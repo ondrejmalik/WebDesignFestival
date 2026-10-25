@@ -641,8 +641,9 @@
             const flagEl = btn.querySelector('.flag-icon, [id^="lang-flag"]');
             const labelEl = btn.querySelector('.lang-label, [id^="lang-label"]');
             if (flagEl) {
-                const flagSrc = dict.lang_flag || (currentLang === 'cs' ? 'img/1f1e8-1f1ff.svg' : 'img/1f1ec-1f1e7.svg');
-                const flagAlt = currentLang === 'cs' ? 'CZ' : 'GB';
+                const isCs = (lang === 'cs');
+                const flagSrc = dict.lang_flag || (isCs ? 'img/1f1e8-1f1ff.svg' : 'img/1f1ec-1f1e7.svg');
+                const flagAlt = isCs ? 'CZ' : 'GB';
                 flagEl.innerHTML = `<img src="${flagSrc}" alt="${flagAlt}" class="flag-img" width="20" height="20">`;
             }
             if (labelEl) {
