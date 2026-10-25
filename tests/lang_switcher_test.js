@@ -93,6 +93,28 @@ assert(csBiosMatch && csBiosMatch.length >= 60, `js/lang.js defines 60 Czech art
 
 // Check dictionary key symmetry between 'en' and 'cs'
 // Mock browser environment to load lang.js
+let mockFlagHTML = '';
+let mockLabelText = '';
+const mockLangBtn = {
+    querySelector: (sub) => {
+        if (sub.includes('flag')) {
+            return {
+                get innerHTML() { return mockFlagHTML; },
+                set innerHTML(v) { mockFlagHTML = v; }
+            };
+        }
+        if (sub.includes('label')) {
+            return {
+                get textContent() { return mockLabelText; },
+                set textContent(v) { mockLabelText = v; }
+            };
+        }
+        return null;
+    },
+    setAttribute: () => {},
+    onclick: null
+};
+
 const mockWindow = {
     location: { search: '', pathname: '/index.html' },
     localStorage: {
@@ -105,7 +127,12 @@ const mockWindow = {
         documentElement: { lang: 'en' },
         title: '',
         addEventListener: () => {},
-        querySelectorAll: () => []
+        querySelectorAll: (sel) => {
+            if (sel === '.lang-switch-btn, #lang-switch-btn') {
+                return [mockLangBtn];
+            }
+            return [];
+        }
     },
     dispatchEvent: () => true
 };
@@ -147,10 +174,14 @@ try {
     assert(toggled === 'cs', 'toggleFestivalLang switches from en to cs');
     assert(context.window.getFestivalLang() === 'cs', 'getFestivalLang returns "cs" after toggle');
     assert(context.window.localStorage.getItem('festival_language') === 'cs', 'Language saved to localStorage as cs');
+    assert(mockFlagHTML.includes('1f1e8-1f1ff.svg'), 'Flag DOM element updated to 1f1e8-1f1ff.svg (Czech flag) upon toggle to cs');
+    assert(mockLabelText === 'Jazyk', 'Label DOM element updated to "Jazyk" upon toggle to cs');
 
     const toggledBack = context.window.toggleFestivalLang();
     assert(toggledBack === 'en', 'toggleFestivalLang switches from cs to en');
     assert(context.window.getFestivalLang() === 'en', 'getFestivalLang returns "en" after second toggle');
+    assert(mockFlagHTML.includes('1f1ec-1f1e7.svg'), 'Flag DOM element updated back to 1f1ec-1f1e7.svg (GB flag) upon toggle to en');
+    assert(mockLabelText === 'Language', 'Label DOM element updated back to "Language" upon toggle to en');
     // Key symmetry check
     const missingInCs = enKeys.filter(k => !(k in I18N.cs));
     const missingInEn = csKeys.filter(k => !(k in I18N.en));
