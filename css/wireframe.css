@@ -506,8 +506,18 @@ hr {
 }
 
 .lang-switch-btn .flag-icon {
-    font-size: 1.15rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     line-height: 1;
+}
+
+.lang-switch-btn .flag-img {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    object-fit: contain;
+    vertical-align: middle;
 }
 
 /* ==========================================================================
@@ -525,9 +535,15 @@ hr {
 
 .wf-top-bar-left,
 .wf-top-bar-placeholder {
-    flex: 0 0 auto;
+    flex: 0 0 96px;
+    min-width: 96px;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
+}
+
+.wf-top-bar-placeholder {
+    visibility: hidden;
 }
 
 .wf-top-bar-left .lang-switch-btn {
@@ -557,8 +573,12 @@ hr {
 }
 
 .wf-top-bar-right {
-    flex: 0 0 auto;
+    flex: 0 0 96px;
+    min-width: 96px;
     text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .wf-menu-btn {
@@ -568,8 +588,14 @@ hr {
 }
 
 @media (max-width: 480px) {
+    .wf-top-bar-left,
+    .wf-top-bar-placeholder,
+    .wf-top-bar-right {
+        flex: 0 0 80px;
+        min-width: 80px;
+    }
     .wf-top-bar-center .festival-brand {
-        font-size: 0.95rem;
+        font-size: 0.92rem;
     }
     .wf-top-bar-left .lang-switch-btn {
         padding: 4px 6px;

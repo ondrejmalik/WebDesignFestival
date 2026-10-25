@@ -123,6 +123,28 @@
         } catch (e) {}
     }
 
+    // Global keyboard listener for Escape key (attached once)
+    let escapeListenerAttached = false;
+    function setupGlobalKeyboard() {
+        if (escapeListenerAttached) return;
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const drawer = document.getElementById('alza-menu-drawer');
+                const backdrop = document.getElementById('alza-drawer-backdrop');
+                const openBtn = document.getElementById('menu-drawer-open-btn');
+                if (drawer && drawer.classList.contains('is-open')) {
+                    drawer.classList.remove('is-open');
+                    if (backdrop) backdrop.classList.remove('is-open');
+                    drawer.setAttribute('aria-hidden', 'true');
+                    if (backdrop) backdrop.setAttribute('aria-hidden', 'true');
+                    if (openBtn) openBtn.setAttribute('aria-expanded', 'false');
+                    document.body.classList.remove('drawer-open-noscroll');
+                }
+            }
+        });
+        escapeListenerAttached = true;
+    }
+
     // Drawer state management
     function setupDrawer() {
         const openBtn = document.getElementById('menu-drawer-open-btn');
@@ -154,10 +176,8 @@
         if (closeBtn) closeBtn.onclick = closeDrawer;
         backdrop.onclick = closeDrawer;
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
-                closeDrawer();
-            }
+        drawer.querySelectorAll('.drawer-links a').forEach(a => {
+            a.addEventListener('click', closeDrawer);
         });
     }
 
@@ -168,9 +188,29 @@
             : (localStorage.getItem('festival_language') || 'en');
 
         if (placeholder) {
+            // Check if drawer was open prior to re-render (e.g. language toggle inside drawer)
+            const existingDrawer = document.getElementById('alza-menu-drawer');
+            const wasDrawerOpen = existingDrawer && existingDrawer.classList.contains('is-open');
+
             placeholder.innerHTML = getNavHTML(currentLang);
             setupDrawer();
+            setupGlobalKeyboard();
             updateBottomBadge();
+
+            // Seamlessly preserve drawer open state across language toggles
+            if (wasDrawerOpen) {
+                const newDrawer = document.getElementById('alza-menu-drawer');
+                const newBackdrop = document.getElementById('alza-drawer-backdrop');
+                const newOpenBtn = document.getElementById('menu-drawer-open-btn');
+                if (newDrawer && newBackdrop) {
+                    newDrawer.classList.add('is-open');
+                    newBackdrop.classList.add('is-open');
+                    newDrawer.setAttribute('aria-hidden', 'false');
+                    newBackdrop.setAttribute('aria-hidden', 'false');
+                    if (newOpenBtn) newOpenBtn.setAttribute('aria-expanded', 'true');
+                    document.body.classList.add('drawer-open-noscroll');
+                }
+            }
 
             const langBtns = placeholder.querySelectorAll('.lang-switch-btn');
             langBtns.forEach(btn => {
