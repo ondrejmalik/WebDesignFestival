@@ -1,0 +1,520 @@
+/* ==========================================================================
+   Festival of Darkness 2 – Layout 05: Dense Data Terminal Stylesheet
+   UX Metaphor: Terminal / Teletext / Flight Departure Board Monospace Wireframe
+   Minimalist Low-Fidelity Wireframe (#222, #777, hr #333, 0 radiuses, 0 shadows, 0 gradients)
+   Strict Responsive Rules: Min 44x44px Touch Targets & Zero Horizontal Overflow
+   ========================================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    background: #ffffff;
+    color: #111111;
+    font-family: 'Courier New', Courier, monospace;
+    line-height: 1.35;
+    font-size: 14px;
+}
+
+.wf-container {
+    width: 100%;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 10px 14px;
+}
+
+/* ==========================================================================
+   Navigation & Footer: Strictly Unbordered, Fluid Multiline Wrapping
+   ========================================================================== */
+.wf-nav-inline,
+.wf-footer-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 18px;
+    padding: 8px 0;
+    border: none;
+    background: transparent;
+}
+
+.wf-nav-inline a,
+.wf-footer-inline a {
+    color: #111111;
+    text-decoration: underline;
+    font-size: 0.92rem;
+    font-weight: bold;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 6px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.wf-nav-inline a:hover,
+.wf-footer-inline a:hover {
+    color: #555555;
+    background: #f0f0f0;
+}
+
+.festival-brand {
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: #000000;
+    text-decoration: none;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 0;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.festival-brand:hover {
+    text-decoration: none;
+    color: #333333;
+}
+
+/* ==========================================================================
+   Wireframe Box Containers (#222, #777, hr #333)
+   Strictly 0 border-radius, 0 box-shadow, 0 gradients
+   ========================================================================== */
+.wf-box {
+    border: 1px solid #222222;
+    padding: 12px 14px;
+    background: #ffffff;
+    margin-bottom: 12px;
+    width: 100%;
+}
+
+.wf-box-sub {
+    border: 1px solid #777777;
+    padding: 10px 12px;
+    background: #fafafa;
+    margin-bottom: 8px;
+    width: 100%;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #333333;
+    margin: 10px 0;
+    width: 100%;
+}
+
+/* ==========================================================================
+   Terminal Telemetry Dashboard Elements
+   ========================================================================== */
+.terminal-sysbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    background: #f4f4f4;
+    border: 1px solid #222222;
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.terminal-status-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 6px;
+    font-size: 0.78rem;
+    font-weight: bold;
+    border: 1px solid #222222;
+    background: #ffffff;
+    min-height: 24px;
+}
+
+.chip-live {
+    border-color: #000000;
+    background: #e0e0e0;
+    color: #000000;
+}
+
+.chip-solar {
+    border-color: #b26a00;
+    background: #fff8e1;
+    color: #b26a00;
+}
+
+.chip-lunar {
+    border-color: #1a237e;
+    background: #e8eaf6;
+    color: #1a237e;
+}
+
+.chip-alert {
+    border-color: #b71c1c;
+    background: #ffebee;
+    color: #b71c1c;
+}
+
+.chip-ok {
+    border-color: #2e7d32;
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+/* ==========================================================================
+   Interactive Controls: Buttons, Inputs, Min 44x44px Touch Targets
+   ========================================================================== */
+.btn-box {
+    border: 1px solid #222222;
+    padding: 8px 14px;
+    background: #eeeeee;
+    font-size: 0.88rem;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #000000;
+    min-height: 44px;
+    min-width: 44px;
+    box-sizing: border-box;
+    vertical-align: middle;
+    user-select: none;
+    text-align: center;
+}
+
+.btn-box:hover {
+    background: #dddddd;
+}
+
+.btn-box:focus {
+    outline: 2px solid #000000;
+}
+
+.btn-box.active {
+    background: #222222;
+    color: #ffffff;
+    border-color: #000000;
+}
+
+.btn-box-danger {
+    border: 1px solid #b71c1c;
+    background: #ffebee;
+    color: #b71c1c;
+}
+
+.btn-box-danger:hover {
+    background: #ffcdd2;
+}
+
+.input-box {
+    border: 1px solid #555555;
+    padding: 8px 10px;
+    font-size: 0.92rem;
+    font-family: 'Courier New', Courier, monospace;
+    background: #ffffff;
+    color: #111111;
+    min-height: 44px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.input-box:focus {
+    outline: 2px solid #000000;
+    border-color: #000000;
+}
+
+/* ==========================================================================
+   Terminal Command & Filter Bar
+   ========================================================================== */
+.terminal-cmd-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+}
+
+.filter-label {
+    font-weight: bold;
+    font-size: 0.85rem;
+    min-width: 75px;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+}
+
+.filter-btn {
+    border: 1px solid #444444;
+    background: #ffffff;
+    color: #111111;
+    padding: 6px 12px;
+    min-height: 44px;
+    min-width: 44px;
+    cursor: pointer;
+    font-size: 0.84rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.filter-btn:hover {
+    background: #eeeeee;
+}
+
+.filter-btn.active {
+    background: #222222;
+    color: #ffffff;
+    border-color: #000000;
+}
+
+.filter-btn-fav {
+    border: 1px solid #28a745;
+    background: #f4fff4;
+    color: #1e7e34;
+}
+
+.filter-btn-fav.active {
+    background: #28a745;
+    color: #ffffff;
+}
+
+.filter-btn-lunar {
+    border: 1px solid #1a237e;
+    background: #f0f2ff;
+    color: #1a237e;
+}
+
+.filter-btn-lunar.active {
+    background: #1a237e;
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   Scenario 2: Favorite Bookmarking State & Highlighting (.is-favourite)
+   ========================================================================== */
+.is-favourite {
+    background: #d4edda !important;
+    border: 2px solid #28a745 !important;
+}
+
+.sch-fav-btn {
+    min-height: 44px;
+    min-width: 44px;
+    font-size: 1.25rem;
+    cursor: pointer;
+    border: 1px solid #777777;
+    background: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    color: #111111;
+    font-family: 'Courier New', Courier, monospace;
+    flex-shrink: 0;
+}
+
+.sch-fav-btn:hover {
+    background: #eeeeee;
+}
+
+.is-favourite .sch-fav-btn {
+    border-color: #28a745;
+    background: #28a745;
+    color: #ffffff;
+}
+
+/* Conflict state */
+.has-conflict {
+    border: 2px solid #b71c1c !important;
+    background: #ffebee !important;
+}
+
+.conflict-warning-badge {
+    color: #b71c1c;
+    font-weight: bold;
+    font-size: 0.85rem;
+    display: inline-block;
+    padding: 4px 6px;
+    border: 1px solid #b71c1c;
+    background: #ffffff;
+    margin-top: 4px;
+}
+
+.clear-status-badge {
+    color: #2e7d32;
+    font-weight: bold;
+    font-size: 0.85rem;
+    display: inline-block;
+    padding: 4px 6px;
+    border: 1px solid #28a745;
+    background: #ffffff;
+    margin-top: 4px;
+}
+
+/* ==========================================================================
+   Dense Monospace Timetable Rows (Flight Board Matrix)
+   Zero Horizontal Overflow Across All Viewports
+   ========================================================================== */
+.sch-terminal-matrix {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+.sch-cell {
+    border: 1px solid #777777;
+    background: #fafafa;
+    padding: 8px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    min-height: 48px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.sch-cell:hover {
+    background: #f2f2f2;
+}
+
+.sch-cell-left {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.sch-cell-row1 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.92rem;
+}
+
+.sch-cell-time {
+    font-weight: bold;
+    color: #000000;
+}
+
+.sch-cell-artist {
+    font-weight: bold;
+    color: #000000;
+    word-break: break-word;
+}
+
+.sch-cell-row2 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    color: #444444;
+    margin-top: 2px;
+}
+
+.sch-cell-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Artist Catalog: Dense Registry Cards
+   ========================================================================== */
+.artists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 10px;
+    width: 100%;
+}
+
+.artist-card {
+    border: 1px solid #777777;
+    background: #fafafa;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 190px;
+    width: 100%;
+}
+
+.artist-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.artist-card-title {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.artist-card-meta {
+    font-size: 0.82rem;
+    color: #555555;
+    margin-top: 2px;
+}
+
+.artist-card-bio {
+    font-size: 0.85rem;
+    color: #222222;
+    margin: 8px 0;
+    line-height: 1.35;
+}
+
+.artist-card-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid #cccccc;
+    font-size: 0.82rem;
+}
+
+/* ==========================================================================
+   Grid & Flex Utilities (Zero Overflow)
+   ========================================================================== */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+}
+
+.col {
+    flex: 1 1 260px;
+    min-width: 0;
+}
+
+.table-responsive {
+    width: 100%;
+    margin: 8px 0;
+}

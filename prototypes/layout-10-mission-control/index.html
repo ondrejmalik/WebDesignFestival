@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Festival of Darkness 2 – Homepage (Mission Control Dashboard Prototype L10). Kutna Hora, Czech Republic, July 10–12, 2026.">
+    <title>Festival of Darkness 2 | Home (Mission Control)</title>
+    <link rel="stylesheet" href="layout.css">
+    <script src="../common/festival-data.js" defer></script>
+    <script src="layout.js" defer></script>
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- Header & Navigation -->
+        <header id="nav-placeholder">
+            <nav class="wf-nav-inline" aria-label="Main Navigation">
+                <a href="index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+                <a href="index.html" class="active">[ Command Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule (<span class="fav-count-badge">0</span>) ]</a>
+            </nav>
+            <hr>
+        </header>
+
+        <!-- Live Telemetry Status Strip -->
+        <div class="telemetry-strip" aria-label="Live Ground Telemetry">
+            <div class="telemetry-item">
+                <span>[ ⏱️ LOCAL TIME: <strong id="telemetry-clock">--:--:--</strong> ]</span>
+            </div>
+            <div class="telemetry-item">
+                <span>[ 🌦️ RADAR: <strong style="color: #ffc107;">RAIN CLOUDS APPROACHING</strong> ]</span>
+            </div>
+            <div class="telemetry-item">
+                <span>[ ☀️ SOLAR STAGE: <strong>OPEN</strong> ]</span>
+            </div>
+            <div class="telemetry-item">
+                <span>[ 🌙 LUNAR DOME: <strong style="color: #28a745;">100% DRY / COVERED</strong> ]</span>
+            </div>
+        </div>
+
+        <main>
+
+            <!-- Scenario 1: Immediate Rain Shelter Quick Action (1 Tap from Homepage) -->
+            <section class="rain-shelter-banner">
+                <div>
+                    <strong>[ 🚨 WEATHER ALERT: RAIN PREDICTED ]</strong>
+                    <p style="font-size: 0.88rem; margin-top: 2px;">
+                        Move under cover! The indoor geodesic dome is fully operational with non-stop live audio-visual programming.
+                    </p>
+                </div>
+                <a href="program.html?stage=lunar" class="btn-box btn-accent" id="s1-quick-shelter-btn">
+                    [ ENTER COVERED DOME TIMETABLE (LUNAR FOREST DOME) &rarr; ]
+                </a>
+            </section>
+
+            <!-- Hero Identity Box -->
+            <section class="wf-box">
+                <h1>[ FESTIVAL OF DARKNESS 2 ]</h1>
+                <p><strong>[ July 10 – July 12, 2026 | Kutna Hora, Czech Republic ]</strong></p>
+                <hr>
+                <p>[ Three-day festival of electronic, alternative, and audiovisual music in Kutna Hora. ]</p>
+                <p>[ <strong>Prototype Layout 10: Mission Control Dashboard</strong> — Operations command triage hub with live weather telemetry, stage status cards, and rapid emergency shelter routing. ]</p>
+            </section>
+
+            <!-- Command Center Tiles -->
+            <section class="wf-box">
+                <h2>[ Operational Status & Stage Telemetry ]</h2>
+                <hr>
+                <div class="control-grid">
+                    <div class="control-tile">
+                        <span class="tile-label">[ STAGE 01 TELEMETRY ]</span>
+                        <div class="tile-value">Solar Horizon Stage</div>
+                        <p style="font-size: 0.85rem; color: #555;">Open-Air Natural Amphitheater &bull; 4,500 Capacity</p>
+                        <hr>
+                        <a href="program.html" class="btn-box">[ Open Solar Timetable &rarr; ]</a>
+                    </div>
+
+                    <div class="control-tile" style="border: 2px solid #222;">
+                        <span class="tile-label">[ STAGE 02 TELEMETRY &bull; SHELTER ]</span>
+                        <div class="tile-value">🌙 Lunar Forest Dome</div>
+                        <p style="font-size: 0.85rem; color: #555;">Geodesic All-Weather Dome &bull; 1,800 Capacity &bull; Covered</p>
+                        <hr>
+                        <a href="program.html?stage=lunar" class="btn-box btn-accent">[ Open Covered Dome Timetable &rarr; ]</a>
+                    </div>
+
+                    <div class="control-tile">
+                        <span class="tile-label">[ ITINERARY STATUS ]</span>
+                        <div class="tile-value">★ <span class="fav-count-badge">0</span> Saved Shows</div>
+                        <p style="font-size: 0.85rem; color: #555;">Automated Pairwise Stage Collision Engine Active</p>
+                        <hr>
+                        <a href="my-schedule.html" class="btn-box">[ Open Planner &rarr; ]</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Directory -->
+            <section class="wf-box">
+                <h2>[ Command Center Directory ]</h2>
+                <hr>
+                <div class="row">
+                    <div class="col wf-box-sub">
+                        <h3>[ 📅 Full Program ]</h3>
+                        <p>Complete 60-set timetable across Friday, Saturday, and Sunday.</p>
+                        <hr>
+                        <a href="program.html" class="btn-box">[ Open Program &rarr; ]</a>
+                    </div>
+                    <div class="col wf-box-sub">
+                        <h3>[ 🎤 60 Artists ]</h3>
+                        <p>Full catalog of international electronic and rock performers.</p>
+                        <hr>
+                        <a href="artists.html" class="btn-box">[ View Artists &rarr; ]</a>
+                    </div>
+                    <div class="col wf-box-sub">
+                        <h3>[ ⛺ Stages & Map ]</h3>
+                        <p>Acoustic specs and festival perimeter emergency routes.</p>
+                        <hr>
+                        <a href="stages.html" class="btn-box">[ Explore Stages &rarr; ]</a>
+                    </div>
+                    <div class="col wf-box-sub">
+                        <h3>[ 🚆 Practical Info ]</h3>
+                        <p>Direct train links, shuttle buses, cashless, and first aid.</p>
+                        <hr>
+                        <a href="practical-info.html" class="btn-box">[ Practical Info &rarr; ]</a>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer id="footer-placeholder">
+            <hr>
+            <div class="wf-footer-inline">
+                <span class="festival-brand">[ Festival of Darkness 2 ]</span>
+                <a href="index.html">[ Command Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+                <span style="color: #666; font-size: 0.85rem; margin-left: auto;">[ Layout 10 Mission Control ]</span>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

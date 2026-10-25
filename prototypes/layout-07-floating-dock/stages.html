@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Festival Stages & Venues – Festival of Darkness 2 (Floating Action Dock Prototype L07)">
+    <title>Festival of Darkness 2 | Stages (Floating Dock)</title>
+    <link rel="stylesheet" href="layout.css">
+    <script src="../common/festival-data.js" defer></script>
+    <script src="layout.js" defer></script>
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- Top Header & Secondary Inline Navigation -->
+        <div id="nav-placeholder">
+            <nav class="wf-nav-inline" aria-label="Top Secondary Navigation">
+                <a href="index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html" class="active">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+            </nav>
+            <hr>
+        </div>
+
+        <!-- Main Content -->
+        <main>
+
+            <!-- Page Title Box -->
+            <section class="wf-box">
+                <h2>[ Festival Stages & Venues ]</h2>
+                <hr>
+                <p>[ The Kutna Hora festival grounds feature 2 distinct musical stages offering complementary acoustic and visual atmospheres. ]</p>
+                <p style="font-size: 0.85rem; color: #555; margin-top: 4px;">
+                    <em>[ Quick Thumb Jump: Tap [ ⚡ DOCK ] at bottom-right to immediately jump to either stage or open the Covered Dome Timetable. ]</em>
+                </p>
+            </section>
+
+            <!-- Stage 1: Solar Horizon Stage -->
+            <section class="wf-box" id="stage-solar">
+                <h3>[ ☀️ Solar Horizon Stage ]</h3>
+                <hr>
+                <div class="row">
+                    <div class="col wf-box-sub" style="min-height: 120px; display: flex; align-items: center; justify-content: center; text-align: center; max-width: 100%; word-break: break-word;">
+                        [ Wireframe Diagram: Open-Air Amphitheater Stage ]
+                    </div>
+                    <div class="col col-2" style="flex: 1 1 260px; min-width: 0; max-width: 100%; word-break: break-word;">
+                        <p><strong>Type:</strong> Open-air natural amphitheater with panoramic hill slope seating.</p>
+                        <p><strong>Capacity:</strong> 4,500 visitors</p>
+                        <p><strong>Programming Focus:</strong> Daylight to midnight live band performances, post-rock, indie rock, and alternative headliners.</p>
+                        <p><strong>Acoustics:</strong> Expansive line-array system tailored for organic instrument reverberation.</p>
+                        <hr>
+                        <a href="program.html?stage=solar" class="btn-box">[ View Solar Stage Timetable &rarr; ]</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stage 2: Lunar Forest Dome (Scenario 1 Covered Dome Shelter) -->
+            <section class="wf-box" id="stage-lunar">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                    <h3>[ 🌙 Lunar Forest Dome (Covered Dome – Scenario 1) ]</h3>
+                    <span style="font-size: 0.8rem; background: #e0f2fe; color: #0369a1; border: 1px solid #0284c7; padding: 2px 8px; font-weight: bold;">
+                        [ ALL-WEATHER RAIN SHELTER ]
+                    </span>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col wf-box-sub" style="min-height: 120px; display: flex; align-items: center; justify-content: center; text-align: center; max-width: 100%; word-break: break-word;">
+                        [ Wireframe Diagram: 360-Degree Covered Dome Projection Rig ]
+                    </div>
+                    <div class="col col-2" style="flex: 1 1 260px; min-width: 0; max-width: 100%; word-break: break-word;">
+                        <p><strong>Type:</strong> Heavy-duty covered marquee dome providing 100% waterproof rain shelter.</p>
+                        <p><strong>Capacity:</strong> 1,800 visitors</p>
+                        <p><strong>Programming Focus:</strong> 360-degree laser mapping, dark techno, modular ambient, synthpop, and experimental audiovisual club sets.</p>
+                        <p><strong>Inclement Weather Protocol:</strong> In case of heavy rainfall, programming continues uninterrupted under the covered dome.</p>
+                        <hr>
+                        <a href="program.html?stage=lunar" class="btn-box btn-accent" id="covered-dome-timetable-link">
+                            [ View Covered Dome Timetable &rarr; ]
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Venue Map & Orientation -->
+            <section class="wf-box">
+                <h3>[ Venue Map & Grounds Orientation ]</h3>
+                <hr>
+                <div class="wf-box-sub" style="min-height: 140px; display: flex; align-items: center; justify-content: center; text-align: center; color: #444; max-width: 100%; overflow-x: auto; overflow-wrap: break-word; word-break: break-word;">
+                    [ Wireframe Schematic: Main Festival Grounds • Gate 1 Entrance • Tent Village Camping • Cashless RFID Top-up Hubs • First Aid & Medical Tent • Solar Stage & Lunar Dome Walkways ]
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <div id="footer-placeholder">
+            <hr>
+            <footer class="wf-footer-inline">
+                <strong class="festival-brand">[ © 2026 Festival of Darkness 2 ]</strong>
+                <span>Kutna Hora, July 10–12, 2026</span>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+            </footer>
+        </div>
+
+    </div>
+
+    <!-- Floating Action Dock Backdrop -->
+    <div id="floating-dock-backdrop" class="floating-dock-backdrop" aria-hidden="true"></div>
+
+    <!-- Persistent Floating Action Dock Button (Bottom-Right Thumb Trigger) -->
+    <button id="floating-dock-btn" class="floating-dock-btn" aria-label="Toggle Floating Action Dock" aria-expanded="false">
+        <span class="dock-btn-icon">⚡</span>
+        <span class="dock-btn-text">[ DOCK ]</span>
+        <span id="dock-fav-badge" class="dock-fav-badge" style="display: none;">0</span>
+    </button>
+
+    <!-- Floating Action Sheet Overlay Menu -->
+    <aside id="floating-dock-sheet" class="floating-dock-sheet" aria-label="Floating Action Dock Menu">
+        <div class="dock-sheet-header">
+            <div class="dock-sheet-title">[ ⚡ DOCK: STAGE JUMPS ]</div>
+            <button id="dock-sheet-close" class="btn-box" style="min-height: 44px; min-width: 44px; padding: 4px 8px;">[ ✕ Close ]</button>
+        </div>
+        <hr>
+
+        <!-- Direct Scenario 1 Shortcut -->
+        <div class="dock-sheet-section">
+            <a href="program.html?stage=lunar" id="dock-shelter-shortcut" class="dock-action-btn highlight">
+                <span>[ 🌙 Covered Dome Timetable ]</span>
+                <span>&rarr;</span>
+            </a>
+        </div>
+
+        <!-- Stage Jumps in Dock -->
+        <div class="dock-sheet-section">
+            <h4>[ On-Page Stage Jumps ]</h4>
+            <div class="dock-action-list">
+                <a href="#stage-lunar" class="dock-action-btn highlight">
+                    <span>[ 🌙 Lunar Forest Dome (Shelter) ]</span>
+                    <span>&darr;</span>
+                </a>
+                <a href="#stage-solar" class="dock-action-btn">
+                    <span>[ ☀️ Solar Horizon Stage ]</span>
+                    <span>&darr;</span>
+                </a>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- Subpage Navigation -->
+        <div class="dock-sheet-section">
+            <h4>[ Subpage Directory ]</h4>
+            <nav class="dock-action-list" aria-label="Dock Navigation">
+                <a href="index.html" class="dock-action-btn dock-nav-item">
+                    <span>[ 🏠 Home ]</span>
+                    <span>&rarr;</span>
+                </a>
+                <a href="program.html" class="dock-action-btn dock-nav-item">
+                    <span>[ 📅 Program Timetable ]</span>
+                    <span>&rarr;</span>
+                </a>
+                <a href="artists.html" class="dock-action-btn dock-nav-item">
+                    <span>[ 🎤 Artists Catalog ]</span>
+                    <span>&rarr;</span>
+                </a>
+                <a href="stages.html" class="dock-action-btn dock-nav-item active">
+                    <span>[ ⛺ Stages & Map ]</span>
+                    <span>&bull;</span>
+                </a>
+                <a href="practical-info.html" class="dock-action-btn dock-nav-item">
+                    <span>[ 🚆 Practical Info ]</span>
+                    <span>&rarr;</span>
+                </a>
+                <a href="my-schedule.html" class="dock-action-btn dock-nav-item">
+                    <span>[ ★ My Schedule (<span class="dock-fav-count">0</span>) ]</span>
+                    <span>&rarr;</span>
+                </a>
+            </nav>
+        </div>
+    </aside>
+
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Homepage – Festival of Darkness 2 (Kutna Hora)">
+    <title>Festival of Darkness 2 | Home</title>
+    <link rel="stylesheet" href="css/wireframe.css">
+    <script src="js/lang.js" defer></script>
+    <script src="components/nav.js" defer></script>
+    <script src="components/footer.js" defer></script>
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- HEADER & NAVIGATION (components/nav.js / nav.html) -->
+        <div id="nav-placeholder">
+            <nav class="wf-nav-inline">
+                <a href="index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+                <a href="index.html" data-i18n="nav_home">[ Home ]</a>
+                <a href="program.html" data-i18n="nav_program">[ Program ]</a>
+                <a href="artists.html" data-i18n="nav_artists">[ Artists ]</a>
+                <a href="stages.html" data-i18n="nav_stages">[ Stages ]</a>
+                <a href="practical-info.html" data-i18n="nav_practical">[ Practical Info ]</a>
+                <a href="my-schedule.html" data-i18n="nav_myschedule">[ My Schedule ]</a>
+                <div class="lang-switch-box">
+                    <button id="lang-switch-btn" class="btn-box lang-switch-btn" type="button" aria-label="Language" title="Switch language to Czech">
+                        <span class="flag-icon" id="lang-flag" aria-hidden="true">🇬🇧</span>
+                        <span class="lang-label" id="lang-label">Language</span>
+                    </button>
+                </div>
+            </nav>
+            <hr>
+        </div>
+
+        <!-- MAIN CONTENT: HOMEPAGE WITH MISSION CONTROL WIDGETS -->
+        <main>
+
+            <!-- Live Telemetry Status Strip (Mission Control) -->
+            <div class="telemetry-strip" aria-label="Live Ground Telemetry">
+                <div class="telemetry-item">
+                    <span>[ ⏱️ LOCAL TIME: <strong id="telemetry-clock">--:--:--</strong> ]</span>
+                </div>
+                <div class="telemetry-item">
+                    <span>[ 🌦️ RADAR: <strong style="color: #ffc107;" data-i18n="telemetry_radar">RAIN CLOUDS APPROACHING</strong> ]</span>
+                </div>
+                <div class="telemetry-item">
+                    <span>[ ☀️ SOLAR: <strong data-i18n="telemetry_solar">OPEN</strong> ]</span>
+                </div>
+                <div class="telemetry-item">
+                    <span>[ 🌙 LUNAR DOME: <strong style="color: #28a745;" data-i18n="telemetry_lunar">100% DRY / COVERED</strong> ]</span>
+                </div>
+            </div>
+
+            <!-- Weather Triage Banner (Immediate Rain Shelter 1-Click Action) -->
+            <section class="rain-shelter-banner">
+                <div>
+                    <strong data-i18n="rain_alert_title">[ 🚨 WEATHER ALERT: RAIN PREDICTED ]</strong>
+                    <p style="font-size: 0.88rem; margin-top: 2px;" data-i18n="rain_alert_desc">
+                        Move under cover! The indoor geodesic dome is fully operational with non-stop live audio-visual programming.
+                    </p>
+                </div>
+                <a href="program.html?stage=lunar" class="btn-box" style="font-weight: bold; background: #222; color: #fff;" data-i18n="rain_alert_btn">
+                    [ Move to Covered Tent (Lunar Forest Dome) &rarr; ]
+                </a>
+            </section>
+
+            <!-- 1. Hero Identity Section -->
+            <section class="wf-box">
+                <h1 data-i18n="index_hero_title">[ FESTIVAL OF DARKNESS 2 ]</h1>
+                <p><strong data-i18n="index_hero_meta">[ July 10 – July 12, 2026 | Kutna Hora, Czech Republic ]</strong></p>
+                <hr>
+                <p data-i18n="index_hero_desc1">[ Three-day festival of electronic, alternative, and audiovisual music in Kutna Hora. ]</p>
+                <p data-i18n="index_hero_desc2">[ Main genres: Post-Rock, Ambient, Indie Pop/Rock, Techno, and Experimental Electronics. ]</p>
+            </section>
+
+            <hr>
+
+            <!-- 2. Quick Navigation Directory to Subpages -->
+            <section class="wf-box">
+                <h2 data-i18n="index_sections_title">[ Main Website Sections ]</h2>
+                <hr>
+                <div class="row">
+                    <div class="col wf-box-sub">
+                        <h3 data-i18n="index_card_prog_title">[ 📅 Program ]</h3>
+                        <p data-i18n="index_card_prog_desc">[ Full timetable across all 3 days and 2 stages with band details. ]</p>
+                        <hr>
+                        <a href="program.html" class="btn-box"><strong data-i18n="index_card_prog_btn">[ Open Program &rarr; ]</strong></a>
+                    </div>
+                    <div class="col wf-box-sub">
+                        <h3 data-i18n="index_card_art_title">[ 🎤 Artists ]</h3>
+                        <p data-i18n="index_card_art_desc">[ Catalog of 60 artists from across Europe, genres, biographies, and profiles. ]</p>
+                        <hr>
+                        <a href="artists.html" class="btn-box" data-i18n="index_card_art_btn">[ View Artists &rarr; ]</a>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top: 12px;">
+                    <div class="col wf-box-sub">
+                        <h3 data-i18n="index_card_stg_title">[ ⛺ Stages ]</h3>
+                        <p data-i18n="index_card_stg_desc">[ Outdoor amphitheater Solar Horizon Stage and covered Lunar Forest Dome. ]</p>
+                        <hr>
+                        <a href="stages.html" class="btn-box" data-i18n="index_card_stg_btn">[ Explore Stages &rarr; ]</a>
+                    </div>
+                    <div class="col wf-box-sub">
+                        <h3 data-i18n="index_card_info_title">[ 🚆 Practical Info & Transit ]</h3>
+                        <p data-i18n="index_card_info_desc">[ Route from the train station, free shuttle bus, walking map, camping, and FAQ. ]</p>
+                        <hr>
+                        <a href="practical-info.html#doprava" class="btn-box" style="font-weight: bold;" data-i18n="index_card_info_btn">[ 🚆 Subsection "Transit from Station" &rarr; ]</a>
+                    </div>
+                    <div class="col wf-box-sub">
+                        <h3 data-i18n="index_card_sch_title">[ ★ My Schedule ]</h3>
+                        <p data-i18n="index_card_sch_desc">[ Personal planner with automatic collision detection and visual warnings. ]</p>
+                        <hr>
+                        <a href="my-schedule.html" class="btn-box" style="font-weight: bold;" data-i18n="index_card_sch_btn">[ ★ Open My Schedule &rarr; ]</a>
+                    </div>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- 3. Key Parameters of the 2026 Edition -->
+            <section class="wf-box">
+                <h2 data-i18n="index_params_title">[ Key Parameters of the 2026 Edition ]</h2>
+                <hr>
+                <p data-i18n-html="index_params_item1">[ • <strong>3 festival days:</strong> Friday July 10, Saturday July 11, Sunday July 12, 2026 ]</p>
+                <p data-i18n-html="index_params_item2">[ • <strong>2 distinct stages:</strong> Solar Horizon Stage & Lunar Forest Dome ]</p>
+                <p data-i18n-html="index_params_item3">[ • <strong>60 live performances</strong> and accompanying audiovisual shows ]</p>
+                <p data-i18n-html="index_params_item4">[ • <strong>Location:</strong> Festival Grounds, Kutna Hora, Czech Republic ]</p>
+            </section>
+
+        </main>
+
+        <!-- FOOTER (components/footer.js / footer.html) -->
+        <div id="footer-placeholder">
+            <hr>
+            <footer class="wf-footer-inline">
+                <strong class="festival-brand">[ © 2026 Festival of Darkness 2 ]</strong>
+                <a href="index.html" data-i18n="nav_home">[ Home ]</a>
+                <a href="program.html" data-i18n="nav_program">[ Program ]</a>
+                <a href="artists.html" data-i18n="nav_artists">[ Artists ]</a>
+                <a href="stages.html" data-i18n="nav_stages">[ Stages ]</a>
+                <a href="practical-info.html" data-i18n="nav_practical">[ Practical Info ]</a>
+                <a href="my-schedule.html" data-i18n="nav_myschedule">[ My Schedule ]</a>
+                <span>[ info@festivalofdarkness.com ]</span>
+            </footer>
+        </div>
+
+    </div>
+
+    <!-- Live Telemetry Clock Script -->
+    <script>
+        (function() {
+            function updateClock() {
+                const clockEl = document.getElementById('telemetry-clock');
+                if (clockEl) {
+                    const now = new Date();
+                    clockEl.textContent = now.toTimeString().split(' ')[0];
+                }
+            }
+            updateClock();
+            setInterval(updateClock, 1000);
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,799 @@
+/* css/wireframe.css - Clean low-fidelity wireframe styling with black/gray outlines and <hr> dividers */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #111;
+    background: #fff;
+    padding: 16px;
+    padding-bottom: 78px;
+    line-height: 1.4;
+    overflow-x: hidden;
+}
+
+.wf-container {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+/* Navigation and Footer: NO BOX, fluid multiline wrapping without horizontal scrollbars */
+.wf-nav-inline,
+.wf-footer-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 18px;
+    padding: 6px 0;
+    font-size: 0.95rem;
+}
+
+.wf-nav-inline .festival-brand,
+.wf-footer-inline .festival-brand {
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+}
+
+.wf-nav-inline a,
+.wf-footer-inline a {
+    color: #111;
+    text-decoration: underline;
+}
+
+.wf-nav-inline a:hover,
+.wf-footer-inline a:hover {
+    color: #555;
+}
+
+.wf-footer-inline span {
+    color: #444;
+}
+
+/* Base wireframe outline box */
+.wf-box {
+    border: 1px solid #222;
+    padding: 12px;
+    background: #fff;
+}
+
+.wf-box-sub {
+    border: 1px solid #777;
+    padding: 10px;
+    background: #fafafa;
+}
+
+/* Section divider rule */
+hr {
+    border: 0;
+    border-top: 1px solid #333;
+    margin: 12px 0;
+}
+
+/* Form input and placeholder boxes */
+.input-box {
+    border: 1px solid #555;
+    padding: 8px 10px;
+    font-size: 0.9rem;
+    background: #fff;
+}
+
+.btn-box {
+    border: 1px solid #111;
+    padding: 6px 14px;
+    background: #eee;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    color: #000;
+}
+
+/* Flexible grid row layout */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.col {
+    flex: 1 1 200px;
+}
+
+/* ==========================================================================
+   Timetable Schedule Grid & Highlighting (School Timetable Style)
+   ========================================================================== */
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #222;
+    background: #fff;
+    margin: 12px 0;
+}
+
+.sch-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.sch-table th,
+.sch-table td {
+    border: 1px solid #777;
+    padding: 6px;
+    vertical-align: top;
+}
+
+.sch-header {
+    background: #e9ecef;
+    border: 1px solid #333;
+    padding: 8px 6px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+.sch-time-col {
+    width: 110px;
+    background: #f1f3f5;
+    border: 1px solid #333;
+    font-weight: bold;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 0.82rem;
+    text-align: center;
+    vertical-align: middle;
+    padding: 8px 4px;
+}
+
+.sch-day-section {
+    margin-bottom: 20px;
+}
+
+.sch-day-title {
+    background: #2b3035;
+    color: #fff;
+    font-weight: bold;
+    padding: 8px 12px;
+    font-size: 0.95rem;
+    border: 1px solid #111;
+    margin-top: 12px;
+}
+
+.sch-cell {
+    min-height: 80px;
+    background: #fff;
+    position: relative;
+    padding: 6px 8px;
+    word-break: break-word;
+}
+
+.sch-cell.sch-empty {
+    background: #fafafa;
+    color: #777;
+    font-size: 0.78rem;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.sch-cell.sch-event {
+    background: #ffffff;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, opacity 0.2s;
+}
+
+.sch-cell.sch-event:hover {
+    background: #f1f5f9;
+}
+
+/* Favourited / Highlighted event cell */
+.sch-cell.is-favourite {
+    background: #d4edda !important;
+    border: 2px solid #28a745 !important;
+}
+
+.sch-cell.is-favourite .sch-card {
+    background: transparent;
+}
+
+.sch-cell.is-favourite .sch-fav-btn {
+    background: #28a745;
+    color: #fff;
+    border-color: #1e7e34;
+}
+
+.sch-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 70px;
+    gap: 4px;
+}
+
+.sch-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.sch-artist {
+    font-size: 0.88rem;
+    font-weight: bold;
+    line-height: 1.2;
+    color: #111;
+}
+
+.sch-time {
+    font-size: 0.76rem;
+    color: #495057;
+    font-family: Consolas, "Courier New", monospace;
+    font-weight: bold;
+}
+
+.sch-meta {
+    font-size: 0.74rem;
+    color: #555;
+    line-height: 1.25;
+}
+
+.sch-fav-btn {
+    border: 1px solid #777;
+    background: #fff;
+    color: #444;
+    width: 24px;
+    height: 24px;
+    line-height: 22px;
+    text-align: center;
+    font-size: 0.95rem;
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.sch-fav-btn:hover {
+    background: #222;
+    color: #fff;
+    border-color: #000;
+}
+
+/* Band details and card actions */
+.sch-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 6px;
+}
+
+.sch-add-btn {
+    font-size: 0.74rem;
+    padding: 3px 8px;
+    font-weight: bold;
+    cursor: pointer;
+    background: #eee;
+    border: 1px solid #333;
+    color: #000;
+}
+
+.sch-detail-btn {
+    font-size: 0.72rem;
+    padding: 3px 6px;
+    cursor: pointer;
+    background: #fdfdfd;
+    border: 1px solid #777;
+    color: #222;
+}
+
+.sch-cell.is-favourite .sch-add-btn {
+    background: #28a745 !important;
+    color: #fff !important;
+    border-color: #1e7e34 !important;
+}
+
+/* Timetable Toolbar & Filters */
+.sch-toolbar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 8px 0;
+}
+
+.filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-label {
+    font-size: 0.88rem;
+    font-weight: bold;
+    min-width: 65px;
+    color: #111;
+}
+
+.filter-btn {
+    border: 1px solid #333;
+    background: #f8f9fa;
+    color: #111;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.filter-btn:hover {
+    background: #e2e6ea;
+}
+
+.filter-btn.active {
+    background: #222;
+    color: #fff;
+    font-weight: bold;
+    border-color: #000;
+}
+
+.filter-btn-fav {
+    border-color: #28a745;
+    color: #155724;
+    background: #e8f5e9;
+}
+
+.filter-btn-fav.active {
+    background: #28a745;
+    color: #fff;
+    border-color: #1e7e34;
+}
+
+.genre-select {
+    border: 1px solid #555;
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    background: #fff;
+}
+
+/* Schedule stats banner */
+.sch-stats-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    background: #f1f3f5;
+    border: 1px solid #777;
+    padding: 8px 12px;
+    font-size: 0.88rem;
+    margin-bottom: 8px;
+}
+
+@media (max-width: 650px) {
+    .sch-time-col {
+        width: 80px;
+        font-size: 0.72rem;
+        padding: 4px 2px;
+    }
+    .sch-cell {
+        padding: 4px 6px;
+    }
+    .sch-artist {
+        font-size: 0.8rem;
+    }
+    .sch-time {
+        font-size: 0.7rem;
+    }
+    .sch-meta {
+        font-size: 0.68rem;
+    }
+}
+
+/* ==========================================================================
+   Performers Grid (3 per row = 20 rows of 60 artists) & Detail View
+   ========================================================================== */
+
+.artists-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 12px;
+}
+
+.artist-card {
+    border: 1px solid #777;
+    background: #fafafa;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 150px;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.artist-card:hover {
+    background: #f1f5f9;
+    border-color: #222;
+}
+
+.artist-card.is-favourite {
+    background: #d4edda !important;
+    border: 2px solid #28a745 !important;
+}
+
+.artist-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+.artist-card-title {
+    font-size: 0.96rem;
+    font-weight: bold;
+    color: #000;
+}
+
+.artist-card-genre {
+    font-size: 0.8rem;
+    color: #555;
+    margin-bottom: 4px;
+}
+
+.artist-card-schedule {
+    font-size: 0.76rem;
+    color: #222;
+    background: #eee;
+    border: 1px solid #ccc;
+    padding: 4px 6px;
+    margin: 6px 0;
+    font-family: Consolas, "Courier New", monospace;
+}
+
+.artist-card-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.artist-detail-box {
+    border: 2px solid #222;
+    background: #fff;
+    padding: 16px;
+    margin-bottom: 16px;
+    scroll-margin-top: 20px;
+}
+
+@media (max-width: 800px) {
+    .artists-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 520px) {
+    .artists-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Language switch button */
+.lang-switch-box {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.lang-switch-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: 1px solid #111;
+    background: #eee;
+    color: #000;
+    min-height: 38px;
+    touch-action: manipulation;
+}
+
+.lang-switch-btn:hover {
+    background: #ddd;
+}
+
+.lang-switch-btn .flag-icon {
+    font-size: 1.15rem;
+    line-height: 1;
+}
+
+/* ==========================================================================
+   Fusion Architecture: Top App Bar, Alza Drawer & Albert Bottom Dock
+   ========================================================================== */
+
+/* Top App Bar */
+.wf-top-app-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    min-height: 48px;
+}
+
+.wf-top-bar-placeholder {
+    flex: 1 1 60px;
+    max-width: 100px;
+}
+
+.wf-top-bar-center {
+    flex: 2 1 auto;
+    text-align: center;
+}
+
+.wf-top-bar-center .festival-brand {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none !important;
+}
+
+.wf-top-bar-right {
+    flex: 1 1 60px;
+    max-width: 100px;
+    text-align: right;
+}
+
+.wf-menu-btn {
+    font-weight: bold;
+    min-height: 40px;
+    padding: 6px 12px;
+}
+
+.wf-top-bar-divider {
+    margin: 4px 0 14px 0;
+}
+
+/* Alza-Style Slide-Out Navigation Drawer */
+.drawer-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.drawer-backdrop.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.alza-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 310px;
+    max-width: 85vw;
+    height: 100vh;
+    background: #fff;
+    border-left: 2px solid #222;
+    z-index: 2000;
+    transform: translateX(100%);
+    transition: transform 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    box-sizing: border-box;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+    overflow-y: auto;
+}
+
+.alza-drawer.is-open {
+    transform: translateX(0);
+}
+
+.drawer-open-noscroll {
+    overflow: hidden !important;
+}
+
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 4px;
+}
+
+.drawer-title {
+    font-size: 1.05rem;
+    color: #000;
+}
+
+.drawer-close-btn {
+    min-height: 40px;
+    padding: 6px 12px;
+    font-weight: bold;
+}
+
+.drawer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 8px 0;
+}
+
+.drawer-links a {
+    display: flex;
+    align-items: center;
+    padding: 10px 12px;
+    color: #111;
+    text-decoration: none;
+    border: 1px solid #777;
+    background: #fafafa;
+    font-size: 0.95rem;
+    font-weight: 500;
+    min-height: 44px;
+}
+
+.drawer-links a:hover {
+    background: #eee;
+    border-color: #222;
+}
+
+.drawer-links a.active {
+    background: #222;
+    color: #fff;
+    border-color: #000;
+    font-weight: bold;
+}
+
+.drawer-footer {
+    margin-top: auto;
+    padding-top: 12px;
+}
+
+/* Ergonomic Bottom Thumb Navigation Dock (Albert App Thumb-Zone Metaphor) */
+.bottom-nav-dock {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: #fff;
+    border-top: 2px solid #222;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: stretch;
+    min-height: 58px;
+    box-sizing: border-box;
+}
+
+.bottom-dock-item {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    min-width: 44px;
+    padding: 4px 2px;
+    color: #111;
+    text-decoration: none !important;
+    font-size: 0.72rem;
+    font-weight: bold;
+    border-right: 1px solid #ddd;
+    text-align: center;
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.bottom-dock-item:last-child {
+    border-right: none;
+}
+
+.bottom-dock-item .dock-icon {
+    font-size: 1.15rem;
+    line-height: 1;
+    margin-bottom: 2px;
+    display: block;
+}
+
+.bottom-dock-item .dock-label {
+    display: block;
+    line-height: 1.1;
+    white-space: nowrap;
+}
+
+.bottom-dock-item:hover {
+    background: #f0f0f0;
+}
+
+.bottom-dock-item.active {
+    background: #222;
+    color: #fff !important;
+}
+
+.bottom-dock-item.active .dock-icon,
+.bottom-dock-item.active .dock-label {
+    color: #fff !important;
+}
+
+/* Prominent Center HOME Button */
+.bottom-dock-home {
+    background: #f9f9f9;
+}
+
+.bottom-dock-home .dock-icon {
+    font-size: 1.25rem;
+}
+
+.nav-badge-count {
+    display: inline-block;
+    padding: 1px 5px;
+    font-size: 0.68rem;
+    background: #28a745;
+    color: #fff;
+    margin-left: 2px;
+    vertical-align: middle;
+}
+
+/* Mission Control Widgets */
+.telemetry-strip {
+    background: #2b3035;
+    color: #fff;
+    padding: 8px 12px;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 0.82rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #111;
+}
+
+.telemetry-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.rain-shelter-banner {
+    border: 2px solid #222;
+    background: #f8f9fa;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.rain-shelter-banner strong {
+    color: #111;
+}
+
+/* Desktop viewport centering for bottom dock */
+@media (min-width: 960px) {
+    .bottom-nav-dock {
+        max-width: 960px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-left: 2px solid #222;
+        border-right: 2px solid #222;
+    }
+}
+
+
+
+

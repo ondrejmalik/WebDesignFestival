@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Festival of Darkness 2 – Homepage (Accordion Drawer Hub Prototype L06). Progressive disclosure wireframe hub. Kutna Hora, Czech Republic, July 10–12, 2026.">
+    <title>Festival of Darkness 2 | Home (Accordion Drawer Hub)</title>
+    <link rel="stylesheet" href="layout.css">
+    <script src="../common/festival-data.js" defer></script>
+    <script src="layout.js" defer></script>
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- Top Header & Primary Wrapping Inline Navigation -->
+        <header id="nav-placeholder">
+            <nav class="wf-nav-inline" aria-label="Main Navigation">
+                <a href="index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule (<span class="fav-count-badge">0</span>) ]</a>
+            </nav>
+            <hr>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+
+            <!-- Scenario 1: Immediate Rain Shelter Quick Action (1 Tap from Homepage) -->
+            <section class="rain-shelter-banner shelter-alert-active" aria-label="Rain Shelter Advisory">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                    <div>
+                        <strong>[ 🌧️ Weather Advisory & Live Covered Dome Access ]</strong>
+                        <p style="font-size: 0.88rem; margin: 4px 0 0 0;">
+                            Sudden precipitation? The <strong>Lunar Forest Dome</strong> offers continuous covered shelter (1,800 capacity) with live audiovisual programming.
+                        </p>
+                    </div>
+                    <div>
+                        <a href="program.html?stage=lunar" class="btn-box btn-accent" id="s1-quick-shelter-btn">
+                            [ View Covered Dome Timetable (Lunar Forest Dome) &rarr; ]
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Hero Section -->
+            <section class="wf-box" aria-labelledby="hero-title">
+                <h1 id="hero-title">[ FESTIVAL OF DARKNESS 2 ]</h1>
+                <p><strong>[ July 10 – July 12, 2026 | Kutna Hora, Czech Republic ]</strong></p>
+                <hr>
+                <p>[ Three-day festival of electronic, alternative, and audiovisual music in the historic mining and industrial landscape of Kutna Hora. ]</p>
+                <p>[ <strong>Prototype Paradigm: Layout 06 — Accordion Drawer Hub.</strong> Designed around zero-scroll progressive disclosure. Instead of overwhelming users with towering lists, all content is tucked into tidy, collapsible drawer blocks that expand on demand. ]</p>
+            </section>
+
+            <!-- Global Accordion Toolbar -->
+            <div class="accordion-controls-bar">
+                <div>
+                    <strong>[ Accordion Controls: ]</strong>
+                    <span style="font-size: 0.85rem; color: #555;">Toggle all homepage knowledge drawers simultaneously</span>
+                </div>
+                <div>
+                    <button class="btn-box" data-action="expand-all">[ ▾ Expand All Drawers ]</button>
+                    <button class="btn-box" data-action="collapse-all">[ ▸ Collapse All Drawers ]</button>
+                </div>
+            </div>
+
+            <!-- Central Hub Drawer 1: Identity & Curatorial Mission -->
+            <section aria-labelledby="drawer-mission-heading">
+                <details class="wf-drawer" open>
+                    <summary id="drawer-mission-heading">
+                        <div class="drawer-summary-title">
+                            <span>🧭 [ Drawer 1: Festival Identity, Heritage & Curatorial Mission ]</span>
+                            <span class="drawer-badge">About 2026</span>
+                        </div>
+                        <span class="drawer-icon">▼</span>
+                    </summary>
+                    <div class="drawer-body">
+                        <article>
+                            <h3>[ The Intersection of Sound, Shadow, and Architecture ]</h3>
+                            <p>
+                                Festival of Darkness 2 returns to Kutna Hora for its second biennial edition. Across three immersive days (July 10–12, 2026), 60 international and Czech artists converge across two contrasting staging concepts: the open-air Solar Horizon Stage and the weatherproof indoor Lunar Forest Dome.
+                            </p>
+                            <p>
+                                Our curation bridges meditative modular ambient, crushing dark techno, shoegaze, ethereal dream pop, and visceral industrial noise. Attendees experience both the expansive summer skies and intimate audiovisual projection spaces.
+                            </p>
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="col wf-box-sub">
+                                    <h4>[ Location & Atmosphere ]</h4>
+                                    <p>Historical industrial periphery of Kutna Hora, 55 minutes by direct express train from Prague Main Station.</p>
+                                </div>
+                                <div class="col wf-box-sub">
+                                    <h4>[ Sound & Acoustics ]</h4>
+                                    <p>Custom-tuned d&b audiotechnik line arrays on Solar Horizon Stage; 360-degree immersive surround sound in Lunar Forest Dome.</p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </details>
+            </section>
+
+            <!-- Central Hub Drawer 2: The Two Festival Stages (with 1-Tap Shelter Access) -->
+            <section aria-labelledby="drawer-stages-heading">
+                <details class="wf-drawer" open>
+                    <summary id="drawer-stages-heading">
+                        <div class="drawer-summary-title">
+                            <span>⛺ [ Drawer 2: The 2 Festival Stages & Rain Shelter Architecture ]</span>
+                            <span class="drawer-badge">4,500 / 1,800 Cap</span>
+                        </div>
+                        <span class="drawer-icon">▼</span>
+                    </summary>
+                    <div class="drawer-body">
+                        <div class="row">
+                            <div class="col wf-box-sub">
+                                <h3>[ ☀️ Solar Horizon Stage ]</h3>
+                                <p><strong>Type:</strong> Open-Air Main Amphitheater</p>
+                                <p><strong>Capacity:</strong> 4,500 attendees</p>
+                                <p><strong>Focus:</strong> Post-rock crescendos, dream pop, synthwave, and energetic electronic dance headliners.</p>
+                                <hr>
+                                <a href="program.html?stage=solar" class="btn-box">[ View Solar Horizon Timetable &rarr; ]</a>
+                                <a href="stages.html#stage-solar" class="btn-box">[ Stage Technical Specs &rarr; ]</a>
+                            </div>
+
+                            <div class="col wf-box-sub" style="border: 2px solid #0284c7; background: #f0f9ff;">
+                                <h3>[ 🌙 Lunar Forest Dome (Covered Rain Shelter) ]</h3>
+                                <p><strong>Type:</strong> Fully Weatherproof Geodesic Dome</p>
+                                <p><strong>Capacity:</strong> 1,800 attendees</p>
+                                <p><strong>Focus:</strong> Hypnotic dark techno, modular ambient soundscapes, experimental noise, and immersive 360&deg; laser mapping.</p>
+                                <p><strong>Rain Protocol:</strong> Completely covered interior shelter with dry seating and non-stop continuous programming.</p>
+                                <hr>
+                                <a href="program.html?stage=lunar" class="btn-box btn-accent">[ View Covered Dome Timetable &rarr; ]</a>
+                                <a href="stages.html#stage-lunar" class="btn-box">[ Dome Specifications &rarr; ]</a>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </section>
+
+            <!-- Central Hub Drawer 3: Quick Program & Schedule Overview -->
+            <section aria-labelledby="drawer-program-heading">
+                <details class="wf-drawer">
+                    <summary id="drawer-program-heading">
+                        <div class="drawer-summary-title">
+                            <span>📅 [ Drawer 3: Program Timetable Preview (60 Performances) ]</span>
+                            <span class="drawer-badge">3 Days / 2 Stages</span>
+                        </div>
+                        <span class="drawer-icon">▼</span>
+                    </summary>
+                    <div class="drawer-body">
+                        <p>Performances run daily from 13:00 through 04:00 the following morning. Timetable slots are structured into Afternoon, Evening, and Night blocks:</p>
+                        <div class="row">
+                            <div class="col wf-box-sub">
+                                <h4>[ Day 1: Friday, July 10 ]</h4>
+                                <p>20 performances across Solar Stage & Lunar Dome. Headliners: Obsidian Wave, Void Transmission.</p>
+                                <hr>
+                                <a href="program.html?day=day1" class="btn-box">[ Friday Drawer &rarr; ]</a>
+                            </div>
+                            <div class="col wf-box-sub">
+                                <h4>[ Day 2: Saturday, July 11 ]</h4>
+                                <p>20 performances across Solar Stage & Lunar Dome. Headliners: Cathedral of Noise, Electric Shaman.</p>
+                                <hr>
+                                <a href="program.html?day=day2" class="btn-box">[ Saturday Drawer &rarr; ]</a>
+                            </div>
+                            <div class="col wf-box-sub">
+                                <h4>[ Day 3: Sunday, July 12 ]</h4>
+                                <p>20 performances across Solar Stage & Lunar Dome. Headliners: Nebular Sequence, Subterranean Mind.</p>
+                                <hr>
+                                <a href="program.html?day=day3" class="btn-box">[ Sunday Drawer &rarr; ]</a>
+                            </div>
+                        </div>
+                        <div style="margin-top: 10px;">
+                            <a href="program.html" class="btn-box active">[ Open Complete 60-Slot Timetable Drawers &rarr; ]</a>
+                        </div>
+                    </div>
+                </details>
+            </section>
+
+            <!-- Central Hub Drawer 4: Fast Navigation Directory -->
+            <section aria-labelledby="drawer-directory-heading">
+                <details class="wf-drawer">
+                    <summary id="drawer-directory-heading">
+                        <div class="drawer-summary-title">
+                            <span>🗂️ [ Drawer 4: Fast Navigation Directory & Festival Essentials ]</span>
+                            <span class="drawer-badge">Subpages</span>
+                        </div>
+                        <span class="drawer-icon">▼</span>
+                    </summary>
+                    <div class="drawer-body">
+                        <div class="row">
+                            <div class="col wf-box-sub">
+                                <h4>[ 🎤 60 Artists Lineup ]</h4>
+                                <p>Complete catalog with bios, origins, genres, and audio sample teasers grouped into genre drawers.</p>
+                                <hr>
+                                <a href="artists.html" class="btn-box">[ Artists Catalog &rarr; ]</a>
+                            </div>
+                            <div class="col wf-box-sub">
+                                <h4>[ 🚆 Practical Guide ]</h4>
+                                <p>Kutna Hora transit routes, festival shuttle schedules, tent city camping rules, and cashless wristband FAQ.</p>
+                                <hr>
+                                <a href="practical-info.html" class="btn-box">[ Practical Info &rarr; ]</a>
+                            </div>
+                            <div class="col wf-box-sub">
+                                <h4>[ ★ Personal Planner ]</h4>
+                                <p>Saved performances synchronized via LocalStorage with real-time automatic time clash detection.</p>
+                                <hr>
+                                <a href="my-schedule.html" class="btn-box">[ My Schedule &rarr; ]</a>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </section>
+
+            <!-- Central Hub Drawer 5: Practical Highlights & Transit Glance -->
+            <section aria-labelledby="drawer-transit-heading">
+                <details class="wf-drawer">
+                    <summary id="drawer-transit-heading">
+                        <div class="drawer-summary-title">
+                            <span>🚆 [ Drawer 5: Quick Transit & Ground Operations ]</span>
+                            <span class="drawer-badge">Logistics</span>
+                        </div>
+                        <span class="drawer-icon">▼</span>
+                    </summary>
+                    <div class="drawer-body">
+                        <p><strong>Direct Train:</strong> Prague Hlavní Nádraží &rarr; Kutná Hora hl.n. (55 min, departs hourly).</p>
+                        <p><strong>Festival Shuttle:</strong> Dedicated electric shuttles run continuously between the main railway station and the festival gate every 15 minutes.</p>
+                        <p><strong>Camping Grounds:</strong> Secured green tent city open from Thursday July 9 at 12:00 through Monday July 13 at 14:00.</p>
+                        <hr>
+                        <a href="practical-info.html" class="btn-box">[ Complete Visitor Guide & FAQ &rarr; ]</a>
+                    </div>
+                </details>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer id="footer-placeholder">
+            <hr>
+            <div class="wf-footer-inline">
+                <span class="festival-brand">[ Festival of Darkness 2 ]</span>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+                <span style="color: #666; font-size: 0.85rem; margin-left: auto;">[ Layout 06: Accordion Drawer Hub &bull; Pure Client-Side ]</span>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

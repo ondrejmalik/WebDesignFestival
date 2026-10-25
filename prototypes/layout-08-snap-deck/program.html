@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Festival Program & Timetable – Layout 08: Horizontal Snap Deck. 60 performances across Solar Horizon Stage and Lunar Forest Dome with scroll-snap stage cards.">
+    <title>Festival of Darkness 2 | Program (Snap Deck)</title>
+    <link rel="stylesheet" href="layout.css">
+    <script src="../common/festival-data.js" defer></script>
+    <script src="layout.js" defer></script>
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- Header & Navigation -->
+        <header id="nav-placeholder">
+            <nav class="wf-nav-inline" aria-label="Main Navigation">
+                <a href="index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html" class="active">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule (<span class="fav-count-badge">0</span>) ]</a>
+            </nav>
+            <hr>
+        </header>
+
+        <main>
+
+            <!-- Page Title Section -->
+            <section class="wf-box">
+                <h1>[ Festival Program & Timetable ]</h1>
+                <p><strong>[ July 10–12, 2026 | Kutna Hora | 60 Performances Across 2 Distinct Stages ]</strong></p>
+                <hr>
+                <p>[ <strong>Horizontal Snap Deck Metaphor:</strong> Swipe horizontally or tap the stage tabs to switch between the Solar Stage and covered Lunar Forest Dome. Click ☆ Save to bookmark shows. ]</p>
+            </section>
+
+            <!-- Stats Bar -->
+            <div class="sch-stats-bar">
+                <div>
+                    <strong>[ ★ My Saved Shows: <span id="fav-count">0</span> bookmarked ]</strong>
+                    <span style="margin-left: 10px; color: #444; font-size: 0.85rem;">[ 60 Live Sets &bull; All 3 Festival Days ]</span>
+                </div>
+                <div>
+                    <a href="my-schedule.html" class="btn-box"><strong>[ View in My Schedule &rarr; ]</strong></a>
+                </div>
+            </div>
+
+            <!-- Horizontal Snap Deck Carousel for Stages (Rendered dynamically from FESTIVAL_DATA.SCHEDULE via renderSchedule) -->
+            <section class="wf-box" id="schedule-deck-section">
+                <div class="deck-nav-bar">
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <button type="button" class="deck-tab-btn active">[ ☀️ Solar Horizon Stage (Open-Air) ]</button>
+                        <button type="button" class="deck-tab-btn" id="lunar-deck-tab">[ 🌙 Lunar Forest Dome (Covered) ]</button>
+                    </div>
+                    <div class="deck-dots">
+                        <button type="button" class="deck-dot active" aria-label="Solar Stage"></button>
+                        <button type="button" class="deck-dot" aria-label="Lunar Dome"></button>
+                    </div>
+                </div>
+
+                <!-- Snap Container -->
+                <div class="snap-deck-container" id="snap-deck">
+                    <!-- Deck 1: Solar Horizon Stage -->
+                    <div class="snap-card" id="card-solar">
+                        <h2>[ ☀️ Solar Horizon Stage (Open-Air) ]</h2>
+                        <p style="font-size: 0.85rem; color: #555;">Capacity: 4,500 &bull; Focus: Post-Rock, Indie Rock, Ambient Live Sets</p>
+                        <hr>
+                        <div id="solar-slots-container">
+                            <p>[ Loading 30 Solar Stage performances... ]</p>
+                        </div>
+                    </div>
+
+                    <!-- Deck 2: Lunar Forest Dome -->
+                    <div class="snap-card" id="card-lunar">
+                        <h2>[ 🌙 Lunar Forest Dome (Covered Rain Shelter) ]</h2>
+                        <p style="font-size: 0.85rem; color: #555;">Capacity: 1,800 &bull; Focus: Modular Ambient, Techno, Experimental Electronics</p>
+                        <hr>
+                        <div id="lunar-slots-container">
+                            <p>[ Loading 30 Lunar Dome performances... ]</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer id="footer-placeholder">
+            <hr>
+            <div class="wf-footer-inline">
+                <span class="festival-brand">[ Festival of Darkness 2 ]</span>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+                <span style="color: #666; font-size: 0.85rem; margin-left: auto;">[ 60 Timetable Slots &bull; Pure Client-Side ]</span>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

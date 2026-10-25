@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My Personal Schedule & Clash Detection – Festival of Darkness 2">
+    <title>Festival of Darkness 2 | My Schedule & Conflict Detection</title>
+    <link rel="stylesheet" href="layout.css">
+    <script src="../common/festival-data.js"></script>
+    <script src="layout.js" defer></script>
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- HEADER & UNBORDERED INLINE NAVIGATION -->
+        <header>
+            <nav class="wf-nav-inline">
+                <a href="index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program Feed ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html" class="active">[ My Schedule <span class="nav-fav-count"></span> ]</a>
+            </nav>
+        </header>
+        <hr>
+
+        <main>
+            <!-- Page Header -->
+            <section class="wf-box">
+                <h1>[ ★ My Personal Schedule Planner ]</h1>
+                <p>[ Your bookmarked performances synchronized across the website. Overlapping showtimes on different stages are flagged automatically with red collision indicators. ]</p>
+            </section>
+
+            <!-- Schedule Status / Conflict Summary Box -->
+            <section class="wf-box" id="schedule-summary-box">
+                <p><strong>[ Personal Schedule Status ]</strong></p>
+                <p>[ Loading your saved itinerary... ]</p>
+            </section>
+
+            <!-- Day Filters & Controls Toolbar -->
+            <section class="wf-box" style="padding: 10px 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                    <div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
+                        <span style="font-size: 0.82rem; font-weight: 700; text-transform: uppercase;">View:</span>
+                        <button type="button" class="btn-pill active" data-schedule-day="all">[ All Days ]</button>
+                        <button type="button" class="btn-pill" data-schedule-day="Day 1">[ Day 1 (Fri) ]</button>
+                        <button type="button" class="btn-pill" data-schedule-day="Day 2">[ Day 2 (Sat) ]</button>
+                        <button type="button" class="btn-pill" data-schedule-day="Day 3">[ Day 3 (Sun) ]</button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn-box" id="btn-clear-favorites" style="color: #b71c1c; border-color: #b71c1c; font-size: 0.85rem; padding: 6px 12px;">
+                            [ 🗑️ Clear All Saved ]
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bookmarked Performances Stream Container -->
+            <section class="wf-box" style="padding: 12px;">
+                <h2>[ Saved Timetable Itinerary ]</h2>
+                <div id="my-schedule-container" class="feed-stream">
+                    <!-- Populated dynamically by layout.js -->
+                    <noscript>
+                        <p>[ JavaScript is required to render and detect schedule conflicts. ]</p>
+                    </noscript>
+                </div>
+            </section>
+
+            <!-- Quick Navigation Shortcuts -->
+            <section class="wf-box" style="margin-top: 16px;">
+                <h3>[ Add More Shows to Your Planner ]</h3>
+                <p>[ Want to discover more performances? Jump back to the Chronological Feed or explore all 60 artist profiles: ]</p>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px;">
+                    <a href="program.html" class="btn-box btn-box-primary">[ Open Program Feed &rarr; ]</a>
+                    <a href="artists.html" class="btn-box">[ Browse Artists Catalog &rarr; ]</a>
+                    <a href="stages.html#stage-lunar" class="btn-box">[ View Covered Rain Shelter Dome &rarr; ]</a>
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer>
+            <hr>
+            <p>[ Festival of Darkness 2 ] • Kutna Hora, July 10–12, 2026 • Course Exercise 3 Mobile Wireframe Prototype L02 (Chronological Feed)</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>

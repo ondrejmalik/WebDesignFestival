@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Festival of Darkness 2 – Layout 05: Dense Data Terminal Personal Schedule & Conflict Engine. Monospace itinerary report with automatic pairwise time overlap detection.">
+    <title>Festival of Darkness 2 | Terminal Personal Schedule</title>
+    <link rel="stylesheet" href="layout.css">
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- HEADER & NAVIGATION -->
+        <header id="nav-placeholder">
+            <nav class="wf-nav-inline">
+                <a href="index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule (<span class="fav-count-badge">0</span>) ]</a>
+            </nav>
+            <hr>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main>
+
+            <!-- Page Title -->
+            <section class="wf-box">
+                <div class="terminal-sysbar" style="margin-bottom: 6px;">
+                    <span>[ ITINERARY_REPORT // USER LOCAL STORAGE ]</span>
+                    <span id="terminal-itinerary-stats">[ SUMMARY: 0 SHOWS | 0 CLASHES ]</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                    <h1>[ PERSONAL SCHEDULE &amp; CLASH REPORT ]</h1>
+                    <button class="btn-box btn-box-danger" id="clear-favorites-btn">
+                        [ CMD: CLEAR_ALL_SAVED_SHOWS ]
+                    </button>
+                </div>
+                <hr>
+                <p>[ Personal festival timetable synced via browser LocalStorage (<code>festival_favorites</code>). Evaluates mathematical time intervals with post-midnight minute adjustment (+1440m for sets past midnight) to detect concurrent stage clashes. ]</p>
+            </section>
+
+            <!-- Conflict Summary Banner Container (Populated by layout.js) -->
+            <div id="conflict-summary-banner"></div>
+
+            <!-- Schedule Items Container (Populated by layout.js) -->
+            <div id="my-schedule-container">
+                <div class="wf-box-sub" style="text-align: center; padding: 20px;">
+                    <p>[ QUERYING_LOCAL_STORAGE_ITINERARY... ]</p>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer id="footer-placeholder">
+            <hr>
+            <div class="wf-footer-inline">
+                <span class="festival-brand">[ Festival of Darkness 2 ]</span>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+                <span style="color: #666; font-size: 0.82rem; margin-left: auto;">[ Itinerary Conflict Engine &bull; Pure Client-Side ]</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Portable Universal Dataset & Client Logic -->
+    <script src="../common/festival-data.js"></script>
+    <script src="layout.js"></script>
+</body>
+</html>

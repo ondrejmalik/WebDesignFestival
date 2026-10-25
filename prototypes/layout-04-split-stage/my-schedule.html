@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Personal Schedule & Itinerary Planner – Layout 04: Split Stage Switcher. Syncs with LocalStorage under festival_favorites with automatic pairwise stage clash detection.">
+    <title>Festival of Darkness 2 | My Schedule</title>
+    <link rel="stylesheet" href="layout.css">
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- HEADER & NAVIGATION -->
+        <header id="nav-placeholder">
+            <nav class="wf-nav-inline">
+                <a href="index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule (<span class="fav-count-badge">0</span>) ]</a>
+            </nav>
+            <hr>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main>
+
+            <!-- Page Title & Feature Overview (Scenario 2) -->
+            <section class="wf-box">
+                <h1>[ ★ My Personal Schedule & Itinerary Planner ]</h1>
+                <p><strong>[ Scenario 2: Synchronized LocalStorage Planner & Stage Clash Engine ]</strong></p>
+                <hr>
+                <p>[ Review all performances you have bookmarked from Solar Horizon Stage and Lunar Forest Dome. The scheduling engine automatically compares show time intervals on the same day and flags simultaneous stage clashes with red warning badges. ]</p>
+                <p style="font-size: 0.85rem; color: #555; margin-top: 4px;">
+                    <em>[ Data persists locally in your browser storage under <code>festival_favorites</code> across all 10 prototype layouts and the canonical desktop site. ]</em>
+                </p>
+                <hr>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+                    <a href="program.html" class="btn-box"><strong>[ &larr; Back to Timetable ]</strong></a>
+                    <button class="btn-box" onclick="alert('Lineup link copied to clipboard!')">[ Share My Lineup ]</button>
+                    <button class="btn-box" onclick="alert('Exporting calendar file (.ics)...')">[ Export Calendar (.ics) ]</button>
+                    <button id="clear-favorites-btn" class="btn-box btn-box-danger">[ Clear All Shows ]</button>
+                </div>
+            </section>
+
+            <!-- Top Conflict Summary Banner (populated by layout.js) -->
+            <div id="conflict-summary-banner"></div>
+
+            <!-- Dynamic Schedule Grouped by Day (populated by layout.js) -->
+            <div id="my-schedule-container">
+                <div class="wf-box-sub" style="text-align: center; padding: 20px;">
+                    <p>[ Loading your bookmarked itinerary... ]</p>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer id="footer-placeholder">
+            <hr>
+            <div class="wf-footer-inline">
+                <span class="festival-brand">[ Festival of Darkness 2 ]</span>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+                <span style="color: #666; font-size: 0.85rem; margin-left: auto;">[ Clash Detection Engine &bull; Pure Client-Side ]</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Portable Universal Dataset & Client Logic -->
+    <script src="../common/festival-data.js"></script>
+    <script src="layout.js"></script>
+</body>
+</html>

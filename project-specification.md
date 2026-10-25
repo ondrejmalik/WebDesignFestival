@@ -1,108 +1,108 @@
-#festival web
+# Festival Website Project Specification
 
-## 1. Identita festivalu
+## 1. Festival Identity
 
-| Položka | Specifikace |
+| Item | Specification |
 |---|---|
-| **Název** | Festival Temnoty 2 |
-| **Ročník** | 2026 |
-| **Lokalita** | Kutná Hora, Česká republika |
-| **Datumový rozsah** | 10. 7. – 12. 7. 2026 (3 dny) |
-| **Charakter festivalu** | Třídenní festival elektronické, alternativní a audiovizuální scény na dvou odlišných pódiích (open-air a kryté šapitó). |
-| **Hlavní žánry/témata** | Post-Rock, Ambient, Indie Pop/Rock, Techno, experimentální elektronika. |
+| **Name** | Festival of Darkness 2 |
+| **Edition** | 2026 |
+| **Location** | Kutna Hora, Czech Republic |
+| **Date Range** | July 10 – July 12, 2026 (3 days) |
+| **Festival Character** | Three-day music festival of electronic, alternative, and audiovisual art across two distinct stages (open-air amphitheater and covered marquee dome). |
+| **Main Genres / Themes** | Post-Rock, Ambient, Indie Pop/Rock, Techno, and Experimental Electronics. |
 
 ---
 
-## 2. Účel webu
+## 2. Website Purpose
 
-**K čemu web slouží:**
-Jako hlavní digitální průvodce festivalem, který prezentuje všech 60 účinkujících, 3denní program a organizační pokyny pro areál Kutné hoře.
+**What the website serves for:**
+Acts as the primary digital guide for the festival, presenting all 60 performers, the 3-day timetable, and organizational guidelines for the Kutna Hora venue.
 
-**Hlavní cíle webu:**
-- Poskytnout přehledný časový harmonogram pro obě scény (Solar Horizon Stage a Lunar Forest Dome).
-- Představit profily interpretů.
-- Zprostředkovat praktické informace pro bezproblémový průběh návštěvy.
+**Primary website goals:**
+- Provide a clear, intuitive schedule for both stages (Solar Horizon Stage and Lunar Forest Dome).
+- Showcase performer profiles and music samples.
+- Deliver essential practical information ensuring a seamless visitor experience.
 
-**Důležité akce uživatele na webu:**
-- Zjištění času a scény, kde hraje vybraný interpret.
-- Uložení vybraných vystoupení do osobního harmonogramu.
-- Vyhledání pokynů k dopravě, orientaci v areálu a pravidlům festivalu.
-
----
-
-## 3. Cílové skupiny
-
-**1. Fanoušci alternativní a elektronické hudby (18–35 let)**
-- **Potřeby:** Rychlý přístup k detailnímu line-upu, objevování nových jmen, osobní plánování.
-- **Očekávání:** Rychlý, mobilně responzivní web pro snadné použití přímo pod pódiem.
-- **Informace/funkce:** Interaktivní program s filtrem, uložení oblíbených interpretů.
-
-**2. Běžní návštěvníci a místní (20–50 let)**
-- **Potřeby:** Zjistit, jak a kdy se dostat do areálu, jaký je program na hlavním open-air pódiu.
-- **Očekávání:** Srozumitelné, věcné a snadno dohledatelné praktické informace.
-- **Informace/funkce:** Sekce "Praktické informace", přehledná navigace, informace o scénách.
+**Key user actions:**
+- Identifying performance time and stage for any selected artist.
+- Saving selected performances into a personal schedule.
+- Locating transit instructions, venue maps, and festival rules.
 
 ---
 
-## 4. Informační architektura
+## 3. Target Groups
 
-**Struktura webu / Sitemap:**
-- `/` (Úvodní stránka)
-- `/program` (Kompletní harmonogram)
-    - `/program?den=1` (Pátek 10. 7.)
-    - `/program?den=2` (Sobota 11. 7.)
-    - `/program?den=3` (Neděle 12. 7.)
-- `/ucinkujici` (Seznam 60 interpretů) -> `/ucinkujici/[id]` (Detail)
-- `/sceny` (Seznam 2 scén) -> `/sceny/[id]` (Detail scény)
-- `/prakticke-informace` (FAQ, doprava do Kutné hory)
-- `/muj-program` (Interaktivní výběr vystoupení)
+**1. Alternative and Electronic Music Fans (Ages 18–35)**
+- **Needs:** Rapid access to the lineup, artist discovery, and personal itinerary planning.
+- **Expectations:** Fast, mobile-responsive layout for effortless navigation directly under the stage.
+- **Features needed:** Interactive schedule with filtering, ability to save favorite performers.
 
-**Hlavní navigace:**
-Úvod | Program | Účinkující | Scény | Praktické info | Můj program
-
-**Vztahy mezi entitami:**
-- Každé **Vystoupení** se odehrává na právě jedné **Scéně** (Solar Horizon nebo Lunar Forest).
-- Každé **Vystoupení** patří právě jednomu **Účinkujícímu**.
-- **Program** spojuje konkrétní čas, Účinkujícího a Scénu.
-
-**Účel jednotlivých částí:**
-- **Úvodní stránka:** Poutač, aktuální novinky.
-- **Program:** Časová osa s možností filtrace podle 3 festivalových dnů a 2 scén.
-- **Účinkující:** Katalog umělců (jméno, žánr, původ).
-- **Scény:** Popis lokací (kapacita, typ stage).
-- **Praktické informace:** Textový přehled o dopravě, ubytování a pravidlech.
-- **Můj program (interaktivní část):** Osobní harmonogram, do kterého si uživatel přidává položky (data uložena přes LocalStorage prohlížeče).
+**2. General Visitors and Locals (Ages 20–50)**
+- **Needs:** Finding how and when to reach the venue, checking the main open-air stage schedule.
+- **Expectations:** Concise, factual, easily discoverable practical details.
+- **Features needed:** "Practical Info" section, clear navigation bar, stage descriptions.
 
 ---
 
-## 5. Uživatelské scénáře
+## 4. Information Architecture
 
-**Scénář 1: Zjištění programu na kryté scéně**
-- **Typ uživatele:** Návštěvník v areálu.
-- **Cíl:** Zjistit, kdo hraje dnes večer v Lunar Forest Dome.
-- **Výchozí situace:** Začíná pršet, uživatel hledá přesun pod střechu a otevírá web na mobilu.
-- **Očekávaný výsledek:** V menu vybere "Scény", klikne na "Lunar Forest Dome" a vidí chronologický program pro aktuální den s detaily vystupujících.
+**Sitemap / Website Structure:**
+- `/` (`index.html`) – Homepage (Hero identity, highlights, section directory)
+- `/program` (`program.html`) – Complete schedule
+    - Day 1: Friday, July 10
+    - Day 2: Saturday, July 11
+    - Day 3: Sunday, July 12
+- `/artists` (`artists.html`) – Catalog of 60 artists with search & detail view
+- `/stages` (`stages.html`) – Presentation of 2 stages + venue map
+- `/practical-info` (`practical-info.html`) – Transit to Kutna Hora, camping, cashless, FAQ
+- `/my-schedule` (`my-schedule.html`) – Personal schedule / planner (LocalStorage)
 
-**Scénář 2: Sestavení osobního plánu na víkend**
-- **Typ uživatele:** Fanoušek připravující se na festival.
-- **Cíl:** Uložit si vybraná vystoupení, aby se vyhnul časovým kolizím mezi Solar a Lunar scénou.
-- **Výchozí situace:** Uživatel sedí u počítače a prochází sekci "Program".
-- **Očekávaný výsledek:** U každé kapely klikne na "Přidat do mého programu". V záložce "Můj program" pak vidí přehledný seznam vybraných koncertů ze všech 3 dnů.
+**Main Navigation:**
+[ Festival of Darkness 2 ] | [ Home ] | [ Program ] | [ Artists ] | [ Stages ] | [ Practical Info ] | [ My Schedule ]
 
-**Scénář 3: Doprava do Kutné hory**
-- **Typ uživatele:** Mimokutnhorský návštěvník.
-- **Cíl:** Zjistit, jak se dostane do areálu.
-- **Výchozí situace:** Uživatel stojí na nádraží v Kutné hoře.
-- **Očekávaný výsledek:** Otevře sekci "Praktické info" a podle ní se vydá do arealu v Kutné hoře.
+**Entity Relationships:**
+- Each **Performance** takes place at exactly one **Stage** (Solar Horizon or Lunar Forest).
+- Each **Performance** is associated with exactly one **Performer**.
+- A **Schedule Item** connects a specific time slot, Performer, and Stage.
+
+**Purpose of Individual Sections:**
+- **Homepage:** Eye-catcher, festival identity, key parameters, quick section routing.
+- **Program:** Timeline filterable by 3 festival days, 2 stages, and genres.
+- **Artists:** Performer catalog (name, genre, country of origin, detail modal/view).
+- **Stages:** Stage venue profiles (capacity, indoor/outdoor type, atmosphere).
+- **Practical Info:** Structured guidance on transport, accommodation, rules, and FAQ.
+- **My Schedule (Interactive):** Custom itinerary where visitors save shows (persisted in browser LocalStorage with clash detection).
 
 ---
 
-## 6. Použití AI
+## 5. User Scenarios
 
-| Povinný bod k vysvětlení | Reflexe týmu |
+**Scenario 1: Finding the Covered Stage Timetable**
+- **User type:** Festival attendee at the venue.
+- **Goal:** Check who is playing tonight at the indoor Lunar Forest Dome.
+- **Context:** Rain begins to fall; attendee needs to move under a roof and checks the site on mobile.
+- **Expected result:** User taps "Stages" or "Program" in the navigation, selects "Lunar Forest Dome", and instantly views the chronological timetable for the current day.
+
+**Scenario 2: Creating a Personal Weekend Itinerary**
+- **User type:** Fan preparing for the festival.
+- **Goal:** Bookmark preferred concerts to avoid scheduling collisions between Solar and Lunar stages.
+- **Context:** User is on a desktop computer reviewing the schedule before the festival.
+- **Expected result:** User clicks "+ Add to My Schedule" on desired performances. In the "My Schedule" tab, they see a conflict-free chronological agenda for all 3 days.
+
+**Scenario 3: Traveling to Kutna Hora**
+- **User type:** Out-of-town visitor.
+- **Goal:** Learn how to reach the festival venue from the train station.
+- **Context:** Attendee arrives at Kutna Hora main railway station.
+- **Expected result:** Opens "Practical Info" and finds festival shuttle bus departure frequency and walking directions to the festival grounds.
+
+---
+
+## 6. AI Usage Reflection
+
+| Required Point of Reflection | Team Evaluation |
 |---|---|
-| **K čemu jsme AI použili** | K reformátování struktury Markdown dokumentu a naplnění uživatelských scénářů a informační architektury přesně podle dodaných dat o festivalu Festival Temnoty  2 . Použili jsme již existující práci. |
-| **Jak jsme výstup ověřili** | Zkontrolovali jsme, že specifikace odpovídá XML datům: 3 dny (10.-12. 7. 2026), 2 scény (Solar a Lunar), 60 umělců a že struktura dokumentu plní zadání. |
-| **Co jsme přijali** | Čistou, zjednodušenou strukturu dokumentu a provázání scénářů s konkrétními názvy scén z databáze. |
-| **Co jsme upravili nebo odmítnuli** | Přizpůsobili jsme popisky a cílové skupiny specifickému zaměření festivalu (elektronika, ambient), aby odpovídaly žánrům z XML souboru. |
-| **Zjištěné limity a chyby** | Bylo nutné dávat pozor, aby AI nedomýšlela zbytečné funkce nad rámec jednoduché webové aplikace. |
+| **What AI was used for** | Structuring the Markdown specification, formatting user scenarios, and generating consistent entity relations directly aligned with the festival's XML dataset. |
+| **How output was verified** | Verified consistency against `data.xml`: 3 days (July 10–12, 2026), 2 stages (Solar and Lunar), 60 performers, and compliance with course requirements. |
+| **What was accepted** | Clean, minimalist architectural structure, clear user personas, and linking scenarios to actual database stages and performers. |
+| **What was modified or rejected** | Removed unnecessary feature bloat (e.g. backend authentication, payment gateways) to keep the project strictly compliant with pure client-side constraints. |
+| **Identified limits and errors** | AI initially tended to suggest complex server-side architectures; manual intervention was needed to restrict the design to clean client-side static web rules. |

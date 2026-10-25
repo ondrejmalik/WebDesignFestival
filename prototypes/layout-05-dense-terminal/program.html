@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Festival of Darkness 2 – Layout 05: Dense Data Terminal Timetable. Dense teletext matrix of 60 performances across 3 days with instant stage filters and star bookmarking.">
+    <title>Festival of Darkness 2 | Terminal Timetable</title>
+    <link rel="stylesheet" href="layout.css">
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- HEADER & NAVIGATION -->
+        <header id="nav-placeholder">
+            <nav class="wf-nav-inline">
+                <a href="index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule (<span class="fav-count-badge">0</span>) ]</a>
+            </nav>
+            <hr>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main>
+
+            <!-- Page Title -->
+            <section class="wf-box">
+                <div class="terminal-sysbar" style="margin-bottom: 6px;">
+                    <span>[ MATRIX: 60 SLOTS // 2 STAGES // 3 DAYS ]</span>
+                    <span id="terminal-telemetry-status">[ REGISTRY: 60 / 60 SLOTS ACTIVE ]</span>
+                </div>
+                <h1>[ TIMETABLE DATA TERMINAL ]</h1>
+                <p><strong>[ July 10–12, 2026 // Kutna Hora // Flight-Departure Monospace Board ]</strong></p>
+                <hr>
+                <p>[ High-density timetable matrix. Filter by stage channel, festival day, or genre pills. Tap any slot row or [★] star button to toggle into your personal schedule. ]</p>
+            </section>
+
+            <!-- Scenario 1: Rain Shelter Quick Override Banner -->
+            <section class="wf-box" style="border: 2px solid #1a237e; background: #e8eaf6;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                    <div>
+                        <strong style="color: #1a237e;">[ 🌧️ INCLEMENT WEATHER PROTOCOL: LUNAR FOREST DOME ]</strong>
+                        <p style="font-size: 0.85rem; margin-top: 2px; color: #111;">
+                            100% weatherproof covered rain shelter marquee (1,800 capacity) running continuously.
+                        </p>
+                    </div>
+                    <button class="filter-btn filter-btn-lunar" data-stage-filter="lunar" style="font-weight: bold;">
+                        [ CMD: FILTER_COVERED_DOME_ONLY ]
+                    </button>
+                </div>
+            </section>
+
+            <!-- Terminal Filter & Command Console -->
+            <section class="wf-box">
+                <h2>[ Terminal Command Console ]</h2>
+                <hr>
+
+                <div class="terminal-cmd-bar">
+                    <!-- Stage Filter Row -->
+                    <div class="filter-row">
+                        <span class="filter-label">[ STAGE: ]</span>
+                        <button class="filter-btn active" data-stage-filter="all">[ ALL STAGES (60) ]</button>
+                        <button class="filter-btn" data-stage-filter="solar">[ ☀️ SOLAR HORIZON (30) ]</button>
+                        <button class="filter-btn filter-btn-lunar" data-stage-filter="lunar">[ 🌙 LUNAR DOME (COVERED 30) ]</button>
+                    </div>
+
+                    <!-- Day Filter Row -->
+                    <div class="filter-row">
+                        <span class="filter-label">[ DAY: ]</span>
+                        <button class="filter-btn active" data-day-filter="all">[ ALL DAYS ]</button>
+                        <button class="filter-btn" data-day-filter="day1">[ DAY 1 // FRI JUL 10 ]</button>
+                        <button class="filter-btn" data-day-filter="day2">[ DAY 2 // SAT JUL 11 ]</button>
+                        <button class="filter-btn" data-day-filter="day3">[ DAY 3 // SUN JUL 12 ]</button>
+                    </div>
+
+                    <!-- Genre Filter Row -->
+                    <div class="filter-row">
+                        <span class="filter-label">[ GENRE: ]</span>
+                        <button class="filter-btn active" data-genre-filter="all">[ ALL GENRES ]</button>
+                        <button class="filter-btn" data-genre-filter="Techno">[ TECHNO ]</button>
+                        <button class="filter-btn" data-genre-filter="Ambient">[ AMBIENT ]</button>
+                        <button class="filter-btn" data-genre-filter="Rock">[ ROCK ]</button>
+                        <button class="filter-btn" data-genre-filter="Indie">[ INDIE ]</button>
+                        <button class="filter-btn" data-genre-filter="Electro">[ ELECTRO ]</button>
+                    </div>
+
+                    <!-- Bookmarks & Search Row -->
+                    <div class="filter-row" style="margin-top: 4px;">
+                        <span class="filter-label">[ QUERY: ]</span>
+                        <button class="filter-btn filter-btn-fav" id="filter-fav-only">[ ★ BOOKMARKED ONLY ]</button>
+                        <div style="flex: 1 1 200px; display: flex; gap: 6px;">
+                            <input type="text" id="terminal-search-input" class="input-box" placeholder="[ SEARCH: Type artist name, genre... ]">
+                            <button class="btn-box" id="clear-search-btn" title="Clear Search" style="flex-shrink: 0;">[ X ]</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Timetable Matrix Container (Populated dynamically by layout.js using window.FESTIVAL_DATA.SCHEDULE) -->
+            <div id="terminal-program-container">
+                <!-- Hydrated dynamically by layout.js using FESTIVAL_DATA.SCHEDULE via renderSchedule -->
+                <div class="wf-box-sub">
+                    <p>[ INITIALIZING_TERMINAL_DATASTREAM... ]</p>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer id="footer-placeholder">
+            <hr>
+            <div class="wf-footer-inline">
+                <span class="festival-brand">[ Festival of Darkness 2 ]</span>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+                <span style="color: #666; font-size: 0.82rem; margin-left: auto;">[ Timetable Matrix &bull; Pure Client-Side ]</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Portable Universal Dataset & Client Logic -->
+    <script src="../common/festival-data.js"></script>
+    <script src="layout.js"></script>
+</body>
+</html>

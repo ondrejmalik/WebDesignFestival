@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Personal Schedule & Itinerary Planner – Festival of Darkness 2">
+    <title>Festival of Darkness 2 | Bento My Schedule</title>
+    <link rel="stylesheet" href="layout.css">
+    <script src="../common/festival-data.js"></script>
+    <script src="layout.js" defer></script>
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- HEADER & NAVIGATION -->
+        <header id="nav-placeholder">
+            <nav class="wf-nav-inline">
+                <a href="index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html" class="active">[ My Schedule ]</a>
+            </nav>
+            <hr>
+        </header>
+
+        <main>
+
+            <!-- 1. Header Box & Collision Engine Overview (Scenario 2) -->
+            <section class="wf-box">
+                <div class="bento-card-header">
+                    <div>
+                        <h1>[ ★ MY PERSONAL FESTIVAL SCHEDULE ]</h1>
+                        <p><strong>[ Interactive Itinerary Planner with Automatic Conflict Detection ]</strong></p>
+                    </div>
+                    <span class="bento-badge">SCENARIO 2 PLANNER</span>
+                </div>
+                <hr>
+                <p>[ Manage your bookmarked performances across all 3 festival days. The integrated conflict engine automatically inspects your timetable and detects scheduling overlaps across Solar and Lunar stages with red clash alerts. ]</p>
+                <div class="bento-card-sub" style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center;">
+                    <div><strong id="schedule-summary-count">0 shows bookmarked</strong></div>
+                    <div id="schedule-summary-conflicts"><span class="badge-clear">[ ✓ 0 Time Conflicts — Schedule is Clear ]</span></div>
+                </div>
+                <div class="bento-actions" style="margin-top: 12px;">
+                    <a href="program.html" class="btn-box" style="font-weight: bold;">[ &larr; Add Shows from Program ]</a>
+                    <button id="share-schedule-btn" class="btn-box">[ Share My Lineup ]</button>
+                    <button id="export-ics-btn" class="btn-box">[ Export to Calendar (.ics) ]</button>
+                    <button id="clear-favorites-btn" class="btn-box btn-box-danger">[ Clear All ]</button>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- 2. Dynamic Schedule Container (Rendered by layout.js) -->
+            <div id="my-schedule-container">
+                <!-- Static Fallback Content -->
+                <section class="wf-box" style="margin-bottom: 16px;">
+                    <h3>[ Friday, July 10, 2026 – Day 1 (Bookmarked Shows) ]</h3>
+                    <hr>
+                    <div class="bento-grid">
+                        <article class="bento-card" style="border: 1px solid #777; background: #fafafa;">
+                            <div class="bento-card-header">
+                                <h4>[ 14:00 – 14:45 | Echoes of Light ]</h4>
+                                <span class="bento-badge">☀️ SOLAR</span>
+                            </div>
+                            <div class="bento-card-sub" style="background: transparent; border: 0; padding: 0;">
+                                <p><strong>Stage:</strong> Solar Horizon Stage</p>
+                                <p><strong>Genre:</strong> Post-Rock / Ambient</p>
+                                <p style="margin-top: 4px; font-size: 0.85rem;"><span class="badge-clear" style="color: #2e7d32; font-weight: bold;">[ ✓ No time conflict ]</span></p>
+                            </div>
+                            <div class="bento-actions" style="margin-top: 10px;">
+                                <button class="btn-box btn-box-danger remove-fav-btn" data-id="perf-01">[ Remove Show ]</button>
+                                <a href="artists.html#perf-01" class="btn-box">[ View Bio ]</a>
+                            </div>
+                        </article>
+                        <article class="bento-card" style="border: 1px solid #777; background: #fafafa;">
+                            <div class="bento-card-header">
+                                <h4>[ 00:05 – 01:25 | Analog Void ]</h4>
+                                <span class="bento-badge">🌙 LUNAR DOME</span>
+                            </div>
+                            <div class="bento-card-sub" style="background: transparent; border: 0; padding: 0;">
+                                <p><strong>Stage:</strong> Lunar Forest Dome</p>
+                                <p><strong>Genre:</strong> Minimal Techno</p>
+                                <p style="margin-top: 4px; font-size: 0.85rem;"><span class="badge-clear" style="color: #2e7d32; font-weight: bold;">[ ✓ No time conflict ]</span></p>
+                            </div>
+                            <div class="bento-actions" style="margin-top: 10px;">
+                                <button class="btn-box btn-box-danger remove-fav-btn" data-id="perf-09">[ Remove Show ]</button>
+                                <a href="artists.html#perf-09" class="btn-box">[ View Bio ]</a>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <hr>
+
+                <section class="wf-box" style="margin-bottom: 16px;">
+                    <h3>[ Saturday, July 11, 2026 – Day 2 (Bookmarked Shows) ]</h3>
+                    <hr>
+                    <div class="wf-box-sub">
+                        <p style="color: #666; font-style: italic;">[ No performances currently bookmarked for Saturday. ]</p>
+                        <a href="program.html" class="btn-box" style="margin-top: 8px;">[ Add Shows from Program &rarr; ]</a>
+                    </div>
+                </section>
+
+                <hr>
+
+                <section class="wf-box">
+                    <h3>[ Sunday, July 12, 2026 – Day 3 (Bookmarked Shows) ]</h3>
+                    <hr>
+                    <div class="wf-box-sub">
+                        <p style="color: #666; font-style: italic;">[ No performances currently bookmarked for Sunday. ]</p>
+                        <a href="program.html" class="btn-box" style="margin-top: 8px;">[ Add Shows from Program &rarr; ]</a>
+                    </div>
+                </section>
+            </div>
+
+        </main>
+
+        <!-- FOOTER -->
+        <div id="footer-placeholder">
+            <hr>
+            <footer class="wf-footer-inline">
+                <strong class="festival-brand">[ © 2026 Festival of Darkness 2 ]</strong>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+            </footer>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Personal Schedule – Layout 06: Accordion Drawer Hub. Custom festival itinerary with collapsible day drawers and automatic pairwise time clash detection.">
+    <title>Festival of Darkness 2 | My Schedule (Accordion Drawer Hub)</title>
+    <link rel="stylesheet" href="layout.css">
+    <script src="../common/festival-data.js" defer></script>
+    <script src="layout.js" defer></script>
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- Top Header & Primary Wrapping Inline Navigation -->
+        <header id="nav-placeholder">
+            <nav class="wf-nav-inline" aria-label="Main Navigation">
+                <a href="index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule (<span class="fav-count-badge" id="fav-count">0</span>) ]</a>
+            </nav>
+            <hr>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+
+            <!-- Page Title Section -->
+            <section class="wf-box" aria-labelledby="schedule-title">
+                <h1 id="schedule-title">[ My Personal Schedule & Itinerary Drawers ]</h1>
+                <p><strong>[ July 10–12, 2026 | Kutna Hora | Synchronized via Shared LocalStorage ]</strong></p>
+                <hr>
+                <p>[ <strong>Collision Detection Engine:</strong> Saved performances are organized into day drawers. If two bookmarked shows on different stages overlap in time (+1440m post-midnight math), a prominent red warning is displayed (<code>[ ⚠️ Time conflict with: ... ]</code>). Clear time slots show a green confirmation badge (<code>[ ✓ No time conflict ]</code>). ]</p>
+            </section>
+
+            <!-- Status Alert Banner (Dynamic) -->
+            <div id="my-conflict-alert-banner" style="display: none; margin-bottom: 14px;"></div>
+
+            <!-- Toolbar & Planner Controls -->
+            <section class="wf-box" aria-label="Planner Controls">
+                <h2>[ Itinerary Controls & Diagnostic Testbeds ]</h2>
+                <hr>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                    <div>
+                        <strong>[ Saved Shows: <span id="my-total-saved">0</span> ]</strong> &bull; 
+                        <strong>[ Conflicts: <span id="my-total-conflicts">0</span> ]</strong>
+                    </div>
+
+                    <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                        <button class="btn-box" data-action="expand-all">[ ▾ Expand All Days ]</button>
+                        <button class="btn-box" data-action="collapse-all">[ ▸ Collapse All Days ]</button>
+                        <button class="btn-box" id="seed-conflict-btn" title="Seed overlapping shows to verify clash engine">
+                            [ + Test Clash Pair ]
+                        </button>
+                        <button class="btn-box" id="seed-clean-btn" title="Seed non-overlapping shows">
+                            [ + Test Clean Schedule ]
+                        </button>
+                        <button class="btn-box" id="clear-all-favs-btn" style="color: #b71c1c; border-color: #b71c1c;">
+                            [ Clear All ]
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dynamic My Schedule Render Container -->
+            <section id="my-schedule-container" aria-label="Personal Schedule Day Drawers">
+                <!-- Hydrated dynamically by layout.js from localStorage['festival_favorites'] -->
+                <div class="wf-box-sub" style="text-align: center; padding: 24px;">
+                    <p>[ Reading personal schedule from LocalStorage... ]</p>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer id="footer-placeholder">
+            <hr>
+            <div class="wf-footer-inline">
+                <span class="festival-brand">[ Festival of Darkness 2 ]</span>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+                <span style="color: #666; font-size: 0.85rem; margin-left: auto;">[ LocalStorage Key: 'festival_favorites' &bull; Pure Client-Side ]</span>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

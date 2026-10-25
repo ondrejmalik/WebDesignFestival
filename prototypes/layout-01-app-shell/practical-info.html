@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Practical Information & Visitor Transit Guide – Festival of Darkness 2 (App-Shell Bottom Nav Prototype L01)">
+    <title>Festival of Darkness 2 | Practical Info (App-Shell)</title>
+    <link rel="stylesheet" href="layout.css">
+    <script src="../common/festival-data.js" defer></script>
+    <script src="layout.js" defer></script>
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- Top Header & Secondary Inline Navigation -->
+        <div id="nav-placeholder">
+            <nav class="wf-nav-inline" aria-label="Top Secondary Navigation">
+                <a href="index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+            </nav>
+            <hr>
+        </div>
+
+        <!-- Main Content -->
+        <main>
+
+            <!-- Page Title Box -->
+            <section class="wf-box">
+                <h2>[ Practical Information for Visitors ]</h2>
+                <hr>
+                <p>[ Complete transit directions, campsite facilities, cashless wristband rules, and visitor FAQ for Kutna Hora 2026. ]</p>
+            </section>
+
+            <!-- Transit & Getting Here -->
+            <section class="wf-box">
+                <h3>[ 🚆 Transit to Kutna Hora ]</h3>
+                <hr>
+                <div class="row">
+                    <div class="col wf-box-sub">
+                        <h4>[ By Train from Prague / Brno ]</h4>
+                        <p>[ Regular direct train connections operate hourly to Kutna Hora main station (approx. 50 minutes from Prague Main Station). ]</p>
+                    </div>
+                    <div class="col wf-box-sub">
+                        <h4>[ Festival Shuttle Bus ]</h4>
+                        <p>[ Dedicated zero-emission shuttle buses connect Kutna Hora train station to the main festival gate every 15 minutes, complimentary with valid festival tickets. ]</p>
+                    </div>
+                    <div class="col wf-box-sub">
+                        <h4>[ Vehicle Parking P1 ]</h4>
+                        <p>[ Official secured parking lot P1 is situated at the town perimeter. Capacity: 800 vehicles, daily fee: 100 CZK (~€4). ]</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Accommodations & Amenities -->
+            <section class="wf-box">
+                <h3>[ Accommodations & Grounds Amenities ]</h3>
+                <hr>
+                <div class="row">
+                    <div class="col wf-box-sub">
+                        <h4>[ Tent Village (Camping) ]</h4>
+                        <p>[ Opens Friday July 10 at 12:00 and operates continuously until Monday July 13 at 12:00. Fenced perimeter with 24/7 security, flush toilets, and warm showers. ]</p>
+                    </div>
+                    <div class="col wf-box-sub">
+                        <h4>[ Cashless RFID Payments ]</h4>
+                        <p>[ 100% cashless festival experience via high-speed RFID wristbands. Top-up anytime via online portal or physical recharge desks with cash or payment card. ]</p>
+                    </div>
+                    <div class="col wf-box-sub">
+                        <h4>[ Lockers & Device Charging ]</h4>
+                        <p>[ Lockable personal deposit boxes with dedicated USB-C fast charging sockets located near the accreditation hub. ]</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Frequently Asked Questions -->
+            <section class="wf-box">
+                <h3>[ Frequently Asked Questions (FAQ) ]</h3>
+                <hr>
+                <div class="wf-box-sub" style="margin-bottom: 8px;">
+                    <p><strong>Q: Are children and pets permitted inside the festival grounds?</strong></p>
+                    <p>A: Children aged 12 and under receive complimentary entry accompanied by an adult legal guardian. Pets and domestic animals are strictly prohibited for safety and hearing protection reasons.</p>
+                </div>
+                <div class="wf-box-sub" style="margin-bottom: 8px;">
+                    <p><strong>Q: What happens if it rains heavily during festival days?</strong></p>
+                    <p>A: The festival proceeds rain or shine. In case of inclement weather, the massive covered <strong>Lunar Forest Dome</strong> provides 100% rain shelter with non-stop electronic performances.</p>
+                </div>
+                <div class="wf-box-sub">
+                    <p><strong>Q: Can I re-enter the grounds once checked in?</strong></p>
+                    <p>A: Yes. Your fabric festival RFID wristband allows unrestricted re-entry throughout all 3 days.</p>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <div id="footer-placeholder">
+            <hr>
+            <footer class="wf-footer-inline">
+                <strong class="festival-brand">[ © 2026 Festival of Darkness 2 ]</strong>
+                <span>Kutna Hora, July 10–12, 2026</span>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+            </footer>
+        </div>
+
+    </div>
+
+    <!-- App-Shell Fixed Bottom Thumb Bar -->
+    <nav class="bottom-nav-bar" aria-label="App Shell Primary Navigation">
+        <a href="index.html" class="bottom-nav-item">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">[ Home ]</span>
+        </a>
+        <a href="program.html" class="bottom-nav-item">
+            <span class="nav-icon">📅</span>
+            <span class="nav-label">[ Timetable ]</span>
+        </a>
+        <a href="artists.html" class="bottom-nav-item">
+            <span class="nav-icon">🎤</span>
+            <span class="nav-label">[ Artists ]</span>
+        </a>
+        <a href="stages.html" class="bottom-nav-item">
+            <span class="nav-icon">⛺</span>
+            <span class="nav-label">[ Stages ]</span>
+        </a>
+        <a href="practical-info.html" class="bottom-nav-item active">
+            <span class="nav-icon">ℹ️</span>
+            <span class="nav-label">[ Info ]</span>
+        </a>
+        <a href="my-schedule.html" class="bottom-nav-item">
+            <span class="nav-icon">★</span>
+            <span class="nav-label">[ My Plan ]<span class="nav-badge-count" style="display: none;">0</span></span>
+        </a>
+    </nav>
+
+</body>
+</html>

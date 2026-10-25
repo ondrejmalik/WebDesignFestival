@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Personal Schedule & Itinerary Planner – Festival of Darkness 2">
+    <title>Festival of Darkness 2 | My Schedule</title>
+    <link rel="stylesheet" href="css/wireframe.css">
+    <script src="js/lang.js" defer></script>
+    <script src="components/nav.js" defer></script>
+    <script src="components/footer.js" defer></script>
+    <script src="js/schedule.js" defer></script>
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- HEADER & NAVIGATION (components/nav.js / nav.html) -->
+        <div id="nav-placeholder">
+            <nav class="wf-nav-inline">
+                <a href="index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+                <a href="index.html" data-i18n="nav_home">[ Home ]</a>
+                <a href="program.html" data-i18n="nav_program">[ Program ]</a>
+                <a href="artists.html" data-i18n="nav_artists">[ Artists ]</a>
+                <a href="stages.html" data-i18n="nav_stages">[ Stages ]</a>
+                <a href="practical-info.html" data-i18n="nav_practical">[ Practical Info ]</a>
+                <a href="my-schedule.html" data-i18n="nav_myschedule">[ My Schedule ]</a>
+                <div class="lang-switch-box">
+                    <button id="lang-switch-btn" class="btn-box lang-switch-btn" type="button" aria-label="Language" title="Switch language to Czech">
+                        <span class="flag-icon" id="lang-flag" aria-hidden="true">🇬🇧</span>
+                        <span class="lang-label" id="lang-label">Language</span>
+                    </button>
+                </div>
+            </nav>
+            <hr>
+        </div>
+
+        <main>
+            <!-- Title & Feature Overview -->
+            <section class="wf-box">
+                <h2 data-i18n="schedule_head">[ ★ My Personal Schedule (Interactive Planner) ]</h2>
+                <hr>
+                <p data-i18n="schedule_intro">[ Overview of your bookmarked shows across all 3 festival days with automatic collision detection and visual warnings between Solar and Lunar stages. ]</p>
+                <p style="font-size: 0.85rem; color: #444; margin-top: 4px;" data-i18n-html="schedule_warning_note">
+                    <em>[ Conflict alert: If two selected performances on the Solar Horizon and Lunar Forest stages overlap in time, the system marks them with a red warning border. Removing one provides a clash-free schedule. ]</em>
+                </p>
+                <hr>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                    <a href="program.html" class="btn-box" style="font-weight: bold; background: #222; color: #fff;"><strong data-i18n="schedule_add_more">[ + Add more shows in "Program" &rarr; ]</strong></a>
+                    <button id="clear-favorites-btn" class="btn-box" data-i18n="schedule_clear_all">[ Clear Entire Plan ]</button>
+                    <button class="btn-box" id="share-schedule-btn" data-i18n="schedule_share" onclick="const isCs=(typeof window.getFestivalLang==='function'?window.getFestivalLang():'en')==='cs'; alert(isCs ? 'Odkaz na váš osobní program byl zkopírován do schránky!' : 'Link to your personal schedule copied to clipboard!');">[ Share My Plan ]</button>
+                    <button class="btn-box" id="export-schedule-btn" data-i18n="schedule_export" onclick="const isCs=(typeof window.getFestivalLang==='function'?window.getFestivalLang():'en')==='cs'; alert(isCs ? 'Exportuji kalendář .ics pro Google & Apple Calendar...' : 'Exporting .ics calendar for Google & Apple Calendar...');">[ Export to Calendar (.ics) ]</button>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- Bookmarked Shows Organized by Day (Rendered dynamically by js/schedule.js) -->
+            <div id="my-schedule-container">
+                <section class="wf-box">
+                    <h3>[ Your Timetable: Friday, July 10, 2026 ]</h3>
+                    <hr>
+                    <div class="row">
+                        <article class="col wf-box-sub">
+                            <h4>[ 14:00 – 14:45 | Echoes of Light ]</h4>
+                            <p><strong>Stage:</strong> Solar Horizon Stage</p>
+                            <p style="color: green; font-size: 0.85rem;">[ Status: ✓ No time conflict ]</p>
+                            <button class="btn-box" style="margin-top: 6px;">[ Remove ]</button>
+                        </article>
+                        <article class="col wf-box-sub">
+                            <h4>[ 00:05 – 01:25 | Analog Void ]</h4>
+                            <p><strong>Stage:</strong> Lunar Forest Dome</p>
+                            <p style="color: green; font-size: 0.85rem;">[ Status: ✓ No time conflict ]</p>
+                            <button class="btn-box" style="margin-top: 6px;">[ Remove ]</button>
+                        </article>
+                    </div>
+                </section>
+
+                <hr>
+
+                <section class="wf-box">
+                    <h3>[ Your Timetable: Saturday, July 11, 2026 ]</h3>
+                    <hr>
+                    <div class="wf-box-sub">
+                        <p style="color: #666;"><em>[ You currently have no performances saved for Saturday. ]</em></p>
+                        <a href="program.html" class="btn-box" style="margin-top: 8px;">[ Pick shows from the schedule &rarr; ]</a>
+                    </div>
+                </section>
+
+                <hr>
+
+                <section class="wf-box">
+                    <h3>[ Your Timetable: Sunday, July 12, 2026 ]</h3>
+                    <hr>
+                    <div class="wf-box-sub">
+                        <p style="color: #666;"><em>[ You currently have no performances saved for Sunday. ]</em></p>
+                        <a href="program.html" class="btn-box" style="margin-top: 8px;">[ Pick shows from the schedule &rarr; ]</a>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- FOOTER (components/footer.js / footer.html) -->
+        <div id="footer-placeholder">
+            <hr>
+            <footer class="wf-footer-inline">
+                <strong class="festival-brand">[ © 2026 Festival of Darkness 2 ]</strong>
+                <a href="index.html" data-i18n="nav_home">[ Home ]</a>
+                <a href="program.html" data-i18n="nav_program">[ Program ]</a>
+                <a href="artists.html" data-i18n="nav_artists">[ Artists ]</a>
+                <a href="stages.html" data-i18n="nav_stages">[ Stages ]</a>
+                <a href="practical-info.html" data-i18n="nav_practical">[ Practical Info ]</a>
+                <a href="my-schedule.html" data-i18n="nav_myschedule">[ My Schedule ]</a>
+                <span>[ info@festivalofdarkness.com ]</span>
+            </footer>
+        </div>
+
+    </div>
+
+</body>
+</html>

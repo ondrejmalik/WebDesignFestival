@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Festival of Darkness 2 – Layout 05: Dense Data Terminal Artist Registry. Comprehensive catalog of all 60 performers with instant search, stage filters, and monospace bio viewer.">
+    <title>Festival of Darkness 2 | Terminal Artist Registry</title>
+    <link rel="stylesheet" href="layout.css">
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- HEADER & NAVIGATION -->
+        <header id="nav-placeholder">
+            <nav class="wf-nav-inline">
+                <a href="index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule (<span class="fav-count-badge">0</span>) ]</a>
+            </nav>
+            <hr>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main>
+
+            <!-- Page Title -->
+            <section class="wf-box">
+                <div class="terminal-sysbar" style="margin-bottom: 6px;">
+                    <span>[ ARTIST_DATABASE // CANONICAL 60 PERFORMERS ]</span>
+                    <span id="artist-telemetry-status">[ REGISTRY_ENTRIES: 60 / 60 ONLINE ]</span>
+                </div>
+                <h1>[ PERFORMER REGISTRY TERMINAL ]</h1>
+                <p><strong>[ July 10–12, 2026 // Kutna Hora // Monospace Bio & Performance Index ]</strong></p>
+                <hr>
+                <p>[ Complete roster of 60 international artists. Query by performer name, genre keyword, or origin country code. Bookmark any artist with the [★] star button to log them into your personal schedule. ]</p>
+            </section>
+
+            <!-- Registry Query Console -->
+            <section class="wf-box">
+                <h2>[ Registry Query Console ]</h2>
+                <hr>
+
+                <div class="terminal-cmd-bar">
+                    <!-- Stage Channels -->
+                    <div class="filter-row">
+                        <span class="filter-label">[ STAGE: ]</span>
+                        <button class="filter-btn active" data-artist-stage="all">[ ALL ARTISTS (60) ]</button>
+                        <button class="filter-btn" data-artist-stage="solar">[ ☀️ SOLAR HORIZON (30) ]</button>
+                        <button class="filter-btn filter-btn-lunar" data-artist-stage="lunar">[ 🌙 LUNAR DOME (COVERED 30) ]</button>
+                    </div>
+
+                    <!-- Search Input -->
+                    <div class="filter-row" style="margin-top: 4px;">
+                        <span class="filter-label">[ SEARCH: ]</span>
+                        <div style="flex: 1 1 240px; display: flex; gap: 6px;">
+                            <input type="text" id="artist-search-input" class="input-box" placeholder="[ QUERY: Type artist name, genre, origin country (CZ, SK, DE)... ]">
+                            <button class="btn-box" id="clear-artist-search" title="Clear Search" style="flex-shrink: 0;">[ X ]</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Artists Grid Container (Populated by layout.js) -->
+            <section class="wf-box" style="padding: 10px;">
+                <div class="artists-grid" id="terminal-artists-container">
+                    <!-- Dynamic rendering by layout.js via window.FESTIVAL_DATA.PERFORMERS -->
+                    <div class="wf-box-sub" style="grid-column: 1 / -1; text-align: center; padding: 20px;">
+                        <p>[ INITIALIZING_PERFORMER_REGISTRY... ]</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer id="footer-placeholder">
+            <hr>
+            <div class="wf-footer-inline">
+                <span class="festival-brand">[ Festival of Darkness 2 ]</span>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+                <span style="color: #666; font-size: 0.82rem; margin-left: auto;">[ Artist Registry &bull; Pure Client-Side ]</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Portable Universal Dataset & Client Logic -->
+    <script src="../common/festival-data.js"></script>
+    <script src="layout.js"></script>
+</body>
+</html>

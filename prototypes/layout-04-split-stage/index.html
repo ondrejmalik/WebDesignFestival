@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Festival of Darkness 2 – Layout 04: Split Stage Switcher Homepage. Immediate 1-tap stage switching between Solar Horizon Stage and covered Lunar Forest Dome rain shelter.">
+    <title>Festival of Darkness 2 | Split Stage Switcher</title>
+    <link rel="stylesheet" href="layout.css">
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- HEADER & NAVIGATION: Fluid Multiline Wrapping, No Outer Box -->
+        <header id="nav-placeholder">
+            <nav class="wf-nav-inline">
+                <a href="index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule (<span class="fav-count-badge">0</span>) ]</a>
+            </nav>
+            <hr>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main>
+
+            <!-- 1. Festival Identity Box -->
+            <section class="wf-box">
+                <h1>[ FESTIVAL OF DARKNESS 2 ]</h1>
+                <p><strong>[ July 10 – July 12, 2026 | Kutna Hora, Czech Republic ]</strong></p>
+                <hr>
+                <p>[ Prototype Layout 04: <strong>Split Stage Switcher</strong>. Built around a dedicated 2-channel mental model that eliminates cross-stage clutter. Switch instantly between open-air amphitheater and covered dome rain shelter. ]</p>
+                <p style="margin-top: 6px; font-size: 0.9rem; color: #444;">
+                    [ 3 Days • 2 Stages • 60 Performers • Post-Rock, Modular Ambient, Dark Techno & AV Projections ]
+                </p>
+            </section>
+
+            <!-- 2. Primary UX Metaphor: Split Stage Switcher Hero (Scenario 1 Direct Access <= 1 Tap) -->
+            <section class="wf-box stage-switcher-hero">
+                <h2>[ ⚡ Split Stage Quick Switcher ]</h2>
+                <p style="font-size: 0.9rem; color: #333; margin-top: 4px;">
+                    [ Select a stage channel below to jump directly into its dedicated timetable with zero irrelevant clutter: ]
+                </p>
+                <hr>
+
+                <div class="stage-switcher-segmented">
+                    <a href="program.html?stage=solar" class="stage-switch-btn" data-stage="solar">
+                        ☀️ Solar Horizon Stage<br><small style="font-weight: normal; font-size: 0.82rem;">[ Open-Air Main Stage • 4,500 Cap ]</small>
+                    </a>
+                    <!-- Scenario 1: Instant 1-tap access to covered rain shelter timetable -->
+                    <a href="program.html?stage=lunar" class="stage-switch-btn stage-lunar-highlight" data-stage="lunar">
+                        🌙 Lunar Forest Dome<br><small style="font-weight: normal; font-size: 0.82rem;">[ Covered Rain Shelter • 1,800 Cap ]</small>
+                    </a>
+                    <a href="program.html?stage=all" class="stage-switch-btn" data-stage="all">
+                        ☵ Parallel Split View<br><small style="font-weight: normal; font-size: 0.82rem;">[ Both Stages Side-by-Side ]</small>
+                    </a>
+                </div>
+
+                <!-- Weather Alert Banner (Scenario 1 Callout) -->
+                <div class="wf-box-sub" style="margin-top: 10px; background: #e8eaf6; border-color: #1a237e;">
+                    <strong>[ 🌧️ Rain or Shine Weather Protection ]</strong>
+                    <p style="font-size: 0.88rem; margin-top: 4px;">
+                        Experiencing inclement weather on the grounds? The <strong>Lunar Forest Dome</strong> is an all-weather covered marquee with heating, soundproofing, and continuous programming throughout the festival.
+                    </p>
+                    <div style="margin-top: 8px;">
+                        <a href="program.html?stage=lunar" class="btn-box" data-stage="lunar">
+                            <strong>[ View Covered Dome Timetable &rarr; ]</strong>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Directory of Main Website Sections -->
+            <section class="wf-box">
+                <h2>[ Main Website Directory ]</h2>
+                <hr>
+                <div class="row">
+                    <div class="col wf-box-sub">
+                        <h3>[ 📅 Full Program ]</h3>
+                        <p>[ Complete 60-slot performance timetable across July 10–12 with stage tabs, day filtering, and star bookmarking. ]</p>
+                        <hr>
+                        <a href="program.html" class="btn-box">[ Open Program &rarr; ]</a>
+                    </div>
+
+                    <div class="col wf-box-sub">
+                        <h3>[ 🎤 Artist Lineup ]</h3>
+                        <p>[ Comprehensive catalog of 60 international artists with stage filtering, genre tags, bios, and deep linking. ]</p>
+                        <hr>
+                        <a href="artists.html" class="btn-box">[ View All 60 Artists &rarr; ]</a>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top: 12px;">
+                    <div class="col wf-box-sub">
+                        <h3>[ ⛺ Stages & Venue ]</h3>
+                        <p>[ Side-by-side comparison of Solar Horizon Stage and Lunar Forest Dome with capacity, acoustics, and venue map. ]</p>
+                        <hr>
+                        <a href="stages.html" class="btn-box">[ Explore Stages &rarr; ]</a>
+                    </div>
+
+                    <div class="col wf-box-sub">
+                        <h3>[ 🚆 Practical Info ]</h3>
+                        <p>[ Travel directions from Kutna Hora station, free shuttle schedule, tent camping village, cashless RFID, and FAQ. ]</p>
+                        <hr>
+                        <a href="practical-info.html" class="btn-box">[ Practical Guide &rarr; ]</a>
+                    </div>
+
+                    <div class="col wf-box-sub">
+                        <h3>[ ★ My Schedule ]</h3>
+                        <p>[ Personal festival planner synced via LocalStorage with automatic pairwise collision detection between stages. ]</p>
+                        <hr>
+                        <a href="my-schedule.html" class="btn-box">[ Open Personal Schedule (<span class="fav-count-badge">0</span>) &rarr; ]</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Key Festival Parameters -->
+            <section class="wf-box">
+                <h2>[ Festival Specifications & Facts ]</h2>
+                <hr>
+                <div class="row">
+                    <div class="col wf-box-sub">
+                        <h4>[ 3 Festival Days ]</h4>
+                        <p>Friday, July 10 &bull; Saturday, July 11 &bull; Sunday, July 12, 2026. Non-stop music from 13:00 to 04:00 daily.</p>
+                    </div>
+                    <div class="col wf-box-sub">
+                        <h4>[ 2 Distinct Stages ]</h4>
+                        <p>Solar Horizon Stage (open-air amphitheater) and Lunar Forest Dome (covered audiovisual marquee rain shelter).</p>
+                    </div>
+                    <div class="col wf-box-sub">
+                        <h4>[ 60 Performances ]</h4>
+                        <p>30 acts on Solar Stage and 30 acts on Lunar Dome, balanced evenly across 3 days (10 acts per stage per day).</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- FOOTER: Strictly Unbordered, Fluid Multiline Wrapping -->
+        <footer id="footer-placeholder">
+            <hr>
+            <div class="wf-footer-inline">
+                <span class="festival-brand">[ Festival of Darkness 2 ]</span>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+                <span style="color: #666; font-size: 0.85rem; margin-left: auto;">[ Layout 04: Split Stage Switcher &bull; Kutna Hora 2026 ]</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Portable Universal Dataset & Client Logic -->
+    <script src="../common/festival-data.js"></script>
+    <script src="layout.js"></script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My Personal Schedule & Conflict Engine – Festival of Darkness 2 (Floating Action Dock Prototype L07)">
+    <title>Festival of Darkness 2 | My Plan (Floating Dock)</title>
+    <link rel="stylesheet" href="layout.css">
+    <script src="../common/festival-data.js" defer></script>
+    <script src="layout.js" defer></script>
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- Top Header & Secondary Inline Navigation -->
+        <div id="nav-placeholder">
+            <nav class="wf-nav-inline" aria-label="Top Secondary Navigation">
+                <a href="index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html" class="active">[ My Schedule ]</a>
+            </nav>
+            <hr>
+        </div>
+
+        <!-- Main Content -->
+        <main>
+
+            <!-- Page Title Box (Scenario 2) -->
+            <section class="wf-box">
+                <h2>[ ★ My Personal Schedule & Conflict Engine ]</h2>
+                <hr>
+                <p>[ Review your bookmarked performances. The system automatically performs interval conflict calculation between Solar and Lunar stages. ]</p>
+                <p style="font-size: 0.85rem; color: #555; margin-top: 4px;">
+                    <em>[ Data is stored locally in your browser (LocalStorage) under <code>festival_favorites</code> and synchronizes across all prototypes. Use [ ⚡ DOCK ] at bottom-right for rapid schedule export and clear actions! ]</em>
+                </p>
+                <hr>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                    <button class="btn-box" onclick="alert('Lineup link copied to clipboard!')">[ Share My Lineup ]</button>
+                    <button class="btn-box" onclick="alert('Exporting .ics calendar...')">[ Export to Calendar (.ics) ]</button>
+                    <button id="clear-favorites-btn" class="btn-box btn-danger">[ Clear All ]</button>
+                    <a href="program.html" class="btn-box"><strong>[ &larr; Back to Timetable ]</strong></a>
+                </div>
+            </section>
+
+            <!-- Dynamic My Schedule Content Container -->
+            <div id="my-schedule-container">
+                <!-- Static initial fallback / hydrated on load -->
+                <section class="wf-box">
+                    <h3>[ Your Timetable: Friday, July 10, 2026 ]</h3>
+                    <hr>
+                    <div class="row">
+                        <article class="col wf-box-sub">
+                            <h4>[ 14:00 – 14:45 | Echoes of Light ]</h4>
+                            <p><strong>Stage:</strong> Solar Horizon Stage</p>
+                            <p style="font-size: 0.82rem; color: #555;"><strong>Genre:</strong> Post-Rock / Ambient</p>
+                            <div class="status-badge-clean" style="margin: 6px 0;">[ ✓ No time conflict ]</div>
+                            <div style="margin-top: 8px;">
+                                <button class="btn-box btn-danger remove-fav-btn" data-id="perf-01">[ Remove ]</button>
+                            </div>
+                        </article>
+                        <article class="col wf-box-sub">
+                            <h4>[ 00:05 – 01:25 | Analog Void ]</h4>
+                            <p><strong>Stage:</strong> Lunar Forest Dome</p>
+                            <p style="font-size: 0.82rem; color: #555;"><strong>Genre:</strong> Dark Techno / Acid</p>
+                            <div class="status-badge-clean" style="margin: 6px 0;">[ ✓ No time conflict ]</div>
+                            <div style="margin-top: 8px;">
+                                <button class="btn-box btn-danger remove-fav-btn" data-id="perf-17">[ Remove ]</button>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <hr>
+
+                <section class="wf-box">
+                    <h3>[ Your Timetable: Saturday, July 11, 2026 ]</h3>
+                    <hr>
+                    <div class="wf-box-sub">
+                        <p style="color: #666;"><em>[ You currently have no performances saved for Saturday. ]</em></p>
+                        <a href="program.html" class="btn-box" style="margin-top: 8px;">[ Pick shows from the schedule &rarr; ]</a>
+                    </div>
+                </section>
+
+                <hr>
+
+                <section class="wf-box">
+                    <h3>[ Your Timetable: Sunday, July 12, 2026 ]</h3>
+                    <hr>
+                    <div class="wf-box-sub">
+                        <p style="color: #666;"><em>[ You currently have no performances saved for Sunday. ]</em></p>
+                        <a href="program.html" class="btn-box" style="margin-top: 8px;">[ Pick shows from the schedule &rarr; ]</a>
+                    </div>
+                </section>
+            </div>
+
+        </main>
+
+        <!-- Footer -->
+        <div id="footer-placeholder">
+            <hr>
+            <footer class="wf-footer-inline">
+                <strong class="festival-brand">[ © 2026 Festival of Darkness 2 ]</strong>
+                <span>Kutna Hora, July 10–12, 2026</span>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+            </footer>
+        </div>
+
+    </div>
+
+    <!-- Floating Action Dock Backdrop -->
+    <div id="floating-dock-backdrop" class="floating-dock-backdrop" aria-hidden="true"></div>
+
+    <!-- Persistent Floating Action Dock Button (Bottom-Right Thumb Trigger) -->
+    <button id="floating-dock-btn" class="floating-dock-btn" aria-label="Toggle Floating Action Dock" aria-expanded="false">
+        <span class="dock-btn-icon">⚡</span>
+        <span class="dock-btn-text">[ DOCK ]</span>
+        <span id="dock-fav-badge" class="dock-fav-badge" style="display: none;">0</span>
+    </button>
+
+    <!-- Floating Action Sheet Overlay Menu -->
+    <aside id="floating-dock-sheet" class="floating-dock-sheet" aria-label="Floating Action Dock Menu">
+        <div class="dock-sheet-header">
+            <div class="dock-sheet-title">[ ⚡ DOCK: SCHEDULE ACTIONS ]</div>
+            <button id="dock-sheet-close" class="btn-box" style="min-height: 44px; min-width: 44px; padding: 4px 8px;">[ ✕ Close ]</button>
+        </div>
+        <hr>
+
+        <!-- Direct Scenario 1 Shortcut -->
+        <div class="dock-sheet-section">
+            <a href="program.html?stage=lunar" id="dock-shelter-shortcut" class="dock-action-btn highlight">
+                <span>[ 🌙 Covered Dome Timetable ]</span>
+                <span>&rarr;</span>
+            </a>
+        </div>
+
+        <!-- Schedule Utilities in Dock -->
+        <div class="dock-sheet-section">
+            <h4>[ Schedule Tools ]</h4>
+            <div class="dock-action-list">
+                <button id="dock-export-ics" class="dock-action-btn">
+                    <span>[ 📋 Export Calendar (.ics) ]</span>
+                    <span>&darr;</span>
+                </button>
+                <button id="dock-share-lineup" class="dock-action-btn">
+                    <span>[ 🔗 Share Lineup Link ]</span>
+                    <span>&rarr;</span>
+                </button>
+                <a href="program.html" class="dock-action-btn">
+                    <span>[ 📅 Add More Shows from Program ]</span>
+                    <span>&rarr;</span>
+                </a>
+                <button id="dock-clear-all-schedule" class="dock-action-btn danger">
+                    <span>[ 🗑️ Clear All Saved Shows ]</span>
+                </button>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- Subpage Navigation -->
+        <div class="dock-sheet-section">
+            <h4>[ Subpage Directory ]</h4>
+            <nav class="dock-action-list" aria-label="Dock Navigation">
+                <a href="index.html" class="dock-action-btn dock-nav-item">
+                    <span>[ 🏠 Home ]</span>
+                    <span>&rarr;</span>
+                </a>
+                <a href="program.html" class="dock-action-btn dock-nav-item">
+                    <span>[ 📅 Program Timetable ]</span>
+                    <span>&rarr;</span>
+                </a>
+                <a href="artists.html" class="dock-action-btn dock-nav-item">
+                    <span>[ 🎤 Artists Catalog ]</span>
+                    <span>&rarr;</span>
+                </a>
+                <a href="stages.html" class="dock-action-btn dock-nav-item">
+                    <span>[ ⛺ Stages & Map ]</span>
+                    <span>&rarr;</span>
+                </a>
+                <a href="practical-info.html" class="dock-action-btn dock-nav-item">
+                    <span>[ 🚆 Practical Info ]</span>
+                    <span>&rarr;</span>
+                </a>
+                <a href="my-schedule.html" class="dock-action-btn dock-nav-item active">
+                    <span>[ ★ My Schedule (<span class="dock-fav-count">0</span>) ]</span>
+                    <span>&bull;</span>
+                </a>
+            </nav>
+        </div>
+    </aside>
+
+</body>
+</html>

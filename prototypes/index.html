@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Festival of Darkness 2 – Central Showcase Hub & Mobile Viewport Simulator. Compare 10 mobile-first wireframe prototypes, test user scenarios, and evaluate ergonomic trade-offs.">
+    <title>Festival of Darkness 2 — Central Showcase Hub & Device Simulator</title>
+    <link rel="stylesheet" href="../css/wireframe.css">
+    <style>
+        /* Showcase Hub Specific Minimalist Wireframe Styles */
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #111;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 16px;
+            line-height: 1.4;
+        }
+        .hub-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .wf-box {
+            border: 1px solid #222;
+            padding: 14px;
+            background: #fff;
+            margin-bottom: 16px;
+        }
+        .wf-box-sub {
+            border: 1px solid #777;
+            padding: 12px;
+            background: #fafafa;
+            margin-bottom: 12px;
+        }
+        hr {
+            border: 0;
+            border-top: 1px solid #333;
+            margin: 14px 0;
+        }
+        .btn-box {
+            border: 1px solid #111;
+            padding: 6px 14px;
+            background: #eee;
+            font-size: 0.88rem;
+            cursor: pointer;
+            display: inline-block;
+            text-decoration: none;
+            color: #000;
+            margin: 2px 4px 2px 0;
+            user-select: none;
+            min-height: 44px;
+            line-height: 30px;
+            box-sizing: border-box;
+            vertical-align: middle;
+        }
+        .btn-box:hover {
+            background: #ddd;
+        }
+        .btn-box.active {
+            background: #222;
+            color: #fff;
+            border-color: #000;
+            font-weight: bold;
+        }
+        .btn-box.btn-accent {
+            background: #e0f2fe;
+            border-color: #0284c7;
+            color: #0369a1;
+        }
+        .btn-box.btn-accent:hover {
+            background: #bae6fd;
+        }
+        .input-box {
+            border: 1px solid #555;
+            padding: 6px 10px;
+            font-size: 0.9rem;
+            background: #fff;
+            box-sizing: border-box;
+            min-height: 44px;
+        }
+        .wf-nav-inline {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px 18px;
+            padding: 6px 0;
+            margin-bottom: 12px;
+        }
+        .festival-brand {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #000;
+            text-decoration: none !important;
+        }
+        .nav-link {
+            color: #111;
+            text-decoration: underline;
+            font-size: 0.95rem;
+        }
+        .nav-link:hover {
+            color: #555;
+        }
+
+        /* Simulator Frame & Container */
+        .simulator-stage-wrapper {
+            background: #e5e7eb;
+            border: 1px solid #9ca3af;
+            padding: 20px 12px;
+            margin-bottom: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: auto;
+        }
+        .device-chrome-frame {
+            background: #fff;
+            border: 2px solid #111;
+            box-sizing: content-box;
+            display: flex;
+            flex-direction: column;
+            transition: width 0.25s ease, height 0.25s ease;
+        }
+        .device-top-status-bar {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 4px 10px;
+            font-family: Consolas, monospace;
+            font-size: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #111;
+        }
+        .device-browser-bar {
+            background: #f3f4f6;
+            border-bottom: 1px solid #ccc;
+            padding: 6px 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+        }
+        .device-url-display {
+            flex: 1;
+            background: #fff;
+            border: 1px solid #bbb;
+            padding: 4px 8px;
+            font-family: Consolas, monospace;
+            font-size: 0.78rem;
+            color: #333;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .simulator-iframe {
+            border: none;
+            width: 100%;
+            height: 667px;
+            display: block;
+            background: #fff;
+        }
+
+        /* Rubric Table */
+        .rubric-table-responsive {
+            overflow-x: auto;
+            margin: 12px 0;
+        }
+        .rubric-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            text-align: left;
+        }
+        .rubric-table th, .rubric-table td {
+            border: 1px solid #777;
+            padding: 8px 10px;
+            vertical-align: middle;
+        }
+        .rubric-table th {
+            background: #e5e7eb;
+            color: #111;
+            font-weight: bold;
+        }
+        .rubric-table tr:nth-child(even) {
+            background: #fafafa;
+        }
+        .rubric-table tr.winner-row {
+            background: #d4edda !important;
+            border: 2px solid #28a745 !important;
+        }
+        .rubric-table tr.winner-row td {
+            border-color: #28a745;
+        }
+        .rubric-score-input {
+            width: 52px;
+            padding: 4px;
+            font-size: 0.88rem;
+            text-align: center;
+            border: 1px solid #555;
+            background: #fff;
+        }
+        .winner-badge {
+            background: #28a745;
+            color: #fff;
+            font-weight: bold;
+            padding: 2px 6px;
+            font-size: 0.75rem;
+            display: inline-block;
+        }
+        .runner-badge {
+            background: #e2e8f0;
+            color: #334155;
+            padding: 2px 6px;
+            font-size: 0.75rem;
+            display: inline-block;
+        }
+
+        /* Testbeds */
+        .testbed-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        @media (max-width: 800px) {
+            .testbed-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .badge-tag {
+            font-family: Consolas, monospace;
+            font-size: 0.78rem;
+            padding: 2px 6px;
+            border: 1px solid #888;
+            background: #eee;
+            margin-right: 4px;
+        }
+        .badge-green {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+            font-weight: bold;
+        }
+        .badge-red {
+            background: #ffebee;
+            border-color: #b71c1c;
+            color: #b71c1c;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="hub-container">
+
+    <!-- Top Navigation Bar (Strict wireframe discipline, unbordered, wrapping) -->
+    <nav class="wf-nav-inline" aria-label="Main Navigation">
+        <a href="../index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+        <a href="../index.html" class="nav-link">[ 💻 Canonical Desktop Site ]</a>
+        <a href="#simulator-section" class="nav-link">[ 📱 Viewport Simulator ]</a>
+        <a href="#rubric-section" class="nav-link">[ 📊 Rubric Evaluation Matrix ]</a>
+        <a href="#scenarios-section" class="nav-link">[ 🧪 Scenario Testbeds ]</a>
+        <a href="../TEST_READY.md" class="nav-link">[ 📋 E2E Test Suite Docs ]</a>
+    </nav>
+
+    <hr>
+
+    <!-- Header Box -->
+    <header class="wf-box">
+        <h1>[ Festival of Darkness 2 — Mobile-First Showcase Hub & Device Simulator ]</h1>
+        <p style="margin: 8px 0 0 0; color: #444; font-size: 0.95rem;">
+            Welcome to the centralized evaluation workbench for Course Exercise 3. This testbed presents <strong>10 completely standalone mobile-first wireframe prototypes</strong>, each exploring an authentic mobile interaction paradigm while maintaining 100% data consistency with the canonical 60-artist lineup, 60-slot schedule timetable, and shared LocalStorage bookmark state.
+        </p>
+    </header>
+
+    <!-- Controls Toolbar Box -->
+    <section class="wf-box" id="controls-toolbar" aria-label="Simulator Controls">
+        <!-- Device Switcher Row -->
+        <div style="margin-bottom: 12px;">
+            <div style="font-weight: bold; margin-bottom: 6px; font-size: 0.92rem;">
+                [ 1. Select Device Viewport Simulation ]
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                <button type="button" class="btn-box active" data-w="375" data-h="667" data-name="iPhone SE" onclick="setDeviceViewport('375', '667', 'iPhone SE', this)">
+                    📱 iPhone SE (375 × 667)
+                </button>
+                <button type="button" class="btn-box" data-w="412" data-h="915" data-name="Pixel 7" onclick="setDeviceViewport('412', '915', 'Pixel 7', this)">
+                    📱 Pixel 7 (412 × 915)
+                </button>
+                <button type="button" class="btn-box" data-w="768" data-h="1024" data-name="iPad Mini" onclick="setDeviceViewport('768', '1024', 'iPad Mini', this)">
+                    📱 iPad Mini (768 × 1024)
+                </button>
+                <button type="button" class="btn-box" data-w="100%" data-h="750" data-name="Full Desktop" onclick="setDeviceViewport('100%', '750', 'Full Desktop', this)">
+                    💻 Full Desktop (100% Fluid)
+                </button>
+                <button type="button" class="btn-box" onclick="toggleOrientation()">
+                    🔄 Rotate Orientation
+                </button>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- Layout Selector Row -->
+        <div style="margin-bottom: 12px;">
+            <div style="font-weight: bold; margin-bottom: 6px; font-size: 0.92rem;">
+                [ 2. Select Mobile Prototype Paradigm (10 Layouts) ]
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px;" id="layout-buttons-container">
+                <button type="button" class="btn-box active" data-layout="layout-01-app-shell" onclick="selectLayout('layout-01-app-shell', this)">
+                    L01: App-Shell Bottom Nav
+                </button>
+                <button type="button" class="btn-box" data-layout="layout-02-chronological-feed" onclick="selectLayout('layout-02-chronological-feed', this)">
+                    L02: Chronological Feed
+                </button>
+                <button type="button" class="btn-box" data-layout="layout-03-bento-grid" onclick="selectLayout('layout-03-bento-grid', this)">
+                    L03: Modular Bento-Grid
+                </button>
+                <button type="button" class="btn-box" data-layout="layout-04-split-stage" onclick="selectLayout('layout-04-split-stage', this)">
+                    L04: Split Stage Switcher
+                </button>
+                <button type="button" class="btn-box" data-layout="layout-05-dense-terminal" onclick="selectLayout('layout-05-dense-terminal', this)">
+                    L05: Dense Data Terminal
+                </button>
+                <button type="button" class="btn-box" data-layout="layout-06-accordion-drawer" onclick="selectLayout('layout-06-accordion-drawer', this)">
+                    L06: Accordion Drawer Hub
+                </button>
+                <button type="button" class="btn-box" data-layout="layout-07-floating-dock" onclick="selectLayout('layout-07-floating-dock', this)">
+                    L07: Floating Action Dock
+                </button>
+                <button type="button" class="btn-box" data-layout="layout-08-snap-deck" onclick="selectLayout('layout-08-snap-deck', this)">
+                    L08: Horizontal Snap Deck
+                </button>
+                <button type="button" class="btn-box" data-layout="layout-09-swiss-grid" onclick="selectLayout('layout-09-swiss-grid', this)">
+                    L09: Swiss Typographic Index
+                </button>
+                <button type="button" class="btn-box" data-layout="layout-10-mission-control" onclick="selectLayout('layout-10-mission-control', this)">
+                    L10: Mission Control Dashboard
+                </button>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- Subpage Quick Switcher -->
+        <div>
+            <div style="font-weight: bold; margin-bottom: 6px; font-size: 0.92rem;">
+                [ 3. Subpage Direct Launcher (Active Layout) ]
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                <button type="button" class="btn-box active" data-page="index.html" onclick="setSubpage('index.html', this)">
+                    🏠 Home (index.html)
+                </button>
+                <button type="button" class="btn-box" data-page="program.html" onclick="setSubpage('program.html', this)">
+                    📅 Timetable (program.html)
+                </button>
+                <button type="button" class="btn-box" data-page="artists.html" onclick="setSubpage('artists.html', this)">
+                    🎤 Artists (artists.html)
+                </button>
+                <button type="button" class="btn-box" data-page="stages.html" onclick="setSubpage('stages.html', this)">
+                    ⛺ Stages (stages.html)
+                </button>
+                <button type="button" class="btn-box" data-page="practical-info.html" onclick="setSubpage('practical-info.html', this)">
+                    ℹ️ Practical Info (practical-info.html)
+                </button>
+                <button type="button" class="btn-box" data-page="my-schedule.html" onclick="setSubpage('my-schedule.html', this)">
+                    ★ My Schedule (my-schedule.html)
+                </button>
+            </div>
+        </div>
+
+        <!-- Active Layout Metadata Brief -->
+        <div class="wf-box-sub" id="active-layout-meta" style="margin-top: 12px; margin-bottom: 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                <strong id="meta-layout-title" style="font-size: 1.05rem;">L01: App-Shell Bottom Nav</strong>
+                <span class="badge-tag badge-green" id="meta-layout-badge">NATIVE APP ERGONOMICS</span>
+            </div>
+            <p id="meta-layout-desc" style="font-size: 0.88rem; color: #333; margin: 0 0 6px 0;">
+                Fixed bottom thumb bar anchoring Home, Program, Artists, Stages, and Schedule in primary thumb zone. Zero occlusion with responsive container padding.
+            </p>
+            <div style="font-size: 0.8rem; color: #555;">
+                <strong>Scenario 1 Path:</strong> Tap 1: Bottom Bar [Stages] &rarr; Tap 2: [View Covered Dome Timetable] (2 taps).
+            </div>
+        </div>
+    </section>
+
+    <!-- Chrome Device Simulator Stage -->
+    <section class="wf-box" id="simulator-section" aria-label="Interactive Simulator Frame">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+            <h2 style="font-size: 1.15rem; margin: 0;">[ Interactive Chrome Viewport Simulator ]</h2>
+            <div>
+                <button type="button" class="btn-box" onclick="reloadIframe()">🔄 Reload Frame</button>
+                <a href="./layout-01-app-shell/index.html" target="_blank" id="open-new-tab-btn" class="btn-box">↗ Open Standalone Tab</a>
+            </div>
+        </div>
+
+        <div class="simulator-stage-wrapper">
+            <!-- Simulated Device Frame -->
+            <div class="device-chrome-frame" id="device-frame-container" style="width: 375px; box-sizing: content-box;">
+                <!-- Device Status Bar -->
+                <div class="device-top-status-bar">
+                    <span>14:00</span>
+                    <span id="device-model-indicator">[ iPhone SE • 375px ]</span>
+                    <span>📶 5G &nbsp; 🔋 98%</span>
+                </div>
+
+                <!-- Browser Address Bar -->
+                <div class="device-browser-bar">
+                    <span style="font-size: 0.85rem; user-select: none;">🔒</span>
+                    <div class="device-url-display" id="device-url-text">prototypes/layout-01-app-shell/index.html</div>
+                    <button type="button" style="border: 1px solid #999; background: #eee; padding: 2px 6px; font-size: 0.72rem; cursor: pointer;" onclick="reloadIframe()">↻</button>
+                </div>
+
+                <!-- Simulator Iframe -->
+                <iframe id="simulator-iframe" class="simulator-iframe" src="./layout-01-app-shell/index.html" title="Simulated Mobile Layout Prototype"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scenario Validation Testbeds -->
+    <section class="wf-box" id="scenarios-section" aria-label="Scenario Validation Testbeds">
+        <h2 style="font-size: 1.15rem; margin-top: 0;">[ Scenario Validation Testbeds & Shared State Engine ]</h2>
+        <p style="font-size: 0.9rem; color: #444; margin: 4px 0 12px 0;">
+            Verify the two required canonical user journeys directly in the active simulator or inspect state:
+        </p>
+
+        <div class="testbed-grid">
+            <!-- Scenario 1 Box -->
+            <div class="wf-box-sub">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <h3 style="font-size: 1rem; margin: 0;">[ Scenario 1: Rain Shelter Navigation ]</h3>
+                    <span class="badge-tag badge-green">Target: &le; 3 Taps</span>
+                </div>
+                <p style="font-size: 0.85rem; color: #333; margin-bottom: 8px;">
+                    <strong>Persona:</strong> Festival attendee standing outdoors in Kutna Hora when sudden rain hits. Needs to quickly reach the indoor covered <em>Lunar Forest Dome</em> and see what acts are performing.
+                </p>
+                <div style="font-size: 0.82rem; background: #fff; border: 1px solid #ddd; padding: 8px; margin-bottom: 10px;">
+                    <div><strong>Tap Path in Active Layout:</strong></div>
+                    <div id="scenario1-active-path" style="color: #0369a1; font-weight: bold; margin-top: 2px;">
+                        1. Tap Nav [Stages] &rarr; 2. Tap [View Covered Dome Timetable] (Total: 2 Taps)
+                    </div>
+                </div>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                    <button type="button" class="btn-box btn-accent" onclick="testScenario1InSimulator()">
+                        🌧️ Launch Scenario 1 in Simulator
+                    </button>
+                    <button type="button" class="btn-box" onclick="showAllScenario1Paths()">
+                        📋 View All 10 Layout Paths
+                    </button>
+                </div>
+            </div>
+
+            <!-- Scenario 2 Box -->
+            <div class="wf-box-sub">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <h3 style="font-size: 1rem; margin: 0;">[ Scenario 2: Shared Bookmarks & Clash Engine ]</h3>
+                    <span class="badge-tag badge-green">Shared State</span>
+                </div>
+                <p style="font-size: 0.85rem; color: #333; margin-bottom: 8px;">
+                    <strong>Storage Key:</strong> <code>localStorage['festival_favorites']</code>. Shared across all 10 layouts and canonical root site. Clashing simultaneous shows on different stages trigger red warning alerts in <code>my-schedule.html</code>.
+                </p>
+                <div style="font-size: 0.82rem; background: #fff; border: 1px solid #ddd; padding: 8px; margin-bottom: 10px;">
+                    <div><strong>Current LocalStorage Bookmarks:</strong> <span id="fav-count-display" style="font-weight: bold;">0 items</span></div>
+                    <div id="fav-conflict-status" style="margin-top: 2px; font-weight: bold; color: #2e7d32;">
+                        [ ✓ No conflicts detected ]
+                    </div>
+                </div>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                    <button type="button" class="btn-box" onclick="seedConflictTestPair()">
+                        ⚡ Seed Conflict Pair (perf-02 + perf-11)
+                    </button>
+                    <button type="button" class="btn-box" onclick="seedCleanSchedule()">
+                        ⚡ Seed 3 Clean Shows
+                    </button>
+                    <button type="button" class="btn-box" onclick="clearFavorites()">
+                        🗑️ Clear Bookmarks
+                    </button>
+                    <button type="button" class="btn-box btn-accent" onclick="openMyScheduleInSimulator()">
+                        📅 Open Planner in Simulator
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5-Point Evaluation Rubric Matrix -->
+    <section class="wf-box" id="rubric-section" aria-label="Evaluation Rubric">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
+            <h2 style="font-size: 1.15rem; margin: 0;">[ 5-Point Mobile Ergonomics Evaluation Rubric Matrix ]</h2>
+            <div style="display: flex; gap: 6px;">
+                <button type="button" class="btn-box" onclick="resetRubricDefaults()">↺ Reset to Defaults</button>
+                <button type="button" class="btn-box" onclick="saveRubricScores()">💾 Save to Storage</button>
+            </div>
+        </div>
+
+        <!-- Winner Highlight Announcement Banner -->
+        <div class="wf-box-sub" id="winner-banner" style="background: #d4edda; border: 2px solid #28a745; margin-bottom: 12px; padding: 10px 14px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.4rem;">🏆</span>
+                <div>
+                    <div style="font-weight: bold; color: #155724; font-size: 1rem;">
+                        CURRENT EVALUATED WINNER: <span id="winner-title-text">L01: App-Shell Bottom Nav</span>
+                    </div>
+                    <div style="font-size: 0.85rem; color: #1e7e34;" id="winner-summary-text">
+                        Weighted Score: 4.45 / 5.00 (89%). Superior thumb reachability, zero cognitive navigation friction, instant 2-tap dome access.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="font-size: 0.82rem; color: #555; margin-bottom: 8px;">
+            <strong>Scoring Dimensions (1–5 scale, calibrated for mobile field usability):</strong><br>
+            • <strong>Ergonomics (25%)</strong>: Thumb reach, one-handed usability, touch target clearance (&ge;44x44px).<br>
+            • <strong>Scenario 1 Speed (25%)</strong>: Tap budget & latency to reach covered dome timetable under rain conditions.<br>
+            • <strong>Scenario 2 Speed (20%)</strong>: Bookmark toggle speed, visual clarity of conflict alerts.<br>
+            • <strong>Information Density (15%)</strong>: Vertical scannability without clutter or horizontal overflow.<br>
+            • <strong>Desktop Scaling (15%)</strong>: Graceful adaptation from 375px mobile to 1200px desktop viewports.
+        </div>
+
+        <div class="rubric-table-responsive">
+            <table class="rubric-table" id="rubric-matrix-table">
+                <thead>
+                    <tr>
+                        <th style="min-width: 170px;">Layout Paradigm</th>
+                        <th title="Weight: 25%">Ergonomics<br><small>(25%)</small></th>
+                        <th title="Weight: 25%">S1 Speed<br><small>(25%)</small></th>
+                        <th title="Weight: 20%">S2 Speed<br><small>(20%)</small></th>
+                        <th title="Weight: 15%">Info Density<br><small>(15%)</small></th>
+                        <th title="Weight: 15%">Desktop Scale<br><small>(15%)</small></th>
+                        <th style="min-width: 90px;">Total Score</th>
+                        <th>Rank / Status</th>
+                        <th style="min-width: 220px;">Ergonomic Analysis & Field Trade-Offs</th>
+                    </tr>
+                </thead>
+                <tbody id="rubric-tbody">
+                    <!-- Populated dynamically by JS -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="margin: 24px 0 16px 0; font-size: 0.82rem; color: #666; text-align: center;">
+        <hr>
+        <p>
+            [ Festival of Darkness 2 ] • Kutna Hora, July 10–12, 2026 • Semester Project Exercise 3 Wireframe Deliverable • Pure Client-Side Architecture
+        </p>
+    </footer>
+
+</div>
+
+<script src="common/festival-data.js"></script>
+<script>
+    // State
+    let currentLayout = 'layout-01-app-shell';
+    let currentSubpage = 'index.html';
+    let currentDevice = { width: '375', height: '667', name: 'iPhone SE', isLandscape: false };
+
+    // Layout Metadata Inventory
+    const LAYOUT_META = {
+        'layout-01-app-shell': {
+            name: 'L01: App-Shell Bottom Nav',
+            badge: 'NATIVE APP ERGONOMICS',
+            desc: 'Fixed bottom thumb bar anchoring Home, Program, Artists, Stages, and Schedule in primary thumb zone. Zero occlusion with responsive container padding.',
+            s1Path: '1. Tap Nav [Stages] &rarr; 2. Tap [View Covered Dome Timetable] (Total: 2 Taps)'
+        },
+        'layout-02-chronological-feed': {
+            name: 'L02: Chronological Feed',
+            badge: 'SOCIAL TIMELINE STREAM',
+            desc: 'Continuous vertical timeline feed with sticky horizontal filter ribbon. Fast vertical scroll velocity with on-the-fly day/stage pills.',
+            s1Path: '1. Tap Sticky Filter Ribbon [Lunar Dome (Covered)] (Total: 1 Tap)'
+        },
+        'layout-03-bento-grid': {
+            name: 'L03: Modular Bento-Grid',
+            badge: 'MODULAR STATUS WIDGETS',
+            desc: 'Card-based visual hierarchy with status glance widgets (Now Playing, Next Up, Covered Dome Live Status, Saved Shows counter).',
+            s1Path: '1. Tap Bento Card [Covered Dome Live Status & Timetable] (Total: 1 Tap)'
+        },
+        'layout-04-split-stage': {
+            name: 'L04: Split Stage Switcher',
+            badge: 'SEGMENTED 2-CHANNEL SWITCHER',
+            desc: 'Segmented top control toggling between Solar Stage and Lunar Dome. Zero cross-stage clutter on mobile; parallel columns on desktop.',
+            s1Path: '1. Tap Segmented Toggle [🌙 Lunar Forest Dome] (Total: 1 Tap)'
+        },
+        'layout-05-dense-terminal': {
+            name: 'L05: Dense Data Terminal',
+            badge: 'HIGH-DENSITY MONOSPACE',
+            desc: 'Monospace flight-departure board styling with compact row heights, maximum data throughput per vertical inch for power users.',
+            s1Path: '1. Tap Mode Pill [LUNAR DOME] (Total: 1 Tap)'
+        },
+        'layout-06-accordion-drawer': {
+            name: 'L06: Accordion Drawer Hub',
+            badge: 'ZERO-SCROLL PROGRESSIVE DISCLOSURE',
+            desc: 'Collapsible day and time drawers preventing vertical scroll fatigue. Users expand only the time block relevant to their current moment.',
+            s1Path: '1. Tap Drawer [Lunar Forest Dome (Covered)] (Total: 1 Tap)'
+        },
+        'layout-07-floating-dock': {
+            name: 'L07: Floating Action Dock',
+            badge: 'SINGLE-HANDED THUMB FAB',
+            desc: 'Bottom-right floating action button fanning out into quick-action radial sheet for rapid jumps while preserving 100% viewport real estate.',
+            s1Path: '1. Tap FAB Dock &rarr; 2. Tap [Covered Dome Shelter] (Total: 2 Taps)'
+        },
+        'layout-08-snap-deck': {
+            name: 'L08: Horizontal Snap Deck',
+            badge: 'CSS SCROLL-SNAP CAROUSEL',
+            desc: 'Horizontal swipeable stage and day cards with CSS scroll-snap. Natural thumb flick gestures across stages without vertical scrolling.',
+            s1Path: '1. Swipe or Tap Pagination Dot [Lunar Dome Deck] (Total: 1 Tap)'
+        },
+        'layout-09-swiss-grid': {
+            name: 'L09: Swiss Typographic Index',
+            badge: 'MINIMALIST EDITORIAL GRID',
+            desc: 'Stark black-and-white International Typographic Style with oversized index numbers, bracketed wireframe taxonomy, and strict baseline rhythm.',
+            s1Path: '1. Tap [03 STAGES] &rarr; 2. Tap [Lunar Forest Dome] (Total: 2 Taps)'
+        },
+        'layout-10-mission-control': {
+            name: 'L10: Mission Control Dashboard',
+            badge: 'OPERATIONS COMMAND CENTER',
+            desc: 'Festival triage hub with live weather telemetry, active rain shelter warning banner, stage crowd gauges, and direct emergency routing.',
+            s1Path: '1. Tap Emergency Alert Banner [🌧️ Active Rain: Enter Dome Timetable] (Total: 1 Tap)'
+        }
+    };
+
+    // Pre-Calibrated Rubric Baseline
+    const DEFAULT_RUBRIC_SCORES = {
+        'layout-01-app-shell':        { ergo: 5.0, s1: 4.5, s2: 5.0, density: 4.0, scale: 4.0, notes: 'Superior thumb zone ergonomics, native app feel, zero navigation ambiguity. Flawless daily driver.' },
+        'layout-02-chronological-feed':{ ergo: 4.0, s1: 4.5, s2: 4.0, density: 4.0, scale: 4.0, notes: 'Fast flick scroll, sticky filter ribbon keeps controls accessible without losing timeline momentum.' },
+        'layout-03-bento-grid':        { ergo: 4.0, s1: 5.0, s2: 4.0, density: 4.5, scale: 5.0, notes: 'Exceptional glanceability. Now Playing and Weather/Dome widgets provide 1-tap instant triage.' },
+        'layout-04-split-stage':       { ergo: 4.5, s1: 5.0, s2: 4.0, density: 4.0, scale: 4.0, notes: 'Completely removes stage overlap confusion. Fastest single-tap stage comparison on mobile.' },
+        'layout-05-dense-terminal':    { ergo: 3.5, s1: 4.0, s2: 4.0, density: 5.0, scale: 4.0, notes: 'Maximum data density per screen inch. Perfect for power users; slightly steeper visual curve.' },
+        'layout-06-accordion-drawer':  { ergo: 4.0, s1: 4.5, s2: 4.0, density: 3.5, scale: 4.0, notes: 'Eliminates endless scrolling. Time blocks stay tidy and expand on demand.' },
+        'layout-07-floating-dock':     { ergo: 4.5, s1: 4.0, s2: 4.0, density: 4.0, scale: 3.5, notes: 'Comfortable right-thumb reach. Content gets full screen height with zero sticky bar occlusions.' },
+        'layout-08-snap-deck':         { ergo: 4.0, s1: 4.0, s2: 3.5, density: 3.5, scale: 3.5, notes: 'Natural swipe gestures. Fun tactile interaction; requires visual pagination dots for orientation.' },
+        'layout-09-swiss-grid':        { ergo: 4.0, s1: 4.0, s2: 4.0, density: 4.0, scale: 4.5, notes: 'Ultra-clean editorial hierarchy. Numbers and brackets make visual scanning remarkably crisp.' },
+        'layout-10-mission-control':   { ergo: 4.0, s1: 5.0, s2: 4.0, density: 4.5, scale: 5.0, notes: 'Built for festival field emergencies. Weather telemetry and shelter alert route attendees instantly.' }
+    };
+
+    let rubricScores = JSON.parse(JSON.stringify(DEFAULT_RUBRIC_SCORES));
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+        loadSavedRubricScores();
+        renderRubricTable();
+        updateActiveLayoutMeta();
+        updateUrlDisplay();
+        updateBookmarksCounter();
+        applyViewportDimensions();
+    });
+
+    // Viewport switcher
+    function setDeviceViewport(width, height, name, btnElem) {
+        currentDevice.width = width;
+        currentDevice.height = height;
+        currentDevice.name = name;
+        currentDevice.isLandscape = false;
+
+        document.querySelectorAll('#controls-toolbar button[data-w]').forEach(b => b.classList.remove('active'));
+        if (btnElem) btnElem.classList.add('active');
+
+        applyViewportDimensions();
+    }
+
+    function toggleOrientation() {
+        if (currentDevice.width === '100%') return;
+        currentDevice.isLandscape = !currentDevice.isLandscape;
+        applyViewportDimensions();
+    }
+
+    function applyViewportDimensions() {
+        const frameContainer = document.getElementById('device-frame-container');
+        const iframe = document.getElementById('simulator-iframe');
+        const modelIndicator = document.getElementById('device-model-indicator');
+
+        let w = currentDevice.width;
+        let h = currentDevice.height;
+
+        if (currentDevice.isLandscape && w !== '100%') {
+            const temp = w;
+            w = h;
+            h = temp;
+        }
+
+        if (w === '100%') {
+            frameContainer.style.boxSizing = 'border-box';
+            frameContainer.style.width = '100%';
+            frameContainer.style.maxWidth = '100%';
+            iframe.style.height = '750px';
+            modelIndicator.textContent = '[ Full Desktop • 100% Fluid ]';
+        } else {
+            frameContainer.style.boxSizing = 'content-box';
+            frameContainer.style.width = w + 'px';
+            frameContainer.style.maxWidth = 'none';
+            iframe.style.height = h + 'px';
+            const orientText = currentDevice.isLandscape ? ' (Landscape)' : '';
+            modelIndicator.textContent = `[ ${currentDevice.name} • ${w}×${h}${orientText} ]`;
+        }
+    }
+
+    // Layout switcher
+    function selectLayout(layoutKey, btnElem) {
+        currentLayout = layoutKey;
+        document.querySelectorAll('#layout-buttons-container button').forEach(b => b.classList.remove('active'));
+        if (btnElem) btnElem.classList.add('active');
+
+        updateActiveLayoutMeta();
+        updateIframeSrc();
+    }
+
+    // Subpage switcher
+    function setSubpage(subpageName, btnElem) {
+        currentSubpage = subpageName;
+        document.querySelectorAll('#controls-toolbar button[data-page]').forEach(b => b.classList.remove('active'));
+        if (btnElem) btnElem.classList.add('active');
+
+        updateIframeSrc();
+    }
+
+    function updateIframeSrc() {
+        const targetUrl = `./${currentLayout}/${currentSubpage}`;
+        const iframe = document.getElementById('simulator-iframe');
+        iframe.src = targetUrl;
+        updateUrlDisplay();
+    }
+
+    function updateUrlDisplay() {
+        const targetUrl = `prototypes/${currentLayout}/${currentSubpage}`;
+        document.getElementById('device-url-text').textContent = targetUrl;
+        document.getElementById('open-new-tab-btn').href = `./${currentLayout}/${currentSubpage}`;
+    }
+
+    function updateActiveLayoutMeta() {
+        const meta = LAYOUT_META[currentLayout] || { name: currentLayout, badge: 'PROTOTYPE', desc: '', s1Path: '' };
+        document.getElementById('meta-layout-title').textContent = meta.name;
+        document.getElementById('meta-layout-badge').textContent = meta.badge;
+        document.getElementById('meta-layout-desc').textContent = meta.desc;
+        document.getElementById('scenario1-active-path').innerHTML = meta.s1Path;
+    }
+
+    function reloadIframe() {
+        const iframe = document.getElementById('simulator-iframe');
+        iframe.src = iframe.src;
+    }
+
+    // Scenario 1
+    function testScenario1InSimulator() {
+        currentSubpage = 'index.html';
+        document.querySelectorAll('#controls-toolbar button[data-page]').forEach(b => {
+            b.classList.toggle('active', b.getAttribute('data-page') === 'index.html');
+        });
+        updateIframeSrc();
+        const meta = LAYOUT_META[currentLayout];
+        alert(`[ Scenario 1 Test Launched ]\nActive Layout: ${meta.name}\n\nTo reach the covered dome schedule in <= 3 taps:\n${meta.s1Path.replace(/&rarr;/g, '->')}`);
+    }
+
+    function showAllScenario1Paths() {
+        let text = '=== SCENARIO 1: RAPID COVERED DOME TAP BUDGET (< 3 TAPS) ===\n\n';
+        for (const [key, data] of Object.entries(LAYOUT_META)) {
+            text += `• ${data.name}:\n   ${data.s1Path.replace(/&rarr;/g, '->')}\n\n`;
+        }
+        alert(text);
+    }
+
+    // Scenario 2 LocalStorage Helpers
+    function getFavorites() {
+        try {
+            return JSON.parse(localStorage.getItem('festival_favorites')) || [];
+        } catch (e) {
+            return [];
+        }
+    }
+
+    function saveFavorites(favs) {
+        try {
+            localStorage.setItem('festival_favorites', JSON.stringify(favs));
+            updateBookmarksCounter();
+            reloadIframe();
+        } catch (e) {
+            alert('LocalStorage write failed: ' + e);
+        }
+    }
+
+    function updateBookmarksCounter() {
+        const favs = getFavorites();
+        document.getElementById('fav-count-display').textContent = `${favs.length} show${favs.length === 1 ? '' : 's'} saved`;
+
+        // Check for conflicts
+        if (typeof window.FESTIVAL_DATA !== 'undefined' && window.FESTIVAL_DATA.detectConflicts) {
+            const conflicts = window.FESTIVAL_DATA.detectConflicts(favs);
+            const statusElem = document.getElementById('fav-conflict-status');
+            if (conflicts.length > 0) {
+                statusElem.textContent = `[ ⚠️ ${conflicts.length} Overlapping Show Conflict Detected! ]`;
+                statusElem.style.color = '#b71c1c';
+            } else {
+                statusElem.textContent = '[ ✓ No conflicts detected ]';
+                statusElem.style.color = '#2e7d32';
+            }
+        }
+    }
+
+    function seedConflictTestPair() {
+        const conflictPair = [
+            {
+                id: 'perf-02',
+                artist: 'Velvet Morning',
+                stage: 'Solar Horizon Stage',
+                day: 'Day 1 (Friday, July 10)',
+                time: '15:00 – 15:45',
+                genre: 'Dream Pop'
+            },
+            {
+                id: 'perf-11',
+                artist: 'Subtle Resonances',
+                stage: 'Lunar Forest Dome',
+                day: 'Day 1 (Friday, July 10)',
+                time: '15:00 – 15:50',
+                genre: 'Modular Ambient'
+            }
+        ];
+        saveFavorites(conflictPair);
+        alert('[ Conflict Pair Injected into LocalStorage ]\n• Velvet Morning (Solar, Fri 15:00–15:45)\n• Subtle Resonances (Lunar, Fri 15:00–15:50)\n\nBoth shows overlap between 15:00 and 15:45 on Day 1. Now navigate to "My Schedule" in any layout to inspect the red warning badge!');
+    }
+
+    function seedCleanSchedule() {
+        const cleanShows = [
+            {
+                id: 'perf-01',
+                artist: 'Echoes of Light',
+                stage: 'Solar Horizon Stage',
+                day: 'Day 1 (Friday, July 10)',
+                time: '14:00 – 14:45',
+                genre: 'Post-Rock / Ambient'
+            },
+            {
+                id: 'perf-12',
+                artist: 'Binary Fields',
+                stage: 'Lunar Forest Dome',
+                day: 'Day 1 (Friday, July 10)',
+                time: '16:05 – 17:00',
+                genre: 'IDM / Glitch'
+            },
+            {
+                id: 'perf-07',
+                artist: 'Mirage Horizon',
+                stage: 'Solar Horizon Stage',
+                day: 'Day 1 (Friday, July 10)',
+                time: '20:40 – 21:40',
+                genre: 'Alternative Rock'
+            }
+        ];
+        saveFavorites(cleanShows);
+        alert('[ Clean Schedule Injected into LocalStorage ]\n3 shows seeded on Day 1 with zero time overlaps. All cards will display green status: [ ✓ No time conflict ].');
+    }
+
+    function clearFavorites() {
+        saveFavorites([]);
+        alert('[ LocalStorage Favorites Cleared ]\nPlanner empty state is now active.');
+    }
+
+    function openMyScheduleInSimulator() {
+        currentSubpage = 'my-schedule.html';
+        document.querySelectorAll('#controls-toolbar button[data-page]').forEach(b => {
+            b.classList.toggle('active', b.getAttribute('data-page') === 'my-schedule.html');
+        });
+        updateIframeSrc();
+    }
+
+    // Rubric Matrix Logic
+    function calculateWeightedScore(row) {
+        // Weights: Ergo: 25%, S1: 25%, S2: 20%, Density: 15%, Scale: 15%
+        const score = (row.ergo * 0.25) + (row.s1 * 0.25) + (row.s2 * 0.20) + (row.density * 0.15) + (row.scale * 0.15);
+        return Math.round(score * 100) / 100;
+    }
+
+    function renderRubricTable() {
+        const tbody = document.getElementById('rubric-tbody');
+        tbody.innerHTML = '';
+
+        // Find max score
+        let maxScore = -1;
+        let winnerKey = '';
+        for (const [key, scores] of Object.entries(rubricScores)) {
+            const total = calculateWeightedScore(scores);
+            if (total > maxScore) {
+                maxScore = total;
+                winnerKey = key;
+            }
+        }
+
+        // Update Winner Banner
+        if (LAYOUT_META[winnerKey]) {
+            const wMeta = LAYOUT_META[winnerKey];
+            const pct = Math.round((maxScore / 5.0) * 100);
+            document.getElementById('winner-title-text').textContent = wMeta.name;
+            document.getElementById('winner-summary-text').textContent = `Weighted Score: ${maxScore.toFixed(2)} / 5.00 (${pct}%). ${wMeta.desc}`;
+        }
+
+        for (const [key, scores] of Object.entries(rubricScores)) {
+            const meta = LAYOUT_META[key] || { name: key };
+            const total = calculateWeightedScore(scores);
+            const isWinner = (key === winnerKey);
+
+            const tr = document.createElement('tr');
+            if (isWinner) tr.classList.add('winner-row');
+
+            tr.innerHTML = `
+                <td>
+                    <strong>${meta.name}</strong><br>
+                    <small style="color: #666;">${key}</small>
+                </td>
+                <td><input type="number" min="1" max="5" step="0.5" class="rubric-score-input" value="${scores.ergo}" onchange="updateRubricScore('${key}', 'ergo', this.value)"></td>
+                <td><input type="number" min="1" max="5" step="0.5" class="rubric-score-input" value="${scores.s1}" onchange="updateRubricScore('${key}', 's1', this.value)"></td>
+                <td><input type="number" min="1" max="5" step="0.5" class="rubric-score-input" value="${scores.s2}" onchange="updateRubricScore('${key}', 's2', this.value)"></td>
+                <td><input type="number" min="1" max="5" step="0.5" class="rubric-score-input" value="${scores.density}" onchange="updateRubricScore('${key}', 'density', this.value)"></td>
+                <td><input type="number" min="1" max="5" step="0.5" class="rubric-score-input" value="${scores.scale}" onchange="updateRubricScore('${key}', 'scale', this.value)"></td>
+                <td style="font-weight: bold; font-family: Consolas, monospace; font-size: 0.95rem;">
+                    ${total.toFixed(2)} / 5.00
+                </td>
+                <td>
+                    ${isWinner ? '<span class="winner-badge">🏆 WINNER</span>' : '<span class="runner-badge">Contender</span>'}
+                </td>
+                <td style="font-size: 0.8rem; color: #444;">
+                    ${scores.notes}
+                </td>
+            `;
+            tbody.appendChild(tr);
+        }
+    }
+
+    function updateRubricScore(layoutKey, field, val) {
+        const num = parseFloat(val);
+        if (isNaN(num) || num < 1 || num > 5) return;
+        rubricScores[layoutKey][field] = num;
+        saveRubricScores();
+        renderRubricTable();
+    }
+
+    function saveRubricScores() {
+        try {
+            localStorage.setItem('festival_rubric_scores', JSON.stringify(rubricScores));
+        } catch (e) {
+            console.error('Failed to save rubric scores:', e);
+        }
+    }
+
+    function loadSavedRubricScores() {
+        try {
+            const saved = localStorage.getItem('festival_rubric_scores');
+            if (saved) {
+                rubricScores = JSON.parse(saved);
+            }
+        } catch (e) {
+            console.warn('Using default rubric scores:', e);
+        }
+    }
+
+    function resetRubricDefaults() {
+        rubricScores = JSON.parse(JSON.stringify(DEFAULT_RUBRIC_SCORES));
+        saveRubricScores();
+        renderRubricTable();
+        alert('Rubric scores reset to design specification baseline calibration.');
+    }
+</script>
+
+</body>
+</html>

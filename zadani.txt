@@ -1,0 +1,390 @@
+Požadavky na projekt a dílčí úkoly | prezenční
+Požadavky na absolvování
+1. Základní informace
+Projekt vytvářejí studenti ve skupinách po 4. Všichni členové skupiny musí navštěvovat stejné cvičení (rozhodující je zapsání v Moodlu).
+
+Téma projektu: fiktivní festival. Může jít například o festival hudební, filmový, divadelní, multižánrový apod.
+
+Festival nesmí být kopií existujícího festivalu 1:1.
+
+Projekt vzniká postupně během semestru. Jednotlivé části jsou průběžně odevzdávány, prezentovány a konzultovány. První a druhý výstup – jsou závazným východiskem projektu. Je možné jej dále upravovat pouze omezeně (cca 15 %) a změny musí být zdůvodněny validací, review, oponenturou nebo konzultací.
+
+Výsledkem je web, který dává smysl (důraz na UX/použitelnost - struktura a informační architektura, navigace, vyhledávání, drobečková navigace, …). Všechny texty, obrázky, ilustrace nechte vygenerovat AI.
+
+Projekt se nahrává na moodle.
+
+2. Pravidla prezentací
+3 až 5 minut na skupinu,
+prezentujete pouze materiály, které jste před cvičením odevzdali,
+pokud chcete použít PPT/PPTX nebo jiný samostatný prezentační soubor, musíte jej také odevzdat,
+během cvičení nelze dodatečně nahrávat, posílat nebo nahrazovat soubory pro prezentaci.
+Každá průběžná prezentace stručně obsahuje:
+
+co jste od minula udělali,
+hlavní rozhodnutí,
+jak jste použili AI,
+jak jste ověřili výsledky AI a vlastní řešení.
+3. Použití AI
+Použití generativní AI a dalších AI nástrojů je povoleno. Za výsledek odpovídá tým - neexistuje nic jako "to nám vygenerovalo AI".
+
+U použitých AI výstupů musíte být schopni vysvětlit:
+
+k čemu jste AI použili,
+jak jste výstup ověřili,
+co jste přijali,
+co jste upravili nebo odmítli,
+jaké limity nebo chyby jste zjistili.
+Stručné tvrzení „ověřili jsme pomocí AI“ není validací.
+
+Dílčí úkoly:
+Cvičení 1
+úkol na Cvičení 2 Projektová specifikace a datová základna
+Prvním výstupem projektu je Projektová specifikace a datová základna.
+
+Odevzdávají se soubory:
+
+project-specification.md
+data.*
+project-specification.md
+Soubor musí obsahovat minimálně:
+
+Identita festivalu (tabulka)
+název,
+ročník,
+lokalita,
+datumový rozsah,
+charakter festivalu,
+hlavní žánry nebo témata.
+Účel webu
+Popište:
+
+k čemu web slouží,
+jaké jsou jeho hlavní cíle,
+jaké důležité akce mají uživatelé na webu provádět.
+Cílové skupiny
+Uveďte hlavní skupiny uživatelů a pro každou stručně:
+
+jejich potřeby,
+očekávání,
+informace nebo funkce, které na webu potřebují.
+Informační architektura
+Uveďte:
+
+strukturu webu / sitemap,
+hlavní navigaci,
+vztahy mezi hlavními částmi webu,
+stručný popis účelu jednotlivých částí.
+Web musí obsahovat minimálně:
+
+úvodní stránku,
+program,
+účinkující – seznam a detail,
+místa/scény,
+praktické informace,
+další (interaktivní) části doplňte podle charakteru vlastního festivalu.
+Uživatelské scénáře
+Popište několik konkrétních situací ve formě např.:
+
+Návštěvník chce zjistit, kdo dnes večer vystupuje na konkrétní scéně, a uložit si vybrané vystoupení do svého programu.
+
+Scénář musí obsahovat:
+
+typ uživatele,
+jeho cíl,
+výchozí situaci,
+očekávaný výsledek.
+Vyberte minimálně 3 klíčové scénáře, které budete dále používat při prototypování, implementaci a ověřování.
+
+data.*
+Minimální rozsah:
+
+3 dny,
+2 místa/scény,
+60 účinkujících,
+60 programových položek.
+Minimální datové entity:
+
+festival,
+místa/scény,
+účinkující,
+programové položky / vystoupení.
+Data musí být konzistentní. Vazby mezi účinkujícími, místy a programem musí být jednoznačné.
+
+Formát
+studenti INFO a SYI: XML nebo JSON,
+studenti ostatních oborů: XML, JSON nebo Excel.
+Odevzdání na cvičení 2
+project-specification.md,
+data.xml, data.json nebo data.xlsx,
+případně soubor prezentace.
+Cvičení 2 → UX návrh, prototyp a funkce
+Na cvičení 2 prezentujete zadání z cvičení 1.
+
+festival a účel webu,
+cílové skupiny,
+informační architektura,
+2 klíčové scénáře,
+použití AI,
+ověření výsledku.
+Úkol do cvičení 3
+Vytvořte návrh klíčových částí webu.
+
+Může jít o low-/mid-fidelity prototyp (wireframe) nebo jiné srovnatelně detailní řešení (vibe kódovaný základ webu).
+
+Návrh musí:
+
+vycházet z Projektové specifikace,
+řešit mobilní zobrazení jako výchozí variantu (mobile-first),
+počítat také s desktopovým rozložením,
+umožnit projít 2 klíčové scénáře,
+řešit navigaci a základní informační hierarchii.
+Interaktivní funkce
+Web nesmí být pouze statickou prezentací obsahu.
+
+Navrhněte alespoň 3 smysluplné interaktivní funkce, které řeší konkrétní potřeby uživatele.
+
+Příklady:
+
+filtr programu podle dne, scény nebo typu programu,
+vyhledávání účinkujících,
+řazení nebo filtrování seznamů,
+vlastní seznam oblíbených vystoupení,
+osobní program,
+kontextové zobrazení detailů programu.
+Menu, slideshow nebo obdobný čistě prezentační prvek se samostatně nepovažuje za požadovanou funkci.
+
+Odevzdání na cvičení 3
+prototyp / export (spustitelný bez instalace),
+krátký progress-02.md:
+seznam navržených funkcí,
+vazba funkcí na uživatelské potřeby,
+co bylo ověřováno a jak,
+použití AI a ověření AI výstupů,
+případně soubor prezentace.
+Cvičení 3 → průchod scénáři a začátek implementace
+Na cvičení 3 prezentujete především HTML implementaci, vzhled, případně průchod klíčovými scénáři.
+
+Úkol do cvičení 4
+Začněte implementovat i uživatelské scénáře.
+
+Minimální stav:
+
+úvodní stránka,
+alespoň jedna obsahově odlišná stránka,
+funkční hlavní navigace,
+responzivní mobile-first,
+funkční interaktivní funkce,
+sémantické HTML,
+CSS,
+JavaScript podle potřeby.
+Odevzdání na cvičení 4
+aktuální složka web/,
+progress-03.md:
+co je implementováno,
+aktuální best practices a trendy v oblasti UX, designu a jak byly implementovány,
+co se proti prototypu změnilo a proč,
+jaké testy / kontroly jste provedli,
+použití AI a ověření AI výstupů,
+případně soubor prezentace.
+Cvičení 4 → první funkční implementace
+Na cvičení 4 prezentujete:
+
+mobilní i desktopové zobrazení,
+hlavní navigaci,
+funkční interaktivitu.
+Úkol do cvičení 5 (cross review)
+Dopracujte web do review-ready verze.
+
+Review-ready verze musí být dostatečně kompletní, aby ji mohl jiný tým nezávisle hodnotit.
+
+Musí:
+
+obsahovat všechny hlavní části,
+umožnit prakticky projít min. 2 klíčové scénáře,
+mít funkční požadovanou interaktivitu,
+být použitelná na mobilu i desktopu,
+obsahovat dostatečně kompletní obsah a data,
+nemít známé blokující chyby.
+Odevzdání na cvičení 5
+review-ready složka web/ (to pošlete společně s project-specification.md i druhému týmu na review),
+progress-04.md:
+aktuální stav,
+známé nedostatky,
+co jste testovali a jak,
+použití AI a ověření AI výstupů,
+případně soubor prezentace.
+Cvičení 5 → cross-review
+Na cvičení 5 odevzdáte a stručně představíte web ve stavu, který bude následně hodnocen jiným týmem.
+
+Na cvičení dostane každý tým přidělený jiný projekt.
+
+Úkol – (expertní) hodnocení
+Proveďte cross-review přiděleného projektu.
+
+Minimálně:
+
+projděte 2 klíčové uživatelské scénáře projektu,
+proveďte expertní hodnocení s pomocí alespoň dvou formalizovaných metod,
+zkontrolujte např.:
+informační architekturu a navigaci,
+srozumitelnost ovládání,
+responzivitu,
+základní přístupnost,
+konzistenci,
+interaktivní funkce,
+u každého nálezu určete
+závažnost (kritický, významný, drobný),
+jak jste jej objevili,
+zdůvodnění,
+návrh úpravy.
+AI můžete použít jako pomocný nástroj, ale každý nález musíte sami ověřit a umět zdůvodnit.
+
+review.md
+metodika,
+seznam nedostatků/nálezů
+Odevzdání na cvičení 6
+review.md k přidělenému projektu,
+případně soubor prezentace.
+Cvičení 6 → prezentace review
+Na cvičení 6 prezentujete především výsledky hodnocení cizího projektu.
+
+Max. 5 minut:
+
+použitou metodiku,
+3–5 nejdůležitějších nálezů,
+jejich závažnost,
+proč jsou problémem,
+doporučené řešení,
+případné využití AI a způsob ověření jejích výstupů.
+Finální projekt
+Finální projekt tvoří:
+
+web,
+dokumentace v Markdownu.
+Web
+Web musí být dynamický / interaktivní, ale musí fungovat jako čistě client-side řešení v prohlížeči.
+
+Nesmí vyžadovat: Node.js, Docker, package manager pro spuštění, build proces, server-side runtime, databázi, vlastní backend.
+
+Použijte:
+
+HTML,
+CSS,
+JavaScript podle potřeby.
+Pokud potřebujete pro web připravit data ve formátu vhodném pro JavaScript, musí být odvoditelná z odevzdané datové základny a obsahově s ní konzistentní.
+
+Web by měl obsahovat minimálně:
+
+úvodní stránku s představením festivalu a hlavními informacemi,
+program s možností smysluplně pracovat s jeho obsahem,
+účinkující – přehled a detail,
+místa / scény,
+praktické informace pro návštěvníky,
+vyhledávání (vyhledávací pole i stránka s výsledky),
+Může být statická ukázka výsledků určitého stringu,
+další části a funkce podle charakteru festivalu, cílových skupin a uživatelských scénářů.
+Jednotlivé části musí být vzájemně provázané a odpovídat navržené informační architektuře.
+Sémantické HTML
+Použijte následující HTML elementy podle jejich významu, zejména tam, kde jsou vhodné:
+
+header,
+h1 -  h3
+nav,
+section,
+article,
+aside,
+footer,
+time,
+address,
+seznamy,
+tabulky pouze pro tabulková data,
+formulářové prvky a jejich popisky.
+Hodnotí se správná sémantika.
+
+Dále:
+
+korektní hierarchie nadpisů,
+přístupnost alespoň WCAG 2.0 level AA
+validní HTML podle HTML Living Standard.
+Metadata
+Každá relevantní stránka musí mít:
+
+smysluplný a konkrétní <title>,
+meta name="description",
+viewport meta pro responzivní zobrazení,
+další vhodná metadata.
+Strukturovaná data musí odpovídat tomu, co je skutečně viditelné na stránce.
+
+Responzivita a adaptace rozhraní
+Web vytvářejte responzivní, ideálně přístupem mobile-first.
+
+Rozhraní se musí vhodně přizpůsobovat velikosti viewportu, ne pouze několika konkrétním modelům zařízení.
+
+Kontrolujte zejména:
+
+horizontální přetékání,
+čitelnost textu,
+navigaci,
+velikost a dostupnost ovládacích prvků,
+rozložení programu a seznamů,
+obrázky,
+formuláře a interaktivní komponenty.
+SEO a optimalizace pro AI, agenty a vyhledávání (AEO / GEO)
+Web musí respektovat základní technické a obsahové principy SEO a optimalizace pro generativní vyhledávání / AI search (AEO/GEO), AI agenty.
+
+Najděte aktuální trendy a best practices. Můžete ověřit web pomocí vhodných nástrojů. Popište do dokumentace, co jste našli a jak jste to implementovali/upravili.
+
+Dokumentace – documentation.md
+Dokumentace musí být věcná a konkrétní. Nepopisujte obecnou teorii.
+
+Musí obsahovat minimálně následující části.
+
+Vývoj projektu a změny
+Popište:
+
+hlavní změny mezi průběžnými verzemi,
+co se změnilo po cvičení 6 (jak jste implementovali cross review),
+proč ke změnám došlo,
+jaká validace, review, oponentura nebo konzultace změnu vyvolala.
+Finální verze se proti výstupům z prvního a druhého cvičení nesmí výrazně změnit - změny je nutné odůvodnit.
+
+Cross-review
+Uveďte přehled připomínek, které jste obdrželi.
+
+Šablona:
+
+Připomínka	Závažnost	Rozhodnutí	Provedená změna / zdůvodnění odmítnutí
+
+Postup práce
+Podrobně popište:
+
+jednotlivé fáze projektu,
+použité nástroje,
+zásadní návrhová a technická rozhodnutí,
+změny proti původním návrhům,
+jak jste hledali a implementovali aktuální trendy a best practices,
+způsob spolupráce v týmu.
+Použití AI
+Stručně shrňte použití generativní AI:
+
+použité AI nástroje,
+k čemu byly použity,
+reprezentativní příklady práce / promptů,
+jak jste kontrolovali výstupy,
+příklady návrhů AI, které jste změnili nebo odmítli,
+vlastní kritické zhodnocení přínosu AI.
+Struktura finálního odevzdání (povinná)
+projekt/
+├── project-specification.md
+├── prototype/
+├── documentation.md
+├── data.xml | .json | .xlsx
+├── web/
+│   ├── index.html
+│   ├── ...
+│   ├── css/
+│   ├── js/
+│   ├── images/
+│   └── ...
+└── review/
+    └── received-review.md

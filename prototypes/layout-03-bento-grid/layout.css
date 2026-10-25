@@ -1,0 +1,475 @@
+/* layout.css - Layout 03: Modular Bento-Grid Prototype
+   Festival of Darkness 2 (July 10–12, 2026, Kutna Hora)
+   Strict minimalist wireframe style: #222 and #777 borders, 0 radiuses, 0 shadows, 0 gradients
+   WCAG min 44x44px touch targets, zero horizontal overflow across 375px/412px/768px/1200px
+*/
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #111;
+    background: #fff;
+    padding: 12px;
+    line-height: 1.4;
+    -webkit-text-size-adjust: 100%;
+}
+
+.wf-container {
+    max-width: 1080px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* ============================================================
+   NAVIGATION & FOOTER (UNBORDERED, FLUID MULTILINE WRAPPING)
+   ============================================================ */
+.wf-nav-inline,
+.wf-footer-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 18px;
+    padding: 8px 0;
+    font-size: 0.95rem;
+}
+
+.wf-nav-inline .festival-brand,
+.wf-footer-inline .festival-brand {
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+}
+
+.wf-nav-inline a,
+.wf-footer-inline a {
+    color: #111;
+    text-decoration: underline;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 4px 0;
+}
+
+.wf-nav-inline a:hover,
+.wf-footer-inline a:hover {
+    color: #555;
+}
+
+.wf-nav-inline a.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* ============================================================
+   WIREFRAME OUTLINE BOXES & DIVIDERS (#222, #777, hr #333)
+   ============================================================ */
+.wf-box {
+    border: 1px solid #222;
+    padding: 14px;
+    background: #fff;
+}
+
+.wf-box-sub {
+    border: 1px solid #777;
+    padding: 12px;
+    background: #fafafa;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #333;
+    margin: 12px 0;
+    width: 100%;
+}
+
+/* ============================================================
+   HEADINGS & TYPOGRAPHY
+   ============================================================ */
+h1 {
+    font-size: 1.4rem;
+    margin-bottom: 6px;
+    line-height: 1.25;
+}
+
+h2 {
+    font-size: 1.2rem;
+    margin-bottom: 6px;
+    line-height: 1.25;
+}
+
+h3 {
+    font-size: 1.05rem;
+    margin-bottom: 4px;
+    line-height: 1.3;
+}
+
+h4 {
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+    line-height: 1.3;
+}
+
+p {
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+}
+
+/* ============================================================
+   INTERACTIVE BUTTONS & FORM INPUTS (MIN 44x44px TOUCH TARGETS)
+   ============================================================ */
+.btn-box {
+    border: 1px solid #111;
+    padding: 8px 14px;
+    background: #eee;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #000;
+    min-height: 44px;
+    min-width: 44px;
+    font-family: inherit;
+    line-height: 1.2;
+}
+
+.btn-box:hover {
+    background: #ddd;
+}
+
+.btn-box.active {
+    background: #222;
+    color: #fff;
+    border-color: #000;
+}
+
+.btn-box-danger {
+    background: #ffebee;
+    border: 1px solid #b71c1c;
+    color: #b71c1c;
+}
+
+.btn-box-danger:hover {
+    background: #ffcdd2;
+}
+
+.input-box {
+    border: 1px solid #555;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    background: #fff;
+    min-height: 44px;
+    font-family: inherit;
+    width: 100%;
+    max-width: 100%;
+}
+
+.filter-btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 8px 0;
+}
+
+.genre-pill {
+    border: 1px solid #777;
+    background: #fafafa;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+}
+
+.genre-pill:hover {
+    background: #eee;
+}
+
+.genre-pill.active {
+    background: #222;
+    color: #fff;
+    border-color: #000;
+}
+
+/* ============================================================
+   BENTO-GRID SYSTEM (RESPONSIVE CARDS & SPANS)
+   ============================================================ */
+.bento-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    width: 100%;
+}
+
+@media (min-width: 640px) {
+    .bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+    }
+
+    .bento-col-2 {
+        grid-column: span 2;
+    }
+
+    .bento-col-full {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (min-width: 1024px) {
+    .bento-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+
+    .bento-col-1 {
+        grid-column: span 1;
+    }
+
+    .bento-col-2 {
+        grid-column: span 2;
+    }
+
+    .bento-col-3 {
+        grid-column: span 3;
+    }
+
+    .bento-col-full {
+        grid-column: 1 / -1;
+    }
+
+    .bento-row-2 {
+        grid-row: span 2;
+    }
+}
+
+.bento-card {
+    border: 1px solid #222;
+    background: #fff;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+}
+
+.bento-card-sub {
+    border: 1px solid #777;
+    background: #fafafa;
+    padding: 10px;
+    margin-top: 8px;
+    min-width: 0;
+}
+
+.bento-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+}
+
+.bento-badge {
+    border: 1px solid #555;
+    background: #eee;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+}
+
+.bento-badge-alert {
+    border: 1px solid #b71c1c;
+    background: #ffebee;
+    color: #b71c1c;
+}
+
+.bento-badge-success {
+    border: 1px solid #2e7d32;
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.bento-actions {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+/* ============================================================
+   SCHEDULE CARDS & HIGHLIGHTING (.is-favourite & COLLISION)
+   ============================================================ */
+.sch-event,
+.sch-cell,
+.bento-slot-card {
+    border: 1px solid #777;
+    background: #fafafa;
+    padding: 12px;
+    margin-bottom: 10px;
+    min-width: 0;
+}
+
+/* SCENARIO 2 HIGHLIGHTING: MANDATORY GREEN WIREFRAME STYLE */
+.is-favourite {
+    background: #d4edda !important;
+    border: 2px solid #28a745 !important;
+}
+
+/* SCENARIO 2 CLASH ALERT: MANDATORY RED WIREFRAME STYLE */
+.has-collision {
+    border: 2px solid #b71c1c !important;
+    background: #ffebee !important;
+}
+
+.badge-conflict {
+    color: #b71c1c;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 4px;
+}
+
+.badge-clear {
+    color: #2e7d32;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 4px;
+}
+
+.sch-fav-btn,
+.fav-toggle-btn {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 4px 12px;
+    font-size: 1.1rem;
+    border: 1px solid #222;
+    background: #fff;
+    cursor: pointer;
+    font-family: inherit;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sch-fav-btn:hover,
+.fav-toggle-btn:hover {
+    background: #eee;
+}
+
+/* ============================================================
+   ARTIST CARDS & MODAL DRAWER
+   ============================================================ */
+.artist-card {
+    border: 1px solid #777;
+    background: #fafafa;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+}
+
+.artist-card.is-favourite {
+    background: #d4edda !important;
+    border: 2px solid #28a745 !important;
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-content {
+    background: #fff;
+    border: 2px solid #222;
+    padding: 16px;
+    max-width: 580px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+/* ============================================================
+   ROW & COLUMN UTILITIES
+   ============================================================ */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    width: 100%;
+}
+
+.col {
+    flex: 1 1 280px;
+    min-width: 0;
+}
+
+/* ============================================================
+   STATUS BADGES & INDICATORS
+   ============================================================ */
+.live-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #2e7d32;
+    margin-right: 6px;
+    border: 1px solid #1b5e20;
+}
+
+.dome-live-pulse {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #1565c0;
+    margin-right: 6px;
+    border: 1px solid #0d47a1;
+}
+
+/* ============================================================
+   ZERO HORIZONTAL OVERFLOW RESILIENCE (375px/412px/768px/1200px)
+   ============================================================ */
+html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+pre, code {
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}

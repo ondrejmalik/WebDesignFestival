@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Festival Schedule Timetable – Festival of Darkness 2 (App-Shell Bottom Nav Prototype L01)">
+    <title>Festival of Darkness 2 | Program (App-Shell)</title>
+    <link rel="stylesheet" href="layout.css">
+    <script src="../common/festival-data.js" defer></script>
+    <script src="layout.js" defer></script>
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- Top Header & Secondary Inline Navigation -->
+        <div id="nav-placeholder">
+            <nav class="wf-nav-inline" aria-label="Top Secondary Navigation">
+                <a href="index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+            </nav>
+            <hr>
+        </div>
+
+        <!-- Main Content -->
+        <main>
+
+            <!-- Page Title Box -->
+            <section class="wf-box">
+                <h2>[ Festival Schedule Timetable ]</h2>
+                <hr>
+                <p>[ 3 Days: July 10–12, 2026 | 2 Stages: Solar Horizon & Lunar Forest Dome | 60 Performances ]</p>
+                <p style="font-size: 0.85rem; color: #555; margin-top: 4px;">
+                    <em>[ Click the ★ star on any performance to bookmark it to your personal schedule. Bookmarked events instantly highlight in green and sync with My Plan! ]</em>
+                </p>
+            </section>
+
+            <!-- Saved Shows Counter Bar -->
+            <div class="sch-stats-bar">
+                <div>
+                    <strong>[ ★ Saved: <span id="fav-count">0</span> shows ]</strong>
+                    <span id="filter-status-text" style="margin-left: 8px; color: #444; font-size: 0.82rem;">[ Showing 60 of 60 performances ]</span>
+                </div>
+                <div>
+                    <a href="my-schedule.html" class="btn-box"><strong>[ View in My Plan &rarr; ]</strong></a>
+                    <button id="clear-favorites-btn" class="btn-box" style="margin-left: 6px;">[ Clear ★ ]</button>
+                </div>
+            </div>
+
+            <!-- Timetable Interactive Filters -->
+            <section class="wf-box">
+                <h3 style="font-size: 0.95rem;">[ Filter Schedule ]</h3>
+                <hr>
+
+                <div class="filter-toolbar">
+                    <!-- Day Filter -->
+                    <div class="filter-row">
+                        <span class="filter-label">[ Day: ]</span>
+                        <button class="filter-btn active" data-filter-day="all">[ All Days (Jul 10–12) ]</button>
+                        <button class="filter-btn" data-filter-day="day1">[ Friday, Jul 10 ]</button>
+                        <button class="filter-btn" data-filter-day="day2">[ Saturday, Jul 11 ]</button>
+                        <button class="filter-btn" data-filter-day="day3">[ Sunday, Jul 12 ]</button>
+                        <button id="filter-fav-only" class="filter-btn filter-btn-fav">[ ★ Bookmarked Only ]</button>
+                    </div>
+
+                    <!-- Stage Filter (Scenario 1 Fast Selector) -->
+                    <div class="filter-row">
+                        <span class="filter-label">[ Stage: ]</span>
+                        <button class="filter-btn active" data-filter-stage="all">[ Both Stages ]</button>
+                        <button class="filter-btn" data-filter-stage="solar">[ ☀️ Solar Horizon Stage (Open-air) ]</button>
+                        <button class="filter-btn" data-filter-stage="lunar" id="stage-filter-lunar">[ 🌙 Lunar Forest Dome (Covered) ]</button>
+                    </div>
+
+                    <!-- Genre Filter -->
+                    <div class="filter-row">
+                        <span class="filter-label">[ Genre: ]</span>
+                        <button class="filter-btn active" data-filter-genre="all">[ All ]</button>
+                        <button class="filter-btn" data-filter-genre="techno">[ Techno ]</button>
+                        <button class="filter-btn" data-filter-genre="ambient">[ Ambient ]</button>
+                        <button class="filter-btn" data-filter-genre="indie">[ Indie ]</button>
+                        <button class="filter-btn" data-filter-genre="dream pop">[ Dream Pop ]</button>
+                        <button class="filter-btn" data-filter-genre="synth">[ Synthpop ]</button>
+                        <button class="filter-btn" data-filter-genre="post-rock">[ Post-Rock ]</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Schedule Items Container (Rendered dynamically from FESTIVAL_DATA.SCHEDULE) -->
+            <section class="sch-container" id="schedule-container">
+                <div class="wf-box-sub" style="text-align: center; padding: 20px;">
+                    [ Loading 60 festival performances from canonical dataset... ]
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <div id="footer-placeholder">
+            <hr>
+            <footer class="wf-footer-inline">
+                <strong class="festival-brand">[ © 2026 Festival of Darkness 2 ]</strong>
+                <span>Kutna Hora, July 10–12, 2026</span>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+            </footer>
+        </div>
+
+    </div>
+
+    <!-- App-Shell Fixed Bottom Thumb Bar -->
+    <nav class="bottom-nav-bar" aria-label="App Shell Primary Navigation">
+        <a href="index.html" class="bottom-nav-item">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">[ Home ]</span>
+        </a>
+        <a href="program.html" class="bottom-nav-item active">
+            <span class="nav-icon">📅</span>
+            <span class="nav-label">[ Timetable ]</span>
+        </a>
+        <a href="artists.html" class="bottom-nav-item">
+            <span class="nav-icon">🎤</span>
+            <span class="nav-label">[ Artists ]</span>
+        </a>
+        <a href="stages.html" class="bottom-nav-item">
+            <span class="nav-icon">⛺</span>
+            <span class="nav-label">[ Stages ]</span>
+        </a>
+        <a href="practical-info.html" class="bottom-nav-item">
+            <span class="nav-icon">ℹ️</span>
+            <span class="nav-label">[ Info ]</span>
+        </a>
+        <a href="my-schedule.html" class="bottom-nav-item">
+            <span class="nav-icon">★</span>
+            <span class="nav-label">[ My Plan ]<span class="nav-badge-count" style="display: none;">0</span></span>
+        </a>
+    </nav>
+
+</body>
+</html>

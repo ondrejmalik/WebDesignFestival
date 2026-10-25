@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Festival of Darkness 2 – Homepage (Horizontal Snap Deck Prototype L08). Kutna Hora, Czech Republic, July 10–12, 2026.">
+    <title>Festival of Darkness 2 | Home (Horizontal Snap Deck)</title>
+    <link rel="stylesheet" href="layout.css">
+    <script src="../common/festival-data.js" defer></script>
+    <script src="layout.js" defer></script>
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- Header & Navigation -->
+        <header id="nav-placeholder">
+            <nav class="wf-nav-inline" aria-label="Main Navigation">
+                <a href="index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+                <a href="index.html" class="active">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule (<span class="fav-count-badge">0</span>) ]</a>
+            </nav>
+            <hr>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+
+            <!-- Scenario 1: Immediate Rain Shelter Quick Action (1 Tap from Homepage) -->
+            <section class="rain-shelter-banner">
+                <div>
+                    <strong>[ 🌧️ Rain Alert / Live Shelter Access ]</strong>
+                    <p style="font-size: 0.88rem; margin-top: 2px;">
+                        Sudden weather change? Seek shelter at the indoor covered dome with continuous audiovisual sets.
+                    </p>
+                </div>
+                <a href="program.html?stage=lunar" class="btn-box btn-accent" id="s1-quick-shelter-btn">
+                    [ View Covered Dome Timetable (Lunar Forest Dome) &rarr; ]
+                </a>
+            </section>
+
+            <!-- Hero Identity Box -->
+            <section class="wf-box">
+                <h1>[ FESTIVAL OF DARKNESS 2 ]</h1>
+                <p><strong>[ July 10 – July 12, 2026 | Kutna Hora, Czech Republic ]</strong></p>
+                <hr>
+                <p>[ Three-day festival of electronic, alternative, and audiovisual music in Kutna Hora. ]</p>
+                <p>[ <strong>Prototype Layout 08: Horizontal Snap Deck</strong> — CSS scroll-snap horizontal carousel with stage cards and dot pagination. Thumb flick navigation between Solar and Lunar stages. ]</p>
+            </section>
+
+            <!-- Horizontal Snap Deck Preview Widget -->
+            <section class="wf-box">
+                <h2>[ Stage Carousel Preview (Swipe Left / Right) ]</h2>
+                <hr>
+
+                <!-- Deck Navigation Bar -->
+                <div class="deck-nav-bar">
+                    <div style="display: flex; gap: 8px;">
+                        <button type="button" class="deck-tab-btn active">[ ☀️ Solar Stage ]</button>
+                        <button type="button" class="deck-tab-btn">[ 🌙 Lunar Dome (Covered) ]</button>
+                    </div>
+                    <div class="deck-dots">
+                        <button type="button" class="deck-dot active" aria-label="Solar Stage"></button>
+                        <button type="button" class="deck-dot" aria-label="Lunar Dome"></button>
+                    </div>
+                </div>
+
+                <!-- Snap Container -->
+                <div class="snap-deck-container" id="snap-deck">
+                    <!-- Card 1: Solar Horizon Stage -->
+                    <div class="snap-card" id="card-solar">
+                        <h3>[ ☀️ Solar Horizon Stage (Open-Air) ]</h3>
+                        <p style="font-size: 0.85rem; color: #555;">Capacity: 4,500 &bull; Focus: Indie Rock, Post-Rock, Audiovisual Live Bands</p>
+                        <hr>
+                        <p>[ 30 Live Shows scheduled across July 10–12 ]</p>
+                        <div style="margin-top: 10px;">
+                            <a href="program.html" class="btn-box">[ Open Solar Timetable &rarr; ]</a>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Lunar Forest Dome (Covered) -->
+                    <div class="snap-card" id="card-lunar">
+                        <h3>[ 🌙 Lunar Forest Dome (Covered Rain Shelter) ]</h3>
+                        <p style="font-size: 0.85rem; color: #555;">Capacity: 1,800 &bull; Focus: Techno, Modular Ambient, Experimental Dome Projections</p>
+                        <hr>
+                        <p>[ 30 Live Shows scheduled across July 10–12 &bull; 100% All-Weather Protection ]</p>
+                        <div style="margin-top: 10px;">
+                            <a href="program.html?stage=lunar" class="btn-box btn-accent">[ Open Covered Dome Timetable &rarr; ]</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Directory -->
+            <section class="wf-box">
+                <h2>[ Festival Directory ]</h2>
+                <hr>
+                <div class="row">
+                    <div class="col wf-box-sub">
+                        <h3>[ 📅 Full Program ]</h3>
+                        <p>Complete 60-performance schedule with bookmarking.</p>
+                        <hr>
+                        <a href="program.html" class="btn-box">[ Open Program &rarr; ]</a>
+                    </div>
+                    <div class="col wf-box-sub">
+                        <h3>[ 🎤 60 Artists ]</h3>
+                        <p>Explore international lineup, soundscapes, and bios.</p>
+                        <hr>
+                        <a href="artists.html" class="btn-box">[ View Artists &rarr; ]</a>
+                    </div>
+                    <div class="col wf-box-sub">
+                        <h3>[ ⛺ 2 Stages ]</h3>
+                        <p>Solar Horizon Stage & Lunar Forest Dome specifications.</p>
+                        <hr>
+                        <a href="stages.html" class="btn-box">[ View Stages &rarr; ]</a>
+                    </div>
+                    <div class="col wf-box-sub">
+                        <h3>[ ★ My Schedule ]</h3>
+                        <p>Personal clash-free agenda with time collision engine.</p>
+                        <hr>
+                        <a href="my-schedule.html" class="btn-box">[ Open Planner &rarr; ]</a>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer id="footer-placeholder">
+            <hr>
+            <div class="wf-footer-inline">
+                <span class="festival-brand">[ Festival of Darkness 2 ]</span>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+                <span style="color: #666; font-size: 0.85rem; margin-left: auto;">[ Layout 08 Snap Deck ]</span>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

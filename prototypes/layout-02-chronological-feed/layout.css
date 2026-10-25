@@ -1,0 +1,543 @@
+/* ==========================================================================
+   Festival of Darkness 2 — Layout 02: Chronological Feed
+   Standalone Wireframe Stylesheet adhering to zadani.txt & AGENTS.md
+   ========================================================================== */
+
+/* Universal Reset & Box Sizing */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.5;
+    color: #111;
+    background: #fff;
+    padding: 0;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Base Container */
+.wf-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 12px 16px 48px 16px;
+    width: 100%;
+}
+
+/* Semantic Section Wireframe Boxes */
+.wf-box {
+    border: 1px solid #222;
+    background: #fff;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.wf-box-sub {
+    border: 1px solid #777;
+    background: #fafafa;
+    padding: 12px;
+    margin-bottom: 12px;
+}
+
+/* Horizontal Rule Divider */
+hr {
+    border: none;
+    border-top: 1px solid #333;
+    margin: 14px 0;
+}
+
+/* Typography */
+h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #111;
+    letter-spacing: -0.5px;
+}
+
+h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #111;
+}
+
+h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #222;
+}
+
+h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: #333;
+}
+
+p {
+    margin-bottom: 8px;
+    color: #222;
+    font-size: 0.95rem;
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+/* Unbordered Natural Wrapping Navigation (Course Exercise 3 & AGENTS.md) */
+.wf-nav-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+    padding: 8px 0;
+    border: none;
+    background: transparent;
+}
+
+.wf-nav-inline a {
+    color: #111;
+    font-size: 0.95rem;
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: underline;
+}
+
+.wf-nav-inline a:hover {
+    color: #000;
+    background: #eee;
+}
+
+/* Festival Brand Anchor: Strictly Un-underlined */
+.wf-nav-inline a.festival-brand,
+.festival-brand {
+    text-decoration: none !important;
+    font-weight: 800;
+    color: #111;
+    font-size: 1.05rem;
+}
+
+.wf-nav-inline a.active {
+    font-weight: 700;
+    background: #f0f0f0;
+    padding: 0 8px;
+}
+
+/* Interactive Touch Targets (Minimum 44x44px standard) */
+button,
+.btn-box,
+.btn-pill,
+.btn-star,
+input[type="text"],
+input[type="search"],
+select {
+    min-height: 44px;
+    min-width: 44px;
+    font-family: inherit;
+    font-size: 0.92rem;
+}
+
+.btn-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border: 1px solid #222;
+    background: #fff;
+    color: #111;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 600;
+    text-align: center;
+}
+
+.btn-box:hover {
+    background: #222;
+    color: #fff;
+}
+
+.btn-box-primary {
+    background: #222;
+    color: #fff;
+}
+
+.btn-box-primary:hover {
+    background: #444;
+}
+
+/* Covered Rain Shelter Alert Button (Scenario 1 Fast-Path) */
+.btn-covered-dome {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 12px 16px;
+    min-height: 44px;
+    border: 2px solid #0056b3;
+    background: #e8f4fd;
+    color: #003366;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-covered-dome:hover {
+    background: #d0e8fc;
+    color: #001f3f;
+}
+
+/* ==========================================================================
+   Chronological Feed Specifics: Sticky Filter Ribbon
+   ========================================================================== */
+.sticky-filter-ribbon {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 100;
+    border-bottom: 1px solid #222;
+    padding: 8px;
+    margin: 0 0 16px 0;
+}
+
+.filter-group-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.filter-group-row:last-child {
+    margin-bottom: 0;
+}
+
+.filter-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #444;
+    text-transform: uppercase;
+    min-width: 60px;
+}
+
+.btn-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    min-height: 44px;
+    min-width: 44px;
+    border: 1px solid #777;
+    background: #fff;
+    color: #222;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.88rem;
+    text-decoration: none;
+    white-space: normal;
+}
+
+.btn-pill:hover {
+    background: #eee;
+}
+
+.btn-pill.active {
+    background: #222;
+    color: #fff;
+    border-color: #222;
+}
+
+.btn-pill.pill-covered {
+    border-color: #0056b3;
+    color: #004085;
+    background: #f0f7fd;
+}
+
+.btn-pill.pill-covered.active {
+    background: #004085;
+    color: #fff;
+    border-color: #004085;
+}
+
+.btn-pill.pill-star.active {
+    background: #28a745;
+    color: #fff;
+    border-color: #28a745;
+}
+
+/* Feed Timeline Stream */
+.feed-stream {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.feed-day-divider {
+    border: 1px solid #222;
+    background: #222;
+    color: #fff;
+    padding: 8px 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-top: 12px;
+}
+
+.feed-item {
+    border: 1px solid #777;
+    background: #fafafa;
+    padding: 12px 14px;
+    position: relative;
+}
+
+.feed-item-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.feed-item-badges {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    border: 1px solid #777;
+    background: #fff;
+    color: #222;
+}
+
+.badge-time {
+    background: #222;
+    color: #fff;
+    border-color: #222;
+}
+
+.badge-solar {
+    background: #fff8e1;
+    border-color: #f57f17;
+    color: #795548;
+}
+
+.badge-lunar {
+    background: #e3f2fd;
+    border-color: #1976d2;
+    color: #0d47a1;
+}
+
+.badge-genre {
+    background: #f5f5f5;
+    border-color: #bbb;
+    color: #444;
+}
+
+.feed-item-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 4px 0 6px 0;
+}
+
+.feed-item-title a {
+    color: #111;
+    text-decoration: underline;
+}
+
+.feed-item-bio {
+    font-size: 0.9rem;
+    color: #444;
+    line-height: 1.4;
+    margin-bottom: 8px;
+}
+
+.feed-item-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    border-top: 1px solid #ddd;
+    padding-top: 8px;
+    margin-top: 6px;
+}
+
+/* Star Bookmark Button */
+.btn-star {
+    border: 1px solid #777;
+    background: #fff;
+    color: #333;
+    cursor: pointer;
+    padding: 6px 12px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.btn-star:hover {
+    background: #f0f0f0;
+}
+
+.btn-star.active {
+    background: #28a745;
+    color: #fff;
+    border-color: #28a745;
+}
+
+/* ==========================================================================
+   Favorite Highlight and Conflict Engine Wireframe Rules
+   ========================================================================== */
+.is-favourite {
+    background: #d4edda !important;
+    border: 2px solid #28a745 !important;
+}
+
+.is-conflict {
+    background: #ffebee !important;
+    border: 2px solid #b71c1c !important;
+}
+
+.conflict-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: #b71c1c;
+    background: #ffebee;
+    border: 1px solid #b71c1c;
+    margin-top: 6px;
+}
+
+.no-conflict-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: #155724;
+    background: #d4edda;
+    border: 1px solid #28a745;
+    margin-top: 6px;
+}
+
+/* Search and Input Fields */
+.search-control-box {
+    margin-bottom: 12px;
+}
+
+.input-text {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #222;
+    background: #fff;
+    color: #111;
+    font-size: 0.95rem;
+}
+
+/* Artist Grid Catalog */
+.artist-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+@media (min-width: 600px) {
+    .artist-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 900px) {
+    .artist-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.artist-card {
+    border: 1px solid #777;
+    background: #fafafa;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.artist-card-header {
+    margin-bottom: 8px;
+}
+
+.artist-card-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.artist-card-details {
+    font-size: 0.88rem;
+    color: #444;
+    margin-bottom: 8px;
+}
+
+.artist-card-bio {
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+/* Quick Jump / Deep Link Target Highlighting */
+.artist-card:target {
+    border: 2px solid #222;
+    background: #f0f7ff;
+}
+
+/* Flexible Columns for General Content */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.col {
+    flex: 1 1 280px;
+}
+
+/* ASCII / Wireframe Map Box */
+.venue-map-pre {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.82rem;
+    line-height: 1.25;
+    background: #fff;
+    border: 1px solid #777;
+    padding: 12px;
+    overflow-x: auto;
+    color: #222;
+}
+
+/* Footer Section */
+footer {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #555;
+}

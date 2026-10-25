@@ -1,0 +1,317 @@
+{
+  "timestamp": "2026-10-25T23:10:17.705Z",
+  "mode": "harness",
+  "summary": {
+    "total": 45,
+    "passed": 45,
+    "failed": 0,
+    "pending": 0
+  },
+  "tiers": {
+    "1": {
+      "passed": 10,
+      "failed": 0,
+      "pending": 0,
+      "cases": [
+        {
+          "id": "TC-T1-01",
+          "name": "Shared festival-data.js exists and is loadable",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T1-02",
+          "name": "Metadata properties match canonical festival specifications",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T1-03",
+          "name": "Exactly 60 unique performers (perf-01 through perf-60) are defined",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T1-04",
+          "name": "Exactly 60 unique schedule items (sch-01 through sch-60) are defined",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T1-05",
+          "name": "1-to-1 mapping exists between schedule items and performers",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T1-06",
+          "name": "All 60 performer bios are present and non-empty",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T1-07",
+          "name": "Stage distribution is balanced (30 Solar Horizon, 30 Lunar Forest Dome)",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T1-08",
+          "name": "Post-midnight hour minute calculation adds 1440 mins to hours < 8",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T1-09",
+          "name": "Interval overlap detection accurately identifies time collisions",
+          "status": "PASS",
+          "details": "en-dash and hyphen resilient"
+        },
+        {
+          "id": "TC-T1-10",
+          "name": "Covered dome schedule helper filters correctly for Scenario 1",
+          "status": "PASS",
+          "details": ""
+        }
+      ]
+    },
+    "2": {
+      "passed": 10,
+      "failed": 0,
+      "pending": 0,
+      "cases": [
+        {
+          "id": "TC-T2-01",
+          "name": "Showcase Hub HTML exists and contains standard semantic headers",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T2-02",
+          "name": "Device viewport switcher supports iPhone SE, Pixel 7, iPad Mini, and Full Desktop",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T2-03",
+          "name": "Centered simulated device frame with simulator iframe is present",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T2-04",
+          "name": "Device chrome includes status bar (time, battery, signal) and address bar",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T2-05",
+          "name": "Layout selector toolbar includes direct links to all 10 prototype layouts",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T2-06",
+          "name": "Subpage quick selector launches all 6 subpages for active layout",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T2-07",
+          "name": "Interactive 5-point evaluation rubric matrix contains 10 layout rows and score inputs",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T2-08",
+          "name": "Rubric weighted scoring formula matches specified weights (25, 25, 20, 15, 15)",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T2-09",
+          "name": "Automatic winner calculation and winner highlight banner are implemented",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T2-10",
+          "name": "Scenario 1 and Scenario 2 interactive validation testbeds are present",
+          "status": "PASS",
+          "details": ""
+        }
+      ]
+    },
+    "3": {
+      "passed": 10,
+      "failed": 0,
+      "pending": 0,
+      "cases": [
+        {
+          "id": "TC-T3-01",
+          "name": "L01: App-Shell Bottom Nav (8 files)",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T3-02",
+          "name": "L02: Chronological Feed (8 files)",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T3-03",
+          "name": "L03: Modular Bento-Grid (8 files)",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T3-04",
+          "name": "L04: Split Stage Switcher (8 files)",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T3-05",
+          "name": "L05: Dense Data Terminal (8 files)",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T3-06",
+          "name": "L06: Accordion Drawer Hub (8 files)",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T3-07",
+          "name": "L07: Floating Action Dock (8 files)",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T3-08",
+          "name": "L08: Horizontal Snap Deck (8 files)",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T3-09",
+          "name": "L09: Swiss Typographic Index (8 files)",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T3-10",
+          "name": "L10: Mission Control Dashboard (8 files)",
+          "status": "PASS",
+          "details": ""
+        }
+      ]
+    },
+    "4": {
+      "passed": 9,
+      "failed": 0,
+      "pending": 0,
+      "cases": [
+        {
+          "id": "TC-T4-01",
+          "name": "HTML5 semantic landmark elements used across all pages",
+          "status": "PASS",
+          "details": "Verified across all 10 prototype layouts"
+        },
+        {
+          "id": "TC-T4-02",
+          "name": "Heading hierarchy h1 through h4 properly structured",
+          "status": "PASS",
+          "details": "Verified across all 10 prototype layouts"
+        },
+        {
+          "id": "TC-T4-03",
+          "name": "Inline unbordered navigation wrapping naturally without horizontal scrollbar",
+          "status": "PASS",
+          "details": "Verified across all 10 prototype layouts"
+        },
+        {
+          "id": "TC-T4-04",
+          "name": "Brand link strictly un-underlined (text-decoration: none)",
+          "status": "PASS",
+          "details": "Verified across all 10 prototype layouts"
+        },
+        {
+          "id": "TC-T4-05",
+          "name": "Wireframe box layout rules applied (#222, #777, hr #333, no shadows/radiuses/gradients)",
+          "status": "PASS",
+          "details": "Verified across all 10 prototype layouts"
+        },
+        {
+          "id": "TC-T4-06",
+          "name": "Mobile interactive elements meet minimum 44x44px touch target standard",
+          "status": "PASS",
+          "details": "Verified across all 10 prototype layouts"
+        },
+        {
+          "id": "TC-T4-07",
+          "name": "Zero horizontal overflow across 375px, 412px, 768px, 1200px viewports",
+          "status": "PASS",
+          "details": "Verified across all 10 prototype layouts"
+        },
+        {
+          "id": "TC-T4-08",
+          "name": "All 60 performers cataloged in artists.html",
+          "status": "PASS",
+          "details": "Verified across all 10 prototype layouts"
+        },
+        {
+          "id": "TC-T4-09",
+          "name": "All 60 timetable slots cataloged in program.html",
+          "status": "PASS",
+          "details": "Verified across all 10 prototype layouts"
+        }
+      ]
+    },
+    "5": {
+      "passed": 6,
+      "failed": 0,
+      "pending": 0,
+      "cases": [
+        {
+          "id": "TC-T5-01",
+          "name": "Scenario 1: Covered dome timetable accessible in <= 3 taps from homepage (max: 2 taps) (10/10 layout DOMs verified)",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T5-02",
+          "name": "Scenario 2: Shared localStorage key 'festival_favorites' used consistently",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T5-03",
+          "name": "Scenario 2: Favorite items follow normalized schema {id, artist, stage, day, time, genre}",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T5-04",
+          "name": "Scenario 2: Active favorites trigger visual highlight .is-favourite (#d4edda and #28a745)",
+          "status": "PASS",
+          "details": "Verified in 10 layout stylesheets"
+        },
+        {
+          "id": "TC-T5-05",
+          "name": "Scenario 2: Pairwise collision detection flags overlapping shows with #b71c1c and warning badge",
+          "status": "PASS",
+          "details": ""
+        },
+        {
+          "id": "TC-T5-06",
+          "name": "Scenario 2: Non-overlapping shows display clear green status badge",
+          "status": "PASS",
+          "details": ""
+        }
+      ]
+    }
+  }
+}

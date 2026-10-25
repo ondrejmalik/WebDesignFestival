@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Program Timetable – Festival of Darkness 2 (Kutna Hora, July 10–12, 2026)">
+    <title>Festival of Darkness 2 | Bento Timetable</title>
+    <link rel="stylesheet" href="layout.css">
+    <script src="../common/festival-data.js"></script>
+    <script src="layout.js" defer></script>
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- HEADER & NAVIGATION -->
+        <header id="nav-placeholder">
+            <nav class="wf-nav-inline">
+                <a href="index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html" class="active">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+            </nav>
+            <hr>
+        </header>
+
+        <main>
+
+            <!-- 1. Header Box & Scenario 1 Fast Path -->
+            <section class="wf-box">
+                <div class="bento-card-header">
+                    <div>
+                        <h1>[ FESTIVAL PROGRAM & TIMETABLE ]</h1>
+                        <p><strong>[ 60 Performances across 3 Days & 2 Distinct Stages ]</strong></p>
+                    </div>
+                    <span class="bento-badge">MODULAR TIMETABLE</span>
+                </div>
+                <hr>
+                <p>[ Hourly schedule runs from 13:00 to 04:00 daily. Tap any performance or the star icon (★) to bookmark it into your personal schedule. Overlapping shows across stages are automatically flagged in My Schedule. ]</p>
+                <button id="rain-shelter-quick-filter" class="btn-box bento-badge-alert" style="width: 100%; margin-top: 8px; font-weight: bold; min-height: 44px;">
+                    [ 🌧️ Rain Shield: Show Covered Lunar Forest Dome Timetable Only (Scenario 1 Fast-Path) ]
+                </button>
+            </section>
+
+            <hr>
+
+            <!-- 2. Bento Control Bar & Filters -->
+            <section class="wf-box">
+                <h2>[ Timetable Filters & Search ]</h2>
+                <hr>
+
+                <!-- Day Filter Buttons -->
+                <p><strong>Filter by Day:</strong></p>
+                <div class="filter-btn-group">
+                    <button class="btn-box active" data-filter-day="all">[ All Days ]</button>
+                    <button class="btn-box" data-filter-day="day1">[ Friday, Jul 10 (Day 1) ]</button>
+                    <button class="btn-box" data-filter-day="day2">[ Saturday, Jul 11 (Day 2) ]</button>
+                    <button class="btn-box" data-filter-day="day3">[ Sunday, Jul 12 (Day 3) ]</button>
+                </div>
+
+                <!-- Stage Filter Buttons -->
+                <p style="margin-top: 8px;"><strong>Filter by Stage:</strong></p>
+                <div class="filter-btn-group">
+                    <button class="btn-box active" data-filter-stage="all">[ Both Stages ]</button>
+                    <button class="btn-box" data-filter-stage="solar">[ ☀️ Solar Horizon Stage (Open-air) ]</button>
+                    <button class="btn-box" data-filter-stage="lunar">[ 🌙 Lunar Forest Dome (Covered Rain Shelter) ]</button>
+                    <button id="filter-fav-only" class="btn-box">[ ★ Only Bookmarked (<span id="fav-count">0</span>) ]</button>
+                </div>
+
+                <!-- Search Input -->
+                <div style="margin-top: 10px;">
+                    <input type="search" id="program-search-input" class="input-box" placeholder="Filter timetable by artist, genre, or country (e.g. ambient, techno, synthwave)..." aria-label="Filter timetable">
+                </div>
+
+                <!-- Quick Genre Pills -->
+                <p style="margin-top: 10px;"><strong>Quick Genre Filter:</strong></p>
+                <div class="filter-btn-group">
+                    <button class="genre-pill active" data-filter-genre="all">[ All Genres ]</button>
+                    <button class="genre-pill" data-filter-genre="Ambient">[ Ambient ]</button>
+                    <button class="genre-pill" data-filter-genre="Techno">[ Techno ]</button>
+                    <button class="genre-pill" data-filter-genre="Post-Rock">[ Post-Rock ]</button>
+                    <button class="genre-pill" data-filter-genre="IDM">[ IDM / Glitch ]</button>
+                    <button class="genre-pill" data-filter-genre="Dream Pop">[ Dream Pop ]</button>
+                    <button class="genre-pill" data-filter-genre="Drone">[ Drone / Noise ]</button>
+                    <button class="genre-pill" data-filter-genre="Synthwave">[ Synthwave ]</button>
+                </div>
+
+                <p id="filter-status-text" style="margin-top: 8px; font-size: 0.85rem; color: #555;">[ Showing 60 performances | Day: ALL | Stage: ALL ]</p>
+            </section>
+
+            <hr>
+
+            <!-- 3. Bento Schedule Grid (All 60 Slots) -->
+            <section class="wf-box">
+                <h2>[ Performance Schedule ]</h2>
+                <hr>
+                <div id="bento-schedule-container" class="bento-grid">
+
+                <article class="sch-event bento-slot-card" data-id="perf-01" data-sch-id="sch-01" data-artist="Echoes of Light" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 1 (Friday, July 10)" data-time="14:00 – 14:45" data-genre="Post-Rock / Ambient">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">14:00 – 14:45</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-01" style="color: #111; text-decoration: underline;"><strong>[ Echoes of Light ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Post-Rock / Ambient | Origin: CZ | Day 1</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-02" data-sch-id="sch-02" data-artist="Velvet Morning" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 1 (Friday, July 10)" data-time="15:00 – 15:45" data-genre="Dream Pop">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">15:00 – 15:45</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-02" style="color: #111; text-decoration: underline;"><strong>[ Velvet Morning ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Dream Pop | Origin: SK | Day 1</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-03" data-sch-id="sch-03" data-artist="Nordic Wave" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 1 (Friday, July 10)" data-time="16:00 – 16:50" data-genre="Indie Rock">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">16:00 – 16:50</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-03" style="color: #111; text-decoration: underline;"><strong>[ Nordic Wave ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Indie Rock | Origin: SE | Day 1</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-04" data-sch-id="sch-04" data-artist="The Daylight Project" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 1 (Friday, July 10)" data-time="17:05 – 17:55" data-genre="Indie Pop">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">17:05 – 17:55</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-04" style="color: #111; text-decoration: underline;"><strong>[ The Daylight Project ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Indie Pop | Origin: CZ | Day 1</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-05" data-sch-id="sch-05" data-artist="Prague Synth Collective" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 1 (Friday, July 10)" data-time="18:15 – 19:05" data-genre="Synthpop">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">18:15 – 19:05</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-05" style="color: #111; text-decoration: underline;"><strong>[ Prague Synth Collective ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Synthpop | Origin: CZ | Day 1</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-06" data-sch-id="sch-06" data-artist="Electric Meadow" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 1 (Friday, July 10)" data-time="19:25 – 20:20" data-genre="Electro-Folk">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">19:25 – 20:20</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-06" style="color: #111; text-decoration: underline;"><strong>[ Electric Meadow ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Electro-Folk | Origin: AT | Day 1</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-07" data-sch-id="sch-07" data-artist="Mirage Horizon" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 1 (Friday, July 10)" data-time="20:40 – 21:40" data-genre="Alternative Rock">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">20:40 – 21:40</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-07" style="color: #111; text-decoration: underline;"><strong>[ Mirage Horizon ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Alternative Rock | Origin: UK | Day 1</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-08" data-sch-id="sch-08" data-artist="Solar Flare" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 1 (Friday, July 10)" data-time="22:00 – 23:10" data-genre="Nu-Disco / Funk">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">22:00 – 23:10</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-08" style="color: #111; text-decoration: underline;"><strong>[ Solar Flare ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Nu-Disco / Funk | Origin: DE | Day 1</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-09" data-sch-id="sch-09" data-artist="Starlight Odyssey" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 1 (Friday, July 10)" data-time="23:30 – 00:45" data-genre="Electronic Indie">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">23:30 – 00:45</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-09" style="color: #111; text-decoration: underline;"><strong>[ Starlight Odyssey ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Electronic Indie | Origin: FR | Day 1</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-10" data-sch-id="sch-10" data-artist="Midnight Pulse" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 1 (Friday, July 10)" data-time="01:00 – 02:00" data-genre="Electro Rock">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">01:00 – 02:00</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-10" style="color: #111; text-decoration: underline;"><strong>[ Midnight Pulse ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Electro Rock | Origin: CZ | Day 1</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-11" data-sch-id="sch-11" data-artist="Subtle Resonances" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 1 (Friday, July 10)" data-time="15:00 – 15:50" data-genre="Modular Ambient">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">15:00 – 15:50</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-11" style="color: #111; text-decoration: underline;"><strong>[ Subtle Resonances ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Modular Ambient | Origin: CZ | Day 1</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-12" data-sch-id="sch-12" data-artist="Binary Fields" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 1 (Friday, July 10)" data-time="16:05 – 17:00" data-genre="IDM / Glitch">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">16:05 – 17:00</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-12" style="color: #111; text-decoration: underline;"><strong>[ Binary Fields ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: IDM / Glitch | Origin: PL | Day 1</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-13" data-sch-id="sch-13" data-artist="Deep Texture" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 1 (Friday, July 10)" data-time="17:15 – 18:15" data-genre="Dub Techno">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">17:15 – 18:15</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-13" style="color: #111; text-decoration: underline;"><strong>[ Deep Texture ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Dub Techno | Origin: DE | Day 1</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-14" data-sch-id="sch-14" data-artist="Oscillator Shift" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 1 (Friday, July 10)" data-time="18:30 – 19:30" data-genre="Minimal Techno">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">18:30 – 19:30</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-14" style="color: #111; text-decoration: underline;"><strong>[ Oscillator Shift ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Minimal Techno | Origin: CZ | Day 1</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-15" data-sch-id="sch-15" data-artist="Echo Chamber" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 1 (Friday, July 10)" data-time="19:45 – 20:45" data-genre="Dark Ambient">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">19:45 – 20:45</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-15" style="color: #111; text-decoration: underline;"><strong>[ Echo Chamber ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Dark Ambient | Origin: SK | Day 1</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-16" data-sch-id="sch-16" data-artist="Krypton DJ" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 1 (Friday, July 10)" data-time="21:00 – 22:15" data-genre="Hypnotic Techno">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">21:00 – 22:15</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-16" style="color: #111; text-decoration: underline;"><strong>[ Krypton DJ ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Hypnotic Techno | Origin: HU | Day 1</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-17" data-sch-id="sch-17" data-artist="Modular Horizon" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 1 (Friday, July 10)" data-time="22:30 – 23:50" data-genre="Live Hardware Techno">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">22:30 – 23:50</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-17" style="color: #111; text-decoration: underline;"><strong>[ Modular Horizon ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Live Hardware Techno | Origin: DE | Day 1</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-18" data-sch-id="sch-18" data-artist="Analog Void" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 1 (Friday, July 10)" data-time="00:05 – 01:25" data-genre="Industrial Techno">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">00:05 – 01:25</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-18" style="color: #111; text-decoration: underline;"><strong>[ Analog Void ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Industrial Techno | Origin: NL | Day 1</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-19" data-sch-id="sch-19" data-artist="Frequency 404" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 1 (Friday, July 10)" data-time="01:40 – 03:00" data-genre="Raw Acid Techno">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">01:40 – 03:00</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-19" style="color: #111; text-decoration: underline;"><strong>[ Frequency 404 ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Raw Acid Techno | Origin: UK | Day 1</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-20" data-sch-id="sch-20" data-artist="Dawn Ritual" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 1 (Friday, July 10)" data-time="03:10 – 04:00" data-genre="Atmospheric Ambient">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">03:10 – 04:00</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-20" style="color: #111; text-decoration: underline;"><strong>[ Dawn Ritual ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Atmospheric Ambient | Origin: CZ | Day 1</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-21" data-sch-id="sch-21" data-artist="Sunburst Trio" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 2 (Saturday, July 11)" data-time="13:30 – 14:15" data-genre="Acoustic Indie">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">13:30 – 14:15</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-21" style="color: #111; text-decoration: underline;"><strong>[ Sunburst Trio ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Acoustic Indie | Origin: CZ | Day 2</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-22" data-sch-id="sch-22" data-artist="Coastline Drift" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 2 (Saturday, July 11)" data-time="14:30 – 15:15" data-genre="Surf Rock">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">14:30 – 15:15</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-22" style="color: #111; text-decoration: underline;"><strong>[ Coastline Drift ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Surf Rock | Origin: ES | Day 2</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-23" data-sch-id="sch-23" data-artist="The Urban Poets" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 2 (Saturday, July 11)" data-time="15:30 – 16:20" data-genre="Indie Soul">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">15:30 – 16:20</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-23" style="color: #111; text-decoration: underline;"><strong>[ The Urban Poets ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Indie Soul | Origin: UK | Day 2</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-24" data-sch-id="sch-24" data-artist="Neon Youth" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 2 (Saturday, July 11)" data-time="16:35 – 17:25" data-genre="Indie Pop">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">16:35 – 17:25</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-24" style="color: #111; text-decoration: underline;"><strong>[ Neon Youth ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Indie Pop | Origin: SK | Day 2</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-25" data-sch-id="sch-25" data-artist="Silver Tides" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 2 (Saturday, July 11)" data-time="17:45 – 18:40" data-genre="Shoegaze">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">17:45 – 18:40</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-25" style="color: #111; text-decoration: underline;"><strong>[ Silver Tides ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Shoegaze | Origin: CZ | Day 2</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-26" data-sch-id="sch-26" data-artist="Horizon Glow" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 2 (Saturday, July 11)" data-time="19:00 – 20:00" data-genre="Electronic Pop">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">19:00 – 20:00</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-26" style="color: #111; text-decoration: underline;"><strong>[ Horizon Glow ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Electronic Pop | Origin: SE | Day 2</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-27" data-sch-id="sch-27" data-artist="Wild Horizon" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 2 (Saturday, July 11)" data-time="20:20 – 21:20" data-genre="Post-Punk Revival">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">20:20 – 21:20</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-27" style="color: #111; text-decoration: underline;"><strong>[ Wild Horizon ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Post-Punk Revival | Origin: DE | Day 2</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-28" data-sch-id="sch-28" data-artist="Magnetic River" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 2 (Saturday, July 11)" data-time="21:40 – 22:50" data-genre="Indie Dance">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">21:40 – 22:50</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-28" style="color: #111; text-decoration: underline;"><strong>[ Magnetic River ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Indie Dance | Origin: FR | Day 2</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-29" data-sch-id="sch-29" data-artist="Vortex Motion" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 2 (Saturday, July 11)" data-time="23:10 – 00:25" data-genre="Nu-Electro">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">23:10 – 00:25</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-29" style="color: #111; text-decoration: underline;"><strong>[ Vortex Motion ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Nu-Electro | Origin: UK | Day 2</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-30" data-sch-id="sch-30" data-artist="Aura Soundsystem" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 2 (Saturday, July 11)" data-time="00:45 – 02:00" data-genre="Progressive Dance">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">00:45 – 02:00</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-30" style="color: #111; text-decoration: underline;"><strong>[ Aura Soundsystem ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Progressive Dance | Origin: CZ | Day 2</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-31" data-sch-id="sch-31" data-artist="Dronescape" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 2 (Saturday, July 11)" data-time="14:30 – 15:20" data-genre="Drone Music">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">14:30 – 15:20</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-31" style="color: #111; text-decoration: underline;"><strong>[ Dronescape ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Drone Music | Origin: CZ | Day 2</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-32" data-sch-id="sch-32" data-artist="Glitch Garden" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 2 (Saturday, July 11)" data-time="15:35 – 16:30" data-genre="Microhouse">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">15:35 – 16:30</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-32" style="color: #111; text-decoration: underline;"><strong>[ Glitch Garden ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Microhouse | Origin: AT | Day 2</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-33" data-sch-id="sch-33" data-artist="Forest Whispers" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 2 (Saturday, July 11)" data-time="16:45 – 17:45" data-genre="Organic House">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">16:45 – 17:45</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-33" style="color: #111; text-decoration: underline;"><strong>[ Forest Whispers ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Organic House | Origin: SK | Day 2</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-34" data-sch-id="sch-34" data-artist="Low Frequency Unit" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 2 (Saturday, July 11)" data-time="18:00 – 19:00" data-genre="Deep Dubstep">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">18:00 – 19:00</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-34" style="color: #111; text-decoration: underline;"><strong>[ Low Frequency Unit ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Deep Dubstep | Origin: UK | Day 2</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-35" data-sch-id="sch-35" data-artist="Monolith Audio" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 2 (Saturday, July 11)" data-time="19:15 – 20:15" data-genre="Peak Time Techno">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">19:15 – 20:15</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-35" style="color: #111; text-decoration: underline;"><strong>[ Monolith Audio ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Peak Time Techno | Origin: DE | Day 2</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-36" data-sch-id="sch-36" data-artist="Sine Wave Syndicate" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 2 (Saturday, July 11)" data-time="20:30 – 21:45" data-genre="Electro Techno">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">20:30 – 21:45</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-36" style="color: #111; text-decoration: underline;"><strong>[ Sine Wave Syndicate ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Electro Techno | Origin: FR | Day 2</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-37" data-sch-id="sch-37" data-artist="Shadowplay DJ" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 2 (Saturday, July 11)" data-time="22:00 – 23:20" data-genre="Dark Wave Techno">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">22:00 – 23:20</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-37" style="color: #111; text-decoration: underline;"><strong>[ Shadowplay DJ ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Dark Wave Techno | Origin: CZ | Day 2</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-38" data-sch-id="sch-38" data-artist="Circuit Overload" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 2 (Saturday, July 11)" data-time="23:35 – 00:55" data-genre="Hard Techno">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">23:35 – 00:55</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-38" style="color: #111; text-decoration: underline;"><strong>[ Circuit Overload ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Hard Techno | Origin: PL | Day 2</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-39" data-sch-id="sch-39" data-artist="Neural Network Live" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 2 (Saturday, July 11)" data-time="01:10 – 02:30" data-genre="Acid Techno">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">01:10 – 02:30</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-39" style="color: #111; text-decoration: underline;"><strong>[ Neural Network Live ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Acid Techno | Origin: BE | Day 2</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-40" data-sch-id="sch-40" data-artist="Solar Wind" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 2 (Saturday, July 11)" data-time="02:40 – 04:00" data-genre="Chillout Ambient">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">02:40 – 04:00</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-40" style="color: #111; text-decoration: underline;"><strong>[ Solar Wind ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Chillout Ambient | Origin: CZ | Day 2</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-41" data-sch-id="sch-41" data-artist="Morning Breeze" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 3 (Sunday, July 12)" data-time="13:00 – 13:45" data-genre="Folk Indie">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">13:00 – 13:45</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-41" style="color: #111; text-decoration: underline;"><strong>[ Morning Breeze ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Folk Indie | Origin: CZ | Day 3</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-42" data-sch-id="sch-42" data-artist="Silent Pines" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 3 (Sunday, July 12)" data-time="14:00 – 14:45" data-genre="Chamber Pop">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">14:00 – 14:45</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-42" style="color: #111; text-decoration: underline;"><strong>[ Silent Pines ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Chamber Pop | Origin: SK | Day 3</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-43" data-sch-id="sch-43" data-artist="Sunken Ship" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 3 (Sunday, July 12)" data-time="15:00 – 15:50" data-genre="Psych Rock">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">15:00 – 15:50</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-43" style="color: #111; text-decoration: underline;"><strong>[ Sunken Ship ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Psych Rock | Origin: UK | Day 3</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-44" data-sch-id="sch-44" data-artist="Amber Boulevard" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 3 (Sunday, July 12)" data-time="16:05 – 16:55" data-genre="Dream Indie">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">16:05 – 16:55</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-44" style="color: #111; text-decoration: underline;"><strong>[ Amber Boulevard ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Dream Indie | Origin: DE | Day 3</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-45" data-sch-id="sch-45" data-artist="Urban Echo" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 3 (Sunday, July 12)" data-time="17:15 – 18:10" data-genre="Art Pop">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">17:15 – 18:10</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-45" style="color: #111; text-decoration: underline;"><strong>[ Urban Echo ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Art Pop | Origin: CZ | Day 3</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-46" data-sch-id="sch-46" data-artist="Luminous Band" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 3 (Sunday, July 12)" data-time="18:30 – 19:30" data-genre="Indie Funk">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">18:30 – 19:30</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-46" style="color: #111; text-decoration: underline;"><strong>[ Luminous Band ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Indie Funk | Origin: IT | Day 3</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-47" data-sch-id="sch-47" data-artist="The Velvet Trails" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 3 (Sunday, July 12)" data-time="19:50 – 20:50" data-genre="Space Rock">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">19:50 – 20:50</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-47" style="color: #111; text-decoration: underline;"><strong>[ The Velvet Trails ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Space Rock | Origin: SE | Day 3</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-48" data-sch-id="sch-48" data-artist="Prismatics" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 3 (Sunday, July 12)" data-time="21:10 – 22:15" data-genre="Dance Punk">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">21:10 – 22:15</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-48" style="color: #111; text-decoration: underline;"><strong>[ Prismatics ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Dance Punk | Origin: UK | Day 3</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-49" data-sch-id="sch-49" data-artist="Starlight Runners" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 3 (Sunday, July 12)" data-time="22:35 – 23:55" data-genre="Electropop Headliner">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">22:35 – 23:55</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-49" style="color: #111; text-decoration: underline;"><strong>[ Starlight Runners ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Electropop Headliner | Origin: DK | Day 3</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-50" data-sch-id="sch-50" data-artist="Final Cascade" data-stage="Solar Horizon Stage" data-stage-id="solar" data-day="Day 3 (Sunday, July 12)" data-time="00:10 – 01:15" data-genre="Orchestral Electronic">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">00:10 – 01:15</span>
+                            <span class="bento-badge ">☀️ SOLAR HORIZON</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-50" style="color: #111; text-decoration: underline;"><strong>[ Final Cascade ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Orchestral Electronic | Origin: CZ | Day 3</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-51" data-sch-id="sch-51" data-artist="Static Drift" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 3 (Sunday, July 12)" data-time="14:00 – 14:50" data-genre="Field Recording / Ambient">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">14:00 – 14:50</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-51" style="color: #111; text-decoration: underline;"><strong>[ Static Drift ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Field Recording / Ambient | Origin: CZ | Day 3</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-52" data-sch-id="sch-52" data-artist="Resonance Space" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 3 (Sunday, July 12)" data-time="15:05 – 16:00" data-genre="Deep Ambient">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">15:05 – 16:00</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-52" style="color: #111; text-decoration: underline;"><strong>[ Resonance Space ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Deep Ambient | Origin: AT | Day 3</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-53" data-sch-id="sch-53" data-artist="Tape Loop Experiment" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 3 (Sunday, July 12)" data-time="16:15 – 17:15" data-genre="Tape Ambient">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">16:15 – 17:15</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-53" style="color: #111; text-decoration: underline;"><strong>[ Tape Loop Experiment ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Tape Ambient | Origin: PL | Day 3</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-54" data-sch-id="sch-54" data-artist="Minimal Horizon" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 3 (Sunday, July 12)" data-time="17:30 – 18:30" data-genre="Micro Techno">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">17:30 – 18:30</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-54" style="color: #111; text-decoration: underline;"><strong>[ Minimal Horizon ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Micro Techno | Origin: DE | Day 3</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-55" data-sch-id="sch-55" data-artist="Dark Matter" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 3 (Sunday, July 12)" data-time="18:45 – 19:45" data-genre="Deep Progressive">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">18:45 – 19:45</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-55" style="color: #111; text-decoration: underline;"><strong>[ Dark Matter ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Deep Progressive | Origin: CZ | Day 3</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-56" data-sch-id="sch-56" data-artist="Hyperspace DJ" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 3 (Sunday, July 12)" data-time="20:00 – 21:15" data-genre="Psy Techno">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">20:00 – 21:15</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-56" style="color: #111; text-decoration: underline;"><strong>[ Hyperspace DJ ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Psy Techno | Origin: IL | Day 3</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-57" data-sch-id="sch-57" data-artist="Galactic Orbit" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 3 (Sunday, July 12)" data-time="21:30 – 22:45" data-genre="Melodic Techno">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">21:30 – 22:45</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-57" style="color: #111; text-decoration: underline;"><strong>[ Galactic Orbit ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Melodic Techno | Origin: IT | Day 3</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-58" data-sch-id="sch-58" data-artist="Bass Distortion" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 3 (Sunday, July 12)" data-time="23:00 – 00:15" data-genre="Leftfield Bass">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">23:00 – 00:15</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-58" style="color: #111; text-decoration: underline;"><strong>[ Bass Distortion ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Leftfield Bass | Origin: UK | Day 3</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-59" data-sch-id="sch-59" data-artist="Cosmic Pulse" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 3 (Sunday, July 12)" data-time="00:30 – 01:45" data-genre="Uplifting Trance Techno">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">00:30 – 01:45</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-59" style="color: #111; text-decoration: underline;"><strong>[ Cosmic Pulse ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Uplifting Trance Techno | Origin: NL | Day 3</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                <article class="sch-event bento-slot-card" data-id="perf-60" data-sch-id="sch-60" data-artist="Equinox Farewell" data-stage="Lunar Forest Dome" data-stage-id="lunar" data-day="Day 3 (Sunday, July 12)" data-time="02:00 – 03:00" data-genre="Down-tempo Ambient">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                        <div>
+                            <span class="bento-badge" style="margin-bottom: 4px;">02:00 – 03:00</span>
+                            <span class="bento-badge bento-badge-alert">🌙 LUNAR DOME (COVERED)</span>
+                            <h4 style="margin-top: 6px;"><a href="artists.html#perf-60" style="color: #111; text-decoration: underline;"><strong>[ Equinox Farewell ]</strong></a></h4>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0;">Genre: Down-tempo Ambient | Origin: CZ | Day 3</p>
+                        </div>
+                        <button class="btn-box sch-fav-btn" title="Add to My Schedule" style="min-height: 44px; min-width: 44px; font-size: 1.2rem;">☆</button>
+                    </div>
+                </article>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- FOOTER -->
+        <div id="footer-placeholder">
+            <hr>
+            <footer class="wf-footer-inline">
+                <strong class="festival-brand">[ © 2026 Festival of Darkness 2 ]</strong>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+            </footer>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Festival Program & Timetable – Layout 06: Accordion Drawer Hub. 60 performance slots organized into collapsible day and time-window drawers with instant covered dome rain shelter filtering.">
+    <title>Festival of Darkness 2 | Program (Accordion Drawer Hub)</title>
+    <link rel="stylesheet" href="layout.css">
+    <script src="../common/festival-data.js" defer></script>
+    <script src="layout.js" defer></script>
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- Top Header & Primary Wrapping Inline Navigation -->
+        <header id="nav-placeholder">
+            <nav class="wf-nav-inline" aria-label="Main Navigation">
+                <a href="index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule (<span class="fav-count-badge">0</span>) ]</a>
+            </nav>
+            <hr>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+
+            <!-- Page Title Section -->
+            <section class="wf-box" aria-labelledby="program-title">
+                <h1 id="program-title">[ Festival Timetable & Schedule Drawers ]</h1>
+                <p><strong>[ July 10–12, 2026 | Kutna Hora | 60 Performances Across 2 Distinct Stages ]</strong></p>
+                <hr>
+                <p>[ <strong>Accordion Progressive Disclosure Metaphor:</strong> Performances are segmented into Day drawers and Time-Window blocks (Afternoon, Evening, Night). Expand only the block you need to eliminate endless scrolling. Click the ★ star on any show to save it to your personal schedule. ]</p>
+            </section>
+
+            <!-- Scenario 1: Covered Dome Rain Shelter Fast Filter Ribbon -->
+            <section class="rain-shelter-banner shelter-alert-active" aria-label="Rain Shelter Live Switch">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                    <div>
+                        <strong>[ 🌧️ Active Weather Response: Lunar Forest Dome Rain Shelter ]</strong>
+                        <p style="font-size: 0.88rem; margin: 4px 0 0 0;">
+                            Filter to show only the 30 indoor performances inside the weatherproof geodesic dome.
+                        </p>
+                    </div>
+                    <div>
+                        <button class="btn-box btn-accent" data-filter-stage="lunar" id="s1-dome-toggle-btn">
+                            [ 🌙 Filter Lunar Forest Dome (Covered) ]
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Global Accordion Toolbar & Status -->
+            <div class="accordion-controls-bar">
+                <div>
+                    <strong>[ Drawers: ]</strong>
+                    <span id="program-status-count" style="font-size: 0.85rem; color: #444; margin-left: 6px;">[ Showing 60 of 60 performance slots ]</span>
+                </div>
+                <div>
+                    <button class="btn-box" data-action="expand-all">[ ▾ Expand All Drawers ]</button>
+                    <button class="btn-box" data-action="collapse-all">[ ▸ Collapse All Drawers ]</button>
+                </div>
+            </div>
+
+            <!-- Filter Toolbar Section -->
+            <section class="wf-box" aria-label="Timetable Filters Toolbar">
+                <h2>[ Timetable Filters ]</h2>
+                <hr>
+
+                <!-- Stage Filter Row -->
+                <div class="drawer-filter-bar">
+                    <span class="filter-label">[ Stage: ]</span>
+                    <button class="btn-box active" data-filter-stage="all">[ All Stages (60) ]</button>
+                    <button class="btn-box" data-filter-stage="solar">[ ☀️ Solar Horizon Stage (Open-Air) ]</button>
+                    <button class="btn-box btn-accent" data-filter-stage="lunar">[ 🌙 Lunar Forest Dome (Covered Shelter) ]</button>
+                </div>
+
+                <!-- Day Filter Row -->
+                <div class="drawer-filter-bar">
+                    <span class="filter-label">[ Day: ]</span>
+                    <button class="btn-box active" data-filter-day="all">[ All 3 Days ]</button>
+                    <button class="btn-box" data-filter-day="day1">[ Friday, Jul 10 ]</button>
+                    <button class="btn-box" data-filter-day="day2">[ Saturday, Jul 11 ]</button>
+                    <button class="btn-box" data-filter-day="day3">[ Sunday, Jul 12 ]</button>
+                    <button class="btn-box" id="filter-fav-only" style="margin-left: auto;">[ ★ Bookmarked Only ]</button>
+                </div>
+
+                <!-- Genre Quick Filters -->
+                <div class="drawer-filter-bar">
+                    <span class="filter-label">[ Genre: ]</span>
+                    <button class="btn-box active" data-filter-genre="all">[ All Genres ]</button>
+                    <button class="btn-box" data-filter-genre="techno">[ Techno ]</button>
+                    <button class="btn-box" data-filter-genre="ambient">[ Ambient ]</button>
+                    <button class="btn-box" data-filter-genre="post-rock">[ Post-Rock ]</button>
+                    <button class="btn-box" data-filter-genre="dream pop">[ Dream Pop ]</button>
+                    <button class="btn-box" data-filter-genre="indie">[ Indie ]</button>
+                    <button class="btn-box" data-filter-genre="synth">[ Synthpop ]</button>
+                    <button class="btn-box" data-filter-genre="idm">[ IDM ]</button>
+                </div>
+
+                <!-- Search Input Row -->
+                <div class="drawer-filter-bar" style="margin-bottom: 0;">
+                    <span class="filter-label">[ Search: ]</span>
+                    <input type="text" id="program-search-input" placeholder="Search performer, band, or stage..." class="input-box" style="flex: 1; min-width: 180px;">
+                    <button class="btn-box" id="clear-search-btn">[ Clear ]</button>
+                </div>
+            </section>
+
+            <!-- Dynamic Timetable Render Container -->
+            <section id="accordion-program-container" aria-label="Accordion Timetable Listings">
+                <!-- Rendered dynamically by layout.js using FESTIVAL_DATA.SCHEDULE -->
+                <div class="wf-box-sub" style="text-align: center; padding: 24px;">
+                    <p>[ Loading 60 timetable slots across Solar Horizon Stage and Lunar Forest Dome... ]</p>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer id="footer-placeholder">
+            <hr>
+            <div class="wf-footer-inline">
+                <span class="festival-brand">[ Festival of Darkness 2 ]</span>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+                <span style="color: #666; font-size: 0.85rem; margin-left: auto;">[ 60 Timetable Slots &bull; Pure Client-Side ]</span>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

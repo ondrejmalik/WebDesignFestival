@@ -1,0 +1,741 @@
+/* ==========================================================================
+   Layout 07: Floating Action Dock - Standalone Stylesheet
+   Festival of Darkness 2 | Kutna Hora, July 10–12, 2026
+   Adheres strictly to Minimalist Wireframe Rules (agents.md & zadani.txt)
+   UX Metaphor: Persistent bottom-right thumb floating dock with action sheet
+   ========================================================================== */
+
+/* Universal Box Sizing & Reset */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #111;
+    background: #fff;
+    line-height: 1.45;
+    padding: 12px;
+    /* Bottom padding to prevent content from hiding behind the floating action dock */
+    padding-bottom: 84px;
+    margin: 0;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* Responsive Main Container */
+.wf-container {
+    max-width: 960px;
+    margin: 0 auto;
+    width: 100%;
+    min-width: 0;
+}
+
+/* Minimalist Wireframe Box System */
+.wf-box {
+    border: 1px solid #222;
+    padding: 14px;
+    background: #fff;
+    margin-bottom: 14px;
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.wf-box-sub {
+    border: 1px solid #777;
+    padding: 12px;
+    background: #fafafa;
+    margin-bottom: 12px;
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+/* Clean Wireframe Divider */
+hr {
+    border: 0;
+    border-top: 1px solid #333;
+    margin: 12px 0;
+}
+
+/* Headings Hierarchy */
+h1 {
+    font-size: 1.35rem;
+    line-height: 1.25;
+    margin-bottom: 6px;
+    word-break: break-word;
+}
+
+h2 {
+    font-size: 1.15rem;
+    line-height: 1.3;
+    margin-bottom: 6px;
+    word-break: break-word;
+}
+
+h3 {
+    font-size: 1.02rem;
+    line-height: 1.35;
+    margin-bottom: 4px;
+    word-break: break-word;
+}
+
+h4 {
+    font-size: 0.95rem;
+    line-height: 1.35;
+    margin-bottom: 4px;
+    word-break: break-word;
+}
+
+p {
+    font-size: 0.92rem;
+    margin-bottom: 6px;
+    line-height: 1.45;
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+/* Top Navigation / Brand Anchor: strictly NO box, fluid multiline wrapping without horizontal scrollbars */
+.wf-nav-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 16px;
+    padding: 6px 0;
+    font-size: 0.92rem;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.festival-brand {
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none !important;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+}
+
+.wf-nav-inline a {
+    color: #111;
+    text-decoration: underline;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 4px;
+}
+
+.wf-nav-inline a:hover {
+    color: #555;
+}
+
+.wf-nav-inline a.active {
+    font-weight: bold;
+    color: #000;
+}
+
+/* Footer Navigation */
+.wf-footer-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 16px;
+    padding: 8px 0;
+    font-size: 0.88rem;
+    color: #444;
+}
+
+.wf-footer-inline a {
+    color: #333;
+    text-decoration: underline;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 4px;
+}
+
+/* Responsive Grid / Row Layouts */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    width: 100%;
+}
+
+.col {
+    flex: 1 1 280px;
+    min-width: 0;
+}
+
+.col-2 {
+    flex: 2 1 340px;
+    min-width: 0;
+}
+
+/* Standard Buttons & Touch Targets (>= 44x44px bounding area) */
+.btn-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 6px 14px;
+    border: 1px solid #222;
+    background: #fff;
+    color: #111;
+    text-decoration: none;
+    font-size: 0.88rem;
+    cursor: pointer;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.btn-box:hover {
+    background: #eee;
+}
+
+.btn-accent {
+    background: #e0f2fe;
+    border-color: #0284c7;
+    color: #0369a1;
+    font-weight: bold;
+}
+
+.btn-accent:hover {
+    background: #bae6fd;
+}
+
+.btn-danger {
+    background: #ffebee;
+    border-color: #b71c1c;
+    color: #b71c1c;
+}
+
+.btn-danger:hover {
+    background: #ffcdd2;
+}
+
+.btn-star {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 6px 12px;
+    border: 1px solid #555;
+    background: #fff;
+    color: #111;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.btn-star:hover {
+    background: #eee;
+}
+
+/* Rain Shelter Live Banner (Scenario 1 Fast Shortcut) */
+.rain-shelter-banner {
+    border: 2px solid #0284c7;
+    background: #f0f9ff;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ==========================================================================
+   FLOATING ACTION DOCK (Core Layout 07 Metaphor)
+   Persistent bottom-right thumb anchor fanning out into action sheet
+   ========================================================================== */
+
+/* Persistent Floating Action Dock Button */
+.floating-dock-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    min-height: 48px;
+    min-width: 48px;
+    padding: 8px 16px;
+    border: 2px solid #222;
+    background: #fff;
+    color: #111;
+    font-size: 0.92rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.floating-dock-btn:hover,
+.floating-dock-btn.is-active {
+    background: #111;
+    color: #fff;
+}
+
+.dock-btn-icon {
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+.dock-btn-text {
+    letter-spacing: 0.5px;
+}
+
+.dock-fav-badge {
+    background: #28a745;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 2px 6px;
+    display: inline-block;
+}
+
+/* Floating Dock Backdrop (Closes sheet when clicked outside) */
+.floating-dock-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+    display: none;
+}
+
+.floating-dock-backdrop.is-open {
+    display: block;
+}
+
+/* Floating Action Sheet (Drawer Panel) */
+.floating-dock-sheet {
+    position: fixed;
+    bottom: 78px;
+    right: 20px;
+    z-index: 1001;
+    max-width: 360px;
+    width: calc(100vw - 40px);
+    max-height: calc(100vh - 95px);
+    overflow-y: auto;
+    border: 2px solid #222;
+    background: #fff;
+    padding: 14px;
+    display: none;
+    box-sizing: border-box;
+}
+
+.floating-dock-sheet.is-open {
+    display: block;
+}
+
+.dock-sheet-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.dock-sheet-title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #111;
+}
+
+.dock-sheet-section {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.dock-sheet-section h4 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: #444;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+
+.dock-action-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.dock-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 44px;
+    padding: 6px 10px;
+    border: 1px solid #777;
+    background: #fafafa;
+    color: #111;
+    text-decoration: none;
+    font-size: 0.88rem;
+    cursor: pointer;
+    box-sizing: border-box;
+    width: 100%;
+    text-align: left;
+    font-family: inherit;
+}
+
+.dock-action-btn:hover {
+    background: #eee;
+    border-color: #222;
+}
+
+.dock-action-btn.active {
+    font-weight: bold;
+    background: #e2e8f0;
+    border-color: #334155;
+}
+
+.dock-action-btn.highlight {
+    background: #e0f2fe;
+    border-color: #0284c7;
+    color: #0369a1;
+    font-weight: bold;
+}
+
+.dock-action-btn.highlight:hover {
+    background: #bae6fd;
+}
+
+.dock-action-btn.danger {
+    background: #ffebee;
+    border-color: #b71c1c;
+    color: #b71c1c;
+}
+
+.dock-action-btn.danger:hover {
+    background: #ffcdd2;
+}
+
+.dock-chips-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.dock-chip-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 4px 10px;
+    border: 1px solid #777;
+    background: #fafafa;
+    color: #111;
+    font-size: 0.82rem;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.dock-chip-btn:hover {
+    background: #eee;
+}
+
+.dock-chip-btn.active {
+    font-weight: bold;
+    background: #111;
+    color: #fff;
+    border-color: #111;
+}
+
+/* ==========================================================================
+   TIMETABLE & SCHEDULE STYLES (program.html)
+   ========================================================================== */
+.sch-stats-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px 12px;
+    background: #fafafa;
+    border: 1px solid #777;
+    margin-bottom: 12px;
+}
+
+.filter-toolbar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+}
+
+.filter-label {
+    font-size: 0.86rem;
+    font-weight: bold;
+    min-width: 60px;
+}
+
+.filter-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 6px 12px;
+    border: 1px solid #777;
+    background: #fff;
+    color: #222;
+    font-size: 0.84rem;
+    cursor: pointer;
+}
+
+.filter-btn:hover {
+    background: #f0f0f0;
+}
+
+.filter-btn.active {
+    background: #222;
+    color: #fff;
+    font-weight: bold;
+    border-color: #222;
+}
+
+.filter-btn-fav {
+    border-color: #28a745;
+    color: #155724;
+}
+
+.filter-btn-fav.active {
+    background: #28a745;
+    color: #fff;
+    border-color: #28a745;
+}
+
+.sch-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.sch-item {
+    border: 1px solid #777;
+    background: #fafafa;
+    padding: 12px;
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.sch-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.sch-time {
+    font-family: Consolas, monospace;
+    font-weight: bold;
+    font-size: 0.95rem;
+    margin-right: 8px;
+}
+
+.sch-stage-tag {
+    font-size: 0.78rem;
+    padding: 2px 6px;
+    border: 1px solid #777;
+    background: #eee;
+    display: inline-block;
+}
+
+.sch-stage-tag.solar {
+    background: #fffbeb;
+    border-color: #d97706;
+    color: #b45309;
+}
+
+.sch-stage-tag.lunar {
+    background: #f0f9ff;
+    border-color: #0284c7;
+    color: #0369a1;
+}
+
+.sch-artist-name {
+    font-size: 1.05rem;
+    font-weight: bold;
+    margin-bottom: 2px;
+    word-break: break-word;
+}
+
+.sch-genre {
+    font-size: 0.84rem;
+    color: #555;
+    margin-bottom: 6px;
+}
+
+/* ==========================================================================
+   SCENARIO 2: BOOKMARKING & PERSONAL SCHEDULE (my-schedule.html)
+   Distinct green wireframe highlight for saved performances
+   Red alert & pairwise collision detection for clashing performances
+   ========================================================================== */
+.is-favourite {
+    background: #d4edda !important;
+    border: 2px solid #28a745 !important;
+}
+
+.is-clash {
+    border: 2px solid #b71c1c !important;
+    background: #fff5f5 !important;
+}
+
+.status-badge-clean {
+    background: #d4edda;
+    border: 1px solid #28a745;
+    color: #155724;
+    font-size: 0.8rem;
+    padding: 4px 8px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.status-badge-clash {
+    background: #ffebee;
+    border: 1px solid #b71c1c;
+    color: #b71c1c;
+    font-size: 0.8rem;
+    padding: 4px 8px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+/* ==========================================================================
+   ARTISTS CATALOG STYLES (artists.html)
+   ========================================================================== */
+.artists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+    width: 100%;
+}
+
+.artist-card {
+    border: 1px solid #777;
+    background: #fafafa;
+    padding: 12px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.artist-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.artist-card-title {
+    font-size: 1rem;
+    font-weight: bold;
+    line-height: 1.25;
+}
+
+.artist-card-meta {
+    font-size: 0.84rem;
+    color: #444;
+    margin-bottom: 6px;
+}
+
+.artist-card-actions {
+    margin-top: 8px;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.artist-detail-expanded {
+    margin-bottom: 14px;
+    padding: 14px;
+    border: 2px solid #222;
+    background: #fff;
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+/* Text Input Box */
+.input-box {
+    min-height: 44px;
+    padding: 8px 10px;
+    border: 1px solid #777;
+    background: #fff;
+    font-size: 0.88rem;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.input-box:focus {
+    outline: 2px solid #111;
+    border-color: #111;
+}
+
+/* Responsive viewports & Media Queries */
+@media (max-width: 600px) {
+    body {
+        padding: 8px;
+        padding-bottom: 84px;
+    }
+
+    .wf-box {
+        padding: 12px;
+    }
+
+    .floating-dock-sheet {
+        right: 10px;
+        left: 10px;
+        width: calc(100vw - 20px);
+        max-width: none;
+        bottom: 74px;
+    }
+
+    .floating-dock-btn {
+        right: 14px;
+        bottom: 14px;
+    }
+
+    .artists-grid {
+        grid-template-columns: 1fr;
+    }
+}

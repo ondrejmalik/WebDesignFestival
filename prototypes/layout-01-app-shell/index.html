@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Festival of Darkness 2 – Homepage (App-Shell Bottom Nav Prototype L01). Kutna Hora, Czech Republic, July 10–12, 2026.">
+    <title>Festival of Darkness 2 | Home (App-Shell)</title>
+    <link rel="stylesheet" href="layout.css">
+    <script src="../common/festival-data.js" defer></script>
+    <script src="layout.js" defer></script>
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- Top Header & Secondary Inline Navigation -->
+        <div id="nav-placeholder">
+            <nav class="wf-nav-inline" aria-label="Top Secondary Navigation">
+                <a href="index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+            </nav>
+            <hr>
+        </div>
+
+        <!-- Main Content -->
+        <main>
+
+            <!-- Scenario 1: Immediate Rain Shelter Quick Action (1 Tap from Homepage) -->
+            <section class="rain-shelter-banner">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                    <div>
+                        <strong>[ 🌧️ Rain Alert / Live Shelter Access ]</strong>
+                        <p style="font-size: 0.88rem; margin-top: 2px;">
+                            Sudden rain? Seek shelter at the indoor covered dome with continuous live programming.
+                        </p>
+                    </div>
+                    <a href="program.html?stage=lunar" class="btn-box btn-accent" id="s1-quick-shelter-btn">
+                        [ View Covered Dome Timetable (Lunar Forest Dome) &rarr; ]
+                    </a>
+                </div>
+            </section>
+
+            <!-- Hero Identity Box -->
+            <section class="wf-box">
+                <h1>[ FESTIVAL OF DARKNESS 2 ]</h1>
+                <p><strong>[ July 10 – July 12, 2026 | Kutna Hora, Czech Republic ]</strong></p>
+                <hr>
+                <p>[ Three-day festival of electronic, alternative, and audiovisual music in Kutna Hora. ]</p>
+                <p>[ Prototype Layout 01: App-Shell Bottom Nav — Native mobile thumb ergonomics with zero vertical scroll interference. ]</p>
+            </section>
+
+            <!-- Quick Access Directory -->
+            <section class="wf-box">
+                <h2>[ Fast Section Directory ]</h2>
+                <hr>
+                <div class="row">
+                    <div class="col wf-box-sub">
+                        <h3>[ 📅 Full Program ]</h3>
+                        <p>[ Complete 3-day schedule across Solar Stage and Lunar Dome with interactive bookmarking. ]</p>
+                        <hr>
+                        <a href="program.html" class="btn-box">[ Open Timetable &rarr; ]</a>
+                    </div>
+                    <div class="col wf-box-sub">
+                        <h3>[ 🎤 60 Artists ]</h3>
+                        <p>[ Lineup of 60 international performers, biographies, set times, and deep-linking profiles. ]</p>
+                        <hr>
+                        <a href="artists.html" class="btn-box">[ View Artists Catalog &rarr; ]</a>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top: 12px;">
+                    <div class="col wf-box-sub">
+                        <h3>[ ⛺ 2 Festival Stages ]</h3>
+                        <p>[ Solar Horizon Stage (open-air, 4500 cap) & Lunar Forest Dome (covered rain shelter, 1800 cap). ]</p>
+                        <hr>
+                        <a href="stages.html" class="btn-box">[ Explore Stages &rarr; ]</a>
+                    </div>
+                    <div class="col wf-box-sub">
+                        <h3>[ 🚆 Practical Guide ]</h3>
+                        <p>[ Trains from Prague, shuttle buses, camping tent village, and cashless RFID guide. ]</p>
+                        <hr>
+                        <a href="practical-info.html" class="btn-box">[ Practical Info &rarr; ]</a>
+                    </div>
+                    <div class="col wf-box-sub">
+                        <h3>[ ★ My Personal Plan ]</h3>
+                        <p>[ Saved performances with automatic pairwise collision detection and alert badges. ]</p>
+                        <hr>
+                        <a href="my-schedule.html" class="btn-box">[ Open My Plan &rarr; ]</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Parameters Section -->
+            <section class="wf-box">
+                <h2>[ Key Parameters of the 2026 Edition ]</h2>
+                <hr>
+                <p>[ • <strong>3 festival days:</strong> Friday July 10, Saturday July 11, Sunday July 12, 2026 ]</p>
+                <p>[ • <strong>2 distinct stages:</strong> Solar Horizon Stage & Lunar Forest Dome (Covered) ]</p>
+                <p>[ • <strong>60 live performances:</strong> Post-Rock, Ambient, Techno, Dream Pop, Synthpop, Indie ]</p>
+                <p>[ • <strong>Location:</strong> Festival Grounds, Kutna Hora, Czech Republic ]</p>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <div id="footer-placeholder">
+            <hr>
+            <footer class="wf-footer-inline">
+                <strong class="festival-brand">[ © 2026 Festival of Darkness 2 ]</strong>
+                <span>Kutna Hora, July 10–12, 2026</span>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+            </footer>
+        </div>
+
+    </div>
+
+    <!-- App-Shell Fixed Bottom Thumb Bar -->
+    <nav class="bottom-nav-bar" aria-label="App Shell Primary Navigation">
+        <a href="index.html" class="bottom-nav-item active">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">[ Home ]</span>
+        </a>
+        <a href="program.html" class="bottom-nav-item">
+            <span class="nav-icon">📅</span>
+            <span class="nav-label">[ Timetable ]</span>
+        </a>
+        <a href="artists.html" class="bottom-nav-item">
+            <span class="nav-icon">🎤</span>
+            <span class="nav-label">[ Artists ]</span>
+        </a>
+        <a href="stages.html" class="bottom-nav-item">
+            <span class="nav-icon">⛺</span>
+            <span class="nav-label">[ Stages ]</span>
+        </a>
+        <a href="practical-info.html" class="bottom-nav-item">
+            <span class="nav-icon">ℹ️</span>
+            <span class="nav-label">[ Info ]</span>
+        </a>
+        <a href="my-schedule.html" class="bottom-nav-item">
+            <span class="nav-icon">★</span>
+            <span class="nav-label">[ My Plan ]<span class="nav-badge-count" style="display: none;">0</span></span>
+        </a>
+    </nav>
+
+</body>
+</html>

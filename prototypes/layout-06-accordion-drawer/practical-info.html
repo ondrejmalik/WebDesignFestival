@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Festival Practical Info – Layout 06: Accordion Drawer Hub. Collapsible inquiry drawers for transportation from Prague, electric shuttles, camping rules, cashless wristbands, and FAQ.">
+    <title>Festival of Darkness 2 | Practical Info (Accordion Drawer Hub)</title>
+    <link rel="stylesheet" href="layout.css">
+    <script src="../common/festival-data.js" defer></script>
+    <script src="layout.js" defer></script>
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- Top Header & Primary Wrapping Inline Navigation -->
+        <header id="nav-placeholder">
+            <nav class="wf-nav-inline" aria-label="Main Navigation">
+                <a href="index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule (<span class="fav-count-badge">0</span>) ]</a>
+            </nav>
+            <hr>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+
+            <!-- Page Title Section -->
+            <section class="wf-box" aria-labelledby="practical-title">
+                <h1 id="practical-title">[ Practical Visitor Guide & FAQ Drawers ]</h1>
+                <p><strong>[ Essential Information for Attendees | Kutna Hora, Czech Republic | July 10–12, 2026 ]</strong></p>
+                <hr>
+                <p>[ <strong>Collapsible Inquiry Architecture:</strong> Everything you need to plan your journey and stay is organized into distinct inquiry drawers below. Expand any topic to read transit schedules, tent village regulations, cashless refund policies, and frequently asked questions. ]</p>
+            </section>
+
+            <!-- Global Accordion Toolbar -->
+            <div class="accordion-controls-bar">
+                <div>
+                    <strong>[ Inquiry Drawers: ]</strong>
+                    <span style="font-size: 0.85rem; color: #555;">Toggle visitor guidance sections</span>
+                </div>
+                <div>
+                    <button class="btn-box" data-action="expand-all">[ ▾ Expand All Info ]</button>
+                    <button class="btn-box" data-action="collapse-all">[ ▸ Collapse All Info ]</button>
+                </div>
+            </div>
+
+            <!-- Drawer 1: Getting to Kutna Hora -->
+            <section aria-labelledby="transit-title">
+                <details class="wf-drawer" open>
+                    <summary id="transit-title">
+                        <div class="drawer-summary-title">
+                            <span>🚆 [ 1. Getting to Kutná Hora (Train, Bus & Highway Directions) ]</span>
+                            <span class="drawer-badge">Transit</span>
+                        </div>
+                        <span class="drawer-icon">▼</span>
+                    </summary>
+                    <div class="drawer-body">
+                        <article>
+                            <h3>[ Transportation Options from Prague & Beyond ]</h3>
+                            <div class="row">
+                                <div class="col wf-box-sub">
+                                    <h4>[ By Direct Train (Recommended) ]</h4>
+                                    <p><strong>Departure:</strong> Praha hlavní nádraží (Prague Main Station)</p>
+                                    <p><strong>Arrival:</strong> Kutná Hora hlavní nádraží</p>
+                                    <p><strong>Travel Time:</strong> Approximately 55 minutes</p>
+                                    <p><strong>Frequency:</strong> Departs hourly (R9 fast trains and local connections). Integrated into PID (Prague Integrated Transport) tariff zone 7.</p>
+                                </div>
+                                <div class="col wf-box-sub">
+                                    <h4>[ By Express Bus ]</h4>
+                                    <p><strong>Departure:</strong> Prague Háje (Metro C terminal)</p>
+                                    <p><strong>Arrival:</strong> Kutná Hora Autobusové nádraží</p>
+                                    <p><strong>Travel Time:</strong> Approximately 70 minutes</p>
+                                    <p><strong>Lines:</strong> Regional bus line 381 runs throughout the day.</p>
+                                </div>
+                                <div class="col wf-box-sub">
+                                    <h4>[ By Car & Highway ]</h4>
+                                    <p><strong>Route:</strong> Via D11 highway to Exit 39 (Poděbrady South), then Route 38 directly to Kutná Hora (approx. 72 km from Prague).</p>
+                                    <p><strong>Parking:</strong> Official festival park-and-ride lot (P1) located 400m from the main entrance. Parking pass is 200 CZK / weekend.</p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </details>
+            </section>
+
+            <!-- Drawer 2: Festival Shuttle Bus -->
+            <section aria-labelledby="shuttle-title">
+                <details class="wf-drawer" open>
+                    <summary id="shuttle-title">
+                        <div class="drawer-summary-title">
+                            <span>🚌 [ 2. Dedicated Festival Shuttle Express (Station &harr; Festival) ]</span>
+                            <span class="drawer-badge">15 min intervals</span>
+                        </div>
+                        <span class="drawer-icon">▼</span>
+                    </summary>
+                    <div class="drawer-body">
+                        <article>
+                            <h3>[ Seamless Last-Mile Connection ]</h3>
+                            <p>
+                                High-capacity electric shuttle buses operate continuous round-trips connecting Kutná Hora railway station directly to the festival main gate.
+                            </p>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Service Day</th>
+                                        <th>Operating Hours</th>
+                                        <th>Interval</th>
+                                        <th>Fare</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Thursday, July 9</td>
+                                        <td>12:00 – 22:00</td>
+                                        <td>Every 20 minutes</td>
+                                        <td>Free with Festival Ticket</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Friday, July 10 & Saturday, July 11</td>
+                                        <td>10:00 – 05:00 (Next Day)</td>
+                                        <td>Every 12–15 minutes</td>
+                                        <td>Free with Festival Ticket</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sunday, July 12</td>
+                                        <td>10:00 – 04:30 (Next Day)</td>
+                                        <td>Every 15 minutes</td>
+                                        <td>Free with Festival Ticket</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Monday, July 13</td>
+                                        <td>07:00 – 15:00</td>
+                                        <td>Every 15 minutes</td>
+                                        <td>Free with Festival Ticket</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </article>
+                    </div>
+                </details>
+            </section>
+
+            <!-- Drawer 3: Tent City & Camping -->
+            <section aria-labelledby="camping-title">
+                <details class="wf-drawer">
+                    <summary id="camping-title">
+                        <div class="drawer-summary-title">
+                            <span>⛺ [ 3. Tent City, Camping Rules & Hygiene Facilities ]</span>
+                            <span class="drawer-badge">Camp Area</span>
+                        </div>
+                        <span class="drawer-icon">▼</span>
+                    </summary>
+                    <div class="drawer-body">
+                        <article>
+                            <h3>[ Festival Camping & Tent Village Guidelines ]</h3>
+                            <p>
+                                The secured campsite is located adjacent to the festival perimeter on flat grassy grounds, shaded by mature trees.
+                            </p>
+                            <div class="row">
+                                <div class="col wf-box-sub">
+                                    <h4>[ Camping Check-In & Hours ]</h4>
+                                    <p>Opens: Thursday, July 9 at 12:00</p>
+                                    <p>Closes: Monday, July 13 at 14:00</p>
+                                    <p>24-hour reception, perimeter security fence, and wristband checkpoint.</p>
+                                </div>
+                                <div class="col wf-box-sub">
+                                    <h4>[ Showers & Sanitary Facilities ]</h4>
+                                    <p>Clean flushing toilets and hot-water shower containers available 24/7.</p>
+                                    <p>Free drinking water refill stations located throughout the campsite.</p>
+                                </div>
+                                <div class="col wf-box-sub">
+                                    <h4>[ Camp Regulations ]</h4>
+                                    <p>&bull; No open campfires or gas grills (designated cooking zone provided).</p>
+                                    <p>&bull; Quiet zone enforced in section C from 03:00 to 10:00.</p>
+                                    <p>&bull; No glass containers allowed in the tent village.</p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </details>
+            </section>
+
+            <!-- Drawer 4: Cashless System -->
+            <section aria-labelledby="cashless-title">
+                <details class="wf-drawer">
+                    <summary id="cashless-title">
+                        <div class="drawer-summary-title">
+                            <span>💳 [ 4. 100% Cashless RFID System & Refund Policy ]</span>
+                            <span class="drawer-badge">NFC Wristband</span>
+                        </div>
+                        <span class="drawer-icon">▼</span>
+                    </summary>
+                    <div class="drawer-body">
+                        <article>
+                            <h3>[ Fast & Secure On-Site Transactions ]</h3>
+                            <p>
+                                Festival of Darkness 2 operates a completely cashless environment. Your festival fabric wristband contains an encrypted waterproof NFC microchip used for all payments across food stalls, bars, merch, and lockers.
+                            </p>
+                            <div class="row">
+                                <div class="col wf-box-sub">
+                                    <h4>[ How to Top Up ]</h4>
+                                    <p><strong>Online Pre-Loading:</strong> Top up via our online portal before arrival without transaction fees.</p>
+                                    <p><strong>On-Site Stations:</strong> Dedicated top-up points accept debit/credit cards (Visa, Mastercard) and cash (CZK, EUR).</p>
+                                </div>
+                                <div class="col wf-box-sub">
+                                    <h4>[ Checking Your Balance ]</h4>
+                                    <p>Every vendor displays your remaining credit on the terminal after each transaction. Free NFC balance scanners are located near the info point.</p>
+                                </div>
+                                <div class="col wf-box-sub">
+                                    <h4>[ 100% Balance Refund Guarantee ]</h4>
+                                    <p>Unspent balances can be refunded back to your bank account online for up to 14 days after the festival with zero administration deduction fee.</p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </details>
+            </section>
+
+            <!-- Drawer 5: FAQ Accordion -->
+            <section aria-labelledby="faq-title">
+                <details class="wf-drawer">
+                    <summary id="faq-title">
+                        <div class="drawer-summary-title">
+                            <span>❓ [ 5. Frequently Asked Questions (FAQ) ]</span>
+                            <span class="drawer-badge">8 Common Queries</span>
+                        </div>
+                        <span class="drawer-icon">▼</span>
+                    </summary>
+                    <div class="drawer-body">
+                        <details class="wf-drawer-sub" open>
+                            <summary>
+                                <span>[ Q: What happens if it rains heavily during the festival? ]</span>
+                                <span class="drawer-icon">▼</span>
+                            </summary>
+                            <div class="drawer-sub-body">
+                                <p><strong>A:</strong> All attendees can immediately transition into the <strong>Lunar Forest Dome</strong>, a 100% weatherproof covered geodesic dome with a capacity of 1,800 people and non-stop audiovisual programming. The open-air Solar Stage has covered roof structures for artists and equipment and continues unless severe lightning mandates a pause.</p>
+                            </div>
+                        </details>
+
+                        <details class="wf-drawer-sub">
+                            <summary>
+                                <span>[ Q: Are tickets available on the festival gate? ]</span>
+                                <span class="drawer-icon">▼</span>
+                            </summary>
+                            <div class="drawer-sub-body">
+                                <p><strong>A:</strong> Unless sold out in advance, a limited contingent of 3-day and single-day tickets will be sold at the accreditation box office. Cash and cards accepted.</p>
+                            </div>
+                        </details>
+
+                        <details class="wf-drawer-sub">
+                            <summary>
+                                <span>[ Q: Can I leave the festival area and re-enter? ]</span>
+                                <span class="drawer-icon">▼</span>
+                            </summary>
+                            <div class="drawer-sub-body">
+                                <p><strong>A:</strong> Yes, your fabric festival wristband allows unlimited re-entry throughout the entire weekend. Wristbands that show signs of tampering or damage will be confiscated.</p>
+                            </div>
+                        </details>
+
+                        <details class="wf-drawer-sub">
+                            <summary>
+                                <span>[ Q: Is there luggage storage and phone charging on site? ]</span>
+                                <span class="drawer-icon">▼</span>
+                            </summary>
+                            <div class="drawer-sub-body">
+                                <p><strong>A:</strong> Yes, the Safe Box container offers lockable compartments with built-in 230V and USB charging ports. Pre-booking online is recommended.</p>
+                            </div>
+                        </details>
+
+                        <details class="wf-drawer-sub">
+                            <summary>
+                                <span>[ Q: Are dogs or pets allowed on festival grounds? ]</span>
+                                <span class="drawer-icon">▼</span>
+                            </summary>
+                            <div class="drawer-sub-body">
+                                <p><strong>A:</strong> Due to extreme sound pressure levels and large crowds, animals are strictly prohibited on festival grounds and in the campsite, with the exception of certified service guide dogs.</p>
+                            </div>
+                        </details>
+                    </div>
+                </details>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer id="footer-placeholder">
+            <hr>
+            <div class="wf-footer-inline">
+                <span class="festival-brand">[ Festival of Darkness 2 ]</span>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+                <span style="color: #666; font-size: 0.85rem; margin-left: auto;">[ Practical Visitor Guide &bull; Pure Client-Side ]</span>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

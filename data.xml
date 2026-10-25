@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <festival_data>
-  <festival id="Festival-Temnoty-2">
-    <name> Festival Temnoty 2</name>
+  <festival id="Festival-of-Darkness-2">
+    <name>Festival of Darkness 2</name>
     <edition>2026</edition>
-    <location>Kutná Hora, Česká republika</location>
+    <location>Kutna Hora, Czech Republic</location>
     <date_start>2026-07-10</date_start>
     <date_end>2026-07-12</date_end>
-    <description>Třídenní festival elektronické, alternativní a audiovizuální scény.</description>
+    <description>Three-day festival of electronic, alternative, and audiovisual music on two distinct stages.</description>
   </festival>
 
   <stages>
     <stage id="stage-solar">
       <name>Solar Horizon Stage</name>
       <capacity>4500</capacity>
-      <type>Open-air hlavní scéna</type>
-      <description>Centrální venkovní pódium pro velká kapelní vystoupení, indie a taneční headlinery.</description>
+      <type>Open-air main stage</type>
+      <description>Central open-air amphitheater for major band performances, indie rock, and dance headliners.</description>
     </stage>
     <stage id="stage-lunar">
       <name>Lunar Forest Dome</name>
       <capacity>1800</capacity>
-      <type>Kryté audiovizuální šapito</type>
-      <description>Atmosférická krytá scéna se zaměřením na techno, ambient, experimentální elektroniku a světelnou projekci.</description>
+      <type>Covered audiovisual dome / marquee</type>
+      <description>Atmospheric covered indoor stage focusing on techno, ambient, experimental electronics, and 360-degree light projections.</description>
     </stage>
   </stages>
 
   <performers>
-    <!-- Den 1: Solar Horizon (10) -->
+    <!-- Day 1: Solar Horizon (10) -->
     <performer id="perf-01"><name>Echoes of Light</name><genre>Post-Rock / Ambient</genre><origin>CZ</origin></performer>
     <performer id="perf-02"><name>Velvet Morning</name><genre>Dream Pop</genre><origin>SK</origin></performer>
     <performer id="perf-03"><name>Nordic Wave</name><genre>Indie Rock</genre><origin>SE</origin></performer>
@@ -37,7 +37,7 @@
     <performer id="perf-09"><name>Starlight Odyssey</name><genre>Electronic Indie</genre><origin>FR</origin></performer>
     <performer id="perf-10"><name>Midnight Pulse</name><genre>Electro Rock</genre><origin>CZ</origin></performer>
 
-    <!-- Den 1: Lunar Forest (10) -->
+    <!-- Day 1: Lunar Forest (10) -->
     <performer id="perf-11"><name>Subtle Resonances</name><genre>Modular Ambient</genre><origin>CZ</origin></performer>
     <performer id="perf-12"><name>Binary Fields</name><genre>IDM / Glitch</genre><origin>PL</origin></performer>
     <performer id="perf-13"><name>Deep Texture</name><genre>Dub Techno</genre><origin>DE</origin></performer>
@@ -49,7 +49,7 @@
     <performer id="perf-19"><name>Frequency 404</name><genre>Raw Acid Techno</genre><origin>UK</origin></performer>
     <performer id="perf-20"><name>Dawn Ritual</name><genre>Atmospheric Ambient</genre><origin>CZ</origin></performer>
 
-    <!-- Den 2: Solar Horizon (10) -->
+    <!-- Day 2: Solar Horizon (10) -->
     <performer id="perf-21"><name>Sunburst Trio</name><genre>Acoustic Indie</genre><origin>CZ</origin></performer>
     <performer id="perf-22"><name>Coastline Drift</name><genre>Surf Rock</genre><origin>ES</origin></performer>
     <performer id="perf-23"><name>The Urban Poets</name><genre>Indie Soul</genre><origin>UK</origin></performer>
@@ -61,7 +61,7 @@
     <performer id="perf-29"><name>Vortex Motion</name><genre>Nu-Electro</genre><origin>UK</origin></performer>
     <performer id="perf-30"><name>Aura Soundsystem</name><genre>Progressive Dance</genre><origin>CZ</origin></performer>
 
-    <!-- Den 2: Lunar Forest (10) -->
+    <!-- Day 2: Lunar Forest (10) -->
     <performer id="perf-31"><name>Dronescape</name><genre>Drone Music</genre><origin>CZ</origin></performer>
     <performer id="perf-32"><name>Glitch Garden</name><genre>Microhouse</genre><origin>AT</origin></performer>
     <performer id="perf-33"><name>Forest Whispers</name><genre>Organic House</genre><origin>SK</origin></performer>
@@ -73,7 +73,7 @@
     <performer id="perf-39"><name>Neural Network Live</name><genre>Acid Techno</genre><origin>BE</origin></performer>
     <performer id="perf-40"><name>Solar Wind</name><genre>Chillout Ambient</genre><origin>CZ</origin></performer>
 
-    <!-- Den 3: Solar Horizon (10) -->
+    <!-- Day 3: Solar Horizon (10) -->
     <performer id="perf-41"><name>Morning Breeze</name><genre>Folk Indie</genre><origin>CZ</origin></performer>
     <performer id="perf-42"><name>Silent Pines</name><genre>Chamber Pop</genre><origin>SK</origin></performer>
     <performer id="perf-43"><name>Sunken Ship</name><genre>Psych Rock</genre><origin>UK</origin></performer>
@@ -85,7 +85,7 @@
     <performer id="perf-49"><name>Starlight Runners</name><genre>Electropop Headliner</genre><origin>DK</origin></performer>
     <performer id="perf-50"><name>Final Cascade</name><genre>Orchestral Electronic</genre><origin>CZ</origin></performer>
 
-    <!-- Den 3: Lunar Forest (10) -->
+    <!-- Day 3: Lunar Forest (10) -->
     <performer id="perf-51"><name>Static Drift</name><genre>Field Recording / Ambient</genre><origin>CZ</origin></performer>
     <performer id="perf-52"><name>Resonance Space</name><genre>Deep Ambient</genre><origin>AT</origin></performer>
     <performer id="perf-53"><name>Tape Loop Experiment</name><genre>Tape Ambient</genre><origin>PL</origin></performer>
@@ -99,7 +99,7 @@
   </performers>
 
   <schedule>
-    <!-- DEN 1: 10. 7. 2026 - Solar Horizon Stage (10 slotů) -->
+    <!-- DAY 1: 2026-07-10 - Solar Horizon Stage (10 slots) -->
     <item id="sch-01"><stage_id>stage-solar</stage_id><performer_id>perf-01</performer_id><date>2026-07-10</date><time_start>14:00</time_start><time_end>14:45</time_end></item>
     <item id="sch-02"><stage_id>stage-solar</stage_id><performer_id>perf-02</performer_id><date>2026-07-10</date><time_start>15:00</time_start><time_end>15:45</time_end></item>
     <item id="sch-03"><stage_id>stage-solar</stage_id><performer_id>perf-03</performer_id><date>2026-07-10</date><time_start>16:00</time_start><time_end>16:50</time_end></item>
@@ -111,7 +111,7 @@
     <item id="sch-09"><stage_id>stage-solar</stage_id><performer_id>perf-09</performer_id><date>2026-07-10</date><time_start>23:30</time_start><time_end>00:45</time_end></item>
     <item id="sch-10"><stage_id>stage-solar</stage_id><performer_id>perf-10</performer_id><date>2026-07-10</date><time_start>01:00</time_start><time_end>02:00</time_end></item>
 
-    <!-- DEN 1: 10. 7. 2026 - Lunar Forest Dome (10 slotů) -->
+    <!-- DAY 1: 2026-07-10 - Lunar Forest Dome (10 slots) -->
     <item id="sch-11"><stage_id>stage-lunar</stage_id><performer_id>perf-11</performer_id><date>2026-07-10</date><time_start>15:00</time_start><time_end>15:50</time_end></item>
     <item id="sch-12"><stage_id>stage-lunar</stage_id><performer_id>perf-12</performer_id><date>2026-07-10</date><time_start>16:05</time_start><time_end>17:00</time_end></item>
     <item id="sch-13"><stage_id>stage-lunar</stage_id><performer_id>perf-13</performer_id><date>2026-07-10</date><time_start>17:15</time_start><time_end>18:15</time_end></item>
@@ -123,7 +123,7 @@
     <item id="sch-19"><stage_id>stage-lunar</stage_id><performer_id>perf-19</performer_id><date>2026-07-10</date><time_start>01:40</time_start><time_end>03:00</time_end></item>
     <item id="sch-20"><stage_id>stage-lunar</stage_id><performer_id>perf-20</performer_id><date>2026-07-10</date><time_start>03:10</time_start><time_end>04:00</time_end></item>
 
-    <!-- DEN 2: 11. 7. 2026 - Solar Horizon Stage (10 slotů) -->
+    <!-- DAY 2: 2026-07-11 - Solar Horizon Stage (10 slots) -->
     <item id="sch-21"><stage_id>stage-solar</stage_id><performer_id>perf-21</performer_id><date>2026-07-11</date><time_start>13:30</time_start><time_end>14:15</time_end></item>
     <item id="sch-22"><stage_id>stage-solar</stage_id><performer_id>perf-22</performer_id><date>2026-07-11</date><time_start>14:30</time_start><time_end>15:15</time_end></item>
     <item id="sch-23"><stage_id>stage-solar</stage_id><performer_id>perf-23</performer_id><date>2026-07-11</date><time_start>15:30</time_start><time_end>16:20</time_end></item>
@@ -135,7 +135,7 @@
     <item id="sch-29"><stage_id>stage-solar</stage_id><performer_id>perf-29</performer_id><date>2026-07-11</date><time_start>23:10</time_start><time_end>00:25</time_end></item>
     <item id="sch-30"><stage_id>stage-solar</stage_id><performer_id>perf-30</performer_id><date>2026-07-11</date><time_start>00:45</time_start><time_end>02:00</time_end></item>
 
-    <!-- DEN 2: 11. 7. 2026 - Lunar Forest Dome (10 slotů) -->
+    <!-- DAY 2: 2026-07-11 - Lunar Forest Dome (10 slots) -->
     <item id="sch-31"><stage_id>stage-lunar</stage_id><performer_id>perf-31</performer_id><date>2026-07-11</date><time_start>14:30</time_start><time_end>15:20</time_end></item>
     <item id="sch-32"><stage_id>stage-lunar</stage_id><performer_id>perf-32</performer_id><date>2026-07-11</date><time_start>15:35</time_start><time_end>16:30</time_end></item>
     <item id="sch-33"><stage_id>stage-lunar</stage_id><performer_id>perf-33</performer_id><date>2026-07-11</date><time_start>16:45</time_start><time_end>17:45</time_end></item>
@@ -147,7 +147,7 @@
     <item id="sch-39"><stage_id>stage-lunar</stage_id><performer_id>perf-39</performer_id><date>2026-07-11</date><time_start>01:10</time_start><time_end>02:30</time_end></item>
     <item id="sch-40"><stage_id>stage-lunar</stage_id><performer_id>perf-40</performer_id><date>2026-07-11</date><time_start>02:40</time_start><time_end>04:00</time_end></item>
 
-    <!-- DEN 3: 12. 7. 2026 - Solar Horizon Stage (10 slotů) -->
+    <!-- DAY 3: 2026-07-12 - Solar Horizon Stage (10 slots) -->
     <item id="sch-41"><stage_id>stage-solar</stage_id><performer_id>perf-41</performer_id><date>2026-07-12</date><time_start>13:00</time_start><time_end>13:45</time_end></item>
     <item id="sch-42"><stage_id>stage-solar</stage_id><performer_id>perf-42</performer_id><date>2026-07-12</date><time_start>14:00</time_start><time_end>14:45</time_end></item>
     <item id="sch-43"><stage_id>stage-solar</stage_id><performer_id>perf-43</performer_id><date>2026-07-12</date><time_start>15:00</time_start><time_end>15:50</time_end></item>
@@ -159,7 +159,7 @@
     <item id="sch-49"><stage_id>stage-solar</stage_id><performer_id>perf-49</performer_id><date>2026-07-12</date><time_start>22:35</time_start><time_end>23:55</time_end></item>
     <item id="sch-50"><stage_id>stage-solar</stage_id><performer_id>perf-50</performer_id><date>2026-07-12</date><time_start>00:10</time_start><time_end>01:15</time_end></item>
 
-    <!-- DEN 3: 12. 7. 2026 - Lunar Forest Dome (10 slotů) -->
+    <!-- DAY 3: 2026-07-12 - Lunar Forest Dome (10 slots) -->
     <item id="sch-51"><stage_id>stage-lunar</stage_id><performer_id>perf-51</performer_id><date>2026-07-12</date><time_start>14:00</time_start><time_end>14:50</time_end></item>
     <item id="sch-52"><stage_id>stage-lunar</stage_id><performer_id>perf-52</performer_id><date>2026-07-12</date><time_start>15:05</time_start><time_end>16:00</time_end></item>
     <item id="sch-53"><stage_id>stage-lunar</stage_id><performer_id>perf-53</performer_id><date>2026-07-12</date><time_start>16:15</time_start><time_end>17:15</time_end></item>

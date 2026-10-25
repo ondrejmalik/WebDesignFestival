@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Festival Artists Catalog – Layout 06: Accordion Drawer Hub. 60 performers cataloged into collapsible genre drawers with biographies, set times, audio teasers, and deep-linking profiles.">
+    <title>Festival of Darkness 2 | Artists (Accordion Drawer Hub)</title>
+    <link rel="stylesheet" href="layout.css">
+    <script src="../common/festival-data.js" defer></script>
+    <script src="layout.js" defer></script>
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- Top Header & Primary Wrapping Inline Navigation -->
+        <header id="nav-placeholder">
+            <nav class="wf-nav-inline" aria-label="Main Navigation">
+                <a href="index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule (<span class="fav-count-badge">0</span>) ]</a>
+            </nav>
+            <hr>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+
+            <!-- Page Title Section -->
+            <section class="wf-box" aria-labelledby="artists-title">
+                <h1 id="artists-title">[ 60 Artists Lineup & Profile Drawers ]</h1>
+                <p><strong>[ July 10–12, 2026 | Kutna Hora | 60 International & Czech Acts Across 2 Stages ]</strong></p>
+                <hr>
+                <p>[ <strong>Genre Accordion Architecture:</strong> Performers are grouped into 4 high-level stylistic category drawers. Tap any drawer to expand its lineup, then open individual artist cards to read full biographies, check set times, and bookmark them to your personal schedule. Direct URL hash deep-links (e.g. <code>#perf-01</code>) automatically expand and target the corresponding profile. ]</p>
+            </section>
+
+            <!-- Global Accordion Toolbar & Status -->
+            <div class="accordion-controls-bar">
+                <div>
+                    <strong>[ Artist Drawers: ]</strong>
+                    <span id="artists-status-count" style="font-size: 0.85rem; color: #444; margin-left: 6px;">[ Showing 60 of 60 performers ]</span>
+                </div>
+                <div>
+                    <button class="btn-box" data-action="expand-all">[ ▾ Expand All Artists ]</button>
+                    <button class="btn-box" data-action="collapse-all">[ ▸ Collapse All Artists ]</button>
+                </div>
+            </div>
+
+            <!-- Search and Genre Filters -->
+            <section class="wf-box" aria-label="Artist Filter Ribbon">
+                <h2>[ Filter Lineup by Genre & Search ]</h2>
+                <hr>
+
+                <div class="drawer-filter-bar">
+                    <span class="filter-label">[ Genre: ]</span>
+                    <button class="btn-box active" data-filter-genre="all">[ All Styles (60) ]</button>
+                    <button class="btn-box" data-filter-genre="techno">[ Dark Techno / EBM ]</button>
+                    <button class="btn-box" data-filter-genre="ambient">[ Post-Rock / Ambient ]</button>
+                    <button class="btn-box" data-filter-genre="synth">[ Synthwave / Darkwave ]</button>
+                    <button class="btn-box" data-filter-genre="industrial">[ Industrial / Noise ]</button>
+                </div>
+
+                <div class="drawer-filter-bar" style="margin-bottom: 0;">
+                    <span class="filter-label">[ Search: ]</span>
+                    <input type="text" id="artist-search-input" placeholder="Search performer name, country, genre, bio keywords..." class="input-box" style="flex: 1; min-width: 180px;">
+                    <button class="btn-box" id="clear-artist-search-btn">[ Clear ]</button>
+                </div>
+            </section>
+
+            <!-- Dynamic Artists Render Container -->
+            <section id="accordion-artists-container" aria-label="Accordion Artist Directory">
+                <!-- Hydrated dynamically by layout.js using FESTIVAL_DATA.PERFORMERS -->
+                <div class="wf-box-sub" style="text-align: center; padding: 24px;">
+                    <p>[ Loading 60 artist profiles and genre drawer categories... ]</p>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer id="footer-placeholder">
+            <hr>
+            <div class="wf-footer-inline">
+                <span class="festival-brand">[ Festival of Darkness 2 ]</span>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+                <span style="color: #666; font-size: 0.85rem; margin-left: auto;">[ 60 Performers Lineup &bull; Pure Client-Side ]</span>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

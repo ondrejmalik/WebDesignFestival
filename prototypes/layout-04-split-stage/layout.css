@@ -1,0 +1,532 @@
+/* ==========================================================================
+   Festival of Darkness 2 – Layout 04: Split Stage Switcher Stylesheet
+   Minimalist Low-Fidelity Wireframe (#222, #777, hr #333, 0 radiuses, 0 shadows, 0 gradients)
+   Full Responsive Layout with Min 44x44px Touch Targets & Zero Horizontal Overflow
+   ========================================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    background: #fff;
+    color: #111;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.4;
+    font-size: 15px;
+}
+
+.wf-container {
+    width: 100%;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 12px 14px;
+}
+
+/* ==========================================================================
+   Navigation & Footer: Strictly Unbordered, Fluid Multiline Wrapping
+   ========================================================================== */
+.wf-nav-inline,
+.wf-footer-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 18px;
+    padding: 8px 0;
+    border: none;
+    background: transparent;
+}
+
+.wf-nav-inline a,
+.wf-footer-inline a {
+    color: #111;
+    text-decoration: underline;
+    font-size: 0.95rem;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 6px;
+}
+
+.wf-nav-inline a:hover,
+.wf-footer-inline a:hover {
+    color: #555;
+}
+
+.festival-brand {
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 0;
+}
+
+.festival-brand:hover {
+    text-decoration: none;
+    color: #333;
+}
+
+/* ==========================================================================
+   Wireframe Box Containers (#222, #777, hr #333)
+   Strictly 0 border-radius, 0 box-shadow, 0 gradients
+   ========================================================================== */
+.wf-box {
+    border: 1px solid #222;
+    padding: 14px;
+    background: #fff;
+    margin-bottom: 14px;
+    width: 100%;
+}
+
+.wf-box-sub {
+    border: 1px solid #777;
+    padding: 12px;
+    background: #fafafa;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #333;
+    margin: 12px 0;
+    width: 100%;
+}
+
+/* ==========================================================================
+   Interactive Controls: Buttons, Inputs, Min 44x44px Touch Targets
+   ========================================================================== */
+.btn-box {
+    border: 1px solid #111;
+    padding: 8px 16px;
+    background: #eee;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #000;
+    min-height: 44px;
+    min-width: 44px;
+    box-sizing: border-box;
+    vertical-align: middle;
+    user-select: none;
+}
+
+.btn-box:hover {
+    background: #ddd;
+}
+
+.btn-box:focus {
+    outline: 2px solid #000;
+}
+
+.btn-box.active {
+    background: #222;
+    color: #fff;
+    border-color: #000;
+}
+
+.btn-box-danger {
+    border: 1px solid #b71c1c;
+    background: #ffebee;
+    color: #b71c1c;
+}
+
+.btn-box-danger:hover {
+    background: #ffcdd2;
+}
+
+.input-box {
+    border: 1px solid #555;
+    padding: 8px 12px;
+    font-size: 0.95rem;
+    background: #fff;
+    color: #111;
+    min-height: 44px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.input-box:focus {
+    outline: 2px solid #111;
+    border-color: #111;
+}
+
+/* ==========================================================================
+   Split Stage Switcher Metaphor: Segmented Stage Switch Bar
+   ========================================================================== */
+.stage-switcher-hero {
+    border: 2px solid #222;
+    background: #f8f8f8;
+    padding: 14px;
+    margin-bottom: 16px;
+}
+
+.stage-switcher-segmented {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.stage-switch-btn {
+    flex: 1 1 200px;
+    min-height: 48px;
+    border: 2px solid #222;
+    background: #eee;
+    color: #111;
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8px 14px;
+    text-decoration: none;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+.stage-switch-btn:hover {
+    background: #ddd;
+}
+
+.stage-switch-btn.active {
+    background: #222;
+    color: #fff;
+    border-color: #000;
+}
+
+.stage-switch-btn.stage-lunar-highlight {
+    border: 2px solid #000;
+    background: #eaeaea;
+}
+
+.stage-switch-btn.stage-lunar-highlight.active {
+    background: #111;
+    color: #fff;
+}
+
+/* Stage quick badges */
+.stage-badge-solar {
+    display: inline-block;
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border: 1px solid #b26a00;
+    background: #fff8e1;
+    color: #b26a00;
+    min-height: 24px;
+}
+
+.stage-badge-lunar {
+    display: inline-block;
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border: 1px solid #1a237e;
+    background: #e8eaf6;
+    color: #1a237e;
+    min-height: 24px;
+}
+
+/* ==========================================================================
+   Filter Toolbar: Days, Stages, Genres, Bookmarked Only
+   ========================================================================== */
+.sch-toolbar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.filter-label {
+    font-weight: bold;
+    font-size: 0.88rem;
+    min-width: 65px;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+}
+
+.filter-btn {
+    border: 1px solid #555;
+    background: #fff;
+    color: #111;
+    padding: 8px 12px;
+    min-height: 44px;
+    min-width: 44px;
+    cursor: pointer;
+    font-size: 0.86rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.filter-btn:hover {
+    background: #eee;
+}
+
+.filter-btn.active {
+    background: #222;
+    color: #fff;
+    border-color: #000;
+}
+
+.filter-btn-fav {
+    border: 1px solid #28a745;
+    background: #f4fff4;
+    color: #1e7e34;
+    font-weight: bold;
+}
+
+.filter-btn-fav.active {
+    background: #28a745;
+    color: #fff;
+}
+
+/* ==========================================================================
+   Scenario 2: Favorite Bookmarking State & Highlighting (.is-favourite)
+   ========================================================================== */
+.is-favourite {
+    background: #d4edda !important;
+    border: 2px solid #28a745 !important;
+}
+
+.sch-fav-btn {
+    min-height: 44px;
+    min-width: 44px;
+    font-size: 1.25rem;
+    cursor: pointer;
+    border: 1px solid #777;
+    background: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    color: #111;
+}
+
+.sch-fav-btn:hover {
+    background: #eee;
+}
+
+.is-favourite .sch-fav-btn {
+    border-color: #28a745;
+    background: #28a745;
+    color: #fff;
+}
+
+/* Conflict state */
+.has-conflict {
+    border: 2px solid #b71c1c !important;
+    background: #ffebee !important;
+}
+
+.conflict-warning-badge {
+    color: #b71c1c;
+    font-weight: bold;
+    font-size: 0.88rem;
+    display: inline-block;
+    padding: 4px 6px;
+    border: 1px solid #b71c1c;
+    background: #fff;
+    margin-top: 4px;
+}
+
+.clear-status-badge {
+    color: #2e7d32;
+    font-weight: bold;
+    font-size: 0.88rem;
+    display: inline-block;
+    padding: 4px 6px;
+    border: 1px solid #28a745;
+    background: #fff;
+    margin-top: 4px;
+}
+
+/* ==========================================================================
+   Program & Schedule Grid Layout: Zero Horizontal Overflow
+   ========================================================================== */
+.sch-stats-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid #222;
+    background: #fafafa;
+    margin-bottom: 12px;
+}
+
+.split-stage-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+.split-stage-column {
+    flex: 1 1 100%;
+    width: 100%;
+}
+
+@media (min-width: 860px) {
+    .split-stage-container.parallel-mode {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    .split-stage-container.parallel-mode .split-stage-column {
+        flex: 1 1 50%;
+        max-width: calc(50% - 8px);
+    }
+}
+
+.stage-column-header {
+    border: 2px solid #222;
+    padding: 12px;
+    background: #eee;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.sch-cell {
+    border: 1px solid #777;
+    background: #fafafa;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    min-height: 52px;
+    width: 100%;
+}
+
+.sch-cell-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.sch-cell-time {
+    font-weight: bold;
+    font-size: 0.95rem;
+    color: #000;
+}
+
+.sch-cell-artist {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #111;
+    word-break: break-word;
+}
+
+.sch-cell-meta {
+    font-size: 0.85rem;
+    color: #444;
+    margin-top: 2px;
+}
+
+/* ==========================================================================
+   Artist Catalog & Details
+   ========================================================================== */
+.artists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+    width: 100%;
+}
+
+.artist-card {
+    border: 1px solid #777;
+    background: #fafafa;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 180px;
+    width: 100%;
+}
+
+.artist-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.artist-card-name {
+    font-size: 1.05rem;
+    font-weight: bold;
+}
+
+.artist-card-genre {
+    font-size: 0.85rem;
+    color: #444;
+    margin-top: 2px;
+}
+
+.artist-card-bio {
+    font-size: 0.88rem;
+    color: #222;
+    margin: 8px 0;
+    line-height: 1.35;
+}
+
+.artist-card-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #ddd;
+}
+
+/* ==========================================================================
+   Grid & Flex Utilities (Zero Overflow)
+   ========================================================================== */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    width: 100%;
+}
+
+.col {
+    flex: 1 1 260px;
+    min-width: 0;
+}
+
+.table-responsive {
+    width: 100%;
+    margin: 10px 0;
+}

@@ -1,0 +1,87 @@
+{
+  "project": "Festival of Darkness 2 - Mobile-First Prototypes & Showcase Hub",
+  "version": "1.0.0",
+  "description": "Comprehensive E2E and static analysis verification suite covering all 5 verification tiers.",
+  "tiers": [
+    {
+      "tier": 1,
+      "name": "Canonical Data & Shared Module Integrity",
+      "scope": "prototypes/common/festival-data.js, data.xml, js/artists.js",
+      "testCases": [
+        { "id": "TC-T1-01", "name": "Shared festival-data.js exists and is loadable in Node and Browser", "target": "prototypes/common/festival-data.js" },
+        { "id": "TC-T1-02", "name": "Metadata properties match canonical festival specifications", "target": "METADATA" },
+        { "id": "TC-T1-03", "name": "Exactly 60 unique performers (perf-01 through perf-60) are defined", "target": "PERFORMERS" },
+        { "id": "TC-T1-04", "name": "Exactly 60 unique schedule items (sch-01 through sch-60) are defined", "target": "SCHEDULE" },
+        { "id": "TC-T1-05", "name": "1-to-1 mapping exists between schedule items and performers", "target": "SCHEDULE <-> PERFORMERS" },
+        { "id": "TC-T1-06", "name": "All 60 performer bios are present and non-empty", "target": "PERFORMERS.bio" },
+        { "id": "TC-T1-07", "name": "Stage distribution is balanced (30 Solar Horizon, 30 Lunar Forest Dome)", "target": "SCHEDULE.stageId" },
+        { "id": "TC-T1-08", "name": "Post-midnight hour minute calculation adds 1440 mins to hours < 8", "target": "timeToMinutes" },
+        { "id": "TC-T1-09", "name": "Interval overlap detection accurately identifies time collisions", "target": "isOverlapping" },
+        { "id": "TC-T1-10", "name": "Covered dome schedule helper filters correctly for Scenario 1", "target": "getCoveredDomeSchedule" }
+      ]
+    },
+    {
+      "tier": 2,
+      "name": "Central Showcase Hub & Device Simulator",
+      "scope": "prototypes/index.html",
+      "testCases": [
+        { "id": "TC-T2-01", "name": "Showcase Hub HTML exists and contains standard semantic headers", "target": "prototypes/index.html" },
+        { "id": "TC-T2-02", "name": "Device viewport switcher supports iPhone SE, Pixel 7, iPad Mini, and Full Desktop", "target": "#controls-toolbar" },
+        { "id": "TC-T2-03", "name": "Centered simulated device frame with simulator iframe is present", "target": "#simulator-iframe" },
+        { "id": "TC-T2-04", "name": "Device chrome includes status bar (time, battery, signal) and address bar", "target": ".device-top-status-bar" },
+        { "id": "TC-T2-05", "name": "Layout selector toolbar includes direct links to all 10 prototype layouts", "target": "#layout-buttons-container" },
+        { "id": "TC-T2-06", "name": "Subpage quick selector launches all 6 subpages for active layout", "target": "index, program, artists, stages, practical-info, my-schedule" },
+        { "id": "TC-T2-07", "name": "Interactive 5-point evaluation rubric matrix contains 10 layout rows and score inputs", "target": "#rubric-matrix-table" },
+        { "id": "TC-T2-08", "name": "Rubric weighted scoring formula matches specified weights (25, 25, 20, 15, 15)", "target": "calculateWeightedScore" },
+        { "id": "TC-T2-09", "name": "Automatic winner calculation and winner highlight banner are implemented", "target": "#winner-banner" },
+        { "id": "TC-T2-10", "name": "Scenario 1 and Scenario 2 interactive validation testbeds are present", "target": "#scenarios-section" }
+      ]
+    },
+    {
+      "tier": 3,
+      "name": "Prototype Directory & Static File Inventory",
+      "scope": "prototypes/layout-01 through layout-10 (80 files)",
+      "testCases": [
+        { "id": "TC-T3-01", "name": "L01: App-Shell Bottom Nav (6 subpages + layout.css + layout.js)", "target": "prototypes/layout-01-app-shell" },
+        { "id": "TC-T3-02", "name": "L02: Chronological Feed (6 subpages + layout.css + layout.js)", "target": "prototypes/layout-02-chronological-feed" },
+        { "id": "TC-T3-03", "name": "L03: Modular Bento-Grid (6 subpages + layout.css + layout.js)", "target": "prototypes/layout-03-bento-grid" },
+        { "id": "TC-T3-04", "name": "L04: Split Stage Switcher (6 subpages + layout.css + layout.js)", "target": "prototypes/layout-04-split-stage" },
+        { "id": "TC-T3-05", "name": "L05: Dense Data Terminal (6 subpages + layout.css + layout.js)", "target": "prototypes/layout-05-dense-terminal" },
+        { "id": "TC-T3-06", "name": "L06: Accordion Drawer Hub (6 subpages + layout.css + layout.js)", "target": "prototypes/layout-06-accordion-drawer" },
+        { "id": "TC-T3-07", "name": "L07: Floating Action Dock (6 subpages + layout.css + layout.js)", "target": "prototypes/layout-07-floating-dock" },
+        { "id": "TC-T3-08", "name": "L08: Horizontal Snap Deck (6 subpages + layout.css + layout.js)", "target": "prototypes/layout-08-snap-deck" },
+        { "id": "TC-T3-09", "name": "L09: Swiss Typographic Index (6 subpages + layout.css + layout.js)", "target": "prototypes/layout-09-swiss-grid" },
+        { "id": "TC-T3-10", "name": "L10: Mission Control Dashboard (6 subpages + layout.css + layout.js)", "target": "prototypes/layout-10-mission-control" }
+      ]
+    },
+    {
+      "tier": 4,
+      "name": "Responsive, Semantic & Ergonomic Rules",
+      "scope": "All layout HTML and CSS files",
+      "testCases": [
+        { "id": "TC-T4-01", "name": "HTML5 semantic landmark elements used across all pages", "target": "header, nav, main, section, article, footer" },
+        { "id": "TC-T4-02", "name": "Heading hierarchy h1 through h4 properly structured", "target": "h1-h4" },
+        { "id": "TC-T4-03", "name": "Inline unbordered navigation wrapping naturally without horizontal scrollbar", "target": "flex-wrap: wrap" },
+        { "id": "TC-T4-04", "name": "Brand link strictly un-underlined (text-decoration: none)", "target": ".festival-brand" },
+        { "id": "TC-T4-05", "name": "Wireframe box layout rules applied (#222, #777, hr #333, no shadows/radiuses/gradients)", "target": "layout.css" },
+        { "id": "TC-T4-06", "name": "Mobile interactive elements meet minimum 44x44px touch target standard", "target": "min-height / min-width >= 44px" },
+        { "id": "TC-T4-07", "name": "Zero horizontal overflow across 375px, 412px, 768px, 1200px viewports", "target": "scrollWidth <= clientWidth" },
+        { "id": "TC-T4-08", "name": "All 60 performers cataloged in artists.html", "target": "artists.html" },
+        { "id": "TC-T4-09", "name": "All 60 timetable slots cataloged in program.html", "target": "program.html" }
+      ]
+    },
+    {
+      "tier": 5,
+      "name": "Scenario Walkthroughs, Shared State & Clash Engine",
+      "scope": "Cross-layout functional integration and LocalStorage state",
+      "testCases": [
+        { "id": "TC-T5-01", "name": "Scenario 1: Covered dome timetable accessible in <= 3 taps from homepage", "target": "index.html -> covered dome" },
+        { "id": "TC-T5-02", "name": "Scenario 2: Shared localStorage key 'festival_favorites' used consistently", "target": "localStorage['festival_favorites']" },
+        { "id": "TC-T5-03", "name": "Scenario 2: Favorite items follow normalized schema {id, artist, stage, day, time, genre}", "target": "favorite schema" },
+        { "id": "TC-T5-04", "name": "Scenario 2: Active favorites trigger visual highlight .is-favourite (#d4edda and #28a745)", "target": ".is-favourite" },
+        { "id": "TC-T5-05", "name": "Scenario 2: Pairwise collision detection flags overlapping shows with #b71c1c and warning badge", "target": "my-schedule.html clash alert" },
+        { "id": "TC-T5-06", "name": "Scenario 2: Non-overlapping shows display clear green status badge", "target": "my-schedule.html clear status" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Artist Catalog – Festival of Darkness 2 (60 Performers)">
+    <title>Festival of Darkness 2 | Artists Catalog</title>
+    <link rel="stylesheet" href="layout.css">
+    <script src="../common/festival-data.js"></script>
+    <script src="layout.js" defer></script>
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- HEADER & UNBORDERED INLINE NAVIGATION -->
+        <header>
+            <nav class="wf-nav-inline">
+                <a href="index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program Feed ]</a>
+                <a href="artists.html" class="active">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule <span class="nav-fav-count"></span> ]</a>
+            </nav>
+        </header>
+        <hr>
+
+        <main>
+            <!-- Page Header -->
+            <section class="wf-box">
+                <h1>[ Artist Lineup & Catalog ]</h1>
+                <p>[ Complete roster of all 60 international and local performers appearing across our two stages July 10–12, 2026 in Kutna Hora. ]</p>
+                <p style="font-size: 0.88rem; color: #555;">[ Search by artist name, origin code (e.g. CZ, DE, IS, UK), or filter by musical genre and stage. Tap ★ Bookmark to pin any artist to your schedule. ]</p>
+            </section>
+
+            <!-- Search & Filter Controls -->
+            <section class="wf-box" style="padding: 12px;">
+                <h2>[ Search & Filter Lineup ]</h2>
+                <div class="search-control-box">
+                    <input type="search" id="artist-search-input" class="input-text" placeholder="🔍 Search by artist name, genre, origin, or keyword..." aria-label="Search performers">
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+                    <div style="flex: 1 1 200px;">
+                        <label for="artist-genre-filter" style="display: block; font-size: 0.8rem; font-weight: 700; margin-bottom: 4px; text-transform: uppercase;">Genre:</label>
+                        <select id="artist-genre-filter" class="input-text" style="width: 100%;">
+                            <option value="all">[ All Genres ]</option>
+                            <option value="Post-Rock">Post-Rock</option>
+                            <option value="Ambient">Ambient</option>
+                            <option value="Techno">Techno / Dark Techno</option>
+                            <option value="Dream Pop">Dream Pop / Shoegaze</option>
+                            <option value="Indie">Indie Rock</option>
+                            <option value="IDM">IDM / Glitch</option>
+                            <option value="Experimental">Experimental / Modular</option>
+                            <option value="Drone">Drone / Soundscape</option>
+                            <option value="Industrial">Industrial</option>
+                            <option value="Coldwave">Coldwave / Darkwave</option>
+                        </select>
+                    </div>
+
+                    <div style="flex: 1 1 200px;">
+                        <label for="artist-stage-filter" style="display: block; font-size: 0.8rem; font-weight: 700; margin-bottom: 4px; text-transform: uppercase;">Stage:</label>
+                        <select id="artist-stage-filter" class="input-text" style="width: 100%;">
+                            <option value="all">[ All Stages ]</option>
+                            <option value="solar">☀️ Solar Horizon Stage (Open-air)</option>
+                            <option value="lunar">🌧️ Lunar Forest Dome (Covered Shelter)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="margin-top: 10px; font-size: 0.85rem; color: #555;">
+                    <span id="artists-summary-text">[ Displaying 60 performers ]</span>
+                </div>
+            </section>
+
+            <!-- Artists Grid Container (All 60 Performers rendered dynamically) -->
+            <section class="wf-box" style="padding: 12px;">
+                <h2>[ Performers List ]</h2>
+                <div id="artists-grid-container" class="artist-grid">
+                    <!-- Populated dynamically by layout.js using FESTIVAL_DATA.PERFORMERS -->
+                    <noscript>
+                        <p>[ JavaScript is required to view the interactive artist catalog. ]</p>
+                    </noscript>
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer>
+            <hr>
+            <p>[ Festival of Darkness 2 ] • Kutna Hora, July 10–12, 2026 • Course Exercise 3 Mobile Wireframe Prototype L02 (Chronological Feed)</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>

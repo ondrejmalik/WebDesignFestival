@@ -1,0 +1,418 @@
+/* ==========================================================================
+   Layout 10: Mission Control Dashboard - Standalone Stylesheet
+   Festival of Darkness 2 | Kutna Hora, July 10–12, 2026
+   UX Metaphor: Ground Operations Command Center, live telemetry, weather triage
+   Adheres strictly to Minimalist Wireframe Rules (agents.md & zadani.txt)
+   ========================================================================== */
+
+/* Universal Box Sizing & Reset */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #111;
+    background: #fff;
+    line-height: 1.45;
+    padding: 12px;
+    margin: 0;
+    width: 100%;
+}
+
+/* Responsive Main Container */
+.wf-container {
+    max-width: 960px;
+    margin: 0 auto;
+    width: 100%;
+    min-width: 0;
+}
+
+/* Minimalist Wireframe Box System */
+.wf-box {
+    border: 1px solid #222;
+    padding: 14px;
+    background: #fff;
+    margin-bottom: 14px;
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.wf-box-sub {
+    border: 1px solid #777;
+    padding: 12px;
+    background: #fafafa;
+    margin-bottom: 12px;
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+/* Clean Wireframe Divider */
+hr {
+    border: 0;
+    border-top: 1px solid #333;
+    margin: 12px 0;
+}
+
+/* Headings Hierarchy */
+h1 {
+    font-size: 1.35rem;
+    line-height: 1.25;
+    margin-bottom: 6px;
+    word-break: break-word;
+}
+
+h2 {
+    font-size: 1.15rem;
+    line-height: 1.3;
+    margin-bottom: 6px;
+    word-break: break-word;
+}
+
+h3 {
+    font-size: 1.02rem;
+    line-height: 1.35;
+    margin-bottom: 4px;
+    word-break: break-word;
+}
+
+h4 {
+    font-size: 0.95rem;
+    line-height: 1.35;
+    margin-bottom: 4px;
+    word-break: break-word;
+}
+
+p {
+    font-size: 0.92rem;
+    margin-bottom: 6px;
+}
+
+/* Navigation & Footer: Unbordered, wrapping naturally */
+.wf-nav-inline,
+.wf-footer-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 18px;
+    padding: 8px 0;
+    font-size: 0.92rem;
+}
+
+.wf-nav-inline .festival-brand,
+.wf-footer-inline .festival-brand {
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+}
+
+.wf-nav-inline a,
+.wf-footer-inline a {
+    color: #111;
+    text-decoration: underline;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 4px;
+}
+
+.wf-nav-inline a:hover,
+.wf-footer-inline a:hover {
+    color: #555;
+}
+
+.wf-nav-inline a.active {
+    font-weight: bold;
+    text-decoration: none;
+    border-bottom: 2px solid #222;
+}
+
+/* Standard Buttons & Touch Targets (>= 44x44px) */
+.btn-box {
+    border: 1px solid #111;
+    padding: 10px 16px;
+    background: #eee;
+    font-size: 0.88rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #000;
+    min-height: 44px;
+    min-width: 44px;
+    line-height: 1.2;
+}
+
+.btn-box:hover {
+    background: #ddd;
+}
+
+.btn-box:focus-visible {
+    outline: 2px solid #000;
+    outline-offset: 2px;
+}
+
+.btn-accent {
+    background: #222;
+    color: #fff;
+    border-color: #000;
+    font-weight: bold;
+}
+
+.btn-accent:hover {
+    background: #444;
+    color: #fff;
+}
+
+.input-box {
+    border: 1px solid #555;
+    padding: 10px 12px;
+    font-size: 0.9rem;
+    background: #fff;
+    min-height: 44px;
+    width: 100%;
+}
+
+/* Flexible Rows */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.col {
+    flex: 1 1 200px;
+    min-width: 0;
+}
+
+/* Live Telemetry Status Strip */
+.telemetry-strip {
+    background: #2b3035;
+    color: #fff;
+    padding: 8px 12px;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 0.82rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #111;
+}
+
+.telemetry-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Rain Alert Banner (Scenario 1) */
+.rain-shelter-banner {
+    border: 2px solid #222;
+    background: #f8f9fa;
+    padding: 12px;
+    margin-bottom: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+/* Mission Control Dashboard Grid */
+.control-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.control-tile {
+    border: 1px solid #777;
+    background: #fafafa;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 140px;
+}
+
+.tile-label {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 0.78rem;
+    font-weight: bold;
+    color: #555;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.tile-value {
+    font-size: 1.15rem;
+    font-weight: bold;
+    color: #111;
+    margin: 4px 0;
+}
+
+/* Schedule & Performance Rows */
+.sch-stats-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    background: #f1f3f5;
+    border: 1px solid #777;
+    padding: 8px 12px;
+    font-size: 0.88rem;
+    margin-bottom: 10px;
+}
+
+.sch-item {
+    border: 1px solid #777;
+    background: #fafafa;
+    padding: 10px;
+    margin-bottom: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.sch-item.is-favourite {
+    background: #d4edda !important;
+    border: 2px solid #28a745 !important;
+}
+
+.sch-item.is-conflict {
+    background: #ffebee !important;
+    border: 2px solid #b71c1c !important;
+}
+
+.sch-item-time {
+    font-family: Consolas, "Courier New", monospace;
+    font-weight: bold;
+    font-size: 0.88rem;
+    color: #222;
+    min-width: 110px;
+}
+
+.sch-item-artist {
+    font-weight: bold;
+    font-size: 0.95rem;
+    color: #000;
+}
+
+.sch-item-stage {
+    font-size: 0.82rem;
+    color: #555;
+}
+
+.sch-fav-btn {
+    border: 1px solid #555;
+    background: #fff;
+    color: #222;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sch-fav-btn:hover {
+    background: #222;
+    color: #fff;
+}
+
+.sch-item.is-favourite .sch-fav-btn {
+    background: #28a745;
+    color: #fff;
+    border-color: #1e7e34;
+}
+
+/* Artists Catalog Grid */
+.artists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.artist-card {
+    border: 1px solid #777;
+    background: #fafafa;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 150px;
+}
+
+.artist-card.is-favourite {
+    background: #d4edda !important;
+    border: 2px solid #28a745 !important;
+}
+
+.artist-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.artist-card-title {
+    font-size: 0.98rem;
+    font-weight: bold;
+    color: #000;
+}
+
+.artist-card-genre {
+    font-size: 0.82rem;
+    color: #555;
+    margin-bottom: 4px;
+}
+
+.artist-card-schedule {
+    font-size: 0.78rem;
+    background: #eee;
+    border: 1px solid #ccc;
+    padding: 6px 8px;
+    margin: 6px 0;
+    font-family: Consolas, "Courier New", monospace;
+}
+
+/* Conflict Alert */
+.conflict-badge {
+    background: #b71c1c;
+    color: #fff;
+    font-weight: bold;
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    display: inline-block;
+    margin-top: 4px;
+}
+
+.ok-badge {
+    background: #28a745;
+    color: #fff;
+    font-weight: bold;
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    display: inline-block;
+    margin-top: 4px;
+}

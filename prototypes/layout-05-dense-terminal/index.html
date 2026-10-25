@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Festival of Darkness 2 – Layout 05: Dense Data Terminal Homepage. High-density teletext & departure board telemetry dashboard with 1-tap covered dome rain shelter routing.">
+    <title>Festival of Darkness 2 | Dense Data Terminal</title>
+    <link rel="stylesheet" href="layout.css">
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- HEADER & NAVIGATION: Fluid Multiline Wrapping, No Outer Box -->
+        <header id="nav-placeholder">
+            <nav class="wf-nav-inline">
+                <a href="index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule (<span class="fav-count-badge">0</span>) ]</a>
+            </nav>
+            <hr>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main>
+
+            <!-- 1. Terminal System Status Bar -->
+            <div class="terminal-sysbar">
+                <span>[ SYS_STATUS: OPERATIONAL // KUTNA HORA, CZ ]</span>
+                <span>[ EDITION: 2026-07-10..12 ]</span>
+                <span class="terminal-status-chip chip-live">[ LIVE DATASTREAM ]</span>
+            </div>
+
+            <!-- 2. Festival Identity Box -->
+            <section class="wf-box">
+                <h1>[ FESTIVAL OF DARKNESS 2 ]</h1>
+                <p><strong>[ July 10 – July 12, 2026 // Kutna Hora Festival Grounds, Czech Republic ]</strong></p>
+                <hr>
+                <p>[ Prototype Layout 05: <strong>Dense Data Terminal</strong>. Monospace high-density operational display engineered for rapid telemetry scanning, zero visual noise, and flight-departure-board information density. ]</p>
+                <p style="margin-top: 6px; font-size: 0.88rem; color: #444;">
+                    [ TELEMETRY: 3 DAYS // 2 STAGES // 60 PERFORMERS // 13:00–04:00 DAILY OPERATING ENVELOPE ]
+                </p>
+            </section>
+
+            <!-- 3. Primary UX Metaphor: Terminal Telemetry Dashboard & Weather Shelter Override (Scenario 1 Direct Access <= 1 Tap) -->
+            <section class="wf-box">
+                <h2>[ ⚡ Stage Telemetry & Weather Alert Console ]</h2>
+                <hr>
+
+                <!-- Weather Precipitation Protocol Banner (Scenario 1 Callout) -->
+                <div class="wf-box-sub" style="border: 2px solid #1a237e; background: #e8eaf6;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;">
+                        <strong style="color: #1a237e; font-size: 0.95rem;">[ 🌧️ METEOROLOGY ALERT: PRECIPITATION PROTOCOL ACTIVE ]</strong>
+                        <span class="terminal-status-chip chip-lunar">[ COVERED RAIN SHELTER // ONLINE ]</span>
+                    </div>
+                    <p style="font-size: 0.88rem; margin-top: 6px; color: #111;">
+                        During inclement rainfall, the <strong>Lunar Forest Dome</strong> operates as a 100% weatherproof, climate-controlled marquee sanctuary (1,800 capacity) featuring continuous non-stop programming.
+                    </p>
+                    <div style="margin-top: 10px;">
+                        <!-- Scenario 1: Direct 1-tap button to covered dome timetable -->
+                        <a href="program.html?stage=lunar" class="btn-box" data-stage="lunar" style="background: #1a237e; color: #ffffff; border-color: #000051;">
+                            <strong>[ CMD: JUMP_TO_COVERED_DOME &rarr; ]</strong>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Stage Telemetry Monitor Cards -->
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col wf-box-sub" style="border-left: 4px solid #b26a00;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <strong>[ NODE_01: SOLAR HORIZON STAGE ]</strong>
+                            <span class="terminal-status-chip chip-solar">[OPEN-AIR]</span>
+                        </div>
+                        <hr>
+                        <p><strong>[ CAPACITY:</strong> 4,500 ATTENDEES <strong>]</strong></p>
+                        <p><strong>[ ACOUSTICS:</strong> L-Acoustics K2 Line Array <strong>]</strong></p>
+                        <p><strong>[ GENRES:</strong> Post-Rock, Alternative, Indie Rock, AV <strong>]</strong></p>
+                        <p><strong>[ SCHEDULE:</strong> 30 Sets // 10 Daily (13:00–02:00) <strong>]</strong></p>
+                        <div style="margin-top: 10px;">
+                            <a href="program.html?stage=solar" class="btn-box" data-stage="solar" style="width: 100%;">
+                                [ CMD: QUERY_SOLAR_TIMETABLE &rarr; ]
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col wf-box-sub" style="border-left: 4px solid #1a237e;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <strong>[ NODE_02: LUNAR FOREST DOME ]</strong>
+                            <span class="terminal-status-chip chip-lunar">[RAIN SHELTER]</span>
+                        </div>
+                        <hr>
+                        <p><strong>[ CAPACITY:</strong> 1,800 ATTENDEES (COVERED DOME) <strong>]</strong></p>
+                        <p><strong>[ ACOUSTICS:</strong> Funktion-One + 360° Laser Array <strong>]</strong></p>
+                        <p><strong>[ GENRES:</strong> Modular Ambient, IDM, Dark Techno, Acid <strong>]</strong></p>
+                        <p><strong>[ SCHEDULE:</strong> 30 Sets // 10 Daily (14:30–04:00) <strong>]</strong></p>
+                        <div style="margin-top: 10px;">
+                            <a href="program.html?stage=lunar" class="btn-box" data-stage="lunar" style="width: 100%;">
+                                [ CMD: QUERY_LUNAR_TIMETABLE &rarr; ]
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Terminal Command Directory -->
+            <section class="wf-box">
+                <h2>[ System Subsystem Directory ]</h2>
+                <hr>
+                <div class="row">
+                    <div class="col wf-box-sub">
+                        <h3>[ 01: FULL_TIMETABLE ]</h3>
+                        <p>[ Complete tabular matrix of 60 performance slots across July 10–12 with terminal filters and star bookmarking. ]</p>
+                        <hr>
+                        <a href="program.html" class="btn-box">[ EXEC: LOAD_PROGRAM &rarr; ]</a>
+                    </div>
+
+                    <div class="col wf-box-sub">
+                        <h3>[ 02: ARTIST_REGISTRY ]</h3>
+                        <p>[ Teletext database of all 60 performers with instant keyword search, origin codes, full bios, and deep-linking. ]</p>
+                        <hr>
+                        <a href="artists.html" class="btn-box">[ EXEC: LOAD_ARTISTS &rarr; ]</a>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col wf-box-sub">
+                        <h3>[ 03: STAGES_FACILITIES ]</h3>
+                        <p>[ Technical specifications, sound engineering rigging, and spatial walking transit telemetry between stages. ]</p>
+                        <hr>
+                        <a href="stages.html" class="btn-box">[ EXEC: LOAD_STAGES &rarr; ]</a>
+                    </div>
+
+                    <div class="col wf-box-sub">
+                        <h3>[ 04: PRACTICAL_LOGISTICS ]</h3>
+                        <p>[ Train transit from Prague, shuttle bus dispatch, camping zone protocol, cashless RFID, and FAQ. ]</p>
+                        <hr>
+                        <a href="practical-info.html" class="btn-box">[ EXEC: LOAD_LOGISTICS &rarr; ]</a>
+                    </div>
+
+                    <div class="col wf-box-sub">
+                        <h3>[ 05: PERSONAL_SCHEDULE ]</h3>
+                        <p>[ Custom itinerary engine synced with LocalStorage featuring real-time collision alerts for overlapping stage sets. ]</p>
+                        <hr>
+                        <a href="my-schedule.html" class="btn-box">[ EXEC: LOAD_SCHEDULE (<span class="fav-count-badge">0</span>) &rarr; ]</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. Key Operational Specs -->
+            <section class="wf-box">
+                <h2>[ Festival Ground Technical Specifications ]</h2>
+                <hr>
+                <div class="row">
+                    <div class="col wf-box-sub">
+                        <h4>[ DURATION & HOURS ]</h4>
+                        <p>July 10–12, 2026. Gates open daily at 12:00. Music program operates continuously from 13:00 to 04:00 (15 hours/day).</p>
+                    </div>
+                    <div class="col wf-box-sub">
+                        <h4>[ TWO PERFORMANCE NODES ]</h4>
+                        <p>Solar Horizon Stage (open-air main amphitheater) and Lunar Forest Dome (covered audiovisual marquee rain shelter).</p>
+                    </div>
+                    <div class="col wf-box-sub">
+                        <h4>[ 60 TOTAL SESSIONS ]</h4>
+                        <p>Exactly 30 sets on Solar Stage and 30 sets on Lunar Dome. Balanced evenly (10 sets per stage per day).</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- FOOTER: Strictly Unbordered, Fluid Multiline Wrapping -->
+        <footer id="footer-placeholder">
+            <hr>
+            <div class="wf-footer-inline">
+                <span class="festival-brand">[ Festival of Darkness 2 ]</span>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+                <span style="color: #666; font-size: 0.82rem; margin-left: auto;">[ Layout 05: Dense Data Terminal &bull; Kutna Hora 2026 ]</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Portable Universal Dataset & Client Logic -->
+    <script src="../common/festival-data.js"></script>
+    <script src="layout.js"></script>
+</body>
+</html>

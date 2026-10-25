@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Festival Artists Lineup – Layout 04: Split Stage Switcher. Full catalog of 60 international performers with stage-by-stage split filtering, text search, and bookmarking.">
+    <title>Festival of Darkness 2 | Artists Lineup</title>
+    <link rel="stylesheet" href="layout.css">
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- HEADER & NAVIGATION -->
+        <header id="nav-placeholder">
+            <nav class="wf-nav-inline">
+                <a href="index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule (<span class="fav-count-badge">0</span>) ]</a>
+            </nav>
+            <hr>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main>
+
+            <!-- Title & Lineup Overview -->
+            <section class="wf-box">
+                <h1>[ Artist Lineup & Catalog ]</h1>
+                <p><strong>[ 60 International Performers | July 10–12, 2026 | Kutna Hora ]</strong></p>
+                <hr>
+                <p>[ <strong>Split Stage Catalog:</strong> Filter performers by stage channel (Solar Horizon Stage vs Lunar Forest Dome), search by performer name or musical genre, and bookmark acts directly to your personal itinerary. ]</p>
+            </section>
+
+            <!-- Stage Filter & Search Controls -->
+            <section class="wf-box stage-switcher-hero">
+                <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px;">
+                    <h2 style="font-size: 1.05rem;">[ ⚡ Filter Lineup by Stage Channel ]</h2>
+                    <span id="artist-count-status" style="font-size: 0.85rem; color: #555;">[ Displaying 60 of 60 artists ]</span>
+                </div>
+                <hr>
+
+                <div class="stage-switcher-segmented">
+                    <button class="stage-switch-btn active" data-artist-stage="all">
+                        ☵ All 60 Performers<br><small style="font-weight: normal; font-size: 0.82rem;">[ Both Festival Stages ]</small>
+                    </button>
+                    <button class="stage-switch-btn" data-artist-stage="solar">
+                        ☀️ Solar Horizon Stage<br><small style="font-weight: normal; font-size: 0.82rem;">[ 30 Open-Air Band Acts ]</small>
+                    </button>
+                    <button class="stage-switch-btn stage-lunar-highlight" data-artist-stage="lunar">
+                        🌙 Lunar Forest Dome<br><small style="font-weight: normal; font-size: 0.82rem;">[ 30 Electronic / AV Acts ]</small>
+                    </button>
+                </div>
+
+                <div class="filter-row" style="margin-top: 10px;">
+                    <span class="filter-label">[ Search: ]</span>
+                    <input type="text" id="artist-search-input" placeholder="Search performer name, genre (e.g. Techno, Ambient, Post-Rock), or country..." class="input-box" style="flex: 1; min-width: 180px;">
+                    <button id="clear-search-btn" class="btn-box">[ Clear ]</button>
+                </div>
+            </section>
+
+            <!-- Dynamic Artists Grid Container -->
+            <div class="artists-grid" id="artists-catalog-container">
+                <!-- Hydrated dynamically by layout.js using FESTIVAL_DATA.PERFORMERS -->
+                <div class="wf-box-sub" style="grid-column: 1 / -1; text-align: center; padding: 24px;">
+                    <p>[ Loading 60 performer profiles from canonical dataset... ]</p>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer id="footer-placeholder">
+            <hr>
+            <div class="wf-footer-inline">
+                <span class="festival-brand">[ Festival of Darkness 2 ]</span>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+                <span style="color: #666; font-size: 0.85rem; margin-left: auto;">[ 60 Performers Catalog &bull; Pure Client-Side ]</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Portable Universal Dataset & Client Logic -->
+    <script src="../common/festival-data.js"></script>
+    <script src="layout.js"></script>
+</body>
+</html>

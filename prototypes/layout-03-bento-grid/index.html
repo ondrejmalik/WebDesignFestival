@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Festival of Darkness 2 – Modular Bento-Grid Layout (Kutna Hora, July 10–12, 2026)">
+    <title>Festival of Darkness 2 | Bento Grid Home</title>
+    <link rel="stylesheet" href="layout.css">
+    <script src="../common/festival-data.js"></script>
+    <script src="layout.js" defer></script>
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- HEADER & NAVIGATION -->
+        <header id="nav-placeholder">
+            <nav class="wf-nav-inline">
+                <a href="index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+                <a href="index.html" class="active">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+            </nav>
+            <hr>
+        </header>
+
+        <!-- MAIN BENTO-GRID DASHBOARD -->
+        <main>
+            <div class="bento-grid">
+
+                <!-- 1. Hero Bento Card (Span Full) -->
+                <section class="bento-card bento-col-full">
+                    <div class="bento-card-header">
+                        <div>
+                            <h1>[ FESTIVAL OF DARKNESS 2 ]</h1>
+                            <p><strong>[ July 10 – July 12, 2026 | Kutna Hora, Czech Republic ]</strong></p>
+                        </div>
+                        <span class="bento-badge">LAYOUT 03: MODULAR BENTO</span>
+                    </div>
+                    <hr>
+                    <p>[ Welcome to the modular dashboard for Festival of Darkness 2. Three days of electronic, ambient, post-rock, and audiovisual performances in Kutna Hora across two distinct stages. ]</p>
+                    <div class="bento-card-sub" style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between;">
+                        <div><strong>Dates:</strong> July 10–12, 2026</div>
+                        <div><strong>Stages:</strong> 2 (Solar Stage & Lunar Dome)</div>
+                        <div><strong>Artists:</strong> 60 Live Performances</div>
+                        <div><strong>Payment:</strong> 100% Cashless RFID</div>
+                    </div>
+                </section>
+
+                <!-- 2. Rain Shelter Alert & Covered Dome Status (Scenario 1 Fast-Path - Span 2) -->
+                <section class="bento-card bento-col-2" style="border: 2px solid #222;">
+                    <div class="bento-card-header">
+                        <h3>[ 🌧️ Rain Shelter Alert & Covered Dome Status ]</h3>
+                        <span class="bento-badge bento-badge-alert">SCENARIO 1 FAST PATH</span>
+                    </div>
+                    <hr>
+                    <p><strong>Current Weather Telemetry:</strong> All-weather operations active. In the event of rain or adverse weather, the indoor covered dome offers 100% rain protection.</p>
+                    <div class="bento-card-sub">
+                        <p><strong>Stage:</strong> Lunar Forest Dome (Covered Dome)</p>
+                        <p><strong>Shelter Capacity:</strong> 1,800 visitors (dry, weatherproof, ventilated marquee)</p>
+                        <p><strong>Programming Focus:</strong> Continuous techno, modular ambient, experimental electronics & 360° laser mapping</p>
+                    </div>
+                    <div class="bento-actions">
+                        <a href="program.html?stage=lunar" class="btn-box" style="background: #222; color: #fff; font-weight: bold;">
+                            [ 🌧️ View Covered Dome Timetable (1-Tap) &rarr; ]
+                        </a>
+                        <a href="stages.html#stage-lunar" class="btn-box">[ View Covered Dome Specs ]</a>
+                    </div>
+                </section>
+
+                <!-- 3. Now Playing & Next Up Widget (Span 1) -->
+                <section class="bento-card bento-col-1">
+                    <div class="bento-card-header">
+                        <h3>[ Live Stage Matrix ]</h3>
+                        <span class="bento-badge"><span class="live-dot"></span>LIVE GLANCE</span>
+                    </div>
+                    <hr>
+                    <div class="bento-card-sub" style="margin-bottom: 6px;">
+                        <p><strong>☀️ Solar Horizon Stage:</strong></p>
+                        <p style="font-size: 0.85rem;">Now: Echoes of Light (14:00)</p>
+                        <p style="font-size: 0.85rem; color: #555;">Next: Velvet Morning (15:00)</p>
+                    </div>
+                    <div class="bento-card-sub">
+                        <p><strong>🌙 Lunar Forest Dome:</strong></p>
+                        <p style="font-size: 0.85rem;">Now: Subtle Resonances (15:00)</p>
+                        <p style="font-size: 0.85rem; color: #555;">Next: Binary Fields (16:05)</p>
+                    </div>
+                    <div class="bento-actions">
+                        <a href="program.html" class="btn-box" style="width: 100%;">[ Open Full Program &rarr; ]</a>
+                    </div>
+                </section>
+
+                <!-- 4. My Schedule Summary Widget (Span 1) -->
+                <section class="bento-card bento-col-1">
+                    <div class="bento-card-header">
+                        <h3>[ ★ My Schedule ]</h3>
+                        <span class="bento-badge">SAVED SHOWS</span>
+                    </div>
+                    <hr>
+                    <p>Track your saved performances and check for time conflicts between Solar and Lunar stages.</p>
+                    <div class="bento-card-sub" style="text-align: center; padding: 12px 6px;">
+                        <div style="font-size: 1.8rem; font-weight: bold; line-height: 1;"><span id="bento-fav-count">0</span></div>
+                        <p style="margin: 4px 0 0 0; font-size: 0.8rem; color: #555;">Performances Bookmarked</p>
+                        <div id="bento-conflict-status" style="margin-top: 6px;">
+                            <span class="badge-clear">[ ✓ 0 Conflicts ]</span>
+                        </div>
+                    </div>
+                    <div class="bento-actions">
+                        <a href="my-schedule.html" class="btn-box" style="width: 100%;">[ Open My Planner &rarr; ]</a>
+                    </div>
+                </section>
+
+                <!-- 5. Quick Lineup Search Widget (Span 2) -->
+                <section class="bento-card bento-col-2">
+                    <div class="bento-card-header">
+                        <h3>[ 🔍 Quick Lineup Search ]</h3>
+                        <span class="bento-badge">60 PERFORMERS</span>
+                    </div>
+                    <hr>
+                    <p>Instant search across all 60 performers by artist name, genre, or country of origin:</p>
+                    <div style="margin-top: 8px;">
+                        <input type="search" id="bento-search-input" class="input-box" placeholder="Search artists (e.g. Echoes, Ambient, Techno, SK, DE)..." aria-label="Search artists">
+                    </div>
+                    <div id="bento-search-results" style="display: none; margin-top: 8px;"></div>
+                    <div class="bento-actions">
+                        <a href="artists.html" class="btn-box">[ View All 60 Artists Catalog &rarr; ]</a>
+                    </div>
+                </section>
+
+                <!-- 6. Bento Section Modules: Program -->
+                <section class="bento-card bento-col-1">
+                    <div class="bento-card-header">
+                        <h3>[ 📅 Program Timetable ]</h3>
+                        <span class="bento-badge">TIMETABLE</span>
+                    </div>
+                    <hr>
+                    <p>Complete 3-day schedule matrix spanning 13:00 to 04:00 across Solar Horizon Stage and Lunar Forest Dome.</p>
+                    <div class="bento-actions">
+                        <a href="program.html" class="btn-box" style="width: 100%;">[ Browse Timetable &rarr; ]</a>
+                    </div>
+                </section>
+
+                <!-- 7. Bento Section Modules: Artists -->
+                <section class="bento-card bento-col-1">
+                    <div class="bento-card-header">
+                        <h3>[ 🎤 Artist Catalog ]</h3>
+                        <span class="bento-badge">PROFILES</span>
+                    </div>
+                    <hr>
+                    <p>Detailed profiles, biographies, genres, and audio previews for all 60 international performers.</p>
+                    <div class="bento-actions">
+                        <a href="artists.html" class="btn-box" style="width: 100%;">[ View Artist Catalog &rarr; ]</a>
+                    </div>
+                </section>
+
+                <!-- 8. Bento Section Modules: Stages & Map -->
+                <section class="bento-card bento-col-1">
+                    <div class="bento-card-header">
+                        <h3>[ ⛺ Stages & Venue Map ]</h3>
+                        <span class="bento-badge">GROUNDS</span>
+                    </div>
+                    <hr>
+                    <p>Solar Horizon Stage (open-air, 4,500 cap) and Lunar Forest Dome (covered rain shelter, 1,800 cap).</p>
+                    <div class="bento-actions">
+                        <a href="stages.html" class="btn-box" style="width: 100%;">[ Explore Stages &rarr; ]</a>
+                    </div>
+                </section>
+
+                <!-- 9. Bento Section Modules: Practical Info (Span Full) -->
+                <section class="bento-card bento-col-full">
+                    <div class="bento-card-header">
+                        <h3>[ 🚆 Practical Information, Transit & Camping ]</h3>
+                        <span class="bento-badge">VISITOR GUIDE</span>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col wf-box-sub">
+                            <h4>[ Train Transit & Shuttle ]</h4>
+                            <p>Direct trains from Prague/Brno to Kutna Hora. Free festival shuttles depart train station every 15 minutes.</p>
+                        </div>
+                        <div class="col wf-box-sub">
+                            <h4>[ Tent Village Camping ]</h4>
+                            <p>Secure fenced camping grounds open Friday July 10, 12:00 to Monday July 13, 12:00 with warm showers and flush toilets.</p>
+                        </div>
+                        <div class="col wf-box-sub">
+                            <h4>[ Cashless & FAQ ]</h4>
+                            <p>100% RFID wristband payments. Lockers, charging stations, and all-weather festival policies.</p>
+                        </div>
+                    </div>
+                    <div class="bento-actions" style="margin-top: 12px;">
+                        <a href="practical-info.html" class="btn-box">[ Open Complete Practical Info Guide &rarr; ]</a>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+
+        <!-- FOOTER -->
+        <div id="footer-placeholder">
+            <hr>
+            <footer class="wf-footer-inline">
+                <strong class="festival-brand">[ © 2026 Festival of Darkness 2 ]</strong>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+            </footer>
+        </div>
+
+    </div>
+
+</body>
+</html>

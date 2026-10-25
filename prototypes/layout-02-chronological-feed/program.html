@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chronological Feed Timetable – Festival of Darkness 2">
+    <title>Festival of Darkness 2 | Chronological Program Feed</title>
+    <link rel="stylesheet" href="layout.css">
+    <script src="../common/festival-data.js"></script>
+    <script src="layout.js" defer></script>
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- HEADER & UNBORDERED INLINE NAVIGATION -->
+        <header>
+            <nav class="wf-nav-inline">
+                <a href="index.html" class="festival-brand"><strong>[ Festival of Darkness 2 ]</strong></a>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html" class="active">[ Program Feed ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule <span class="nav-fav-count"></span> ]</a>
+            </nav>
+        </header>
+        <hr>
+
+        <main>
+            <!-- Page Header -->
+            <section class="wf-box">
+                <h1>[ Chronological Program Feed ]</h1>
+                <p>[ Continuous vertical timeline of all 60 performances across July 10–12, 2026 in Kutna Hora. ]</p>
+                <p style="font-size: 0.88rem; color: #555;">[ Tip: Use the sticky ribbon below to filter by Day, Stage, or saved bookmarks. Tap ★ Bookmark on any act to save it to your personal schedule. ]</p>
+            </section>
+
+            <!-- STICKY TOP FILTER RIBBON (L02 Hallmark UX Metaphor) -->
+            <section class="sticky-filter-ribbon" aria-label="Timeline Filters">
+                <!-- Row 1: Day Filter Pills -->
+                <div class="filter-group-row">
+                    <span class="filter-label">Day:</span>
+                    <button type="button" class="btn-pill active" data-filter-day="all">[ All Days ]</button>
+                    <button type="button" class="btn-pill" data-filter-day="day1">[ Day 1 (Fri 10) ]</button>
+                    <button type="button" class="btn-pill" data-filter-day="day2">[ Day 2 (Sat 11) ]</button>
+                    <button type="button" class="btn-pill" data-filter-day="day3">[ Day 3 (Sun 12) ]</button>
+                </div>
+
+                <!-- Row 2: Stage Filter Pills (Includes Scenario 1 1-tap covered dome filter) -->
+                <div class="filter-group-row">
+                    <span class="filter-label">Stage:</span>
+                    <button type="button" class="btn-pill active" data-filter-stage="all">[ All Stages ]</button>
+                    <button type="button" class="btn-pill" data-filter-stage="solar">[ ☀️ Solar Horizon (Open-Air) ]</button>
+                    <button type="button" class="btn-pill pill-covered" data-filter-stage="lunar" id="stage-filter-lunar">[ 🌧️ Lunar Forest Dome (Covered Shelter) ]</button>
+                </div>
+
+                <!-- Row 3: Quick Genre & Bookmarked Only Toggle -->
+                <div class="filter-group-row">
+                    <span class="filter-label">Filter:</span>
+                    <select id="filter-genre-select" style="padding: 6px 10px; border: 1px solid #777; background: #fff; max-width: 200px;">
+                        <option value="all">[ All Genres ]</option>
+                        <option value="Post-Rock">Post-Rock</option>
+                        <option value="Ambient">Ambient</option>
+                        <option value="Techno">Techno / Dark Techno</option>
+                        <option value="Dream Pop">Dream Pop / Shoegaze</option>
+                        <option value="Indie">Indie Rock</option>
+                        <option value="Experimental">Experimental / Modular</option>
+                        <option value="Drone">Drone / Soundscape</option>
+                    </select>
+
+                    <button type="button" class="btn-pill pill-star" id="filter-bookmark-toggle">
+                        ★ Bookmarked Only (0)
+                    </button>
+                </div>
+            </section>
+
+            <!-- Feed Status / Summary -->
+            <section style="margin-bottom: 12px; font-size: 0.85rem; color: #555;">
+                <span id="feed-summary-text">[ Initializing chronological feed stream... ]</span>
+            </section>
+
+            <!-- Vertical Timeline Stream Container -->
+            <section class="wf-box" style="padding: 12px;">
+                <h2>[ Timeline Stream ]</h2>
+                <div id="feed-stream-container" class="feed-stream">
+                    <!-- Populated dynamically by layout.js using FESTIVAL_DATA.SCHEDULE -->
+                    <noscript>
+                        <p>[ JavaScript is required to run the interactive timeline filter and bookmarking engine. ]</p>
+                    </noscript>
+                </div>
+            </section>
+
+            <!-- Schedule Footnote / Scenario 1 Quick Action -->
+            <section class="wf-box" style="margin-top: 16px;">
+                <h3>[ Weather Sanctuary & Stage Info ]</h3>
+                <p>[ In case of rainfall, the <strong>Lunar Forest Dome</strong> remains 100% dry and operational with continuous sets and warm acoustic isolation. Capacity is 1,800. ]</p>
+                <div style="margin-top: 8px;">
+                    <a href="stages.html" class="btn-box">[ View Stage Maps & Venue Information &rarr; ]</a>
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer>
+            <hr>
+            <p>[ Festival of Darkness 2 ] • Kutna Hora, July 10–12, 2026 • Course Exercise 3 Mobile Wireframe Prototype L02 (Chronological Feed)</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>

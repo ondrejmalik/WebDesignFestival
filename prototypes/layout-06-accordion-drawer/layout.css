@@ -1,0 +1,542 @@
+/* ==========================================================================
+   Layout 06: Accordion Drawer Hub - Wireframe Stylesheet
+   Festival of Darkness 2 | Kutna Hora, July 10–12, 2026
+   Pure client-side minimalist wireframe with zero-scroll progressive disclosure.
+   ========================================================================== */
+
+/* Universal box-sizing for zero horizontal overflow */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Base Document Layout */
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #111;
+    background: #fff;
+    line-height: 1.45;
+    font-size: 15px;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* Master Container */
+.wf-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px;
+}
+
+/* Headings Hierarchy */
+h1, h2, h3, h4, h5, h6 {
+    color: #111;
+    margin-top: 0;
+    margin-bottom: 8px;
+    line-height: 1.25;
+    word-break: break-word;
+}
+
+h1 { font-size: 1.45rem; }
+h2 { font-size: 1.2rem; }
+h3 { font-size: 1.05rem; }
+h4 { font-size: 0.95rem; }
+
+p {
+    margin: 0 0 8px 0;
+    word-break: break-word;
+}
+
+/* Horizontal Dividers */
+hr {
+    border: 0;
+    border-top: 1px solid #333;
+    margin: 12px 0;
+    width: 100%;
+}
+
+/* ==========================================================================
+   Navigation (Unbordered, Wrapping, No Horizontal Scrollbar)
+   ========================================================================== */
+#nav-placeholder, header {
+    margin-bottom: 12px;
+    width: 100%;
+}
+
+.wf-nav-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 18px;
+    padding: 6px 0;
+    width: 100%;
+}
+
+.festival-brand {
+    font-size: 1.08rem;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+}
+
+.festival-brand:hover {
+    text-decoration: none;
+}
+
+.wf-nav-inline a {
+    color: #111;
+    text-decoration: underline;
+    font-size: 0.92rem;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 2px 6px;
+}
+
+.wf-nav-inline a:hover {
+    color: #000;
+    background: #f0f0f0;
+}
+
+.wf-nav-inline a.festival-brand {
+    text-decoration: none;
+}
+
+/* Footer Navigation */
+footer {
+    margin-top: 24px;
+    margin-bottom: 16px;
+    width: 100%;
+}
+
+.wf-footer-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 18px;
+    padding: 6px 0;
+    font-size: 0.88rem;
+    width: 100%;
+}
+
+.wf-footer-inline a {
+    color: #222;
+    text-decoration: underline;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 2px 6px;
+}
+
+/* ==========================================================================
+   Wireframe Boxes & Cards
+   ========================================================================== */
+.wf-box {
+    border: 1px solid #222;
+    background: #fff;
+    padding: 14px;
+    margin-bottom: 14px;
+    width: 100%;
+}
+
+.wf-box-sub {
+    border: 1px solid #777;
+    background: #fafafa;
+    padding: 12px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+/* Flex Grid Containers */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 8px 0;
+    width: 100%;
+}
+
+.col {
+    flex: 1 1 280px;
+    min-width: 0;
+}
+
+/* ==========================================================================
+   Accordion Drawer Hub Specific Styles
+   ========================================================================== */
+.accordion-controls-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    border: 1px solid #777;
+    background: #fafafa;
+}
+
+/* Details and Summary for Native Accessible Drawers */
+details.wf-drawer {
+    border: 1px solid #222;
+    background: #fff;
+    margin-bottom: 12px;
+    width: 100%;
+    display: block;
+}
+
+details.wf-drawer > summary {
+    padding: 10px 14px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    background: #f2f2f2;
+    border-bottom: 1px solid #ddd;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+    outline: none;
+    list-style: none;
+}
+
+details.wf-drawer > summary::-webkit-details-marker {
+    display: none;
+}
+
+details.wf-drawer[open] > summary {
+    background: #e2e2e2;
+    border-bottom: 1px solid #222;
+}
+
+.drawer-summary-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+}
+
+.drawer-badge {
+    font-size: 0.8rem;
+    font-weight: normal;
+    padding: 2px 8px;
+    border: 1px solid #777;
+    background: #fff;
+    margin-left: 6px;
+    white-space: nowrap;
+}
+
+.drawer-icon {
+    font-family: monospace;
+    font-size: 1.15rem;
+    font-weight: bold;
+    padding-left: 8px;
+    flex-shrink: 0;
+}
+
+.drawer-body {
+    padding: 12px;
+    background: #fff;
+    width: 100%;
+}
+
+/* Sub-Drawers for Nested Granular Collapse */
+details.wf-drawer-sub {
+    border: 1px solid #777;
+    background: #fafafa;
+    margin-bottom: 10px;
+    width: 100%;
+    display: block;
+}
+
+details.wf-drawer-sub > summary {
+    padding: 8px 12px;
+    font-weight: bold;
+    font-size: 0.94rem;
+    cursor: pointer;
+    background: #ececec;
+    border-bottom: 1px solid #ccc;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+    outline: none;
+    list-style: none;
+}
+
+details.wf-drawer-sub > summary::-webkit-details-marker {
+    display: none;
+}
+
+details.wf-drawer-sub[open] > summary {
+    background: #dedede;
+    border-bottom: 1px solid #777;
+}
+
+.drawer-sub-body {
+    padding: 10px;
+    background: #fafafa;
+    width: 100%;
+}
+
+/* ==========================================================================
+   Buttons and Interactive Form Controls (>=44x44px touch targets)
+   ========================================================================== */
+.btn-box {
+    border: 1px solid #111;
+    padding: 8px 14px;
+    background: #eee;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #000;
+    margin: 3px 4px 3px 0;
+    user-select: none;
+    min-height: 44px;
+    min-width: 44px;
+    line-height: 1.2;
+    vertical-align: middle;
+    font-family: inherit;
+    text-align: center;
+}
+
+.btn-box:hover {
+    background: #ddd;
+}
+
+.btn-box.active {
+    background: #222;
+    color: #fff;
+    border-color: #000;
+    font-weight: bold;
+}
+
+.btn-box.btn-accent {
+    background: #e0f2fe;
+    border-color: #0284c7;
+    color: #0369a1;
+    font-weight: bold;
+}
+
+.btn-box.btn-accent:hover {
+    background: #bae6fd;
+}
+
+.btn-fav-star {
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 1.35rem;
+    line-height: 1;
+    padding: 6px 12px;
+    cursor: pointer;
+    border: 1px solid #555;
+    background: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    color: #111;
+}
+
+.btn-fav-star:hover {
+    background: #f0f0f0;
+}
+
+.input-box {
+    border: 1px solid #555;
+    padding: 8px 12px;
+    font-size: 0.92rem;
+    background: #fff;
+    min-height: 44px;
+    font-family: inherit;
+    width: 100%;
+    color: #111;
+}
+
+.input-box:focus {
+    outline: 2px solid #222;
+}
+
+/* Toolbar and Filters */
+.drawer-filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    width: 100%;
+}
+
+.filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+}
+
+.filter-label {
+    font-weight: bold;
+    font-size: 0.88rem;
+    margin-right: 4px;
+}
+
+/* ==========================================================================
+   Scenario 1: Live Covered Dome Rain Shelter Banner
+   ========================================================================== */
+.rain-shelter-banner {
+    border: 1px solid #222;
+    background: #fff;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    width: 100%;
+}
+
+.rain-shelter-banner.shelter-alert-active {
+    border: 2px solid #0284c7;
+    background: #f0f9ff;
+}
+
+/* ==========================================================================
+   Performance Slots & Artist Cards
+   ========================================================================== */
+.sch-cell {
+    border: 1px solid #777;
+    background: #fafafa;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.sch-cell-info {
+    flex: 1 1 240px;
+    min-width: 0;
+}
+
+.artist-card {
+    border: 1px solid #777;
+    background: #fafafa;
+    padding: 12px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.artist-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.stage-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border: 1px solid #555;
+    background: #fff;
+    margin-top: 4px;
+}
+
+.stage-badge-lunar {
+    background: #e0f2fe;
+    border-color: #0284c7;
+    color: #0369a1;
+}
+
+/* ==========================================================================
+   Scenario 2: Favorite Highlighting & Conflict Alerts
+   ========================================================================== */
+.is-favourite {
+    background: #d4edda !important;
+    border: 2px solid #28a745 !important;
+}
+
+details.wf-drawer.is-favourite > summary,
+details.wf-drawer-sub.is-favourite > summary {
+    background: #d4edda !important;
+    border-bottom: 2px solid #28a745 !important;
+}
+
+.is-conflict {
+    background: #ffebee !important;
+    border: 2px solid #b71c1c !important;
+}
+
+.conflict-alert-box {
+    border: 2px solid #b71c1c;
+    background: #ffebee;
+    color: #b71c1c;
+    padding: 8px 12px;
+    font-weight: bold;
+    font-size: 0.86rem;
+    margin: 6px 0;
+    width: 100%;
+}
+
+.clear-alert-box {
+    border: 1px solid #28a745;
+    background: #d4edda;
+    color: #155724;
+    padding: 8px 12px;
+    font-weight: bold;
+    font-size: 0.86rem;
+    margin: 6px 0;
+    width: 100%;
+}
+
+/* Counter Badge */
+.fav-count-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    padding: 1px 6px;
+    font-size: 0.82rem;
+    font-weight: bold;
+    border: 1px solid #222;
+    background: #222;
+    color: #fff;
+    margin-left: 4px;
+}
+
+/* Utility to ensure text within tables or lists never forces overflow */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0;
+}
+
+th, td {
+    border: 1px solid #777;
+    padding: 8px 10px;
+    text-align: left;
+    font-size: 0.9rem;
+    word-break: break-word;
+}
+
+th {
+    background: #ececec;
+    border-color: #222;
+    font-weight: bold;
+}
