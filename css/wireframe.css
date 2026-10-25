@@ -523,26 +523,41 @@ hr {
     min-height: 48px;
 }
 
+.wf-top-bar-left,
 .wf-top-bar-placeholder {
-    flex: 1 1 60px;
-    max-width: 100px;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.wf-top-bar-left .lang-switch-btn {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #222;
+    min-height: 38px;
+    line-height: 1;
 }
 
 .wf-top-bar-center {
-    flex: 2 1 auto;
+    flex: 1 1 auto;
     text-align: center;
+    min-width: 0;
 }
 
 .wf-top-bar-center .festival-brand {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: bold;
     color: #000;
     text-decoration: none !important;
 }
 
 .wf-top-bar-right {
-    flex: 1 1 60px;
-    max-width: 100px;
+    flex: 0 0 auto;
     text-align: right;
 }
 
@@ -550,6 +565,20 @@ hr {
     font-weight: bold;
     min-height: 40px;
     padding: 6px 12px;
+}
+
+@media (max-width: 480px) {
+    .wf-top-bar-center .festival-brand {
+        font-size: 0.95rem;
+    }
+    .wf-top-bar-left .lang-switch-btn {
+        padding: 4px 6px;
+        font-size: 0.78rem;
+    }
+    .wf-menu-btn {
+        padding: 4px 8px;
+        font-size: 0.85rem;
+    }
 }
 
 .wf-top-bar-divider {

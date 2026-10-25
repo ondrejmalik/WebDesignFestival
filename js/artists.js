@@ -431,11 +431,19 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('languageChanged', () => {
     syncFavoriteCards();
     const hash = window.location.hash.replace('#', '');
+    const detailContainer = document.getElementById('artist-detail-container');
     if (hash) {
         const card = document.querySelector(`.artist-card[data-id="${hash}"]`);
         if (card) {
             displayArtistDetail(card);
         }
+    } else if (detailContainer && !detailContainer.querySelector('.artist-detail-box')) {
+        const isCs = getActiveLanguage() === 'cs';
+        detailContainer.innerHTML = `
+            <div class="wf-box-sub" style="padding: 14px; text-align: center; color: #555;">
+                <p data-i18n-html="artists_detail_empty">[ ${isCs ? 'Vyberte libovolného z 60 interpretů níže kliknutím na <strong>[ Zobrazit detail &rarr; ]</strong> pro zobrazení profilu, náhledu a času vystoupení.' : 'Select any artist card below by clicking <strong>[ View Detail &rarr; ]</strong> to view their full profile, photo preview, and set info.'} ]</p>
+            </div>
+        `;
     }
     const countEl = document.getElementById('filtered-count');
     if (countEl) {

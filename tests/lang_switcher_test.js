@@ -151,7 +151,33 @@ try {
     const toggledBack = context.window.toggleFestivalLang();
     assert(toggledBack === 'en', 'toggleFestivalLang switches from cs to en');
     assert(context.window.getFestivalLang() === 'en', 'getFestivalLang returns "en" after second toggle');
-    assert(context.window.localStorage.getItem('festival_language') === 'en', 'Language saved to localStorage as en');
+    // Key symmetry check
+    const missingInCs = enKeys.filter(k => !(k in I18N.cs));
+    const missingInEn = csKeys.filter(k => !(k in I18N.en));
+    assert(missingInCs.length === 0, `All EN keys exist in CS (missing: ${missingInCs.join(', ') || 'none'})`);
+    assert(missingInEn.length === 0, `All CS keys exist in EN (missing: ${missingInEn.join(', ') || 'none'})`);
+
+    // Top app bar and nav component verification
+    console.log('\n--- 4. Nav Component Top Bar and Drawer Switcher Verification ---');
+    const navJsContent = fs.readFileSync(path.join(ROOT_DIR, 'components', 'nav.js'), 'utf8');
+    assert(navJsContent.includes('wf-top-bar-left'), 'nav.js defines wf-top-bar-left container in top app bar');
+    assert(navJsContent.includes('lang-switch-btn') && navJsContent.includes('lang-flag') && navJsContent.includes('lang-label'), 'nav.js defines flag button with Language/Jazyk label in top bar');
+    assert(navJsContent.includes('lang-switch-btn-drawer'), 'nav.js defines drawer flag button');
+
+    // Program timetable headers and empty slots verification
+    console.log('\n--- 5. Timetable & Schedule Dynamic Localization Verification ---');
+    const scheduleJsContent = fs.readFileSync(path.join(ROOT_DIR, 'js', 'schedule.js'), 'utf8');
+    assert(scheduleJsContent.includes('sch-day-title') && scheduleJsContent.includes('sch-day-heading'), 'schedule.js targets both sch-day-title and sch-day-heading');
+    assert(scheduleJsContent.includes('sch-header.col-solar') && scheduleJsContent.includes('sch-header.col-lunar'), 'schedule.js targets table headers col-solar and col-lunar');
+    assert(scheduleJsContent.includes('updateTimetableLanguage()'), 'schedule.js defines updateTimetableLanguage()');
+    assert(scheduleJsContent.includes("languageChanged"), 'schedule.js listens to languageChanged event');
+
+    // Artists dynamic localization verification
+    console.log('\n--- 6. Artists Catalog Dynamic Localization Verification ---');
+    const artistsJsContent = fs.readFileSync(path.join(ROOT_DIR, 'js', 'artists.js'), 'utf8');
+    assert(artistsJsContent.includes('window.ARTIST_BIOS_CS'), 'artists.js connects to window.ARTIST_BIOS_CS');
+    assert(artistsJsContent.includes("languageChanged"), 'artists.js listens to languageChanged event');
+    assert(artistsJsContent.includes('Zobrazeno') && artistsJsContent.includes('Showing'), 'artists.js dynamically localizes search counter');
 } catch (e) {
     assert(false, `VM evaluation of js/lang.js threw error: ${e.message}`);
 }

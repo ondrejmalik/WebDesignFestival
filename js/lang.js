@@ -205,6 +205,9 @@
             program_stage_lunar: "[ 🌙 Lunar Forest Dome (Covered Dome) ]",
             program_filter_genre: "[ Genre: ]",
             program_genre_all: "[ All Genres ]",
+            program_day1_title: "[ Friday, July 10, 2026 – Day 1 ]",
+            program_day2_title: "[ Saturday, July 11, 2026 – Day 2 ]",
+            program_day3_title: "[ Sunday, July 12, 2026 – Day 3 ]",
             program_col_slot: "Time Slot",
             program_col_solar: "☀️ Solar Horizon Stage (Open-air Amphitheater)",
             program_col_lunar: "🌙 Lunar Forest Dome (Covered Dome – Rain Shelter)",
@@ -299,7 +302,15 @@
             schedule_remove_btn: "[ 🗑️ Remove from schedule ]",
             schedule_resolve_btn: "[ 🗑️ Remove this performance (Resolve conflict) ]",
             schedule_no_shows_day: "[ You currently have no performances saved for this day. ]",
-            schedule_pick_shows_btn: "[ Pick shows in Program → ]"
+            schedule_pick_shows_btn: "[ Pick shows in Program → ]",
+            schedule_fri_head: "[ Your Timetable: Friday, July 10, 2026 ]",
+            schedule_sat_head: "[ Your Timetable: Saturday, July 11, 2026 ]",
+            schedule_sun_head: "[ Your Timetable: Sunday, July 12, 2026 ]",
+            schedule_sat_empty: "[ You currently have no performances saved for Saturday. ]",
+            schedule_sun_empty: "[ You currently have no performances saved for Sunday. ]",
+            schedule_status_clean: "[ Status: ✓ No time conflict ]",
+            schedule_stage_label: "Stage:",
+            schedule_remove_btn_text: "[ Remove ]"
         },
         cs: {
             // Navigation
@@ -434,6 +445,9 @@
             program_stage_lunar: "[ 🌙 Lunar Forest Dome (Krytá scéna) ]",
             program_filter_genre: "[ Žánr: ]",
             program_genre_all: "[ Všechny žánry ]",
+            program_day1_title: "[ Den 1: Pátek 10. července 2026 ]",
+            program_day2_title: "[ Den 2: Sobota 11. července 2026 ]",
+            program_day3_title: "[ Den 3: Neděle 12. července 2026 ]",
             program_col_slot: "Časový slot",
             program_col_solar: "☀️ Solar Horizon Stage (Venkovní amfiteátr)",
             program_col_lunar: "🌙 Lunar Forest Dome (Krytá kupole – Ochrana před deštěm)",
@@ -528,7 +542,15 @@
             schedule_remove_btn: "[ 🗑️ Odebrat z programu ]",
             schedule_resolve_btn: "[ 🗑️ Odebrat toto vystoupení (Vyřešit kolizi) ]",
             schedule_no_shows_day: "[ Pro tento den zatím nemáte uložená žádná vystoupení. ]",
-            schedule_pick_shows_btn: "[ Vybrat vystoupení v Programu → ]"
+            schedule_pick_shows_btn: "[ Vybrat vystoupení v Programu → ]",
+            schedule_fri_head: "[ Váš harmonogram: Pátek 10. července 2026 ]",
+            schedule_sat_head: "[ Váš harmonogram: Sobota 11. července 2026 ]",
+            schedule_sun_head: "[ Váš harmonogram: Neděle 12. července 2026 ]",
+            schedule_sat_empty: "[ Pro sobotu zatím nemáte uložená žádná vystoupení. ]",
+            schedule_sun_empty: "[ Pro neděli zatím nemáte uložená žádná vystoupení. ]",
+            schedule_status_clean: "[ Stav: ✓ Bez časové kolize ]",
+            schedule_stage_label: "Scéna:",
+            schedule_remove_btn_text: "[ Odebrat ]"
         }
     };
 
@@ -616,8 +638,8 @@
         // 5. Update Language Switch Button (Flag + Language or Jazyk text next to it)
         const langBtns = document.querySelectorAll('.lang-switch-btn, #lang-switch-btn');
         langBtns.forEach(btn => {
-            const flagEl = btn.querySelector('.flag-icon, #lang-flag');
-            const labelEl = btn.querySelector('.lang-label, #lang-label');
+            const flagEl = btn.querySelector('.flag-icon, [id^="lang-flag"]');
+            const labelEl = btn.querySelector('.lang-label, [id^="lang-label"]');
             if (flagEl) {
                 flagEl.textContent = dict.lang_flag;
             }

@@ -293,25 +293,25 @@ function updateTimetableLanguage() {
     const isCs = getActiveLanguage() === 'cs';
 
     // 1. Update day section headings
-    const dayHeaders = document.querySelectorAll('.sch-day-heading');
+    const dayHeaders = document.querySelectorAll('.sch-day-heading, .sch-day-title');
     dayHeaders.forEach(h => {
-        const day = h.getAttribute('data-day');
+        const day = h.getAttribute('data-day') || (h.closest('.sch-day-section') && h.closest('.sch-day-section').getAttribute('data-day'));
         if (day === 'day1') h.textContent = isCs ? '[ Den 1: Pátek 10. července 2026 ]' : '[ Day 1: Friday, July 10, 2026 ]';
         else if (day === 'day2') h.textContent = isCs ? '[ Den 2: Sobota 11. července 2026 ]' : '[ Day 2: Saturday, July 11, 2026 ]';
         else if (day === 'day3') h.textContent = isCs ? '[ Den 3: Neděle 12. července 2026 ]' : '[ Day 3: Sunday, July 12, 2026 ]';
     });
 
     // 2. Update table column headers
-    document.querySelectorAll('.th-slot').forEach(th => th.textContent = isCs ? 'Časový slot' : 'Time Slot');
-    document.querySelectorAll('.th-solar').forEach(th => th.textContent = isCs ? '☀️ Solar Horizon Stage (Venkovní amfiteátr)' : '☀️ Solar Horizon Stage (Open-air Amphitheater)');
-    document.querySelectorAll('.th-lunar').forEach(th => th.textContent = isCs ? '🌙 Lunar Forest Dome (Krytá kupole – Ochrana před deštěm)' : '🌙 Lunar Forest Dome (Covered Dome – Rain Shelter)');
+    document.querySelectorAll('.th-slot, .sch-header.sch-time-col').forEach(th => th.textContent = isCs ? 'Časový slot' : 'Time Slot');
+    document.querySelectorAll('.th-solar, .sch-header.col-solar').forEach(th => th.textContent = isCs ? '☀️ Solar Horizon Stage (Venkovní amfiteátr)' : '☀️ Solar Horizon Stage (Open-air Amphitheater)');
+    document.querySelectorAll('.th-lunar, .sch-header.col-lunar').forEach(th => th.textContent = isCs ? '🌙 Lunar Forest Dome (Krytá kupole – Ochrana před deštěm)' : '🌙 Lunar Forest Dome (Covered Dome – Rain Shelter)');
 
     // 3. Update empty slots text
     document.querySelectorAll('.sch-cell.sch-empty').forEach(cell => {
         const emptyType = cell.getAttribute('data-empty-type');
         if (emptyType === 'doors') {
             cell.textContent = isCs ? '[ Otevření areálu & Příprava ]' : '[ Doors Open & Grounds Preparation ]';
-        } else if (emptyType === 'dome-sound') {
+        } else if (emptyType === 'dome-sound' || emptyType === 'dome-open') {
             cell.textContent = isCs ? '[ Otevření kupole & Zvuková zkouška ]' : '[ Dome Open & Sound Check ]';
         } else if (emptyType === 'stage-change') {
             cell.textContent = isCs ? '[ Přestavba scény & Zvuková zkouška ]' : '[ Stage Changeover & Sound Setup ]';
@@ -324,17 +324,33 @@ function updateTimetableLanguage() {
         }
     });
 
-    // 4. Update band details bio text
+    // 4. Update band details bio text & drawer
     document.querySelectorAll('.sch-cell.sch-event').forEach(cell => {
         const id = cell.getAttribute('data-id');
-        const bioEl = cell.querySelector('.bio-text');
-        if (bioEl && id) {
-            bioEl.textContent = getArtistBio(id);
+        const artist = cell.getAttribute('data-artist') || '';
+        const stage = cell.getAttribute('data-stage') || '';
+        const time = cell.getAttribute('data-time') || '';
+        const genre = cell.getAttribute('data-genre') || '';
+        const bio = getArtistBio(id);
+
+        const detailsDiv = cell.querySelector('.sch-band-details');
+        if (detailsDiv) {
+            const isHidden = detailsDiv.style.display === 'none';
+            detailsDiv.innerHTML = `
+                <p><strong>${isCs ? 'Detaily kapely & bio:' : 'Band Details & Bio:'}</strong> <span class="bio-text">${bio}</span></p>
+                <p style="margin-top: 4px; color: #444;">
+                    <strong>${isCs ? 'Scéna:' : 'Stage:'}</strong> ${stage} | <strong>${isCs ? 'Čas:' : 'Time:'}</strong> ${time} | <strong>${isCs ? 'Žánr:' : 'Genre:'}</strong> ${genre}
+                </p>
+                <div style="margin-top: 6px; display: flex; gap: 8px;">
+                    <a href="artists.html#${id}" style="color: #000; text-decoration: underline; font-weight: bold;">${isCs ? '[ Kompletní profil v sekci Účinkující → ]' : '[ Full profile in Artists section → ]'}</a>
+                </div>
+            `;
+            detailsDiv.style.display = isHidden ? 'none' : 'block';
         }
+
         const detailBtn = cell.querySelector('.sch-detail-btn');
         if (detailBtn) {
-            const detailEl = cell.querySelector(`#detail-${id}`);
-            const isHidden = !detailEl || detailEl.style.display === 'none';
+            const isHidden = !detailsDiv || detailsDiv.style.display === 'none';
             detailBtn.textContent = isHidden 
                 ? (isCs ? '[ ℹ️ Detaily kapely ]' : '[ ℹ️ Band Details ]') 
                 : (isCs ? '[ ✖ Skrýt detaily ]' : '[ ✖ Hide Details ]');
@@ -810,6 +826,7 @@ function renderMySchedule() {
 document.addEventListener('DOMContentLoaded', () => {
     // If on program page
     setupProgramTimetable();
+    updateTimetableLanguage();
     updateHighlightState();
     updateStatsBar();
 

@@ -33,7 +33,12 @@
         return `
 <!-- 1. Top Bar (Centered Festival Name + Right Menu Button) -->
 <header class="wf-top-app-bar" role="banner">
-    <div class="wf-top-bar-placeholder"></div>
+    <div class="wf-top-bar-left">
+        <button id="lang-switch-btn" class="btn-box lang-switch-btn" type="button" aria-label="${langText}" title="${title}">
+            <span class="flag-icon" id="lang-flag" aria-hidden="true">${flag}</span>
+            <span class="lang-label" id="lang-label">${langText}</span>
+        </button>
+    </div>
     <div class="wf-top-bar-center">
         <a href="index.html" class="festival-brand" aria-label="Festival of Darkness 2 Home">
             <strong>${brand}</strong>
@@ -68,9 +73,9 @@
     <hr>
     <div class="drawer-footer">
         <div class="lang-switch-box" style="margin: 0; width: 100%;">
-            <button id="lang-switch-btn" class="btn-box lang-switch-btn" type="button" aria-label="${langText}" title="${title}" style="width: 100%; justify-content: center;">
-                <span class="flag-icon" id="lang-flag" aria-hidden="true">${flag}</span>
-                <span class="lang-label" id="lang-label">${langText}</span>
+            <button id="lang-switch-btn-drawer" class="btn-box lang-switch-btn" type="button" aria-label="${langText}" title="${title}" style="width: 100%; justify-content: center;">
+                <span class="flag-icon" id="lang-flag-drawer" aria-hidden="true">${flag}</span>
+                <span class="lang-label" id="lang-label-drawer">${langText}</span>
             </button>
         </div>
     </div>
@@ -167,10 +172,12 @@
             setupDrawer();
             updateBottomBadge();
 
-            const langBtn = document.getElementById('lang-switch-btn');
-            if (langBtn && typeof window.toggleFestivalLang === 'function') {
-                langBtn.onclick = window.toggleFestivalLang;
-            }
+            const langBtns = placeholder.querySelectorAll('.lang-switch-btn');
+            langBtns.forEach(btn => {
+                if (typeof window.toggleFestivalLang === 'function') {
+                    btn.onclick = window.toggleFestivalLang;
+                }
+            });
         }
     }
 
