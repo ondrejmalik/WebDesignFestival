@@ -78,23 +78,23 @@
 
 <!-- 3. Ergonomic Bottom Thumb Navigation Dock (Albert App Style: Artists - Stages - HOME - Timetable - My Plan) -->
 <nav class="bottom-nav-dock" aria-label="Mobile Bottom Navigation">
-    <a href="artists.html" class="bottom-dock-item ${currentPath === 'artists.html' ? 'active' : ''}" id="dock-item-artists">
+    <a href="artists.html" class="bottom-dock-item bottom-nav-item ${currentPath === 'artists.html' ? 'active' : ''}" id="dock-item-artists">
         <span class="dock-icon">🎤</span>
         <span class="dock-label" data-i18n="dock_artists">${dockArtists}</span>
     </a>
-    <a href="stages.html" class="bottom-dock-item ${currentPath === 'stages.html' ? 'active' : ''}" id="dock-item-stages">
+    <a href="stages.html" class="bottom-dock-item bottom-nav-item ${currentPath === 'stages.html' ? 'active' : ''}" id="dock-item-stages">
         <span class="dock-icon">⛺</span>
         <span class="dock-label" data-i18n="dock_stages">${dockStages}</span>
     </a>
-    <a href="index.html" class="bottom-dock-item bottom-dock-home ${currentPath === 'index.html' ? 'active' : ''}" id="dock-item-home">
+    <a href="index.html" class="bottom-dock-item bottom-nav-item bottom-dock-home ${currentPath === 'index.html' ? 'active' : ''}" id="dock-item-home">
         <span class="dock-icon">🏠</span>
         <span class="dock-label" data-i18n="dock_home">${dockHome}</span>
     </a>
-    <a href="program.html" class="bottom-dock-item ${currentPath === 'program.html' ? 'active' : ''}" id="dock-item-timetable">
+    <a href="program.html" class="bottom-dock-item bottom-nav-item ${currentPath === 'program.html' ? 'active' : ''}" id="dock-item-timetable">
         <span class="dock-icon">📅</span>
         <span class="dock-label" data-i18n="dock_timetable">${dockTimetable}</span>
     </a>
-    <a href="my-schedule.html" class="bottom-dock-item ${currentPath === 'my-schedule.html' ? 'active' : ''}" id="dock-item-myplan">
+    <a href="my-schedule.html" class="bottom-dock-item bottom-nav-item ${currentPath === 'my-schedule.html' ? 'active' : ''}" id="dock-item-myplan">
         <span class="dock-icon">★</span>
         <span class="dock-label"><span data-i18n="dock_myplan">${dockMyPlan}</span> <span class="nav-badge-count" style="display:none;">0</span></span>
     </a>
@@ -108,10 +108,12 @@
             const raw = localStorage.getItem('festival_favorites');
             const favs = raw ? JSON.parse(raw) : [];
             const count = Array.isArray(favs) ? favs.length : 0;
-            const badges = document.querySelectorAll('.nav-badge-count');
+            const badges = document.querySelectorAll('.nav-badge-count, .fav-count-badge');
             badges.forEach(b => {
                 b.textContent = count;
-                b.style.display = count > 0 ? 'inline-block' : 'none';
+                if (b.classList.contains('nav-badge-count')) {
+                    b.style.display = count > 0 ? 'inline-block' : 'none';
+                }
             });
         } catch (e) {}
     }
