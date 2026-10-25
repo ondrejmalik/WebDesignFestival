@@ -134,8 +134,8 @@ try {
     // Flag button labels
     assert(I18N.en.lang_label === 'Language', 'EN lang_label is "Language"');
     assert(I18N.cs.lang_label === 'Jazyk', 'CS lang_label is "Jazyk"');
-    assert(I18N.en.lang_flag === '🇬🇧', 'EN lang_flag is 🇬🇧');
-    assert(I18N.cs.lang_flag === '🇨🇿', 'CS lang_flag is 🇨🇿');
+    assert(I18N.en.lang_flag === 'img/1f1ec-1f1e7.svg', 'EN lang_flag is img/1f1ec-1f1e7.svg');
+    assert(I18N.cs.lang_flag === 'img/1f1e8-1f1ff.svg', 'CS lang_flag is img/1f1e8-1f1ff.svg');
 
     // Language toggle function test
     assert(typeof context.window.getFestivalLang === 'function', 'getFestivalLang is exposed');

@@ -83,7 +83,7 @@
             nav_myschedule: "[ My Schedule ]",
             lang_label: "Language",
             lang_switch_title: "Switch language to Czech",
-            lang_flag: "🇬🇧",
+            lang_flag: "img/1f1ec-1f1e7.svg",
             dock_artists: "Artists",
             dock_stages: "Stages",
             dock_home: "HOME",
@@ -323,7 +323,7 @@
             nav_myschedule: "[ Můj program ]",
             lang_label: "Jazyk",
             lang_switch_title: "Přepnout do angličtiny",
-            lang_flag: "🇨🇿",
+            lang_flag: "img/1f1e8-1f1ff.svg",
             dock_artists: "Účinkující",
             dock_stages: "Scény",
             dock_home: "ÚVOD",
@@ -641,7 +641,9 @@
             const flagEl = btn.querySelector('.flag-icon, [id^="lang-flag"]');
             const labelEl = btn.querySelector('.lang-label, [id^="lang-label"]');
             if (flagEl) {
-                flagEl.textContent = dict.lang_flag;
+                const flagSrc = dict.lang_flag || (currentLang === 'cs' ? 'img/1f1e8-1f1ff.svg' : 'img/1f1ec-1f1e7.svg');
+                const flagAlt = currentLang === 'cs' ? 'CZ' : 'GB';
+                flagEl.innerHTML = `<img src="${flagSrc}" alt="${flagAlt}" class="flag-img" width="20" height="20">`;
             }
             if (labelEl) {
                 labelEl.textContent = dict.lang_label;

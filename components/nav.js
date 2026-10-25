@@ -22,7 +22,9 @@
         const dockTimetable = isCs ? 'Program' : 'Timetable';
         const dockMyPlan = isCs ? 'Můj plán' : 'My Plan';
 
-        const flag = isCs ? '🇨🇿' : '🇬🇧';
+        const flagImg = isCs ? 'img/1f1e8-1f1ff.svg' : 'img/1f1ec-1f1e7.svg';
+        const flagAlt = isCs ? 'CZ' : 'GB';
+        const flag = `<img src="${flagImg}" alt="${flagAlt}" class="flag-img" width="20" height="20">`;
         const langText = isCs ? 'Jazyk' : 'Language';
         const title = isCs ? 'Přepnout do angličtiny' : 'Switch language to Czech';
 
