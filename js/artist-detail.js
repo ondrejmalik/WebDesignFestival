@@ -1033,11 +1033,16 @@
                 if (idx > -1) {
                     currentFavs.splice(idx, 1);
                 } else {
+                    const num = parseInt(String(artist.id || '').replace(/\D/g, ''), 10) || 1;
+                    const canonicalDay = (num <= 20) 
+                        ? 'Day 1 (Friday, July 10)' 
+                        : (num <= 40 ? 'Day 2 (Saturday, July 11)' : 'Day 3 (Sunday, July 12)');
+
                     currentFavs.push({
                         id: artist.id,
                         artist: artist.name,
                         stage: artist.stage,
-                        day: artist.day,
+                        day: canonicalDay,
                         time: artist.time,
                         genre: artist.genre
                     });

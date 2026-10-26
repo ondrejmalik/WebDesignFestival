@@ -113,13 +113,18 @@ function saveFavorites(favs) {
 
 // Helper: toggle a single event favourite
 function toggleFavorite(eventData) {
-    const favs = getFavorites();
+    const rawFavs = getFavorites();
+    const favs = rawFavs.map(enrichFavorite).filter(Boolean);
     const existingIndex = favs.findIndex(item => item.id === eventData.id);
 
     if (existingIndex > -1) {
         favs.splice(existingIndex, 1);
     } else {
-        favs.push(eventData);
+        const dayKey = (typeof normalizeDayKey === 'function') ? normalizeDayKey(eventData) : 'Day 1';
+        favs.push({
+            ...eventData,
+            day: eventData.day || ((typeof getCanonicalDayLabel === 'function') ? getCanonicalDayLabel(dayKey) : 'Day 1 (Friday, July 10)')
+        });
     }
 
     saveFavorites(favs);
@@ -607,6 +612,138 @@ function isOverlapping(t1, t2) {
 }
 
 // Render dynamic user schedule on my-schedule.html
+
+const PERFORMERS_CATALOG = {
+    "perf-01": { id: "perf-01", name: "Echoes of Light", genre: "Post-Rock / Ambient", stage: "Solar Horizon Stage", day: "Day 1 (Friday, July 10)", time: "14:00 – 14:45" },
+    "perf-02": { id: "perf-02", name: "Velvet Morning", genre: "Dream Pop", stage: "Solar Horizon Stage", day: "Day 1 (Friday, July 10)", time: "15:00 – 15:45" },
+    "perf-03": { id: "perf-03", name: "Nordic Wave", genre: "Indie Rock", stage: "Solar Horizon Stage", day: "Day 1 (Friday, July 10)", time: "16:00 – 16:50" },
+    "perf-04": { id: "perf-04", name: "The Daylight Project", genre: "Indie Pop", stage: "Solar Horizon Stage", day: "Day 1 (Friday, July 10)", time: "17:05 – 17:55" },
+    "perf-05": { id: "perf-05", name: "Prague Synth Collective", genre: "Synthpop", stage: "Solar Horizon Stage", day: "Day 1 (Friday, July 10)", time: "18:15 – 19:05" },
+    "perf-06": { id: "perf-06", name: "Electric Meadow", genre: "Electro-Folk", stage: "Solar Horizon Stage", day: "Day 1 (Friday, July 10)", time: "19:25 – 20:20" },
+    "perf-07": { id: "perf-07", name: "Mirage Horizon", genre: "Alternative Rock", stage: "Solar Horizon Stage", day: "Day 1 (Friday, July 10)", time: "20:40 – 21:40" },
+    "perf-08": { id: "perf-08", name: "Solar Flare", genre: "Nu-Disco / Funk", stage: "Solar Horizon Stage", day: "Day 1 (Friday, July 10)", time: "22:00 – 23:10" },
+    "perf-09": { id: "perf-09", name: "Starlight Odyssey", genre: "Electronic Indie", stage: "Solar Horizon Stage", day: "Day 1 (Friday, July 10)", time: "23:30 – 00:45" },
+    "perf-10": { id: "perf-10", name: "Midnight Pulse", genre: "Electro Rock", stage: "Solar Horizon Stage", day: "Day 1 (Friday, July 10)", time: "01:00 – 02:00" },
+    "perf-11": { id: "perf-11", name: "Subtle Resonances", genre: "Modular Ambient", stage: "Lunar Forest Dome", day: "Day 1 (Friday, July 10)", time: "15:00 – 15:50" },
+    "perf-12": { id: "perf-12", name: "Binary Fields", genre: "IDM / Glitch", stage: "Lunar Forest Dome", day: "Day 1 (Friday, July 10)", time: "16:05 – 17:00" },
+    "perf-13": { id: "perf-13", name: "Deep Texture", genre: "Dub Techno", stage: "Lunar Forest Dome", day: "Day 1 (Friday, July 10)", time: "17:15 – 18:15" },
+    "perf-14": { id: "perf-14", name: "Oscillator Shift", genre: "Minimal Techno", stage: "Lunar Forest Dome", day: "Day 1 (Friday, July 10)", time: "18:30 – 19:30" },
+    "perf-15": { id: "perf-15", name: "Echo Chamber", genre: "Dark Ambient", stage: "Lunar Forest Dome", day: "Day 1 (Friday, July 10)", time: "19:45 – 20:45" },
+    "perf-16": { id: "perf-16", name: "Krypton DJ", genre: "Hypnotic Techno", stage: "Lunar Forest Dome", day: "Day 1 (Friday, July 10)", time: "21:00 – 22:15" },
+    "perf-17": { id: "perf-17", name: "Modular Horizon", genre: "Live Hardware Techno", stage: "Lunar Forest Dome", day: "Day 1 (Friday, July 10)", time: "22:30 – 23:50" },
+    "perf-18": { id: "perf-18", name: "Analog Void", genre: "Industrial Techno", stage: "Lunar Forest Dome", day: "Day 1 (Friday, July 10)", time: "00:05 – 01:25" },
+    "perf-19": { id: "perf-19", name: "Frequency 404", genre: "Raw Acid Techno", stage: "Lunar Forest Dome", day: "Day 1 (Friday, July 10)", time: "01:40 – 03:00" },
+    "perf-20": { id: "perf-20", name: "Dawn Ritual", genre: "Atmospheric Ambient", stage: "Lunar Forest Dome", day: "Day 1 (Friday, July 10)", time: "03:10 – 04:00" },
+    "perf-21": { id: "perf-21", name: "Sunburst Trio", genre: "Acoustic Indie", stage: "Solar Horizon Stage", day: "Day 2 (Saturday, July 11)", time: "13:30 – 14:15" },
+    "perf-22": { id: "perf-22", name: "Coastline Drift", genre: "Surf Rock", stage: "Solar Horizon Stage", day: "Day 2 (Saturday, July 11)", time: "14:30 – 15:15" },
+    "perf-23": { id: "perf-23", name: "The Urban Poets", genre: "Indie Soul", stage: "Solar Horizon Stage", day: "Day 2 (Saturday, July 11)", time: "15:30 – 16:20" },
+    "perf-24": { id: "perf-24", name: "Neon Youth", genre: "Indie Pop", stage: "Solar Horizon Stage", day: "Day 2 (Saturday, July 11)", time: "16:35 – 17:25" },
+    "perf-25": { id: "perf-25", name: "Silver Tides", genre: "Shoegaze", stage: "Solar Horizon Stage", day: "Day 2 (Saturday, July 11)", time: "17:45 – 18:40" },
+    "perf-26": { id: "perf-26", name: "Horizon Glow", genre: "Electronic Pop", stage: "Solar Horizon Stage", day: "Day 2 (Saturday, July 11)", time: "19:00 – 20:00" },
+    "perf-27": { id: "perf-27", name: "Wild Horizon", genre: "Post-Punk Revival", stage: "Solar Horizon Stage", day: "Day 2 (Saturday, July 11)", time: "20:20 – 21:20" },
+    "perf-28": { id: "perf-28", name: "Magnetic River", genre: "Indie Dance", stage: "Solar Horizon Stage", day: "Day 2 (Saturday, July 11)", time: "21:40 – 22:50" },
+    "perf-29": { id: "perf-29", name: "Vortex Motion", genre: "Nu-Electro", stage: "Solar Horizon Stage", day: "Day 2 (Saturday, July 11)", time: "23:10 – 00:25" },
+    "perf-30": { id: "perf-30", name: "Aura Soundsystem", genre: "Progressive Dance", stage: "Solar Horizon Stage", day: "Day 2 (Saturday, July 11)", time: "00:45 – 02:00" },
+    "perf-31": { id: "perf-31", name: "Dronescape", genre: "Drone Music", stage: "Lunar Forest Dome", day: "Day 2 (Saturday, July 11)", time: "14:30 – 15:20" },
+    "perf-32": { id: "perf-32", name: "Glitch Garden", genre: "Microhouse", stage: "Lunar Forest Dome", day: "Day 2 (Saturday, July 11)", time: "15:35 – 16:30" },
+    "perf-33": { id: "perf-33", name: "Forest Whispers", genre: "Organic House", stage: "Lunar Forest Dome", day: "Day 2 (Saturday, July 11)", time: "16:45 – 17:45" },
+    "perf-34": { id: "perf-34", name: "Low Frequency Unit", genre: "Deep Dubstep", stage: "Lunar Forest Dome", day: "Day 2 (Saturday, July 11)", time: "18:00 – 19:00" },
+    "perf-35": { id: "perf-35", name: "Monolith Audio", genre: "Peak Time Techno", stage: "Lunar Forest Dome", day: "Day 2 (Saturday, July 11)", time: "19:15 – 20:15" },
+    "perf-36": { id: "perf-36", name: "Sine Wave Syndicate", genre: "Electro Techno", stage: "Lunar Forest Dome", day: "Day 2 (Saturday, July 11)", time: "20:30 – 21:45" },
+    "perf-37": { id: "perf-37", name: "Shadowplay DJ", genre: "Dark Wave Techno", stage: "Lunar Forest Dome", day: "Day 2 (Saturday, July 11)", time: "22:00 – 23:20" },
+    "perf-38": { id: "perf-38", name: "Circuit Overload", genre: "Hard Techno", stage: "Lunar Forest Dome", day: "Day 2 (Saturday, July 11)", time: "23:35 – 00:55" },
+    "perf-39": { id: "perf-39", name: "Neural Network Live", genre: "Acid Techno", stage: "Lunar Forest Dome", day: "Day 2 (Saturday, July 11)", time: "01:10 – 02:30" },
+    "perf-40": { id: "perf-40", name: "Solar Wind", genre: "Chillout Ambient", stage: "Lunar Forest Dome", day: "Day 2 (Saturday, July 11)", time: "02:40 – 04:00" },
+    "perf-41": { id: "perf-41", name: "Morning Breeze", genre: "Folk Indie", stage: "Solar Horizon Stage", day: "Day 3 (Sunday, July 12)", time: "13:00 – 13:45" },
+    "perf-42": { id: "perf-42", name: "Silent Pines", genre: "Chamber Pop", stage: "Solar Horizon Stage", day: "Day 3 (Sunday, July 12)", time: "14:00 – 14:45" },
+    "perf-43": { id: "perf-43", name: "Sunken Ship", genre: "Psych Rock", stage: "Solar Horizon Stage", day: "Day 3 (Sunday, July 12)", time: "15:00 – 15:50" },
+    "perf-44": { id: "perf-44", name: "Amber Boulevard", genre: "Dream Indie", stage: "Solar Horizon Stage", day: "Day 3 (Sunday, July 12)", time: "16:05 – 16:55" },
+    "perf-45": { id: "perf-45", name: "Urban Echo", genre: "Art Pop", stage: "Solar Horizon Stage", day: "Day 3 (Sunday, July 12)", time: "17:15 – 18:10" },
+    "perf-46": { id: "perf-46", name: "Luminous Band", genre: "Indie Funk", stage: "Solar Horizon Stage", day: "Day 3 (Sunday, July 12)", time: "18:30 – 19:30" },
+    "perf-47": { id: "perf-47", name: "The Velvet Trails", genre: "Space Rock", stage: "Solar Horizon Stage", day: "Day 3 (Sunday, July 12)", time: "19:50 – 20:50" },
+    "perf-48": { id: "perf-48", name: "Prismatics", genre: "Dance Punk", stage: "Solar Horizon Stage", day: "Day 3 (Sunday, July 12)", time: "21:10 – 22:15" },
+    "perf-49": { id: "perf-49", name: "Starlight Runners", genre: "Electropop Headliner", stage: "Solar Horizon Stage", day: "Day 3 (Sunday, July 12)", time: "22:35 – 23:55" },
+    "perf-50": { id: "perf-50", name: "Final Cascade", genre: "Orchestral Electronic", stage: "Solar Horizon Stage", day: "Day 3 (Sunday, July 12)", time: "00:10 – 01:15" },
+    "perf-51": { id: "perf-51", name: "Static Drift", genre: "Field Recording / Ambient", stage: "Lunar Forest Dome", day: "Day 3 (Sunday, July 12)", time: "14:00 – 14:50" },
+    "perf-52": { id: "perf-52", name: "Resonance Space", genre: "Deep Ambient", stage: "Lunar Forest Dome", day: "Day 3 (Sunday, July 12)", time: "15:05 – 16:00" },
+    "perf-53": { id: "perf-53", name: "Tape Loop Experiment", genre: "Tape Ambient", stage: "Lunar Forest Dome", day: "Day 3 (Sunday, July 12)", time: "16:15 – 17:15" },
+    "perf-54": { id: "perf-54", name: "Minimal Horizon", genre: "Micro Techno", stage: "Lunar Forest Dome", day: "Day 3 (Sunday, July 12)", time: "17:30 – 18:30" },
+    "perf-55": { id: "perf-55", name: "Dark Matter", genre: "Deep Progressive", stage: "Lunar Forest Dome", day: "Day 3 (Sunday, July 12)", time: "18:45 – 19:45" },
+    "perf-56": { id: "perf-56", name: "Hyperspace DJ", genre: "Psy Techno", stage: "Lunar Forest Dome", day: "Day 3 (Sunday, July 12)", time: "20:00 – 21:15" },
+    "perf-57": { id: "perf-57", name: "Galactic Orbit", genre: "Melodic Techno", stage: "Lunar Forest Dome", day: "Day 3 (Sunday, July 12)", time: "21:30 – 22:45" },
+    "perf-58": { id: "perf-58", name: "Bass Distortion", genre: "Leftfield Bass", stage: "Lunar Forest Dome", day: "Day 3 (Sunday, July 12)", time: "23:00 – 00:15" },
+    "perf-59": { id: "perf-59", name: "Cosmic Pulse", genre: "Uplifting Trance Techno", stage: "Lunar Forest Dome", day: "Day 3 (Sunday, July 12)", time: "00:30 – 01:45" },
+    "perf-60": { id: "perf-60", name: "Equinox Farewell", genre: "Down-tempo Ambient", stage: "Lunar Forest Dome", day: "Day 3 (Sunday, July 12)", time: "02:00 – 03:00" },
+};
+
+// Normalize stage into canonical 'solar' or 'lunar' for collision comparison
+function normalizeStageKey(stageStr) {
+    const s = String(stageStr || '').toLowerCase();
+    return s.includes('lunar') ? 'lunar' : 'solar';
+}
+
+// Normalize any day string or performance ID into canonical 'Day 1', 'Day 2', or 'Day 3'
+function normalizeDayKey(item) {
+    if (!item) return 'Day 1';
+
+    // 1. Direct ID range mapping (perf-01..20 = Day 1, perf-21..40 = Day 2, perf-41..60 = Day 3)
+    const match = String(item.id || '').match(/perf-(\d+)/i);
+    if (match) {
+        const num = parseInt(match[1], 10);
+        if (num >= 1 && num <= 20) return 'Day 1';
+        if (num >= 21 && num <= 40) return 'Day 2';
+        if (num >= 41 && num <= 60) return 'Day 3';
+    }
+
+    // 2. String heuristics for weekday names (EN/CS), dates, or explicit day numbers
+    const rawDay = String(item.day || '').toLowerCase();
+    if (
+        rawDay.includes('day 1') || rawDay.includes('day1') ||
+        rawDay.includes('friday') || rawDay.includes('pátek') || rawDay.includes('patek') ||
+        rawDay.includes('10.') || rawDay.includes('july 10') || rawDay.includes('1. den') || rawDay.includes('den 1')
+    ) {
+        return 'Day 1';
+    }
+    if (
+        rawDay.includes('day 2') || rawDay.includes('day2') ||
+        rawDay.includes('saturday') || rawDay.includes('sobota') ||
+        rawDay.includes('11.') || rawDay.includes('july 11') || rawDay.includes('2. den') || rawDay.includes('den 2')
+    ) {
+        return 'Day 2';
+    }
+    if (
+        rawDay.includes('day 3') || rawDay.includes('day3') ||
+        rawDay.includes('sunday') || rawDay.includes('neděle') || rawDay.includes('nedele') ||
+        rawDay.includes('12.') || rawDay.includes('july 12') || rawDay.includes('3. den') || rawDay.includes('den 3')
+    ) {
+        return 'Day 3';
+    }
+
+    return 'Day 1';
+}
+
+// Canonical full day label
+function getCanonicalDayLabel(dayKey) {
+    if (dayKey === 'Day 2') return 'Day 2 (Saturday, July 11)';
+    if (dayKey === 'Day 3') return 'Day 3 (Sunday, July 12)';
+    return 'Day 1 (Friday, July 10)';
+}
+
+// Ensure favorite item has full metadata (recovers incomplete items safely)
+function enrichFavorite(item) {
+    if (!item) return null;
+    const cat = PERFORMERS_CATALOG[item.id] || {};
+    const dayKey = normalizeDayKey(item);
+    return {
+        id: item.id,
+        artist: item.artist || item.name || cat.name || item.id,
+        stage: item.stage || cat.stage || 'Solar Horizon Stage',
+        day: item.day || cat.day || getCanonicalDayLabel(dayKey),
+        time: item.time || cat.time || '14:00 - 15:00',
+        genre: item.genre || cat.genre || 'Electronic'
+    };
+}
+
 function renderMySchedule() {
     const container = document.getElementById('my-schedule-container');
     if (!container) return;
@@ -649,10 +786,10 @@ function renderMySchedule() {
 
     // Check overall collisions across all days
     days.forEach(d => {
-        const dayFavs = favs.filter(f => f.day && f.day.includes(d.key));
+        const dayFavs = favs.filter(f => normalizeDayKey(f) === d.key);
         dayFavs.forEach((item, idx) => {
             dayFavs.forEach((other, oIdx) => {
-                if (idx < oIdx && item.stage !== other.stage && isOverlapping(item.time, other.time)) {
+                if (idx < oIdx && normalizeStageKey(item.stage) !== normalizeStageKey(other.stage) && isOverlapping(item.time, other.time)) {
                     totalCollisions++;
                 }
             });
@@ -699,7 +836,7 @@ function renderMySchedule() {
 
     // Render by Day
     days.forEach(d => {
-        const dayFavs = favs.filter(f => f.day && f.day.includes(d.key));
+        const dayFavs = favs.filter(f => normalizeDayKey(f) === d.key);
         const count = dayFavs.length;
         let showsCountText = '';
         if (isCs) {
@@ -739,7 +876,7 @@ function renderMySchedule() {
 
             dayFavs.forEach((item, idx) => {
                 dayFavs.forEach((other, oIdx) => {
-                    if (idx !== oIdx && item.stage !== other.stage && isOverlapping(item.time, other.time)) {
+                    if (idx !== oIdx && normalizeStageKey(item.stage) !== normalizeStageKey(other.stage) && isOverlapping(item.time, other.time)) {
                         dayCollisions++;
                         collisionMap.set(item.id, other);
                     }

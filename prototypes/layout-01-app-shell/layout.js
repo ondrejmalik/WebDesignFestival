@@ -1,3 +1,20 @@
+
+function isItemInDay(item, dayKey) {
+    if (!item) return false;
+    const raw = String(item.day || '').toLowerCase();
+    if (dayKey === 'Day 1' && (raw.includes('day 1') || raw.includes('day1') || raw.includes('fri') || raw.includes('pát') || raw.includes('10'))) return true;
+    if (dayKey === 'Day 2' && (raw.includes('day 2') || raw.includes('day2') || raw.includes('sat') || raw.includes('sob') || raw.includes('11'))) return true;
+    if (dayKey === 'Day 3' && (raw.includes('day 3') || raw.includes('day3') || raw.includes('sun') || raw.includes('ned') || raw.includes('12'))) return true;
+    const m = String(item.id || '').match(/perf-(\d+)/i);
+    if (m) {
+        const n = parseInt(m[1], 10);
+        if (dayKey === 'Day 1' && n >= 1 && n <= 20) return true;
+        if (dayKey === 'Day 2' && n >= 21 && n <= 40) return true;
+        if (dayKey === 'Day 3' && n >= 41 && n <= 60) return true;
+    }
+    return false;
+}
+
 /**
  * Layout 01: App-Shell Bottom Nav - Standalone Logic & State Engine
  * Festival of Darkness 2 | Kutna Hora, July 10–12, 2026
@@ -578,7 +595,7 @@
             let html = '';
 
             days.forEach(d => {
-                const dayItems = favs.filter(item => item.day && item.day.includes(d.key));
+                const dayItems = favs.filter(item => isItemInDay(item, d.key));
                 // Sort chronologically using timeToMinutes
                 dayItems.sort((a, b) => timeToMinutes(a.time) - timeToMinutes(b.time));
 

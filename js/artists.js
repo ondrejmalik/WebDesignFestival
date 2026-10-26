@@ -106,6 +106,23 @@ function saveFavorites(favs) {
     }
 }
 
+// Helper: normalize day string or ID into full canonical day label
+function normalizeDayLabel(item) {
+    if (!item) return 'Day 1 (Friday, July 10)';
+    const match = String(item.id || '').match(/perf-(\d+)/i);
+    if (match) {
+        const num = parseInt(match[1], 10);
+        if (num >= 1 && num <= 20) return 'Day 1 (Friday, July 10)';
+        if (num >= 21 && num <= 40) return 'Day 2 (Saturday, July 11)';
+        if (num >= 41 && num <= 60) return 'Day 3 (Sunday, July 12)';
+    }
+    const rawDay = String(item.day || '').toLowerCase();
+    if (rawDay.includes('fri') || rawDay.includes('pát') || rawDay.includes('10')) return 'Day 1 (Friday, July 10)';
+    if (rawDay.includes('sat') || rawDay.includes('sob') || rawDay.includes('11')) return 'Day 2 (Saturday, July 11)';
+    if (rawDay.includes('sun') || rawDay.includes('ned') || rawDay.includes('12')) return 'Day 3 (Sunday, July 12)';
+    return item.day || 'Day 1 (Friday, July 10)';
+}
+
 // Toggle favourite state
 function toggleArtistFavorite(cardData) {
     const favs = getFavorites();
@@ -114,7 +131,10 @@ function toggleArtistFavorite(cardData) {
     if (idx > -1) {
         favs.splice(idx, 1);
     } else {
-        favs.push(cardData);
+        favs.push({
+            ...cardData,
+            day: normalizeDayLabel(cardData)
+        });
     }
 
     saveFavorites(favs);

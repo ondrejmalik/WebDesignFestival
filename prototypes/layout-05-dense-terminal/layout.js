@@ -1,3 +1,20 @@
+
+function isItemInDay(item, dayKey) {
+    if (!item) return false;
+    const raw = String(item.day || '').toLowerCase();
+    if (dayKey === 'Day 1' && (raw.includes('day 1') || raw.includes('day1') || raw.includes('fri') || raw.includes('pát') || raw.includes('10'))) return true;
+    if (dayKey === 'Day 2' && (raw.includes('day 2') || raw.includes('day2') || raw.includes('sat') || raw.includes('sob') || raw.includes('11'))) return true;
+    if (dayKey === 'Day 3' && (raw.includes('day 3') || raw.includes('day3') || raw.includes('sun') || raw.includes('ned') || raw.includes('12'))) return true;
+    const m = String(item.id || '').match(/perf-(\d+)/i);
+    if (m) {
+        const n = parseInt(m[1], 10);
+        if (dayKey === 'Day 1' && n >= 1 && n <= 20) return true;
+        if (dayKey === 'Day 2' && n >= 21 && n <= 40) return true;
+        if (dayKey === 'Day 3' && n >= 41 && n <= 60) return true;
+    }
+    return false;
+}
+
 /**
  * Festival of Darkness 2 – Layout 05: Dense Data Terminal Engine
  * Standalone client-side controller supporting:
@@ -595,7 +612,7 @@
         let totalRuntimeMinutes = 0;
 
         days.forEach(d => {
-            const dayFavs = favs.filter(f => f.day && f.day.includes(d.key));
+            const dayFavs = favs.filter(f => isItemInDay(f, d.key));
 
             html += `<section class="wf-box" style="margin-bottom: 14px;">`;
             html += `<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">`;
