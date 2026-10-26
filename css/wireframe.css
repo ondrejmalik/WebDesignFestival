@@ -546,6 +546,40 @@ hr {
    Fusion Architecture: Top App Bar, Alza Drawer & Albert Bottom Dock
    ========================================================================== */
 
+/* Sticky Top Navigation App Bar */
+#nav-placeholder,
+.wf-nav-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #fff;
+    margin-bottom: 14px;
+}
+
+#nav-placeholder .wf-top-bar-divider,
+.wf-nav-sticky .wf-top-bar-divider {
+    margin: 4px 0 0 0;
+}
+
+html.dark-mode #nav-placeholder,
+body.dark-mode #nav-placeholder,
+html.dark-mode .wf-nav-sticky,
+body.dark-mode .wf-nav-sticky {
+    background: #141414;
+}
+
+/* Offset in-page jump targets for sticky top navigation */
+html {
+    scroll-padding-top: 80px;
+}
+
+@media (max-width: 440px) {
+    html {
+        scroll-padding-top: 96px;
+    }
+}
+
 /* Top App Bar */
 .wf-top-app-bar {
     display: flex;
@@ -695,7 +729,6 @@ hr {
         flex: 1 1 auto;
         justify-content: flex-end;
     }
-}
     .alza-drawer {
         width: 100%;
         max-width: 94vw;
