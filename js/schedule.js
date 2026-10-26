@@ -632,8 +632,8 @@ function renderMySchedule() {
             ? '[ Zatím nemáte v osobním plánu žádná uložená vystoupení ]'
             : '[ You currently have no performances saved in your personal schedule ]';
         const emptyDesc = isCs
-            ? 'Projděte si kompletní program festivalu a u vybraných interpretů klikněte na tlačítko <strong>[ + Přidat do mého programu ]</strong>. Váš osobní harmonogram se zde automaticky sestaví a upozorní vás na případné časové kolize mezi scénami Solar a Lunar.'
-            : 'Browse the full festival program and click <strong>[ + Add to My Schedule ]</strong> on any artist. Your personal itinerary will be automatically compiled here with automatic collision detection between the Solar and Lunar stages.';
+            ? 'Zatím nemáte v osobním programu uložena žádná vystoupení. Můžete si je přidat v sekci Program.'
+            : 'You have not added any performances to your schedule yet. You can add them in the Program section.';
         const emptyBtn = isCs ? '[ Přejít do sekce „Program“ &rarr; ]' : '[ Go to "Program" Section &rarr; ]';
 
         container.innerHTML = `
@@ -678,8 +678,8 @@ function renderMySchedule() {
             ? `[ ⚠️ Upozornění na časové kolize: Nalezeno ${totalCollisions} překrývajících se vystoupení! ]`
             : `[ ⚠️ Schedule Conflict Alert: Found ${totalCollisions} overlapping shows! ]`;
         const bannerDesc = isCs
-            ? `V některých časových slotech máte naplánována vystoupení současně na scéně <strong>Solar Horizon Stage</strong> i v krytém <strong>Lunar Forest Dome</strong>. Na základě vizuálního upozornění níže jedno z překrývajících se vystoupení odeberte tlačítkem <strong>[ 🗑️ Odebrat toto vystoupení ]</strong>, čímž získáte harmonogram bez kolizí.`
-            : `In some time slots, you have performances scheduled simultaneously on the <strong>Solar Horizon Stage</strong> and in the covered <strong>Lunar Forest Dome</strong>. Based on the visual alert below, remove one of the conflicting shows with <strong>[ 🗑️ Remove this performance ]</strong> to obtain a clash-free timetable.`;
+            ? `V některých časech máte naplánována překrývající se vystoupení na scéně <strong>Solar Horizon Stage</strong> a v <strong>Lunar Forest Dome</strong>.`
+            : `You have overlapping performances scheduled at the same time on the <strong>Solar Horizon Stage</strong> and in the <strong>Lunar Forest Dome</strong>.`;
 
         html += `
             <div class="wf-box" style="border: 2px solid #b71c1c; background: #ffebee; margin-bottom: 16px; padding: 14px;">
@@ -785,7 +785,7 @@ function renderMySchedule() {
                     : 'background: #eee; border: 1px solid #333; color: #111;';
 
                 const removeBtnText = hasCollision 
-                    ? (isCs ? '[ 🗑️ Odebrat toto vystoupení (Vyřešit kolizi) ]' : '[ 🗑️ Remove this performance (Resolve conflict) ]')
+                    ? (isCs ? '[ 🗑️ Odebrat vystoupení ]' : '[ 🗑️ Remove performance ]')
                     : (isCs ? '[ 🗑️ Odebrat z programu ]' : '[ 🗑️ Remove from schedule ]');
 
                 const bio = getArtistBio(item.id);

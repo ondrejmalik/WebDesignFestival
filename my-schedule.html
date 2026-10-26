@@ -94,15 +94,12 @@
         <main>
             <!-- Title & Feature Overview -->
             <section class="wf-box">
-                <h2 data-i18n="schedule_head">[ ★ My Personal Schedule (Interactive Planner) ]</h2>
+                <h2 data-i18n="schedule_head">[ ★ My Personal Schedule ]</h2>
                 <hr>
-                <p data-i18n="schedule_intro">[ Overview of your bookmarked shows across all 3 festival days with automatic collision detection and visual warnings between Solar and Lunar stages. ]</p>
-                <p style="font-size: 0.85rem; color: #444; margin-top: 4px;" data-i18n-html="schedule_warning_note">
-                    <em>[ Conflict alert: If two selected performances on the Solar Horizon and Lunar Forest stages overlap in time, the system marks them with a red warning border. Removing one provides a clash-free schedule. ]</em>
-                </p>
+                <p data-i18n="schedule_intro">[ Your bookmarked performances across all 3 festival days. ]</p>
                 <hr>
                 <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-                    <a href="program.html" class="btn-box" style="font-weight: bold; background: #222; color: #fff;"><strong data-i18n="schedule_add_more">[ + Add more shows in "Program" &rarr; ]</strong></a>
+                    <a href="program.html" class="btn-box" style="font-weight: bold; background: #222; color: #fff;" data-i18n-html="schedule_add_more"><strong>[ + Add more shows in "Program" &rarr; ]</strong></a>
                     <button id="clear-favorites-btn" class="btn-box" data-i18n="schedule_clear_all">[ Clear Entire Plan ]</button>
                     <button class="btn-box" id="share-schedule-btn" data-i18n="schedule_share" onclick="const isCs=(typeof window.getFestivalLang==='function'?window.getFestivalLang():'en')==='cs'; alert(isCs ? 'Odkaz na váš osobní program byl zkopírován do schránky!' : 'Link to your personal schedule copied to clipboard!');">[ Share My Plan ]</button>
                     <button class="btn-box" id="export-schedule-btn" data-i18n="schedule_export" onclick="const isCs=(typeof window.getFestivalLang==='function'?window.getFestivalLang():'en')==='cs'; alert(isCs ? 'Exportuji kalendář .ics pro Google & Apple Calendar...' : 'Exporting .ics calendar for Google & Apple Calendar...');">[ Export to Calendar (.ics) ]</button>

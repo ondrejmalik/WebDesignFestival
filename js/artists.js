@@ -245,11 +245,7 @@ function displayArtistDetail(card) {
 
     // Hook close button
     document.getElementById('close-detail-btn').addEventListener('click', () => {
-        detailContainer.innerHTML = `
-            <div class="wf-box-sub" style="padding: 16px; text-align: center; color: #666;">
-                <p>[ ${isCs ? 'Vyberte libovolného z 60 interpretů níže kliknutím na <strong>[ Zobrazit detail &rarr; ]</strong> pro zobrazení profilu, náhledu a času vystoupení.' : 'Click <strong>[ View Detail &rarr; ]</strong> on any of the 60 performers below to inspect their full profile, biography, and set times.'} ]</p>
-            </div>
-        `;
+        detailContainer.innerHTML = '';
         window.location.hash = '';
     });
 
@@ -438,12 +434,7 @@ window.addEventListener('languageChanged', () => {
             displayArtistDetail(card);
         }
     } else if (detailContainer && !detailContainer.querySelector('.artist-detail-box')) {
-        const isCs = getActiveLanguage() === 'cs';
-        detailContainer.innerHTML = `
-            <div class="wf-box-sub" style="padding: 14px; text-align: center; color: #555;">
-                <p data-i18n-html="artists_detail_empty">[ ${isCs ? 'Vyberte libovolného z 60 interpretů níže kliknutím na <strong>[ Zobrazit detail &rarr; ]</strong> pro zobrazení profilu, náhledu a času vystoupení.' : 'Select any artist card below by clicking <strong>[ View Detail &rarr; ]</strong> to view their full profile, photo preview, and set info.'} ]</p>
-            </div>
-        `;
+        detailContainer.innerHTML = '';
     }
     const countEl = document.getElementById('filtered-count');
     if (countEl) {
