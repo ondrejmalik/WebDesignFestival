@@ -1133,6 +1133,35 @@ hr {
     flex: 2 1 360px;
 }
 
+.artist-detail-meta-text {
+    color: #111;
+    font-size: 0.95rem;
+}
+
+.artist-detail-bio-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #050505;
+    margin-bottom: 14px;
+}
+
+.artist-detail-stage-text {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: #111;
+    margin-bottom: 14px;
+}
+
+.stage-link {
+    color: #111;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.stage-link:hover {
+    color: #444;
+}
+
 .audio-preview-box {
     border: 1px solid #777;
     background: #fafafa;
@@ -1604,6 +1633,52 @@ html.dark-mode .artist-detail-meta-grid {
     background: #222;
     border-color: #444;
     color: #ddd;
+}
+
+/* High contrast text blocks for artist profile & biography */
+html.dark-mode .artist-detail-meta-text,
+html.dark-mode p.artist-detail-meta-text,
+html.dark-mode #artist-profile-content p[style*="font-size: 0.95rem"],
+html.dark-mode .artist-detail-box p[style*="font-size: 0.95rem"],
+html.dark-mode .artist-detail-box p[style*="font-size: 0.9rem"] {
+    color: #f0f0f0 !important;
+}
+
+html.dark-mode .artist-detail-meta-text strong,
+html.dark-mode p.artist-detail-meta-text strong {
+    color: #ffffff !important;
+}
+
+html.dark-mode .artist-detail-bio-text,
+html.dark-mode p.artist-detail-bio-text,
+html.dark-mode .artist-detail-content-col p.artist-detail-bio-text,
+html.dark-mode .artist-detail-content-col p[style*="line-height: 1.6"] {
+    color: #ffffff !important;
+}
+
+html.dark-mode .artist-detail-stage-text,
+html.dark-mode p.artist-detail-stage-text,
+html.dark-mode .artist-detail-content-col p.artist-detail-stage-text,
+html.dark-mode .artist-detail-content-col p[style*="line-height: 1.5"] {
+    color: #e8e8e8 !important;
+}
+
+/* Stage links in dark mode */
+html.dark-mode .stage-link,
+html.dark-mode a.stage-link,
+html.dark-mode .artist-detail-meta-grid a:not(.btn-box),
+html.dark-mode .artist-detail-meta-grid a[href*="stages.html"],
+html.dark-mode a:not(.btn-box)[href*="stages.html#"] {
+    color: #93c5fd !important;
+    text-decoration: underline;
+}
+
+html.dark-mode .stage-link:hover,
+html.dark-mode a.stage-link:hover,
+html.dark-mode .artist-detail-meta-grid a:not(.btn-box):hover,
+html.dark-mode .artist-detail-meta-grid a[href*="stages.html"]:hover,
+html.dark-mode a:not(.btn-box)[href*="stages.html#"]:hover {
+    color: #bfdbfe !important;
 }
 
 html.dark-mode .audio-preview-box {

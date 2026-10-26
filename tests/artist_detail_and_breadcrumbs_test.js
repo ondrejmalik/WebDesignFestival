@@ -35,6 +35,12 @@ test('artist-detail.html exists and contains core structural components', () => 
     assert(html.includes('js/lang.js'), 'Must load js/lang.js');
     assert(html.includes('css/wireframe.css'), 'Must load css/wireframe.css');
 
+    // High contrast typography verification
+    assert(html.includes('class="artist-detail-meta-text"'), 'Must have artist-detail-meta-text');
+    assert(html.includes('class="artist-detail-bio-text"'), 'Must have artist-detail-bio-text');
+    assert(html.includes('class="artist-detail-stage-text"'), 'Must have artist-detail-stage-text');
+    assert(html.includes('class="stage-link"'), 'Must have stage-link');
+
     // Bottom dock IDs check
     const expectedDockIds = ['dock-item-artists', 'dock-item-stages', 'dock-item-home', 'dock-item-timetable', 'dock-item-myplan'];
     expectedDockIds.forEach(id => {
@@ -143,6 +149,13 @@ test('wireframe.css has breadcrumbs, bigger sch-artist, spot-highlight and stage
     assert(css.includes('@keyframes spot-pulse-highlight'), 'wireframe.css must define spot-pulse-highlight keyframes');
     assert(css.includes('.stage-nav-tabs'), 'wireframe.css must define .stage-nav-tabs');
     assert(css.includes('.sch-detail-btn'), 'wireframe.css must define .sch-detail-btn');
+    assert(css.includes('.artist-detail-meta-text'), 'wireframe.css must define .artist-detail-meta-text');
+    assert(css.includes('.artist-detail-bio-text'), 'wireframe.css must define .artist-detail-bio-text');
+    assert(css.includes('.artist-detail-stage-text'), 'wireframe.css must define .artist-detail-stage-text');
+    assert(css.includes('html.dark-mode .artist-detail-bio-text'), 'wireframe.css must define dark mode for .artist-detail-bio-text');
+    assert(css.includes('html.dark-mode .artist-detail-stage-text'), 'wireframe.css must define dark mode for .artist-detail-stage-text');
+    assert(css.includes('.stage-link'), 'wireframe.css must define .stage-link');
+    assert(css.includes('html.dark-mode .stage-link'), 'wireframe.css must define dark mode for .stage-link');
 });
 
 console.log('\n========================================================================');

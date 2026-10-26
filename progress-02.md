@@ -1,8 +1,8 @@
 # Průběžná zpráva k projektu: Cvičení 3 (progress-02.md)
-**Projekt:** Festival of Darkness 2 (WebDesignFestival)  
-**Ročník / Termín konání:** 2. ročník | 10.–12. července 2026 | Kutná Hora, Česká republika  
-**Tým:** RagnaroR & Kzakyz (Studentský tým)  
-**Datum odevzdání:** Říjen 2026  
+**Projekt:** Festival of Darkness 2 (WebDesignFestival)
+**Ročník / Termín konání:** 2. ročník | 10.–12. července 2026 | Kutná Hora, Česká republika
+**Tým:** David Kostera, Ondřej Malík, František Josef Jankovský, Martin Karásek
+**Datum odevzdání:** Říjen 2026
 
 ---
 

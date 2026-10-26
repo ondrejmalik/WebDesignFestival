@@ -906,7 +906,7 @@
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px;">
                     <div>
                         <h2 style="font-size: 1.55rem; margin-bottom: 6px;">[ ${artist.name} (${artist.origin}) ]</h2>
-                        <p style="color: #444; font-size: 0.95rem;">
+                        <p class="artist-detail-meta-text" style="color: #111; font-size: 0.95rem;">
                             <strong>${isCs ? 'Žánr:' : 'Genre:'}</strong> ${artist.genre} | 
                             <strong>${isCs ? 'Původ:' : 'Origin:'}</strong> ${countryText}
                         </p>
@@ -932,7 +932,7 @@
                     </div>
                     <div>
                         <strong>${isCs ? '⛺ Festivalová scéna:' : '⛺ Stage:'}</strong><br>
-                        <a href="stages.html#${stageId}" style="color: #000; font-weight: bold; text-decoration: underline;" title="${isCs ? 'Zobrazit informace o scéně' : 'View Stage Details'}">
+                        <a href="stages.html#${stageId}" class="stage-link" style="color: #111; font-weight: bold; text-decoration: underline;" title="${isCs ? 'Zobrazit informace o scéně' : 'View Stage Details'}">
                             ${stageText} &rarr;
                         </a>
                     </div>
@@ -973,14 +973,14 @@
                     <!-- Right: Biography & Stage Specs -->
                     <div class="artist-detail-content-col">
                         <h3 style="font-size: 1.15rem; margin-bottom: 8px;">[ ${isCs ? 'Biografie a hudební profil' : 'Biography & Musical Profile'} ]</h3>
-                        <p style="font-size: 0.95rem; line-height: 1.6; color: #222; margin-bottom: 14px;">
+                        <p class="artist-detail-bio-text" style="font-size: 0.95rem; line-height: 1.6; color: #050505; margin-bottom: 14px;">
                             ${bio}
                         </p>
 
                         <hr>
 
                         <h4 style="font-size: 1.02rem; margin: 12px 0 6px;">[ ${isCs ? 'Technické informace & specifikace scény' : 'Stage Environment & Technical Specs'} ]</h4>
-                        <p style="font-size: 0.88rem; line-height: 1.5; color: #444; margin-bottom: 14px;">
+                        <p class="artist-detail-stage-text" style="font-size: 0.88rem; line-height: 1.5; color: #111; margin-bottom: 14px;">
                             ${stageSpecsText}
                         </p>
 

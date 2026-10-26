@@ -783,7 +783,7 @@ function renderMySchedule() {
                         </h4>
                         <p>
                             <strong>${isCs ? 'Scéna:' : 'Stage:'}</strong> 
-                            <a href="stages.html#${stageHash}" class="stage-link" style="color: #000; font-weight: bold; text-decoration: underline;" title="${isCs ? 'Zobrazit informace o scéně' : 'View Stage Details'}">
+                            <a href="stages.html#${stageHash}" class="stage-link" style="color: #111; font-weight: bold; text-decoration: underline;" title="${isCs ? 'Zobrazit informace o scéně' : 'View Stage Details'}">
                                 ${stageDisplayName} &rarr;
                             </a>
                         </p>

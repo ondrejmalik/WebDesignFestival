@@ -86,6 +86,8 @@ test('wireframe.css defines comprehensive html.dark-mode wireframe styles includ
     assert(css.includes('html.dark-mode .sch-cell.is-favourite'), 'wireframe.css must define dark mode for .is-favourite');
     assert(css.includes('html.dark-mode .alza-drawer'), 'wireframe.css must define dark mode for .alza-drawer');
     assert(css.includes('html.dark-mode .bottom-nav-dock'), 'wireframe.css must define dark mode for .bottom-nav-dock');
+    assert(css.includes('html.dark-mode .stage-link'), 'wireframe.css must define dark mode for .stage-link');
+    assert(css.includes('html.dark-mode .artist-detail-meta-grid a'), 'wireframe.css must define bright stage link for artist-detail-meta-grid');
 });
 
 // 3. Functional Execution & State Engine Verification (VM Simulation)
