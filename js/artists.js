@@ -325,9 +325,15 @@ function setupArtistFilters() {
         });
 
         if (countEl) {
-            countEl.textContent = isCs 
-                ? `[ Zobrazeno ${visibleCount} z 60 interpretů ]`
-                : `[ Showing ${visibleCount} of 60 performers ]`;
+            if (isCs) {
+                if (visibleCount === 1) countEl.textContent = '[ Zobrazen 1 ze 60 interpretů ]';
+                else if (visibleCount >= 2 && visibleCount <= 4) countEl.textContent = `[ Zobrazeni ${visibleCount} ze 60 interpretů ]`;
+                else countEl.textContent = `[ Zobrazeno ${visibleCount} z 60 interpretů ]`;
+            } else {
+                countEl.textContent = visibleCount === 1 ? '[ Showing 1 of 60 performers ]' : `[ Showing ${visibleCount} of 60 performers ]`;
+            }
+
+
         }
     }
 
@@ -458,6 +464,12 @@ window.addEventListener('languageChanged', () => {
         const isCs = getActiveLanguage() === 'cs';
         const cards = document.querySelectorAll('.artist-card');
         const visible = Array.from(cards).filter(c => c.style.display !== 'none').length;
-        countEl.textContent = isCs ? `[ Zobrazeno ${visible} z 60 interpretů ]` : `[ Showing ${visible} of 60 performers ]`;
+        if (isCs) {
+            if (visible === 1) countEl.textContent = '[ Zobrazen 1 ze 60 interpretů ]';
+            else if (visible >= 2 && visible <= 4) countEl.textContent = `[ Zobrazeni ${visible} ze 60 interpretů ]`;
+            else countEl.textContent = `[ Zobrazeno ${visible} z 60 interpretů ]`;
+        } else {
+            countEl.textContent = visible === 1 ? '[ Showing 1 of 60 performers ]' : `[ Showing ${visible} of 60 performers ]`;
+        }
     }
 });

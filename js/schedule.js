@@ -489,9 +489,15 @@ function setupFilters() {
         if (filterStatusText) {
             const isCs = getActiveLanguage() === 'cs';
             const stageLabel = currentStage === 'lunar' ? ' (Lunar Forest Dome)' : (currentStage === 'solar' ? ' (Solar Horizon)' : '');
-            filterStatusText.textContent = isCs 
-                ? `[ Zobrazeno ${visibleCount} vystoupení${stageLabel} ]`
-                : `[ Showing ${visibleCount} shows${stageLabel} ]`;
+            if (isCs) {
+                if (visibleCount === 1) filterStatusText.textContent = `[ Zobrazeno 1 vystoupení${stageLabel} ]`;
+                else if (visibleCount >= 2 && visibleCount <= 4) filterStatusText.textContent = `[ Zobrazena ${visibleCount} vystoupení${stageLabel} ]`;
+                else filterStatusText.textContent = `[ Zobrazeno ${visibleCount} vystoupení${stageLabel} ]`;
+            } else {
+                filterStatusText.textContent = visibleCount === 1 ? `[ Showing 1 show${stageLabel} ]` : `[ Showing ${visibleCount} shows${stageLabel} ]`;
+            }
+
+
         }
     }
 
@@ -655,9 +661,16 @@ function renderMySchedule() {
 
     // Top summary banner
     if (totalCollisions > 0) {
-        const bannerTitle = isCs 
-            ? `[ ⚠️ Upozornění na časové kolize: Nalezeno ${totalCollisions} překrývajících se vystoupení! ]`
-            : `[ ⚠️ Schedule Conflict Alert: Found ${totalCollisions} overlapping shows! ]`;
+        let bannerTitle = '';
+        if (isCs) {
+            if (totalCollisions === 1) bannerTitle = '[ ⚠️ Upozornění na časové kolize: Nalezeno 1 překrývající se vystoupení! ]';
+            else if (totalCollisions >= 2 && totalCollisions <= 4) bannerTitle = `[ ⚠️ Upozornění na časové kolize: Nalezena ${totalCollisions} překrývající se vystoupení! ]`;
+            else bannerTitle = `[ ⚠️ Upozornění na časové kolize: Nalezeno ${totalCollisions} překrývajících se vystoupení! ]`;
+        } else {
+            bannerTitle = totalCollisions === 1 ? '[ ⚠️ Schedule Conflict Alert: Found 1 overlapping show! ]' : `[ ⚠️ Schedule Conflict Alert: Found ${totalCollisions} overlapping shows! ]`;
+        }
+
+
         const bannerDesc = isCs
             ? `V některých časech máte naplánována překrývající se vystoupení na scéně <strong>Solar Horizon Stage</strong> a v <strong>Lunar Forest Dome</strong>.`
             : `You have overlapping performances scheduled at the same time on the <strong>Solar Horizon Stage</strong> and in the <strong>Lunar Forest Dome</strong>.`;
@@ -687,7 +700,15 @@ function renderMySchedule() {
     // Render by Day
     days.forEach(d => {
         const dayFavs = favs.filter(f => f.day && f.day.includes(d.key));
-        const showsCountText = isCs ? `${dayFavs.length} uložených vystoupení` : `${dayFavs.length} saved shows`;
+        const count = dayFavs.length;
+        let showsCountText = '';
+        if (isCs) {
+            if (count === 1) showsCountText = '1 uložené vystoupení';
+            else if (count >= 2 && count <= 4) showsCountText = `${count} uložená vystoupení`;
+            else showsCountText = `${count} uložených vystoupení`;
+        } else {
+            showsCountText = count === 1 ? '1 saved show' : `${count} saved shows`;
+        }
         
         html += `<section class="wf-box" style="margin-bottom: 18px;">`;
         html += `<h3>[ 📅 ${d.label} – ${showsCountText} ]</h3><hr>`;

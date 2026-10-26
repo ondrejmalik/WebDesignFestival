@@ -263,9 +263,21 @@
                     const raw = localStorage.getItem('festival_favorites');
                     const favs = raw ? JSON.parse(raw) : [];
                     const count = Array.isArray(favs) ? favs.length : 0;
-                    document.querySelectorAll('.fav-count-badge').forEach(el => {
-                        el.textContent = count;
-                    });
+                    document.querySelectorAll('.fav-count-badge').forEach(el => el.textContent = count);
+
+
+                    const isCs = (typeof window.getFestivalLang === 'function' ? window.getFestivalLang() : 'en') === 'cs';
+                    const unitEl = document.querySelector('[data-i18n="mc_tile_itinerary_unit"]');
+                    if (unitEl) {
+                        if (isCs) {
+                            if (count === 1) unitEl.textContent = 'uložené vystoupení';
+                            else if (count >= 2 && count <= 4) unitEl.textContent = 'uložená vystoupení';
+                            else unitEl.textContent = 'uložených vystoupení';
+                        } else {
+                            unitEl.textContent = count === 1 ? 'Saved Show' : 'Saved Shows';
+                        }
+                    }
+
                 } catch (e) {}
             }
             updateClock();
@@ -273,6 +285,7 @@
             updateFavBadges();
             window.addEventListener('storage', updateFavBadges);
             window.addEventListener('favoritesUpdated', updateFavBadges);
+            window.addEventListener('languageChanged', updateFavBadges);
         })();
     </script>
 </body>

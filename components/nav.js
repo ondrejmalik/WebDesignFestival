@@ -277,6 +277,20 @@
                     b.style.display = count > 0 ? 'inline-block' : 'none';
                 }
             });
+            const isCs = (typeof window.getFestivalLang === 'function' ? window.getFestivalLang() : 'en') === 'cs';
+            const dockPlanLink = document.getElementById('dock-item-myplan');
+            if (dockPlanLink) {
+                if (count > 0) {
+                    if (isCs) {
+                        const countStr = count === 1 ? '1 uložené vystoupení' : (count >= 2 && count <= 4 ? `${count} uložená vystoupení` : `${count} uložených vystoupení`);
+                        dockPlanLink.setAttribute('title', `Můj plán (${countStr})`);
+                    } else {
+                        dockPlanLink.setAttribute('title', `My Plan (${count === 1 ? '1 saved show' : count + ' saved shows'})`);
+                    }
+                } else {
+                    dockPlanLink.setAttribute('title', isCs ? 'Můj plán' : 'My Plan');
+                }
+            }
         } catch (e) {}
     }
 

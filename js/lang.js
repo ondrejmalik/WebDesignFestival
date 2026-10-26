@@ -192,7 +192,7 @@
             program_rain_title: "[ 🌧️ Quick Shelter Access: ]",
             program_rain_desc: "Raining at the festival? Check the timetable in covered Lunar Forest Dome in 1 click:",
             program_rain_btn: "[ 🌙 Show Covered Stage (Lunar Forest Dome) → ]",
-            program_fav_count_label: "shows",
+            program_fav_count_label: "Saved in My Schedule:",
             program_showing_label: "shows",
             program_go_schedule: "[ View in My Schedule → ]",
             program_clear_fav: "[ Clear ★ ]",
@@ -241,7 +241,7 @@
             artists_head: "[ Festival Lineup: Complete Catalog of 60 Performers ]",
             artists_meta: "[ 60 Musical Acts | 3 Days (July 10–12, 2026) | 2 Stages (Solar Horizon & Lunar Forest Dome) ]",
             artists_note: "",
-            artists_fav_label: "performers",
+            artists_fav_label: "Saved in My Schedule:",
             artists_showing_label: "Showing",
             artists_of_label: "of 60 performers",
             artists_go_schedule: "[ View in My Schedule → ]",
@@ -453,7 +453,7 @@
             program_rain_title: "[ 🌧️ Rychlý přesun pod střechu: ]",
             program_rain_desc: "Začíná pršet v areálu? Zjistěte program v krytém Lunar Forest Dome na 1 kliknutí:",
             program_rain_btn: "[ 🌙 Zobrazit krytou scénu (Lunar Forest Dome) → ]",
-            program_fav_count_label: "vystoupení",
+            program_fav_count_label: "Uloženo v mém programu:",
             program_showing_label: "vystoupení",
             program_go_schedule: "[ Přejít do záložky „Můj program“ → ]",
             program_clear_fav: "[ Vymazat ★ ]",
@@ -502,7 +502,7 @@
             artists_head: "[ Katalog vystupujících: Všech 60 interpretů ]",
             artists_meta: "[ 60 hudebních formací | 3 dny (10.–12. 7. 2026) | 2 scény (Solar Horizon & Lunar Forest Dome) ]",
             artists_note: "",
-            artists_fav_label: "interpretů",
+            artists_fav_label: "Uloženo v mém programu:",
             artists_showing_label: "Zobrazeno",
             artists_of_label: "z 60 interpretů",
             artists_go_schedule: "[ Zobrazit v Mém programu → ]",
@@ -726,10 +726,24 @@
         });
     }
 
+    // Czech grammatical declension / pluralization helper
+    function czechPlural(count, form1, form2to4, form5plus) {
+        const abs = Math.abs(count);
+        if (abs === 1) return form1;
+        if (abs >= 2 && abs <= 4) return form2to4;
+        return form5plus;
+    }
+
+    function formatCzechCount(count, form1, form2to4, form5plus) {
+        return `${count} ${czechPlural(count, form1, form2to4, form5plus)}`;
+    }
+
     // Expose helpers globally
     window.getFestivalLang = getFestivalLang;
     window.setFestivalLang = setFestivalLang;
     window.toggleFestivalLang = toggleFestivalLang;
+    window.czechPlural = czechPlural;
+    window.formatCzechCount = formatCzechCount;
     window.FESTIVAL_I18N = I18N;
     window.ARTIST_BIOS_CS = ARTIST_BIOS_CS;
 
