@@ -5,6 +5,98 @@
     padding: 0;
 }
 
+/* ==========================================================================
+   CSS Custom Properties (Design Tokens) - Light & Dark Mode
+   ========================================================================== */
+:root {
+    --wf-bg: #ffffff;
+    --wf-bg-sub: #fafafa;
+    --wf-bg-muted: #f1f3f5;
+    --wf-bg-elevated: #f8f9fa;
+    --wf-text: #111111;
+    --wf-text-secondary: #333333;
+    --wf-text-muted: #555555;
+    --wf-border-strong: #222222;
+    --wf-border-mid: #555555;
+    --wf-border-subtle: #777777;
+    --wf-link: #111111;
+    --wf-link-hover: #000000;
+
+    /* Primary / Interactive Tokens */
+    --wf-btn-bg: #eeeeee;
+    --wf-btn-text: #000000;
+    --wf-btn-border: #111111;
+    --wf-btn-primary-bg: #222222;
+    --wf-btn-primary-text: #ffffff;
+    --wf-btn-primary-border: #000000;
+
+    /* Semantic Status Tokens: Favourite / Clean (Green) */
+    --wf-fav-bg: #d4edda;
+    --wf-fav-bg-soft: #f4faf5;
+    --wf-fav-border: #28a745;
+    --wf-fav-text: #155724;
+
+    /* Semantic Status Tokens: Conflict / Collision (Red) */
+    --wf-conflict-bg: #f8d7da;
+    --wf-conflict-bg-soft: #fff5f5;
+    --wf-conflict-border: #b71c1c;
+    --wf-conflict-text: #721c24;
+
+    /* Telemetry & Shelter Tokens */
+    --wf-telemetry-bg: #2b3035;
+    --wf-telemetry-text: #ffffff;
+    --wf-telemetry-border: #111111;
+    --wf-shelter-bg: #fff3cd;
+    --wf-shelter-border: #856404;
+    --wf-shelter-text: #856404;
+}
+
+html.dark-mode,
+body.dark-mode,
+html[data-theme="dark"],
+body[data-theme="dark"] {
+    --wf-bg: #141414;
+    --wf-bg-sub: #202020;
+    --wf-bg-muted: #222222;
+    --wf-bg-elevated: #1c1c1c;
+    --wf-text: #e4e4e4;
+    --wf-text-secondary: #cccccc;
+    --wf-text-muted: #a6a6a6;
+    --wf-border-strong: #444444;
+    --wf-border-mid: #555555;
+    --wf-border-subtle: #444444;
+    --wf-link: #93c5fd;
+    --wf-link-hover: #bfdbfe;
+
+    /* Primary / Interactive Tokens (Dark) */
+    --wf-btn-bg: #2a2a2a;
+    --wf-btn-text: #eeeeee;
+    --wf-btn-border: #555555;
+    --wf-btn-primary-bg: #3e3e3e;
+    --wf-btn-primary-text: #ffffff;
+    --wf-btn-primary-border: #888888;
+
+    /* Semantic Status Tokens: Favourite / Clean (Dark Green) */
+    --wf-fav-bg: #143820;
+    --wf-fav-bg-soft: #14351c;
+    --wf-fav-border: #28a745;
+    --wf-fav-text: #81c784;
+
+    /* Semantic Status Tokens: Conflict / Collision (Dark Red) */
+    --wf-conflict-bg: #3c1414;
+    --wf-conflict-bg-soft: #341a1c;
+    --wf-conflict-border: #e53935;
+    --wf-conflict-text: #ffcdd2;
+
+    /* Telemetry & Shelter Tokens (Dark) */
+    --wf-telemetry-bg: #1e1e1e;
+    --wf-telemetry-text: #00ff66;
+    --wf-telemetry-border: #444444;
+    --wf-shelter-bg: #3a2e10;
+    --wf-shelter-border: #d4a72c;
+    --wf-shelter-text: #f6d878;
+}
+
 body {
     font-family: Arial, Helvetica, sans-serif;
     color: #111;
@@ -951,14 +1043,28 @@ html {
     font-size: 1.25rem;
 }
 
-.nav-badge-count {
+.nav-badge-count,
+.fav-count-badge {
     display: inline-block;
     padding: 1px 5px;
     font-size: 0.68rem;
+    font-weight: bold;
+    line-height: 1.1;
     background: #28a745;
-    color: #fff;
+    color: #ffffff;
     margin-left: 2px;
     vertical-align: middle;
+}
+
+.nav-badge-count.is-hidden,
+.fav-count-badge.is-hidden {
+    display: none !important;
+}
+
+html.dark-mode .nav-badge-count,
+html.dark-mode .fav-count-badge {
+    background: #28a745;
+    color: #ffffff;
 }
 
 /* Mission Control Widgets */
@@ -1268,31 +1374,9 @@ html.dark-mode .col.wf-box-sub p {
     color: #ccc;
 }
 
-html.dark-mode .col.wf-box-sub p[style*="color: green"],
-html.dark-mode .col.wf-box-sub [style*="color: #155724"],
-html.dark-mode .col.wf-box-sub div[style*="border: 1px solid #28a745"] {
-    background: #14351c !important;
-    border-color: #28a745 !important;
-    color: #81c784 !important;
-}
 
-html.dark-mode .col.wf-box-sub div[style*="border: 1px solid #28a745"] strong {
-    color: #81c784 !important;
-}
 
-html.dark-mode .col.wf-box-sub div[style*="border: 1px solid #b71c1c"],
-html.dark-mode .col.wf-box-sub div[style*="border: 2px solid #b71c1c"],
-html.dark-mode div[style*="border: 1px solid #b71c1c"] {
-    background: #3c1414 !important;
-    border-color: #e53935 !important;
-    color: #ffcdd2 !important;
-}
 
-html.dark-mode .col.wf-box-sub div[style*="border: 1px solid #b71c1c"] strong,
-html.dark-mode .col.wf-box-sub div[style*="border: 1px solid #b71c1c"] p,
-html.dark-mode div[style*="border: 1px solid #b71c1c"] strong {
-    color: #ffcdd2 !important;
-}
 
 html.dark-mode hr {
     border-top-color: #444;
@@ -1670,8 +1754,7 @@ html.dark-mode .artist-detail-meta-grid {
 
 /* High contrast text blocks for artist profile & biography */
 html.dark-mode .artist-detail-meta-text,
-html.dark-mode p.artist-detail-meta-text,
-html.dark-mode .artist-detail-box p[style*="font-size: 0.9rem"] {
+html.dark-mode p.artist-detail-meta-text {
     color: #f0f0f0 !important;
 }
 
@@ -1844,59 +1927,39 @@ html.dark-mode nav[aria-label="Quick section navigation"] a.btn-box:hover {
     color: #fff !important;
 }
 
-html.dark-mode .quick-section-nav a.btn-box[style*="background: #222"],
-html.dark-mode .quick-section-nav a.btn-box[style*="background:#222"],
-html.dark-mode nav[aria-label="Quick section navigation"] a.btn-box[style*="background: #222"] {
-    background: #3e3e3e !important;
-    border: 2px solid #888 !important;
-    color: #fff !important;
-}
 
-/* Walking Route Step Divs (Czech & English) */
-html.dark-mode .walking-step-item,
-html.dark-mode #pesi-trasa div[style*="background: #fff"],
-html.dark-mode #pesi-trasa-en div[style*="background: #fff"],
-html.dark-mode #pesi-trasa div[style*="background:#fff"],
-html.dark-mode #pesi-trasa-en div[style*="background:#fff"] {
+
+/* Walking Route Step Divs */
+html.dark-mode .walking-step-item {
     background: #1e1e1e !important;
     border-color: #444 !important;
     color: #ddd !important;
 }
 
-html.dark-mode .walking-step-item strong,
-html.dark-mode #pesi-trasa div[style*="background: #fff"] strong,
-html.dark-mode #pesi-trasa-en div[style*="background: #fff"] strong {
+html.dark-mode .walking-step-item strong {
     color: #eee !important;
 }
 
-html.dark-mode .walking-step-item p,
-html.dark-mode #pesi-trasa div[style*="background: #fff"] p,
-html.dark-mode #pesi-trasa-en div[style*="background: #fff"] p {
+html.dark-mode .walking-step-item p {
     color: #ccc !important;
 }
 
-html.dark-mode .walking-step-item.walking-step-destination,
-html.dark-mode #pesi-trasa div[style*="background: #f4faf5"],
-html.dark-mode #pesi-trasa-en div[style*="background: #f4faf5"] {
+html.dark-mode .walking-step-item.walking-step-destination {
     background: #14351c !important;
     border: 2px solid #28a745 !important;
     color: #e8f5e9 !important;
 }
 
-html.dark-mode .walking-step-item.walking-step-destination strong,
-html.dark-mode #pesi-trasa div[style*="background: #f4faf5"] strong,
-html.dark-mode #pesi-trasa-en div[style*="background: #f4faf5"] strong {
+html.dark-mode .walking-step-item.walking-step-destination strong {
     color: #81c784 !important;
 }
 
-html.dark-mode .walking-step-item.walking-step-destination p,
-html.dark-mode #pesi-trasa div[style*="background: #f4faf5"] p,
-html.dark-mode #pesi-trasa-en div[style*="background: #f4faf5"] p {
+html.dark-mode .walking-step-item.walking-step-destination p {
     color: #d4edda !important;
 }
 
 /* Schematic Route Map SVG and Walking Rect in Dark Mode */
-html.dark-mode div[style*="overflow-x: auto"] {
+html.dark-mode .svg-map-frame {
     background: #141414 !important;
     border-color: #444 !important;
 }
@@ -1986,25 +2049,1247 @@ html.dark-mode .col.wf-box-sub .remove-btn:hover {
     color: #eee !important;
 }
 
-html.dark-mode .remove-btn.has-collision,
-html.dark-mode .remove-btn[style*="#f8d7da"],
-html.dark-mode article.col.wf-box-sub[style*="#b71c1c"] .remove-btn {
+html.dark-mode .remove-btn.has-collision {
     background: #341a1c !important;
     border: 1px solid #70262a !important;
     color: #e57373 !important;
     font-weight: bold;
 }
 
-html.dark-mode .remove-btn.has-collision:hover,
-html.dark-mode .remove-btn[style*="#f8d7da"]:hover,
-html.dark-mode article.col.wf-box-sub[style*="#b71c1c"] .remove-btn:hover {
+html.dark-mode .remove-btn.has-collision:hover {
     background: #421f22 !important;
     border-color: #c62828 !important;
     color: #ffcdd2 !important;
 }
 
+/* ==========================================================================
+   Accessibility, Visibility & Typography Utilities
+   ========================================================================== */
 
+.skip-link {
+    position: absolute;
+    top: -9999px;
+    left: 8px;
+    z-index: 3000;
+    padding: 8px 14px;
+    background: var(--wf-btn-primary-bg, #222);
+    color: var(--wf-btn-primary-text, #fff);
+    border: 2px solid var(--wf-border-strong, #222);
+    font-weight: bold;
+    text-decoration: none;
+}
 
+.skip-link:focus,
+.skip-link:focus-visible {
+    top: 8px;
+}
 
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+.is-hidden {
+    display: none !important;
+}
+
+.is-dimmed {
+    opacity: 0.28 !important;
+    pointer-events: none;
+    filter: grayscale(100%);
+    transition: opacity 0.2s ease;
+}
+
+.wf-page-title {
+    font-size: 1.35rem;
+    font-weight: bold;
+    line-height: 1.25;
+    color: inherit;
+    margin-bottom: 6px;
+}
+
+address.wf-address {
+    font-style: normal;
+    line-height: 1.5;
+    color: inherit;
+}
+
+/* ==========================================================================
+   Semantic Button, Card & Component Classes
+   ========================================================================== */
+
+.btn-primary,
+.btn-box.btn-primary,
+a.btn-box.btn-primary {
+    background: #222222 !important;
+    color: #ffffff !important;
+    border: 1px solid #000000 !important;
+    font-weight: bold;
+}
+
+.btn-primary:hover,
+.btn-box.btn-primary:hover,
+a.btn-box.btn-primary:hover {
+    background: #000000 !important;
+    color: #ffffff !important;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+/* Telemetry Strip & Shelter Badge */
+.telemetry-strip {
+    background: #2b3035;
+    color: #ffffff;
+    border: 1px solid #111111;
+    padding: 8px 12px;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 0.82rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.wf-badge-shelter {
+    display: inline-block;
+    padding: 3px 8px;
+    font-size: 0.78rem;
+    font-weight: bold;
+    background: #fff3cd;
+    border: 1px solid #856404;
+    color: #856404;
+}
+
+/* SVG Map Frame Container */
+.svg-map-frame {
+    width: 100%;
+    overflow-x: auto;
+    background: #ffffff;
+    border: 1px solid #777777;
+    padding: 8px;
+    margin: 10px 0;
+}
+
+/* Artist Card Title Links & Favourites */
+.artist-card-title a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+.artist-card-title a:hover {
+    color: #555555;
+}
+
+.artist-card.is-favourite {
+    background: #d4edda !important;
+    border: 2px solid #28a745 !important;
+}
+
+/* Conflict & Clean Status Banners / Badges (My Schedule) */
+.conflict-alert-box,
+.sch-conflict-alert {
+    background: #ffebee;
+    border: 2px solid #b71c1c;
+    color: #721c24;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+}
+
+.conflict-alert-box strong,
+.conflict-alert-box p {
+    color: #721c24;
+}
+
+.conflict-clean-box {
+    background: #d4edda;
+    border: 2px solid #28a745;
+    color: #155724;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+}
+
+.conflict-clean-box strong,
+.conflict-clean-box p {
+    color: #155724;
+}
+
+.status-badge-conflict {
+    display: inline-block;
+    padding: 3px 8px;
+    font-size: 0.78rem;
+    font-weight: bold;
+    background: #ffebee;
+    border: 1px solid #b71c1c;
+    color: #b71c1c;
+}
+
+.status-badge-clean {
+    display: inline-block;
+    padding: 3px 8px;
+    font-size: 0.78rem;
+    font-weight: bold;
+    background: #e8f5e9;
+    border: 1px solid #28a745;
+    color: #155724;
+}
+
+/* Personal Schedule Plan Cards & Collision States */
+.sch-plan-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 6px;
+    border: 1px solid #777777;
+    background: #fafafa;
+    padding: 12px;
+}
+
+.sch-plan-card.has-collision,
+.wf-box-sub.has-collision,
+article.col.wf-box-sub.has-collision {
+    background: #ffebee !important;
+    border: 2px solid #b71c1c !important;
+}
+
+/* Walking Route Steps (Info / Venue Directions) */
+.walking-step-item {
+    background: #ffffff;
+    border: 1px solid #777777;
+    color: #111111;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+}
+
+.walking-step-item.walking-step-destination {
+    background: #f4faf5;
+    border: 2px solid #28a745;
+    color: #155724;
+}
+
+.walking-step-item.walking-step-destination strong {
+    color: #155724;
+}
+
+/* ==========================================================================
+   Dark Mode High-Specificity Overrides for Semantic Classes
+   ========================================================================== */
+
+/* Primary Buttons & Quick Section Nav Active Button */
+html.dark-mode .btn-primary,
+html.dark-mode .btn-box.btn-primary,
+html.dark-mode a.btn-box.btn-primary,
+html.dark-mode .quick-section-nav a.btn-box.btn-primary,
+html.dark-mode nav[aria-label="Quick section navigation"] a.btn-box.btn-primary {
+    background: #3e3e3e !important;
+    border: 2px solid #888888 !important;
+    color: #ffffff !important;
+    font-weight: bold;
+}
+
+html.dark-mode .btn-primary:hover,
+html.dark-mode .btn-box.btn-primary:hover,
+html.dark-mode a.btn-box.btn-primary:hover,
+html.dark-mode .quick-section-nav a.btn-box.btn-primary:hover,
+html.dark-mode nav[aria-label="Quick section navigation"] a.btn-box.btn-primary:hover {
+    background: #4e4e4e !important;
+    border-color: #aaaaaa !important;
+    color: #ffffff !important;
+}
+
+/* Artist Card Title Link in Dark Mode */
+html.dark-mode .artist-card-title a {
+    color: #93c5fd !important;
+}
+
+html.dark-mode .artist-card-title a:hover {
+    color: #bfdbfe !important;
+}
+
+/* Schedule Plan Cards & Collision Boxes */
+html.dark-mode .sch-plan-card,
+html.dark-mode article.col.wf-box-sub.sch-plan-card {
+    background: #202020 !important;
+    border-color: #444444 !important;
+    color: #d6d6d6 !important;
+}
+
+html.dark-mode .sch-plan-card.has-collision,
+html.dark-mode .wf-box-sub.has-collision,
+html.dark-mode .col.wf-box-sub.has-collision,
+html.dark-mode article.wf-box-sub.has-collision,
+html.dark-mode article.col.wf-box-sub.has-collision,
+html.dark-mode article.col.wf-box-sub.sch-plan-card.has-collision {
+    background: #2b1416 !important;
+    border: 2px solid #e53935 !important;
+    color: #ffcdd2 !important;
+}
+
+/* Remove Button inside a Colliding Card */
+html.dark-mode .sch-plan-card.has-collision .remove-btn,
+html.dark-mode article.col.wf-box-sub.has-collision .remove-btn,
+html.dark-mode .remove-btn.has-collision {
+    background: #341a1c !important;
+    border: 1px solid #70262a !important;
+    color: #e57373 !important;
+    font-weight: bold;
+}
+
+html.dark-mode .sch-plan-card.has-collision .remove-btn:hover,
+html.dark-mode article.col.wf-box-sub.has-collision .remove-btn:hover,
+html.dark-mode .remove-btn.has-collision:hover {
+    background: #421f22 !important;
+    border-color: #c62828 !important;
+    color: #ffcdd2 !important;
+}
+
+/* Conflict & Clean Alerts / Status Badges in Dark Mode */
+html.dark-mode .conflict-alert-box,
+html.dark-mode .sch-conflict-alert,
+html.dark-mode .col.wf-box-sub .conflict-alert-box {
+    background: #3c1414 !important;
+    border: 2px solid #e53935 !important;
+    color: #ffcdd2 !important;
+}
+
+html.dark-mode .conflict-alert-box strong,
+html.dark-mode .conflict-alert-box p,
+html.dark-mode .col.wf-box-sub .conflict-alert-box strong,
+html.dark-mode .col.wf-box-sub .conflict-alert-box p {
+    color: #ffcdd2 !important;
+}
+
+html.dark-mode .conflict-clean-box,
+html.dark-mode .col.wf-box-sub .conflict-clean-box {
+    background: #14351c !important;
+    border: 2px solid #28a745 !important;
+    color: #81c784 !important;
+}
+
+html.dark-mode .conflict-clean-box strong,
+html.dark-mode .conflict-clean-box p,
+html.dark-mode .col.wf-box-sub .conflict-clean-box strong,
+html.dark-mode .col.wf-box-sub .conflict-clean-box p {
+    color: #81c784 !important;
+}
+
+html.dark-mode .status-badge-conflict {
+    background: #3c1414 !important;
+    border-color: #e53935 !important;
+    color: #ffcdd2 !important;
+}
+
+html.dark-mode .status-badge-clean {
+    background: #14351c !important;
+    border-color: #28a745 !important;
+    color: #81c784 !important;
+}
+
+html.dark-mode .wf-badge-shelter {
+    background: #3a2e10 !important;
+    border-color: #d4a72c !important;
+    color: #f6d878 !important;
+}
+
+html.dark-mode .svg-map-frame {
+    background: #141414 !important;
+    border-color: #444444 !important;
+}
+
+html.dark-mode .wf-page-title,
+html.dark-mode address.wf-address {
+    color: #e4e4e4;
+}
+
+.drawer-footer .theme-switch-box,
+.drawer-footer .lang-switch-box {
+    width: 100%;
+}
+.drawer-footer .theme-switch-box {
+    margin-bottom: 8px;
+}
+.drawer-footer .lang-switch-box {
+    margin: 0;
+}
+footer.wf-footer-inline address.wf-address {
+    display: inline;
+}
+
+.telemetry-radar-alert {
+    color: #ffc107;
+}
+.telemetry-lunar-dry {
+    color: #28a745;
+}
+html.dark-mode .telemetry-radar-alert {
+    color: #ffd54f !important;
+}
+html.dark-mode .telemetry-lunar-dry {
+    color: #81c784 !important;
+}
+.rain-shelter-banner p {
+    font-size: 0.88rem;
+    margin-top: 2px;
+}
+.control-tile p {
+    font-size: 0.85rem;
+    color: #555;
+}
+html.dark-mode .control-tile p {
+    color: #aaa !important;
+}
+.control-tile.control-tile-shelter {
+    border: 2px solid #222;
+}
+html.dark-mode .control-tile.control-tile-shelter {
+    border: 2px solid #666 !important;
+}
+.row-spaced,
+.row + .row {
+    margin-top: 12px;
+}
+.btn-bold {
+    font-weight: bold;
+}
+
+.shelter-note {
+    margin-top: 4px;
+    font-size: 0.85rem;
+    color: #155724;
+}
+html.dark-mode .shelter-note {
+    color: #81c784 !important;
+}
+.map-summary-box {
+    padding: 14px;
+    text-align: center;
+}
+.map-summary-box p {
+    margin-bottom: 8px;
+}
+.map-summary-box a {
+    margin-top: 6px;
+}
+
+/* ==========================================================================
+   Artist Detail Dedicated Components & Modifiers
+   ========================================================================== */
+.detail-toolbar {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.detail-toolbar-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+#detail-back-btn {
+    font-weight: bold;
+    text-decoration: none;
+}
+.artist-detail-header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.artist-detail-title {
+    font-size: 1.55rem;
+    margin-bottom: 6px;
+}
+.artist-detail-star-btn {
+    font-size: 0.95rem;
+    font-weight: bold;
+    padding: 6px 14px;
+    cursor: pointer;
+    background: #eee;
+    color: #000;
+    border: 1px solid #333;
+}
+.artist-detail-star-btn.is-active {
+    background: #28a745;
+    color: #fff;
+    border-color: #1e7e34;
+}
+html.dark-mode .artist-detail-star-btn {
+    background: #2a2a2a;
+    color: #fff;
+    border-color: #555;
+}
+html.dark-mode .artist-detail-star-btn.is-active {
+    background: #28a745;
+    color: #fff;
+    border-color: #1e7e34;
+}
+.audio-preview-container {
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 12px;
+    background: #fafafa;
+    border: 1px solid #777;
+}
+html.dark-mode .audio-preview-container {
+    background: #202020 !important;
+    border-color: #444 !important;
+}
+.audio-preview-icon {
+    font-size: 2rem;
+    margin-bottom: 6px;
+}
+.audio-preview-label {
+    font-size: 0.85rem;
+    color: #555;
+}
+html.dark-mode .audio-preview-label {
+    color: #a6a6a6;
+}
+.audio-sample-title {
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+}
+.audio-sample-subtitle {
+    font-size: 0.78rem;
+    color: #555;
+    margin-bottom: 6px;
+}
+html.dark-mode .audio-sample-subtitle {
+    color: #a6a6a6;
+}
+.audio-play-btn {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+    font-weight: bold;
+}
+.audio-time-label {
+    font-size: 0.75rem;
+    font-family: monospace;
+}
+.audio-stream-info {
+    font-size: 0.76rem;
+    color: #666;
+    margin-top: 8px;
+}
+html.dark-mode .audio-stream-info {
+    color: #a6a6a6;
+}
+.artist-detail-section-title {
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+}
+.artist-detail-subsection-title {
+    font-size: 1.02rem;
+    margin: 12px 0 6px;
+}
+.artist-detail-actions-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+}
+.artist-detail-back-btn-alt {
+    margin-left: auto;
+    background: #222;
+    color: #fff;
+    font-weight: bold;
+}
+html.dark-mode .artist-detail-back-btn-alt {
+    background: #333;
+    color: #fff;
+    border-color: #555;
+}
+.artist-quick-select-section {
+    margin-top: 16px;
+}
+.artist-quick-select-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.artist-quick-select-box {
+    flex: 1;
+    min-width: 220px;
+    max-width: 400px;
+}
+.artist-quick-select-input {
+    width: 100%;
+    padding: 5px 8px;
+    font-size: 0.88rem;
+}
+
+/* ==========================================================================
+   My Schedule Dedicated Components & Collision Engine
+   ========================================================================== */
+.sch-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.sch-day-section-box {
+    margin-bottom: 18px;
+}
+
+.sch-empty-box {
+    padding: 24px;
+    text-align: center;
+}
+
+.sch-empty-title {
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+}
+
+.sch-empty-desc {
+    color: #444;
+    max-width: 600px;
+    margin: 0 auto 14px;
+}
+
+html.dark-mode .sch-empty-desc {
+    color: #aaa !important;
+}
+
+.sch-empty-btn {
+    font-weight: bold;
+    padding: 8px 16px;
+}
+
+.sch-empty-text {
+    color: #666;
+}
+
+html.dark-mode .sch-empty-text {
+    color: #888 !important;
+}
+
+/* Conflict Alert & Clean Banners */
+.conflict-alert-box {
+    border: 2px solid #b71c1c;
+    background: #ffebee;
+    margin-bottom: 16px;
+    padding: 14px;
+}
+
+.conflict-alert-box h3 {
+    color: #b71c1c;
+    margin-bottom: 6px;
+}
+
+.conflict-alert-box p {
+    color: #721c24;
+    font-size: 0.92rem;
+    line-height: 1.45;
+}
+
+html.dark-mode .conflict-alert-box {
+    background: #3c1414 !important;
+    border: 2px solid #e53935 !important;
+    color: #ffcdd2 !important;
+}
+
+html.dark-mode .conflict-alert-box h3,
+html.dark-mode .conflict-alert-box p {
+    color: #ffcdd2 !important;
+}
+
+.conflict-clean-box {
+    border: 2px solid #28a745;
+    background: #d4edda;
+    margin-bottom: 16px;
+    padding: 12px 14px;
+}
+
+.conflict-clean-box p {
+    color: #155724;
+    font-weight: bold;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+html.dark-mode .conflict-clean-box {
+    background: #14351c !important;
+    border: 2px solid #28a745 !important;
+}
+
+html.dark-mode .conflict-clean-box p {
+    color: #81c784 !important;
+}
+
+.day-conflict-note {
+    border: 1px solid #b71c1c;
+    background: #fff5f5;
+    padding: 8px 12px;
+    margin-bottom: 12px;
+    font-size: 0.88rem;
+    color: #b71c1c;
+}
+
+html.dark-mode .day-conflict-note {
+    background: #3c1414 !important;
+    border-color: #e53935 !important;
+    color: #ffcdd2 !important;
+}
+
+/* Schedule Plan Cards */
+.sch-plan-card {
+    min-width: 260px;
+    border: 1px solid #777;
+    background: #fafafa;
+}
+
+.sch-plan-card.has-collision {
+    border: 2px solid #b71c1c !important;
+    background: #ffebee !important;
+}
+
+html.dark-mode .sch-plan-card {
+    background: #202020 !important;
+    border-color: #444 !important;
+}
+
+html.dark-mode article.col.wf-box-sub.sch-plan-card.has-collision,
+html.dark-mode .sch-plan-card.has-collision {
+    background: #3c1414 !important;
+    border: 2px solid #e53935 !important;
+    color: #ffcdd2 !important;
+}
+
+.sch-card-artist-title {
+    font-size: 1.05rem;
+    margin-bottom: 6px;
+}
+
+.sch-card-bio {
+    font-size: 0.8rem;
+    color: #555;
+    margin-top: 4px;
+}
+
+html.dark-mode .sch-card-bio {
+    color: #a6a6a6 !important;
+}
+
+.status-badge-conflict {
+    margin-top: 8px;
+    padding: 6px 8px;
+    border: 1px solid #b71c1c;
+    background: #fff;
+    font-size: 0.84rem;
+    color: #b71c1c;
+}
+
+.status-badge-conflict p {
+    margin-top: 3px;
+    color: #900;
+}
+
+html.dark-mode .status-badge-conflict {
+    background: #2a1515 !important;
+    border-color: #e53935 !important;
+    color: #ffcdd2 !important;
+}
+
+html.dark-mode .status-badge-conflict p {
+    color: #ffcdd2 !important;
+}
+
+.status-badge-clean {
+    margin-top: 8px;
+    padding: 4px 8px;
+    border: 1px solid #28a745;
+    background: #f4faf5;
+    font-size: 0.84rem;
+    color: #155724;
+}
+
+html.dark-mode .status-badge-clean {
+    background: #14351c !important;
+    border-color: #28a745 !important;
+    color: #81c784 !important;
+}
+
+.sch-card-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.sch-card-btn {
+    flex: 1;
+    text-align: center;
+    font-size: 0.82rem;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 6px 8px;
+}
+
+.remove-btn {
+    flex: 1;
+    text-align: center;
+    font-size: 0.82rem;
+    padding: 6px 8px;
+    border: 1px solid #333;
+}
+
+.remove-btn.has-collision {
+    border: 1px solid #b71c1c;
+    font-weight: bold;
+}
+
+html.dark-mode .remove-btn {
+    background: #2a2a2a;
+    border-color: #555;
+    color: #eee;
+}
+
+html.dark-mode .remove-btn.has-collision {
+    border-color: #e53935 !important;
+    color: #ffcdd2 !important;
+}
+
+/* Band Details Popover in Timetable */
+.sch-band-meta {
+    margin-top: 4px;
+    color: #444;
+}
+html.dark-mode .sch-band-meta {
+    color: #a6a6a6 !important;
+}
+.sch-band-profile-link {
+    margin-top: 6px;
+    display: flex;
+    gap: 8px;
+}
+.sch-artist-profile-btn {
+    color: #000;
+    text-decoration: underline;
+    font-weight: bold;
+}
+html.dark-mode .sch-artist-profile-btn {
+    color: #93c5fd !important;
+}
+
+/* ==========================================================================
+   Program Timetable Dedicated Components
+   ========================================================================== */
+.rain-shelter-quick-banner {
+    margin-bottom: 12px;
+    background: #fdfdfe;
+    border: 1px solid #333;
+    padding: 10px 14px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+html.dark-mode .rain-shelter-quick-banner {
+    background: #222 !important;
+    border-color: #555 !important;
+}
+.rain-shelter-desc {
+    font-size: 0.85rem;
+    color: #444;
+    margin-left: 6px;
+}
+html.dark-mode .rain-shelter-desc {
+    color: #aaa !important;
+}
+.filter-status-text {
+    margin-left: 10px;
+    color: #444;
+    font-size: 0.82rem;
+}
+html.dark-mode .filter-status-text {
+    color: #aaa !important;
+}
+.btn-space-left {
+    margin-left: 6px;
+}
+.filter-heading {
+    font-size: 0.95rem;
+}
+.filter-btn-auto-left {
+    margin-left: auto;
+}
+.filter-search-input {
+    flex: 1;
+    min-width: 180px;
+}
+
+/* ==========================================================================
+   Artist Catalog Dedicated Components
+   ========================================================================== */
+.artist-card-title a {
+    color: inherit;
+    text-decoration: underline;
+}
+html.dark-mode .artist-card-title a {
+    color: #93c5fd;
+    text-decoration: underline;
+}
+html.dark-mode .artist-card-title a:hover {
+    color: #bfdbfe;
+}
+
+.artist-inline-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+}
+.artist-inline-detail-title {
+    font-size: 1.3rem;
+    margin-bottom: 4px;
+}
+.artist-inline-detail-meta {
+    color: #444;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+html.dark-mode .artist-inline-detail-meta {
+    color: #aaa !important;
+}
+.artist-inline-media-col {
+    flex: 1 1 220px;
+    max-width: 280px;
+}
+.artist-inline-photo-box {
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #555;
+}
+html.dark-mode .artist-inline-photo-box {
+    color: #a6a6a6 !important;
+}
+.artist-inline-audio-note {
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: #666;
+    text-align: center;
+}
+html.dark-mode .artist-inline-audio-note {
+    color: #a6a6a6 !important;
+}
+.artist-inline-content-col {
+    flex: 2 1 320px;
+}
+.artist-inline-schedule-box {
+    background: #f1f3f5;
+    border: 1px solid #777;
+    padding: 8px 12px;
+    font-size: 0.88rem;
+}
+html.dark-mode .artist-inline-schedule-box {
+    background: #202020 !important;
+    border-color: #444 !important;
+}
+.artist-inline-actions {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+#detail-fav-btn {
+    font-weight: bold;
+    background: #eee;
+    color: #000;
+}
+#detail-fav-btn.is-favourite {
+    background: #28a745;
+    color: #fff;
+}
+
+/* ==========================================================================
+   Practical Info Dedicated Components & Modifiers
+   ========================================================================== */
+.quick-nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.transit-situation-box {
+    background: #f1f5f9;
+    border-left: 4px solid #222;
+    padding: 12px;
+    margin-bottom: 14px;
+}
+
+html.dark-mode .transit-situation-box {
+    background: #202020 !important;
+    border-left-color: #93c5fd !important;
+}
+
+.transit-situation-list {
+    margin: 6px 0 0 20px;
+    font-size: 0.92rem;
+    line-height: 1.5;
+}
+
+.col-shuttle-info {
+    flex: 1 1 260px;
+}
+
+.col-shuttle-table {
+    flex: 2 1 340px;
+}
+
+.shuttle-timetable {
+    width: 100%;
+    font-size: 0.84rem;
+}
+
+.shuttle-sync-note {
+    font-size: 0.78rem;
+    color: #555;
+    margin-top: 4px;
+}
+
+html.dark-mode .shuttle-sync-note {
+    color: #aaa !important;
+}
+
+.walking-steps-list {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.walking-step-item {
+    border: 1px solid #777;
+    background: #fff;
+    padding: 8px 12px;
+    font-size: 0.88rem;
+}
+
+.walking-step-destination {
+    border: 2px solid #28a745 !important;
+    background: #f4faf5 !important;
+}
+
+html.dark-mode .walking-step-destination {
+    background: #14351c !important;
+    border-color: #28a745 !important;
+}
+
+.destination-title {
+    color: #155724;
+}
+
+html.dark-mode .destination-title {
+    color: #81c784 !important;
+}
+
+.destination-desc {
+    color: #222;
+}
+
+html.dark-mode .destination-desc {
+    color: #e0e0e0 !important;
+}
+
+.walking-route-summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.svg-map {
+    width: 100%;
+    min-width: 600px;
+    height: auto;
+    display: block;
+}
+
+.camp-price-text {
+    margin-top: 6px;
+    font-size: 0.85rem;
+}
+
+.faq-item {
+    margin-bottom: 8px;
+}
+
+/* ==========================================================================
+   Search Showcase Page (search.html)
+   ========================================================================== */
+.search-form-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0 8px 0;
+}
+
+.search-input-box {
+    flex: 1 1 280px;
+    border: 1px solid #555;
+    padding: 8px 10px;
+    font-size: 0.95rem;
+    background: #fff;
+    color: #111;
+}
+
+.search-pills-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 8px 0 12px 0;
+}
+
+.search-pill-btn {
+    border: 1px solid #333;
+    background: #f8f9fa;
+    color: #111;
+    padding: 4px 10px;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.search-pill-btn:hover,
+.search-pill-btn.active {
+    background: #222;
+    color: #fff;
+    border-color: #000;
+}
+
+.search-status-bar {
+    font-size: 0.88rem;
+    font-weight: bold;
+    margin-top: 6px;
+}
+
+.search-results-section {
+    margin-bottom: 24px;
+}
+
+.search-section-heading {
+    font-size: 1.15rem;
+    margin-bottom: 12px;
+}
+
+.search-result-item {
+    border: 1px solid #777;
+    background: #fafafa;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+}
+
+.search-result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.search-result-content {
+    flex: 1;
+}
+
+.search-result-title {
+    font-size: 1.05rem;
+    margin-bottom: 4px;
+}
+
+.search-result-meta {
+    font-size: 0.82rem;
+    color: #555;
+}
+
+.search-result-desc {
+    font-size: 0.88rem;
+    margin-top: 6px;
+    line-height: 1.4;
+    color: #222;
+}
+
+.search-result-action {
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+
+.search-result-action .btn-box {
+    font-size: 0.82rem;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.search-empty-box {
+    border: 1px solid #777;
+    background: #fafafa;
+    padding: 16px;
+    text-align: center;
+    color: #555;
+    margin-top: 12px;
+}
+
+/* Dark Mode Overrides for Search */
+html.dark-mode .search-input-box {
+    background: #222;
+    border-color: #555;
+    color: #eee;
+}
+
+html.dark-mode .search-pill-btn {
+    background: #242424;
+    border-color: #444;
+    color: #ddd;
+}
+
+html.dark-mode .search-pill-btn:hover,
+html.dark-mode .search-pill-btn.active {
+    background: #3e3e3e !important;
+    color: #fff !important;
+    border-color: #888 !important;
+}
+
+html.dark-mode .search-result-item {
+    background: #1e1e1e !important;
+    border-color: #444 !important;
+    color: #ddd !important;
+}
+
+html.dark-mode .search-result-meta {
+    color: #a6a6a6 !important;
+}
+
+html.dark-mode .search-result-desc {
+    color: #ccc !important;
+}
+
+html.dark-mode .search-empty-box {
+    background: #1e1e1e !important;
+    border-color: #444 !important;
+    color: #aaa !important;
+}
 
 

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Festival Search & Lineup Explorer – Festival of Darkness 2">
+    <title>Festival of Darkness 2 | Search</title>
+    <link rel="stylesheet" href="css/wireframe.css">
+    <script src="js/theme.js"></script>
+    <script src="js/lang.js" defer></script>
+    <script src="components/nav.js" defer></script>
+    <script src="components/footer.js" defer></script>
+    <script src="js/search.js" defer></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Festival of Darkness 2",
+        "url": "https://www.festivalofdarkness2.cz/",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://www.festivalofdarkness2.cz/search.html?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- HEADER & NAVIGATION (components/nav.js / nav.html) -->
+        <div id="nav-placeholder">
+            <header class="wf-top-app-bar" role="banner">
+                <a href="#main-content" class="skip-link" data-i18n="skip_to_content">Skip to main content</a>
+                <div class="wf-top-bar-left">
+                    <button id="lang-switch-btn" class="btn-box lang-switch-btn" type="button" aria-label="Language" title="Switch language to Czech">
+                        <span class="flag-icon" id="lang-flag" aria-hidden="true"><img src="img/1f1ec-1f1e7.svg" alt="GB" class="flag-img" width="20" height="20"></span>
+                        <span class="lang-label" id="lang-label">Language</span>
+                    </button>
+                </div>
+                <div class="wf-top-bar-center">
+                    <a href="index.html" class="festival-brand" aria-label="Festival of Darkness 2 Home">
+                        <strong>[ Festival of Darkness 2 ]</strong>
+                    </a>
+                </div>
+                <div class="wf-top-bar-right">
+                    <button id="theme-switch-btn" class="btn-box theme-switch-btn" type="button" aria-label="Switch to Dark Mode" title="Switch to Dark Mode">
+                        <span class="theme-icon" id="theme-icon" aria-hidden="true">🌙</span>
+                        <span class="theme-label" id="theme-label">Dark</span>
+                    </button>
+                    <button id="menu-drawer-open-btn" class="btn-box wf-menu-btn" type="button" aria-expanded="false" aria-controls="alza-menu-drawer" aria-label="Open Navigation Menu">
+                        [ ☰ Menu ]
+                    </button>
+                </div>
+            </header>
+            <hr class="wf-top-bar-divider">
+
+            <!-- Alza Drawer -->
+            <div id="alza-drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
+            <aside id="alza-menu-drawer" class="alza-drawer" aria-label="Site Menu" aria-hidden="true">
+                <div class="drawer-header">
+                    <span class="drawer-title"><strong>[ Festival of Darkness 2 ]</strong></span>
+                    <button id="menu-drawer-close-btn" class="btn-box drawer-close-btn" type="button" aria-label="Close navigation menu">
+                        [ ✕ Close ]
+                    </button>
+                </div>
+                <hr>
+                <nav class="drawer-links" aria-label="Drawer Navigation">
+                    <a href="index.html" data-i18n="nav_home">🏠 [ Home ]</a>
+                    <a href="program.html" data-i18n="nav_program">📅 [ Program ]</a>
+                    <a href="artists.html" data-i18n="nav_artists">🎤 [ Artists ]</a>
+                    <a href="stages.html" data-i18n="nav_stages">⛺ [ Stages ]</a>
+                    <a href="practical-info.html" data-i18n="nav_practical">🚆 [ Practical Info ]</a>
+                    <a href="my-schedule.html" data-i18n="nav_myschedule">★ [ My Schedule ]</a>
+                    <a href="search.html" class="active" data-i18n="nav_search">🔍 [ Search ]</a>
+                </nav>
+                <hr>
+                <div class="drawer-footer">
+                    <div class="theme-switch-box">
+                        <button id="theme-switch-btn-drawer" class="btn-box theme-switch-btn btn-block" type="button" aria-label="Switch to Dark Mode" title="Switch to Dark Mode">
+                            <span class="theme-icon" id="theme-icon-drawer" aria-hidden="true">🌙</span>
+                            <span class="theme-label" id="theme-label-drawer">Dark</span>
+                        </button>
+                    </div>
+                    <div class="lang-switch-box">
+                        <button id="lang-switch-btn-drawer" class="btn-box lang-switch-btn btn-block" type="button" aria-label="Language" title="Switch language to Czech">
+                            <span class="flag-icon" id="lang-flag-drawer" aria-hidden="true"><img src="img/1f1ec-1f1e7.svg" alt="GB" class="flag-img" width="20" height="20"></span>
+                            <span class="lang-label" id="lang-label-drawer">Language</span>
+                        </button>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Bottom Dock -->
+            <nav class="bottom-nav-dock" aria-label="Mobile Bottom Navigation">
+                <a href="artists.html" class="bottom-dock-item bottom-nav-item" id="dock-item-artists">
+                    <span class="dock-icon">🎤</span>
+                    <span class="dock-label" data-i18n="dock_artists">Artists</span>
+                </a>
+                <a href="stages.html" class="bottom-dock-item bottom-nav-item" id="dock-item-stages">
+                    <span class="dock-icon">⛺</span>
+                    <span class="dock-label" data-i18n="dock_stages">Stages</span>
+                </a>
+                <a href="index.html" class="bottom-dock-item bottom-nav-item bottom-dock-home" id="dock-item-home">
+                    <span class="dock-icon">🏠</span>
+                    <span class="dock-label" data-i18n="dock_home">HOME</span>
+                </a>
+                <a href="program.html" class="bottom-dock-item bottom-nav-item" id="dock-item-timetable">
+                    <span class="dock-icon">📅</span>
+                    <span class="dock-label" data-i18n="dock_timetable">Timetable</span>
+                </a>
+                <a href="my-schedule.html" class="bottom-dock-item bottom-nav-item" id="dock-item-myplan">
+                    <span class="dock-icon">★</span>
+                    <span class="dock-label"><span data-i18n="dock_myplan">My Plan</span> <span class="nav-badge-count is-hidden">0</span></span>
+                </a>
+            </nav>
+        </div>
+
+        <main id="main-content">
+            <!-- Breadcrumbs Navigation -->
+            <nav class="wf-breadcrumbs" aria-label="Breadcrumb">
+                <a href="index.html" data-i18n="nav_home">🏠 [ Home ]</a>
+                <span class="sep">&gt;</span>
+                <span class="current" data-i18n="nav_search">🔍 [ Search ]</span>
+            </nav>
+
+            <!-- Page Header -->
+            <header class="wf-box">
+                <h1 class="wf-page-title" data-i18n="search_title">[ Festival Search &amp; Lineup Explorer ]</h1>
+                <p data-i18n="practical_intro">[ Complete guide to searching performers, timetable slots, stages, and practical info across the 2026 edition. ]</p>
+            </header>
+
+            <hr>
+
+            <!-- Search Filter Form & Quick Query Pills -->
+            <section class="wf-box-sub" aria-label="Search filter form">
+                <form role="search" class="search-form-box" id="search-form" onsubmit="return false;">
+                    <input type="text" id="global-search-input" class="search-input-box" data-i18n-placeholder="search_placeholder" placeholder="Search performers, stages, times, genres, info..." value="techno" aria-label="Search query input">
+                    <button type="submit" id="search-submit-btn" class="btn-box btn-primary" data-i18n="search_btn">[ Search ]</button>
+                </form>
+
+                <div class="search-pills-row" id="search-pills" role="toolbar" aria-label="Quick search query pills">
+                    <button type="button" class="search-pill-btn active" data-query="techno">[ Techno ]</button>
+                    <button type="button" class="search-pill-btn" data-query="ambient">[ Ambient ]</button>
+                    <button type="button" class="search-pill-btn" data-query="post-rock">[ Post-Rock ]</button>
+                    <button type="button" class="search-pill-btn" data-query="lunar">[ Lunar Forest Dome ]</button>
+                    <button type="button" class="search-pill-btn" data-query="shuttle">[ Shuttle Bus ]</button>
+                    <button type="button" class="search-pill-btn" data-query="" data-i18n="search_quick_pill_all">[ Show All ]</button>
+                </div>
+
+                <div id="search-status-bar" class="search-status-bar" role="status" aria-live="polite">
+                    <span data-i18n="search_results_for">Search Results for:</span> "<span id="active-query-text">techno</span>" (<span id="results-count">5</span> results)
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- Results Section 1: Matching Performers -->
+            <section id="results-performers" class="search-results-section" aria-labelledby="heading-performers">
+                <h2 id="heading-performers" class="wf-page-title search-section-heading" data-i18n="search_performers">Matching Performers</h2>
+                <div id="performers-results-container">
+                    <!-- Static Pre-Rendered Showcase Results for "techno" query -->
+                    <article class="search-result-item" data-keywords="perf-13 deep texture dub techno electronic berlin lunar stage-lunar">
+                        <div class="search-result-row">
+                            <div class="search-result-content">
+                                <h3 class="search-result-title"><strong>Deep Texture</strong> <span class="search-result-meta">[ Dub Techno / Electronic (DE) ]</span></h3>
+                                <p class="search-result-desc">Cavernous dub techno soundscapes with echoing chord stabs and deep sub-bass frequencies from Berlin underground.</p>
+                            </div>
+                            <div class="search-result-action">
+                                <a href="artist-detail.html?id=perf-13&amp;from=search#perf-13" class="btn-box">[ View Profile &rarr; ]</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="search-result-item" data-keywords="perf-14 oscillator shift minimal techno electronic brno lunar stage-lunar">
+                        <div class="search-result-row">
+                            <div class="search-result-content">
+                                <h3 class="search-result-title"><strong>Oscillator Shift</strong> <span class="search-result-meta">[ Minimal Techno / Electronic (CZ) ]</span></h3>
+                                <p class="search-result-desc">Hypnotic minimal techno driven by subtle groove modulations and percussive precision from Brno.</p>
+                            </div>
+                            <div class="search-result-action">
+                                <a href="artist-detail.html?id=perf-14&amp;from=search#perf-14" class="btn-box">[ View Profile &rarr; ]</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="search-result-item" data-keywords="perf-16 phase shift deep techno budapest hungary lunar stage-lunar">
+                        <div class="search-result-row">
+                            <div class="search-result-content">
+                                <h3 class="search-result-title"><strong>Phase Shift</strong> <span class="search-result-meta">[ Deep Techno / Electronic (HU) ]</span></h3>
+                                <p class="search-result-desc">Budapest club staple delivering relentless, hypnotic deep techno sets built around rolling basslines and dark modular loops.</p>
+                            </div>
+                            <div class="search-result-action">
+                                <a href="artist-detail.html?id=perf-16&amp;from=search#perf-16" class="btn-box">[ View Profile &rarr; ]</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Results Section 2: Matching Timetable Slots -->
+            <section id="results-timetable" class="search-results-section" aria-labelledby="heading-timetable">
+                <h2 id="heading-timetable" class="wf-page-title search-section-heading" data-i18n="search_timetable">Matching Timetable Slots</h2>
+                <div id="timetable-results-container">
+                    <div class="search-result-item" data-keywords="phase shift lunar dome saturday techno session late night">
+                        <div class="search-result-row">
+                            <div class="search-result-content">
+                                <h3 class="search-result-title"><strong>🌙 Lunar Forest Dome &mdash; Saturday, July 11, <time datetime="23:30">23:30</time> &ndash; <time datetime="01:00">01:00</time></strong></h3>
+                                <p class="search-result-desc"><strong>Phase Shift</strong> &mdash; Late-night modular deep techno showcase in the covered weather-proof dome.</p>
+                            </div>
+                            <div class="search-result-action">
+                                <a href="program.html?day=2&amp;highlight=perf-16#perf-16" class="btn-box">[ View in Timetable Grid &rarr; ]</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section 3: Stages & Practical Information -->
+            <section id="results-info" class="search-results-section" aria-labelledby="heading-info">
+                <h2 id="heading-info" class="wf-page-title search-section-heading" data-i18n="search_info">Stages &amp; Practical Information</h2>
+                <div id="info-results-container">
+                    <div class="search-result-item" data-keywords="lunar forest dome rain shelter covered tent weather techno ambient indoor">
+                        <div class="search-result-row">
+                            <div class="search-result-content">
+                                <h3 class="search-result-title"><strong>🌙 Lunar Forest Dome (Rain Shelter &amp; Techno Stage)</strong></h3>
+                                <p class="search-result-desc">All-weather geodesic dome with 1,800 capacity. Features continuous shelter, electronic music sets, and techno showcases when rain occurs.</p>
+                            </div>
+                            <div class="search-result-action">
+                                <a href="stages.html#stage-lunar" class="btn-box">[ Explore Stage Details &rarr; ]</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div id="search-empty-msg" class="search-empty-box is-hidden" role="alert">
+                <p data-i18n="search_empty">No results found matching your query.</p>
+            </div>
+
+        </main>
+
+        <!-- FOOTER (components/footer.js / footer.html) -->
+        <div id="footer-placeholder">
+            <hr>
+            <footer class="wf-footer-inline">
+                <strong class="festival-brand">[ © 2026 Festival of Darkness 2 ]</strong>
+                <a href="index.html" data-i18n="nav_home">[ Home ]</a>
+                <a href="program.html" data-i18n="nav_program">[ Program ]</a>
+                <a href="artists.html" data-i18n="nav_artists">[ Artists ]</a>
+                <a href="stages.html" data-i18n="nav_stages">[ Stages ]</a>
+                <a href="practical-info.html" data-i18n="nav_practical">[ Practical Info ]</a>
+                <a href="my-schedule.html" data-i18n="nav_myschedule">[ My Schedule ]</a>
+                <address class="wf-address"><span>[ info@festivalofdarkness.com ]</span></address>
+            </footer>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -25,7 +25,8 @@
             'stages.html',
             'practical-info.html',
             'my-schedule.html',
-            'artist-detail.html'
+            'artist-detail.html',
+            'search.html'
         ];
 
         if (validPages.includes(page)) {
@@ -53,6 +54,7 @@
         const stages = isCs ? '[ Scény ]' : '[ Stages ]';
         const practical = isCs ? '[ Praktické info ]' : '[ Practical Info ]';
         const mySchedule = isCs ? '[ Můj program ]' : '[ My Schedule ]';
+        const search = isCs ? '[ Vyhledávání ]' : '[ Search ]';
 
         const dockArtists = isCs ? 'Účinkující' : 'Artists';
         const dockStages = isCs ? 'Scény' : 'Stages';
@@ -84,6 +86,7 @@
         return `
 <!-- 1. Top Bar (Centered Festival Name + Right Menu Button) -->
 <header class="wf-top-app-bar" role="banner">
+    <a href="#main-content" class="skip-link" data-i18n="skip_to_content">${isCs ? 'Přejít k hlavnímu obsahu' : 'Skip to main content'}</a>
     <div class="wf-top-bar-left">
         <button id="lang-switch-btn" class="btn-box lang-switch-btn" type="button" aria-label="${langText}" title="${title}">
             <span class="flag-icon" id="lang-flag" aria-hidden="true">${flag}</span>
@@ -124,17 +127,18 @@
         <a href="stages.html" class="${currentPath === 'stages.html' ? 'active' : ''}" data-i18n="nav_stages">⛺ ${stages}</a>
         <a href="practical-info.html" class="${currentPath === 'practical-info.html' ? 'active' : ''}" data-i18n="nav_practical">🚆 ${practical}</a>
         <a href="my-schedule.html" class="${currentPath === 'my-schedule.html' ? 'active' : ''}" data-i18n="nav_myschedule">★ ${mySchedule}</a>
+        <a href="search.html" class="${currentPath === 'search.html' ? 'active' : ''}" data-i18n="nav_search">🔍 ${search}</a>
     </nav>
     <hr>
     <div class="drawer-footer">
-        <div class="theme-switch-box" style="margin-bottom: 8px; width: 100%;">
-            <button id="theme-switch-btn-drawer" class="btn-box theme-switch-btn" type="button" aria-label="${themeTitle}" title="${themeTitle}" style="width: 100%; justify-content: center;">
+        <div class="theme-switch-box">
+            <button id="theme-switch-btn-drawer" class="btn-box theme-switch-btn btn-block" type="button" aria-label="${themeTitle}" title="${themeTitle}">
                 <span class="theme-icon" id="theme-icon-drawer" aria-hidden="true">${themeIcon}</span>
                 <span class="theme-label" id="theme-label-drawer">${themeLabel}</span>
             </button>
         </div>
-        <div class="lang-switch-box" style="margin: 0; width: 100%;">
-            <button id="lang-switch-btn-drawer" class="btn-box lang-switch-btn" type="button" aria-label="${langText}" title="${title}" style="width: 100%; justify-content: center;">
+        <div class="lang-switch-box">
+            <button id="lang-switch-btn-drawer" class="btn-box lang-switch-btn btn-block" type="button" aria-label="${langText}" title="${title}">
                 <span class="flag-icon" id="lang-flag-drawer" aria-hidden="true">${flag}</span>
                 <span class="lang-label" id="lang-label-drawer">${langText}</span>
             </button>
@@ -162,7 +166,7 @@
     </a>
     <a href="my-schedule.html" class="bottom-dock-item bottom-nav-item ${currentPath === 'my-schedule.html' ? 'active' : ''}" id="dock-item-myplan">
         <span class="dock-icon">★</span>
-        <span class="dock-label"><span data-i18n="dock_myplan">${dockMyPlan}</span> <span class="nav-badge-count" style="display:none;">0</span></span>
+        <span class="dock-label"><span data-i18n="dock_myplan">${dockMyPlan}</span> <span class="nav-badge-count is-hidden">0</span></span>
     </a>
 </nav>
 `;
@@ -247,12 +251,15 @@
             nav_artists: isCs ? '🎤 [ Účinkující ]' : '🎤 [ Artists ]',
             nav_stages: isCs ? '⛺ [ Scény ]' : '⛺ [ Stages ]',
             nav_practical: isCs ? '🚆 [ Praktické info ]' : '🚆 [ Practical Info ]',
-            nav_myschedule: isCs ? '★ [ Můj program ]' : '★ [ My Schedule ]'
+            nav_myschedule: isCs ? '★ [ Můj program ]' : '★ [ My Schedule ]',
+            nav_search: isCs ? '🔍 [ Vyhledávání ]' : '🔍 [ Search ]'
         };
         for (const [key, text] of Object.entries(drawerLinkMap)) {
             const link = document.querySelector(`.drawer-links a[data-i18n="${key}"]`);
             if (link) link.textContent = text;
         }
+        const skipLink = document.querySelector('.skip-link');
+        if (skipLink) skipLink.textContent = isCs ? 'Přejít k hlavnímu obsahu' : 'Skip to main content';
 
         const drawerCloseBtn = document.getElementById('menu-drawer-close-btn');
         if (drawerCloseBtn) {
@@ -273,8 +280,12 @@
             const badges = document.querySelectorAll('.nav-badge-count, .fav-count-badge');
             badges.forEach(b => {
                 b.textContent = count;
-                if (b.classList.contains('nav-badge-count')) {
-                    b.style.display = count > 0 ? 'inline-block' : 'none';
+                if (count > 0) {
+                    b.classList.remove('is-hidden');
+                    b.style.display = 'inline-block';
+                } else {
+                    b.classList.add('is-hidden');
+                    b.style.display = 'none';
                 }
             });
             const isCs = (typeof window.getFestivalLang === 'function' ? window.getFestivalLang() : 'en') === 'cs';
@@ -282,7 +293,7 @@
             if (dockPlanLink) {
                 if (count > 0) {
                     if (isCs) {
-                        const countStr = count === 1 ? '1 uložené vystoupení' : (count >= 2 && count <= 4 ? `${count} uložená vystoupení` : `${count} uložených vystoupení`);
+                        const countStr = typeof window.formatCzPlural === 'function' ? window.formatCzPlural(count, 'uložené vystoupení', 'uložená vystoupení', 'uložených vystoupení') : (count === 1 ? '1 uložené vystoupení' : (count >= 2 && count <= 4 ? `${count} uložená vystoupení` : `${count} uložených vystoupení`));
                         dockPlanLink.setAttribute('title', `Můj plán (${countStr})`);
                     } else {
                         dockPlanLink.setAttribute('title', `My Plan (${count === 1 ? '1 saved show' : count + ' saved shows'})`);

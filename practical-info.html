@@ -13,6 +13,8 @@
 </head>
 <body>
 
+    <a href="#main-content" class="skip-link" data-i18n="skip_to_content">Skip to main content</a>
+
     <div class="wf-container">
 
         <!-- HEADER & NAVIGATION (components/nav.js / nav.html) -->
@@ -58,17 +60,18 @@
                     <a href="stages.html" data-i18n="nav_stages">⛺ [ Stages ]</a>
                     <a href="practical-info.html" class="active" data-i18n="nav_practical">🚆 [ Practical Info ]</a>
                     <a href="my-schedule.html" data-i18n="nav_myschedule">★ [ My Schedule ]</a>
+                    <a href="search.html" data-i18n="nav_search">🔍 [ Search ]</a>
                 </nav>
                 <hr>
                 <div class="drawer-footer">
-                    <div class="theme-switch-box" style="margin-bottom: 8px; width: 100%;">
-                        <button id="theme-switch-btn-drawer" class="btn-box theme-switch-btn" type="button" aria-label="Switch to Dark Mode" title="Switch to Dark Mode" style="width: 100%; justify-content: center;">
+                    <div class="theme-switch-box">
+                        <button id="theme-switch-btn-drawer" class="btn-box theme-switch-btn btn-block" type="button" aria-label="Switch to Dark Mode" title="Switch to Dark Mode">
                             <span class="theme-icon" id="theme-icon-drawer" aria-hidden="true">🌙</span>
                             <span class="theme-label" id="theme-label-drawer">Dark</span>
                         </button>
                     </div>
-                    <div class="lang-switch-box" style="margin: 0; width: 100%;">
-                        <button id="lang-switch-btn-drawer" class="btn-box lang-switch-btn" type="button" aria-label="Language" title="Switch language to Czech" style="width: 100%; justify-content: center;">
+                    <div class="lang-switch-box">
+                        <button id="lang-switch-btn-drawer" class="btn-box lang-switch-btn btn-block" type="button" aria-label="Language" title="Switch language to Czech">
                             <span class="flag-icon" id="lang-flag-drawer" aria-hidden="true"><img src="img/1f1ec-1f1e7.svg" alt="GB" class="flag-img" width="20" height="20"></span>
                             <span class="lang-label" id="lang-label-drawer">Language</span>
                         </button>
@@ -96,12 +99,12 @@
                 </a>
                 <a href="my-schedule.html" class="bottom-dock-item bottom-nav-item" id="dock-item-myplan">
                     <span class="dock-icon">★</span>
-                    <span class="dock-label"><span data-i18n="dock_myplan">My Plan</span> <span class="nav-badge-count" style="display:none;">0</span></span>
+                    <span class="dock-label"><span data-i18n="dock_myplan">My Plan</span> <span class="nav-badge-count is-hidden">0</span></span>
                 </a>
             </nav>
         </div>
 
-        <main>
+        <main id="main-content">
             <!-- Breadcrumbs Navigation -->
             <nav class="wf-breadcrumbs" aria-label="Breadcrumb">
                 <a href="index.html" data-i18n="nav_home">🏠 [ Home ]</a>
@@ -111,7 +114,7 @@
 
             <!-- Page Title -->
             <section class="wf-box">
-                <h1 data-i18n="practical_head">[ Practical Information for Visitors ]</h1>
+                <h1 class="wf-page-title" data-i18n="practical_head">[ Practical Information for Visitors ]</h1>
                 <hr>
                 <p><strong data-i18n="practical_date">[ Festival of Darkness 2 | July 10–12, 2026 | Kutna Hora ]</strong></p>
                 <p data-i18n="practical_intro">[ Complete guide to transit from the train station to the venue, shuttle bus timetables, marked walking route on the map, camping, and cashless services. ]</p>
@@ -120,10 +123,10 @@
             <hr>
 
             <!-- Top Sub-Navigation Anchor Ribbon -->
-            <nav class="wf-box-sub quick-section-nav" aria-label="Quick section navigation" style="padding: 12px;">
+            <nav class="wf-box-sub quick-section-nav" aria-label="Quick section navigation">
                 <strong data-i18n="practical_quick_nav">[ 📍 Quick Section Navigation: ]</strong>
-                <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;">
-                    <a href="#doprava" class="btn-box" style="font-weight: bold; background: #222; color: #fff;" data-i18n="practical_nav_transit">[ 🚆 Transit: Station to Venue &darr; ]</a>
+                <div class="quick-nav-links">
+                    <a href="#doprava" class="btn-box btn-primary" data-i18n="practical_nav_transit">[ 🚆 Transit: Station to Venue &darr; ]</a>
                     <a href="#shuttle-bus" class="btn-box" data-i18n="practical_nav_shuttle">[ 🚌 Festival Shuttle Bus Timetable ]</a>
                     <a href="#pesi-trasa" class="btn-box" data-i18n="practical_nav_walk">[ 🚶 Marked Walking Route &amp; Map ]</a>
                     <a href="#kemp" class="btn-box" data-i18n="practical_nav_camp">[ ⛺ Camping Ground &amp; Lodging ]</a>
@@ -145,28 +148,28 @@
                     <hr>
                     
                     <!-- Situation Box -->
-                    <div class="wf-box-sub" style="background: #f1f5f9; border-left: 4px solid #222; padding: 12px; margin-bottom: 14px;">
+                    <div class="wf-box-sub transit-situation-box">
                         <p><strong>Příjezd vlakem:</strong> <em>Pokud přijíždíte na hlavní nádraží v Kutné Hoře (Kutná Hora hl. n.), do festivalového areálu ke vstupní bráně vedou dvě oficiálně zajištěné a značené trasy:</em></p>
-                        <ol style="margin: 6px 0 0 20px; font-size: 0.92rem; line-height: 1.5;">
+                        <ol class="transit-situation-list">
                             <li><strong>Festivalový shuttle bus (kyvadlová doprava ZDARMA):</strong> Doba jízdy 7 minut, odjezdy každých 10–15 minut přímo z přednádraží ke Vstupu A do areálu.</li>
                             <li><strong>Vyznačená pěší trasa:</strong> Délka 1,8 km (cca 22–25 minut klidné chůze) po značeném festivalovém koridoru přes historický Sedlec.</li>
                         </ol>
                     </div>
 
                     <!-- 1. Shuttle Bus Timetable -->
-                    <article class="wf-box-sub" id="shuttle-bus" style="margin-bottom: 14px;">
+                    <article class="wf-box-sub sch-day-section-box" id="shuttle-bus">
                         <h3>[ 🚌 1. Jízdní řád festivalového shuttle busu (Kyvadlová doprava ZDARMA) ]</h3>
                         <hr>
                         <div class="row">
-                            <div class="col" style="flex: 1 1 260px;">
+                            <div class="col col-shuttle-info">
                                 <p><strong>Nástupní zastávka:</strong> Kutná Hora hl. n. (Přednádražní terminál ČD, stanoviště označené vlajkou <em>„Festival Shuttle Bus“</em>).</p>
                                 <p><strong>Výstupní zastávka:</strong> Festivalový areál – Hlavní brána (Vstup A).</p>
                                 <p><strong>Doba jízdy:</strong> 7 minut (přímý spoj bez mezizastávek).</p>
                                 <p><strong>Jízdné:</strong> <strong>ZDARMA</strong> pro všechny držitele festivalové vstupenky nebo pásky.</p>
                                 <p><strong>Vozový park:</strong> Nízkopodlažní bezbariérové autobusy s prostorem pro batohy i stany.</p>
                             </div>
-                            <div class="col" style="flex: 2 1 340px;">
-                                <table class="sch-table" style="width: 100%; font-size: 0.84rem;">
+                            <div class="col col-shuttle-table">
+                                <table class="sch-table shuttle-timetable">
                                     <thead>
                                         <tr>
                                             <th class="sch-header">Festivalový den</th>
@@ -197,37 +200,37 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <p style="font-size: 0.78rem; color: #555; margin-top: 4px;"><em>* Spoje shuttle busu garantují návaznost na rychlíky linky R9 z Prahy hl. n. a Brna hl. n.</em></p>
+                                <p class="shuttle-sync-note"><em>* Spoje shuttle busu garantují návaznost na rychlíky linky R9 z Prahy hl. n. a Brna hl. n.</em></p>
                             </div>
                         </div>
                     </article>
 
                     <!-- 2. Walking Route -->
-                    <article class="wf-box-sub" id="pesi-trasa" style="margin-bottom: 14px;">
+                    <article class="wf-box-sub sch-day-section-box" id="pesi-trasa">
                         <h3>[ 🚶 2. Vyznačená pěší trasa z nádraží do areálu (1,8 km, cca 22–25 min) ]</h3>
                         <hr>
                         <p>Pokud preferujete procházku, trasa je po celé délce osazena reflexními žlutými směrovkami <em>[ Festival of Darkness 2 &rarr; ]</em> a je vedena po bezpečných osvětlených chodnících:</p>
                         
-                        <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px;">
-                            <div class="walking-step-item" style="border: 1px solid #777; background: #fff; padding: 8px 12px; font-size: 0.88rem;">
+                        <div class="walking-steps-list">
+                            <div class="walking-step-item">
                                 <strong>Krok 1: Výchozí bod – Kutná Hora hl. n. (0,0 km)</strong>
                                 <p>Vyjděte z hlavní nádražní budovy ČD rovně na přednádražní náměstí. Držte se vlevo po širokém chodníku do ulice <em>Nádražní</em>.</p>
                             </div>
-                            <div class="walking-step-item" style="border: 1px solid #777; background: #fff; padding: 8px 12px; font-size: 0.88rem;">
+                            <div class="walking-step-item">
                                 <strong>Krok 2: Ulice Nádražní &rarr; Křižovatka Sedlec (0,1 – 0,7 km)</strong>
                                 <p>Pokračujte 600 metrů rovně po Nádražní ulici. Minete železniční viadukt a dorazíte na světelnou křižovatku u Katedrály Nanebevzetí Panny Marie.</p>
                             </div>
-                            <div class="walking-step-item" style="border: 1px solid #777; background: #fff; padding: 8px 12px; font-size: 0.88rem;">
+                            <div class="walking-step-item">
                                 <strong>Krok 3: Průchod kolem Sedlecké kostnice do ulice Zámecká (0,7 – 1,2 km)</strong>
                                 <p>Na křižovatce odbočte vpravo do Vítězné ulice. Po 300 m odbočte vlevo do Zámecké ulice kolem areálu Sedlecké kostnice a tabákové továrny.</p>
                             </div>
-                            <div class="walking-step-item" style="border: 1px solid #777; background: #fff; padding: 8px 12px; font-size: 0.88rem;">
+                            <div class="walking-step-item">
                                 <strong>Krok 4: Pěší lávka přes Vrchlici do festivalové zóny (1,2 – 1,6 km)</strong>
                                 <p>Zámecká ulice vás dovede k vyhrazené osvětlené festivalové lávce přes říčku Vrchlici. Za lávkou začíná klidová zóna festivalu.</p>
                             </div>
-                            <div class="walking-step-item walking-step-destination" style="border: 2px solid #28a745; background: #f4faf5; padding: 8px 12px; font-size: 0.88rem;">
-                                <strong style="color: #155724;">Krok 5: Cíl – Hlavní brána (Vstup A do areálu festivalu, 1,8 km)</strong>
-                                <p style="color: #222;">Příchod přímo k hlavní pokladně, akreditaci, výměně vstupenek za festivalové RFID pásky a turniketovému vstupu do areálu.</p>
+                            <div class="walking-step-item walking-step-destination">
+                                <strong class="destination-title">Krok 5: Cíl – Hlavní brána (Vstup A do areálu festivalu, 1,8 km)</strong>
+                                <p class="destination-desc">Příchod přímo k hlavní pokladně, akreditaci, výměně vstupenek za festivalové RFID pásky a turniketovému vstupu do areálu.</p>
                             </div>
                         </div>
                     </article>
@@ -238,15 +241,15 @@
                         <hr>
 
                         <!-- Interactive Route Switcher Buttons -->
-                        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
+                        <div class="walking-route-summary">
                             <button type="button" class="filter-btn active" onclick="setMapRoute('all', this)">[ Zobrazit všechny trasy (Shuttle a Pěší) ]</button>
                             <button type="button" class="filter-btn" onclick="setMapRoute('bus', this)">[ 🚌 Jen trasa Shuttle Bus (7 min) ]</button>
                             <button type="button" class="filter-btn" onclick="setMapRoute('walk', this)">[ 🚶 Jen Pěší trasa (1,8 km, 22 min) ]</button>
                         </div>
 
                         <!-- Clean SVG Wireframe Schematic Route Map -->
-                        <div style="border: 1px solid #333; background: #ffffff; padding: 12px; overflow-x: auto;">
-                            <svg viewBox="0 0 880 340" style="width: 100%; min-width: 600px; height: auto; display: block;" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schematická mapa dopravy z vlakového nádraží ke vstupu do areálu">
+                        <div class="svg-map-frame">
+                            <svg viewBox="0 0 880 340" class="svg-map" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schematická mapa dopravy z vlakového nádraží ke vstupu do areálu">
                                 <rect width="880" height="340" fill="#fafafa" stroke="#999" stroke-width="1"/>
                                 <line x1="20" y1="170" x2="860" y2="170" stroke="#eee" stroke-width="1" stroke-dasharray="4"/>
                                 
@@ -306,7 +309,7 @@
                     </article>
 
                     <!-- Arrival by Car -->
-                    <article class="wf-box-sub" style="margin-top: 14px;">
+                    <article class="wf-box-sub row-spaced">
                         <h4>[ 🚗 Příjezd automobilem a parkování (Parkoviště P1) ]</h4>
                         <hr>
                         <p>Pro návštěvníky přijíždějící vozem je vyhrazeno centrální odstavné <strong>Parkoviště P1</strong> na okraji Kutné Hory s kapacitou 800 vozidel. Parkovné činí 100 Kč za den. Z parkoviště vede značený pěší koridor přímo ke Vstupu do areálu (cca 400 m, 5 min chůze).</p>
@@ -319,28 +322,28 @@
                     <hr>
                     
                     <!-- Situation Box -->
-                    <div class="wf-box-sub" style="background: #f1f5f9; border-left: 4px solid #222; padding: 12px; margin-bottom: 14px;">
+                    <div class="wf-box-sub transit-situation-box">
                         <p><strong>Arrival by Train:</strong> <em>If arriving at Kutna Hora main railway station (Kutna Hora hl. n.), there are two officially organized and marked routes to the festival entrance:</em></p>
-                        <ol style="margin: 6px 0 0 20px; font-size: 0.92rem; line-height: 1.5;">
+                        <ol class="transit-situation-list">
                             <li><strong>Festival Shuttle Bus (FREE shuttle service):</strong> 7 minutes travel time, departing every 10–15 minutes directly from the station forecourt to Venue Entrance A.</li>
                             <li><strong>Marked Walking Route:</strong> 1.8 km distance (approx. 22–25 minutes easy walk) following the marked festival pedestrian corridor through historic Sedlec.</li>
                         </ol>
                     </div>
 
                     <!-- 1. Shuttle Bus Timetable -->
-                    <article class="wf-box-sub" id="shuttle-bus-en" style="margin-bottom: 14px;">
+                    <article class="wf-box-sub sch-day-section-box" id="shuttle-bus-en">
                         <h3>[ 🚌 1. Festival Shuttle Bus Timetable (FREE Shuttle Service) ]</h3>
                         <hr>
                         <div class="row">
-                            <div class="col" style="flex: 1 1 260px;">
+                            <div class="col col-shuttle-info">
                                 <p><strong>Boarding Stop:</strong> Kutna Hora main station (ČD forecourt terminal, bay marked with <em>"Festival Shuttle Bus"</em> flag).</p>
                                 <p><strong>Arrival Stop:</strong> Festival Venue – Main Gate (Entrance A).</p>
                                 <p><strong>Travel Time:</strong> 7 minutes (direct express with no intermediate stops).</p>
                                 <p><strong>Fare:</strong> <strong>FREE</strong> for all festival ticket holders and wristband wearers.</p>
                                 <p><strong>Fleet:</strong> Low-floor accessible buses with ample space for backpacks and tents.</p>
                             </div>
-                            <div class="col" style="flex: 2 1 340px;">
-                                <table class="sch-table" style="width: 100%; font-size: 0.84rem;">
+                            <div class="col col-shuttle-table">
+                                <table class="sch-table shuttle-timetable">
                                     <thead>
                                         <tr>
                                             <th class="sch-header">Festival Day</th>
@@ -371,37 +374,37 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <p style="font-size: 0.78rem; color: #555; margin-top: 4px;"><em>* Shuttle bus connections are synchronized with incoming R9 express trains from Prague and Brno.</em></p>
+                                <p class="shuttle-sync-note"><em>* Shuttle bus connections are synchronized with incoming R9 express trains from Prague and Brno.</em></p>
                             </div>
                         </div>
                     </article>
 
                     <!-- 2. Walking Route -->
-                    <article class="wf-box-sub" id="pesi-trasa-en" style="margin-bottom: 14px;">
+                    <article class="wf-box-sub sch-day-section-box" id="pesi-trasa-en">
                         <h3>[ 🚶 2. Marked Walking Route from Station to Venue (1.8 km, approx. 22–25 min) ]</h3>
                         <hr>
                         <p>If you prefer a short walk, the entire corridor is marked with bright yellow reflective signage <em>[ Festival of Darkness 2 &rarr; ]</em> and runs along safe, illuminated sidewalks:</p>
                         
-                        <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px;">
-                            <div class="walking-step-item" style="border: 1px solid #777; background: #fff; padding: 8px 12px; font-size: 0.88rem;">
+                        <div class="walking-steps-list">
+                            <div class="walking-step-item">
                                 <strong>Step 1: Starting Point – Kutna Hora Main Station (0.0 km)</strong>
                                 <p>Exit the main railway station hall forward into the forecourt. Keep left along the wide sidewalk into <em>Nadrazni Street</em>.</p>
                             </div>
-                            <div class="walking-step-item" style="border: 1px solid #777; background: #fff; padding: 8px 12px; font-size: 0.88rem;">
+                            <div class="walking-step-item">
                                 <strong>Step 2: Nadrazni Street &rarr; Sedlec Junction (0.1 – 0.7 km)</strong>
                                 <p>Continue straight for 600 meters along Nadrazni Street. Pass under the railway viaduct to reach the signaled intersection near the Cathedral of the Assumption.</p>
                             </div>
-                            <div class="walking-step-item" style="border: 1px solid #777; background: #fff; padding: 8px 12px; font-size: 0.88rem;">
+                            <div class="walking-step-item">
                                 <strong>Step 3: Past Sedlec Ossuary into Zamecka Street (0.7 – 1.2 km)</strong>
                                 <p>Turn right at the junction into Vitezna Street. After 300 meters, turn left into Zamecka Street past the famous Sedlec Ossuary and former monastery grounds.</p>
                             </div>
-                            <div class="walking-step-item" style="border: 1px solid #777; background: #fff; padding: 8px 12px; font-size: 0.88rem;">
+                            <div class="walking-step-item">
                                 <strong>Step 4: Footbridge across Vrchlice River into Festival Zone (1.2 – 1.6 km)</strong>
                                 <p>Follow Zamecka Street to the dedicated illuminated festival pedestrian bridge across the Vrchlice river into the venue buffer area.</p>
                             </div>
-                            <div class="walking-step-item walking-step-destination" style="border: 2px solid #28a745; background: #f4faf5; padding: 8px 12px; font-size: 0.88rem;">
-                                <strong style="color: #155724;">Step 5: Destination – Main Gate (Entrance A to Festival Venue, 1.8 km)</strong>
-                                <p style="color: #222;">Arrive directly at the main ticket office, accreditation, wristband check-in, and turnstile gates.</p>
+                            <div class="walking-step-item walking-step-destination">
+                                <strong class="destination-title">Step 5: Destination – Main Gate (Entrance A to Festival Venue, 1.8 km)</strong>
+                                <p class="destination-desc">Arrive directly at the main ticket office, accreditation, wristband check-in, and turnstile gates.</p>
                             </div>
                         </div>
                     </article>
@@ -412,15 +415,15 @@
                         <hr>
 
                         <!-- Interactive Route Switcher Buttons -->
-                        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
+                        <div class="walking-route-summary">
                             <button type="button" class="filter-btn active" onclick="setMapRoute('all', this)">[ Show All Routes (Shuttle and Walking) ]</button>
                             <button type="button" class="filter-btn" onclick="setMapRoute('bus', this)">[ 🚌 Shuttle Bus Route Only (7 min) ]</button>
                             <button type="button" class="filter-btn" onclick="setMapRoute('walk', this)">[ 🚶 Walking Route Only (1.8 km, 22 min) ]</button>
                         </div>
 
                         <!-- Clean SVG Wireframe Schematic Route Map -->
-                        <div style="border: 1px solid #333; background: #ffffff; padding: 12px; overflow-x: auto;">
-                            <svg viewBox="0 0 880 340" style="width: 100%; min-width: 600px; height: auto; display: block;" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schematic transit map from railway station to venue entrance">
+                        <div class="svg-map-frame">
+                            <svg viewBox="0 0 880 340" class="svg-map" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schematic transit map from railway station to venue entrance">
                                 <rect width="880" height="340" fill="#fafafa" stroke="#999" stroke-width="1"/>
                                 <line x1="20" y1="170" x2="860" y2="170" stroke="#eee" stroke-width="1" stroke-dasharray="4"/>
                                 
@@ -480,7 +483,7 @@
                     </article>
 
                     <!-- Arrival by Car -->
-                    <article class="wf-box-sub" style="margin-top: 14px;">
+                    <article class="wf-box-sub row-spaced">
                         <h4>[ 🚗 Arrival by Car &amp; Parking (Parking Lot P1) ]</h4>
                         <hr>
                         <p>For visitors traveling by car, central parking area <strong>Parking Lot P1</strong> on the outskirts of Kutna Hora is available with a capacity of 800 vehicles. The parking fee is 100 CZK per day. A dedicated marked pedestrian path leads directly to Venue Entrance A (approx. 400 m, 5 minutes walk).</p>
@@ -522,7 +525,7 @@
                         <div class="col wf-box-sub">
                             <h4>[ Oficiální stanový kemp ]</h4>
                             <p>Otevřen od pátku 10. 7. 12:00 do pondělí 13. 7. 12:00. Oplocený, hlídaný areál bezprostředně sousedící s festivalovou loukou.</p>
-                            <p style="margin-top: 6px; font-size: 0.85rem;"><strong>Cena:</strong> 250 Kč na osobu na celý víkend (včetně přístupu ke sprchám).</p>
+                            <p class="camp-price-text"><strong>Cena:</strong> 250 Kč na osobu na celý víkend (včetně přístupu ke sprchám).</p>
                         </div>
                         <div class="col wf-box-sub">
                             <h4>[ Hygienické zázemí ]</h4>
@@ -543,7 +546,7 @@
                         <div class="col wf-box-sub">
                             <h4>[ Official Tent Camping ]</h4>
                             <p>Open from Friday July 10 at 12:00 until Monday July 13 at 12:00. Fenced, secured campsite located directly adjacent to the festival field.</p>
-                            <p style="margin-top: 6px; font-size: 0.85rem;"><strong>Fee:</strong> 250 CZK per person for the entire weekend (includes shower access).</p>
+                            <p class="camp-price-text"><strong>Fee:</strong> 250 CZK per person for the entire weekend (includes shower access).</p>
                         </div>
                         <div class="col wf-box-sub">
                             <h4>[ Sanitary Facilities ]</h4>
@@ -614,11 +617,11 @@
                 <div class="lang-cs">
                     <h3>[ ❓ Často kladené otázky (FAQ) ]</h3>
                     <hr>
-                    <div class="wf-box-sub" style="margin-bottom: 8px;">
+                    <div class="wf-box-sub faq-item">
                         <p><strong>Otázka: Co se stane v případě prudkého deště?</strong></p>
                         <p>Odpověď: Festival se koná za každého počasí. V případě deště poskytuje krytá scéna <strong>Lunar Forest Dome</strong> velkokapacitní zastřešený prostor pro 1 800 návštěvníků s nepřerušeným hudebním programem.</p>
                     </div>
-                    <div class="wf-box-sub" style="margin-bottom: 8px;">
+                    <div class="wf-box-sub faq-item">
                         <p><strong>Otázka: Je shuttle bus z nádraží zpoplatněn?</strong></p>
                         <p>Odpověď: Ne, festivalový kyvadlový autobus z hlavního nádraží v Kutné Hoře ke Vstupu do areálu je pro všechny držitele vstupenek zcela <strong>ZDARMA</strong> a jezdí každých 10 až 15 minut.</p>
                     </div>
@@ -628,11 +631,11 @@
                 <div class="lang-en">
                     <h3>[ ❓ Frequently Asked Questions (FAQ) ]</h3>
                     <hr>
-                    <div class="wf-box-sub" style="margin-bottom: 8px;">
+                    <div class="wf-box-sub faq-item">
                         <p><strong>Question: What happens if it rains heavily?</strong></p>
                         <p>Answer: The festival takes place in all weather conditions. In case of rain, the covered <strong>Lunar Forest Dome</strong> provides a large sheltered space for 1,800 visitors with uninterrupted live music.</p>
                     </div>
-                    <div class="wf-box-sub" style="margin-bottom: 8px;">
+                    <div class="wf-box-sub faq-item">
                         <p><strong>Question: Is the shuttle bus from the station free of charge?</strong></p>
                         <p>Answer: Yes, the festival shuttle bus running between Kutna Hora main station and Venue Entrance A is completely <strong>FREE</strong> for all ticket holders and departs every 10 to 15 minutes.</p>
                     </div>
@@ -652,7 +655,7 @@
                 <a href="stages.html" data-i18n="nav_stages">[ Stages ]</a>
                 <a href="practical-info.html" data-i18n="nav_practical">[ Practical Info ]</a>
                 <a href="my-schedule.html" data-i18n="nav_myschedule">[ My Schedule ]</a>
-                <span>[ info@festivalofdarkness.com ]</span>
+                <address class="wf-address"><span>[ info@festivalofdarkness.com ]</span></address>
             </footer>
         </div>
 

@@ -10,6 +10,33 @@
     <script src="js/lang.js" defer></script>
     <script src="components/nav.js" defer></script>
     <script src="components/footer.js" defer></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "MusicFestival",
+        "name": "Festival of Darkness 2 - Stages",
+        "subEvent": [
+            {
+                "@type": "Event",
+                "name": "Solar Horizon Stage Performances",
+                "location": {
+                    "@type": "Place",
+                    "name": "Solar Horizon Stage",
+                    "description": "Natural open-air amphitheater with capacity of 4,500 visitors."
+                }
+            },
+            {
+                "@type": "Event",
+                "name": "Lunar Forest Dome Performances",
+                "location": {
+                    "@type": "Place",
+                    "name": "Lunar Forest Dome",
+                    "description": "Large-capacity covered all-weather geodesic dome with capacity of 1,800 visitors."
+                }
+            }
+        ]
+    }
+    </script>
 </head>
 <body>
 
@@ -18,6 +45,7 @@
         <!-- HEADER & NAVIGATION (components/nav.js / nav.html) -->
         <div id="nav-placeholder">
             <header class="wf-top-app-bar" role="banner">
+                <a href="#main-content" class="skip-link" data-i18n="skip_to_content">Skip to main content</a>
                 <div class="wf-top-bar-left">
                     <button id="lang-switch-btn" class="btn-box lang-switch-btn" type="button" aria-label="Language" title="Switch language to Czech">
                         <span class="flag-icon" id="lang-flag" aria-hidden="true"><img src="img/1f1ec-1f1e7.svg" alt="GB" class="flag-img" width="20" height="20"></span>
@@ -58,17 +86,18 @@
                     <a href="stages.html" class="active" data-i18n="nav_stages">⛺ [ Stages ]</a>
                     <a href="practical-info.html" data-i18n="nav_practical">🚆 [ Practical Info ]</a>
                     <a href="my-schedule.html" data-i18n="nav_myschedule">★ [ My Schedule ]</a>
+                    <a href="search.html" data-i18n="nav_search">🔍 [ Search ]</a>
                 </nav>
                 <hr>
                 <div class="drawer-footer">
-                    <div class="theme-switch-box" style="margin-bottom: 8px; width: 100%;">
-                        <button id="theme-switch-btn-drawer" class="btn-box theme-switch-btn" type="button" aria-label="Switch to Dark Mode" title="Switch to Dark Mode" style="width: 100%; justify-content: center;">
+                    <div class="theme-switch-box">
+                        <button id="theme-switch-btn-drawer" class="btn-box theme-switch-btn btn-block" type="button" aria-label="Switch to Dark Mode" title="Switch to Dark Mode">
                             <span class="theme-icon" id="theme-icon-drawer" aria-hidden="true">🌙</span>
                             <span class="theme-label" id="theme-label-drawer">Dark</span>
                         </button>
                     </div>
-                    <div class="lang-switch-box" style="margin: 0; width: 100%;">
-                        <button id="lang-switch-btn-drawer" class="btn-box lang-switch-btn" type="button" aria-label="Language" title="Switch language to Czech" style="width: 100%; justify-content: center;">
+                    <div class="lang-switch-box">
+                        <button id="lang-switch-btn-drawer" class="btn-box lang-switch-btn btn-block" type="button" aria-label="Language" title="Switch language to Czech">
                             <span class="flag-icon" id="lang-flag-drawer" aria-hidden="true"><img src="img/1f1ec-1f1e7.svg" alt="GB" class="flag-img" width="20" height="20"></span>
                             <span class="lang-label" id="lang-label-drawer">Language</span>
                         </button>
@@ -96,12 +125,12 @@
                 </a>
                 <a href="my-schedule.html" class="bottom-dock-item bottom-nav-item" id="dock-item-myplan">
                     <span class="dock-icon">★</span>
-                    <span class="dock-label"><span data-i18n="dock_myplan">My Plan</span> <span class="nav-badge-count" style="display:none;">0</span></span>
+                    <span class="dock-label"><span data-i18n="dock_myplan">My Plan</span> <span class="nav-badge-count is-hidden">0</span></span>
                 </a>
             </nav>
         </div>
 
-        <main>
+        <main id="main-content">
             <!-- Breadcrumbs Navigation -->
             <nav class="wf-breadcrumbs" aria-label="Breadcrumb">
                 <a href="index.html" data-i18n="nav_home">🏠 [ Home ]</a>
@@ -111,7 +140,7 @@
 
             <!-- Title -->
             <section class="wf-box">
-                <h2 data-i18n="stages_head">[ Festival Stages & Locations ]</h2>
+                <h1 class="wf-page-title" data-i18n="stages_head">[ Festival Stages & Locations ]</h1>
                 <hr>
                 <p data-i18n="stages_intro">[ The Kutna Hora festival grounds feature 2 main musical stages offering completely distinct sensory atmospheres. ]</p>
             </section>
@@ -126,12 +155,15 @@
 
             <!-- Stage 1: Solar Horizon Stage -->
             <section class="wf-box" id="stage-solar">
-                <h3 data-i18n="stages_solar_title">[ ☀️ Solar Horizon Stage ]</h3>
+                <h2 data-i18n="stages_solar_title">[ ☀️ Solar Horizon Stage ]</h2>
                 <hr>
                 <div>
                     <p data-i18n-html="stages_solar_type"><strong>Stage Type:</strong> Natural open-air amphitheater</p>
                     <p data-i18n-html="stages_solar_cap"><strong>Capacity:</strong> 4,500 visitors</p>
                     <p data-i18n-html="stages_solar_focus"><strong>Focus:</strong> Afternoon and evening live band performances (Post-Rock, Indie Rock, live audiovisual sets).</p>
+                    <address class="wf-address">
+                        <p><strong>Location:</strong> Western festival amphitheater, Sedlec Grounds</p>
+                    </address>
                     <hr>
                     <a href="program.html?stage=solar" class="btn-box" data-i18n="stages_solar_btn">[ ☀️ View Solar Horizon Stage Schedule &rarr; ]</a>
                 </div>
@@ -141,13 +173,16 @@
 
             <!-- Stage 2: Lunar Forest Dome (Covered Dome) -->
             <section class="wf-box" id="stage-lunar">
-                <h3 data-i18n="stages_lunar_title">[ 🌙 Lunar Forest Dome (Covered Dome) ]</h3>
+                <h2 data-i18n="stages_lunar_title">[ 🌙 Lunar Forest Dome (Covered Dome) ]</h2>
                 <hr>
                 <div>
                     <p data-i18n-html="stages_lunar_type"><strong>Stage Type:</strong> Large-capacity covered dome with complete all-weather rain shelter</p>
                     <p data-i18n-html="stages_lunar_cap"><strong>Capacity:</strong> 1,800 visitors</p>
                     <p data-i18n-html="stages_lunar_focus"><strong>Focus:</strong> Late-night club sets, dark techno, modular ambient, experimental electronics, and 360° projections.</p>
-                    <p style="margin-top: 4px; font-size: 0.85rem; color: #155724;" data-i18n-html="stages_lunar_shelter"><em>Ideal refuge when it rains – music runs continuously under a solid covered roof!</em></p>
+                    <p class="shelter-note" data-i18n-html="stages_lunar_shelter"><em>Ideal refuge when it rains – music runs continuously under a solid covered roof!</em></p>
+                    <address class="wf-address">
+                        <p><strong>Location:</strong> Eastern forest sector, Weatherproof Dome</p>
+                    </address>
                     <hr>
                     <a href="program.html?stage=lunar" class="btn-box" data-i18n="stages_lunar_btn">[ 🌙 View Lunar Forest Dome Schedule &rarr; ]</a>
                 </div>
@@ -157,11 +192,11 @@
 
             <!-- Venue Map -->
             <section class="wf-box">
-                <h3 data-i18n="stages_map_title">[ Festival Grounds Map & Visitor Orientation ]</h3>
+                <h2 data-i18n="stages_map_title">[ Festival Grounds Map & Visitor Orientation ]</h2>
                 <hr>
-                <div class="wf-box-sub" style="padding: 14px; text-align: center;">
-                    <p style="margin-bottom: 8px;" data-i18n="stages_map_desc">[ Entrance A (Main Gate) &bull; Solar Horizon Stage &bull; Lunar Forest Dome (Covered) &bull; Camping Ground &bull; Cashless Zone &bull; Shuttle Bus Stop ]</p>
-                    <a href="practical-info.html#doprava" class="btn-box" style="margin-top: 6px; font-weight: bold;" data-i18n="stages_map_btn">
+                <div class="wf-box-sub map-summary-box">
+                    <p data-i18n="stages_map_desc">[ Entrance A (Main Gate) &bull; Solar Horizon Stage &bull; Lunar Forest Dome (Covered) &bull; Camping Ground &bull; Cashless Zone &bull; Shuttle Bus Stop ]</p>
+                    <a href="practical-info.html#doprava" class="btn-box btn-bold" data-i18n="stages_map_btn">
                         [ 🚆 Transit Guide: How to get from the train station to the venue &rarr; ]
                     </a>
                 </div>
@@ -179,7 +214,7 @@
                 <a href="stages.html" data-i18n="nav_stages">[ Stages ]</a>
                 <a href="practical-info.html" data-i18n="nav_practical">[ Practical Info ]</a>
                 <a href="my-schedule.html" data-i18n="nav_myschedule">[ My Schedule ]</a>
-                <span>[ info@festivalofdarkness.com ]</span>
+                <address class="wf-address"><span>[ info@festivalofdarkness.com ]</span></address>
             </footer>
         </div>
 
@@ -217,4 +252,3 @@
     </script>
 </body>
 </html>
-
