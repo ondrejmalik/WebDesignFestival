@@ -154,6 +154,7 @@ test('wireframe.css has breadcrumbs, bigger sch-artist, spot-highlight and stage
     assert(css.includes('.artist-detail-stage-text'), 'wireframe.css must define .artist-detail-stage-text');
     assert(css.includes('html.dark-mode .artist-detail-bio-text'), 'wireframe.css must define dark mode for .artist-detail-bio-text');
     assert(css.includes('html.dark-mode .artist-detail-stage-text'), 'wireframe.css must define dark mode for .artist-detail-stage-text');
+    assert(css.includes('#a6a6a6'), 'wireframe.css must define #a6a6a6 for artist detail text');
     assert(css.includes('.stage-link'), 'wireframe.css must define .stage-link');
     assert(css.includes('html.dark-mode .stage-link'), 'wireframe.css must define dark mode for .stage-link');
 });

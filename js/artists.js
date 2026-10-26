@@ -224,7 +224,7 @@ function displayArtistDetail(card) {
 
                 <div class="col" style="flex: 2 1 320px;">
                     <h4>[ ${isCs ? 'Biografie a profil interpreta' : 'Artist Biography & Profile'} ]</h4>
-                    <p style="margin-top: 6px; line-height: 1.5; color: #222;">${bio}</p>
+                    <p class="artist-detail-bio-text" style="margin-top: 6px; line-height: 1.5; color: #111;">${bio}</p>
                     
                     <hr>
 

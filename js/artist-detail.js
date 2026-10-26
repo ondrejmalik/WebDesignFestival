@@ -973,7 +973,7 @@
                     <!-- Right: Biography & Stage Specs -->
                     <div class="artist-detail-content-col">
                         <h3 style="font-size: 1.15rem; margin-bottom: 8px;">[ ${isCs ? 'Biografie a hudební profil' : 'Biography & Musical Profile'} ]</h3>
-                        <p class="artist-detail-bio-text" style="font-size: 0.95rem; line-height: 1.6; color: #050505; margin-bottom: 14px;">
+                        <p class="artist-detail-bio-text" style="font-size: 0.95rem; line-height: 1.6; color: #111; margin-bottom: 14px;">
                             ${bio}
                         </p>
 
