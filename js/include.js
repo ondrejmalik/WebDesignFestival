@@ -4,7 +4,9 @@ async function loadComponent(targetId, componentPath) {
     const target = document.getElementById(targetId);
     if (!target) return;
 
-    // If the element already contains static fallback elements, do not overwrite on failure
+    // If the element already contains functional HTML, do not overwrite
+    if (target.children && target.children.length > 0) return;
+
     try {
         const response = await fetch(componentPath);
         if (response.ok) {

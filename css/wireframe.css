@@ -644,6 +644,7 @@ hr {
     display: flex;
     flex-direction: column;
     padding: 16px;
+    padding-bottom: 78px;
     box-sizing: border-box;
     overflow-y: auto;
 }
@@ -718,7 +719,7 @@ hr {
     bottom: 0;
     left: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 2100; /* Stays above drawer backdrop (1999) and drawer (2000) to prevent hit-test blocking */
     background: #fff;
     border-top: 2px solid #222;
     display: flex;
@@ -727,6 +728,7 @@ hr {
     align-items: stretch;
     min-height: 58px;
     box-sizing: border-box;
+    touch-action: manipulation;
 }
 
 .bottom-dock-item {
@@ -747,6 +749,8 @@ hr {
     box-sizing: border-box;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+    touch-action: manipulation;
 }
 
 .bottom-dock-item:last-child {
@@ -758,12 +762,14 @@ hr {
     line-height: 1;
     margin-bottom: 2px;
     display: block;
+    pointer-events: none;
 }
 
 .bottom-dock-item .dock-label {
     display: block;
     line-height: 1.1;
     white-space: nowrap;
+    pointer-events: none;
 }
 
 .bottom-dock-item:hover {

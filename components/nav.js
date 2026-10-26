@@ -3,6 +3,43 @@
 (function() {
     'use strict';
 
+    // Robust path resolution for file:/// and HTTP environments
+    function getCurrentPage() {
+        let pathname = (window.location.pathname || '').replace(/\\/g, '/');
+        // Filter empty tokens so trailing slashes (/artists/) don't produce an empty string
+        const segments = pathname.split('/').filter(Boolean);
+        const lastSegment = (segments.pop() || '').toLowerCase().split('?')[0].split('#')[0];
+        let page = lastSegment;
+
+        if (page === '' || page === 'index' || page === 'webdesignfestival') {
+            return 'index.html';
+        }
+        if (!page.includes('.')) {
+            page = page + '.html';
+        }
+
+        const validPages = [
+            'index.html',
+            'program.html',
+            'artists.html',
+            'stages.html',
+            'practical-info.html',
+            'my-schedule.html'
+        ];
+
+        if (validPages.includes(page)) {
+            return page;
+        }
+
+        for (const vp of validPages) {
+            if (pathname.toLowerCase().includes(vp)) {
+                return vp;
+            }
+        }
+
+        return 'index.html';
+    }
+
     function getNavHTML(lang) {
         const isCs = lang === 'cs';
         const brand = '[ Festival of Darkness 2 ]';
@@ -29,8 +66,7 @@
         const title = isCs ? 'Přepnout do angličtiny' : 'Switch language to Czech';
 
         // Detect current page for active indicator
-        let currentPath = window.location.pathname.split('/').pop().toLowerCase() || 'index.html';
-        if (currentPath === '') currentPath = 'index.html';
+        const currentPath = getCurrentPage();
 
         return `
 <!-- 1. Top Bar (Centered Festival Name + Right Menu Button) -->
@@ -109,6 +145,98 @@
 `;
     }
 
+    // Synchronize active classes on bottom dock and drawer without destroying DOM
+    function updateActiveNavigation(activePage) {
+        const pageName = activePage || getCurrentPage();
+
+        const dockItems = document.querySelectorAll('.bottom-nav-dock .bottom-dock-item, .bottom-nav-dock a');
+        dockItems.forEach(item => {
+            const href = (item.getAttribute('href') || '').split('?')[0].split('#')[0].toLowerCase();
+            if (href === pageName) {
+                item.classList.add('active');
+                item.setAttribute('aria-current', 'page');
+            } else {
+                item.classList.remove('active');
+                item.removeAttribute('aria-current');
+            }
+        });
+
+        const drawerLinks = document.querySelectorAll('.alza-drawer .drawer-links a');
+        drawerLinks.forEach(link => {
+            const href = (link.getAttribute('href') || '').split('?')[0].split('#')[0].toLowerCase();
+            if (href === pageName) {
+                link.classList.add('active');
+                link.setAttribute('aria-current', 'page');
+            } else {
+                link.classList.remove('active');
+                link.removeAttribute('aria-current');
+            }
+        });
+    }
+
+    // Update navigation text and icons in-place without DOM destruction
+    function updateNavLanguage(lang) {
+        const isCs = lang === 'cs';
+        const dict = (window.FESTIVAL_I18N && window.FESTIVAL_I18N[lang]) || {};
+
+        const dockArtists = dict.dock_artists || (isCs ? 'Účinkující' : 'Artists');
+        const dockStages = dict.dock_stages || (isCs ? 'Scény' : 'Stages');
+        const dockHome = dict.dock_home || (isCs ? 'ÚVOD' : 'HOME');
+        const dockTimetable = dict.dock_timetable || (isCs ? 'Program' : 'Timetable');
+        const dockMyPlan = dict.dock_myplan || (isCs ? 'Můj plán' : 'My Plan');
+
+        const flagImg = isCs ? 'img/1f1e8-1f1ff.svg' : 'img/1f1ec-1f1e7.svg';
+        const flagAlt = isCs ? 'CZ' : 'GB';
+        const langText = isCs ? 'Jazyk' : 'Language';
+        const title = isCs ? 'Přepnout do angličtiny' : 'Switch language to Czech';
+
+        const lblArtists = document.querySelector('[data-i18n="dock_artists"]');
+        if (lblArtists) lblArtists.textContent = dockArtists;
+
+        const lblStages = document.querySelector('[data-i18n="dock_stages"]');
+        if (lblStages) lblStages.textContent = dockStages;
+
+        const lblHome = document.querySelector('[data-i18n="dock_home"]');
+        if (lblHome) lblHome.textContent = dockHome;
+
+        const lblTimetable = document.querySelector('[data-i18n="dock_timetable"]');
+        if (lblTimetable) lblTimetable.textContent = dockTimetable;
+
+        const lblMyPlan = document.querySelector('[data-i18n="dock_myplan"]');
+        if (lblMyPlan) lblMyPlan.textContent = dockMyPlan;
+
+        document.querySelectorAll('.lang-switch-btn').forEach(btn => {
+            const flagEl = btn.querySelector('.flag-icon, [id^="lang-flag"]');
+            const labelEl = btn.querySelector('.lang-label, [id^="lang-label"]');
+            if (flagEl) {
+                flagEl.innerHTML = `<img src="${flagImg}" alt="${flagAlt}" class="flag-img" width="20" height="20">`;
+            }
+            if (labelEl) {
+                labelEl.textContent = langText;
+            }
+            btn.setAttribute('title', title);
+            btn.setAttribute('aria-label', langText);
+        });
+
+        const drawerLinkMap = {
+            nav_home: isCs ? '🏠 [ Úvod ]' : '🏠 [ Home ]',
+            nav_program: isCs ? '📅 [ Program ]' : '📅 [ Program ]',
+            nav_artists: isCs ? '🎤 [ Účinkující ]' : '🎤 [ Artists ]',
+            nav_stages: isCs ? '⛺ [ Scény ]' : '⛺ [ Stages ]',
+            nav_practical: isCs ? '🚆 [ Praktické info ]' : '🚆 [ Practical Info ]',
+            nav_myschedule: isCs ? '★ [ Můj program ]' : '★ [ My Schedule ]'
+        };
+        for (const [key, text] of Object.entries(drawerLinkMap)) {
+            const link = document.querySelector(`.drawer-links a[data-i18n="${key}"]`);
+            if (link) link.textContent = text;
+        }
+
+        const drawerCloseBtn = document.getElementById('menu-drawer-close-btn');
+        if (drawerCloseBtn) {
+            drawerCloseBtn.textContent = isCs ? '[ ✕ Zavřít ]' : '[ ✕ Close ]';
+        }
+    }
+
     // Badge synchronizer with localStorage['festival_favorites']
     function updateBottomBadge() {
         try {
@@ -183,44 +311,80 @@
         });
     }
 
+    // Event delegation on bottom dock to guarantee instant hit-testing and smooth handling
+    let dockInteractionsAttached = false;
+    function setupBottomDockInteractions() {
+        const dock = document.querySelector('.bottom-nav-dock');
+        if (!dock || dockInteractionsAttached) return;
+
+        dock.addEventListener('click', (e) => {
+            const item = e.target.closest('.bottom-dock-item, a');
+            if (!item) return;
+
+            // Immediately dismiss open drawer if active
+            const drawer = document.getElementById('alza-menu-drawer');
+            const backdrop = document.getElementById('alza-drawer-backdrop');
+            const openBtn = document.getElementById('menu-drawer-open-btn');
+            if (drawer && drawer.classList.contains('is-open')) {
+                drawer.classList.remove('is-open');
+                if (backdrop) backdrop.classList.remove('is-open');
+                drawer.setAttribute('aria-hidden', 'true');
+                if (backdrop) backdrop.setAttribute('aria-hidden', 'true');
+                if (openBtn) openBtn.setAttribute('aria-expanded', 'false');
+                document.body.classList.remove('drawer-open-noscroll');
+            }
+
+            const href = item.getAttribute('href');
+            if (!href) return;
+
+            const targetPage = href.split('?')[0].split('#')[0].toLowerCase();
+            const currentPage = getCurrentPage();
+
+            // If user taps the tab of the current page and there are no active query or hash parameters: smooth scroll to top
+            if (targetPage === currentPage && !window.location.search && !window.location.hash) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+            }
+
+            // Otherwise, allow standard browser navigation to target page
+        });
+
+        dockInteractionsAttached = true;
+    }
+
     function initNav() {
         const placeholder = document.getElementById("nav-placeholder");
         const currentLang = (typeof window.getFestivalLang === 'function') 
             ? window.getFestivalLang() 
             : (localStorage.getItem('festival_language') || 'en');
 
-        if (placeholder) {
-            // Check if drawer was open prior to re-render (e.g. language toggle inside drawer)
-            const existingDrawer = document.getElementById('alza-menu-drawer');
-            const wasDrawerOpen = existingDrawer && existingDrawer.classList.contains('is-open');
+        if (!placeholder) return;
 
+        // Check if placeholder already has static HTML markup
+        const hasExistingNav = placeholder.querySelector('.bottom-nav-dock') && placeholder.querySelector('.wf-top-app-bar');
+
+        if (!hasExistingNav) {
+            // Only inject HTML if container was empty
             placeholder.innerHTML = getNavHTML(currentLang);
-            setupDrawer();
-            setupGlobalKeyboard();
-            updateBottomBadge();
-
-            // Seamlessly preserve drawer open state across language toggles
-            if (wasDrawerOpen) {
-                const newDrawer = document.getElementById('alza-menu-drawer');
-                const newBackdrop = document.getElementById('alza-drawer-backdrop');
-                const newOpenBtn = document.getElementById('menu-drawer-open-btn');
-                if (newDrawer && newBackdrop) {
-                    newDrawer.classList.add('is-open');
-                    newBackdrop.classList.add('is-open');
-                    newDrawer.setAttribute('aria-hidden', 'false');
-                    newBackdrop.setAttribute('aria-hidden', 'false');
-                    if (newOpenBtn) newOpenBtn.setAttribute('aria-expanded', 'true');
-                    document.body.classList.add('drawer-open-noscroll');
-                }
-            }
-
-            const langBtns = placeholder.querySelectorAll('.lang-switch-btn');
-            langBtns.forEach(btn => {
-                if (typeof window.toggleFestivalLang === 'function') {
-                    btn.onclick = window.toggleFestivalLang;
-                }
-            });
+        } else {
+            // Non-destructive synchronization: preserve DOM nodes to eliminate click-drop race conditions
+            updateNavLanguage(currentLang);
         }
+
+        const currentPage = getCurrentPage();
+        updateActiveNavigation(currentPage);
+        setupDrawer();
+        setupBottomDockInteractions();
+        setupGlobalKeyboard();
+        updateBottomBadge();
+
+        const langBtns = placeholder.querySelectorAll('.lang-switch-btn');
+        langBtns.forEach(btn => {
+            if (typeof window.toggleFestivalLang === 'function') {
+                btn.onclick = window.toggleFestivalLang;
+            }
+        });
     }
 
     if (document.readyState === "loading") {
@@ -229,8 +393,12 @@
         initNav();
     }
 
-    window.addEventListener('languageChanged', () => {
-        initNav();
+    window.addEventListener('languageChanged', (e) => {
+        const newLang = (e && e.detail && e.detail.lang) 
+            ? e.detail.lang 
+            : (localStorage.getItem('festival_language') || 'en');
+        updateNavLanguage(newLang);
+        updateActiveNavigation(getCurrentPage());
     });
 
     window.addEventListener('storage', (e) => {
@@ -245,4 +413,6 @@
     });
 
     window.updateNavBadge = updateBottomBadge;
+    window.getCurrentPage = getCurrentPage;
+    window.updateActiveNavigation = updateActiveNavigation;
 })();

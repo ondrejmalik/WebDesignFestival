@@ -132,7 +132,7 @@ p:last-child {
     left: 0;
     width: 100%;
     max-width: 100%;
-    z-index: 1000;
+    z-index: 2100;
     background: #fff;
     border-top: 2px solid #222;
     display: flex;
@@ -141,6 +141,7 @@ p:last-child {
     align-items: stretch;
     min-height: 56px;
     box-sizing: border-box;
+    touch-action: manipulation;
 }
 
 .bottom-nav-item {
@@ -161,6 +162,8 @@ p:last-child {
     box-sizing: border-box;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+    touch-action: manipulation;
 }
 
 .bottom-nav-item:last-child {
@@ -172,12 +175,14 @@ p:last-child {
     line-height: 1;
     margin-bottom: 2px;
     display: block;
+    pointer-events: none;
 }
 
 .bottom-nav-item .nav-label {
     display: block;
     line-height: 1.1;
     white-space: nowrap;
+    pointer-events: none;
 }
 
 .bottom-nav-item:hover {

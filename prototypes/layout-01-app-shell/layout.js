@@ -125,16 +125,39 @@
 
     // Setup active state on bottom navigation
     function setupBottomNav() {
-        const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+        let pathname = (window.location.pathname || '').replace(/\\/g, '/');
+        const segments = pathname.split('/').filter(Boolean);
+        let rawLast = (segments.pop() || 'index.html').toLowerCase().split('?')[0].split('#')[0];
+        let currentPath = rawLast.endsWith('.html') ? rawLast : 'index.html';
+        if (currentPath === '') currentPath = 'index.html';
+
         const navItems = document.querySelectorAll('.bottom-nav-item');
         navItems.forEach(item => {
-            const href = item.getAttribute('href');
-            if (href === currentPath || (currentPath === '' && href === 'index.html')) {
+            const href = (item.getAttribute('href') || '').toLowerCase().split('?')[0].split('#')[0];
+            if (href === currentPath || (currentPath === 'index.html' && href === 'index.html')) {
                 item.classList.add('active');
+                item.setAttribute('aria-current', 'page');
             } else {
                 item.classList.remove('active');
+                item.removeAttribute('aria-current');
             }
         });
+
+        // Add smooth scroll to top when clicking current active tab
+        const navBar = document.querySelector('.bottom-nav-bar');
+        if (navBar && !navBar.hasAttribute('data-interactions-bound')) {
+            navBar.setAttribute('data-interactions-bound', 'true');
+            navBar.addEventListener('click', (e) => {
+                const item = e.target.closest('.bottom-nav-item');
+                if (!item) return;
+                const href = (item.getAttribute('href') || '').toLowerCase().split('?')[0].split('#')[0];
+                if (href === currentPath && !window.location.search && !window.location.hash) {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+        }
+
         updateNavBadge();
     }
 
@@ -633,8 +656,8 @@
         renderSchedule();
     }
 
-    // Initialize layout on DOMContentLoaded
-    document.addEventListener('DOMContentLoaded', () => {
+    // Initialize layout on DOMContentLoaded or immediately if already loaded
+    function init() {
         setupBottomNav();
 
         const path = window.location.pathname;
@@ -645,7 +668,13 @@
         } else if (path.includes('my-schedule.html')) {
             setupSchedulePage();
         }
-    });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
 
     // Expose helpers globally if needed for testing
     window.LayoutAppShell = {
