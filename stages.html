@@ -6,6 +6,7 @@
     <meta name="description" content="Festival Stages & Map – Festival of Darkness 2">
     <title>Festival of Darkness 2 | Stages</title>
     <link rel="stylesheet" href="css/wireframe.css">
+    <script src="js/theme.js"></script>
     <script src="js/lang.js" defer></script>
     <script src="components/nav.js" defer></script>
     <script src="components/footer.js" defer></script>
@@ -29,6 +30,10 @@
                     </a>
                 </div>
                 <div class="wf-top-bar-right">
+                    <button id="theme-switch-btn" class="btn-box theme-switch-btn" type="button" aria-label="Switch to Dark Mode" title="Switch to Dark Mode">
+                        <span class="theme-icon" id="theme-icon" aria-hidden="true">🌙</span>
+                        <span class="theme-label" id="theme-label">Dark</span>
+                    </button>
                     <button id="menu-drawer-open-btn" class="btn-box wf-menu-btn" type="button" aria-expanded="false" aria-controls="alza-menu-drawer" aria-label="Open Navigation Menu">
                         [ ☰ Menu ]
                     </button>
@@ -56,6 +61,12 @@
                 </nav>
                 <hr>
                 <div class="drawer-footer">
+                    <div class="theme-switch-box" style="margin-bottom: 8px; width: 100%;">
+                        <button id="theme-switch-btn-drawer" class="btn-box theme-switch-btn" type="button" aria-label="Switch to Dark Mode" title="Switch to Dark Mode" style="width: 100%; justify-content: center;">
+                            <span class="theme-icon" id="theme-icon-drawer" aria-hidden="true">🌙</span>
+                            <span class="theme-label" id="theme-label-drawer">Dark</span>
+                        </button>
+                    </div>
                     <div class="lang-switch-box" style="margin: 0; width: 100%;">
                         <button id="lang-switch-btn-drawer" class="btn-box lang-switch-btn" type="button" aria-label="Language" title="Switch language to Czech" style="width: 100%; justify-content: center;">
                             <span class="flag-icon" id="lang-flag-drawer" aria-hidden="true"><img src="img/1f1ec-1f1e7.svg" alt="GB" class="flag-img" width="20" height="20"></span>
@@ -91,6 +102,13 @@
         </div>
 
         <main>
+            <!-- Breadcrumbs Navigation -->
+            <nav class="wf-breadcrumbs" aria-label="Breadcrumb">
+                <a href="index.html" data-i18n="nav_home">🏠 [ Home ]</a>
+                <span class="sep">&gt;</span>
+                <span class="current" data-i18n="nav_stages">⛺ [ Stages ]</span>
+            </nav>
+
             <!-- Title -->
             <section class="wf-box">
                 <h2 data-i18n="stages_head">[ Festival Stages & Locations ]</h2>
@@ -100,8 +118,14 @@
 
             <hr>
 
+            <!-- Stage Navigation Tabs -->
+            <nav class="stage-nav-tabs" aria-label="Stage Tabs">
+                <a href="#stage-solar" class="btn-box stage-tab-btn" id="tab-stage-solar" data-i18n="stages_tab_solar">[ ☀️ Solar Horizon Stage ]</a>
+                <a href="#stage-lunar" class="btn-box stage-tab-btn" id="tab-stage-lunar" data-i18n="stages_tab_lunar">[ 🌙 Lunar Forest Dome ]</a>
+            </nav>
+
             <!-- Stage 1: Solar Horizon Stage -->
-            <section class="wf-box">
+            <section class="wf-box" id="stage-solar">
                 <h3 data-i18n="stages_solar_title">[ ☀️ Solar Horizon Stage ]</h3>
                 <hr>
                 <div>
@@ -109,7 +133,7 @@
                     <p data-i18n-html="stages_solar_cap"><strong>Capacity:</strong> 4,500 visitors</p>
                     <p data-i18n-html="stages_solar_focus"><strong>Focus:</strong> Afternoon and evening live band performances (Post-Rock, Indie Rock, live audiovisual sets).</p>
                     <hr>
-                    <a href="program.html?stage=solar&day=day1" class="btn-box" data-i18n="stages_solar_btn">[ View Solar Horizon Stage Schedule &rarr; ]</a>
+                    <a href="program.html?stage=solar" class="btn-box" data-i18n="stages_solar_btn">[ ☀️ View Solar Horizon Stage Schedule &rarr; ]</a>
                 </div>
             </section>
 
@@ -125,9 +149,7 @@
                     <p data-i18n-html="stages_lunar_focus"><strong>Focus:</strong> Late-night club sets, dark techno, modular ambient, experimental electronics, and 360° projections.</p>
                     <p style="margin-top: 4px; font-size: 0.85rem; color: #155724;" data-i18n-html="stages_lunar_shelter"><em>Ideal refuge when it rains – music runs continuously under a solid covered roof!</em></p>
                     <hr>
-                    <a href="program.html?stage=lunar&day=day1" class="btn-box" style="font-weight: bold; background: #222; color: #fff;" data-i18n="stages_lunar_btn">
-                        [ 🌙 View Schedule for Lunar Forest Dome (Covered Dome) &rarr; ]
-                    </a>
+                    <a href="program.html?stage=lunar" class="btn-box" data-i18n="stages_lunar_btn">[ 🌙 View Lunar Forest Dome Schedule &rarr; ]</a>
                 </div>
             </section>
 
@@ -163,5 +185,36 @@
 
     </div>
 
+    <script>
+        function updateStageTabs() {
+            const hash = window.location.hash;
+            const tabSolar = document.getElementById('tab-stage-solar');
+            const tabLunar = document.getElementById('tab-stage-lunar');
+            if (!tabSolar || !tabLunar) return;
+
+            tabSolar.classList.remove('active');
+            tabLunar.classList.remove('active');
+
+            let target = null;
+            if (hash === '#stage-lunar') {
+                tabLunar.classList.add('active');
+                target = document.getElementById('stage-lunar');
+            } else if (hash === '#stage-solar') {
+                tabSolar.classList.add('active');
+                target = document.getElementById('stage-solar');
+            }
+
+            if (target) {
+                setTimeout(() => {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    target.classList.add('spot-highlight');
+                    setTimeout(() => target.classList.remove('spot-highlight'), 2500);
+                }, 100);
+            }
+        }
+        window.addEventListener('hashchange', updateStageTabs);
+        document.addEventListener('DOMContentLoaded', updateStageTabs);
+    </script>
 </body>
 </html>
+

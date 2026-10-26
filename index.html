@@ -6,6 +6,7 @@
     <meta name="description" content="Homepage – Festival of Darkness 2 (Kutna Hora)">
     <title>Festival of Darkness 2 | Home</title>
     <link rel="stylesheet" href="css/wireframe.css">
+    <script src="js/theme.js"></script>
     <script src="js/lang.js" defer></script>
     <script src="components/nav.js" defer></script>
     <script src="components/footer.js" defer></script>
@@ -29,6 +30,10 @@
                     </a>
                 </div>
                 <div class="wf-top-bar-right">
+                    <button id="theme-switch-btn" class="btn-box theme-switch-btn" type="button" aria-label="Switch to Dark Mode" title="Switch to Dark Mode">
+                        <span class="theme-icon" id="theme-icon" aria-hidden="true">🌙</span>
+                        <span class="theme-label" id="theme-label">Dark</span>
+                    </button>
                     <button id="menu-drawer-open-btn" class="btn-box wf-menu-btn" type="button" aria-expanded="false" aria-controls="alza-menu-drawer" aria-label="Open Navigation Menu">
                         [ ☰ Menu ]
                     </button>
@@ -56,6 +61,12 @@
                 </nav>
                 <hr>
                 <div class="drawer-footer">
+                    <div class="theme-switch-box" style="margin-bottom: 8px; width: 100%;">
+                        <button id="theme-switch-btn-drawer" class="btn-box theme-switch-btn" type="button" aria-label="Switch to Dark Mode" title="Switch to Dark Mode" style="width: 100%; justify-content: center;">
+                            <span class="theme-icon" id="theme-icon-drawer" aria-hidden="true">🌙</span>
+                            <span class="theme-label" id="theme-label-drawer">Dark</span>
+                        </button>
+                    </div>
                     <div class="lang-switch-box" style="margin: 0; width: 100%;">
                         <button id="lang-switch-btn-drawer" class="btn-box lang-switch-btn" type="button" aria-label="Language" title="Switch language to Czech" style="width: 100%; justify-content: center;">
                             <span class="flag-icon" id="lang-flag-drawer" aria-hidden="true"><img src="img/1f1ec-1f1e7.svg" alt="GB" class="flag-img" width="20" height="20"></span>

@@ -6,6 +6,7 @@
     <meta name="description" content="Festival of Darkness 2 – Practical Info & Transit">
     <title>Festival of Darkness 2 | Practical Info & Transit</title>
     <link rel="stylesheet" href="css/wireframe.css">
+    <script src="js/theme.js"></script>
     <script src="js/lang.js" defer></script>
     <script src="components/nav.js" defer></script>
     <script src="components/footer.js" defer></script>
@@ -29,6 +30,10 @@
                     </a>
                 </div>
                 <div class="wf-top-bar-right">
+                    <button id="theme-switch-btn" class="btn-box theme-switch-btn" type="button" aria-label="Switch to Dark Mode" title="Switch to Dark Mode">
+                        <span class="theme-icon" id="theme-icon" aria-hidden="true">🌙</span>
+                        <span class="theme-label" id="theme-label">Dark</span>
+                    </button>
                     <button id="menu-drawer-open-btn" class="btn-box wf-menu-btn" type="button" aria-expanded="false" aria-controls="alza-menu-drawer" aria-label="Open Navigation Menu">
                         [ ☰ Menu ]
                     </button>
@@ -56,6 +61,12 @@
                 </nav>
                 <hr>
                 <div class="drawer-footer">
+                    <div class="theme-switch-box" style="margin-bottom: 8px; width: 100%;">
+                        <button id="theme-switch-btn-drawer" class="btn-box theme-switch-btn" type="button" aria-label="Switch to Dark Mode" title="Switch to Dark Mode" style="width: 100%; justify-content: center;">
+                            <span class="theme-icon" id="theme-icon-drawer" aria-hidden="true">🌙</span>
+                            <span class="theme-label" id="theme-label-drawer">Dark</span>
+                        </button>
+                    </div>
                     <div class="lang-switch-box" style="margin: 0; width: 100%;">
                         <button id="lang-switch-btn-drawer" class="btn-box lang-switch-btn" type="button" aria-label="Language" title="Switch language to Czech" style="width: 100%; justify-content: center;">
                             <span class="flag-icon" id="lang-flag-drawer" aria-hidden="true"><img src="img/1f1ec-1f1e7.svg" alt="GB" class="flag-img" width="20" height="20"></span>
@@ -91,6 +102,13 @@
         </div>
 
         <main>
+            <!-- Breadcrumbs Navigation -->
+            <nav class="wf-breadcrumbs" aria-label="Breadcrumb">
+                <a href="index.html" data-i18n="nav_home">🏠 [ Home ]</a>
+                <span class="sep">&gt;</span>
+                <span class="current" data-i18n="nav_practical">🚆 [ Practical Info ]</span>
+            </nav>
+
             <!-- Page Title -->
             <section class="wf-box">
                 <h1 data-i18n="practical_head">[ Practical Information for Visitors ]</h1>
@@ -102,7 +120,7 @@
             <hr>
 
             <!-- Top Sub-Navigation Anchor Ribbon -->
-            <nav class="wf-box-sub" aria-label="Quick section navigation" style="background: #f8f9fa; padding: 12px;">
+            <nav class="wf-box-sub quick-section-nav" aria-label="Quick section navigation" style="padding: 12px;">
                 <strong data-i18n="practical_quick_nav">[ 📍 Quick Section Navigation: ]</strong>
                 <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;">
                     <a href="#doprava" class="btn-box" style="font-weight: bold; background: #222; color: #fff;" data-i18n="practical_nav_transit">[ 🚆 Transit: Station to Venue &darr; ]</a>
@@ -191,23 +209,23 @@
                         <p>Pokud preferujete procházku, trasa je po celé délce osazena reflexními žlutými směrovkami <em>[ Festival of Darkness 2 &rarr; ]</em> a je vedena po bezpečných osvětlených chodnících:</p>
                         
                         <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px;">
-                            <div style="border: 1px solid #777; background: #fff; padding: 8px 12px; font-size: 0.88rem;">
+                            <div class="walking-step-item" style="border: 1px solid #777; background: #fff; padding: 8px 12px; font-size: 0.88rem;">
                                 <strong>Krok 1: Výchozí bod – Kutná Hora hl. n. (0,0 km)</strong>
                                 <p>Vyjděte z hlavní nádražní budovy ČD rovně na přednádražní náměstí. Držte se vlevo po širokém chodníku do ulice <em>Nádražní</em>.</p>
                             </div>
-                            <div style="border: 1px solid #777; background: #fff; padding: 8px 12px; font-size: 0.88rem;">
+                            <div class="walking-step-item" style="border: 1px solid #777; background: #fff; padding: 8px 12px; font-size: 0.88rem;">
                                 <strong>Krok 2: Ulice Nádražní &rarr; Křižovatka Sedlec (0,1 – 0,7 km)</strong>
                                 <p>Pokračujte 600 metrů rovně po Nádražní ulici. Minete železniční viadukt a dorazíte na světelnou křižovatku u Katedrály Nanebevzetí Panny Marie.</p>
                             </div>
-                            <div style="border: 1px solid #777; background: #fff; padding: 8px 12px; font-size: 0.88rem;">
+                            <div class="walking-step-item" style="border: 1px solid #777; background: #fff; padding: 8px 12px; font-size: 0.88rem;">
                                 <strong>Krok 3: Průchod kolem Sedlecké kostnice do ulice Zámecká (0,7 – 1,2 km)</strong>
                                 <p>Na křižovatce odbočte vpravo do Vítězné ulice. Po 300 m odbočte vlevo do Zámecké ulice kolem areálu Sedlecké kostnice a tabákové továrny.</p>
                             </div>
-                            <div style="border: 1px solid #777; background: #fff; padding: 8px 12px; font-size: 0.88rem;">
+                            <div class="walking-step-item" style="border: 1px solid #777; background: #fff; padding: 8px 12px; font-size: 0.88rem;">
                                 <strong>Krok 4: Pěší lávka přes Vrchlici do festivalové zóny (1,2 – 1,6 km)</strong>
                                 <p>Zámecká ulice vás dovede k vyhrazené osvětlené festivalové lávce přes říčku Vrchlici. Za lávkou začíná klidová zóna festivalu.</p>
                             </div>
-                            <div style="border: 2px solid #28a745; background: #f4faf5; padding: 8px 12px; font-size: 0.88rem;">
+                            <div class="walking-step-item walking-step-destination" style="border: 2px solid #28a745; background: #f4faf5; padding: 8px 12px; font-size: 0.88rem;">
                                 <strong style="color: #155724;">Krok 5: Cíl – Hlavní brána (Vstup A do areálu festivalu, 1,8 km)</strong>
                                 <p style="color: #222;">Příchod přímo k hlavní pokladně, akreditaci, výměně vstupenek za festivalové RFID pásky a turniketovému vstupu do areálu.</p>
                             </div>
@@ -365,23 +383,23 @@
                         <p>If you prefer a short walk, the entire corridor is marked with bright yellow reflective signage <em>[ Festival of Darkness 2 &rarr; ]</em> and runs along safe, illuminated sidewalks:</p>
                         
                         <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px;">
-                            <div style="border: 1px solid #777; background: #fff; padding: 8px 12px; font-size: 0.88rem;">
+                            <div class="walking-step-item" style="border: 1px solid #777; background: #fff; padding: 8px 12px; font-size: 0.88rem;">
                                 <strong>Step 1: Starting Point – Kutna Hora Main Station (0.0 km)</strong>
                                 <p>Exit the main railway station hall forward into the forecourt. Keep left along the wide sidewalk into <em>Nadrazni Street</em>.</p>
                             </div>
-                            <div style="border: 1px solid #777; background: #fff; padding: 8px 12px; font-size: 0.88rem;">
+                            <div class="walking-step-item" style="border: 1px solid #777; background: #fff; padding: 8px 12px; font-size: 0.88rem;">
                                 <strong>Step 2: Nadrazni Street &rarr; Sedlec Junction (0.1 – 0.7 km)</strong>
                                 <p>Continue straight for 600 meters along Nadrazni Street. Pass under the railway viaduct to reach the signaled intersection near the Cathedral of the Assumption.</p>
                             </div>
-                            <div style="border: 1px solid #777; background: #fff; padding: 8px 12px; font-size: 0.88rem;">
+                            <div class="walking-step-item" style="border: 1px solid #777; background: #fff; padding: 8px 12px; font-size: 0.88rem;">
                                 <strong>Step 3: Past Sedlec Ossuary into Zamecka Street (0.7 – 1.2 km)</strong>
                                 <p>Turn right at the junction into Vitezna Street. After 300 meters, turn left into Zamecka Street past the famous Sedlec Ossuary and former monastery grounds.</p>
                             </div>
-                            <div style="border: 1px solid #777; background: #fff; padding: 8px 12px; font-size: 0.88rem;">
+                            <div class="walking-step-item" style="border: 1px solid #777; background: #fff; padding: 8px 12px; font-size: 0.88rem;">
                                 <strong>Step 4: Footbridge across Vrchlice River into Festival Zone (1.2 – 1.6 km)</strong>
                                 <p>Follow Zamecka Street to the dedicated illuminated festival pedestrian bridge across the Vrchlice river into the venue buffer area.</p>
                             </div>
-                            <div style="border: 2px solid #28a745; background: #f4faf5; padding: 8px 12px; font-size: 0.88rem;">
+                            <div class="walking-step-item walking-step-destination" style="border: 2px solid #28a745; background: #f4faf5; padding: 8px 12px; font-size: 0.88rem;">
                                 <strong style="color: #155724;">Step 5: Destination – Main Gate (Entrance A to Festival Venue, 1.8 km)</strong>
                                 <p style="color: #222;">Arrive directly at the main ticket office, accreditation, wristband check-in, and turnstile gates.</p>
                             </div>

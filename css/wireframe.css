@@ -93,6 +93,18 @@ hr {
     color: #000;
 }
 
+.remove-btn {
+    background: #eee;
+    border: 1px solid #333;
+    color: #111;
+}
+
+.remove-btn.has-collision {
+    background: #f8d7da;
+    border: 1px solid #b71c1c;
+    color: #721c24;
+}
+
 /* Flexible grid row layout */
 .row {
     display: flex;
@@ -223,21 +235,32 @@ hr {
 }
 
 .sch-artist {
-    font-size: 0.88rem;
+    font-size: 1.05rem;
     font-weight: bold;
-    line-height: 1.2;
+    line-height: 1.25;
     color: #111;
+    margin-bottom: 2px;
+}
+
+.sch-artist-link {
+    color: inherit;
+    text-decoration: underline;
+}
+
+.sch-artist-link:hover {
+    color: #000;
+    text-decoration: underline;
 }
 
 .sch-time {
-    font-size: 0.76rem;
-    color: #495057;
+    font-size: 0.8rem;
+    color: #333;
     font-family: Consolas, "Courier New", monospace;
     font-weight: bold;
 }
 
 .sch-meta {
-    font-size: 0.74rem;
+    font-size: 0.78rem;
     color: #555;
     line-height: 1.25;
 }
@@ -246,14 +269,17 @@ hr {
     border: 1px solid #777;
     background: #fff;
     color: #444;
-    width: 24px;
-    height: 24px;
-    line-height: 22px;
+    width: 28px;
+    height: 28px;
+    line-height: 26px;
     text-align: center;
-    font-size: 0.95rem;
+    font-size: 1.15rem;
     cursor: pointer;
     padding: 0;
     flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .sch-fav-btn:hover {
@@ -262,37 +288,34 @@ hr {
     border-color: #000;
 }
 
-/* Band details and card actions */
+/* Band details and card actions (detail button and star button at the end) */
 .sch-actions {
     display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    margin-top: 6px;
-}
-
-.sch-add-btn {
-    font-size: 0.74rem;
-    padding: 3px 8px;
-    font-weight: bold;
-    cursor: pointer;
-    background: #eee;
-    border: 1px solid #333;
-    color: #000;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    margin-top: 8px;
+    padding-top: 4px;
+    border-top: 1px dashed #ccc;
 }
 
 .sch-detail-btn {
-    font-size: 0.72rem;
-    padding: 3px 6px;
+    font-size: 0.82rem;
+    padding: 4px 10px;
+    font-weight: bold;
     cursor: pointer;
     background: #fdfdfd;
-    border: 1px solid #777;
-    color: #222;
+    border: 1px solid #333;
+    color: #111;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.sch-cell.is-favourite .sch-add-btn {
-    background: #28a745 !important;
-    color: #fff !important;
-    border-color: #1e7e34 !important;
+.sch-detail-btn:hover {
+    background: #222;
+    color: #fff;
 }
 
 /* Timetable Toolbar & Filters */
@@ -530,12 +553,13 @@ hr {
     justify-content: space-between;
     padding: 8px 0;
     min-height: 48px;
+    gap: 8px;
 }
 
 .wf-top-bar-left,
 .wf-top-bar-placeholder {
-    flex: 0 0 120px;
-    min-width: 120px;
+    flex: 0 0 auto;
+    min-width: 100px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -573,19 +597,50 @@ hr {
 }
 
 .wf-top-bar-right {
-    flex: 0 0 120px;
+    flex: 0 0 auto;
     min-width: 120px;
     text-align: right;
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    gap: 8px;
+}
+
+.theme-switch-btn {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #222;
+    min-height: 38px;
+    line-height: 1;
+    white-space: nowrap;
+    box-sizing: border-box;
+    font-weight: bold;
+    color: #000;
+    touch-action: manipulation;
+}
+
+.theme-switch-btn:hover {
+    background: #eee;
+}
+
+.theme-switch-btn .theme-icon {
+    font-size: 1rem;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .wf-menu-btn {
     font-weight: bold;
-    min-height: 40px;
-    min-width: 110px;
-    padding: 6px 16px;
+    min-height: 38px;
+    min-width: 90px;
+    padding: 6px 14px;
     white-space: nowrap;
     text-align: center;
     display: inline-flex;
@@ -594,28 +649,53 @@ hr {
     box-sizing: border-box;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 580px) {
     .wf-top-bar-left,
     .wf-top-bar-placeholder,
     .wf-top-bar-right {
-        flex: 0 0 96px;
-        min-width: 96px;
+        min-width: auto;
     }
     .wf-top-bar-center .festival-brand {
         font-size: 0.88rem;
         white-space: nowrap;
     }
-    .wf-top-bar-left .lang-switch-btn {
+    .wf-top-bar-left .lang-switch-btn,
+    .theme-switch-btn {
         padding: 4px 6px;
         font-size: 0.78rem;
+        min-height: 36px;
         white-space: nowrap;
     }
     .wf-menu-btn {
-        padding: 4px 10px;
-        font-size: 0.85rem;
-        min-width: 92px;
+        padding: 4px 8px;
+        font-size: 0.82rem;
+        min-width: 76px;
+        min-height: 36px;
         white-space: nowrap;
     }
+}
+
+@media (max-width: 440px) {
+    .wf-top-app-bar {
+        flex-wrap: wrap;
+        row-gap: 8px;
+    }
+    .wf-top-bar-center {
+        order: 1;
+        flex: 1 0 100%;
+        text-align: center;
+        margin-bottom: 2px;
+    }
+    .wf-top-bar-left {
+        order: 2;
+        flex: 1 1 auto;
+    }
+    .wf-top-bar-right {
+        order: 3;
+        flex: 1 1 auto;
+        justify-content: flex-end;
+    }
+}
     .alza-drawer {
         width: 100%;
         max-width: 94vw;
@@ -937,6 +1017,888 @@ hr {
     margin: 4px 0;
     color: #111;
 }
+
+/* ==========================================================================
+   Wireframe Breadcrumbs Navigation
+   ========================================================================== */
+.wf-breadcrumbs {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px 8px;
+    font-size: 0.88rem;
+    margin-bottom: 14px;
+    padding: 8px 12px;
+    background: #fff;
+    border: 1px solid #777;
+}
+
+.wf-breadcrumbs a {
+    color: #111;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.wf-breadcrumbs a:hover {
+    color: #000;
+}
+
+.wf-breadcrumbs .sep {
+    color: #777;
+    user-select: none;
+    font-size: 0.82rem;
+}
+
+.wf-breadcrumbs .current {
+    color: #333;
+    font-weight: normal;
+}
+
+/* ==========================================================================
+   Exact Spot Scroll Return Highlight Animation
+   ========================================================================== */
+@keyframes spot-pulse-highlight {
+    0% {
+        outline: 3px solid #ff9800;
+        background-color: #fff9c4 !important;
+        box-shadow: 0 0 10px rgba(255, 152, 0, 0.4);
+    }
+    40% {
+        outline: 3px solid #e65100;
+        background-color: #ffe082 !important;
+    }
+    100% {
+        outline: 1px solid #777;
+    }
+}
+
+.spot-highlight {
+    animation: spot-pulse-highlight 2.4s ease-out;
+}
+
+/* ==========================================================================
+   Stages Tabs Navigation
+   ========================================================================== */
+.stage-nav-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.stage-tab-btn {
+    font-weight: bold;
+    padding: 7px 14px;
+    text-decoration: none;
+    color: #111;
+    background: #fdfdfd;
+    border: 1px solid #333;
+    display: inline-flex;
+    align-items: center;
+}
+
+.stage-tab-btn.active,
+.stage-tab-btn:hover {
+    background: #222;
+    color: #fff;
+}
+
+/* ==========================================================================
+   Artist Detail Document Layout
+   ========================================================================== */
+.artist-detail-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    margin: 12px 0;
+    padding: 10px 12px;
+    background: #f5f5f5;
+    border: 1px solid #777;
+    font-size: 0.88rem;
+}
+
+.artist-detail-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 14px;
+}
+
+.artist-detail-media-col {
+    flex: 1 1 260px;
+    max-width: 320px;
+}
+
+.artist-detail-content-col {
+    flex: 2 1 360px;
+}
+
+.audio-preview-box {
+    border: 1px solid #777;
+    background: #fafafa;
+    padding: 12px;
+    margin-top: 12px;
+}
+
+.audio-player-wireframe {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0;
+    padding: 8px;
+    background: #fff;
+    border: 1px solid #999;
+}
+
+.audio-progress-bar {
+    flex: 1;
+    height: 8px;
+    background: #ddd;
+    border: 1px solid #777;
+    position: relative;
+}
+
+.audio-progress-fill {
+    height: 100%;
+    width: 38%;
+    background: #222;
+}
+
+/* ==========================================================================
+   Dark Mode Wireframe Styling (Activated via .dark-mode / [data-theme="dark"])
+   Preserves minimalist outlines, strong contrast and green bookmark identity
+   ========================================================================== */
+
+html.dark-mode,
+html.dark-mode body,
+body.dark-mode {
+    background: #141414;
+    color: #e4e4e4;
+}
+
+/* Base Wireframe Boxes in Dark Mode */
+html.dark-mode .wf-box {
+    background: #1c1c1c;
+    border-color: #444;
+    color: #e4e4e4;
+}
+
+html.dark-mode .wf-box-sub,
+html.dark-mode .col.wf-box-sub,
+html.dark-mode article.col.wf-box-sub,
+html.dark-mode article.wf-box-sub {
+    background: #202020 !important;
+    border-color: #444 !important;
+    color: #d6d6d6 !important;
+}
+
+html.dark-mode .col.wf-box-sub h4,
+html.dark-mode .wf-box-sub h4,
+html.dark-mode .wf-box-sub h3 {
+    color: #eee !important;
+}
+
+html.dark-mode .col.wf-box-sub a {
+    color: #93c5fd !important;
+}
+
+html.dark-mode .col.wf-box-sub p {
+    color: #ccc;
+}
+
+html.dark-mode .col.wf-box-sub p[style*="color: green"],
+html.dark-mode .col.wf-box-sub [style*="color: #155724"],
+html.dark-mode .col.wf-box-sub div[style*="border: 1px solid #28a745"] {
+    background: #14351c !important;
+    border-color: #28a745 !important;
+    color: #81c784 !important;
+}
+
+html.dark-mode .col.wf-box-sub div[style*="border: 1px solid #28a745"] strong {
+    color: #81c784 !important;
+}
+
+html.dark-mode .col.wf-box-sub div[style*="border: 1px solid #b71c1c"],
+html.dark-mode .col.wf-box-sub div[style*="border: 2px solid #b71c1c"],
+html.dark-mode div[style*="border: 1px solid #b71c1c"] {
+    background: #3c1414 !important;
+    border-color: #e53935 !important;
+    color: #ffcdd2 !important;
+}
+
+html.dark-mode .col.wf-box-sub div[style*="border: 1px solid #b71c1c"] strong,
+html.dark-mode .col.wf-box-sub div[style*="border: 1px solid #b71c1c"] p,
+html.dark-mode div[style*="border: 1px solid #b71c1c"] strong {
+    color: #ffcdd2 !important;
+}
+
+html.dark-mode hr {
+    border-top-color: #444;
+}
+
+html.dark-mode .wf-top-bar-divider {
+    border-top-color: #444;
+}
+
+/* Links & Brand */
+html.dark-mode a {
+    color: #93c5fd;
+}
+
+html.dark-mode a:hover {
+    color: #bfdbfe;
+}
+
+html.dark-mode .festival-brand,
+html.dark-mode .wf-nav-inline .festival-brand,
+html.dark-mode .wf-footer-inline .festival-brand,
+html.dark-mode .drawer-title {
+    color: #ffffff !important;
+}
+
+html.dark-mode .wf-nav-inline a,
+html.dark-mode .wf-footer-inline a {
+    color: #93c5fd;
+}
+
+html.dark-mode .wf-footer-inline span {
+    color: #aaa;
+}
+
+/* Buttons and Inputs */
+html.dark-mode .btn-box,
+html.dark-mode a.btn-box {
+    background: #2a2a2a;
+    border-color: #555;
+    color: #eee;
+    text-decoration: none;
+}
+
+html.dark-mode .btn-box:hover,
+html.dark-mode a.btn-box:hover {
+    background: #383838;
+    border-color: #777;
+    color: #fff;
+}
+
+html.dark-mode .input-box,
+html.dark-mode select.genre-select {
+    background: #222;
+    border-color: #555;
+    color: #eee;
+}
+
+/* Top App Bar & Switchers */
+html.dark-mode .wf-top-app-bar .lang-switch-btn,
+html.dark-mode .wf-top-app-bar .theme-switch-btn,
+html.dark-mode .wf-top-app-bar .wf-menu-btn {
+    background: #242424;
+    border-color: #555;
+    color: #eee;
+}
+
+html.dark-mode .wf-top-app-bar .lang-switch-btn:hover,
+html.dark-mode .wf-top-app-bar .theme-switch-btn:hover,
+html.dark-mode .wf-top-app-bar .wf-menu-btn:hover {
+    background: #333;
+    border-color: #777;
+    color: #fff;
+}
+
+/* Alza Slide-out Drawer */
+html.dark-mode .alza-drawer {
+    background: #1a1a1a;
+    border-left-color: #444;
+    color: #eee;
+}
+
+html.dark-mode .drawer-links a {
+    background: #242424;
+    border-color: #444;
+    color: #ddd;
+}
+
+html.dark-mode .drawer-links a:hover {
+    background: #333;
+    border-color: #666;
+    color: #fff;
+}
+
+html.dark-mode .drawer-links a.active {
+    background: #444;
+    color: #fff;
+    border-color: #888;
+}
+
+/* Bottom Nav Dock */
+html.dark-mode .bottom-nav-dock {
+    background: #1a1a1a;
+    border-top-color: #444;
+    border-left-color: #444;
+    border-right-color: #444;
+}
+
+html.dark-mode .bottom-dock-item {
+    color: #ccc;
+    border-right-color: #333;
+}
+
+html.dark-mode .bottom-dock-item:hover {
+    background: #262626;
+    color: #fff;
+}
+
+html.dark-mode .bottom-dock-item.active {
+    background: #333;
+    color: #fff !important;
+    border-top: 2px solid #93c5fd;
+}
+
+html.dark-mode .bottom-dock-home {
+    background: #222;
+}
+
+/* Breadcrumbs in Dark Mode */
+html.dark-mode .wf-breadcrumbs,
+html.dark-mode .breadcrumb-trail {
+    background: #1c1c1c;
+    border-color: #444;
+    color: #ddd;
+}
+
+html.dark-mode .wf-breadcrumbs a,
+html.dark-mode .breadcrumb-item a {
+    color: #93c5fd;
+    text-decoration: underline;
+}
+
+html.dark-mode .wf-breadcrumbs a:hover,
+html.dark-mode .breadcrumb-item a:hover {
+    color: #bfdbfe;
+}
+
+html.dark-mode .wf-breadcrumbs .sep {
+    color: #777;
+}
+
+html.dark-mode .wf-breadcrumbs .current,
+html.dark-mode .breadcrumb-item.active {
+    color: #eee;
+}
+
+/* Timetable / Program Grid */
+html.dark-mode .table-responsive {
+    background: #1a1a1a;
+    border-color: #444;
+}
+
+html.dark-mode .sch-header {
+    background: #2a2a2a;
+    border-color: #444;
+    color: #eee;
+}
+
+html.dark-mode .sch-time-col {
+    background: #222;
+    border-color: #444;
+    color: #ccc;
+}
+
+html.dark-mode .sch-day-title {
+    background: #2a2a2a;
+    border-color: #555;
+    color: #fff;
+}
+
+html.dark-mode .sch-cell {
+    background: #1a1a1a;
+    border-color: #383838;
+}
+
+html.dark-mode .sch-cell.sch-empty {
+    background: #161616;
+    color: #777;
+}
+
+html.dark-mode .sch-cell.sch-event {
+    background: #202020;
+    border-color: #3e3e3e;
+}
+
+html.dark-mode .sch-cell.sch-event:hover {
+    background: #2c2c2c;
+}
+
+html.dark-mode .sch-artist {
+    color: #fff;
+}
+
+html.dark-mode .sch-artist-link {
+    color: #93c5fd;
+}
+
+html.dark-mode .sch-artist-link:hover {
+    color: #bfdbfe;
+}
+
+html.dark-mode .sch-time {
+    color: #bbb;
+}
+
+html.dark-mode .sch-meta {
+    color: #aaa;
+}
+
+html.dark-mode .sch-fav-btn {
+    background: #2a2a2a;
+    border-color: #555;
+    color: #ccc;
+}
+
+html.dark-mode .sch-fav-btn:hover {
+    background: #444;
+    color: #fff;
+    border-color: #777;
+}
+
+html.dark-mode .sch-detail-btn {
+    background: #282828;
+    border-color: #555;
+    color: #ddd;
+}
+
+html.dark-mode .sch-detail-btn:hover {
+    background: #3e3e3e;
+    color: #fff;
+    border-color: #777;
+}
+
+html.dark-mode .sch-actions {
+    border-top-color: #444;
+}
+
+/* Favourites highlighting in dark mode (keeps green wireframe identity with dark contrast) */
+html.dark-mode .sch-cell.is-favourite {
+    background: #143820 !important;
+    border: 2px solid #28a745 !important;
+}
+
+html.dark-mode .sch-cell.is-favourite .sch-fav-btn {
+    background: #28a745;
+    color: #fff;
+    border-color: #1e7e34;
+}
+
+html.dark-mode .sch-stats-bar {
+    background: #222;
+    border-color: #444;
+    color: #ddd;
+}
+
+/* Filter buttons */
+html.dark-mode .filter-label {
+    color: #ddd;
+}
+
+html.dark-mode .filter-btn {
+    background: #242424;
+    border-color: #444;
+    color: #ddd;
+}
+
+html.dark-mode .filter-btn:hover {
+    background: #333;
+}
+
+html.dark-mode .filter-btn.active {
+    background: #3e3e3e !important;
+    color: #ffffff !important;
+    border: 2px solid #888 !important;
+    font-weight: bold;
+}
+
+html.dark-mode .filter-btn-fav {
+    border-color: #28a745;
+    color: #81c784;
+    background: #1b3320;
+}
+
+html.dark-mode .filter-btn-fav.active {
+    background: #28a745;
+    color: #fff;
+    border-color: #1e7e34;
+}
+
+/* Artist cards & Bookmark buttons */
+html.dark-mode .artist-card {
+    background: #1e1e1e;
+    border-color: #444;
+}
+
+html.dark-mode .artist-card:hover {
+    background: #272727;
+    border-color: #666;
+}
+
+html.dark-mode .artist-card.is-favourite {
+    background: #143820 !important;
+    border: 2px solid #28a745 !important;
+}
+
+html.dark-mode .artist-card-title {
+    color: #fff;
+}
+
+html.dark-mode .artist-card-genre {
+    color: #aaa;
+}
+
+html.dark-mode .artist-card-schedule {
+    background: #272727;
+    border-color: #444;
+    color: #ddd;
+}
+
+/* Artist Bookmark Buttons (in cards and details) */
+html.dark-mode .artist-fav-btn,
+html.dark-mode .btn-box.artist-fav-btn {
+    background: #2a2a2a !important;
+    border-color: #555 !important;
+    color: #eee !important;
+}
+
+html.dark-mode .artist-fav-btn:hover,
+html.dark-mode .btn-box.artist-fav-btn:hover {
+    background: #383838 !important;
+    border-color: #777 !important;
+    color: #fff !important;
+}
+
+html.dark-mode .artist-card.is-favourite .artist-fav-btn {
+    background: #28a745 !important;
+    border-color: #1e7e34 !important;
+    color: #fff !important;
+}
+
+html.dark-mode #detail-fav-btn,
+html.dark-mode #profile-star-btn {
+    background: #2a2a2a !important;
+    border-color: #555 !important;
+    color: #eee !important;
+}
+
+html.dark-mode #detail-fav-btn.is-favourite,
+html.dark-mode #profile-star-btn.is-favourite {
+    background: #28a745 !important;
+    border-color: #1e7e34 !important;
+    color: #fff !important;
+}
+
+html.dark-mode .artist-detail-box {
+    background: #1a1a1a;
+    border-color: #555;
+    color: #eee;
+}
+
+html.dark-mode .artist-detail-meta-grid {
+    background: #222;
+    border-color: #444;
+    color: #ddd;
+}
+
+html.dark-mode .audio-preview-box {
+    background: #222;
+    border-color: #444;
+}
+
+html.dark-mode .audio-player-wireframe {
+    background: #1a1a1a;
+    border-color: #444;
+}
+
+html.dark-mode .audio-progress-bar {
+    background: #333;
+    border-color: #555;
+}
+
+html.dark-mode .audio-progress-fill {
+    background: #93c5fd;
+}
+
+/* Stages & Map */
+html.dark-mode .stage-nav-tabs .stage-tab-btn {
+    background: #242424;
+    border-color: #444;
+    color: #ddd;
+}
+
+html.dark-mode .stage-nav-tabs .stage-tab-btn.active,
+html.dark-mode .stage-nav-tabs .stage-tab-btn:hover {
+    background: #3e3e3e !important;
+    color: #ffffff !important;
+    border-color: #888 !important;
+}
+
+html.dark-mode .svg-map-frame {
+    background: #1a1a1a;
+    border-color: #444;
+}
+
+/* Mission Control / Homepage */
+html.dark-mode .telemetry-strip {
+    background: #1e1e1e;
+    border-color: #444;
+    color: #00ff66;
+}
+
+html.dark-mode .rain-shelter-banner {
+    background: #222;
+    border-color: #555;
+    color: #eee;
+}
+
+html.dark-mode .rain-shelter-banner strong {
+    color: #fff;
+}
+
+html.dark-mode .control-tile {
+    background: #1e1e1e;
+    border-color: #444;
+}
+
+html.dark-mode .control-tile .tile-label {
+    color: #aaa;
+}
+
+html.dark-mode .control-tile .tile-value {
+    color: #fff;
+}
+
+html.dark-mode .btn-accent {
+    background: #0f3453;
+    border-color: #0284c7;
+    color: #7dd3fc;
+}
+
+html.dark-mode .btn-accent:hover {
+    background: #164e7a;
+}
+
+/* Collisions & Warnings in Schedule */
+html.dark-mode .sch-conflict-alert {
+    background: #3c1313 !important;
+    border: 2px solid #e53935 !important;
+    color: #ffcdd2 !important;
+}
+
+html.dark-mode .genre-pill {
+    background: #242424;
+    border-color: #444;
+    color: #ccc;
+}
+
+html.dark-mode .genre-pill:hover {
+    background: #333;
+}
+
+html.dark-mode .genre-pill.active {
+    background: #3e3e3e !important;
+    color: #ffffff !important;
+    border: 2px solid #888 !important;
+    font-weight: bold;
+}
+
+/* Quick Section Navigation Ribbon */
+.quick-section-nav {
+    background: #f8f9fa;
+}
+
+html.dark-mode .quick-section-nav,
+html.dark-mode nav[aria-label="Quick section navigation"] {
+    background: #1c1c1c !important;
+    border-color: #444 !important;
+    color: #eee !important;
+}
+
+html.dark-mode .quick-section-nav strong,
+html.dark-mode nav[aria-label="Quick section navigation"] strong {
+    color: #eee !important;
+}
+
+html.dark-mode .quick-section-nav a.btn-box,
+html.dark-mode nav[aria-label="Quick section navigation"] a.btn-box {
+    background: #2a2a2a !important;
+    border-color: #555 !important;
+    color: #eee !important;
+}
+
+html.dark-mode .quick-section-nav a.btn-box:hover,
+html.dark-mode nav[aria-label="Quick section navigation"] a.btn-box:hover {
+    background: #383838 !important;
+    border-color: #777 !important;
+    color: #fff !important;
+}
+
+html.dark-mode .quick-section-nav a.btn-box[style*="background: #222"],
+html.dark-mode .quick-section-nav a.btn-box[style*="background:#222"],
+html.dark-mode nav[aria-label="Quick section navigation"] a.btn-box[style*="background: #222"] {
+    background: #3e3e3e !important;
+    border: 2px solid #888 !important;
+    color: #fff !important;
+}
+
+/* Walking Route Step Divs (Czech & English) */
+html.dark-mode .walking-step-item,
+html.dark-mode #pesi-trasa div[style*="background: #fff"],
+html.dark-mode #pesi-trasa-en div[style*="background: #fff"],
+html.dark-mode #pesi-trasa div[style*="background:#fff"],
+html.dark-mode #pesi-trasa-en div[style*="background:#fff"] {
+    background: #1e1e1e !important;
+    border-color: #444 !important;
+    color: #ddd !important;
+}
+
+html.dark-mode .walking-step-item strong,
+html.dark-mode #pesi-trasa div[style*="background: #fff"] strong,
+html.dark-mode #pesi-trasa-en div[style*="background: #fff"] strong {
+    color: #eee !important;
+}
+
+html.dark-mode .walking-step-item p,
+html.dark-mode #pesi-trasa div[style*="background: #fff"] p,
+html.dark-mode #pesi-trasa-en div[style*="background: #fff"] p {
+    color: #ccc !important;
+}
+
+html.dark-mode .walking-step-item.walking-step-destination,
+html.dark-mode #pesi-trasa div[style*="background: #f4faf5"],
+html.dark-mode #pesi-trasa-en div[style*="background: #f4faf5"] {
+    background: #14351c !important;
+    border: 2px solid #28a745 !important;
+    color: #e8f5e9 !important;
+}
+
+html.dark-mode .walking-step-item.walking-step-destination strong,
+html.dark-mode #pesi-trasa div[style*="background: #f4faf5"] strong,
+html.dark-mode #pesi-trasa-en div[style*="background: #f4faf5"] strong {
+    color: #81c784 !important;
+}
+
+html.dark-mode .walking-step-item.walking-step-destination p,
+html.dark-mode #pesi-trasa div[style*="background: #f4faf5"] p,
+html.dark-mode #pesi-trasa-en div[style*="background: #f4faf5"] p {
+    color: #d4edda !important;
+}
+
+/* Schematic Route Map SVG and Walking Rect in Dark Mode */
+html.dark-mode div[style*="overflow-x: auto"] {
+    background: #141414 !important;
+    border-color: #444 !important;
+}
+
+html.dark-mode svg rect[fill="#fafafa"] {
+    fill: #181818 !important;
+    stroke: #444 !important;
+}
+
+html.dark-mode svg rect[fill="#fff"],
+html.dark-mode svg rect[fill="#ffffff"] {
+    fill: #222 !important;
+    stroke: #555 !important;
+}
+
+/* Walking route rects and paths ("the rect that shows the way") */
+html.dark-mode svg rect[fill="#fff3cd"] {
+    fill: #3a2e10 !important;
+    stroke: #d4a72c !important;
+}
+
+html.dark-mode svg text[fill="#856404"] {
+    fill: #f6d878 !important;
+}
+
+html.dark-mode .route-walk-group path {
+    stroke: #f6d878 !important;
+}
+
+html.dark-mode svg text[fill="#000"],
+html.dark-mode svg text[fill="#222"] {
+    fill: #e0e0e0 !important;
+}
+
+html.dark-mode svg text[fill="#333"],
+html.dark-mode svg text[fill="#555"] {
+    fill: #aaa !important;
+}
+
+html.dark-mode svg text[fill="#777"] {
+    fill: #888 !important;
+}
+
+html.dark-mode svg line[stroke="#ccc"],
+html.dark-mode svg line[stroke="#eee"] {
+    stroke: #333 !important;
+}
+
+html.dark-mode svg rect[fill="#f0f4f8"],
+html.dark-mode svg rect[fill="#e7f1ff"] {
+    fill: #12283e !important;
+    stroke: #3b82f6 !important;
+}
+
+html.dark-mode svg text[fill="#0056b3"] {
+    fill: #93c5fd !important;
+}
+
+html.dark-mode svg circle[fill="#0056b3"] {
+    fill: #3b82f6 !important;
+}
+
+html.dark-mode svg rect[fill="#f4faf5"] {
+    fill: #12331b !important;
+    stroke: #28a745 !important;
+}
+
+html.dark-mode svg text[fill="#155724"] {
+    fill: #81c784 !important;
+}
+
+/* Muted "Remove from Schedule" Buttons in Dark Mode */
+html.dark-mode .remove-btn,
+html.dark-mode button.remove-btn,
+html.dark-mode .col.wf-box-sub .remove-btn {
+    background: #252525 !important;
+    border: 1px solid #4a4a4a !important;
+    color: #aaa !important;
+    font-weight: normal;
+}
+
+html.dark-mode .remove-btn:hover,
+html.dark-mode button.remove-btn:hover,
+html.dark-mode .col.wf-box-sub .remove-btn:hover {
+    background: #323232 !important;
+    border-color: #666 !important;
+    color: #eee !important;
+}
+
+html.dark-mode .remove-btn.has-collision,
+html.dark-mode .remove-btn[style*="#f8d7da"],
+html.dark-mode article.col.wf-box-sub[style*="#b71c1c"] .remove-btn {
+    background: #341a1c !important;
+    border: 1px solid #70262a !important;
+    color: #e57373 !important;
+    font-weight: bold;
+}
+
+html.dark-mode .remove-btn.has-collision:hover,
+html.dark-mode .remove-btn[style*="#f8d7da"]:hover,
+html.dark-mode article.col.wf-box-sub[style*="#b71c1c"] .remove-btn:hover {
+    background: #421f22 !important;
+    border-color: #c62828 !important;
+    color: #ffcdd2 !important;
+}
+
+
 
 
 

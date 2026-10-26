@@ -24,7 +24,8 @@
             'artists.html',
             'stages.html',
             'practical-info.html',
-            'my-schedule.html'
+            'my-schedule.html',
+            'artist-detail.html'
         ];
 
         if (validPages.includes(page)) {
@@ -65,6 +66,18 @@
         const langText = isCs ? 'Jazyk' : 'Language';
         const title = isCs ? 'Přepnout do angličtiny' : 'Switch language to Czech';
 
+        const currentTheme = (typeof window.getFestivalTheme === 'function')
+            ? window.getFestivalTheme()
+            : (localStorage.getItem('festival_theme') || 'light');
+        const isDark = currentTheme === 'dark';
+        const themeIcon = isDark ? '☀️' : '🌙';
+        const themeLabel = isDark
+            ? (isCs ? 'Světlý' : 'Light')
+            : (isCs ? 'Tmavý' : 'Dark');
+        const themeTitle = isDark
+            ? (isCs ? 'Přepnout na světlý režim' : 'Switch to Light Mode')
+            : (isCs ? 'Přepnout na tmavý režim' : 'Switch to Dark Mode');
+
         // Detect current page for active indicator
         const currentPath = getCurrentPage();
 
@@ -83,6 +96,10 @@
         </a>
     </div>
     <div class="wf-top-bar-right">
+        <button id="theme-switch-btn" class="btn-box theme-switch-btn" type="button" aria-label="${themeTitle}" title="${themeTitle}">
+            <span class="theme-icon" id="theme-icon" aria-hidden="true">${themeIcon}</span>
+            <span class="theme-label" id="theme-label">${themeLabel}</span>
+        </button>
         <button id="menu-drawer-open-btn" class="btn-box wf-menu-btn" type="button" aria-expanded="false" aria-controls="alza-menu-drawer" aria-label="Open Navigation Menu">
             ${menuBtnText}
         </button>
@@ -110,6 +127,12 @@
     </nav>
     <hr>
     <div class="drawer-footer">
+        <div class="theme-switch-box" style="margin-bottom: 8px; width: 100%;">
+            <button id="theme-switch-btn-drawer" class="btn-box theme-switch-btn" type="button" aria-label="${themeTitle}" title="${themeTitle}" style="width: 100%; justify-content: center;">
+                <span class="theme-icon" id="theme-icon-drawer" aria-hidden="true">${themeIcon}</span>
+                <span class="theme-label" id="theme-label-drawer">${themeLabel}</span>
+            </button>
+        </div>
         <div class="lang-switch-box" style="margin: 0; width: 100%;">
             <button id="lang-switch-btn-drawer" class="btn-box lang-switch-btn" type="button" aria-label="${langText}" title="${title}" style="width: 100%; justify-content: center;">
                 <span class="flag-icon" id="lang-flag-drawer" aria-hidden="true">${flag}</span>
@@ -234,6 +257,10 @@
         const drawerCloseBtn = document.getElementById('menu-drawer-close-btn');
         if (drawerCloseBtn) {
             drawerCloseBtn.textContent = isCs ? '[ ✕ Zavřít ]' : '[ ✕ Close ]';
+        }
+
+        if (typeof window.updateThemeButtons === 'function') {
+            window.updateThemeButtons();
         }
     }
 
@@ -385,6 +412,33 @@
                 btn.onclick = window.toggleFestivalLang;
             }
         });
+
+        const themeBtns = placeholder.querySelectorAll('.theme-switch-btn');
+        themeBtns.forEach(btn => {
+            btn.onclick = () => {
+                if (typeof window.toggleFestivalTheme === 'function') {
+                    window.toggleFestivalTheme();
+                } else {
+                    const current = localStorage.getItem('festival_theme') || 'light';
+                    const next = current === 'dark' ? 'light' : 'dark';
+                    localStorage.setItem('festival_theme', next);
+                    if (next === 'dark') {
+                        document.documentElement.classList.add('dark-mode');
+                        document.documentElement.setAttribute('data-theme', 'dark');
+                    } else {
+                        document.documentElement.classList.remove('dark-mode');
+                        document.documentElement.setAttribute('data-theme', 'light');
+                    }
+                    if (typeof window.updateThemeButtons === 'function') {
+                        window.updateThemeButtons(next);
+                    }
+                }
+            };
+        });
+
+        if (typeof window.updateThemeButtons === 'function') {
+            window.updateThemeButtons();
+        }
     }
 
     if (document.readyState === "loading") {
@@ -399,6 +453,13 @@
             : (localStorage.getItem('festival_language') || 'en');
         updateNavLanguage(newLang);
         updateActiveNavigation(getCurrentPage());
+    });
+
+    window.addEventListener('themeChanged', (e) => {
+        const theme = (e && e.detail && e.detail.theme) || 'light';
+        if (typeof window.updateThemeButtons === 'function') {
+            window.updateThemeButtons(theme);
+        }
     });
 
     window.addEventListener('storage', (e) => {

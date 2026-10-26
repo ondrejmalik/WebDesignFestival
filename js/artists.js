@@ -144,8 +144,8 @@ function syncFavoriteCards() {
             card.classList.remove('is-favourite');
             if (starBtn) {
                 starBtn.textContent = isCs ? '☆ Uložit' : '☆ Bookmark';
-                starBtn.style.background = '#eee';
-                starBtn.style.color = '#000';
+                starBtn.style.background = '';
+                starBtn.style.color = '';
             }
         }
 
@@ -173,8 +173,8 @@ function updateDetailFavoriteButton(artistId) {
         detailBtn.style.color = '#fff';
     } else {
         detailBtn.textContent = isCs ? '☆ Přidat do mého programu' : '☆ Add to My Schedule';
-        detailBtn.style.background = '#eee';
-        detailBtn.style.color = '#000';
+        detailBtn.style.background = '';
+        detailBtn.style.color = '';
     }
 }
 
@@ -392,16 +392,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = e.target.closest('.artist-card');
             if (!card) return;
 
-            // Clicked View Detail
-            if (e.target.closest('.view-detail-btn')) {
-                displayArtistDetail(card);
+            const id = card.getAttribute('data-id');
+
+            // Clicked View Detail or Artist Title
+            if (e.target.closest('.view-detail-btn') || e.target.closest('.artist-card-title')) {
+                if (!e.target.closest('a')) {
+                    window.location.href = `artist-detail.html?id=${encodeURIComponent(id)}&from=artists#${encodeURIComponent(id)}`;
+                }
                 return;
             }
 
             // Clicked Bookmark Button
             if (e.target.closest('.artist-fav-btn')) {
                 toggleArtistFavorite({
-                    id: card.getAttribute('data-id'),
+                    id: id,
                     artist: card.getAttribute('data-name'),
                     stage: card.getAttribute('data-stage'),
                     day: card.getAttribute('data-day'),
@@ -413,29 +417,42 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Handle deep linking from URL hash (e.g. #perf-08)
-    const hash = window.location.hash.replace('#', '');
-    if (hash) {
-        const card = document.querySelector(`.artist-card[data-id="${hash}"]`);
+    // Scroll to exact spot when returning from detail page via hash (e.g. #perf-08)
+    function scrollToArtistSpot() {
+        const hash = window.location.hash.replace('#', '');
+        if (!hash) return;
+        const card = document.getElementById(hash) || document.querySelector(`.artist-card[data-id="${hash}"]`);
         if (card) {
-            displayArtistDetail(card);
+            // Check day of card and activate that day filter if needed
+            const cardDay = card.getAttribute('data-day') || '';
+            let targetDay = 'all';
+            if (cardDay.toLowerCase().includes('fri')) targetDay = 'friday';
+            else if (cardDay.toLowerCase().includes('sat')) targetDay = 'saturday';
+            else if (cardDay.toLowerCase().includes('sun')) targetDay = 'sunday';
+
+            const dayBtn = document.querySelector(`.filter-btn[data-filter-day="${targetDay}"]`);
+            if (dayBtn && !dayBtn.classList.contains('active')) {
+                dayBtn.click();
+            }
+
+            // Ensure card is visible even if other filters were active
+            card.style.display = '';
+
+            setTimeout(() => {
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                card.classList.add('spot-highlight');
+                setTimeout(() => card.classList.remove('spot-highlight'), 2500);
+            }, 150);
         }
     }
+
+    scrollToArtistSpot();
+    window.addEventListener('hashchange', scrollToArtistSpot);
 });
 
 // React immediately to language switch
 window.addEventListener('languageChanged', () => {
     syncFavoriteCards();
-    const hash = window.location.hash.replace('#', '');
-    const detailContainer = document.getElementById('artist-detail-container');
-    if (hash) {
-        const card = document.querySelector(`.artist-card[data-id="${hash}"]`);
-        if (card) {
-            displayArtistDetail(card);
-        }
-    } else if (detailContainer && !detailContainer.querySelector('.artist-detail-box')) {
-        detailContainer.innerHTML = '';
-    }
     const countEl = document.getElementById('filtered-count');
     if (countEl) {
         const isCs = getActiveLanguage() === 'cs';

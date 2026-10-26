@@ -84,6 +84,10 @@
             lang_label: "Language",
             lang_switch_title: "Switch language to Czech",
             lang_flag: "img/1f1ec-1f1e7.svg",
+            theme_dark_label: "Dark",
+            theme_light_label: "Light",
+            theme_to_dark_title: "Switch to Dark Mode",
+            theme_to_light_title: "Switch to Light Mode",
             dock_artists: "Artists",
             dock_stages: "Stages",
             dock_home: "HOME",
@@ -168,14 +172,14 @@
             stages_solar_type: "<strong>Stage Type:</strong> Natural open-air amphitheater",
             stages_solar_cap: "<strong>Capacity:</strong> 4,500 visitors",
             stages_solar_focus: "<strong>Focus:</strong> Afternoon and evening live band performances (Post-Rock, Indie Rock, live audiovisual sets).",
-            stages_solar_btn: "[ View Solar Horizon Stage Schedule → ]",
+            stages_solar_btn: "[ ☀️ View Solar Horizon Stage Schedule → ]",
             stages_lunar_title: "[ 🌙 Lunar Forest Dome (Covered Dome) ]",
             stages_lunar_sketch: "",
             stages_lunar_type: "<strong>Stage Type:</strong> Large-capacity covered dome with complete all-weather rain shelter",
             stages_lunar_cap: "<strong>Capacity:</strong> 1,800 visitors",
             stages_lunar_focus: "<strong>Focus:</strong> Late-night club sets, dark techno, modular ambient, experimental electronics, and 360° projections.",
             stages_lunar_shelter: "<em>Ideal refuge when it rains – music runs continuously under a solid covered roof!</em>",
-            stages_lunar_btn: "[ 🌙 View Schedule for Lunar Forest Dome (Covered Dome) → ]",
+            stages_lunar_btn: "[ 🌙 View Lunar Forest Dome Schedule → ]",
             stages_map_title: "[ Festival Grounds Map & Visitor Orientation ]",
             stages_map_desc: "[ Entrance A (Main Gate) • Solar Horizon Stage • Lunar Forest Dome (Covered) • Camping Ground • Cashless Zone • Shuttle Bus Stop ]",
             stages_map_btn: "[ 🚆 Transit Guide: How to get from the train station to the venue → ]",
@@ -310,7 +314,24 @@
             schedule_sun_empty: "[ You currently have no performances saved for Sunday. ]",
             schedule_status_clean: "[ Status: ✓ No time conflict ]",
             schedule_stage_label: "Stage:",
-            schedule_remove_btn_text: "[ Remove ]"
+            schedule_remove_btn_text: "[ Remove ]",
+
+            // artist-detail.html & stages tabs
+            stages_tab_solar: "[ ☀️ Solar Horizon Stage ]",
+            stages_tab_lunar: "[ 🌙 Lunar Forest Dome ]",
+            detail_title: "Festival of Darkness 2 | Artist Detail",
+            detail_head: "[ Artist Profile & Performance Details ]",
+            detail_back_to_program: "[ ← Back to Program ]",
+            detail_back_to_artists: "[ ← Back to Artists ]",
+            detail_back_to_myschedule: "[ ← Back to My Schedule ]",
+            detail_view_timetable: "[ 📅 View in Timetable → ]",
+            detail_view_stage: "[ ⛺ Stage Details → ]",
+            detail_view_schedule: "[ ★ View in My Schedule → ]",
+            detail_audio_preview: "[ Audio Sample Preview ]",
+            detail_play: "[ ▶ Play ]",
+            detail_pause: "[ ❚❚ Pause ]",
+            detail_btn_text: "[ ℹ️ Detail → ]",
+            schedule_artist_detail_btn: "[ ℹ️ Artist Detail → ]"
         },
         cs: {
             // Navigation
@@ -324,6 +345,10 @@
             lang_label: "Jazyk",
             lang_switch_title: "Přepnout do angličtiny",
             lang_flag: "img/1f1e8-1f1ff.svg",
+            theme_dark_label: "Tmavý",
+            theme_light_label: "Světlý",
+            theme_to_dark_title: "Přepnout na tmavý režim",
+            theme_to_light_title: "Přepnout na světlý režim",
             dock_artists: "Účinkující",
             dock_stages: "Scény",
             dock_home: "ÚVOD",
@@ -408,14 +433,14 @@
             stages_solar_type: "<strong>Typ scény:</strong> Přírodní otevřený amfiteátr (Open-air)",
             stages_solar_cap: "<strong>Kapacita:</strong> 4 500 návštěvníků",
             stages_solar_focus: "<strong>Zaměření:</strong> Odpolední a večerní vystoupení kapel (Post-Rock, Indie Rock, živé audiovizuální sety).",
-            stages_solar_btn: "[ Zobrazit program Solar Horizon Stage → ]",
+            stages_solar_btn: "[ ☀️ Zobrazit program Solar Horizon Stage → ]",
             stages_lunar_title: "[ 🌙 Lunar Forest Dome (Krytá scéna) ]",
             stages_lunar_sketch: "",
             stages_lunar_type: "<strong>Typ scény:</strong> Velkokapacitní zastřešená kopule s plnou ochranou proti dešti",
             stages_lunar_cap: "<strong>Kapacita:</strong> 1 800 návštěvníků",
             stages_lunar_focus: "<strong>Zaměření:</strong> Noční klubové sety, dark techno, modulární ambient, experimentální elektronika a 360° projekce.",
             stages_lunar_shelter: "<em>Ideální útočiště při dešti – hudební produkce probíhá nepřetržitě pod pevnou střechou!</em>",
-            stages_lunar_btn: "[ 🌙 Zjistit program v Lunar Forest Dome (Krytá scéna) → ]",
+            stages_lunar_btn: "[ 🌙 Zobrazit program Lunar Forest Dome → ]",
             stages_map_title: "[ Mapa areálu & Orientace pro návštěvníky ]",
             stages_map_desc: "[ Vstup A (Hlavní brána) • Solar Horizon Stage • Lunar Forest Dome (Krytá scéna) • Stanové městečko • Cashless zóna • Zastávka shuttle busu ]",
             stages_map_btn: "[ 🚆 Průvodce dopravou: Jak se dostat z vlakového nádraží do areálu → ]",
@@ -550,7 +575,24 @@
             schedule_sun_empty: "[ Pro neděli zatím nemáte uložená žádná vystoupení. ]",
             schedule_status_clean: "[ Stav: ✓ Bez časové kolize ]",
             schedule_stage_label: "Scéna:",
-            schedule_remove_btn_text: "[ Odebrat ]"
+            schedule_remove_btn_text: "[ Odebrat ]",
+
+            // artist-detail.html & stages tabs
+            stages_tab_solar: "[ ☀️ Scéna Solar Horizon ]",
+            stages_tab_lunar: "[ 🌙 Kupola Lunar Forest ]",
+            detail_title: "Festival of Darkness 2 | Detail interpreta",
+            detail_head: "[ Profil interpreta & detaily vystoupení ]",
+            detail_back_to_program: "[ ← Zpět do Programu ]",
+            detail_back_to_artists: "[ ← Zpět k Účinkujícím ]",
+            detail_back_to_myschedule: "[ ← Zpět do Mého plánu ]",
+            detail_view_timetable: "[ 📅 Zobrazit v harmonogramu → ]",
+            detail_view_stage: "[ ⛺ Detaily scény → ]",
+            detail_view_schedule: "[ ★ Přejít do Mého plánu → ]",
+            detail_audio_preview: "[ Zvuková ukázka ]",
+            detail_play: "[ ▶ Přehrát ]",
+            detail_pause: "[ ❚❚ Pozastavit ]",
+            detail_btn_text: "[ ℹ️ Detail → ]",
+            schedule_artist_detail_btn: "[ ℹ️ Detail interpreta → ]"
         }
     };
 
@@ -653,6 +695,11 @@
             btn.setAttribute('aria-label', dict.lang_label);
             btn.onclick = toggleFestivalLang;
         });
+
+        // 5b. Update Theme Switch Buttons
+        if (typeof window.updateThemeButtons === 'function') {
+            window.updateThemeButtons();
+        }
 
         // 6. Update Page Title if mapped
         const path = window.location.pathname.toLowerCase();

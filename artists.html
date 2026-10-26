@@ -6,6 +6,7 @@
     <meta name="description" content="Festival Lineup & Artist Profiles – Festival of Darkness 2">
     <title>Festival of Darkness 2 | Artists</title>
     <link rel="stylesheet" href="css/wireframe.css">
+    <script src="js/theme.js"></script>
     <script src="js/lang.js" defer></script>
     <script src="components/nav.js" defer></script>
     <script src="components/footer.js" defer></script>
@@ -30,6 +31,10 @@
                     </a>
                 </div>
                 <div class="wf-top-bar-right">
+                    <button id="theme-switch-btn" class="btn-box theme-switch-btn" type="button" aria-label="Switch to Dark Mode" title="Switch to Dark Mode">
+                        <span class="theme-icon" id="theme-icon" aria-hidden="true">🌙</span>
+                        <span class="theme-label" id="theme-label">Dark</span>
+                    </button>
                     <button id="menu-drawer-open-btn" class="btn-box wf-menu-btn" type="button" aria-expanded="false" aria-controls="alza-menu-drawer" aria-label="Open Navigation Menu">
                         [ ☰ Menu ]
                     </button>
@@ -57,6 +62,12 @@
                 </nav>
                 <hr>
                 <div class="drawer-footer">
+                    <div class="theme-switch-box" style="margin-bottom: 8px; width: 100%;">
+                        <button id="theme-switch-btn-drawer" class="btn-box theme-switch-btn" type="button" aria-label="Switch to Dark Mode" title="Switch to Dark Mode" style="width: 100%; justify-content: center;">
+                            <span class="theme-icon" id="theme-icon-drawer" aria-hidden="true">🌙</span>
+                            <span class="theme-label" id="theme-label-drawer">Dark</span>
+                        </button>
+                    </div>
                     <div class="lang-switch-box" style="margin: 0; width: 100%;">
                         <button id="lang-switch-btn-drawer" class="btn-box lang-switch-btn" type="button" aria-label="Language" title="Switch language to Czech" style="width: 100%; justify-content: center;">
                             <span class="flag-icon" id="lang-flag-drawer" aria-hidden="true"><img src="img/1f1ec-1f1e7.svg" alt="GB" class="flag-img" width="20" height="20"></span>
@@ -92,6 +103,13 @@
         </div>
 
         <main>
+            <!-- Breadcrumbs Navigation -->
+            <nav class="wf-breadcrumbs" aria-label="Breadcrumb">
+                <a href="index.html" data-i18n="nav_home">🏠 [ Home ]</a>
+                <span class="sep">&gt;</span>
+                <span class="current" data-i18n="nav_artists">🎤 [ Artists ]</span>
+            </nav>
+
             <!-- Page Title & Stats Overview -->
             <section class="wf-box">
                 <h2 data-i18n="artists_head">[ Festival Lineup: Complete Catalog of 60 Performers ]</h2>
@@ -162,861 +180,861 @@
 
                 <div class="artists-grid">
                     <!-- ================= LINE 1 (Artists 1 - 3) ================= -->
-                    <article class="artist-card" data-id="perf-01" data-name="Echoes of Light" data-genre="Post-Rock / Ambient" data-origin="CZ" data-day="Friday, July 10" data-time="14:00 – 14:45" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-01" data-id="perf-01" data-name="Echoes of Light" data-genre="Post-Rock / Ambient" data-origin="CZ" data-day="Friday, July 10" data-time="14:00 – 14:45" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Echoes of Light (CZ) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-01&from=artists#perf-01" style="color: inherit; text-decoration: underline;">[ Echoes of Light (CZ) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Post-Rock / Ambient</p>
                             <p class="artist-card-schedule">Fri 14:00 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-01&from=artists#perf-01" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-02" data-name="Velvet Morning" data-genre="Dream Pop" data-origin="SK" data-day="Friday, July 10" data-time="15:00 – 15:45" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-02" data-id="perf-02" data-name="Velvet Morning" data-genre="Dream Pop" data-origin="SK" data-day="Friday, July 10" data-time="15:00 – 15:45" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Velvet Morning (SK) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-02&from=artists#perf-02" style="color: inherit; text-decoration: underline;">[ Velvet Morning (SK) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Dream Pop</p>
                             <p class="artist-card-schedule">Fri 15:00 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-02&from=artists#perf-02" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-03" data-name="Nordic Wave" data-genre="Indie Rock" data-origin="SE" data-day="Friday, July 10" data-time="16:00 – 16:50" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-03" data-id="perf-03" data-name="Nordic Wave" data-genre="Indie Rock" data-origin="SE" data-day="Friday, July 10" data-time="16:00 – 16:50" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Nordic Wave (SE) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-03&from=artists#perf-03" style="color: inherit; text-decoration: underline;">[ Nordic Wave (SE) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Indie Rock</p>
                             <p class="artist-card-schedule">Fri 16:00 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-03&from=artists#perf-03" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
                     <!-- ================= LINE 2 (Artists 4 - 6) ================= -->
-                    <article class="artist-card" data-id="perf-04" data-name="The Daylight Project" data-genre="Indie Pop" data-origin="CZ" data-day="Friday, July 10" data-time="17:05 – 17:55" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-04" data-id="perf-04" data-name="The Daylight Project" data-genre="Indie Pop" data-origin="CZ" data-day="Friday, July 10" data-time="17:05 – 17:55" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ The Daylight Project (CZ) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-04&from=artists#perf-04" style="color: inherit; text-decoration: underline;">[ The Daylight Project (CZ) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Indie Pop</p>
                             <p class="artist-card-schedule">Fri 17:05 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-04&from=artists#perf-04" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-05" data-name="Prague Synth Collective" data-genre="Synthpop" data-origin="CZ" data-day="Friday, July 10" data-time="18:15 – 19:05" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-05" data-id="perf-05" data-name="Prague Synth Collective" data-genre="Synthpop" data-origin="CZ" data-day="Friday, July 10" data-time="18:15 – 19:05" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Prague Synth Collective (CZ) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-05&from=artists#perf-05" style="color: inherit; text-decoration: underline;">[ Prague Synth Collective (CZ) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Synthpop</p>
                             <p class="artist-card-schedule">Fri 18:15 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-05&from=artists#perf-05" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-06" data-name="Electric Meadow" data-genre="Electro-Folk" data-origin="AT" data-day="Friday, July 10" data-time="19:25 – 20:20" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-06" data-id="perf-06" data-name="Electric Meadow" data-genre="Electro-Folk" data-origin="AT" data-day="Friday, July 10" data-time="19:25 – 20:20" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Electric Meadow (AT) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-06&from=artists#perf-06" style="color: inherit; text-decoration: underline;">[ Electric Meadow (AT) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Electro-Folk</p>
                             <p class="artist-card-schedule">Fri 19:25 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-06&from=artists#perf-06" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
                     <!-- ================= LINE 3 (Artists 7 - 9) ================= -->
-                    <article class="artist-card" data-id="perf-07" data-name="Mirage Horizon" data-genre="Alternative Rock" data-origin="UK" data-day="Friday, July 10" data-time="20:40 – 21:40" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-07" data-id="perf-07" data-name="Mirage Horizon" data-genre="Alternative Rock" data-origin="UK" data-day="Friday, July 10" data-time="20:40 – 21:40" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Mirage Horizon (UK) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-07&from=artists#perf-07" style="color: inherit; text-decoration: underline;">[ Mirage Horizon (UK) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Alternative Rock</p>
                             <p class="artist-card-schedule">Fri 20:40 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-07&from=artists#perf-07" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-08" data-name="Solar Flare" data-genre="Nu-Disco / Funk" data-origin="DE" data-day="Friday, July 10" data-time="22:00 – 23:10" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-08" data-id="perf-08" data-name="Solar Flare" data-genre="Nu-Disco / Funk" data-origin="DE" data-day="Friday, July 10" data-time="22:00 – 23:10" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Solar Flare (DE) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-08&from=artists#perf-08" style="color: inherit; text-decoration: underline;">[ Solar Flare (DE) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Nu-Disco / Funk</p>
                             <p class="artist-card-schedule">Fri 22:00 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-08&from=artists#perf-08" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-09" data-name="Starlight Odyssey" data-genre="Electronic Indie" data-origin="FR" data-day="Friday, July 10" data-time="23:30 – 00:45" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-09" data-id="perf-09" data-name="Starlight Odyssey" data-genre="Electronic Indie" data-origin="FR" data-day="Friday, July 10" data-time="23:30 – 00:45" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Starlight Odyssey (FR) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-09&from=artists#perf-09" style="color: inherit; text-decoration: underline;">[ Starlight Odyssey (FR) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Electronic Indie</p>
                             <p class="artist-card-schedule">Fri 23:30 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-09&from=artists#perf-09" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
                     <!-- ================= LINE 4 (Artists 10 - 12) ================= -->
-                    <article class="artist-card" data-id="perf-10" data-name="Midnight Pulse" data-genre="Electro Rock" data-origin="CZ" data-day="Friday, July 10" data-time="01:00 – 02:00" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-10" data-id="perf-10" data-name="Midnight Pulse" data-genre="Electro Rock" data-origin="CZ" data-day="Friday, July 10" data-time="01:00 – 02:00" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Midnight Pulse (CZ) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-10&from=artists#perf-10" style="color: inherit; text-decoration: underline;">[ Midnight Pulse (CZ) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Electro Rock</p>
                             <p class="artist-card-schedule">Fri 01:00 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-10&from=artists#perf-10" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-11" data-name="Subtle Resonances" data-genre="Modular Ambient" data-origin="CZ" data-day="Friday, July 10" data-time="15:00 – 15:50" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-11" data-id="perf-11" data-name="Subtle Resonances" data-genre="Modular Ambient" data-origin="CZ" data-day="Friday, July 10" data-time="15:00 – 15:50" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Subtle Resonances (CZ) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-11&from=artists#perf-11" style="color: inherit; text-decoration: underline;">[ Subtle Resonances (CZ) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Modular Ambient</p>
                             <p class="artist-card-schedule">Fri 15:00 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-11&from=artists#perf-11" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-12" data-name="Binary Fields" data-genre="IDM / Glitch" data-origin="PL" data-day="Friday, July 10" data-time="16:05 – 17:00" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-12" data-id="perf-12" data-name="Binary Fields" data-genre="IDM / Glitch" data-origin="PL" data-day="Friday, July 10" data-time="16:05 – 17:00" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Binary Fields (PL) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-12&from=artists#perf-12" style="color: inherit; text-decoration: underline;">[ Binary Fields (PL) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: IDM / Glitch</p>
                             <p class="artist-card-schedule">Fri 16:05 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-12&from=artists#perf-12" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
                     <!-- ================= LINE 5 (Artists 13 - 15) ================= -->
-                    <article class="artist-card" data-id="perf-13" data-name="Deep Texture" data-genre="Dub Techno" data-origin="DE" data-day="Friday, July 10" data-time="17:15 – 18:15" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-13" data-id="perf-13" data-name="Deep Texture" data-genre="Dub Techno" data-origin="DE" data-day="Friday, July 10" data-time="17:15 – 18:15" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Deep Texture (DE) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-13&from=artists#perf-13" style="color: inherit; text-decoration: underline;">[ Deep Texture (DE) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Dub Techno</p>
                             <p class="artist-card-schedule">Fri 17:15 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-13&from=artists#perf-13" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-14" data-name="Oscillator Shift" data-genre="Minimal Techno" data-origin="CZ" data-day="Friday, July 10" data-time="18:30 – 19:30" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-14" data-id="perf-14" data-name="Oscillator Shift" data-genre="Minimal Techno" data-origin="CZ" data-day="Friday, July 10" data-time="18:30 – 19:30" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Oscillator Shift (CZ) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-14&from=artists#perf-14" style="color: inherit; text-decoration: underline;">[ Oscillator Shift (CZ) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Minimal Techno</p>
                             <p class="artist-card-schedule">Fri 18:30 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-14&from=artists#perf-14" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-15" data-name="Echo Chamber" data-genre="Dark Ambient" data-origin="SK" data-day="Friday, July 10" data-time="19:45 – 20:45" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-15" data-id="perf-15" data-name="Echo Chamber" data-genre="Dark Ambient" data-origin="SK" data-day="Friday, July 10" data-time="19:45 – 20:45" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Echo Chamber (SK) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-15&from=artists#perf-15" style="color: inherit; text-decoration: underline;">[ Echo Chamber (SK) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Dark Ambient</p>
                             <p class="artist-card-schedule">Fri 19:45 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-15&from=artists#perf-15" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
                     <!-- ================= LINE 6 (Artists 16 - 18) ================= -->
-                    <article class="artist-card" data-id="perf-16" data-name="Krypton DJ" data-genre="Hypnotic Techno" data-origin="HU" data-day="Friday, July 10" data-time="21:00 – 22:15" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-16" data-id="perf-16" data-name="Krypton DJ" data-genre="Hypnotic Techno" data-origin="HU" data-day="Friday, July 10" data-time="21:00 – 22:15" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Krypton DJ (HU) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-16&from=artists#perf-16" style="color: inherit; text-decoration: underline;">[ Krypton DJ (HU) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Hypnotic Techno</p>
                             <p class="artist-card-schedule">Fri 21:00 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-16&from=artists#perf-16" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-17" data-name="Modular Horizon" data-genre="Live Hardware Techno" data-origin="DE" data-day="Friday, July 10" data-time="22:30 – 23:50" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-17" data-id="perf-17" data-name="Modular Horizon" data-genre="Live Hardware Techno" data-origin="DE" data-day="Friday, July 10" data-time="22:30 – 23:50" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Modular Horizon (DE) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-17&from=artists#perf-17" style="color: inherit; text-decoration: underline;">[ Modular Horizon (DE) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Live Hardware Techno</p>
                             <p class="artist-card-schedule">Fri 22:30 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-17&from=artists#perf-17" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-18" data-name="Analog Void" data-genre="Industrial Techno" data-origin="NL" data-day="Friday, July 10" data-time="00:05 – 01:25" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-18" data-id="perf-18" data-name="Analog Void" data-genre="Industrial Techno" data-origin="NL" data-day="Friday, July 10" data-time="00:05 – 01:25" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Analog Void (NL) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-18&from=artists#perf-18" style="color: inherit; text-decoration: underline;">[ Analog Void (NL) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Industrial Techno</p>
                             <p class="artist-card-schedule">Fri 00:05 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-18&from=artists#perf-18" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
                     <!-- ================= LINE 7 (Artists 19 - 21) ================= -->
-                    <article class="artist-card" data-id="perf-19" data-name="Frequency 404" data-genre="Raw Acid Techno" data-origin="UK" data-day="Friday, July 10" data-time="01:40 – 03:00" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-19" data-id="perf-19" data-name="Frequency 404" data-genre="Raw Acid Techno" data-origin="UK" data-day="Friday, July 10" data-time="01:40 – 03:00" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Frequency 404 (UK) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-19&from=artists#perf-19" style="color: inherit; text-decoration: underline;">[ Frequency 404 (UK) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Raw Acid Techno</p>
                             <p class="artist-card-schedule">Fri 01:40 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-19&from=artists#perf-19" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-20" data-name="Dawn Ritual" data-genre="Atmospheric Ambient" data-origin="CZ" data-day="Friday, July 10" data-time="03:10 – 04:00" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-20" data-id="perf-20" data-name="Dawn Ritual" data-genre="Atmospheric Ambient" data-origin="CZ" data-day="Friday, July 10" data-time="03:10 – 04:00" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Dawn Ritual (CZ) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-20&from=artists#perf-20" style="color: inherit; text-decoration: underline;">[ Dawn Ritual (CZ) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Atmospheric Ambient</p>
                             <p class="artist-card-schedule">Fri 03:10 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-20&from=artists#perf-20" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-21" data-name="Sunburst Trio" data-genre="Acoustic Indie" data-origin="CZ" data-day="Saturday, July 11" data-time="13:30 – 14:15" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-21" data-id="perf-21" data-name="Sunburst Trio" data-genre="Acoustic Indie" data-origin="CZ" data-day="Saturday, July 11" data-time="13:30 – 14:15" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Sunburst Trio (CZ) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-21&from=artists#perf-21" style="color: inherit; text-decoration: underline;">[ Sunburst Trio (CZ) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Acoustic Indie</p>
                             <p class="artist-card-schedule">Sat 13:30 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-21&from=artists#perf-21" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
                     <!-- ================= LINE 8 (Artists 22 - 24) ================= -->
-                    <article class="artist-card" data-id="perf-22" data-name="Coastline Drift" data-genre="Surf Rock" data-origin="ES" data-day="Saturday, July 11" data-time="14:30 – 15:15" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-22" data-id="perf-22" data-name="Coastline Drift" data-genre="Surf Rock" data-origin="ES" data-day="Saturday, July 11" data-time="14:30 – 15:15" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Coastline Drift (ES) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-22&from=artists#perf-22" style="color: inherit; text-decoration: underline;">[ Coastline Drift (ES) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Surf Rock</p>
                             <p class="artist-card-schedule">Sat 14:30 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-22&from=artists#perf-22" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-23" data-name="The Urban Poets" data-genre="Indie Soul" data-origin="UK" data-day="Saturday, July 11" data-time="15:30 – 16:20" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-23" data-id="perf-23" data-name="The Urban Poets" data-genre="Indie Soul" data-origin="UK" data-day="Saturday, July 11" data-time="15:30 – 16:20" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ The Urban Poets (UK) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-23&from=artists#perf-23" style="color: inherit; text-decoration: underline;">[ The Urban Poets (UK) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Indie Soul</p>
                             <p class="artist-card-schedule">Sat 15:30 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-23&from=artists#perf-23" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-24" data-name="Neon Youth" data-genre="Indie Pop" data-origin="SK" data-day="Saturday, July 11" data-time="16:35 – 17:25" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-24" data-id="perf-24" data-name="Neon Youth" data-genre="Indie Pop" data-origin="SK" data-day="Saturday, July 11" data-time="16:35 – 17:25" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Neon Youth (SK) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-24&from=artists#perf-24" style="color: inherit; text-decoration: underline;">[ Neon Youth (SK) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Indie Pop</p>
                             <p class="artist-card-schedule">Sat 16:35 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-24&from=artists#perf-24" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
                     <!-- ================= LINE 9 (Artists 25 - 27) ================= -->
-                    <article class="artist-card" data-id="perf-25" data-name="Silver Tides" data-genre="Shoegaze" data-origin="CZ" data-day="Saturday, July 11" data-time="17:45 – 18:40" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-25" data-id="perf-25" data-name="Silver Tides" data-genre="Shoegaze" data-origin="CZ" data-day="Saturday, July 11" data-time="17:45 – 18:40" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Silver Tides (CZ) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-25&from=artists#perf-25" style="color: inherit; text-decoration: underline;">[ Silver Tides (CZ) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Shoegaze</p>
                             <p class="artist-card-schedule">Sat 17:45 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-25&from=artists#perf-25" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-26" data-name="Horizon Glow" data-genre="Electronic Pop" data-origin="SE" data-day="Saturday, July 11" data-time="19:00 – 20:00" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-26" data-id="perf-26" data-name="Horizon Glow" data-genre="Electronic Pop" data-origin="SE" data-day="Saturday, July 11" data-time="19:00 – 20:00" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Horizon Glow (SE) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-26&from=artists#perf-26" style="color: inherit; text-decoration: underline;">[ Horizon Glow (SE) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Electronic Pop</p>
                             <p class="artist-card-schedule">Sat 19:00 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-26&from=artists#perf-26" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-27" data-name="Wild Horizon" data-genre="Post-Punk Revival" data-origin="DE" data-day="Saturday, July 11" data-time="20:20 – 21:20" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-27" data-id="perf-27" data-name="Wild Horizon" data-genre="Post-Punk Revival" data-origin="DE" data-day="Saturday, July 11" data-time="20:20 – 21:20" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Wild Horizon (DE) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-27&from=artists#perf-27" style="color: inherit; text-decoration: underline;">[ Wild Horizon (DE) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Post-Punk Revival</p>
                             <p class="artist-card-schedule">Sat 20:20 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-27&from=artists#perf-27" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
                     <!-- ================= LINE 10 (Artists 28 - 30) ================= -->
-                    <article class="artist-card" data-id="perf-28" data-name="Magnetic River" data-genre="Indie Dance" data-origin="FR" data-day="Saturday, July 11" data-time="21:40 – 22:50" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-28" data-id="perf-28" data-name="Magnetic River" data-genre="Indie Dance" data-origin="FR" data-day="Saturday, July 11" data-time="21:40 – 22:50" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Magnetic River (FR) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-28&from=artists#perf-28" style="color: inherit; text-decoration: underline;">[ Magnetic River (FR) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Indie Dance</p>
                             <p class="artist-card-schedule">Sat 21:40 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-28&from=artists#perf-28" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-29" data-name="Vortex Motion" data-genre="Nu-Electro" data-origin="UK" data-day="Saturday, July 11" data-time="23:10 – 00:25" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-29" data-id="perf-29" data-name="Vortex Motion" data-genre="Nu-Electro" data-origin="UK" data-day="Saturday, July 11" data-time="23:10 – 00:25" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Vortex Motion (UK) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-29&from=artists#perf-29" style="color: inherit; text-decoration: underline;">[ Vortex Motion (UK) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Nu-Electro</p>
                             <p class="artist-card-schedule">Sat 23:10 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-29&from=artists#perf-29" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-30" data-name="Aura Soundsystem" data-genre="Progressive Dance" data-origin="CZ" data-day="Saturday, July 11" data-time="00:45 – 02:00" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-30" data-id="perf-30" data-name="Aura Soundsystem" data-genre="Progressive Dance" data-origin="CZ" data-day="Saturday, July 11" data-time="00:45 – 02:00" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Aura Soundsystem (CZ) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-30&from=artists#perf-30" style="color: inherit; text-decoration: underline;">[ Aura Soundsystem (CZ) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Progressive Dance</p>
                             <p class="artist-card-schedule">Sat 00:45 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-30&from=artists#perf-30" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
                     <!-- ================= LINE 11 (Artists 31 - 33) ================= -->
-                    <article class="artist-card" data-id="perf-31" data-name="Dronescape" data-genre="Drone Music" data-origin="CZ" data-day="Saturday, July 11" data-time="14:30 – 15:20" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-31" data-id="perf-31" data-name="Dronescape" data-genre="Drone Music" data-origin="CZ" data-day="Saturday, July 11" data-time="14:30 – 15:20" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Dronescape (CZ) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-31&from=artists#perf-31" style="color: inherit; text-decoration: underline;">[ Dronescape (CZ) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Drone Music</p>
                             <p class="artist-card-schedule">Sat 14:30 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-31&from=artists#perf-31" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-32" data-name="Glitch Garden" data-genre="Microhouse" data-origin="AT" data-day="Saturday, July 11" data-time="15:35 – 16:30" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-32" data-id="perf-32" data-name="Glitch Garden" data-genre="Microhouse" data-origin="AT" data-day="Saturday, July 11" data-time="15:35 – 16:30" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Glitch Garden (AT) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-32&from=artists#perf-32" style="color: inherit; text-decoration: underline;">[ Glitch Garden (AT) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Microhouse</p>
                             <p class="artist-card-schedule">Sat 15:35 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-32&from=artists#perf-32" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-33" data-name="Forest Whispers" data-genre="Organic House" data-origin="SK" data-day="Saturday, July 11" data-time="16:45 – 17:45" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-33" data-id="perf-33" data-name="Forest Whispers" data-genre="Organic House" data-origin="SK" data-day="Saturday, July 11" data-time="16:45 – 17:45" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Forest Whispers (SK) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-33&from=artists#perf-33" style="color: inherit; text-decoration: underline;">[ Forest Whispers (SK) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Organic House</p>
                             <p class="artist-card-schedule">Sat 16:45 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-33&from=artists#perf-33" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
                     <!-- ================= LINE 12 (Artists 34 - 36) ================= -->
-                    <article class="artist-card" data-id="perf-34" data-name="Low Frequency Unit" data-genre="Deep Dubstep" data-origin="UK" data-day="Saturday, July 11" data-time="18:00 – 19:00" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-34" data-id="perf-34" data-name="Low Frequency Unit" data-genre="Deep Dubstep" data-origin="UK" data-day="Saturday, July 11" data-time="18:00 – 19:00" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Low Frequency Unit (UK) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-34&from=artists#perf-34" style="color: inherit; text-decoration: underline;">[ Low Frequency Unit (UK) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Deep Dubstep</p>
                             <p class="artist-card-schedule">Sat 18:00 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-34&from=artists#perf-34" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-35" data-name="Monolith Audio" data-genre="Peak Time Techno" data-origin="DE" data-day="Saturday, July 11" data-time="19:15 – 20:15" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-35" data-id="perf-35" data-name="Monolith Audio" data-genre="Peak Time Techno" data-origin="DE" data-day="Saturday, July 11" data-time="19:15 – 20:15" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Monolith Audio (DE) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-35&from=artists#perf-35" style="color: inherit; text-decoration: underline;">[ Monolith Audio (DE) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Peak Time Techno</p>
                             <p class="artist-card-schedule">Sat 19:15 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-35&from=artists#perf-35" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-36" data-name="Sine Wave Syndicate" data-genre="Electro Techno" data-origin="FR" data-day="Saturday, July 11" data-time="20:30 – 21:45" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-36" data-id="perf-36" data-name="Sine Wave Syndicate" data-genre="Electro Techno" data-origin="FR" data-day="Saturday, July 11" data-time="20:30 – 21:45" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Sine Wave Syndicate (FR) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-36&from=artists#perf-36" style="color: inherit; text-decoration: underline;">[ Sine Wave Syndicate (FR) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Electro Techno</p>
                             <p class="artist-card-schedule">Sat 20:30 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-36&from=artists#perf-36" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
                     <!-- ================= LINE 13 (Artists 37 - 39) ================= -->
-                    <article class="artist-card" data-id="perf-37" data-name="Shadowplay DJ" data-genre="Dark Wave Techno" data-origin="CZ" data-day="Saturday, July 11" data-time="22:00 – 23:20" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-37" data-id="perf-37" data-name="Shadowplay DJ" data-genre="Dark Wave Techno" data-origin="CZ" data-day="Saturday, July 11" data-time="22:00 – 23:20" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Shadowplay DJ (CZ) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-37&from=artists#perf-37" style="color: inherit; text-decoration: underline;">[ Shadowplay DJ (CZ) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Dark Wave Techno</p>
                             <p class="artist-card-schedule">Sat 22:00 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-37&from=artists#perf-37" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-38" data-name="Circuit Overload" data-genre="Hard Techno" data-origin="PL" data-day="Saturday, July 11" data-time="23:35 – 00:55" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-38" data-id="perf-38" data-name="Circuit Overload" data-genre="Hard Techno" data-origin="PL" data-day="Saturday, July 11" data-time="23:35 – 00:55" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Circuit Overload (PL) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-38&from=artists#perf-38" style="color: inherit; text-decoration: underline;">[ Circuit Overload (PL) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Hard Techno</p>
                             <p class="artist-card-schedule">Sat 23:35 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-38&from=artists#perf-38" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-39" data-name="Neural Network Live" data-genre="Acid Techno" data-origin="BE" data-day="Saturday, July 11" data-time="01:10 – 02:30" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-39" data-id="perf-39" data-name="Neural Network Live" data-genre="Acid Techno" data-origin="BE" data-day="Saturday, July 11" data-time="01:10 – 02:30" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Neural Network Live (BE) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-39&from=artists#perf-39" style="color: inherit; text-decoration: underline;">[ Neural Network Live (BE) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Acid Techno</p>
                             <p class="artist-card-schedule">Sat 01:10 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-39&from=artists#perf-39" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
                     <!-- ================= LINE 14 (Artists 40 - 42) ================= -->
-                    <article class="artist-card" data-id="perf-40" data-name="Solar Wind" data-genre="Chillout Ambient" data-origin="CZ" data-day="Saturday, July 11" data-time="02:40 – 04:00" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-40" data-id="perf-40" data-name="Solar Wind" data-genre="Chillout Ambient" data-origin="CZ" data-day="Saturday, July 11" data-time="02:40 – 04:00" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Solar Wind (CZ) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-40&from=artists#perf-40" style="color: inherit; text-decoration: underline;">[ Solar Wind (CZ) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Chillout Ambient</p>
                             <p class="artist-card-schedule">Sat 02:40 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-40&from=artists#perf-40" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-41" data-name="Morning Breeze" data-genre="Folk Indie" data-origin="CZ" data-day="Sunday, July 12" data-time="13:00 – 13:45" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-41" data-id="perf-41" data-name="Morning Breeze" data-genre="Folk Indie" data-origin="CZ" data-day="Sunday, July 12" data-time="13:00 – 13:45" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Morning Breeze (CZ) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-41&from=artists#perf-41" style="color: inherit; text-decoration: underline;">[ Morning Breeze (CZ) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Folk Indie</p>
                             <p class="artist-card-schedule">Sun 13:00 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-41&from=artists#perf-41" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-42" data-name="Silent Pines" data-genre="Chamber Pop" data-origin="SK" data-day="Sunday, July 12" data-time="14:00 – 14:45" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-42" data-id="perf-42" data-name="Silent Pines" data-genre="Chamber Pop" data-origin="SK" data-day="Sunday, July 12" data-time="14:00 – 14:45" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Silent Pines (SK) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-42&from=artists#perf-42" style="color: inherit; text-decoration: underline;">[ Silent Pines (SK) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Chamber Pop</p>
                             <p class="artist-card-schedule">Sun 14:00 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-42&from=artists#perf-42" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
                     <!-- ================= LINE 15 (Artists 43 - 45) ================= -->
-                    <article class="artist-card" data-id="perf-43" data-name="Sunken Ship" data-genre="Psych Rock" data-origin="UK" data-day="Sunday, July 12" data-time="15:00 – 15:50" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-43" data-id="perf-43" data-name="Sunken Ship" data-genre="Psych Rock" data-origin="UK" data-day="Sunday, July 12" data-time="15:00 – 15:50" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Sunken Ship (UK) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-43&from=artists#perf-43" style="color: inherit; text-decoration: underline;">[ Sunken Ship (UK) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Psych Rock</p>
                             <p class="artist-card-schedule">Sun 15:00 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-43&from=artists#perf-43" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-44" data-name="Amber Boulevard" data-genre="Dream Indie" data-origin="DE" data-day="Sunday, July 12" data-time="16:05 – 16:55" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-44" data-id="perf-44" data-name="Amber Boulevard" data-genre="Dream Indie" data-origin="DE" data-day="Sunday, July 12" data-time="16:05 – 16:55" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Amber Boulevard (DE) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-44&from=artists#perf-44" style="color: inherit; text-decoration: underline;">[ Amber Boulevard (DE) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Dream Indie</p>
                             <p class="artist-card-schedule">Sun 16:05 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-44&from=artists#perf-44" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-45" data-name="Urban Echo" data-genre="Art Pop" data-origin="CZ" data-day="Sunday, July 12" data-time="17:15 – 18:10" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-45" data-id="perf-45" data-name="Urban Echo" data-genre="Art Pop" data-origin="CZ" data-day="Sunday, July 12" data-time="17:15 – 18:10" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Urban Echo (CZ) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-45&from=artists#perf-45" style="color: inherit; text-decoration: underline;">[ Urban Echo (CZ) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Art Pop</p>
                             <p class="artist-card-schedule">Sun 17:15 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-45&from=artists#perf-45" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
                     <!-- ================= LINE 16 (Artists 46 - 48) ================= -->
-                    <article class="artist-card" data-id="perf-46" data-name="Luminous Band" data-genre="Indie Funk" data-origin="IT" data-day="Sunday, July 12" data-time="18:30 – 19:30" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-46" data-id="perf-46" data-name="Luminous Band" data-genre="Indie Funk" data-origin="IT" data-day="Sunday, July 12" data-time="18:30 – 19:30" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Luminous Band (IT) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-46&from=artists#perf-46" style="color: inherit; text-decoration: underline;">[ Luminous Band (IT) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Indie Funk</p>
                             <p class="artist-card-schedule">Sun 18:30 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-46&from=artists#perf-46" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-47" data-name="The Velvet Trails" data-genre="Space Rock" data-origin="SE" data-day="Sunday, July 12" data-time="19:50 – 20:50" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-47" data-id="perf-47" data-name="The Velvet Trails" data-genre="Space Rock" data-origin="SE" data-day="Sunday, July 12" data-time="19:50 – 20:50" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ The Velvet Trails (SE) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-47&from=artists#perf-47" style="color: inherit; text-decoration: underline;">[ The Velvet Trails (SE) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Space Rock</p>
                             <p class="artist-card-schedule">Sun 19:50 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-47&from=artists#perf-47" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-48" data-name="Prismatics" data-genre="Dance Punk" data-origin="UK" data-day="Sunday, July 12" data-time="21:10 – 22:15" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-48" data-id="perf-48" data-name="Prismatics" data-genre="Dance Punk" data-origin="UK" data-day="Sunday, July 12" data-time="21:10 – 22:15" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Prismatics (UK) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-48&from=artists#perf-48" style="color: inherit; text-decoration: underline;">[ Prismatics (UK) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Dance Punk</p>
                             <p class="artist-card-schedule">Sun 21:10 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-48&from=artists#perf-48" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
                     <!-- ================= LINE 17 (Artists 49 - 51) ================= -->
-                    <article class="artist-card" data-id="perf-49" data-name="Starlight Runners" data-genre="Electropop Headliner" data-origin="DK" data-day="Sunday, July 12" data-time="22:35 – 23:55" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-49" data-id="perf-49" data-name="Starlight Runners" data-genre="Electropop Headliner" data-origin="DK" data-day="Sunday, July 12" data-time="22:35 – 23:55" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Starlight Runners (DK) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-49&from=artists#perf-49" style="color: inherit; text-decoration: underline;">[ Starlight Runners (DK) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Electropop Headliner</p>
                             <p class="artist-card-schedule">Sun 22:35 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-49&from=artists#perf-49" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-50" data-name="Final Cascade" data-genre="Orchestral Electronic" data-origin="CZ" data-day="Sunday, July 12" data-time="00:10 – 01:15" data-stage="Solar Horizon Stage">
+                    <article class="artist-card" id="perf-50" data-id="perf-50" data-name="Final Cascade" data-genre="Orchestral Electronic" data-origin="CZ" data-day="Sunday, July 12" data-time="00:10 – 01:15" data-stage="Solar Horizon Stage">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Final Cascade (CZ) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-50&from=artists#perf-50" style="color: inherit; text-decoration: underline;">[ Final Cascade (CZ) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Orchestral Electronic</p>
                             <p class="artist-card-schedule">Sun 00:10 @ Solar Horizon Stage</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-50&from=artists#perf-50" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-51" data-name="Static Drift" data-genre="Field Recording / Ambient" data-origin="CZ" data-day="Sunday, July 12" data-time="14:00 – 14:50" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-51" data-id="perf-51" data-name="Static Drift" data-genre="Field Recording / Ambient" data-origin="CZ" data-day="Sunday, July 12" data-time="14:00 – 14:50" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Static Drift (CZ) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-51&from=artists#perf-51" style="color: inherit; text-decoration: underline;">[ Static Drift (CZ) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Field Recording / Ambient</p>
                             <p class="artist-card-schedule">Sun 14:00 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-51&from=artists#perf-51" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
                     <!-- ================= LINE 18 (Artists 52 - 54) ================= -->
-                    <article class="artist-card" data-id="perf-52" data-name="Resonance Space" data-genre="Deep Ambient" data-origin="AT" data-day="Sunday, July 12" data-time="15:05 – 16:00" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-52" data-id="perf-52" data-name="Resonance Space" data-genre="Deep Ambient" data-origin="AT" data-day="Sunday, July 12" data-time="15:05 – 16:00" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Resonance Space (AT) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-52&from=artists#perf-52" style="color: inherit; text-decoration: underline;">[ Resonance Space (AT) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Deep Ambient</p>
                             <p class="artist-card-schedule">Sun 15:05 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-52&from=artists#perf-52" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-53" data-name="Tape Loop Experiment" data-genre="Tape Ambient" data-origin="PL" data-day="Sunday, July 12" data-time="16:15 – 17:15" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-53" data-id="perf-53" data-name="Tape Loop Experiment" data-genre="Tape Ambient" data-origin="PL" data-day="Sunday, July 12" data-time="16:15 – 17:15" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Tape Loop Experiment (PL) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-53&from=artists#perf-53" style="color: inherit; text-decoration: underline;">[ Tape Loop Experiment (PL) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Tape Ambient</p>
                             <p class="artist-card-schedule">Sun 16:15 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-53&from=artists#perf-53" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-54" data-name="Minimal Horizon" data-genre="Micro Techno" data-origin="DE" data-day="Sunday, July 12" data-time="17:30 – 18:30" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-54" data-id="perf-54" data-name="Minimal Horizon" data-genre="Micro Techno" data-origin="DE" data-day="Sunday, July 12" data-time="17:30 – 18:30" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Minimal Horizon (DE) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-54&from=artists#perf-54" style="color: inherit; text-decoration: underline;">[ Minimal Horizon (DE) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Micro Techno</p>
                             <p class="artist-card-schedule">Sun 17:30 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-54&from=artists#perf-54" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
                     <!-- ================= LINE 19 (Artists 55 - 57) ================= -->
-                    <article class="artist-card" data-id="perf-55" data-name="Dark Matter" data-genre="Deep Progressive" data-origin="CZ" data-day="Sunday, July 12" data-time="18:45 – 19:45" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-55" data-id="perf-55" data-name="Dark Matter" data-genre="Deep Progressive" data-origin="CZ" data-day="Sunday, July 12" data-time="18:45 – 19:45" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Dark Matter (CZ) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-55&from=artists#perf-55" style="color: inherit; text-decoration: underline;">[ Dark Matter (CZ) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Deep Progressive</p>
                             <p class="artist-card-schedule">Sun 18:45 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-55&from=artists#perf-55" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-56" data-name="Hyperspace DJ" data-genre="Psy Techno" data-origin="IL" data-day="Sunday, July 12" data-time="20:00 – 21:15" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-56" data-id="perf-56" data-name="Hyperspace DJ" data-genre="Psy Techno" data-origin="IL" data-day="Sunday, July 12" data-time="20:00 – 21:15" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Hyperspace DJ (IL) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-56&from=artists#perf-56" style="color: inherit; text-decoration: underline;">[ Hyperspace DJ (IL) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Psy Techno</p>
                             <p class="artist-card-schedule">Sun 20:00 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-56&from=artists#perf-56" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-57" data-name="Galactic Orbit" data-genre="Melodic Techno" data-origin="IT" data-day="Sunday, July 12" data-time="21:30 – 22:45" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-57" data-id="perf-57" data-name="Galactic Orbit" data-genre="Melodic Techno" data-origin="IT" data-day="Sunday, July 12" data-time="21:30 – 22:45" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Galactic Orbit (IT) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-57&from=artists#perf-57" style="color: inherit; text-decoration: underline;">[ Galactic Orbit (IT) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Melodic Techno</p>
                             <p class="artist-card-schedule">Sun 21:30 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-57&from=artists#perf-57" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
                     <!-- ================= LINE 20 (Artists 58 - 60) ================= -->
-                    <article class="artist-card" data-id="perf-58" data-name="Bass Distortion" data-genre="Leftfield Bass" data-origin="UK" data-day="Sunday, July 12" data-time="23:00 – 00:15" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-58" data-id="perf-58" data-name="Bass Distortion" data-genre="Leftfield Bass" data-origin="UK" data-day="Sunday, July 12" data-time="23:00 – 00:15" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Bass Distortion (UK) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-58&from=artists#perf-58" style="color: inherit; text-decoration: underline;">[ Bass Distortion (UK) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Leftfield Bass</p>
                             <p class="artist-card-schedule">Sun 23:00 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-58&from=artists#perf-58" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-59" data-name="Cosmic Pulse" data-genre="Uplifting Trance Techno" data-origin="NL" data-day="Sunday, July 12" data-time="00:30 – 01:45" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-59" data-id="perf-59" data-name="Cosmic Pulse" data-genre="Uplifting Trance Techno" data-origin="NL" data-day="Sunday, July 12" data-time="00:30 – 01:45" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Cosmic Pulse (NL) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-59&from=artists#perf-59" style="color: inherit; text-decoration: underline;">[ Cosmic Pulse (NL) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Uplifting Trance Techno</p>
                             <p class="artist-card-schedule">Sun 00:30 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-59&from=artists#perf-59" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>
 
-                    <article class="artist-card" data-id="perf-60" data-name="Equinox Farewell" data-genre="Down-tempo Ambient" data-origin="CZ" data-day="Sunday, July 12" data-time="02:00 – 03:00" data-stage="Lunar Forest Dome">
+                    <article class="artist-card" id="perf-60" data-id="perf-60" data-name="Equinox Farewell" data-genre="Down-tempo Ambient" data-origin="CZ" data-day="Sunday, July 12" data-time="02:00 – 03:00" data-stage="Lunar Forest Dome">
                         <div>
                             <div class="artist-card-header">
-                                <h4 class="artist-card-title">[ Equinox Farewell (CZ) ]</h4>
+                                <h4 class="artist-card-title"><a href="artist-detail.html?id=perf-60&from=artists#perf-60" style="color: inherit; text-decoration: underline;">[ Equinox Farewell (CZ) ]</a></h4>
                             </div>
                             <p class="artist-card-genre">Genre: Down-tempo Ambient</p>
                             <p class="artist-card-schedule">Sun 02:00 @ Lunar Forest Dome</p>
                         </div>
                         <div class="artist-card-actions">
-                            <button class="btn-box view-detail-btn">[ View Detail &rarr; ]</button>
+                            <a href="artist-detail.html?id=perf-60&from=artists#perf-60" class="btn-box view-detail-btn">[ View Detail &rarr; ]</a>
                             <button class="btn-box artist-fav-btn">[ ☆ Bookmark ]</button>
                         </div>
                     </article>

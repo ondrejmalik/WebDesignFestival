@@ -6,6 +6,7 @@
     <meta name="description" content="Personal Schedule & Itinerary Planner – Festival of Darkness 2">
     <title>Festival of Darkness 2 | My Schedule</title>
     <link rel="stylesheet" href="css/wireframe.css">
+    <script src="js/theme.js"></script>
     <script src="js/lang.js" defer></script>
     <script src="components/nav.js" defer></script>
     <script src="components/footer.js" defer></script>
@@ -30,6 +31,10 @@
                     </a>
                 </div>
                 <div class="wf-top-bar-right">
+                    <button id="theme-switch-btn" class="btn-box theme-switch-btn" type="button" aria-label="Switch to Dark Mode" title="Switch to Dark Mode">
+                        <span class="theme-icon" id="theme-icon" aria-hidden="true">🌙</span>
+                        <span class="theme-label" id="theme-label">Dark</span>
+                    </button>
                     <button id="menu-drawer-open-btn" class="btn-box wf-menu-btn" type="button" aria-expanded="false" aria-controls="alza-menu-drawer" aria-label="Open Navigation Menu">
                         [ ☰ Menu ]
                     </button>
@@ -57,6 +62,12 @@
                 </nav>
                 <hr>
                 <div class="drawer-footer">
+                    <div class="theme-switch-box" style="margin-bottom: 8px; width: 100%;">
+                        <button id="theme-switch-btn-drawer" class="btn-box theme-switch-btn" type="button" aria-label="Switch to Dark Mode" title="Switch to Dark Mode" style="width: 100%; justify-content: center;">
+                            <span class="theme-icon" id="theme-icon-drawer" aria-hidden="true">🌙</span>
+                            <span class="theme-label" id="theme-label-drawer">Dark</span>
+                        </button>
+                    </div>
                     <div class="lang-switch-box" style="margin: 0; width: 100%;">
                         <button id="lang-switch-btn-drawer" class="btn-box lang-switch-btn" type="button" aria-label="Language" title="Switch language to Czech" style="width: 100%; justify-content: center;">
                             <span class="flag-icon" id="lang-flag-drawer" aria-hidden="true"><img src="img/1f1ec-1f1e7.svg" alt="GB" class="flag-img" width="20" height="20"></span>
@@ -92,6 +103,13 @@
         </div>
 
         <main>
+            <!-- Breadcrumbs Navigation -->
+            <nav class="wf-breadcrumbs" aria-label="Breadcrumb">
+                <a href="index.html" data-i18n="nav_home">🏠 [ Home ]</a>
+                <span class="sep">&gt;</span>
+                <span class="current" data-i18n="nav_myschedule">★ [ My Schedule ]</span>
+            </nav>
+
             <!-- Title & Feature Overview -->
             <section class="wf-box">
                 <h2 data-i18n="schedule_head">[ ★ My Personal Schedule ]</h2>
@@ -114,17 +132,23 @@
                     <h3 data-i18n="schedule_fri_head">[ Your Timetable: Friday, July 10, 2026 ]</h3>
                     <hr>
                     <div class="row">
-                        <article class="col wf-box-sub">
-                            <h4>[ 14:00 – 14:45 | Echoes of Light ]</h4>
-                            <p><strong data-i18n="schedule_stage_label">Stage:</strong> Solar Horizon Stage</p>
+                        <article class="col wf-box-sub" id="perf-01">
+                            <h4>[ 14:00 – 14:45 | <a href="artist-detail.html?id=perf-01&from=myschedule#perf-01" style="color: inherit; text-decoration: underline;">Echoes of Light</a> ]</h4>
+                            <p><strong data-i18n="schedule_stage_label">Stage:</strong> <a href="stages.html#stage-solar" style="color: inherit; text-decoration: underline; font-weight: bold;">Solar Horizon Stage &rarr;</a></p>
                             <p style="color: green; font-size: 0.85rem;" data-i18n="schedule_status_clean">[ Status: ✓ No time conflict ]</p>
-                            <button class="btn-box" style="margin-top: 6px;" data-i18n="schedule_remove_btn_text">[ Remove ]</button>
+                            <div style="display: flex; gap: 6px; margin-top: 8px;">
+                                <a href="artist-detail.html?id=perf-01&from=myschedule#perf-01" class="btn-box" style="flex: 1; text-align: center; font-size: 0.82rem; font-weight: bold; text-decoration: none; padding: 6px 8px;">[ ℹ️ Detail &rarr; ]</a>
+                                <button class="btn-box remove-btn" style="flex: 1; font-size: 0.82rem; padding: 6px 8px;" data-i18n="schedule_remove_btn_text">[ Remove ]</button>
+                            </div>
                         </article>
-                        <article class="col wf-box-sub">
-                            <h4>[ 00:05 – 01:25 | Analog Void ]</h4>
-                            <p><strong data-i18n="schedule_stage_label">Stage:</strong> Lunar Forest Dome</p>
+                        <article class="col wf-box-sub" id="perf-17">
+                            <h4>[ 00:05 – 01:25 | <a href="artist-detail.html?id=perf-17&from=myschedule#perf-17" style="color: inherit; text-decoration: underline;">Analog Void</a> ]</h4>
+                            <p><strong data-i18n="schedule_stage_label">Stage:</strong> <a href="stages.html#stage-lunar" style="color: inherit; text-decoration: underline; font-weight: bold;">Lunar Forest Dome &rarr;</a></p>
                             <p style="color: green; font-size: 0.85rem;" data-i18n="schedule_status_clean">[ Status: ✓ No time conflict ]</p>
-                            <button class="btn-box" style="margin-top: 6px;" data-i18n="schedule_remove_btn_text">[ Remove ]</button>
+                            <div style="display: flex; gap: 6px; margin-top: 8px;">
+                                <a href="artist-detail.html?id=perf-17&from=myschedule#perf-17" class="btn-box" style="flex: 1; text-align: center; font-size: 0.82rem; font-weight: bold; text-decoration: none; padding: 6px 8px;">[ ℹ️ Detail &rarr; ]</a>
+                                <button class="btn-box remove-btn" style="flex: 1; font-size: 0.82rem; padding: 6px 8px;" data-i18n="schedule_remove_btn_text">[ Remove ]</button>
+                            </div>
                         </article>
                     </div>
                 </section>

@@ -140,14 +140,11 @@ function updateHighlightState() {
 
     const starFavTitle = isCs ? 'Odebrat z mého programu' : 'Remove from My Schedule';
     const starAddTitle = isCs ? 'Přidat do mého programu' : 'Add to My Schedule';
-    const addBtnFavText = isCs ? '[ ★ V mém programu ]' : '[ ★ In My Schedule ]';
-    const addBtnAddText = isCs ? '[ + Přidat do mého programu ]' : '[ + Add to My Schedule ]';
 
     const cells = document.querySelectorAll('.sch-cell[data-id]');
     cells.forEach(cell => {
         const id = cell.getAttribute('data-id');
         const starBtn = cell.querySelector('.sch-fav-btn');
-        const addBtn = cell.querySelector('.sch-add-btn');
 
         if (favIds.has(id)) {
             cell.classList.add('is-favourite');
@@ -155,24 +152,46 @@ function updateHighlightState() {
                 starBtn.textContent = '★';
                 starBtn.title = starFavTitle;
             }
-            if (addBtn) {
-                addBtn.textContent = addBtnFavText;
-                addBtn.style.background = '#28a745';
-                addBtn.style.color = '#fff';
-            }
         } else {
             cell.classList.remove('is-favourite');
             if (starBtn) {
                 starBtn.textContent = '☆';
                 starBtn.title = starAddTitle;
             }
-            if (addBtn) {
-                addBtn.textContent = addBtnAddText;
-                addBtn.style.background = '#eee';
-                addBtn.style.color = '#000';
-            }
         }
     });
+}
+
+// Scroll to exact spot from return navigation hash
+function scrollToSpotHash() {
+    const hash = window.location.hash.replace('#', '');
+    if (!hash) return;
+    const targetCell = document.getElementById(hash) || document.querySelector(`.sch-cell[data-id="${hash}"]`);
+    if (!targetCell) return;
+
+    // Check which day section this cell belongs to and activate that day filter
+    const daySection = targetCell.closest('.sch-day-section');
+    if (daySection) {
+        const dayKey = daySection.getAttribute('data-day');
+        const dayBtn = document.querySelector(`.filter-btn[data-filter-day="${dayKey}"]`);
+        if (dayBtn && !dayBtn.classList.contains('active')) {
+            dayBtn.click();
+        }
+        daySection.style.display = '';
+    }
+
+    // Ensure row and cell are visible even if other filters were applied
+    const row = targetCell.closest('tr');
+    if (row && row.style.display === 'none') {
+        row.style.display = '';
+    }
+    targetCell.style.display = '';
+
+    setTimeout(() => {
+        targetCell.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        targetCell.classList.add('spot-highlight');
+        setTimeout(() => targetCell.classList.remove('spot-highlight'), 2500);
+    }, 150);
 }
 
 // Update the stats counter bar on program.html
@@ -191,53 +210,34 @@ function setupProgramTimetable() {
 
     const isCs = getActiveLanguage() === 'cs';
 
-    // Enhance each event cell with explicit action buttons and expandable band details
+    // Ensure each event cell has the detail button and star button at the end
     const eventCells = document.querySelectorAll('.sch-cell.sch-event');
     eventCells.forEach(cell => {
         const id = cell.getAttribute('data-id');
         const artist = cell.getAttribute('data-artist') || '';
-        const stage = cell.getAttribute('data-stage') || '';
-        const time = cell.getAttribute('data-time') || '';
-        const genre = cell.getAttribute('data-genre') || '';
-        const bio = getArtistBio(id);
 
         const card = cell.querySelector('.sch-card');
         if (card && !card.querySelector('.sch-actions')) {
-            // Create action bar
             const actionsDiv = document.createElement('div');
             actionsDiv.className = 'sch-actions';
-            actionsDiv.style.cssText = 'margin-top: 6px; display: flex; flex-wrap: wrap; gap: 4px;';
             actionsDiv.innerHTML = `
-                <button type="button" class="btn-box sch-add-btn" data-id="${id}" title="${isCs ? 'Přidat do mého programu' : 'Add to My Schedule'}" style="font-size: 0.76rem; padding: 3px 8px; font-weight: bold;">
-                    ${isCs ? '[ + Přidat do mého programu ]' : '[ + Add to My Schedule ]'}
-                </button>
-                <button type="button" class="btn-box sch-detail-btn" data-id="${id}" title="${isCs ? 'Zobrazit detaily kapely' : 'Show Band Details'}" style="font-size: 0.74rem; padding: 3px 7px;">
-                    ${isCs ? '[ ℹ️ Detaily kapely ]' : '[ ℹ️ Band Details ]'}
-                </button>
+                <a href="artist-detail.html?id=${id}&from=program#${id}" class="btn-box sch-detail-btn" title="${isCs ? 'Detail interpreta' : 'Artist Detail'}">
+                    [ ℹ️ Detail &rarr; ]
+                </a>
+                <button type="button" class="sch-fav-btn" title="${isCs ? 'Přidat do mého programu' : 'Add to My Schedule'}">☆</button>
             `;
             card.appendChild(actionsDiv);
-
-            // Create expandable band details drawer
-            const detailsDiv = document.createElement('div');
-            detailsDiv.id = `detail-${id}`;
-            detailsDiv.className = 'sch-band-details';
-            detailsDiv.style.cssText = 'display: none; margin-top: 6px; padding: 8px; border: 1px solid #777; background: #fff; font-size: 0.78rem; text-align: left;';
-            detailsDiv.innerHTML = `
-                <p><strong>${isCs ? 'Detaily kapely & bio:' : 'Band Details & Bio:'}</strong> <span class="bio-text">${bio}</span></p>
-                <p style="margin-top: 4px; color: #444;">
-                    <strong>${isCs ? 'Scéna:' : 'Stage:'}</strong> ${stage} | <strong>${isCs ? 'Čas:' : 'Time:'}</strong> ${time} | <strong>${isCs ? 'Žánr:' : 'Genre:'}</strong> ${genre}
-                </p>
-                <div style="margin-top: 6px; display: flex; gap: 8px;">
-                    <a href="artists.html#${id}" style="color: #000; text-decoration: underline; font-weight: bold;">${isCs ? '[ Kompletní profil v sekci Účinkující → ]' : '[ Full profile in Artists section → ]'}</a>
-                </div>
-            `;
-            card.appendChild(detailsDiv);
         }
     });
 
     // Delegate clicks across ALL timetable tables (Day 1, Day 2, Day 3)
     tables.forEach(table => {
         table.addEventListener('click', (e) => {
+            // 1. If clicking a link inside (artist link or detail button): allow standard navigation
+            if (e.target.closest('a')) {
+                return;
+            }
+
             const cell = e.target.closest('.sch-cell.sch-event');
             if (!cell) return;
 
@@ -248,30 +248,7 @@ function setupProgramTimetable() {
             const time = cell.getAttribute('data-time');
             const genre = cell.getAttribute('data-genre');
 
-            // 1. If clicking detail button: toggle band details
-            if (e.target.closest('.sch-detail-btn')) {
-                e.stopPropagation();
-                const detailEl = cell.querySelector(`#detail-${id}`);
-                if (detailEl) {
-                    const isHidden = detailEl.style.display === 'none';
-                    detailEl.style.display = isHidden ? 'block' : 'none';
-                    const btn = cell.querySelector('.sch-detail-btn');
-                    if (btn) {
-                        const curCs = getActiveLanguage() === 'cs';
-                        btn.textContent = isHidden 
-                            ? (curCs ? '[ ✖ Skrýt detaily ]' : '[ ✖ Hide Details ]') 
-                            : (curCs ? '[ ℹ️ Detaily kapely ]' : '[ ℹ️ Band Details ]');
-                    }
-                }
-                return;
-            }
-
-            // 2. If clicking a link inside: let the link follow
-            if (e.target.closest('a')) {
-                return;
-            }
-
-            // 3. If clicking Add/Remove button or Star button or anywhere on card: toggle favourite
+            // 2. If clicking star button or anywhere on card: toggle favourite
             e.preventDefault();
             toggleFavorite({
                 id: id,
@@ -284,8 +261,12 @@ function setupProgramTimetable() {
         });
     });
 
-    // Filtering controls
+    // Filtering controls (must be initialized before scrollToSpotHash)
     setupFilters();
+
+    // Handle return navigation scroll
+    scrollToSpotHash();
+    window.addEventListener('hashchange', scrollToSpotHash);
 }
 
 // Update table headers, day titles, and empty slot descriptions when language switches
@@ -780,26 +761,43 @@ function renderMySchedule() {
                         </div>
                       `;
 
+                const removeBtnClass = hasCollision ? 'btn-box remove-btn has-collision' : 'btn-box remove-btn';
                 const removeBtnStyle = hasCollision
-                    ? 'background: #f8d7da; border: 1px solid #b71c1c; color: #721c24; font-weight: bold;'
-                    : 'background: #eee; border: 1px solid #333; color: #111;';
+                    ? 'border: 1px solid #b71c1c; font-weight: bold;'
+                    : 'border: 1px solid #333;';
 
                 const removeBtnText = hasCollision 
                     ? (isCs ? '[ 🗑️ Odebrat vystoupení ]' : '[ 🗑️ Remove performance ]')
                     : (isCs ? '[ 🗑️ Odebrat z programu ]' : '[ 🗑️ Remove from schedule ]');
 
                 const bio = getArtistBio(item.id);
+                const stageHash = (item.stage && item.stage.toLowerCase().includes('solar')) ? 'stage-solar' : 'stage-lunar';
+                const stageDisplayName = isCs
+                    ? (stageHash === 'stage-solar' ? '☀️ Solar Horizon Stage' : '🌙 Lunar Forest Dome')
+                    : (stageHash === 'stage-solar' ? '☀️ Solar Horizon Stage' : '🌙 Lunar Forest Dome');
 
                 html += `
-                    <article class="col wf-box-sub" style="${borderStyle}; min-width: 260px;">
-                        <h4 style="font-size: 1.05rem; margin-bottom: 4px;">[ ${item.time} | ${item.artist} ]</h4>
-                        <p><strong>${isCs ? 'Scéna:' : 'Stage:'}</strong> ${item.stage}</p>
+                    <article class="col wf-box-sub" id="${item.id}" style="${borderStyle}; min-width: 260px;">
+                        <h4 style="font-size: 1.05rem; margin-bottom: 6px;">
+                            [ ${item.time} | <a href="artist-detail.html?id=${item.id}&from=myschedule#${item.id}" style="color: inherit; text-decoration: underline;" title="${isCs ? 'Detail interpreta' : 'Artist Detail'}">${item.artist}</a> ]
+                        </h4>
+                        <p>
+                            <strong>${isCs ? 'Scéna:' : 'Stage:'}</strong> 
+                            <a href="stages.html#${stageHash}" class="stage-link" style="color: #000; font-weight: bold; text-decoration: underline;" title="${isCs ? 'Zobrazit informace o scéně' : 'View Stage Details'}">
+                                ${stageDisplayName} &rarr;
+                            </a>
+                        </p>
                         <p><strong>${isCs ? 'Žánr:' : 'Genre:'}</strong> ${item.genre || (isCs ? 'Elektronická hudba' : 'Electronic')}</p>
                         ${bio ? `<p style="font-size: 0.8rem; color: #555; margin-top: 4px;"><em>${bio}</em></p>` : ''}
                         ${statusBadge}
-                        <button class="btn-box remove-btn" data-id="${item.id}" style="margin-top: 10px; width: 100%; ${removeBtnStyle}">
-                            ${removeBtnText}
-                        </button>
+                        <div style="display: flex; gap: 6px; margin-top: 10px;">
+                            <a href="artist-detail.html?id=${item.id}&from=myschedule#${item.id}" class="btn-box" style="flex: 1; text-align: center; font-size: 0.82rem; font-weight: bold; text-decoration: none; padding: 6px 8px;">
+                                ${isCs ? '[ ℹ️ Detail interpreta → ]' : '[ ℹ️ Artist Detail → ]'}
+                            </a>
+                            <button class="${removeBtnClass}" data-id="${item.id}" style="flex: 1; text-align: center; font-size: 0.82rem; padding: 6px 8px; ${removeBtnStyle}">
+                                ${removeBtnText}
+                            </button>
+                        </div>
                     </article>
                 `;
             });
@@ -820,6 +818,24 @@ function renderMySchedule() {
             renderMySchedule();
         });
     });
+
+    // Check return navigation hash on my-schedule
+    scrollToPlanSpot();
+}
+
+// Scroll to exact spot on my-schedule planner
+function scrollToPlanSpot() {
+    const planHash = window.location.hash.replace('#', '');
+    if (planHash) {
+        const targetPlan = document.getElementById(planHash);
+        if (targetPlan) {
+            setTimeout(() => {
+                targetPlan.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                targetPlan.classList.add('spot-highlight');
+                setTimeout(() => targetPlan.classList.remove('spot-highlight'), 2500);
+            }, 150);
+        }
+    }
 }
 
 // Initialise upon DOM load
@@ -852,6 +868,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // If on my schedule page
     if (document.getElementById('my-schedule-container')) {
         renderMySchedule();
+        window.addEventListener('hashchange', scrollToPlanSpot);
     }
 });
 
