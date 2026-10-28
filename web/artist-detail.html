@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Artist Profile & Performance Details – Festival of Darkness 2">
+    <title>Festival of Darkness 2 | Artist Detail</title>
+    <link rel="stylesheet" href="css/wireframe.css">
+    <script src="js/theme.js"></script>
+    <script src="js/lang.js" defer></script>
+    <script src="components/nav.js" defer></script>
+    <script src="components/footer.js" defer></script>
+    <script src="js/artist-detail.js" defer></script>
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MusicGroup",
+      "name": "Echoes of Light",
+      "genre": "Post-Rock / Ambient",
+      "homeLocation": {
+        "@type": "Place",
+        "name": "Prague, Czech Republic"
+      }
+    }
+    </script>
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link" data-i18n="skip_to_content">Skip to main content</a>
+
+    <div class="wf-container">
+
+        <!-- HEADER & NAVIGATION (components/nav.js / nav.html) -->
+        <div id="nav-placeholder">
+            <header class="wf-top-app-bar" role="banner">
+                <div class="wf-top-bar-left">
+                    <button id="lang-switch-btn" class="btn-box lang-switch-btn" type="button" aria-label="Language" title="Switch language to Czech">
+                        <span class="flag-icon" id="lang-flag" aria-hidden="true"><img src="img/1f1ec-1f1e7.svg" alt="GB" class="flag-img" width="20" height="20"></span>
+                        <span class="lang-label" id="lang-label">Language</span>
+                    </button>
+                </div>
+                <div class="wf-top-bar-center">
+                    <a href="index.html" class="festival-brand" aria-label="Festival of Darkness 2 Home">
+                        <strong>[ Festival of Darkness 2 ]</strong>
+                    </a>
+                </div>
+                <div class="wf-top-bar-right">
+                    <button id="theme-switch-btn" class="btn-box theme-switch-btn" type="button" aria-label="Switch to Dark Mode" title="Switch to Dark Mode">
+                        <span class="theme-icon" id="theme-icon" aria-hidden="true">🌙</span>
+                        <span class="theme-label" id="theme-label">Dark</span>
+                    </button>
+                    <button id="menu-drawer-open-btn" class="btn-box wf-menu-btn" type="button" aria-expanded="false" aria-controls="alza-menu-drawer" aria-label="Open Navigation Menu">
+                        [ ☰ Menu ]
+                    </button>
+                </div>
+            </header>
+            <hr class="wf-top-bar-divider">
+
+            <!-- Alza Drawer -->
+            <div id="alza-drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
+            <aside id="alza-menu-drawer" class="alza-drawer" aria-label="Site Menu" aria-hidden="true">
+                <div class="drawer-header">
+                    <span class="drawer-title"><strong>[ Festival of Darkness 2 ]</strong></span>
+                    <button id="menu-drawer-close-btn" class="btn-box drawer-close-btn" type="button" aria-label="Close navigation menu">
+                        [ ✕ Close ]
+                    </button>
+                </div>
+                <hr>
+                <nav class="drawer-links" aria-label="Drawer Navigation">
+                    <a href="index.html" data-i18n="nav_home">🏠 [ Home ]</a>
+                    <a href="program.html" data-i18n="nav_program">📅 [ Program ]</a>
+                    <a href="artists.html" data-i18n="nav_artists">🎤 [ Artists ]</a>
+                    <a href="stages.html" data-i18n="nav_stages">⛺ [ Stages ]</a>
+                    <a href="practical-info.html" data-i18n="nav_practical">🚆 [ Practical Info ]</a>
+                    <a href="my-schedule.html" data-i18n="nav_myschedule">★ [ My Schedule ]</a>
+                    <a href="search.html" data-i18n="nav_search">🔍 [ Search ]</a>
+                </nav>
+                <hr>
+                <div class="drawer-footer">
+                    <div class="theme-switch-box">
+                        <button id="theme-switch-btn-drawer" class="btn-box theme-switch-btn btn-block" type="button" aria-label="Switch to Dark Mode" title="Switch to Dark Mode">
+                            <span class="theme-icon" id="theme-icon-drawer" aria-hidden="true">🌙</span>
+                            <span class="theme-label" id="theme-label-drawer">Dark</span>
+                        </button>
+                    </div>
+                    <div class="lang-switch-box">
+                        <button id="lang-switch-btn-drawer" class="btn-box lang-switch-btn btn-block" type="button" aria-label="Language" title="Switch language to Czech">
+                            <span class="flag-icon" id="lang-flag-drawer" aria-hidden="true"><img src="img/1f1ec-1f1e7.svg" alt="GB" class="flag-img" width="20" height="20"></span>
+                            <span class="lang-label" id="lang-label-drawer">Language</span>
+                        </button>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Bottom Dock -->
+            <nav class="bottom-nav-dock" aria-label="Mobile Bottom Navigation">
+                <a href="artists.html" class="bottom-dock-item bottom-nav-item" id="dock-item-artists">
+                    <span class="dock-icon">🎤</span>
+                    <span class="dock-label" data-i18n="dock_artists">Artists</span>
+                </a>
+                <a href="stages.html" class="bottom-dock-item bottom-nav-item" id="dock-item-stages">
+                    <span class="dock-icon">⛺</span>
+                    <span class="dock-label" data-i18n="dock_stages">Stages</span>
+                </a>
+                <a href="index.html" class="bottom-dock-item bottom-nav-item bottom-dock-home" id="dock-item-home">
+                    <span class="dock-icon">🏠</span>
+                    <span class="dock-label" data-i18n="dock_home">HOME</span>
+                </a>
+                <a href="program.html" class="bottom-dock-item bottom-nav-item" id="dock-item-timetable">
+                    <span class="dock-icon">📅</span>
+                    <span class="dock-label" data-i18n="dock_timetable">Timetable</span>
+                </a>
+                <a href="my-schedule.html" class="bottom-dock-item bottom-nav-item" id="dock-item-myplan">
+                    <span class="dock-icon">★</span>
+                    <span class="dock-label"><span data-i18n="dock_myplan">My Plan</span> <span class="nav-badge-count is-hidden">0</span></span>
+                </a>
+            </nav>
+        </div>
+
+        <main id="main-content">
+            <h1 class="wf-page-title sr-only">[ Artist Profile ]</h1>
+
+            <!-- Breadcrumbs Navigation -->
+            <nav class="wf-breadcrumbs" aria-label="Breadcrumb" id="detail-breadcrumbs">
+                <a href="index.html" data-i18n="nav_home">🏠 [ Home ]</a>
+                <span class="sep">&gt;</span>
+                <a href="program.html" id="breadcrumb-origin-link" data-i18n="nav_program">📅 [ Program ]</a>
+                <span class="sep">&gt;</span>
+                <span class="current" id="breadcrumb-artist-name">[ Artist Detail ]</span>
+            </nav>
+
+            <!-- Back navigation toolbar -->
+            <div class="detail-toolbar">
+                <a href="program.html" id="detail-back-btn" class="btn-box">
+                    <span id="detail-back-label">[ &larr; Back to Program ]</span>
+                </a>
+                <div class="detail-toolbar-group">
+                    <a href="program.html" class="btn-box" data-i18n="nav_program">📅 [ Program ]</a>
+                    <a href="artists.html" class="btn-box" data-i18n="nav_artists">🎤 [ Artists ]</a>
+                    <a href="my-schedule.html" class="btn-box" data-i18n="nav_myschedule">★ [ My Schedule ]</a>
+                </div>
+            </div>
+
+            <!-- Artist Profile Dynamic Content -->
+            <div id="artist-profile-content">
+                <section class="wf-box">
+                    <div class="artist-detail-header-wrapper">
+                        <div>
+                            <h2 class="artist-detail-title">[ Echoes of Light (CZ) ]</h2>
+                            <p class="artist-detail-meta-text">
+                                <strong>Genre:</strong> Post-Rock / Ambient |
+                                <strong>Origin:</strong> Czech Republic (CZ)
+                            </p>
+                        </div>
+                        <div>
+                            <button id="profile-star-btn" class="btn-box artist-detail-star-btn" type="button">
+                                ☆ Add to My Schedule
+                            </button>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="artist-detail-meta-grid">
+                        <div>
+                            <strong>📅 Performance Day:</strong><br>
+                            Friday, July 10, 2026 (Day 1)
+                        </div>
+                        <div>
+                            <strong>⏰ Time Slot:</strong><br>
+                            14:00 – 14:45
+                        </div>
+                        <div>
+                            <strong>⛺ Stage:</strong><br>
+                            <a href="stages.html#stage-solar" class="stage-link" title="View Stage Details">
+                                ☀️ Solar Horizon Stage &rarr;
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="artist-detail-columns">
+                        <div class="artist-detail-media-col">
+                            <div class="wf-box-sub audio-preview-container">
+                                <div class="audio-preview-icon">📷</div>
+                                <span class="audio-preview-label">
+                                    [ Official Press Kit Photo:<br><strong>Echoes of Light</strong> ]
+                                </span>
+                            </div>
+
+                            <div class="audio-preview-box">
+                                <h3 class="audio-sample-title">[ ♫ Audio Sample Preview ]</h3>
+                                <p class="audio-sample-subtitle">
+                                    <em>Echoes of Light – Live Session (4:18)</em>
+                                </p>
+                                <div class="audio-player-wireframe">
+                                    <button type="button" id="preview-play-btn" class="btn-box audio-play-btn">
+                                        [ ▶ Play ]
+                                    </button>
+                                    <div class="audio-progress-bar">
+                                        <div class="audio-progress-fill"></div>
+                                    </div>
+                                    <span class="audio-time-label">01:38 / 04:18</span>
+                                </div>
+                                <p class="audio-stream-info">
+                                    Discography streaming: Bandcamp • Spotify • Soundcloud
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="artist-detail-content-col">
+                            <h3 class="artist-detail-section-title">[ Biography &amp; Musical Profile ]</h3>
+                            <p class="artist-detail-bio-text">
+                                Atmospheric post-rock ensemble from Prague combining sweeping cinematic crescendos with ambient soundscapes and textured guitar delays.
+                            </p>
+
+                            <hr>
+
+                            <h4 class="artist-detail-subsection-title">[ Stage Environment &amp; Technical Specs ]</h4>
+                            <p class="artist-detail-stage-text">
+                                Natural open-air amphitheater with a capacity of 4,500 visitors. Central festival stage for live bands with powerful line-array sound and panoramic views of historic Kutna Hora.
+                            </p>
+
+                            <hr>
+
+                            <div class="artist-detail-actions-bar">
+                                <a href="program.html#perf-01" class="btn-box btn-bold">
+                                    [ 📅 View in Timetable &rarr; ]
+                                </a>
+                                <a href="stages.html#stage-solar" class="btn-box">
+                                    [ ⛺ Stage Details &rarr; ]
+                                </a>
+                                <a href="my-schedule.html#perf-01" class="btn-box">
+                                    [ ★ Go to My Schedule &rarr; ]
+                                </a>
+                                <a href="program.html#perf-01" class="btn-box artist-detail-back-btn-alt">
+                                    [ &larr; Back to Program ]
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- FOOTER (components/footer.js / footer.html) -->
+        <div id="footer-placeholder">
+            <hr>
+            <footer class="wf-footer-inline">
+                <strong class="festival-brand">[ © 2026 Festival of Darkness 2 ]</strong>
+                <a href="index.html" data-i18n="nav_home">[ Home ]</a>
+                <a href="program.html" data-i18n="nav_program">[ Program ]</a>
+                <a href="artists.html" data-i18n="nav_artists">[ Artists ]</a>
+                <a href="stages.html" data-i18n="nav_stages">[ Stages ]</a>
+                <a href="practical-info.html" data-i18n="nav_practical">[ Practical Info ]</a>
+                <a href="my-schedule.html" data-i18n="nav_myschedule">[ My Schedule ]</a>
+                <address class="wf-address"><span>[ info@festivalofdarkness.com ]</span></address>
+            </footer>
+        </div>
+
+    </div>
+
+</body>
+</html>

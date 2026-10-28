@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Festival Schedule Timetable – Festival of Darkness 2">
+    <title>Festival of Darkness 2 | Program</title>
+    <link rel="stylesheet" href="css/wireframe.css">
+    <script src="js/theme.js"></script>
+    <script src="js/lang.js" defer></script>
+    <script src="components/nav.js" defer></script>
+    <script src="components/footer.js" defer></script>
+    <script src="js/schedule.js" defer></script>
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link" data-i18n="skip_to_content">Skip to main content</a>
+
+    <div class="wf-container">
+
+        <!-- HEADER & NAVIGATION (components/nav.js / nav.html) -->
+        <div id="nav-placeholder">
+            <header class="wf-top-app-bar" role="banner">
+                <div class="wf-top-bar-left">
+                    <button id="lang-switch-btn" class="btn-box lang-switch-btn" type="button" aria-label="Language" title="Switch language to Czech">
+                        <span class="flag-icon" id="lang-flag" aria-hidden="true"><img src="img/1f1ec-1f1e7.svg" alt="GB" class="flag-img" width="20" height="20"></span>
+                        <span class="lang-label" id="lang-label">Language</span>
+                    </button>
+                </div>
+                <div class="wf-top-bar-center">
+                    <a href="index.html" class="festival-brand" aria-label="Festival of Darkness 2 Home">
+                        <strong>[ Festival of Darkness 2 ]</strong>
+                    </a>
+                </div>
+                <div class="wf-top-bar-right">
+                    <button id="theme-switch-btn" class="btn-box theme-switch-btn" type="button" aria-label="Switch to Dark Mode" title="Switch to Dark Mode">
+                        <span class="theme-icon" id="theme-icon" aria-hidden="true">🌙</span>
+                        <span class="theme-label" id="theme-label">Dark</span>
+                    </button>
+                    <button id="menu-drawer-open-btn" class="btn-box wf-menu-btn" type="button" aria-expanded="false" aria-controls="alza-menu-drawer" aria-label="Open Navigation Menu">
+                        [ ☰ Menu ]
+                    </button>
+                </div>
+            </header>
+            <hr class="wf-top-bar-divider">
+
+            <!-- Alza Drawer -->
+            <div id="alza-drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
+            <aside id="alza-menu-drawer" class="alza-drawer" aria-label="Site Menu" aria-hidden="true">
+                <div class="drawer-header">
+                    <span class="drawer-title"><strong>[ Festival of Darkness 2 ]</strong></span>
+                    <button id="menu-drawer-close-btn" class="btn-box drawer-close-btn" type="button" aria-label="Close navigation menu">
+                        [ ✕ Close ]
+                    </button>
+                </div>
+                <hr>
+                <nav class="drawer-links" aria-label="Drawer Navigation">
+                    <a href="index.html" data-i18n="nav_home">🏠 [ Home ]</a>
+                    <a href="program.html" class="active" data-i18n="nav_program">📅 [ Program ]</a>
+                    <a href="artists.html" data-i18n="nav_artists">🎤 [ Artists ]</a>
+                    <a href="stages.html" data-i18n="nav_stages">⛺ [ Stages ]</a>
+                    <a href="practical-info.html" data-i18n="nav_practical">🚆 [ Practical Info ]</a>
+                    <a href="my-schedule.html" data-i18n="nav_myschedule">★ [ My Schedule ]</a>
+                    <a href="search.html" data-i18n="nav_search">🔍 [ Search ]</a>
+                </nav>
+                <hr>
+                <div class="drawer-footer">
+                    <div class="theme-switch-box">
+                        <button id="theme-switch-btn-drawer" class="btn-box theme-switch-btn btn-block" type="button" aria-label="Switch to Dark Mode" title="Switch to Dark Mode">
+                            <span class="theme-icon" id="theme-icon-drawer" aria-hidden="true">🌙</span>
+                            <span class="theme-label" id="theme-label-drawer">Dark</span>
+                        </button>
+                    </div>
+                    <div class="lang-switch-box">
+                        <button id="lang-switch-btn-drawer" class="btn-box lang-switch-btn btn-block" type="button" aria-label="Language" title="Switch language to Czech">
+                            <span class="flag-icon" id="lang-flag-drawer" aria-hidden="true"><img src="img/1f1ec-1f1e7.svg" alt="GB" class="flag-img" width="20" height="20"></span>
+                            <span class="lang-label" id="lang-label-drawer">Language</span>
+                        </button>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Bottom Dock -->
+            <nav class="bottom-nav-dock" aria-label="Mobile Bottom Navigation">
+                <a href="artists.html" class="bottom-dock-item bottom-nav-item" id="dock-item-artists">
+                    <span class="dock-icon">🎤</span>
+                    <span class="dock-label" data-i18n="dock_artists">Artists</span>
+                </a>
+                <a href="stages.html" class="bottom-dock-item bottom-nav-item" id="dock-item-stages">
+                    <span class="dock-icon">⛺</span>
+                    <span class="dock-label" data-i18n="dock_stages">Stages</span>
+                </a>
+                <a href="index.html" class="bottom-dock-item bottom-nav-item bottom-dock-home" id="dock-item-home">
+                    <span class="dock-icon">🏠</span>
+                    <span class="dock-label" data-i18n="dock_home">HOME</span>
+                </a>
+                <a href="program.html" class="bottom-dock-item bottom-nav-item active" id="dock-item-timetable">
+                    <span class="dock-icon">📅</span>
+                    <span class="dock-label" data-i18n="dock_timetable">Timetable</span>
+                </a>
+                <a href="my-schedule.html" class="bottom-dock-item bottom-nav-item" id="dock-item-myplan">
+                    <span class="dock-icon">★</span>
+                    <span class="dock-label"><span data-i18n="dock_myplan">My Plan</span> <span class="nav-badge-count is-hidden">0</span></span>
+                </a>
+            </nav>
+        </div>
+
+        <main id="main-content">
+            <!-- Breadcrumbs Navigation -->
+            <nav class="wf-breadcrumbs" aria-label="Breadcrumb">
+                <a href="index.html" data-i18n="nav_home">🏠 [ Home ]</a>
+                <span class="sep">&gt;</span>
+                <span class="current" data-i18n="nav_program">📅 [ Program ]</span>
+            </nav>
+            <!-- Page Title & Overview -->
+            <section class="wf-box">
+                <h1 class="wf-page-title" data-i18n="program_head">[ Festival Timetable & Schedule ]</h1>
+                <hr>
+                <p data-i18n="program_meta">[ 3 festival days: July 10–12, 2026 | 2 stages: Solar Horizon Stage & Lunar Forest Dome | 60 performances ]</p>
+            </section>
+
+            <hr>
+
+            <!-- Quick Rain Alert Banner -->
+            <section class="wf-box-sub rain-shelter-quick-banner">
+                <div>
+                    <strong data-i18n="program_rain_title">[ 🌧️ Quick Shelter Access: ]</strong>
+                    <span class="rain-shelter-desc" data-i18n="program_rain_desc">Raining at the festival? Check the timetable in covered Lunar Forest Dome in 1 click:</span>
+                </div>
+                <button type="button" id="quick-lunar-btn" class="btn-box btn-primary btn-bold" data-i18n="program_rain_btn">
+                    [ 🌙 Show Covered Stage (Lunar Forest Dome) &rarr; ]
+                </button>
+            </section>
+
+            <!-- Bookmarked Shows Stats Bar -->
+            <div class="sch-stats-bar">
+                <div>
+                    <strong>[ ★ <span data-i18n="program_fav_count_label">Saved in My Schedule:</span> <span id="fav-count">0</span> ]</strong>
+                    <span id="filter-status-text" class="filter-status-text">[ Showing 60 shows ]</span>
+                </div>
+                <div>
+                    <a href="my-schedule.html" class="btn-box"><strong data-i18n="program_go_schedule">[ View in My Schedule &rarr; ]</strong></a>
+                    <button id="clear-favorites-btn" class="btn-box btn-space-left" data-i18n="program_clear_fav">[ Clear ★ ]</button>
+                </div>
+            </div>
+
+            <!-- Timetable Interactive Filters Toolbar -->
+            <section class="wf-box">
+                <h2 class="filter-heading" data-i18n="program_filter_title">[ Timetable Filters ]</h2>
+                <hr>
+                
+                <div class="sch-toolbar">
+                    <!-- Line 1: Day Filter -->
+                    <div class="filter-row">
+                        <span class="filter-label" data-i18n="program_filter_day">[ Day: ]</span>
+                        <button class="filter-btn active" data-filter-day="all" data-i18n="program_day_all">[ All Days (Jul 10–12) ]</button>
+                        <button class="filter-btn" data-filter-day="day1" data-i18n="program_day1">[ Friday, Jul 10 – Today (Day 1) ]</button>
+                        <button class="filter-btn" data-filter-day="day2" data-i18n="program_day2">[ Saturday, Jul 11 (Day 2) ]</button>
+                        <button class="filter-btn" data-filter-day="day3" data-i18n="program_day3">[ Sunday, Jul 12 (Day 3) ]</button>
+                        <button id="filter-fav-only" class="filter-btn filter-btn-fav filter-btn-auto-left" data-i18n="program_fav_only">[ ★ Bookmarked Only ]</button>
+                    </div>
+
+                    <!-- Line 2: Stage Filter -->
+                    <div class="filter-row">
+                        <span class="filter-label" data-i18n="program_filter_stage">[ Stage: ]</span>
+                        <button class="filter-btn active" data-filter-stage="all" data-i18n="program_stage_all">[ All Stages ]</button>
+                        <button class="filter-btn" data-filter-stage="solar" data-i18n="program_stage_solar">[ ☀️ Solar Horizon Stage (Open-air) ]</button>
+                        <button class="filter-btn" data-filter-stage="lunar" data-i18n="program_stage_lunar">[ 🌙 Lunar Forest Dome (Covered Dome) ]</button>
+                    </div>
+
+                    <!-- Line 3: Genre Filter -->
+                    <div class="filter-row">
+                        <span class="filter-label" data-i18n="program_filter_genre">[ Genre: ]</span>
+                        <button class="filter-btn active" data-filter-genre="all" data-i18n="program_genre_all">[ All Genres ]</button>
+                        <button class="filter-btn" data-filter-genre="techno">[ Techno ]</button>
+                        <button class="filter-btn" data-filter-genre="ambient">[ Ambient ]</button>
+                        <button class="filter-btn" data-filter-genre="indie">[ Indie ]</button>
+                        <button class="filter-btn" data-filter-genre="dream pop">[ Dream Pop ]</button>
+                        <button class="filter-btn" data-filter-genre="synth">[ Synthpop ]</button>
+                        <button class="filter-btn" data-filter-genre="post-rock">[ Post-Rock ]</button>
+                    </div>
+
+                    <!-- Line 4: Search Input -->
+                    <div class="filter-row">
+                        <span class="filter-label" data-i18n="artists_search_label">[ Search: ]</span>
+                        <input type="text" id="artist-search-input" placeholder="Search by artist name or genre..." class="input-box filter-search-input" data-i18n-placeholder="artists_search_placeholder">
+                        <button id="clear-search-btn" class="btn-box" data-i18n="artists_clear_search">[ Clear Search ]</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================================================================= -->
+            <!-- DAY 1: FRIDAY, JULY 10, 2026 -->
+            <!-- ================================================================= -->
+            <section class="sch-day-section" data-day="day1">
+                <div class="sch-day-title sch-day-heading" data-day="day1" data-i18n="program_day1_title">[ Friday, July 10, 2026 – Day 1 ]</div>
+                <div class="table-responsive">
+                    <table class="sch-table">
+                        <thead>
+                            <tr>
+                                <th class="sch-header sch-time-col th-slot" data-i18n="program_col_slot">Time Slot</th>
+                                <th scope="col" class="sch-header col-solar th-solar" data-i18n="program_col_solar">Solar Horizon Stage (Open-air)</th>
+                                <th scope="col" class="sch-header col-lunar th-lunar" data-i18n="program_col_lunar">Lunar Forest Dome (Covered)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- 13:00-14:00 -->
+                            <tr>
+                                <td class="sch-time-col">13:00 – 14:00</td>
+                                <td class="sch-cell sch-empty col-solar" data-empty-type="doors">[ Doors Open & Festival Grounds Preparation ]</td>
+                                <td class="sch-cell sch-empty col-lunar" data-empty-type="dome-sound">[ Dome Open & Ambient Sound Check ]</td>
+                            </tr>
+                            <!-- 14:00-15:00 -->
+                            <tr>
+                                <td class="sch-time-col">14:00 – 15:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-01" data-id="perf-01" data-artist="Echoes of Light" data-stage="Solar Horizon Stage" data-day="Day 1 (Friday, July 10)" data-time="14:00 – 14:45" data-genre="Post-Rock / Ambient">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-01&from=program#perf-01" class="sch-artist-link" title="[ Detail: Echoes of Light ]"><strong class="sch-artist">Echoes of Light</strong></a>
+                                        </div>
+                                        <div class="sch-time">14:00 – 14:45</div>
+                                        <div class="sch-meta">Post-Rock / Ambient (CZ)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-01&from=program#perf-01" class="btn-box sch-detail-btn" title="[ Detail: Echoes of Light ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-empty col-lunar" data-empty-type="stage-change">[ Stage Changeover & Sound Setup ]</td>
+                            </tr>
+                            <!-- 15:00-16:00 -->
+                            <tr>
+                                <td class="sch-time-col">15:00 – 16:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-02" data-id="perf-02" data-artist="Velvet Morning" data-stage="Solar Horizon Stage" data-day="Day 1 (Friday, July 10)" data-time="15:00 – 15:45" data-genre="Dream Pop">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-02&from=program#perf-02" class="sch-artist-link" title="[ Detail: Velvet Morning ]"><strong class="sch-artist">Velvet Morning</strong></a>
+                                        </div>
+                                        <div class="sch-time">15:00 – 15:45</div>
+                                        <div class="sch-meta">Dream Pop (SK)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-02&from=program#perf-02" class="btn-box sch-detail-btn" title="[ Detail: Velvet Morning ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-11" data-id="perf-11" data-artist="Subtle Resonances" data-stage="Lunar Forest Dome" data-day="Day 1 (Friday, July 10)" data-time="15:00 – 15:50" data-genre="Modular Ambient">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-11&from=program#perf-11" class="sch-artist-link" title="[ Detail: Subtle Resonances ]"><strong class="sch-artist">Subtle Resonances</strong></a>
+                                        </div>
+                                        <div class="sch-time">15:00 – 15:50</div>
+                                        <div class="sch-meta">Modular Ambient (CZ)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-11&from=program#perf-11" class="btn-box sch-detail-btn" title="[ Detail: Subtle Resonances ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 16:00-17:00 -->
+                            <tr>
+                                <td class="sch-time-col">16:00 – 17:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-03" data-id="perf-03" data-artist="Nordic Wave" data-stage="Solar Horizon Stage" data-day="Day 1 (Friday, July 10)" data-time="16:00 – 16:50" data-genre="Indie Rock">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-03&from=program#perf-03" class="sch-artist-link" title="[ Detail: Nordic Wave ]"><strong class="sch-artist">Nordic Wave</strong></a>
+                                        </div>
+                                        <div class="sch-time">16:00 – 16:50</div>
+                                        <div class="sch-meta">Indie Rock (SE)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-03&from=program#perf-03" class="btn-box sch-detail-btn" title="[ Detail: Nordic Wave ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-12" data-id="perf-12" data-artist="Binary Fields" data-stage="Lunar Forest Dome" data-day="Day 1 (Friday, July 10)" data-time="16:05 – 17:00" data-genre="IDM / Glitch">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-12&from=program#perf-12" class="sch-artist-link" title="[ Detail: Binary Fields ]"><strong class="sch-artist">Binary Fields</strong></a>
+                                        </div>
+                                        <div class="sch-time">16:05 – 17:00</div>
+                                        <div class="sch-meta">IDM / Glitch (PL)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-12&from=program#perf-12" class="btn-box sch-detail-btn" title="[ Detail: Binary Fields ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 17:00-18:00 -->
+                            <tr>
+                                <td class="sch-time-col">17:00 – 18:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-04" data-id="perf-04" data-artist="The Daylight Project" data-stage="Solar Horizon Stage" data-day="Day 1 (Friday, July 10)" data-time="17:05 – 17:55" data-genre="Indie Pop">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-04&from=program#perf-04" class="sch-artist-link" title="[ Detail: The Daylight Project ]"><strong class="sch-artist">The Daylight Project</strong></a>
+                                        </div>
+                                        <div class="sch-time">17:05 – 17:55</div>
+                                        <div class="sch-meta">Indie Pop (CZ)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-04&from=program#perf-04" class="btn-box sch-detail-btn" title="[ Detail: The Daylight Project ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-13" data-id="perf-13" data-artist="Deep Texture" data-stage="Lunar Forest Dome" data-day="Day 1 (Friday, July 10)" data-time="17:15 – 18:15" data-genre="Dub Techno">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-13&from=program#perf-13" class="sch-artist-link" title="[ Detail: Deep Texture ]"><strong class="sch-artist">Deep Texture</strong></a>
+                                        </div>
+                                        <div class="sch-time">17:15 – 18:15</div>
+                                        <div class="sch-meta">Dub Techno (DE)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-13&from=program#perf-13" class="btn-box sch-detail-btn" title="[ Detail: Deep Texture ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 18:00-19:00 -->
+                            <tr>
+                                <td class="sch-time-col">18:00 – 19:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-05" data-id="perf-05" data-artist="Prague Synth Collective" data-stage="Solar Horizon Stage" data-day="Day 1 (Friday, July 10)" data-time="18:15 – 19:05" data-genre="Synthpop">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-05&from=program#perf-05" class="sch-artist-link" title="[ Detail: Prague Synth Collective ]"><strong class="sch-artist">Prague Synth Collective</strong></a>
+                                        </div>
+                                        <div class="sch-time">18:15 – 19:05</div>
+                                        <div class="sch-meta">Synthpop (CZ)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-05&from=program#perf-05" class="btn-box sch-detail-btn" title="[ Detail: Prague Synth Collective ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-14" data-id="perf-14" data-artist="Oscillator Shift" data-stage="Lunar Forest Dome" data-day="Day 1 (Friday, July 10)" data-time="18:30 – 19:30" data-genre="Minimal Techno">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-14&from=program#perf-14" class="sch-artist-link" title="[ Detail: Oscillator Shift ]"><strong class="sch-artist">Oscillator Shift</strong></a>
+                                        </div>
+                                        <div class="sch-time">18:30 – 19:30</div>
+                                        <div class="sch-meta">Minimal Techno (CZ)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-14&from=program#perf-14" class="btn-box sch-detail-btn" title="[ Detail: Oscillator Shift ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 19:00-20:00 -->
+                            <tr>
+                                <td class="sch-time-col">19:00 – 20:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-06" data-id="perf-06" data-artist="Electric Meadow" data-stage="Solar Horizon Stage" data-day="Day 1 (Friday, July 10)" data-time="19:25 – 20:20" data-genre="Electro-Folk">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-06&from=program#perf-06" class="sch-artist-link" title="[ Detail: Electric Meadow ]"><strong class="sch-artist">Electric Meadow</strong></a>
+                                        </div>
+                                        <div class="sch-time">19:25 – 20:20</div>
+                                        <div class="sch-meta">Electro-Folk (AT)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-06&from=program#perf-06" class="btn-box sch-detail-btn" title="[ Detail: Electric Meadow ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-15" data-id="perf-15" data-artist="Echo Chamber" data-stage="Lunar Forest Dome" data-day="Day 1 (Friday, July 10)" data-time="19:45 – 20:45" data-genre="Dark Ambient">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-15&from=program#perf-15" class="sch-artist-link" title="[ Detail: Echo Chamber ]"><strong class="sch-artist">Echo Chamber</strong></a>
+                                        </div>
+                                        <div class="sch-time">19:45 – 20:45</div>
+                                        <div class="sch-meta">Dark Ambient (SK)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-15&from=program#perf-15" class="btn-box sch-detail-btn" title="[ Detail: Echo Chamber ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 20:00-21:00 -->
+                            <tr>
+                                <td class="sch-time-col">20:00 – 21:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-07" data-id="perf-07" data-artist="Mirage Horizon" data-stage="Solar Horizon Stage" data-day="Day 1 (Friday, July 10)" data-time="20:40 – 21:40" data-genre="Alternative Rock">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-07&from=program#perf-07" class="sch-artist-link" title="[ Detail: Mirage Horizon ]"><strong class="sch-artist">Mirage Horizon</strong></a>
+                                        </div>
+                                        <div class="sch-time">20:40 – 21:40</div>
+                                        <div class="sch-meta">Alternative Rock (UK)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-07&from=program#perf-07" class="btn-box sch-detail-btn" title="[ Detail: Mirage Horizon ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-empty col-lunar">[ Technical Break & Projection Calibration ]</td>
+                            </tr>
+                            <!-- 21:00-22:00 -->
+                            <tr>
+                                <td class="sch-time-col">21:00 – 22:00</td>
+                                <td class="sch-cell sch-empty col-solar">[ Solar Main Stage Sunset Changeover ]</td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-16" data-id="perf-16" data-artist="Krypton DJ" data-stage="Lunar Forest Dome" data-day="Day 1 (Friday, July 10)" data-time="21:00 – 22:15" data-genre="Hypnotic Techno">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-16&from=program#perf-16" class="sch-artist-link" title="[ Detail: Krypton DJ ]"><strong class="sch-artist">Krypton DJ</strong></a>
+                                        </div>
+                                        <div class="sch-time">21:00 – 22:15</div>
+                                        <div class="sch-meta">Hypnotic Techno (HU)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-16&from=program#perf-16" class="btn-box sch-detail-btn" title="[ Detail: Krypton DJ ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 22:00-23:00 -->
+                            <tr>
+                                <td class="sch-time-col">22:00 – 23:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-08" data-id="perf-08" data-artist="Solar Flare" data-stage="Solar Horizon Stage" data-day="Day 1 (Friday, July 10)" data-time="22:00 – 23:10" data-genre="Nu-Disco / Funk">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-08&from=program#perf-08" class="sch-artist-link" title="[ Detail: Solar Flare ]"><strong class="sch-artist">Solar Flare</strong></a>
+                                        </div>
+                                        <div class="sch-time">22:00 – 23:10</div>
+                                        <div class="sch-meta">Nu-Disco / Funk (DE)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-08&from=program#perf-08" class="btn-box sch-detail-btn" title="[ Detail: Solar Flare ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-17" data-id="perf-17" data-artist="Modular Horizon" data-stage="Lunar Forest Dome" data-day="Day 1 (Friday, July 10)" data-time="22:30 – 23:50" data-genre="Live Hardware Techno">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-17&from=program#perf-17" class="sch-artist-link" title="[ Detail: Modular Horizon ]"><strong class="sch-artist">Modular Horizon</strong></a>
+                                        </div>
+                                        <div class="sch-time">22:30 – 23:50</div>
+                                        <div class="sch-meta">Live Hardware Techno (DE)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-17&from=program#perf-17" class="btn-box sch-detail-btn" title="[ Detail: Modular Horizon ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 23:00-00:00 -->
+                            <tr>
+                                <td class="sch-time-col">23:00 – 00:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-09" data-id="perf-09" data-artist="Starlight Odyssey" data-stage="Solar Horizon Stage" data-day="Day 1 (Friday, July 10)" data-time="23:30 – 00:45" data-genre="Electronic Indie">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-09&from=program#perf-09" class="sch-artist-link" title="[ Detail: Starlight Odyssey ]"><strong class="sch-artist">Starlight Odyssey</strong></a>
+                                        </div>
+                                        <div class="sch-time">23:30 – 00:45</div>
+                                        <div class="sch-meta">Electronic Indie (FR)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-09&from=program#perf-09" class="btn-box sch-detail-btn" title="[ Detail: Starlight Odyssey ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-empty col-lunar" data-empty-type="intermission">[ Changeover & Ambient Intermission ]</td>
+                            </tr>
+                            <!-- 00:00-01:00 -->
+                            <tr>
+                                <td class="sch-time-col">00:00 – 01:00</td>
+                                <td class="sch-cell sch-empty col-solar">[ Break & Headliner Setup ]</td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-18" data-id="perf-18" data-artist="Analog Void" data-stage="Lunar Forest Dome" data-day="Day 1 (Friday, July 10)" data-time="00:05 – 01:25" data-genre="Industrial Techno">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-18&from=program#perf-18" class="sch-artist-link" title="[ Detail: Analog Void ]"><strong class="sch-artist">Analog Void</strong></a>
+                                        </div>
+                                        <div class="sch-time">00:05 – 01:25</div>
+                                        <div class="sch-meta">Industrial Techno (NL)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-18&from=program#perf-18" class="btn-box sch-detail-btn" title="[ Detail: Analog Void ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 01:00-02:00 -->
+                            <tr>
+                                <td class="sch-time-col">01:00 – 02:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-10" data-id="perf-10" data-artist="Midnight Pulse" data-stage="Solar Horizon Stage" data-day="Day 1 (Friday, July 10)" data-time="01:00 – 02:00" data-genre="Electro Rock">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-10&from=program#perf-10" class="sch-artist-link" title="[ Detail: Midnight Pulse ]"><strong class="sch-artist">Midnight Pulse</strong></a>
+                                        </div>
+                                        <div class="sch-time">01:00 – 02:00</div>
+                                        <div class="sch-meta">Electro Rock (CZ)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-10&from=program#perf-10" class="btn-box sch-detail-btn" title="[ Detail: Midnight Pulse ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-19" data-id="perf-19" data-artist="Frequency 404" data-stage="Lunar Forest Dome" data-day="Day 1 (Friday, July 10)" data-time="01:40 – 03:00" data-genre="Raw Acid Techno">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-19&from=program#perf-19" class="sch-artist-link" title="[ Detail: Frequency 404 ]"><strong class="sch-artist">Frequency 404</strong></a>
+                                        </div>
+                                        <div class="sch-time">01:40 – 03:00</div>
+                                        <div class="sch-meta">Raw Acid Techno (UK)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-19&from=program#perf-19" class="btn-box sch-detail-btn" title="[ Detail: Frequency 404 ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 02:00-03:00 -->
+                            <tr>
+                                <td class="sch-time-col">02:00 – 03:00</td>
+                                <td class="sch-cell sch-empty col-solar" data-empty-type="curfew">[ Solar Stage Closed (Curfew) ]</td>
+                                <td class="sch-cell sch-empty col-lunar">[ Frequency 404 concludes at 03:00 ]</td>
+                            </tr>
+                            <!-- 03:00-04:00 -->
+                            <tr>
+                                <td class="sch-time-col">03:00 – 04:00</td>
+                                <td class="sch-cell sch-empty col-solar">[ Solar Stage Closed ]</td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-20" data-id="perf-20" data-artist="Dawn Ritual" data-stage="Lunar Forest Dome" data-day="Day 1 (Friday, July 10)" data-time="03:10 – 04:00" data-genre="Atmospheric Ambient">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-20&from=program#perf-20" class="sch-artist-link" title="[ Detail: Dawn Ritual ]"><strong class="sch-artist">Dawn Ritual</strong></a>
+                                        </div>
+                                        <div class="sch-time">03:10 – 04:00</div>
+                                        <div class="sch-meta">Atmospheric Ambient (CZ)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-20&from=program#perf-20" class="btn-box sch-detail-btn" title="[ Detail: Dawn Ritual ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ================================================================= -->
+            <!-- DAY 2: SATURDAY, JULY 11, 2026 -->
+            <!-- ================================================================= -->
+            <section class="sch-day-section" data-day="day2">
+                <div class="sch-day-title sch-day-heading" data-day="day2" data-i18n="program_day2_title">[ Saturday, July 11, 2026 – Day 2 ]</div>
+                <div class="table-responsive">
+                    <table class="sch-table">
+                        <caption class="sr-only" data-i18n="sch_caption_day2">Timetable for Day 2</caption>
+                        <thead>
+                            <tr>
+                                <th class="sch-header sch-time-col th-slot" data-i18n="program_col_slot">Time Slot</th>
+                                <th scope="col" class="sch-header col-solar th-solar" data-i18n="program_col_solar">Solar Horizon Stage (Open-air)</th>
+                                <th scope="col" class="sch-header col-lunar th-lunar" data-i18n="program_col_lunar">Lunar Forest Dome (Covered)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- 13:00-14:00 -->
+                            <tr>
+                                <td class="sch-time-col">13:00 – 14:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-21" data-id="perf-21" data-artist="Sunburst Trio" data-stage="Solar Horizon Stage" data-day="Day 2 (Saturday, July 11)" data-time="13:30 – 14:15" data-genre="Acoustic Indie">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-21&from=program#perf-21" class="sch-artist-link" title="[ Detail: Sunburst Trio ]"><strong class="sch-artist">Sunburst Trio</strong></a>
+                                        </div>
+                                        <div class="sch-time">13:30 – 14:15</div>
+                                        <div class="sch-meta">Acoustic Indie (CZ)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-21&from=program#perf-21" class="btn-box sch-detail-btn" title="[ Detail: Sunburst Trio ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-empty col-lunar" data-empty-type="dome-sound">[ Dome Open & Sound Check ]</td>
+                            </tr>
+                            <!-- 14:00-15:00 -->
+                            <tr>
+                                <td class="sch-time-col">14:00 – 15:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-22" data-id="perf-22" data-artist="Coastline Drift" data-stage="Solar Horizon Stage" data-day="Day 2 (Saturday, July 11)" data-time="14:30 – 15:15" data-genre="Surf Rock">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-22&from=program#perf-22" class="sch-artist-link" title="[ Detail: Coastline Drift ]"><strong class="sch-artist">Coastline Drift</strong></a>
+                                        </div>
+                                        <div class="sch-time">14:30 – 15:15</div>
+                                        <div class="sch-meta">Surf Rock (ES)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-22&from=program#perf-22" class="btn-box sch-detail-btn" title="[ Detail: Coastline Drift ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-31" data-id="perf-31" data-artist="Dronescape" data-stage="Lunar Forest Dome" data-day="Day 2 (Saturday, July 11)" data-time="14:30 – 15:20" data-genre="Drone Music">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-31&from=program#perf-31" class="sch-artist-link" title="[ Detail: Dronescape ]"><strong class="sch-artist">Dronescape</strong></a>
+                                        </div>
+                                        <div class="sch-time">14:30 – 15:20</div>
+                                        <div class="sch-meta">Drone Music (CZ)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-31&from=program#perf-31" class="btn-box sch-detail-btn" title="[ Detail: Dronescape ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 15:00-16:00 -->
+                            <tr>
+                                <td class="sch-time-col">15:00 – 16:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-23" data-id="perf-23" data-artist="The Urban Poets" data-stage="Solar Horizon Stage" data-day="Day 2 (Saturday, July 11)" data-time="15:30 – 16:20" data-genre="Indie Soul">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-23&from=program#perf-23" class="sch-artist-link" title="[ Detail: The Urban Poets ]"><strong class="sch-artist">The Urban Poets</strong></a>
+                                        </div>
+                                        <div class="sch-time">15:30 – 16:20</div>
+                                        <div class="sch-meta">Indie Soul (UK)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-23&from=program#perf-23" class="btn-box sch-detail-btn" title="[ Detail: The Urban Poets ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-32" data-id="perf-32" data-artist="Glitch Garden" data-stage="Lunar Forest Dome" data-day="Day 2 (Saturday, July 11)" data-time="15:35 – 16:30" data-genre="Microhouse">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-32&from=program#perf-32" class="sch-artist-link" title="[ Detail: Glitch Garden ]"><strong class="sch-artist">Glitch Garden</strong></a>
+                                        </div>
+                                        <div class="sch-time">15:35 – 16:30</div>
+                                        <div class="sch-meta">Microhouse (AT)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-32&from=program#perf-32" class="btn-box sch-detail-btn" title="[ Detail: Glitch Garden ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 16:00-17:00 -->
+                            <tr>
+                                <td class="sch-time-col">16:00 – 17:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-24" data-id="perf-24" data-artist="Neon Youth" data-stage="Solar Horizon Stage" data-day="Day 2 (Saturday, July 11)" data-time="16:35 – 17:25" data-genre="Indie Pop">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-24&from=program#perf-24" class="sch-artist-link" title="[ Detail: Neon Youth ]"><strong class="sch-artist">Neon Youth</strong></a>
+                                        </div>
+                                        <div class="sch-time">16:35 – 17:25</div>
+                                        <div class="sch-meta">Indie Pop (SK)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-24&from=program#perf-24" class="btn-box sch-detail-btn" title="[ Detail: Neon Youth ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-33" data-id="perf-33" data-artist="Forest Whispers" data-stage="Lunar Forest Dome" data-day="Day 2 (Saturday, July 11)" data-time="16:45 – 17:45" data-genre="Organic House">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-33&from=program#perf-33" class="sch-artist-link" title="[ Detail: Forest Whispers ]"><strong class="sch-artist">Forest Whispers</strong></a>
+                                        </div>
+                                        <div class="sch-time">16:45 – 17:45</div>
+                                        <div class="sch-meta">Organic House (SK)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-33&from=program#perf-33" class="btn-box sch-detail-btn" title="[ Detail: Forest Whispers ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 17:00-18:00 -->
+                            <tr>
+                                <td class="sch-time-col">17:00 – 18:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-25" data-id="perf-25" data-artist="Silver Tides" data-stage="Solar Horizon Stage" data-day="Day 2 (Saturday, July 11)" data-time="17:45 – 18:40" data-genre="Shoegaze">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-25&from=program#perf-25" class="sch-artist-link" title="[ Detail: Silver Tides ]"><strong class="sch-artist">Silver Tides</strong></a>
+                                        </div>
+                                        <div class="sch-time">17:45 – 18:40</div>
+                                        <div class="sch-meta">Shoegaze (CZ)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-25&from=program#perf-25" class="btn-box sch-detail-btn" title="[ Detail: Silver Tides ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-empty col-lunar" data-empty-type="pause">[ Changeover & Ambient Pause ]</td>
+                            </tr>
+                            <!-- 18:00-19:00 -->
+                            <tr>
+                                <td class="sch-time-col">18:00 – 19:00</td>
+                                <td class="sch-cell sch-empty col-solar">[ Solar Horizon Technical Changeover ]</td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-34" data-id="perf-34" data-artist="Low Frequency Unit" data-stage="Lunar Forest Dome" data-day="Day 2 (Saturday, July 11)" data-time="18:00 – 19:00" data-genre="Deep Dubstep">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-34&from=program#perf-34" class="sch-artist-link" title="[ Detail: Low Frequency Unit ]"><strong class="sch-artist">Low Frequency Unit</strong></a>
+                                        </div>
+                                        <div class="sch-time">18:00 – 19:00</div>
+                                        <div class="sch-meta">Deep Dubstep (UK)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-34&from=program#perf-34" class="btn-box sch-detail-btn" title="[ Detail: Low Frequency Unit ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 19:00-20:00 -->
+                            <tr>
+                                <td class="sch-time-col">19:00 – 20:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-26" data-id="perf-26" data-artist="Horizon Glow" data-stage="Solar Horizon Stage" data-day="Day 2 (Saturday, July 11)" data-time="19:00 – 20:00" data-genre="Electronic Pop">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-26&from=program#perf-26" class="sch-artist-link" title="[ Detail: Horizon Glow ]"><strong class="sch-artist">Horizon Glow</strong></a>
+                                        </div>
+                                        <div class="sch-time">19:00 – 20:00</div>
+                                        <div class="sch-meta">Electronic Pop (SE)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-26&from=program#perf-26" class="btn-box sch-detail-btn" title="[ Detail: Horizon Glow ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-35" data-id="perf-35" data-artist="Monolith Audio" data-stage="Lunar Forest Dome" data-day="Day 2 (Saturday, July 11)" data-time="19:15 – 20:15" data-genre="Peak Time Techno">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-35&from=program#perf-35" class="sch-artist-link" title="[ Detail: Monolith Audio ]"><strong class="sch-artist">Monolith Audio</strong></a>
+                                        </div>
+                                        <div class="sch-time">19:15 – 20:15</div>
+                                        <div class="sch-meta">Peak Time Techno (DE)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-35&from=program#perf-35" class="btn-box sch-detail-btn" title="[ Detail: Monolith Audio ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 20:00-21:00 -->
+                            <tr>
+                                <td class="sch-time-col">20:00 – 21:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-27" data-id="perf-27" data-artist="Wild Horizon" data-stage="Solar Horizon Stage" data-day="Day 2 (Saturday, July 11)" data-time="20:20 – 21:20" data-genre="Post-Punk Revival">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-27&from=program#perf-27" class="sch-artist-link" title="[ Detail: Wild Horizon ]"><strong class="sch-artist">Wild Horizon</strong></a>
+                                        </div>
+                                        <div class="sch-time">20:20 – 21:20</div>
+                                        <div class="sch-meta">Post-Punk Revival (DE)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-27&from=program#perf-27" class="btn-box sch-detail-btn" title="[ Detail: Wild Horizon ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-36" data-id="perf-36" data-artist="Sine Wave Syndicate" data-stage="Lunar Forest Dome" data-day="Day 2 (Saturday, July 11)" data-time="20:30 – 21:45" data-genre="Electro Techno">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-36&from=program#perf-36" class="sch-artist-link" title="[ Detail: Sine Wave Syndicate ]"><strong class="sch-artist">Sine Wave Syndicate</strong></a>
+                                        </div>
+                                        <div class="sch-time">20:30 – 21:45</div>
+                                        <div class="sch-meta">Electro Techno (FR)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-36&from=program#perf-36" class="btn-box sch-detail-btn" title="[ Detail: Sine Wave Syndicate ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 21:00-22:00 -->
+                            <tr>
+                                <td class="sch-time-col">21:00 – 22:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-28" data-id="perf-28" data-artist="Magnetic River" data-stage="Solar Horizon Stage" data-day="Day 2 (Saturday, July 11)" data-time="21:40 – 22:50" data-genre="Indie Dance">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-28&from=program#perf-28" class="sch-artist-link" title="[ Detail: Magnetic River ]"><strong class="sch-artist">Magnetic River</strong></a>
+                                        </div>
+                                        <div class="sch-time">21:40 – 22:50</div>
+                                        <div class="sch-meta">Indie Dance (FR)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-28&from=program#perf-28" class="btn-box sch-detail-btn" title="[ Detail: Magnetic River ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-empty col-lunar">[ Technical Break & Visual Prep ]</td>
+                            </tr>
+                            <!-- 22:00-23:00 -->
+                            <tr>
+                                <td class="sch-time-col">22:00 – 23:00</td>
+                                <td class="sch-cell sch-empty col-solar">[ Sunset Stage Reconfiguration ]</td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-37" data-id="perf-37" data-artist="Shadowplay DJ" data-stage="Lunar Forest Dome" data-day="Day 2 (Saturday, July 11)" data-time="22:00 – 23:20" data-genre="Dark Wave Techno">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-37&from=program#perf-37" class="sch-artist-link" title="[ Detail: Shadowplay DJ ]"><strong class="sch-artist">Shadowplay DJ</strong></a>
+                                        </div>
+                                        <div class="sch-time">22:00 – 23:20</div>
+                                        <div class="sch-meta">Dark Wave Techno (CZ)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-37&from=program#perf-37" class="btn-box sch-detail-btn" title="[ Detail: Shadowplay DJ ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 23:00-00:00 -->
+                            <tr>
+                                <td class="sch-time-col">23:00 – 00:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-29" data-id="perf-29" data-artist="Vortex Motion" data-stage="Solar Horizon Stage" data-day="Day 2 (Saturday, July 11)" data-time="23:10 – 00:25" data-genre="Nu-Electro">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-29&from=program#perf-29" class="sch-artist-link" title="[ Detail: Vortex Motion ]"><strong class="sch-artist">Vortex Motion</strong></a>
+                                        </div>
+                                        <div class="sch-time">23:10 – 00:25</div>
+                                        <div class="sch-meta">Nu-Electro (UK)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-29&from=program#perf-29" class="btn-box sch-detail-btn" title="[ Detail: Vortex Motion ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-38" data-id="perf-38" data-artist="Circuit Overload" data-stage="Lunar Forest Dome" data-day="Day 2 (Saturday, July 11)" data-time="23:35 – 00:55" data-genre="Hard Techno">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-38&from=program#perf-38" class="sch-artist-link" title="[ Detail: Circuit Overload ]"><strong class="sch-artist">Circuit Overload</strong></a>
+                                        </div>
+                                        <div class="sch-time">23:35 – 00:55</div>
+                                        <div class="sch-meta">Hard Techno (PL)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-38&from=program#perf-38" class="btn-box sch-detail-btn" title="[ Detail: Circuit Overload ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 00:00-01:00 -->
+                            <tr>
+                                <td class="sch-time-col">00:00 – 01:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-30" data-id="perf-30" data-artist="Aura Soundsystem" data-stage="Solar Horizon Stage" data-day="Day 2 (Saturday, July 11)" data-time="00:45 – 02:00" data-genre="Progressive Dance">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-30&from=program#perf-30" class="sch-artist-link" title="[ Detail: Aura Soundsystem ]"><strong class="sch-artist">Aura Soundsystem</strong></a>
+                                        </div>
+                                        <div class="sch-time">00:45 – 02:00</div>
+                                        <div class="sch-meta">Progressive Dance (CZ)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-30&from=program#perf-30" class="btn-box sch-detail-btn" title="[ Detail: Aura Soundsystem ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-empty col-lunar">[ Intermission & Live Visuals ]</td>
+                            </tr>
+                            <!-- 01:00-02:00 -->
+                            <tr>
+                                <td class="sch-time-col">01:00 – 02:00</td>
+                                <td class="sch-cell sch-empty col-solar">[ Solar Stage Concludes at 02:00 ]</td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-39" data-id="perf-39" data-artist="Neural Network Live" data-stage="Lunar Forest Dome" data-day="Day 2 (Saturday, July 11)" data-time="01:10 – 02:30" data-genre="Acid Techno">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-39&from=program#perf-39" class="sch-artist-link" title="[ Detail: Neural Network Live ]"><strong class="sch-artist">Neural Network Live</strong></a>
+                                        </div>
+                                        <div class="sch-time">01:10 – 02:30</div>
+                                        <div class="sch-meta">Acid Techno (BE)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-39&from=program#perf-39" class="btn-box sch-detail-btn" title="[ Detail: Neural Network Live ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 02:00-03:00 -->
+                            <tr>
+                                <td class="sch-time-col">02:00 – 03:00</td>
+                                <td class="sch-cell sch-empty col-solar">[ Solar Stage Closed ]</td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-40" data-id="perf-40" data-artist="Solar Wind" data-stage="Lunar Forest Dome" data-day="Day 2 (Saturday, July 11)" data-time="02:40 – 04:00" data-genre="Chillout Ambient">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-40&from=program#perf-40" class="sch-artist-link" title="[ Detail: Solar Wind ]"><strong class="sch-artist">Solar Wind</strong></a>
+                                        </div>
+                                        <div class="sch-time">02:40 – 04:00</div>
+                                        <div class="sch-meta">Chillout Ambient (CZ)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-40&from=program#perf-40" class="btn-box sch-detail-btn" title="[ Detail: Solar Wind ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 03:00-04:00 -->
+                            <tr>
+                                <td class="sch-time-col">03:00 – 04:00</td>
+                                <td class="sch-cell sch-empty col-solar">[ Solar Stage Closed ]</td>
+                                <td class="sch-cell sch-empty col-lunar">[ Solar Wind concludes at 04:00 ]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ================================================================= -->
+            <!-- DAY 3: SUNDAY, JULY 12, 2026 -->
+            <!-- ================================================================= -->
+            <section class="sch-day-section" data-day="day3">
+                <div class="sch-day-title sch-day-heading" data-day="day3" data-i18n="program_day3_title">[ Sunday, July 12, 2026 – Day 3 ]</div>
+                <div class="table-responsive">
+                    <table class="sch-table">
+                        <caption class="sr-only" data-i18n="sch_caption_day3">Timetable for Day 3</caption>
+                        <thead>
+                            <tr>
+                                <th class="sch-header sch-time-col th-slot" data-i18n="program_col_slot">Time Slot</th>
+                                <th scope="col" class="sch-header col-solar th-solar" data-i18n="program_col_solar">Solar Horizon Stage (Open-air)</th>
+                                <th scope="col" class="sch-header col-lunar th-lunar" data-i18n="program_col_lunar">Lunar Forest Dome (Covered)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- 13:00-14:00 -->
+                            <tr>
+                                <td class="sch-time-col">13:00 – 14:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-41" data-id="perf-41" data-artist="Morning Breeze" data-stage="Solar Horizon Stage" data-day="Day 3 (Sunday, July 12)" data-time="13:00 – 13:45" data-genre="Folk Indie">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-41&from=program#perf-41" class="sch-artist-link" title="[ Detail: Morning Breeze ]"><strong class="sch-artist">Morning Breeze</strong></a>
+                                        </div>
+                                        <div class="sch-time">13:00 – 13:45</div>
+                                        <div class="sch-meta">Folk Indie (CZ)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-41&from=program#perf-41" class="btn-box sch-detail-btn" title="[ Detail: Morning Breeze ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-empty col-lunar" data-empty-type="dome-sound">[ Dome Open & Sound Check ]</td>
+                            </tr>
+                            <!-- 14:00-15:00 -->
+                            <tr>
+                                <td class="sch-time-col">14:00 – 15:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-42" data-id="perf-42" data-artist="Silent Pines" data-stage="Solar Horizon Stage" data-day="Day 3 (Sunday, July 12)" data-time="14:00 – 14:45" data-genre="Chamber Pop">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-42&from=program#perf-42" class="sch-artist-link" title="[ Detail: Silent Pines ]"><strong class="sch-artist">Silent Pines</strong></a>
+                                        </div>
+                                        <div class="sch-time">14:00 – 14:45</div>
+                                        <div class="sch-meta">Chamber Pop (SK)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-42&from=program#perf-42" class="btn-box sch-detail-btn" title="[ Detail: Silent Pines ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-51" data-id="perf-51" data-artist="Static Drift" data-stage="Lunar Forest Dome" data-day="Day 3 (Sunday, July 12)" data-time="14:00 – 14:50" data-genre="Field Recording / Ambient">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-51&from=program#perf-51" class="sch-artist-link" title="[ Detail: Static Drift ]"><strong class="sch-artist">Static Drift</strong></a>
+                                        </div>
+                                        <div class="sch-time">14:00 – 14:50</div>
+                                        <div class="sch-meta">Field Recording / Ambient (CZ)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-51&from=program#perf-51" class="btn-box sch-detail-btn" title="[ Detail: Static Drift ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 15:00-16:00 -->
+                            <tr>
+                                <td class="sch-time-col">15:00 – 16:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-43" data-id="perf-43" data-artist="Sunken Ship" data-stage="Solar Horizon Stage" data-day="Day 3 (Sunday, July 12)" data-time="15:00 – 15:50" data-genre="Psych Rock">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-43&from=program#perf-43" class="sch-artist-link" title="[ Detail: Sunken Ship ]"><strong class="sch-artist">Sunken Ship</strong></a>
+                                        </div>
+                                        <div class="sch-time">15:00 – 15:50</div>
+                                        <div class="sch-meta">Psych Rock (UK)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-43&from=program#perf-43" class="btn-box sch-detail-btn" title="[ Detail: Sunken Ship ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-52" data-id="perf-52" data-artist="Resonance Space" data-stage="Lunar Forest Dome" data-day="Day 3 (Sunday, July 12)" data-time="15:05 – 16:00" data-genre="Deep Ambient">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-52&from=program#perf-52" class="sch-artist-link" title="[ Detail: Resonance Space ]"><strong class="sch-artist">Resonance Space</strong></a>
+                                        </div>
+                                        <div class="sch-time">15:05 – 16:00</div>
+                                        <div class="sch-meta">Deep Ambient (AT)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-52&from=program#perf-52" class="btn-box sch-detail-btn" title="[ Detail: Resonance Space ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 16:00-17:00 -->
+                            <tr>
+                                <td class="sch-time-col">16:00 – 17:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-44" data-id="perf-44" data-artist="Amber Boulevard" data-stage="Solar Horizon Stage" data-day="Day 3 (Sunday, July 12)" data-time="16:05 – 16:55" data-genre="Dream Indie">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-44&from=program#perf-44" class="sch-artist-link" title="[ Detail: Amber Boulevard ]"><strong class="sch-artist">Amber Boulevard</strong></a>
+                                        </div>
+                                        <div class="sch-time">16:05 – 16:55</div>
+                                        <div class="sch-meta">Dream Indie (DE)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-44&from=program#perf-44" class="btn-box sch-detail-btn" title="[ Detail: Amber Boulevard ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-53" data-id="perf-53" data-artist="Tape Loop Experiment" data-stage="Lunar Forest Dome" data-day="Day 3 (Sunday, July 12)" data-time="16:15 – 17:15" data-genre="Tape Ambient">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-53&from=program#perf-53" class="sch-artist-link" title="[ Detail: Tape Loop Experiment ]"><strong class="sch-artist">Tape Loop Experiment</strong></a>
+                                        </div>
+                                        <div class="sch-time">16:15 – 17:15</div>
+                                        <div class="sch-meta">Tape Ambient (PL)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-53&from=program#perf-53" class="btn-box sch-detail-btn" title="[ Detail: Tape Loop Experiment ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 17:00-18:00 -->
+                            <tr>
+                                <td class="sch-time-col">17:00 – 18:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-45" data-id="perf-45" data-artist="Urban Echo" data-stage="Solar Horizon Stage" data-day="Day 3 (Sunday, July 12)" data-time="17:15 – 18:10" data-genre="Art Pop">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-45&from=program#perf-45" class="sch-artist-link" title="[ Detail: Urban Echo ]"><strong class="sch-artist">Urban Echo</strong></a>
+                                        </div>
+                                        <div class="sch-time">17:15 – 18:10</div>
+                                        <div class="sch-meta">Art Pop (CZ)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-45&from=program#perf-45" class="btn-box sch-detail-btn" title="[ Detail: Urban Echo ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-54" data-id="perf-54" data-artist="Minimal Horizon" data-stage="Lunar Forest Dome" data-day="Day 3 (Sunday, July 12)" data-time="17:30 – 18:30" data-genre="Micro Techno">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-54&from=program#perf-54" class="sch-artist-link" title="[ Detail: Minimal Horizon ]"><strong class="sch-artist">Minimal Horizon</strong></a>
+                                        </div>
+                                        <div class="sch-time">17:30 – 18:30</div>
+                                        <div class="sch-meta">Micro Techno (DE)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-54&from=program#perf-54" class="btn-box sch-detail-btn" title="[ Detail: Minimal Horizon ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 18:00-19:00 -->
+                            <tr>
+                                <td class="sch-time-col">18:00 – 19:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-46" data-id="perf-46" data-artist="Luminous Band" data-stage="Solar Horizon Stage" data-day="Day 3 (Sunday, July 12)" data-time="18:30 – 19:30" data-genre="Indie Funk">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-46&from=program#perf-46" class="sch-artist-link" title="[ Detail: Luminous Band ]"><strong class="sch-artist">Luminous Band</strong></a>
+                                        </div>
+                                        <div class="sch-time">18:30 – 19:30</div>
+                                        <div class="sch-meta">Indie Funk (IT)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-46&from=program#perf-46" class="btn-box sch-detail-btn" title="[ Detail: Luminous Band ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-55" data-id="perf-55" data-artist="Dark Matter" data-stage="Lunar Forest Dome" data-day="Day 3 (Sunday, July 12)" data-time="18:45 – 19:45" data-genre="Deep Progressive">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-55&from=program#perf-55" class="sch-artist-link" title="[ Detail: Dark Matter ]"><strong class="sch-artist">Dark Matter</strong></a>
+                                        </div>
+                                        <div class="sch-time">18:45 – 19:45</div>
+                                        <div class="sch-meta">Deep Progressive (CZ)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-55&from=program#perf-55" class="btn-box sch-detail-btn" title="[ Detail: Dark Matter ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 19:00-20:00 -->
+                            <tr>
+                                <td class="sch-time-col">19:00 – 20:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-47" data-id="perf-47" data-artist="The Velvet Trails" data-stage="Solar Horizon Stage" data-day="Day 3 (Sunday, July 12)" data-time="19:50 – 20:50" data-genre="Space Rock">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-47&from=program#perf-47" class="sch-artist-link" title="[ Detail: The Velvet Trails ]"><strong class="sch-artist">The Velvet Trails</strong></a>
+                                        </div>
+                                        <div class="sch-time">19:50 – 20:50</div>
+                                        <div class="sch-meta">Space Rock (SE)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-47&from=program#perf-47" class="btn-box sch-detail-btn" title="[ Detail: The Velvet Trails ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-empty col-lunar">[ Stage Changeover & Light Testing ]</td>
+                            </tr>
+                            <!-- 20:00-21:00 -->
+                            <tr>
+                                <td class="sch-time-col">20:00 – 21:00</td>
+                                <td class="sch-cell sch-empty col-solar">[ Solar Stage Break ]</td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-56" data-id="perf-56" data-artist="Hyperspace DJ" data-stage="Lunar Forest Dome" data-day="Day 3 (Sunday, July 12)" data-time="20:00 – 21:15" data-genre="Psy Techno">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-56&from=program#perf-56" class="sch-artist-link" title="[ Detail: Hyperspace DJ ]"><strong class="sch-artist">Hyperspace DJ</strong></a>
+                                        </div>
+                                        <div class="sch-time">20:00 – 21:15</div>
+                                        <div class="sch-meta">Psy Techno (IL)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-56&from=program#perf-56" class="btn-box sch-detail-btn" title="[ Detail: Hyperspace DJ ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 21:00-22:00 -->
+                            <tr>
+                                <td class="sch-time-col">21:00 – 22:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-48" data-id="perf-48" data-artist="Prismatics" data-stage="Solar Horizon Stage" data-day="Day 3 (Sunday, July 12)" data-time="21:10 – 22:15" data-genre="Dance Punk">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-48&from=program#perf-48" class="sch-artist-link" title="[ Detail: Prismatics ]"><strong class="sch-artist">Prismatics</strong></a>
+                                        </div>
+                                        <div class="sch-time">21:10 – 22:15</div>
+                                        <div class="sch-meta">Dance Punk (UK)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-48&from=program#perf-48" class="btn-box sch-detail-btn" title="[ Detail: Prismatics ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-57" data-id="perf-57" data-artist="Galactic Orbit" data-stage="Lunar Forest Dome" data-day="Day 3 (Sunday, July 12)" data-time="21:30 – 22:45" data-genre="Melodic Techno">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-57&from=program#perf-57" class="sch-artist-link" title="[ Detail: Galactic Orbit ]"><strong class="sch-artist">Galactic Orbit</strong></a>
+                                        </div>
+                                        <div class="sch-time">21:30 – 22:45</div>
+                                        <div class="sch-meta">Melodic Techno (IT)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-57&from=program#perf-57" class="btn-box sch-detail-btn" title="[ Detail: Galactic Orbit ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 22:00-23:00 -->
+                            <tr>
+                                <td class="sch-time-col">22:00 – 23:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-49" data-id="perf-49" data-artist="Starlight Runners" data-stage="Solar Horizon Stage" data-day="Day 3 (Sunday, July 12)" data-time="22:35 – 23:55" data-genre="Electropop Headliner">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-49&from=program#perf-49" class="sch-artist-link" title="[ Detail: Starlight Runners ]"><strong class="sch-artist">Starlight Runners</strong></a>
+                                        </div>
+                                        <div class="sch-time">22:35 – 23:55</div>
+                                        <div class="sch-meta">Electropop Headliner (DK)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-49&from=program#perf-49" class="btn-box sch-detail-btn" title="[ Detail: Starlight Runners ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-empty col-lunar">[ Intermission & Ambient Pulse ]</td>
+                            </tr>
+                            <!-- 23:00-00:00 -->
+                            <tr>
+                                <td class="sch-time-col">23:00 – 00:00</td>
+                                <td class="sch-cell sch-empty col-solar">[ Closing Festival Setup ]</td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-58" data-id="perf-58" data-artist="Bass Distortion" data-stage="Lunar Forest Dome" data-day="Day 3 (Sunday, July 12)" data-time="23:00 – 00:15" data-genre="Leftfield Bass">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-58&from=program#perf-58" class="sch-artist-link" title="[ Detail: Bass Distortion ]"><strong class="sch-artist">Bass Distortion</strong></a>
+                                        </div>
+                                        <div class="sch-time">23:00 – 00:15</div>
+                                        <div class="sch-meta">Leftfield Bass (UK)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-58&from=program#perf-58" class="btn-box sch-detail-btn" title="[ Detail: Bass Distortion ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 00:00-01:00 -->
+                            <tr>
+                                <td class="sch-time-col">00:00 – 01:00</td>
+                                <td class="sch-cell sch-event col-solar" id="perf-50" data-id="perf-50" data-artist="Final Cascade" data-stage="Solar Horizon Stage" data-day="Day 3 (Sunday, July 12)" data-time="00:10 – 01:15" data-genre="Orchestral Electronic">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-50&from=program#perf-50" class="sch-artist-link" title="[ Detail: Final Cascade ]"><strong class="sch-artist">Final Cascade</strong></a>
+                                        </div>
+                                        <div class="sch-time">00:10 – 01:15</div>
+                                        <div class="sch-meta">Orchestral Electronic (CZ)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-50&from=program#perf-50" class="btn-box sch-detail-btn" title="[ Detail: Final Cascade ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-59" data-id="perf-59" data-artist="Cosmic Pulse" data-stage="Lunar Forest Dome" data-day="Day 3 (Sunday, July 12)" data-time="00:30 – 01:45" data-genre="Uplifting Trance Techno">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-59&from=program#perf-59" class="sch-artist-link" title="[ Detail: Cosmic Pulse ]"><strong class="sch-artist">Cosmic Pulse</strong></a>
+                                        </div>
+                                        <div class="sch-time">00:30 – 01:45</div>
+                                        <div class="sch-meta">Trance Techno (NL)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-59&from=program#perf-59" class="btn-box sch-detail-btn" title="[ Detail: Cosmic Pulse ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 01:00-02:00 -->
+                            <tr>
+                                <td class="sch-time-col">01:00 – 02:00</td>
+                                <td class="sch-cell sch-empty col-solar" data-empty-type="curfew">[ Solar Horizon Stage Closed (See you next year!) ]</td>
+                                <td class="sch-cell sch-empty col-lunar">[ Cosmic Pulse concludes at 01:45 ]</td>
+                            </tr>
+                            <!-- 02:00-03:00 -->
+                            <tr>
+                                <td class="sch-time-col">02:00 – 03:00</td>
+                                <td class="sch-cell sch-empty col-solar">[ Solar Stage Closed ]</td>
+                                <td class="sch-cell sch-event col-lunar" id="perf-60" data-id="perf-60" data-artist="Equinox Farewell" data-stage="Lunar Forest Dome" data-day="Day 3 (Sunday, July 12)" data-time="02:00 – 03:00" data-genre="Down-tempo Ambient">
+                                    <div class="sch-card">
+                                        <div class="sch-card-top">
+                                            <a href="artist-detail.html?id=perf-60&from=program#perf-60" class="sch-artist-link" title="[ Detail: Equinox Farewell ]"><strong class="sch-artist">Equinox Farewell</strong></a>
+                                        </div>
+                                        <div class="sch-time">02:00 – 03:00</div>
+                                        <div class="sch-meta">Down-tempo Ambient (CZ)</div>
+                                        <div class="sch-actions">
+                                            <a href="artist-detail.html?id=perf-60&from=program#perf-60" class="btn-box sch-detail-btn" title="[ Detail: Equinox Farewell ]">[ ℹ️ Detail &rarr; ]</a>
+                                            <button type="button" class="sch-fav-btn" title="Add to My Schedule">☆</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- 03:00-04:00 -->
+                            <tr>
+                                <td class="sch-time-col">03:00 – 04:00</td>
+                                <td class="sch-cell sch-empty col-solar">[ Solar Stage Closed ]</td>
+                                <td class="sch-cell sch-empty col-lunar" data-empty-type="pause">[ Festival Officially Closed (Chillout Zone Open) ]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER (components/footer.js / footer.html) -->
+        <div id="footer-placeholder">
+            <hr>
+            <footer class="wf-footer-inline">
+                <strong class="festival-brand">[ © 2026 Festival of Darkness 2 ]</strong>
+                <a href="index.html">[ Home ]</a>
+                <a href="program.html">[ Program ]</a>
+                <a href="artists.html">[ Artists ]</a>
+                <a href="stages.html">[ Stages ]</a>
+                <a href="practical-info.html">[ Practical Info ]</a>
+                <a href="my-schedule.html">[ My Schedule ]</a>
+                <address class="wf-address"><span>[ info@festivalofdarkness.com ]</span></address>
+            </footer>
+        </div>
+
+    </div>
+
+</body>
+</html>

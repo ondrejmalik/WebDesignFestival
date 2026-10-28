@@ -218,43 +218,43 @@ function displayArtistDetail(card) {
     const favBtnText = isFav 
         ? (isCs ? '★ Odebrat z mého programu' : '★ Remove from My Schedule') 
         : (isCs ? '☆ Přidat do mého programu' : '☆ Add to My Schedule');
-    const favBtnStyle = isFav ? 'background: #28a745; color: #fff;' : 'background: #eee; color: #000;';
+    const favBtnClass = isFav ? 'btn-box is-favourite' : 'btn-box';
 
     detailContainer.innerHTML = `
         <div class="artist-detail-box" id="detail-focus-target">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;">
+            <div class="artist-inline-detail-header">
                 <div>
-                    <h3 style="font-size: 1.3rem; margin-bottom: 4px;">[ ${name} (${origin}) ]</h3>
-                    <p style="color: #444; font-weight: bold; font-size: 0.9rem;">${isCs ? 'Žánr:' : 'Genre:'} ${genre} | ${isCs ? 'Země:' : 'Origin:'} ${origin}</p>
+                    <h3 class="artist-inline-detail-title">[ ${name} (${origin}) ]</h3>
+                    <p class="artist-inline-detail-meta">${isCs ? 'Žánr:' : 'Genre:'} ${genre} | ${isCs ? 'Země:' : 'Origin:'} ${origin}</p>
                 </div>
-                <button id="close-detail-btn" class="btn-box" style="padding: 4px 10px;" title="${isCs ? 'Zavřít profil' : 'Close Profile'}">[ ${isCs ? '&times; Zavřít profil' : '&times; Close Profile'} ]</button>
+                <button id="close-detail-btn" class="btn-box" title="${isCs ? 'Zavřít profil' : 'Close Profile'}">[ ${isCs ? '&times; Zavřít profil' : '&times; Close Profile'} ]</button>
             </div>
             
             <hr>
 
-            <div class="row" style="margin-top: 10px;">
-                <div class="col" style="flex: 1 1 220px; max-width: 280px;">
-                    <div class="wf-box-sub" style="height: 140px; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 0.85rem; color: #555;">
+            <div class="row row-spaced">
+                <div class="col artist-inline-media-col">
+                    <div class="wf-box-sub artist-inline-photo-box">
                         ${isCs ? `[ Fotografie interpreta:<br><strong>${name}</strong> ]` : `[ Artist Press Kit Photo:<br><strong>${name}</strong> ]`}
                     </div>
-                    <div style="margin-top: 8px; font-size: 0.8rem; color: #666; text-align: center;">
+                    <div class="artist-inline-audio-note">
                         ${isCs ? '[ Zvuková ukázka: ♫ Bandcamp & Spotify ]' : '[ Audio Preview: ♫ Bandcamp & Spotify ]'}
                     </div>
                 </div>
 
-                <div class="col" style="flex: 2 1 320px;">
+                <div class="col artist-inline-content-col">
                     <h4>[ ${isCs ? 'Biografie a profil interpreta' : 'Artist Biography & Profile'} ]</h4>
-                    <p class="artist-detail-bio-text" style="margin-top: 6px; line-height: 1.5; color: #111;">${bio}</p>
+                    <p class="artist-detail-bio-text">${bio}</p>
                     
                     <hr>
 
-                    <div style="background: #f1f3f5; border: 1px solid #777; padding: 8px 12px; font-size: 0.88rem;">
+                    <div class="artist-inline-schedule-box">
                         <p><strong>${isCs ? 'Plánované vystoupení:' : 'Scheduled Performance:'}</strong> ${day}, ${time}</p>
                         <p><strong>${isCs ? 'Scéna:' : 'Stage:'}</strong> ${stage}</p>
                     </div>
 
-                    <div style="margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px;">
-                        <button id="detail-fav-btn" class="btn-box" style="font-weight: bold; ${favBtnStyle}">[ ${favBtnText} ]</button>
+                    <div class="artist-inline-actions">
+                        <button id="detail-fav-btn" class="${favBtnClass}">[ ${favBtnText} ]</button>
                         <a href="program.html" class="btn-box">[ ${isCs ? 'Zobrazit v harmonogramu &rarr;' : 'View in Timetable &rarr;'} ]</a>
                         <a href="my-schedule.html" class="btn-box">[ ${isCs ? 'Přejít do Mého programu &rarr;' : 'Go to My Schedule &rarr;'} ]</a>
                     </div>

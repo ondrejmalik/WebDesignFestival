@@ -21,7 +21,7 @@
     <a href="stages.html" data-i18n="nav_stages">${stages}</a>
     <a href="practical-info.html" data-i18n="nav_practical">${practical}</a>
     <a href="my-schedule.html" data-i18n="nav_myschedule">${mySchedule}</a>
-    <span>[ info@festivalofdarkness.com ]</span>
+    <address class="wf-address"><span>[ info@festivalofdarkness.com ]</span></address>
 </footer>
 `;
     }

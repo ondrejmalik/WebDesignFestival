@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Homepage – Festival of Darkness 2 (Kutna Hora)">
+    <title>Festival of Darkness 2 | Home</title>
+    <link rel="stylesheet" href="css/wireframe.css">
+    <script src="js/theme.js"></script>
+    <script src="js/lang.js" defer></script>
+    <script src="components/nav.js" defer></script>
+    <script src="components/footer.js" defer></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "MusicFestival",
+        "name": "Festival of Darkness 2",
+        "startDate": "2026-07-10T13:00:00+02:00",
+        "endDate": "2026-07-13T04:00:00+02:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+            "@type": "Place",
+            "name": "Sedlec Festival Grounds",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Zámecká",
+                "addressLocality": "Kutná Hora",
+                "postalCode": "28403",
+                "addressCountry": "CZ"
+            }
+        },
+        "description": "Three-day multi-genre alternative and electronic music festival featuring 60 artists on two stages."
+    }
+    </script>
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- HEADER & NAVIGATION (components/nav.js / nav.html) -->
+        <div id="nav-placeholder">
+            <header class="wf-top-app-bar" role="banner">
+                <a href="#main-content" class="skip-link" data-i18n="skip_to_content">Skip to main content</a>
+                <div class="wf-top-bar-left">
+                    <button id="lang-switch-btn" class="btn-box lang-switch-btn" type="button" aria-label="Language" title="Switch language to Czech">
+                        <span class="flag-icon" id="lang-flag" aria-hidden="true"><img src="img/1f1ec-1f1e7.svg" alt="GB" class="flag-img" width="20" height="20"></span>
+                        <span class="lang-label" id="lang-label">Language</span>
+                    </button>
+                </div>
+                <div class="wf-top-bar-center">
+                    <a href="index.html" class="festival-brand" aria-label="Festival of Darkness 2 Home">
+                        <strong>[ Festival of Darkness 2 ]</strong>
+                    </a>
+                </div>
+                <div class="wf-top-bar-right">
+                    <button id="theme-switch-btn" class="btn-box theme-switch-btn" type="button" aria-label="Switch to Dark Mode" title="Switch to Dark Mode">
+                        <span class="theme-icon" id="theme-icon" aria-hidden="true">🌙</span>
+                        <span class="theme-label" id="theme-label">Dark</span>
+                    </button>
+                    <button id="menu-drawer-open-btn" class="btn-box wf-menu-btn" type="button" aria-expanded="false" aria-controls="alza-menu-drawer" aria-label="Open Navigation Menu">
+                        [ ☰ Menu ]
+                    </button>
+                </div>
+            </header>
+            <hr class="wf-top-bar-divider">
+
+            <!-- Alza Drawer -->
+            <div id="alza-drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
+            <aside id="alza-menu-drawer" class="alza-drawer" aria-label="Site Menu" aria-hidden="true">
+                <div class="drawer-header">
+                    <span class="drawer-title"><strong>[ Festival of Darkness 2 ]</strong></span>
+                    <button id="menu-drawer-close-btn" class="btn-box drawer-close-btn" type="button" aria-label="Close navigation menu">
+                        [ ✕ Close ]
+                    </button>
+                </div>
+                <hr>
+                <nav class="drawer-links" aria-label="Drawer Navigation">
+                    <a href="index.html" class="active" data-i18n="nav_home">🏠 [ Home ]</a>
+                    <a href="program.html" data-i18n="nav_program">📅 [ Program ]</a>
+                    <a href="artists.html" data-i18n="nav_artists">🎤 [ Artists ]</a>
+                    <a href="stages.html" data-i18n="nav_stages">⛺ [ Stages ]</a>
+                    <a href="practical-info.html" data-i18n="nav_practical">🚆 [ Practical Info ]</a>
+                    <a href="my-schedule.html" data-i18n="nav_myschedule">★ [ My Schedule ]</a>
+                    <a href="search.html" data-i18n="nav_search">🔍 [ Search ]</a>
+                </nav>
+                <hr>
+                <div class="drawer-footer">
+                    <div class="theme-switch-box">
+                        <button id="theme-switch-btn-drawer" class="btn-box theme-switch-btn btn-block" type="button" aria-label="Switch to Dark Mode" title="Switch to Dark Mode">
+                            <span class="theme-icon" id="theme-icon-drawer" aria-hidden="true">🌙</span>
+                            <span class="theme-label" id="theme-label-drawer">Dark</span>
+                        </button>
+                    </div>
+                    <div class="lang-switch-box">
+                        <button id="lang-switch-btn-drawer" class="btn-box lang-switch-btn btn-block" type="button" aria-label="Language" title="Switch language to Czech">
+                            <span class="flag-icon" id="lang-flag-drawer" aria-hidden="true"><img src="img/1f1ec-1f1e7.svg" alt="GB" class="flag-img" width="20" height="20"></span>
+                            <span class="lang-label" id="lang-label-drawer">Language</span>
+                        </button>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Bottom Dock -->
+            <nav class="bottom-nav-dock" aria-label="Mobile Bottom Navigation">
+                <a href="artists.html" class="bottom-dock-item bottom-nav-item" id="dock-item-artists">
+                    <span class="dock-icon">🎤</span>
+                    <span class="dock-label" data-i18n="dock_artists">Artists</span>
+                </a>
+                <a href="stages.html" class="bottom-dock-item bottom-nav-item" id="dock-item-stages">
+                    <span class="dock-icon">⛺</span>
+                    <span class="dock-label" data-i18n="dock_stages">Stages</span>
+                </a>
+                <a href="index.html" class="bottom-dock-item bottom-nav-item bottom-dock-home active" id="dock-item-home">
+                    <span class="dock-icon">🏠</span>
+                    <span class="dock-label" data-i18n="dock_home">HOME</span>
+                </a>
+                <a href="program.html" class="bottom-dock-item bottom-nav-item" id="dock-item-timetable">
+                    <span class="dock-icon">📅</span>
+                    <span class="dock-label" data-i18n="dock_timetable">Timetable</span>
+                </a>
+                <a href="my-schedule.html" class="bottom-dock-item bottom-nav-item" id="dock-item-myplan">
+                    <span class="dock-icon">★</span>
+                    <span class="dock-label"><span data-i18n="dock_myplan">My Plan</span> <span class="nav-badge-count is-hidden">0</span></span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- MAIN CONTENT: HOMEPAGE WITH MISSION CONTROL WIDGETS -->
+        <main id="main-content">
+
+            <!-- Live Telemetry Status Strip (Mission Control) -->
+            <div class="telemetry-strip" aria-label="Live Ground Telemetry">
+                <div class="telemetry-item">
+                    <span>[ ⏱️ <span data-i18n="mc_clock_prefix">LOCAL TIME:</span> <strong id="telemetry-clock">--:--:--</strong> ]</span>
+                </div>
+                <div class="telemetry-item">
+                    <span>[ 🌦️ <span data-i18n="mc_radar_label">RADAR:</span> <strong class="telemetry-radar-alert" data-i18n="mc_radar_text">RAIN CLOUDS APPROACHING</strong> ]</span>
+                </div>
+                <div class="telemetry-item">
+                    <span>[ ☀️ <strong data-i18n="mc_solar_status">SOLAR STAGE: OPEN</strong> ]</span>
+                </div>
+                <div class="telemetry-item">
+                    <span>[ 🌙 <strong class="telemetry-lunar-dry" data-i18n="mc_lunar_status">LUNAR DOME: 100% DRY / COVERED</strong> ]</span>
+                </div>
+            </div>
+
+            <!-- Weather Triage Banner (Immediate Rain Shelter 1-Click Action) -->
+            <section class="rain-shelter-banner">
+                <div>
+                    <strong data-i18n="mc_rain_alert_title">[ 🚨 WEATHER ALERT: RAIN PREDICTED ]</strong>
+                    <p data-i18n="mc_rain_alert_desc">
+                        Move under cover! The indoor geodesic dome is fully operational with non-stop live audio-visual programming.
+                    </p>
+                </div>
+                <a href="program.html?stage=lunar" class="btn-box btn-accent" id="s1-quick-shelter-btn" data-i18n="mc_rain_alert_btn">
+                    [ Move to Covered Tent (Lunar Forest Dome) &rarr; ]
+                </a>
+            </section>
+
+            <!-- 1. Hero Identity Section -->
+            <section class="wf-box">
+                <h1 class="wf-page-title" data-i18n="index_hero_title">[ FESTIVAL OF DARKNESS 2 ]</h1>
+                <p><strong data-i18n="index_hero_meta">[ July 10 – July 12, 2026 | Kutna Hora, Czech Republic ]</strong></p>
+                <hr>
+                <p data-i18n="index_hero_desc1">[ Three-day festival of electronic, alternative, and audiovisual music in Kutna Hora. ]</p>
+                <p data-i18n="index_hero_desc2">[ Main genres: Post-Rock, Ambient, Indie Pop/Rock, Techno, and Experimental Electronics. ]</p>
+            </section>
+
+            <hr>
+
+            <!-- Operational Status & Stage Telemetry Cards (Mission Control) -->
+            <section class="wf-box">
+                <h2 data-i18n="mc_control_title">[ Operational Status & Stage Telemetry ]</h2>
+                <hr>
+                <div class="control-grid">
+                    <div class="control-tile">
+                        <span class="tile-label" data-i18n="mc_tile_stage1_label">[ STAGE 01 TELEMETRY ]</span>
+                        <div class="tile-value" data-i18n="mc_tile_stage1_name">Solar Horizon Stage</div>
+                        <p data-i18n="mc_tile_stage1_sub">Open-Air Natural Amphitheater &bull; 4,500 Capacity</p>
+                        <hr>
+                        <a href="program.html?stage=solar" class="btn-box" data-i18n="mc_tile_stage1_btn">[ Open Solar Timetable &rarr; ]</a>
+                    </div>
+
+                    <div class="control-tile control-tile-shelter">
+                        <span class="tile-label" data-i18n="mc_tile_stage2_label">[ STAGE 02 TELEMETRY &bull; SHELTER ]</span>
+                        <div class="tile-value" data-i18n="mc_tile_stage2_name">🌙 Lunar Forest Dome</div>
+                        <p data-i18n="mc_tile_stage2_sub">Geodesic All-Weather Dome &bull; 1,800 Capacity &bull; Covered</p>
+                        <hr>
+                        <a href="program.html?stage=lunar" class="btn-box btn-accent" data-i18n="mc_tile_stage2_btn">[ Open Covered Dome Timetable &rarr; ]</a>
+                    </div>
+
+                    <div class="control-tile">
+                        <span class="tile-label" data-i18n="mc_tile_itinerary_label">[ ITINERARY STATUS ]</span>
+                        <div class="tile-value">★ <span class="fav-count-badge">0</span> <span data-i18n="mc_tile_itinerary_unit">Saved Shows</span></div>
+                        <hr>
+                        <a href="my-schedule.html" class="btn-box" data-i18n="mc_tile_itinerary_btn">[ Open Planner &rarr; ]</a>
+                    </div>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- 2. Quick Navigation Directory to Subpages -->
+            <section class="wf-box">
+                <h2 data-i18n="index_sections_title">[ Main Website Sections ]</h2>
+                <hr>
+                <div class="row">
+                    <div class="col wf-box-sub">
+                        <h3 data-i18n="index_card_prog_title">[ 📅 Program ]</h3>
+                        <p data-i18n="index_card_prog_desc">[ Full timetable across all 3 days and 2 stages with band details. ]</p>
+                        <hr>
+                        <a href="program.html" class="btn-box"><strong data-i18n="index_card_prog_btn">[ Open Program &rarr; ]</strong></a>
+                    </div>
+                    <div class="col wf-box-sub">
+                        <h3 data-i18n="index_card_art_title">[ 🎤 Artists ]</h3>
+                        <p data-i18n="index_card_art_desc">[ Catalog of 60 artists from across Europe, genres, biographies, and profiles. ]</p>
+                        <hr>
+                        <a href="artists.html" class="btn-box" data-i18n="index_card_art_btn">[ View Artists &rarr; ]</a>
+                    </div>
+                </div>
+
+                <div class="row row-spaced">
+                    <div class="col wf-box-sub">
+                        <h3 data-i18n="index_card_stg_title">[ ⛺ Stages ]</h3>
+                        <p data-i18n="index_card_stg_desc">[ Outdoor amphitheater Solar Horizon Stage and covered Lunar Forest Dome. ]</p>
+                        <hr>
+                        <a href="stages.html" class="btn-box" data-i18n="index_card_stg_btn">[ Explore Stages &rarr; ]</a>
+                    </div>
+                    <div class="col wf-box-sub">
+                        <h3 data-i18n="index_card_info_title">[ 🚆 Practical Info & Transit ]</h3>
+                        <p data-i18n="index_card_info_desc">[ Route from the train station, free shuttle bus, walking map, camping, and FAQ. ]</p>
+                        <hr>
+                        <a href="practical-info.html#doprava" class="btn-box btn-bold" data-i18n="index_card_info_btn">[ 🚆 Transit from Station &rarr; ]</a>
+                    </div>
+                    <div class="col wf-box-sub">
+                        <h3 data-i18n="index_card_sch_title">[ ★ My Schedule ]</h3>
+                        <p data-i18n="index_card_sch_desc">[ Your personal festival timetable across all 3 days. ]</p>
+                        <hr>
+                        <a href="my-schedule.html" class="btn-box btn-bold" data-i18n="index_card_sch_btn">[ ★ Open My Schedule &rarr; ]</a>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- FOOTER (components/footer.js / footer.html) -->
+        <div id="footer-placeholder">
+            <hr>
+            <footer class="wf-footer-inline">
+                <strong class="festival-brand">[ © 2026 Festival of Darkness 2 ]</strong>
+                <a href="index.html" data-i18n="nav_home">[ Home ]</a>
+                <a href="program.html" data-i18n="nav_program">[ Program ]</a>
+                <a href="artists.html" data-i18n="nav_artists">[ Artists ]</a>
+                <a href="stages.html" data-i18n="nav_stages">[ Stages ]</a>
+                <a href="practical-info.html" data-i18n="nav_practical">[ Practical Info ]</a>
+                <a href="my-schedule.html" data-i18n="nav_myschedule">[ My Schedule ]</a>
+                <address class="wf-address"><span>[ info@festivalofdarkness.com ]</span></address>
+            </footer>
+        </div>
+
+    </div>
+
+    <!-- Live Telemetry Clock and Favorite Synchronizer Script -->
+    <script>
+        (function() {
+            function updateClock() {
+                const clockEl = document.getElementById('telemetry-clock');
+                if (clockEl) {
+                    const now = new Date();
+                    clockEl.textContent = now.toTimeString().split(' ')[0];
+                }
+            }
+            function updateFavBadges() {
+                try {
+                    const raw = localStorage.getItem('festival_favorites');
+                    const favs = raw ? JSON.parse(raw) : [];
+                    const count = Array.isArray(favs) ? favs.length : 0;
+                    document.querySelectorAll('.fav-count-badge').forEach(el => el.textContent = count);
+
+                    const isCs = (typeof window.getFestivalLang === 'function' ? window.getFestivalLang() : 'en') === 'cs';
+                    const unitEl = document.querySelector('[data-i18n="mc_tile_itinerary_unit"]');
+                    if (unitEl) {
+                        if (isCs) {
+                            unitEl.textContent = typeof window.formatCzPlural === 'function'
+                                ? window.formatCzPlural(count, 'uložené vystoupení', 'uložená vystoupení', 'uložených vystoupení').replace(/^\d+\s+/, '')
+                                : (count === 1 ? 'uložené vystoupení' : (count >= 2 && count <= 4 ? 'uložená vystoupení' : 'uložených vystoupení'));
+                        } else {
+                            unitEl.textContent = count === 1 ? 'Saved Show' : 'Saved Shows';
+                        }
+                    }
+                } catch (e) {}
+            }
+            updateClock();
+            setInterval(updateClock, 1000);
+            updateFavBadges();
+            window.addEventListener('storage', updateFavBadges);
+            window.addEventListener('favoritesUpdated', updateFavBadges);
+            window.addEventListener('languageChanged', updateFavBadges);
+        })();
+    </script>
+</body>
+</html>

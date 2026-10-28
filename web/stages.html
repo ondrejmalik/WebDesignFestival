@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Festival Stages & Map – Festival of Darkness 2">
+    <title>Festival of Darkness 2 | Stages</title>
+    <link rel="stylesheet" href="css/wireframe.css">
+    <script src="js/theme.js"></script>
+    <script src="js/lang.js" defer></script>
+    <script src="components/nav.js" defer></script>
+    <script src="components/footer.js" defer></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "MusicFestival",
+        "name": "Festival of Darkness 2 - Stages",
+        "subEvent": [
+            {
+                "@type": "Event",
+                "name": "Solar Horizon Stage Performances",
+                "location": {
+                    "@type": "Place",
+                    "name": "Solar Horizon Stage",
+                    "description": "Natural open-air amphitheater with capacity of 4,500 visitors."
+                }
+            },
+            {
+                "@type": "Event",
+                "name": "Lunar Forest Dome Performances",
+                "location": {
+                    "@type": "Place",
+                    "name": "Lunar Forest Dome",
+                    "description": "Large-capacity covered all-weather geodesic dome with capacity of 1,800 visitors."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+
+    <div class="wf-container">
+
+        <!-- HEADER & NAVIGATION (components/nav.js / nav.html) -->
+        <div id="nav-placeholder">
+            <header class="wf-top-app-bar" role="banner">
+                <a href="#main-content" class="skip-link" data-i18n="skip_to_content">Skip to main content</a>
+                <div class="wf-top-bar-left">
+                    <button id="lang-switch-btn" class="btn-box lang-switch-btn" type="button" aria-label="Language" title="Switch language to Czech">
+                        <span class="flag-icon" id="lang-flag" aria-hidden="true"><img src="img/1f1ec-1f1e7.svg" alt="GB" class="flag-img" width="20" height="20"></span>
+                        <span class="lang-label" id="lang-label">Language</span>
+                    </button>
+                </div>
+                <div class="wf-top-bar-center">
+                    <a href="index.html" class="festival-brand" aria-label="Festival of Darkness 2 Home">
+                        <strong>[ Festival of Darkness 2 ]</strong>
+                    </a>
+                </div>
+                <div class="wf-top-bar-right">
+                    <button id="theme-switch-btn" class="btn-box theme-switch-btn" type="button" aria-label="Switch to Dark Mode" title="Switch to Dark Mode">
+                        <span class="theme-icon" id="theme-icon" aria-hidden="true">🌙</span>
+                        <span class="theme-label" id="theme-label">Dark</span>
+                    </button>
+                    <button id="menu-drawer-open-btn" class="btn-box wf-menu-btn" type="button" aria-expanded="false" aria-controls="alza-menu-drawer" aria-label="Open Navigation Menu">
+                        [ ☰ Menu ]
+                    </button>
+                </div>
+            </header>
+            <hr class="wf-top-bar-divider">
+
+            <!-- Alza Drawer -->
+            <div id="alza-drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
+            <aside id="alza-menu-drawer" class="alza-drawer" aria-label="Site Menu" aria-hidden="true">
+                <div class="drawer-header">
+                    <span class="drawer-title"><strong>[ Festival of Darkness 2 ]</strong></span>
+                    <button id="menu-drawer-close-btn" class="btn-box drawer-close-btn" type="button" aria-label="Close navigation menu">
+                        [ ✕ Close ]
+                    </button>
+                </div>
+                <hr>
+                <nav class="drawer-links" aria-label="Drawer Navigation">
+                    <a href="index.html" data-i18n="nav_home">🏠 [ Home ]</a>
+                    <a href="program.html" data-i18n="nav_program">📅 [ Program ]</a>
+                    <a href="artists.html" data-i18n="nav_artists">🎤 [ Artists ]</a>
+                    <a href="stages.html" class="active" data-i18n="nav_stages">⛺ [ Stages ]</a>
+                    <a href="practical-info.html" data-i18n="nav_practical">🚆 [ Practical Info ]</a>
+                    <a href="my-schedule.html" data-i18n="nav_myschedule">★ [ My Schedule ]</a>
+                    <a href="search.html" data-i18n="nav_search">🔍 [ Search ]</a>
+                </nav>
+                <hr>
+                <div class="drawer-footer">
+                    <div class="theme-switch-box">
+                        <button id="theme-switch-btn-drawer" class="btn-box theme-switch-btn btn-block" type="button" aria-label="Switch to Dark Mode" title="Switch to Dark Mode">
+                            <span class="theme-icon" id="theme-icon-drawer" aria-hidden="true">🌙</span>
+                            <span class="theme-label" id="theme-label-drawer">Dark</span>
+                        </button>
+                    </div>
+                    <div class="lang-switch-box">
+                        <button id="lang-switch-btn-drawer" class="btn-box lang-switch-btn btn-block" type="button" aria-label="Language" title="Switch language to Czech">
+                            <span class="flag-icon" id="lang-flag-drawer" aria-hidden="true"><img src="img/1f1ec-1f1e7.svg" alt="GB" class="flag-img" width="20" height="20"></span>
+                            <span class="lang-label" id="lang-label-drawer">Language</span>
+                        </button>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Bottom Dock -->
+            <nav class="bottom-nav-dock" aria-label="Mobile Bottom Navigation">
+                <a href="artists.html" class="bottom-dock-item bottom-nav-item" id="dock-item-artists">
+                    <span class="dock-icon">🎤</span>
+                    <span class="dock-label" data-i18n="dock_artists">Artists</span>
+                </a>
+                <a href="stages.html" class="bottom-dock-item bottom-nav-item active" id="dock-item-stages">
+                    <span class="dock-icon">⛺</span>
+                    <span class="dock-label" data-i18n="dock_stages">Stages</span>
+                </a>
+                <a href="index.html" class="bottom-dock-item bottom-nav-item bottom-dock-home" id="dock-item-home">
+                    <span class="dock-icon">🏠</span>
+                    <span class="dock-label" data-i18n="dock_home">HOME</span>
+                </a>
+                <a href="program.html" class="bottom-dock-item bottom-nav-item" id="dock-item-timetable">
+                    <span class="dock-icon">📅</span>
+                    <span class="dock-label" data-i18n="dock_timetable">Timetable</span>
+                </a>
+                <a href="my-schedule.html" class="bottom-dock-item bottom-nav-item" id="dock-item-myplan">
+                    <span class="dock-icon">★</span>
+                    <span class="dock-label"><span data-i18n="dock_myplan">My Plan</span> <span class="nav-badge-count is-hidden">0</span></span>
+                </a>
+            </nav>
+        </div>
+
+        <main id="main-content">
+            <!-- Breadcrumbs Navigation -->
+            <nav class="wf-breadcrumbs" aria-label="Breadcrumb">
+                <a href="index.html" data-i18n="nav_home">🏠 [ Home ]</a>
+                <span class="sep">&gt;</span>
+                <span class="current" data-i18n="nav_stages">⛺ [ Stages ]</span>
+            </nav>
+
+            <!-- Title -->
+            <section class="wf-box">
+                <h1 class="wf-page-title" data-i18n="stages_head">[ Festival Stages & Locations ]</h1>
+                <hr>
+                <p data-i18n="stages_intro">[ The Kutna Hora festival grounds feature 2 main musical stages offering completely distinct sensory atmospheres. ]</p>
+            </section>
+
+            <hr>
+
+            <!-- Stage Navigation Tabs -->
+            <nav class="stage-nav-tabs" aria-label="Stage Tabs">
+                <a href="#stage-solar" class="btn-box stage-tab-btn" id="tab-stage-solar" data-i18n="stages_tab_solar">[ ☀️ Solar Horizon Stage ]</a>
+                <a href="#stage-lunar" class="btn-box stage-tab-btn" id="tab-stage-lunar" data-i18n="stages_tab_lunar">[ 🌙 Lunar Forest Dome ]</a>
+            </nav>
+
+            <!-- Stage 1: Solar Horizon Stage -->
+            <section class="wf-box" id="stage-solar">
+                <h2 data-i18n="stages_solar_title">[ ☀️ Solar Horizon Stage ]</h2>
+                <hr>
+                <div>
+                    <p data-i18n-html="stages_solar_type"><strong>Stage Type:</strong> Natural open-air amphitheater</p>
+                    <p data-i18n-html="stages_solar_cap"><strong>Capacity:</strong> 4,500 visitors</p>
+                    <p data-i18n-html="stages_solar_focus"><strong>Focus:</strong> Afternoon and evening live band performances (Post-Rock, Indie Rock, live audiovisual sets).</p>
+                    <address class="wf-address">
+                        <p><strong>Location:</strong> Western festival amphitheater, Sedlec Grounds</p>
+                    </address>
+                    <hr>
+                    <a href="program.html?stage=solar" class="btn-box" data-i18n="stages_solar_btn">[ ☀️ View Solar Horizon Stage Schedule &rarr; ]</a>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- Stage 2: Lunar Forest Dome (Covered Dome) -->
+            <section class="wf-box" id="stage-lunar">
+                <h2 data-i18n="stages_lunar_title">[ 🌙 Lunar Forest Dome (Covered Dome) ]</h2>
+                <hr>
+                <div>
+                    <p data-i18n-html="stages_lunar_type"><strong>Stage Type:</strong> Large-capacity covered dome with complete all-weather rain shelter</p>
+                    <p data-i18n-html="stages_lunar_cap"><strong>Capacity:</strong> 1,800 visitors</p>
+                    <p data-i18n-html="stages_lunar_focus"><strong>Focus:</strong> Late-night club sets, dark techno, modular ambient, experimental electronics, and 360° projections.</p>
+                    <p class="shelter-note" data-i18n-html="stages_lunar_shelter"><em>Ideal refuge when it rains – music runs continuously under a solid covered roof!</em></p>
+                    <address class="wf-address">
+                        <p><strong>Location:</strong> Eastern forest sector, Weatherproof Dome</p>
+                    </address>
+                    <hr>
+                    <a href="program.html?stage=lunar" class="btn-box" data-i18n="stages_lunar_btn">[ 🌙 View Lunar Forest Dome Schedule &rarr; ]</a>
+                </div>
+            </section>
+
+            <hr>
+
+            <!-- Venue Map -->
+            <section class="wf-box">
+                <h2 data-i18n="stages_map_title">[ Festival Grounds Map & Visitor Orientation ]</h2>
+                <hr>
+                <div class="wf-box-sub map-summary-box">
+                    <p data-i18n="stages_map_desc">[ Entrance A (Main Gate) &bull; Solar Horizon Stage &bull; Lunar Forest Dome (Covered) &bull; Camping Ground &bull; Cashless Zone &bull; Shuttle Bus Stop ]</p>
+                    <a href="practical-info.html#doprava" class="btn-box btn-bold" data-i18n="stages_map_btn">
+                        [ 🚆 Transit Guide: How to get from the train station to the venue &rarr; ]
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER (components/footer.js / footer.html) -->
+        <div id="footer-placeholder">
+            <hr>
+            <footer class="wf-footer-inline">
+                <strong class="festival-brand">[ © 2026 Festival of Darkness 2 ]</strong>
+                <a href="index.html" data-i18n="nav_home">[ Home ]</a>
+                <a href="program.html" data-i18n="nav_program">[ Program ]</a>
+                <a href="artists.html" data-i18n="nav_artists">[ Artists ]</a>
+                <a href="stages.html" data-i18n="nav_stages">[ Stages ]</a>
+                <a href="practical-info.html" data-i18n="nav_practical">[ Practical Info ]</a>
+                <a href="my-schedule.html" data-i18n="nav_myschedule">[ My Schedule ]</a>
+                <address class="wf-address"><span>[ info@festivalofdarkness.com ]</span></address>
+            </footer>
+        </div>
+
+    </div>
+
+    <script>
+        function updateStageTabs() {
+            const hash = window.location.hash;
+            const tabSolar = document.getElementById('tab-stage-solar');
+            const tabLunar = document.getElementById('tab-stage-lunar');
+            if (!tabSolar || !tabLunar) return;
+
+            tabSolar.classList.remove('active');
+            tabLunar.classList.remove('active');
+
+            let target = null;
+            if (hash === '#stage-lunar') {
+                tabLunar.classList.add('active');
+                target = document.getElementById('stage-lunar');
+            } else if (hash === '#stage-solar') {
+                tabSolar.classList.add('active');
+                target = document.getElementById('stage-solar');
+            }
+
+            if (target) {
+                setTimeout(() => {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    target.classList.add('spot-highlight');
+                    setTimeout(() => target.classList.remove('spot-highlight'), 2500);
+                }, 100);
+            }
+        }
+        window.addEventListener('hashchange', updateStageTabs);
+        document.addEventListener('DOMContentLoaded', updateStageTabs);
+    </script>
+</body>
+</html>
