@@ -724,6 +724,7 @@
         const targetUrl = `./${currentLayout}/${currentSubpage}`;
         const iframe = document.getElementById('simulator-iframe');
         if (iframe) {
+            iframe.setAttribute('src', targetUrl);
             try {
                 // Must resolve targetUrl against parent window's base URL, not the iframe's current location
                 const resolvedUrl = new URL(targetUrl, window.location.href).href;

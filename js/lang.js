@@ -6,6 +6,13 @@
 
     const LANG_STORAGE_KEY = 'festival_language';
 
+    // Shared Czech morphological pluralization helper
+    window.formatCzPlural = function(count, one, few, many) {
+        if (count === 1) return `${count} ${one}`;
+        if (count >= 2 && count <= 4) return `${count} ${few}`;
+        return `${count} ${many}`;
+    };
+
     // 60 Canonical Czech performer biographies (paired with canonical English bios)
     const ARTIST_BIOS_CS = {
         "perf-01": "Atmosférická post-rocková formace z Prahy kombinující mohutné filmové gradace s ambientními plochami a vrstvenými kytarovými efekty.",
@@ -276,6 +283,11 @@
             practical_head: "[ Practical Information for Visitors ]",
             practical_date: "[ Festival of Darkness 2 | July 10–12, 2026 | Kutna Hora ]",
             practical_intro: "[ Complete guide to transit from the train station to the venue, shuttle bus timetables, marked walking route on the map, camping, and cashless services. ]",
+            practical_params_title: "[ Key Parameters of the 2026 Edition ]",
+            practical_params_item1: "[ • <strong>3 festival days:</strong> Friday July 10, Saturday July 11, Sunday July 12, 2026 ]",
+            practical_params_item2: "[ • <strong>2 distinct stages:</strong> Solar Horizon Stage & Lunar Forest Dome ]",
+            practical_params_item3: "[ • <strong>60 live performances</strong> and accompanying audiovisual shows ]",
+            practical_params_item4: "[ • <strong>Location:</strong> Festival Grounds, Kutna Hora, Czech Republic ]",
             practical_quick_nav: "[ 📍 Quick Section Navigation: ]",
             practical_nav_transit: "[ 🚆 Transit: Station to Venue ↓ ]",
             practical_nav_shuttle: "[ 🚌 Festival Shuttle Bus Timetable ]",
@@ -331,7 +343,21 @@
             detail_play: "[ ▶ Play ]",
             detail_pause: "[ ❚❚ Pause ]",
             detail_btn_text: "[ ℹ️ Detail → ]",
-            schedule_artist_detail_btn: "[ ℹ️ Artist Detail → ]"
+            schedule_artist_detail_btn: "[ ℹ️ Artist Detail → ]",
+            skip_to_content: "Skip to main content",
+            nav_search: "🔍 [ Search ]",
+            sch_caption_day1: "Festival timetable for Friday, July 10, 2026",
+            sch_caption_day2: "Festival timetable for Saturday, July 11, 2026",
+            sch_caption_day3: "Festival timetable for Sunday, July 12, 2026",
+            search_title: "[ Festival Search & Lineup Explorer ]",
+            search_placeholder: "Search performers, stages, times, genres, info...",
+            search_btn: "[ Search ]",
+            search_results_for: "Search Results for:",
+            search_performers: "Matching Performers",
+            search_timetable: "Matching Timetable Slots",
+            search_info: "Stages & Practical Information",
+            search_empty: "No results found matching your query.",
+            search_quick_pill_all: "[ Show All ]"
         },
         cs: {
             // Navigation
@@ -537,6 +563,11 @@
             practical_head: "[ Praktické informace pro návštěvníky ]",
             practical_date: "[ Festival of Darkness 2 | 10.–12. července 2026 | Kutná Hora ]",
             practical_intro: "[ Kompletní průvodce dopravou z vlakového nádraží do areálu, jízdním řádem festivalového shuttle busu, vyznačenou pěší trasou na mapě, stanovým městečkem a bezhotovostním placením. ]",
+            practical_params_title: "[ Klíčové parametry ročníku 2026 ]",
+            practical_params_item1: "[ • <strong>3 festivalové dny:</strong> Pátek 10. července, Sobota 11. července, Neděle 12. července 2026 ]",
+            practical_params_item2: "[ • <strong>2 unikátní scény:</strong> Solar Horizon Stage & Lunar Forest Dome ]",
+            practical_params_item3: "[ • <strong>60 živých vystoupení</strong> a doprovodných audiovizuálních show ]",
+            practical_params_item4: "[ • <strong>Lokalita:</strong> Festivalový areál, Kutná Hora, Česká republika ]",
             practical_quick_nav: "[ 📍 Rychlá navigace v sekci: ]",
             practical_nav_transit: "[ 🚆 Doprava z nádraží do areálu ↓ ]",
             practical_nav_shuttle: "[ 🚌 Jízdní řád festivalového Shuttle Busu ]",
@@ -592,7 +623,21 @@
             detail_play: "[ ▶ Přehrát ]",
             detail_pause: "[ ❚❚ Pozastavit ]",
             detail_btn_text: "[ ℹ️ Detail → ]",
-            schedule_artist_detail_btn: "[ ℹ️ Detail interpreta → ]"
+            schedule_artist_detail_btn: "[ ℹ️ Detail interpreta → ]",
+            skip_to_content: "Přejít k hlavnímu obsahu",
+            nav_search: "🔍 [ Vyhledávání ]",
+            sch_caption_day1: "Harmonogram festivalu na pátek 10. července 2026",
+            sch_caption_day2: "Harmonogram festivalu na sobotu 11. července 2026",
+            sch_caption_day3: "Harmonogram festivalu na neděli 12. července 2026",
+            search_title: "[ Vyhledávání festivalu & Lineupu ]",
+            search_placeholder: "Hledat interprety, scény, časy, žánry, informace...",
+            search_btn: "[ Hledat ]",
+            search_results_for: "Výsledky vyhledávání pro:",
+            search_performers: "Odpovídající interpreti",
+            search_timetable: "Odpovídající časové sloty",
+            search_info: "Scény a praktické informace",
+            search_empty: "Pro váš dotaz nebyly nalezeny žádné výsledky.",
+            search_quick_pill_all: "[ Zobrazit vše ]"
         }
     };
 

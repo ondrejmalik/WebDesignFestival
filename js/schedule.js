@@ -758,17 +758,13 @@ function renderMySchedule() {
         const emptyDesc = isCs
             ? 'Zatím nemáte v osobním programu uložena žádná vystoupení. Můžete si je přidat v sekci Program.'
             : 'You have not added any performances to your schedule yet. You can add them in the Program section.';
-        const emptyBtn = isCs ? '[ Přejít do sekce „Program“ &rarr; ]' : '[ Go to "Program" Section &rarr; ]';
+        const emptyBtn = isCs ? '[ Přejít do sekce „Program“ → ]' : '[ Go to "Program" Section → ]';
 
         container.innerHTML = `
-            <div class="wf-box-sub" style="padding: 24px; text-align: center;">
-                <h3 style="font-size: 1.15rem; margin-bottom: 8px;">${emptyTitle}</h3>
-                <p style="color: #444; max-width: 600px; margin: 0 auto 14px;">
-                    ${emptyDesc}
-                </p>
-                <a href="program.html" class="btn-box" style="font-weight: bold; background: #222; color: #fff; padding: 8px 16px;">
-                    ${emptyBtn}
-                </a>
+            <div class="wf-box-sub sch-empty-box">
+                <h2 class="sch-empty-title">${emptyTitle}</h2>
+                <p class="sch-empty-desc">${emptyDesc}</p>
+                <a href="program.html" class="btn-box btn-primary sch-empty-btn">${emptyBtn}</a>
             </div>
         `;
         return;
@@ -800,24 +796,26 @@ function renderMySchedule() {
     if (totalCollisions > 0) {
         let bannerTitle = '';
         if (isCs) {
-            if (totalCollisions === 1) bannerTitle = '[ ⚠️ Upozornění na časové kolize: Nalezeno 1 překrývající se vystoupení! ]';
-            else if (totalCollisions >= 2 && totalCollisions <= 4) bannerTitle = `[ ⚠️ Upozornění na časové kolize: Nalezena ${totalCollisions} překrývající se vystoupení! ]`;
-            else bannerTitle = `[ ⚠️ Upozornění na časové kolize: Nalezeno ${totalCollisions} překrývajících se vystoupení! ]`;
+            if (typeof window.formatCzPlural === 'function') {
+                const pluralShows = window.formatCzPlural(totalCollisions, 'překrývající se vystoupení', 'překrývající se vystoupení', 'překrývajících se vystoupení');
+                bannerTitle = `[ ⚠️ Upozornění na časové kolize: Nalezeno ${pluralShows}! ]`;
+            } else {
+                if (totalCollisions === 1) bannerTitle = '[ ⚠️ Upozornění na časové kolize: Nalezeno 1 překrývající se vystoupení! ]';
+                else if (totalCollisions >= 2 && totalCollisions <= 4) bannerTitle = `[ ⚠️ Upozornění na časové kolize: Nalezena ${totalCollisions} překrývající se vystoupení! ]`;
+                else bannerTitle = `[ ⚠️ Upozornění na časové kolize: Nalezeno ${totalCollisions} překrývajících se vystoupení! ]`;
+            }
         } else {
             bannerTitle = totalCollisions === 1 ? '[ ⚠️ Schedule Conflict Alert: Found 1 overlapping show! ]' : `[ ⚠️ Schedule Conflict Alert: Found ${totalCollisions} overlapping shows! ]`;
         }
-
 
         const bannerDesc = isCs
             ? `V některých časech máte naplánována překrývající se vystoupení na scéně <strong>Solar Horizon Stage</strong> a v <strong>Lunar Forest Dome</strong>.`
             : `You have overlapping performances scheduled at the same time on the <strong>Solar Horizon Stage</strong> and in the <strong>Lunar Forest Dome</strong>.`;
 
         html += `
-            <div class="wf-box" style="border: 2px solid #b71c1c; background: #ffebee; margin-bottom: 16px; padding: 14px;">
-                <h3 style="color: #b71c1c; margin-bottom: 6px;">${bannerTitle}</h3>
-                <p style="color: #721c24; font-size: 0.92rem; line-height: 1.45;">
-                    ${bannerDesc}
-                </p>
+            <div class="wf-box conflict-alert-box">
+                <h3>${bannerTitle}</h3>
+                <p>${bannerDesc}</p>
             </div>
         `;
     } else {
@@ -826,10 +824,8 @@ function renderMySchedule() {
             : '[ ✓ Your schedule has no conflicts! All selected performances follow each other seamlessly. ]';
 
         html += `
-            <div class="wf-box" style="border: 2px solid #28a745; background: #d4edda; margin-bottom: 16px; padding: 12px 14px;">
-                <p style="color: #155724; font-weight: bold; font-size: 0.95rem; margin: 0;">
-                    ${cleanMsg}
-                </p>
+            <div class="wf-box conflict-clean-box">
+                <p><strong>${cleanMsg}</strong></p>
             </div>
         `;
     }
@@ -840,26 +836,30 @@ function renderMySchedule() {
         const count = dayFavs.length;
         let showsCountText = '';
         if (isCs) {
-            if (count === 1) showsCountText = '1 uložené vystoupení';
-            else if (count >= 2 && count <= 4) showsCountText = `${count} uložená vystoupení`;
-            else showsCountText = `${count} uložených vystoupení`;
+            if (typeof window.formatCzPlural === 'function') {
+                showsCountText = window.formatCzPlural(count, '1 uložené vystoupení', `${count} uložená vystoupení`, `${count} uložených vystoupení`);
+            } else {
+                if (count === 1) showsCountText = '1 uložené vystoupení';
+                else if (count >= 2 && count <= 4) showsCountText = `${count} uložená vystoupení`;
+                else showsCountText = `${count} uložených vystoupení`;
+            }
         } else {
             showsCountText = count === 1 ? '1 saved show' : `${count} saved shows`;
         }
         
-        html += `<section class="wf-box" style="margin-bottom: 18px;">`;
-        html += `<h3>[ 📅 ${d.label} – ${showsCountText} ]</h3><hr>`;
+        html += `<section class="wf-box sch-day-section-box">`;
+        html += `<h2>[ 📅 ${d.label} – ${showsCountText} ]</h2><hr>`;
 
         if (dayFavs.length === 0) {
             const noShowsText = isCs 
                 ? '[ Pro tento den zatím nemáte uložená žádná vystoupení. ]'
                 : '[ You currently have no performances saved for this day. ]';
-            const pickBtnText = isCs ? '[ Vybrat vystoupení v Programu &rarr; ]' : '[ Pick shows from the schedule &rarr; ]';
+            const pickBtnText = isCs ? '[ Vybrat vystoupení v Programu → ]' : '[ Pick shows from the schedule → ]';
 
             html += `
-                <div class="wf-box-sub" style="padding: 12px; color: #555;">
-                    <p><em>${noShowsText}</em></p>
-                    <a href="program.html" class="btn-box" style="margin-top: 8px;">${pickBtnText}</a>
+                <div class="wf-box-sub">
+                    <p class="sch-empty-text"><em>${noShowsText}</em></p>
+                    <a href="program.html" class="btn-box sch-empty-btn">${pickBtnText}</a>
                 </div>
             `;
         } else {
@@ -889,7 +889,7 @@ function renderMySchedule() {
                     : '[ ⚠️ A time conflict occurs on this day between the Solar and Lunar stages! Inspect highlighted shows below. ]';
 
                 html += `
-                    <div style="border: 1px solid #b71c1c; background: #fff5f5; padding: 8px 12px; margin-bottom: 12px; font-size: 0.88rem; color: #b71c1c;">
+                    <div class="day-conflict-note">
                         <strong>${dayConflictMsg}</strong>
                     </div>
                 `;
@@ -900,59 +900,54 @@ function renderMySchedule() {
                 const collidingWithObj = collisionMap.get(item.id);
                 const hasCollision = !!collidingWithObj;
 
-                const borderStyle = hasCollision 
-                    ? 'border: 2px solid #b71c1c; background: #ffebee;' 
-                    : 'border: 1px solid #777; background: #fafafa;';
+                const cardClass = hasCollision 
+                    ? 'col wf-box-sub sch-plan-card has-collision' 
+                    : 'col wf-box-sub sch-plan-card';
 
+                const statusBadgeClass = hasCollision ? 'status-badge-conflict' : 'status-badge-clean';
                 const statusBadge = hasCollision 
                     ? `
-                        <div style="margin-top: 8px; padding: 6px 8px; border: 1px solid #b71c1c; background: #fff; font-size: 0.84rem; color: #b71c1c;">
+                        <div class="${statusBadgeClass}">
                             <strong>${isCs ? '[ ⚠️ ČASOVÁ KOLIZE ]' : '[ ⚠️ TIME CONFLICT ]'}</strong>
-                            <p style="margin-top: 3px; color: #900;">
+                            <p>
                                 ${isCs ? 'Překrývá se s:' : 'Overlaps with:'} <strong>${collidingWithObj.artist}</strong> ${isCs ? 'na scéně' : 'on'} <em>${collidingWithObj.stage}</em> (${collidingWithObj.time}).
                             </p>
                         </div>
                       `
                     : `
-                        <div style="margin-top: 8px; padding: 4px 8px; border: 1px solid #28a745; background: #f4faf5; font-size: 0.84rem; color: #155724;">
+                        <div class="${statusBadgeClass}">
                             <strong>${isCs ? '[ ✓ Bez časové kolize ]' : '[ ✓ No time conflict ]'}</strong>
                         </div>
                       `;
 
                 const removeBtnClass = hasCollision ? 'btn-box remove-btn has-collision' : 'btn-box remove-btn';
-                const removeBtnStyle = hasCollision
-                    ? 'border: 1px solid #b71c1c; font-weight: bold;'
-                    : 'border: 1px solid #333;';
-
                 const removeBtnText = hasCollision 
                     ? (isCs ? '[ 🗑️ Odebrat vystoupení ]' : '[ 🗑️ Remove performance ]')
                     : (isCs ? '[ 🗑️ Odebrat z programu ]' : '[ 🗑️ Remove from schedule ]');
 
                 const bio = getArtistBio(item.id);
                 const stageHash = (item.stage && item.stage.toLowerCase().includes('solar')) ? 'stage-solar' : 'stage-lunar';
-                const stageDisplayName = isCs
-                    ? (stageHash === 'stage-solar' ? '☀️ Solar Horizon Stage' : '🌙 Lunar Forest Dome')
-                    : (stageHash === 'stage-solar' ? '☀️ Solar Horizon Stage' : '🌙 Lunar Forest Dome');
+                const stageDisplayName = stageHash === 'stage-solar' ? '☀️ Solar Horizon Stage' : '🌙 Lunar Forest Dome';
 
                 html += `
-                    <article class="col wf-box-sub" id="${item.id}" style="${borderStyle}; min-width: 260px;">
-                        <h4 style="font-size: 1.05rem; margin-bottom: 6px;">
-                            [ ${item.time} | <a href="artist-detail.html?id=${item.id}&from=myschedule#${item.id}" style="color: inherit; text-decoration: underline;" title="${isCs ? 'Detail interpreta' : 'Artist Detail'}">${item.artist}</a> ]
-                        </h4>
+                    <article class="${cardClass}" id="${item.id}">
+                        <h3 class="sch-card-artist-title">
+                            [ ${item.time} | <a href="artist-detail.html?id=${item.id}&from=myschedule#${item.id}" class="sch-artist-link" title="${isCs ? 'Detail interpreta' : 'Artist Detail'}">${item.artist}</a> ]
+                        </h3>
                         <p>
                             <strong>${isCs ? 'Scéna:' : 'Stage:'}</strong> 
-                            <a href="stages.html#${stageHash}" class="stage-link" style="color: #111; font-weight: bold; text-decoration: underline;" title="${isCs ? 'Zobrazit informace o scéně' : 'View Stage Details'}">
+                            <a href="stages.html#${stageHash}" class="stage-link" title="${isCs ? 'Zobrazit informace o scéně' : 'View Stage Details'}">
                                 ${stageDisplayName} &rarr;
                             </a>
                         </p>
                         <p><strong>${isCs ? 'Žánr:' : 'Genre:'}</strong> ${item.genre || (isCs ? 'Elektronická hudba' : 'Electronic')}</p>
-                        ${bio ? `<p style="font-size: 0.8rem; color: #555; margin-top: 4px;"><em>${bio}</em></p>` : ''}
+                        ${bio ? `<p class="sch-card-bio"><em>${bio}</em></p>` : ''}
                         ${statusBadge}
-                        <div style="display: flex; gap: 6px; margin-top: 10px;">
-                            <a href="artist-detail.html?id=${item.id}&from=myschedule#${item.id}" class="btn-box" style="flex: 1; text-align: center; font-size: 0.82rem; font-weight: bold; text-decoration: none; padding: 6px 8px;">
+                        <div class="sch-card-actions">
+                            <a href="artist-detail.html?id=${item.id}&from=myschedule#${item.id}" class="btn-box sch-card-btn">
                                 ${isCs ? '[ ℹ️ Detail interpreta → ]' : '[ ℹ️ Artist Detail → ]'}
                             </a>
-                            <button class="${removeBtnClass}" data-id="${item.id}" style="flex: 1; text-align: center; font-size: 0.82rem; padding: 6px 8px; ${removeBtnStyle}">
+                            <button class="${removeBtnClass}" data-id="${item.id}">
                                 ${removeBtnText}
                             </button>
                         </div>

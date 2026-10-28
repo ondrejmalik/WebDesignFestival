@@ -848,6 +848,11 @@
             originUrl = `my-schedule.html#${artist.id}`;
             backText = isCs ? '[ ← Zpět do Mého plánu ]' : '[ ← Back to My Schedule ]';
             originIcon = '★';
+        } else if (from === 'search') {
+            originName = isCs ? 'Vyhledávání' : 'Search';
+            originUrl = `search.html`;
+            backText = isCs ? '[ ← Zpět do Vyhledávání ]' : '[ ← Back to Search ]';
+            originIcon = '🔍';
         }
 
         if (breadcrumbsEl) {
@@ -886,7 +891,7 @@
         const favBtnText = isFav 
             ? (isCs ? '★ Uloženo v mém programu' : '★ Saved in My Schedule') 
             : (isCs ? '☆ Přidat do mého programu' : '☆ Add to My Schedule');
-        const favBtnStyle = isFav ? 'background: #28a745; color: #fff; border-color: #1e7e34;' : 'background: #eee; color: #000; border-color: #333;';
+        const favBtnClass = isFav ? 'btn-box artist-detail-star-btn is-active' : 'btn-box artist-detail-star-btn';
 
         const stageSpecsText = stageId === 'stage-lunar'
             ? (isCs 
@@ -903,16 +908,16 @@
         container.innerHTML = `
             <!-- Main Profile Header -->
             <section class="wf-box">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px;">
+                <div class="artist-detail-header-wrapper">
                     <div>
-                        <h2 style="font-size: 1.55rem; margin-bottom: 6px;">[ ${artist.name} (${artist.origin}) ]</h2>
-                        <p class="artist-detail-meta-text" style="color: #111; font-size: 0.95rem;">
+                        <h2 class="artist-detail-title">[ ${artist.name} (${artist.origin}) ]</h2>
+                        <p class="artist-detail-meta-text">
                             <strong>${isCs ? 'Žánr:' : 'Genre:'}</strong> ${artist.genre} | 
                             <strong>${isCs ? 'Původ:' : 'Origin:'}</strong> ${countryText}
                         </p>
                     </div>
                     <div>
-                        <button id="profile-star-btn" class="btn-box" type="button" style="font-size: 0.95rem; font-weight: bold; padding: 6px 14px; cursor: pointer; ${favBtnStyle}">
+                        <button id="profile-star-btn" class="${favBtnClass}" type="button">
                             ${favBtnText}
                         </button>
                     </div>
@@ -932,7 +937,7 @@
                     </div>
                     <div>
                         <strong>${isCs ? '⛺ Festivalová scéna:' : '⛺ Stage:'}</strong><br>
-                        <a href="stages.html#${stageId}" class="stage-link" style="color: #111; font-weight: bold; text-decoration: underline;" title="${isCs ? 'Zobrazit informace o scéně' : 'View Stage Details'}">
+                        <a href="stages.html#${stageId}" class="stage-link" title="${isCs ? 'Zobrazit informace o scéně' : 'View Stage Details'}">
                             ${stageText} &rarr;
                         </a>
                     </div>
@@ -942,29 +947,29 @@
                 <div class="artist-detail-columns">
                     <!-- Left: Media & Audio Wireframe -->
                     <div class="artist-detail-media-col">
-                        <div class="wf-box-sub" style="height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 12px; background: #fafafa; border: 1px solid #777;">
-                            <div style="font-size: 2rem; margin-bottom: 6px;">📷</div>
-                            <span style="font-size: 0.85rem; color: #555;">
+                        <div class="wf-box-sub audio-preview-container">
+                            <div class="audio-preview-icon">📷</div>
+                            <span class="audio-preview-label">
                                 ${isCs ? `[ Oficiální festivalová fotografie:<br><strong>${artist.name}</strong> ]` : `[ Official Press Kit Photo:<br><strong>${artist.name}</strong> ]`}
                             </span>
                         </div>
 
                         <!-- Audio Sample Box -->
                         <div class="audio-preview-box">
-                            <h4 style="font-size: 0.9rem; margin-bottom: 6px;">[ ${isCs ? '♫ Zvuková ukázka tvorby' : '♫ Audio Sample Preview'} ]</h4>
-                            <p style="font-size: 0.78rem; color: #555; margin-bottom: 6px;">
+                            <h3 class="audio-sample-title">[ ${isCs ? '♫ Zvuková ukázka tvorby' : '♫ Audio Sample Preview'} ]</h3>
+                            <p class="audio-sample-subtitle">
                                 <em>${artist.name} – Live Session (4:18)</em>
                             </p>
                             <div class="audio-player-wireframe">
-                                <button type="button" id="preview-play-btn" class="btn-box" style="font-size: 0.8rem; padding: 4px 8px; font-weight: bold;">
+                                <button type="button" id="preview-play-btn" class="btn-box audio-play-btn">
                                     [ ▶ ${isCs ? 'Přehrát' : 'Play'} ]
                                 </button>
                                 <div class="audio-progress-bar">
                                     <div class="audio-progress-fill"></div>
                                 </div>
-                                <span style="font-size: 0.75rem; font-family: monospace;">01:38 / 04:18</span>
+                                <span class="audio-time-label">01:38 / 04:18</span>
                             </div>
-                            <p style="font-size: 0.76rem; color: #666; margin-top: 8px;">
+                            <p class="audio-stream-info">
                                 ${isCs ? 'Odkazy na diskografii: Bandcamp • Spotify • Soundcloud' : 'Discography streaming: Bandcamp • Spotify • Soundcloud'}
                             </p>
                         </div>
@@ -972,23 +977,23 @@
 
                     <!-- Right: Biography & Stage Specs -->
                     <div class="artist-detail-content-col">
-                        <h3 style="font-size: 1.15rem; margin-bottom: 8px;">[ ${isCs ? 'Biografie a hudební profil' : 'Biography & Musical Profile'} ]</h3>
-                        <p class="artist-detail-bio-text" style="font-size: 0.95rem; line-height: 1.6; color: #111; margin-bottom: 14px;">
+                        <h3 class="artist-detail-section-title">[ ${isCs ? 'Biografie a hudební profil' : 'Biography & Musical Profile'} ]</h3>
+                        <p class="artist-detail-bio-text">
                             ${bio}
                         </p>
 
                         <hr>
 
-                        <h4 style="font-size: 1.02rem; margin: 12px 0 6px;">[ ${isCs ? 'Technické informace & specifikace scény' : 'Stage Environment & Technical Specs'} ]</h4>
-                        <p class="artist-detail-stage-text" style="font-size: 0.88rem; line-height: 1.5; color: #111; margin-bottom: 14px;">
+                        <h4 class="artist-detail-subsection-title">[ ${isCs ? 'Technické informace & specifikace scény' : 'Stage Environment & Technical Specs'} ]</h4>
+                        <p class="artist-detail-stage-text">
                             ${stageSpecsText}
                         </p>
 
                         <hr>
 
                         <!-- Action Buttons -->
-                        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;">
-                            <a href="program.html#${artist.id}" class="btn-box" style="font-weight: bold;">
+                        <div class="artist-detail-actions-bar">
+                            <a href="program.html#${artist.id}" class="btn-box btn-bold">
                                 ${isCs ? '[ 📅 Zobrazit v harmonogramu → ]' : '[ 📅 View in Timetable → ]'}
                             </a>
                             <a href="stages.html#${stageId}" class="btn-box">
@@ -997,7 +1002,7 @@
                             <a href="my-schedule.html#${artist.id}" class="btn-box">
                                 ${isCs ? '[ ★ Přejít do Mého plánu → ]' : '[ ★ Go to My Schedule → ]'}
                             </a>
-                            <a href="${originUrl}" class="btn-box" style="margin-left: auto; background: #222; color: #fff; font-weight: bold;">
+                            <a href="${originUrl}" class="btn-box artist-detail-back-btn-alt">
                                 ${backText}
                             </a>
                         </div>
@@ -1006,13 +1011,13 @@
             </section>
 
             <!-- Artist Quick Selector Dropdown -->
-            <section class="wf-box" style="margin-top: 16px;">
-                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+            <section class="wf-box artist-quick-select-section">
+                <div class="artist-quick-select-wrapper">
                     <div>
                         <strong>${isCs ? '[ Přejít na jiného ze 60 interpretů: ]' : '[ Jump to Another of the 60 Performers: ]'}</strong>
                     </div>
-                    <div style="flex: 1; min-width: 220px; max-width: 400px;">
-                        <select id="artist-quick-select" class="input-box" style="width: 100%; padding: 5px 8px; font-size: 0.88rem;">
+                    <div class="artist-quick-select-box">
+                        <select id="artist-quick-select" class="input-box artist-quick-select-input">
                             ${ARTISTS_CATALOG.map(a => `
                                 <option value="${a.id}" ${a.id === artist.id ? 'selected' : ''}>
                                     ${a.name} (${a.origin}) – ${a.genre}
