@@ -150,10 +150,6 @@
 
 <!-- 3. Ergonomic Bottom Thumb Navigation Dock (Albert App Style: Artists - Stages - HOME - Timetable - My Plan) -->
 <nav class="bottom-nav-dock" aria-label="Main Navigation">
-    <a href="program.html" class="bottom-dock-item bottom-nav-item ${currentPath === "program.html" ? "active" : ""}" id="dock-item-timetable">
-        <span class="dock-icon">📅</span>
-        <span class="dock-label" data-i18n="dock_timetable">${dockTimetable}</span>
-    </a>
     <a href="artists.html" class="bottom-dock-item bottom-nav-item ${currentPath === "artists.html" ? "active" : ""}" id="dock-item-artists">
         <span class="dock-icon">🎤</span>
         <span class="dock-label" data-i18n="dock_artists">${dockArtists}</span>
@@ -162,13 +158,17 @@
         <span class="dock-icon">⛺</span>
         <span class="dock-label" data-i18n="dock_stages">${dockStages}</span>
     </a>
+    <a href="practical-info.html" class="bottom-dock-item bottom-nav-item ${currentPath === "practical-info.html" ? "active" : ""}" id="dock-item-info">
+        <span class="dock-icon">🚆</span>
+        <span class="dock-label" data-i18n="dock_practical">${dockPractical}</span>
+    </a>
     <a href="index.html" class="bottom-dock-item bottom-nav-item bottom-dock-home ${currentPath === "index.html" ? "active" : ""}" id="dock-item-home">
         <span class="dock-icon">🏠</span>
         <span class="dock-label" data-i18n="dock_home">${dockHome}</span>
     </a>
-    <a href="practical-info.html" class="bottom-dock-item bottom-nav-item ${currentPath === "practical-info.html" ? "active" : ""}" id="dock-item-info">
-        <span class="dock-icon">🚆</span>
-        <span class="dock-label" data-i18n="dock_practical">${dockPractical}</span>
+    <a href="program.html" class="bottom-dock-item bottom-nav-item ${currentPath === "program.html" ? "active" : ""}" id="dock-item-timetable">
+        <span class="dock-icon">📅</span>
+        <span class="dock-label" data-i18n="dock_timetable">${dockTimetable}</span>
     </a>
     <a href="my-schedule.html" class="bottom-dock-item bottom-nav-item ${currentPath === "my-schedule.html" ? "active" : ""}" id="dock-item-myplan">
         <span class="dock-icon">★</span>
