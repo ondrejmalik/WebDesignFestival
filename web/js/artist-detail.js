@@ -898,7 +898,7 @@
                 ? 'Geodetická krytá kupole s kapacitou 1 800 návštěvníků. Kompletně zastřešená a odolná proti dešti. Vybavena prostorovým zvukovým systémem a 360° projekcí pro pohlcující audiovizuální show.'
                 : 'Geodesic covered dome with a capacity of 1,800 visitors. Completely sheltered and rainproof. Features immersive surround audio and 360-degree light projections for experimental performances.')
             : (isCs
-                ? 'Přírodní otevřený amfiteátr s kapacitou 4 500 návštěvníků. Centrální scéna pro živé kapely s mohutným ozvučením line-array a panoramatickým výhledem na historické panorama Kutné Hory.'
+                ? 'Přírodní otevřený amfiteátr s kapacitou 4 500 návštěvníků. Centrální pódium pro živé kapely s mohutným ozvučením line-array a panoramatickým výhledem na historické panorama Kutné Hory.'
                 : 'Natural open-air amphitheater with a capacity of 4,500 visitors. Central festival stage for live bands with powerful line-array sound and panoramic views of historic Kutna Hora.');
 
         // 3. Render Profile Container
@@ -936,8 +936,8 @@
                         ${artist.time}
                     </div>
                     <div>
-                        <strong>${isCs ? '⛺ Festivalová scéna:' : '⛺ Stage:'}</strong><br>
-                        <a href="stages.html#${stageId}" class="stage-link" title="${isCs ? 'Zobrazit informace o scéně' : 'View Stage Details'}">
+                        <strong>${isCs ? '⛺ Festivalové pódium:' : '⛺ Stage:'}</strong><br>
+                        <a href="stages.html#${stageId}" class="stage-link" title="${isCs ? 'Zobrazit informace o pódiu' : 'View Stage Details'}">
                             ${stageText} &rarr;
                         </a>
                     </div>
@@ -984,7 +984,7 @@
 
                         <hr>
 
-                        <h4 class="artist-detail-subsection-title">[ ${isCs ? 'Technické informace & specifikace scény' : 'Stage Environment & Technical Specs'} ]</h4>
+                        <h4 class="artist-detail-subsection-title">[ ${isCs ? 'Technické informace & specifikace pódia' : 'Stage Environment & Technical Specs'} ]</h4>
                         <p class="artist-detail-stage-text">
                             ${stageSpecsText}
                         </p>
@@ -997,7 +997,7 @@
                                 ${isCs ? '[ 📅 Zobrazit v harmonogramu → ]' : '[ 📅 View in Timetable → ]'}
                             </a>
                             <a href="stages.html#${stageId}" class="btn-box">
-                                ${isCs ? '[ ⛺ Detaily scény → ]' : '[ ⛺ Stage Details → ]'}
+                                ${isCs ? '[ ⛺ Detaily pódia → ]' : '[ ⛺ Stage Details → ]'}
                             </a>
                             <a href="my-schedule.html#${artist.id}" class="btn-box">
                                 ${isCs ? '[ ★ Přejít do Mého plánu → ]' : '[ ★ Go to My Schedule → ]'}

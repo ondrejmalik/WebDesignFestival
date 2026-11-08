@@ -300,7 +300,7 @@ function updateTimetableLanguage() {
         } else if (emptyType === 'dome-sound' || emptyType === 'dome-open') {
             cell.textContent = isCs ? '[ Otevření kupole & Zvuková zkouška ]' : '[ Dome Open & Sound Check ]';
         } else if (emptyType === 'stage-change') {
-            cell.textContent = isCs ? '[ Přestavba scény & Zvuková zkouška ]' : '[ Stage Changeover & Sound Setup ]';
+            cell.textContent = isCs ? '[ Přestavba pódia & Zvuková zkouška ]' : '[ Stage Changeover & Sound Setup ]';
         } else if (emptyType === 'intermission') {
             cell.textContent = isCs ? '[ Přestavba & Ambientní pauza ]' : '[ Changeover & Ambient Intermission ]';
         } else if (emptyType === 'curfew') {
@@ -325,7 +325,7 @@ function updateTimetableLanguage() {
             detailsDiv.innerHTML = `
                 <p><strong>${isCs ? 'Detaily kapely & bio:' : 'Band Details & Bio:'}</strong> <span class="bio-text">${bio}</span></p>
                 <p style="margin-top: 4px; color: #444;">
-                    <strong>${isCs ? 'Scéna:' : 'Stage:'}</strong> ${stage} | <strong>${isCs ? 'Čas:' : 'Time:'}</strong> ${time} | <strong>${isCs ? 'Žánr:' : 'Genre:'}</strong> ${genre}
+                    <strong>${isCs ? 'Pódium:' : 'Stage:'}</strong> ${stage} | <strong>${isCs ? 'Čas:' : 'Time:'}</strong> ${time} | <strong>${isCs ? 'Žánr:' : 'Genre:'}</strong> ${genre}
                 </p>
                 <div style="margin-top: 6px; display: flex; gap: 8px;">
                     <a href="artists.html#${id}" style="color: #000; text-decoration: underline; font-weight: bold;">${isCs ? '[ Kompletní profil v sekci Účinkující → ]' : '[ Full profile in Artists section → ]'}</a>
@@ -809,7 +809,7 @@ function renderMySchedule() {
         }
 
         const bannerDesc = isCs
-            ? `V některých časech máte naplánována překrývající se vystoupení na scéně <strong>Solar Horizon Stage</strong> a v <strong>Lunar Forest Dome</strong>.`
+            ? `V některých časech máte naplánována překrývající se vystoupení na pódiu <strong>Solar Horizon Stage</strong> a v <strong>Lunar Forest Dome</strong>.`
             : `You have overlapping performances scheduled at the same time on the <strong>Solar Horizon Stage</strong> and in the <strong>Lunar Forest Dome</strong>.`;
 
         html += `
@@ -885,7 +885,7 @@ function renderMySchedule() {
 
             if (dayCollisions > 0) {
                 const dayConflictMsg = isCs
-                    ? '[ ⚠️ V tomto dni dochází ke kolizi mezi Solar a Lunar scénou! Zkontrolujte označené koncerty níže. ]'
+                    ? '[ ⚠️ V tomto dni dochází ke kolizi mezi Solar a Lunar pódiem! Zkontrolujte označené koncerty níže. ]'
                     : '[ ⚠️ A time conflict occurs on this day between the Solar and Lunar stages! Inspect highlighted shows below. ]';
 
                 html += `
@@ -910,7 +910,7 @@ function renderMySchedule() {
                         <div class="${statusBadgeClass}">
                             <strong>${isCs ? '[ ⚠️ ČASOVÁ KOLIZE ]' : '[ ⚠️ TIME CONFLICT ]'}</strong>
                             <p>
-                                ${isCs ? 'Překrývá se s:' : 'Overlaps with:'} <strong>${collidingWithObj.artist}</strong> ${isCs ? 'na scéně' : 'on'} <em>${collidingWithObj.stage}</em> (${collidingWithObj.time}).
+                                ${isCs ? 'Překrývá se s:' : 'Overlaps with:'} <strong>${collidingWithObj.artist}</strong> ${isCs ? 'na pódiu' : 'on'} <em>${collidingWithObj.stage}</em> (${collidingWithObj.time}).
                             </p>
                         </div>
                       `
@@ -935,8 +935,8 @@ function renderMySchedule() {
                             [ ${item.time} | <a href="artist-detail.html?id=${item.id}&from=myschedule#${item.id}" class="sch-artist-link" title="${isCs ? 'Detail interpreta' : 'Artist Detail'}">${item.artist}</a> ]
                         </h3>
                         <p>
-                            <strong>${isCs ? 'Scéna:' : 'Stage:'}</strong> 
-                            <a href="stages.html#${stageHash}" class="stage-link" title="${isCs ? 'Zobrazit informace o scéně' : 'View Stage Details'}">
+                            <strong>${isCs ? 'Pódium:' : 'Stage:'}</strong> 
+                            <a href="stages.html#${stageHash}" class="stage-link" title="${isCs ? 'Zobrazit informace o pódiu' : 'View Stage Details'}">
                                 ${stageDisplayName} &rarr;
                             </a>
                         </p>
