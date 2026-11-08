@@ -950,15 +950,15 @@ html {
 }
 
 .drawer-links a.active {
-    background: #222;
-    color: #fff;
-    border-color: #000;
-    font-weight: bold;
+    background: #444;
+    color: #D8D8D8;
+    border-color: #333;
+    font-weight: 500;
 }
 
-.drawer-footer {
-    margin-top: auto;
-    padding-top: 12px;
+.drawer-footer,
+.alza-drawer hr:last-of-type {
+    display: none !important;
 }
 
 /* Ergonomic Bottom Thumb Navigation Dock (Albert App Thumb-Zone Metaphor) */
@@ -1025,13 +1025,13 @@ html {
 }
 
 .bottom-dock-item.active {
-    background: #222;
-    color: #fff !important;
+    background: #444;
+    color: #D8D8D8 !important;
 }
 
 .bottom-dock-item.active .dock-icon,
 .bottom-dock-item.active .dock-label {
-    color: #fff !important;
+    color: #D8D8D8 !important;
 }
 
 /* Prominent Center HOME Button */
@@ -1065,6 +1065,20 @@ html.dark-mode .nav-badge-count,
 html.dark-mode .fav-count-badge {
     background: #28a745;
     color: #ffffff;
+}
+
+.wf-menu-btn .nav-badge-count,
+.wf-menu-btn .fav-count-badge {
+    pointer-events: none;
+    margin-left: 6px;
+    font-size: 0.72rem;
+    padding: 1px 6px;
+}
+
+.drawer-links a .nav-badge-count {
+    margin-left: auto;
+    font-size: 0.76rem;
+    padding: 2px 7px;
 }
 
 /* Mission Control Widgets */
@@ -1104,16 +1118,14 @@ html.dark-mode .fav-count-badge {
     color: #111;
 }
 
-/* Hide redundant second hamburger menu & drawer (Single Unified Menu per teacher feedback) */
-#menu-drawer-open-btn,
-.wf-menu-btn,
-.alza-drawer,
-.drawer-backdrop {
-    display: none !important;
-}
-
-/* Mobile-First (< 769px): Compact 7-item bottom thumb dock without horizontal overflow */
+/* Mobile (< 769px): Hide burger menu & drawer so mobile navigation is strictly the bottom thumb dock */
 @media (max-width: 768px) {
+    #menu-drawer-open-btn,
+    .wf-menu-btn,
+    .alza-drawer,
+    .drawer-backdrop {
+        display: none !important;
+    }
     .bottom-dock-item {
         min-width: 0;
         padding: 4px 2px;
@@ -1134,45 +1146,16 @@ html.dark-mode .fav-count-badge {
     }
 }
 
-/* Desktop (>= 769px): Switch single <nav> from fixed bottom dock to horizontal Top Navigation Bar */
+/* Desktop (>= 769px): Desktop navigation in burger menu (Alza Drawer from Progress 3); bottom dock is hidden */
 @media (min-width: 769px) {
     body {
         padding-bottom: 16px;
     }
-    #nav-placeholder .wf-top-bar-divider {
-        display: none;
-    }
     .bottom-nav-dock {
-        position: static;
-        width: 100%;
-        max-width: none;
-        left: auto;
-        bottom: auto;
-        transform: none;
-        border-top: 1px solid #333;
-        border-bottom: 2px solid #222;
-        border-left: none;
-        border-right: none;
-        min-height: 44px;
-        margin-top: 4px;
+        display: none !important;
     }
-    .bottom-dock-item {
-        flex-direction: row;
-        gap: 6px;
-        min-height: 42px;
-        padding: 6px 10px;
-        font-size: 0.88rem;
-    }
-    .bottom-dock-item .dock-icon {
-        font-size: 1rem;
-        margin-bottom: 0;
-    }
-    .bottom-dock-home .dock-icon {
-        font-size: 1.05rem;
-    }
-    html.dark-mode .bottom-nav-dock {
-        border-top-color: #444;
-        border-bottom-color: #555;
+    #nav-placeholder .wf-top-bar-divider {
+        display: block;
     }
 }
 
@@ -1235,8 +1218,7 @@ html.dark-mode .fav-count-badge {
 
 .sch-cell.is-favourite .sch-fav-btn,
 .artist-card.is-favourite .artist-fav-btn,
-#profile-star-btn.is-favourited,
-.nav-badge-count {
+#profile-star-btn.is-favourited {
     animation: wf-star-pop 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -3382,6 +3364,52 @@ html.dark-mode .destination-desc {
     display: inline-block;
 }
 
+.search-clear-btn {
+    font-size: 0.88rem;
+    padding: 8px 12px;
+}
+
+.search-empty-suggestions-hint {
+    margin: 8px 0 10px 0;
+    font-size: 0.88rem;
+    color: #333;
+}
+
+.search-suggestions-chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.search-suggestion-chip {
+    font-size: 0.82rem;
+    padding: 4px 8px;
+    background: #fff;
+    cursor: pointer;
+}
+
+.search-suggestion-chip:hover {
+    background: #e9ecef;
+}
+
+.artists-search-bridge-box {
+    border: 1px solid #777;
+    background: #fafafa;
+    padding: 16px;
+    margin: 16px 0;
+    text-align: center;
+}
+
+.artists-search-bridge-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
 .search-empty-box {
     border: 1px solid #777;
     background: #fafafa;
@@ -3423,6 +3451,26 @@ html.dark-mode .search-result-meta {
 
 html.dark-mode .search-result-desc {
     color: #ccc !important;
+}
+
+html.dark-mode .search-empty-suggestions-hint {
+    color: #ccc;
+}
+
+html.dark-mode .search-suggestion-chip {
+    background: #242424;
+    border-color: #555;
+    color: #ddd;
+}
+
+html.dark-mode .search-suggestion-chip:hover {
+    background: #333;
+}
+
+html.dark-mode .artists-search-bridge-box {
+    background: #1e1e1e !important;
+    border-color: #444 !important;
+    color: #ddd !important;
 }
 
 html.dark-mode .search-empty-box {

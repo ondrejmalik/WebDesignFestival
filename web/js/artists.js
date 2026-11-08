@@ -332,7 +332,11 @@ function setupArtistFilters() {
                 match = false;
             }
 
-            if (searchQuery && !name.includes(searchQuery) && !genre.includes(searchQuery)) {
+            const origin = (card.getAttribute('data-origin') || '').toLowerCase();
+            const stage = (card.getAttribute('data-stage') || '').toLowerCase();
+            const bio = (ARTIST_BIOS[id] || '').toLowerCase();
+
+            if (searchQuery && !name.includes(searchQuery) && !genre.includes(searchQuery) && !origin.includes(searchQuery) && !stage.includes(searchQuery) && !bio.includes(searchQuery)) {
                 match = false;
             }
 
@@ -352,8 +356,23 @@ function setupArtistFilters() {
             } else {
                 countEl.textContent = visibleCount === 1 ? '[ Showing 1 of 60 performers ]' : `[ Showing ${visibleCount} of 60 performers ]`;
             }
+        }
 
-
+        const emptyMsg = document.getElementById('artists-empty-msg');
+        const bridgeSearchLink = document.getElementById('bridge-search-link');
+        if (emptyMsg) {
+            if (visibleCount === 0 && searchQuery) {
+                emptyMsg.classList.remove('is-hidden');
+                if (bridgeSearchLink) {
+                    bridgeSearchLink.href = `search.html?q=${encodeURIComponent(searchQuery)}`;
+                }
+                const titleP = emptyMsg.querySelector('p strong');
+                const hintP = emptyMsg.querySelectorAll('p')[1];
+                if (titleP) titleP.textContent = isCs ? `[ Žádní účinkující neodpovídají dotazu "${searchQuery}". ]` : `[ No performers match your search query "${searchQuery}". ]`;
+                if (hintP) hintP.textContent = isCs ? '[ Hledáte praktické informace o festivalu, dopravu, kemp nebo scény? ]' : '[ Looking for festival practical info, shuttle buses, camping, or stages? ]';
+            } else {
+                emptyMsg.classList.add('is-hidden');
+            }
         }
     }
 

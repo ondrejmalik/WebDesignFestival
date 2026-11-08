@@ -50,7 +50,7 @@
                         <span class="theme-label" id="theme-label">Dark</span>
                     </button>
                     <button id="menu-drawer-open-btn" class="btn-box wf-menu-btn" type="button" aria-expanded="false" aria-controls="alza-menu-drawer" aria-label="Open Navigation Menu">
-                        [ ☰ Menu ]
+                        [ ☰ Menu ] <span class="nav-badge-count is-hidden">0</span>
                     </button>
                 </div>
             </header>
@@ -72,7 +72,7 @@
                     <a href="artists.html" data-i18n="nav_artists">🎤 [ Artists ]</a>
                     <a href="stages.html" data-i18n="nav_stages">⛺ [ Stages ]</a>
                     <a href="practical-info.html" data-i18n="nav_practical">🚆 [ Practical Info ]</a>
-                    <a href="my-schedule.html" data-i18n="nav_myschedule">★ [ My Schedule ]</a>
+                    <a href="my-schedule.html" data-i18n="nav_myschedule">★ [ My Schedule ] <span class="nav-badge-count is-hidden">0</span></a>
                     <a href="search.html" class="active" data-i18n="nav_search">🔍 [ Search ]</a>
                 </nav>
                 <hr>
@@ -94,10 +94,6 @@
 
             <!-- Bottom Dock -->
             <nav class="bottom-nav-dock" aria-label="Main Navigation">
-                <a href="index.html" class="bottom-dock-item bottom-nav-item bottom-dock-home" id="dock-item-home">
-                    <span class="dock-icon">🏠</span>
-                    <span class="dock-label" data-i18n="dock_home">Home</span>
-                </a>
                 <a href="program.html" class="bottom-dock-item bottom-nav-item" id="dock-item-timetable">
                     <span class="dock-icon">📅</span>
                     <span class="dock-label" data-i18n="dock_timetable">Program</span>
@@ -109,6 +105,10 @@
                 <a href="stages.html" class="bottom-dock-item bottom-nav-item" id="dock-item-stages">
                     <span class="dock-icon">⛺</span>
                     <span class="dock-label" data-i18n="dock_stages">Stages</span>
+                </a>
+                <a href="index.html" class="bottom-dock-item bottom-nav-item bottom-dock-home" id="dock-item-home">
+                    <span class="dock-icon">🏠</span>
+                    <span class="dock-label" data-i18n="dock_home">Home</span>
                 </a>
                 <a href="practical-info.html" class="bottom-dock-item bottom-nav-item" id="dock-item-info">
                     <span class="dock-icon">🚆</span>
@@ -130,7 +130,7 @@
             <nav class="wf-breadcrumbs" aria-label="Breadcrumb">
                 <a href="index.html" data-i18n="nav_home">🏠 [ Home ]</a>
                 <span class="sep">&gt;</span>
-                <span class="current" data-i18n="nav_search">🔍 [ Search ]</span>
+                <span class="current" data-i18n="nav_search">[ Search ]</span>
             </nav>
 
             <!-- Page Header -->
@@ -145,6 +145,7 @@
             <section class="wf-box-sub" aria-label="Search filter form">
                 <form role="search" class="search-form-box" id="search-form" onsubmit="return false;">
                     <input type="text" id="global-search-input" class="search-input-box" data-i18n-placeholder="search_placeholder" placeholder="Search performers, stages, times, genres, info..." value="techno" aria-label="Search query input">
+                    <button type="button" id="search-clear-btn" class="btn-box search-clear-btn" data-i18n="search_clear_btn" aria-label="Clear search input">[ ✕ Clear ]</button>
                     <button type="submit" id="search-submit-btn" class="btn-box btn-primary" data-i18n="search_btn">[ Search ]</button>
                 </form>
 
@@ -154,6 +155,7 @@
                     <button type="button" class="search-pill-btn" data-query="post-rock">[ Post-Rock ]</button>
                     <button type="button" class="search-pill-btn" data-query="lunar">[ Lunar Forest Dome ]</button>
                     <button type="button" class="search-pill-btn" data-query="shuttle">[ Shuttle Bus ]</button>
+                    <button type="button" class="search-pill-btn" data-query="info" data-i18n="search_quick_pill_info">[ ℹ️ Practical Info ]</button>
                     <button type="button" class="search-pill-btn" data-query="" data-i18n="search_quick_pill_all">[ Show All ]</button>
                 </div>
 
