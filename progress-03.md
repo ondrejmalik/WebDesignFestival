@@ -11,10 +11,10 @@
 V rámci 4. cvičení (*první funkční implementace*) jsme dopracovali čistě klientskou (zero-server) implementaci celého webu ve složce `web/` (zrcadlené z kořene projektu), která je okamžitě spustitelná jak přes protokol `file:///`, tak na GitHub Pages bez nutnosti backendu či build nástrojů.
 
 ### A. Implementované stránky (8 propojených HTML5 dokumentů)
-1. **Úvodní stránka (`index.html`):** Identita festivalu, živý telemetrický pás (*Mission Control* s lokálním časem a stavem oblačnosti), pohotovostní meteorologický alert pro okamžitý přesun pod střechu a rozcestník klíčových sekcí.
+1. **Úvodní stránka (`index.html`):** Identita festivalu s jasnou Hero sekcí a primárním CTA tlačítkem (`.btn-primary-cta`), živý telemetrický pás (*Mission Control* s lokálním časem a stavem oblačnosti), pohotovostní meteorologický alert pro okamžitý přesun pod střechu a kompaktní Bento Grid rozcestník.
 2. **Program (`program.html`):** Dvourozměrná rozvrhová matice (časy `13:00`–`04:00` × 2 scény *Solar Horizon Stage* a *Lunar Forest Dome* pro všechny 3 dny) s okamžitou filtrací podle dne, scény, žánru a záložek (`★`).
 3. **Katalog účinkujících (`artists.html`):** Kompletní přehled všech 60 interpretů (`perf-01` až `perf-60`) v responzivní mřížce s živým fulltextovým vyhledáváním, žánrovými filtry a záložkováním.
-4. **Detail účinkujícího (`artist-detail.html`):** Dynamický profil interpreta, bilingvní biografie, interaktivní simulátor audio ukázky (waveform přehrávač), přímé uložení do vlastního plánu a návrat na přesnou pozici v katalogu nebo rozvrhu se zvýrazněním (`.spot-highlight`).
+4. **Detail účinkujícího (`artist-detail.html`):** Dynamický profil interpreta, bilingvní biografie s typograficky optimalizovanou šířkou řádku (`max-width: 72ch`), interaktivní simulátor audio ukázky (waveform přehrávač), přímé uložení do vlastního plánu a návrat na přesnou pozici v katalogu nebo rozvrhu se zvýrazněním (`.spot-highlight`).
 5. **Místa / Scény (`stages.html`):** Technické a kapacitní srovnání obou scén, interaktivní vektorová SVG mapa areálu v Kutné Hoře – Sedlci a přímé prokliky na filtrovaný program každé scény.
 6. **Praktické informace (`practical-info.html`):** Klíčové parametry ročníku 2026, jízdní řády kyvadlové dopravy (*Shuttle Bus*) ze stanice Kutná Hora hl. n., kroková mapa pěší trasy, pravidla stanování, cashless platby a strukturované FAQ.
 7. **Můj plán (`my-schedule.html`):** Osobní plánovač využívající `localStorage` (`festival_favorites`) s automatickým kolizním enginem, který detekuje časové překryvy mezi scénami (včetně nočních setů přes půlnoc) a umožňuje konflikt vyřešit jedním kliknutím.
@@ -29,14 +29,17 @@ V rámci 4. cvičení (*první funkční implementace*) jsme dopracovali čistě
 
 ## 2. Aktuální best practices a trendy v oblasti UX a designu a jejich implementace
 
-| Trend / UX Best Practice | Konkrétní implementace v projektu |
+Při návrhu a úpravách pro 4. cvičení jsme vycházeli z aktuálního přehledu principů a trendů pro rok 2026 dle odborné metodiky **[Moderní web design – principy, trendy a UX webu (WebOptim.cz, P. Gáborík, 2026)](https://www.weboptim.cz/blog/web-design-trendy)**, standardu **WCAG 2.2** a doporučení **Google Search Central (Core Web Vitals)**:
+
+| Princip / Trend 2026 (dle WebOptim.cz) | Konkrétní implementace v projektu |
 | :--- | :--- |
-| **1. Kontextově adaptivní jednotná navigace (Desktop Top Bar vs. Mobile Thumb-Zone Dock)** | Na základě zpětné vazby vyučujícího a principu **Fittsova zákona** web využívá jediné sémantické `<nav>` menu se 7 identickými položkami. Na **desktopu (`@media (min-width: 769px)`)** je vykresleno jako vodorovná lišta nahoře v hlavičce. Na **mobilu (`@media (max-width: 768px)`)** se tentýž element přes CSS přemístí ke spodnímu okraji obrazovky do přirozené zóny palce (*Thumb Zone*), přičemž všechny dotykové plochy splňují min. rozměr $44\times 44\text{ px}$. |
-| **2. Nulové horizontální přetékání (Zero Horizontal Overflow)** | Rozvrhové tabulky, filtry i navigační lišty se přirozeně zalamují (`flex-wrap: wrap`) a adaptují až do šířky `375px` (iPhone SE) bez vzniku vodorovného posuvníku (`scrollWidth <= clientWidth`). |
-| **3. Sémantické HTML5 a přístupnost WCAG 2.0 Level AA** | Důsledné využití tagů `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<time datetime="...">`, `<address>` a tabulkových atributů `<caption>`, `scope="col"`, `scope="row"`. Nechybí klávesová zkratka *Skip to main content* (`.skip-link`) a korektní hierarchie nadpisů `<h1>`–`<h3>`. |
-| **4. Design Tokens (CSS Custom Properties) & Dark Mode** | Kompletní eliminace inline stylů (`0` výskytů `style="..."` v HTML). Veškeré barvy jsou řízeny přes proměnné `--wf-*` v `:root` a `html.dark-mode`. Tmavý režim šetří baterii OLED displejů v nočním areálu a zachovává kontrast dle WCAG AA. |
-| **5. Mikro-interakce a respektování `prefers-reduced-motion`** | Přidány funkční CSS mikro-animace: pružné vyskočení hvězdičky při uložení koncertu (`@keyframes wf-star-pop`), pulzování dešťového radaru (`@keyframes wf-radar-pulse`) a jemná odezva karet/tlačítek při `:hover` a `:active`. Pro uživatele s vestibularní citlivostí pravidlo `@media (prefers-reduced-motion: reduce)` animace automaticky vypne. |
-| **6. AEO / GEO (Optimalizace pro AI vyhledávače a agenty)** | Každá stránka obsahuje strojově čitelná strukturovaná data **Schema.org JSON-LD** (`MusicFestival`, `ItemList`, `MusicGroup`, `Place`, `FAQPage`) přesně odpovídající viditelnému obsahu. |
+| **1. Kontextově adaptivní jednotná navigace & pojmenování slovy uživatelů** | Web využívá jediné sémantické `<nav>` menu se 7 srozumitelnými položkami (`Úvod`, `Program`, `Účinkující`, `Scény`, `Info`, `Můj plán`, `Hledat`). Na **desktopu (`@media (min-width: 769px)`)** je vykresleno nahoře v hlavičce jako vodorovná lišta. Na **mobilu (`@media (max-width: 768px)`)** se tentýž element přes CSS přemístí ke spodnímu okraji obrazovky do přirozené zóny palce (*Thumb Zone* dle Fittsova zákona), přičemž všechny dotykové plochy přesahují minimum WCAG 2.2 ($24\times 24\text{ px}$, u nás $\ge 44\times 44\text{ px}$). |
+| **2. Hero sekce se 3 odpověďmi a jedním primárním CTA (Princip č. 1 a 2)** | První obrazovka na `index.html` okamžitě odpovídá na 3 klíčové otázky (*co nabízíme*, *pro koho* a *co udělat dál*). Do Hero boxu jsme přidali akční lištu `.hero-cta-row` s jedním vizuálně dominantním primárním tlačítkem `.btn-primary-cta` (`[ Otevřít program → ]`) a sekundárním proklikem na účinkující. |
+| **3. Čitelnost a optimální délka řádku $\le 75$ znaků (Princip č. 3)** | Základní velikost písma je nastavena na čitelných `1rem` (`16px`) a pro delší textové bloky (biografie interpretů `.artist-detail-bio-text`, popisy scén, FAQ a úvodní anotace) je v `css/wireframe.css` vynuceno typografické pravidlo `max-width: 72ch`. Text se tak na širokých monitorech neroztahuje do nečitelných řádků. |
+| **4. Bento Grid (dlaždice) s prevencí dlouhého sloupce na mobilu (Trend 2026)** | Telemetrické a navigační panely na `index.html` využívají dlaždicové rozvržení (*Bento Grid* – `.control-grid`). Abychom předešli riziku zmiňovanému v analýze WebOptim.cz (*„Riziko Bento gridu: dlouhý sloupec na mobilu“*), upravili jsme `@media (max-width: 768px)` na kompaktní mřížku `minmax(160px, 1fr)` se sníženou výškou dlaždic (`min-height: 96px`). |
+| **5. Tmavý režim (Dark Mode) s dvojí kontrolou kontrastu (Trend 2026)** | Kompletní eliminace inline stylů (`0` výskytů `style="..."` v HTML). Veškeré barvy jsou řízeny přes CSS Custom Properties (`--wf-*`) a testovány jak ve světlém, tak v tmavém režimu (`html.dark-mode`), aby byl vždy dodržen kontrast min. $4.5:1$ dle WCAG. |
+| **6. Funkční mikrointerakce místo těžkých animací (Core Web Vitals: LCP, INP, CLS)** | Místo náročných videí či celostránkových efektů, které zhoršují metriky *Core Web Vitals*, používáme lehké CSS mikro-animace: pružné vyskočení hvězdičky při uložení koncertu (`@keyframes wf-star-pop`), pulzování dešťového radaru (`@keyframes wf-radar-pulse`) a hmatovou odezvu tlačítek (`:hover` / `:active`). Pro uživatele s citlivostí na pohyb pravidlo `@media (prefers-reduced-motion: reduce)` animace automaticky vypne. |
+| **7. Checklist před spuštěním: Klikací telefon a e-mail jedním klepnutím + Více stránek místo One-page** | V souladu s checklistem WebOptim.cz jsou kontakty v `<address>` implementovány jako aktivní odkazy `<a href="mailto:info@festivalofdarkness.com">` a `<a href="tel:+420800202600">` pro okamžité vytočení nebo napsání e-mailu jedním klepnutím na mobilu. Více-stránková architektura (8 samostatných URL + Schema.org JSON-LD) pak zajišťuje cílené indexování pro vyhledávače i AI agenty (SEO / AEO / GEO). |
 
 ---
 
@@ -46,13 +49,13 @@ V rámci 4. cvičení (*první funkční implementace*) jsme dopracovali čistě
    - *Podnět (komentář vyučujícího k Cvičení 3):* **„Nemělo by být dvojí menu – navíc každé trochu jiné. Dejte jen jedno.“**
    - *Původní stav:* V prototypu bylo současně viditelné horní tlačítko `[ ☰ Menu ]` (otevírající boční panel se 7 položkami) a zároveň spodní lišta (s 5 položkami v jiném pořadí a s odlišnými názvy).
    - *Provedená změna:* Boční výsuvné menu bylo ze zobrazení vyřazeno. Celý web nyní používá **jediné hlavní menu** se 100% shodnými 7 položkami (`🏠 Úvod`, `📅 Program`, `🎤 Účinkující`, `⛺ Scény`, `🚆 Info`, `★ Můj plán`, `🔍 Hledat`). Pomocí CSS `@media` queries se toto jediné menu zobrazuje **na PC nahoře v hlavičce** (`>= 769px`) a **na mobilu dole u palce** (`<= 768px`).
-2. **Zvažované sloučení sekcí *Účinkující* a *Scény* (zamítnuto po týmové validaci):**
+2. **Zvažované sloučení sekcí *Účinkující* a *Scény* (zamítnuto po týmové validaci a metodice WebOptim.cz):**
    - *Diskuze v týmu:* Padl návrh spojit stránky `artists.html` a `stages.html` do jedné.
-   - *Rozhodnutí a zdůvodnění:* Návrh jsme zamítli. Spojení 60 karet interpretů s mapou areálu a parametry pódií by zhoršilo přehlednost a porušilo schválenou Informační architekturu z `project-specification.md` i požadavek zadání na samostatné sekce.
-3. **Přesun bloku *Klíčové parametry ročníku* z úvodní stránky do *Praktických informací*:**
-   - *Důvod:* Odlehčení úvodní stránky (`index.html`), aby se mobilní návštěvník v areálu okamžitě dostal k živé telemetrii a rychlému rozcestníku bez nutnosti skrolovat přes faktografický souhrn.
-4. **Refaktoring na nulové inline styly a doplnění CSS mikro-animací:**
-   - *Důvod:* Čisté oddělení struktury (HTML) a prezentace (CSS) pro bezproblémové fungování Dark Mode a vizuální zpětnou vazbu při ukládání koncertů.
+   - *Rozhodnutí a zdůvodnění:* Návrh jsme zamítli. Jak uvádí i metodika WebOptim.cz (*„One page web, nebo více stránek“*), při více obsahově odlišných celcích je mnohem přehlednější samostatná stránka pro každý záměr uživatele. Spojení 60 karet interpretů s mapou areálu by navíc porušilo schválenou Informační architekturu z `project-specification.md`.
+3. **Doplnění primárního CTA do Hero sekce, klikacích kontaktů (`mailto:` / `tel:`) a omezení délky řádku (`72ch`):**
+   - *Důvod:* Aplikace konkrétních bodů z *Checklistu před spuštěním webu* a *7 principů dobrého web designu* (WebOptim.cz, 2026).
+4. **Přesun bloku *Klíčové parametry ročníku* z úvodní stránky do *Praktických informací*:**
+   - *Důvod:* Odlehčení úvodní stránky (`index.html`), aby se mobilní návštěvník v areálu okamžitě dostal k živé telemetrii a hlavnímu CTA bez nutnosti skrolovat přes faktografický souhrn.
 
 ---
 
@@ -82,6 +85,7 @@ Kvalita implementace byla ověřena víceúrovňovou sadou automatizovaných skr
 1. **K čemu byla AI použita:**
    - Refaktoring inline stylů do sémantických tříd a CSS proměnných v `css/wireframe.css`.
    - Návrh CSS `@media` pravidel pro transformaci jednoho `<nav>` elementu mezi desktopovou horní lištou a mobilním spodním dokem.
+   - Analýza a zapracování doporučení z metodiky WebOptim.cz (primární CTA v Hero sekci, `max-width: 72ch`, kompaktní Bento grid na mobilu, 1-tap `mailto:` a `tel:` odkazy).
    - Tvorba automatizovaných regresních skriptů nad Chrome DevTools Protocol (CDP) pro měření přesných souřadnic prvků a šířky viewportu.
 2. **Jak byly výstupy ověřeny a co bylo upraveno / odmítnuto:**
    - **Odmítnutí dvojí navigace:** Původní návrh kombinující horní zásuvkové menu (Alza Drawer) a spodní dok (Albert Dock) se v praxi ukázal jako matoucí, což oprávněně vytkl i vyučující při hodnocení Cvičení 3. Tento koncept jsme nahradili jedním responzivním menu se shodnými položkami.
