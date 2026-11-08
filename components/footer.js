@@ -7,7 +7,7 @@
         const home = isCs ? '[ Úvod ]' : '[ Home ]';
         const program = '[ Program ]';
         const artists = isCs ? '[ Účinkující ]' : '[ Artists ]';
-        const stages = isCs ? '[ Scény ]' : '[ Stages ]';
+        const stages = isCs ? '[ Pódia ]' : '[ Stages ]';
         const practical = isCs ? '[ Praktické info ]' : '[ Practical Info ]';
         const mySchedule = isCs ? '[ Můj program ]' : '[ My Schedule ]';
 

@@ -250,7 +250,7 @@ function displayArtistDetail(card) {
 
                     <div class="artist-inline-schedule-box">
                         <p><strong>${isCs ? 'Plánované vystoupení:' : 'Scheduled Performance:'}</strong> ${day}, ${time}</p>
-                        <p><strong>${isCs ? 'Scéna:' : 'Stage:'}</strong> ${stage}</p>
+                        <p><strong>${isCs ? 'Pódium:' : 'Stage:'}</strong> ${stage}</p>
                     </div>
 
                     <div class="artist-inline-actions">
@@ -369,7 +369,7 @@ function setupArtistFilters() {
                 const titleP = emptyMsg.querySelector('p strong');
                 const hintP = emptyMsg.querySelectorAll('p')[1];
                 if (titleP) titleP.textContent = isCs ? `[ Žádní účinkující neodpovídají dotazu "${searchQuery}". ]` : `[ No performers match your search query "${searchQuery}". ]`;
-                if (hintP) hintP.textContent = isCs ? '[ Hledáte praktické informace o festivalu, dopravu, kemp nebo scény? ]' : '[ Looking for festival practical info, shuttle buses, camping, or stages? ]';
+                if (hintP) hintP.textContent = isCs ? '[ Hledáte praktické informace o festivalu, dopravu, kemp nebo pódia? ]' : '[ Looking for festival practical info, shuttle buses, camping, or stages? ]';
             } else {
                 emptyMsg.classList.add('is-hidden');
             }

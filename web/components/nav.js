@@ -51,7 +51,7 @@
         const home = isCs ? '[ Úvod ]' : '[ Home ]';
         const program = isCs ? '[ Program ]' : '[ Program ]';
         const artists = isCs ? '[ Účinkující ]' : '[ Artists ]';
-        const stages = isCs ? '[ Scény ]' : '[ Stages ]';
+        const stages = isCs ? '[ Pódia ]' : '[ Stages ]';
         const practical = isCs ? '[ Praktické info ]' : '[ Practical Info ]';
         const mySchedule = isCs ? '[ Můj program ]' : '[ My Schedule ]';
         const search = isCs ? '[ Vyhledávání ]' : '[ Search ]';
@@ -59,7 +59,7 @@
         const dockHome = isCs ? "Úvod" : "Home";
         const dockTimetable = isCs ? "Program" : "Program";
         const dockArtists = isCs ? "Účinkující" : "Artists";
-        const dockStages = isCs ? "Scény" : "Stages";
+        const dockStages = isCs ? "Pódia" : "Stages";
         const dockPractical = isCs ? "Info" : "Info";
         const dockMyPlan = isCs ? "Můj plán" : "My Plan";
         const dockSearch = isCs ? "Hledat" : "Search";
@@ -217,7 +217,7 @@
         const dict = (window.FESTIVAL_I18N && window.FESTIVAL_I18N[lang]) || {};
 
         const dockArtists = dict.dock_artists || (isCs ? "Účinkující" : "Artists");
-        const dockStages = dict.dock_stages || (isCs ? "Scény" : "Stages");
+        const dockStages = dict.dock_stages || (isCs ? "Pódia" : "Stages");
         const dockHome = dict.dock_home || (isCs ? "Úvod" : "Home");
         const dockTimetable = dict.dock_timetable || (isCs ? "Program" : "Program");
         const dockPractical = dict.dock_practical || (isCs ? "Info" : "Info");
@@ -267,7 +267,7 @@
             nav_home: isCs ? '🏠 [ Úvod ]' : '🏠 [ Home ]',
             nav_program: isCs ? '📅 [ Program ]' : '📅 [ Program ]',
             nav_artists: isCs ? '🎤 [ Účinkující ]' : '🎤 [ Artists ]',
-            nav_stages: isCs ? '⛺ [ Scény ]' : '⛺ [ Stages ]',
+            nav_stages: isCs ? '⛺ [ Pódia ]' : '⛺ [ Stages ]',
             nav_practical: isCs ? '🚆 [ Praktické info ]' : '🚆 [ Practical Info ]',
             nav_myschedule: isCs ? '★ [ Můj program ]' : '★ [ My Schedule ]',
             nav_search: isCs ? '🔍 [ Vyhledávání ]' : '🔍 [ Search ]'
