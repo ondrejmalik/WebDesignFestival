@@ -106,7 +106,7 @@
             <span class="theme-label" id="theme-label">${themeLabel}</span>
         </button>
         <button id="menu-drawer-open-btn" class="btn-box wf-menu-btn" type="button" aria-expanded="false" aria-controls="alza-menu-drawer" aria-label="Open Navigation Menu">
-            ${menuBtnText}
+            ${menuBtnText} <span class="nav-badge-count is-hidden">0</span>
         </button>
     </div>
 </header>
@@ -128,7 +128,7 @@
         <a href="artists.html" class="${currentPath === 'artists.html' ? 'active' : ''}" data-i18n="nav_artists">🎤 ${artists}</a>
         <a href="stages.html" class="${currentPath === 'stages.html' ? 'active' : ''}" data-i18n="nav_stages">⛺ ${stages}</a>
         <a href="practical-info.html" class="${currentPath === 'practical-info.html' ? 'active' : ''}" data-i18n="nav_practical">🚆 ${practical}</a>
-        <a href="my-schedule.html" class="${currentPath === 'my-schedule.html' ? 'active' : ''}" data-i18n="nav_myschedule">★ ${mySchedule}</a>
+        <a href="my-schedule.html" class="${currentPath === 'my-schedule.html' ? 'active' : ''}" data-i18n="nav_myschedule">★ ${mySchedule} <span class="nav-badge-count is-hidden">0</span></a>
         <a href="search.html" class="${currentPath === 'search.html' ? 'active' : ''}" data-i18n="nav_search">🔍 ${search}</a>
     </nav>
     <hr>
@@ -150,10 +150,6 @@
 
 <!-- 3. Ergonomic Bottom Thumb Navigation Dock (Albert App Style: Artists - Stages - HOME - Timetable - My Plan) -->
 <nav class="bottom-nav-dock" aria-label="Main Navigation">
-    <a href="index.html" class="bottom-dock-item bottom-nav-item bottom-dock-home ${currentPath === "index.html" ? "active" : ""}" id="dock-item-home">
-        <span class="dock-icon">🏠</span>
-        <span class="dock-label" data-i18n="dock_home">${dockHome}</span>
-    </a>
     <a href="program.html" class="bottom-dock-item bottom-nav-item ${currentPath === "program.html" ? "active" : ""}" id="dock-item-timetable">
         <span class="dock-icon">📅</span>
         <span class="dock-label" data-i18n="dock_timetable">${dockTimetable}</span>
@@ -165,6 +161,10 @@
     <a href="stages.html" class="bottom-dock-item bottom-nav-item ${currentPath === "stages.html" ? "active" : ""}" id="dock-item-stages">
         <span class="dock-icon">⛺</span>
         <span class="dock-label" data-i18n="dock_stages">${dockStages}</span>
+    </a>
+    <a href="index.html" class="bottom-dock-item bottom-nav-item bottom-dock-home ${currentPath === "index.html" ? "active" : ""}" id="dock-item-home">
+        <span class="dock-icon">🏠</span>
+        <span class="dock-label" data-i18n="dock_home">${dockHome}</span>
     </a>
     <a href="practical-info.html" class="bottom-dock-item bottom-nav-item ${currentPath === "practical-info.html" ? "active" : ""}" id="dock-item-info">
         <span class="dock-icon">🚆</span>
@@ -274,8 +274,18 @@
         };
         for (const [key, text] of Object.entries(drawerLinkMap)) {
             const link = document.querySelector(`.drawer-links a[data-i18n="${key}"]`);
-            if (link) link.textContent = text;
+            if (link) {
+                if (key === 'nav_myschedule') {
+                    const badge = link.querySelector('.nav-badge-count, .fav-count-badge');
+                    const badgeCount = badge ? badge.textContent : '0';
+                    const isBadgeHidden = badge ? badge.classList.contains('is-hidden') : true;
+                    link.innerHTML = `${text} <span class="nav-badge-count ${isBadgeHidden ? 'is-hidden' : ''}">${badgeCount}</span>`;
+                } else {
+                    link.textContent = text;
+                }
+            }
         }
+        updateBottomBadge();
         const skipLink = document.querySelector('.skip-link');
         if (skipLink) skipLink.textContent = isCs ? 'Přejít k hlavnímu obsahu' : 'Skip to main content';
 
@@ -307,6 +317,15 @@
                 }
             });
             const isCs = (typeof window.getFestivalLang === 'function' ? window.getFestivalLang() : 'en') === 'cs';
+            const openBtn = document.getElementById('menu-drawer-open-btn');
+            if (openBtn) {
+                if (count > 0) {
+                    const countStr = typeof window.formatCzPlural === 'function' ? window.formatCzPlural(count, 'uložené vystoupení', 'uložená vystoupení', 'uložených vystoupení') : (count === 1 ? '1 uložené vystoupení' : (count >= 2 && count <= 4 ? `${count} uložená vystoupení` : `${count} uložených vystoupení`));
+                    openBtn.setAttribute('title', isCs ? `Menu (${countStr})` : `Menu (${count === 1 ? '1 saved show' : count + ' saved shows'})`);
+                } else {
+                    openBtn.setAttribute('title', 'Menu');
+                }
+            }
             const dockPlanLink = document.getElementById('dock-item-myplan');
             if (dockPlanLink) {
                 if (count > 0) {
@@ -348,6 +367,12 @@
     // Drawer state management
     function setupDrawer() {
         const openBtn = document.getElementById('menu-drawer-open-btn');
+        if (openBtn && !openBtn.querySelector('.nav-badge-count')) {
+            const badge = document.createElement('span');
+            badge.className = 'nav-badge-count is-hidden';
+            badge.textContent = '0';
+            openBtn.appendChild(badge);
+        }
         const closeBtn = document.getElementById('menu-drawer-close-btn');
         const drawer = document.getElementById('alza-menu-drawer');
         const backdrop = document.getElementById('alza-drawer-backdrop');

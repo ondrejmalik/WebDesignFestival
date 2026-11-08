@@ -67,51 +67,95 @@
         { id: "perf-60", name: "Equinox Farewell", genre: "Dawn Ambient", origin: "CZ", stage: "Lunar Forest Dome", day: "Sunday", time: "02:00 – 03:00", bioEn: "Prague downtempo pioneer performing the official festival sunrise farewell set with warm ambient chords.", bioCs: "Pražský ambientní tvůrce provádějící oficiální ranní rozloučení s festivalem za východu slunce." }
     ];
 
-    // Practical & Venue information data
+    // Practical & Venue information data (Comprehensive 10-Topic Catalog)
     const PRACTICAL_INFO_DATA = [
+        {
+            id: "info-general",
+            titleEn: "ℹ️ Practical Info & Visitor Overview",
+            titleCs: "ℹ️ Praktické informace & Přehled pro návštěvníky",
+            descEn: "Complete visitor guide to Festival of Darkness 2 (July 10–12, 2026, Kutná Hora): opening hours, 2 stages, 60 artists, venue facilities, and essential festival info.",
+            descCs: "Kompletní návštěvnický průvodce Festival of Darkness 2 (10.–12. července 2026, Kutná Hora): otevírací doba, 2 scény, 60 účinkujících, areál a klíčové informace.",
+            link: "practical-info.html#parametry",
+            linkTextEn: "[ View Festival Overview → ]",
+            linkTextCs: "[ Zobrazit přehled festivalu → ]",
+            keywords: "info information prakticke informace prehled festival terminy datum otevreni gates opening hours pruvodce guide obecne kutna hora parametry"
+        },
         {
             id: "info-shuttle",
             titleEn: "🚆 Shuttle Bus Timetable & Route",
             titleCs: "🚆 Kyvadlová doprava (Shuttle Bus) & Jízdní řád",
-            descEn: "Free festival shuttle buses operate continuously between Kutná Hora hl.n. main train station and the festival venue every 15–20 minutes from 11:30 to 04:30.",
+            descEn: "Free festival shuttle buses operate continuously between Kutná Hora hl.n. main train station and the festival venue every 15–20 minutes from 11:30 to 04:30 daily.",
             descCs: "Bezplatná festivalová kyvadlová doprava jezdí nepřetržitě mezi nádražím Kutná Hora hl.n. a areálem každých 15–20 minut od 11:30 do 04:30.",
             link: "practical-info.html#kyvadlova-doprava",
             linkTextEn: "[ View Shuttle Timetable → ]",
             linkTextCs: "[ Jízdní řád kyvadlové dopravy → ]",
-            keywords: "shuttle bus vlak train stanice nadrazi doprava transit bus kutna hora zastavka transfer"
+            keywords: "info shuttle bus kyvadlova doprava vlak train stanice nadrazi doprava transit bus kutna hora zastavka transfer informace jizdni rad"
         },
         {
             id: "info-walking",
             titleEn: "🚶 Walking Route & Map (20 min)",
             titleCs: "🚶 Pěší trasa a orientační mapa (20 min)",
-            descEn: "Marked walking trail from Kutná Hora hl.n. train station to the festival gate (1.6 km, approx. 20–25 minutes). Illuminated at night.",
-            descCs: "Značená pěší trasa z hlavního nádraží Kutná Hora hl.n. k bráně festivalu (1,6 km, cca 20–25 minut). V noci plně osvětlena.",
+            descEn: "Marked walking trail from Kutná Hora hl.n. train station to the festival gate (1.8 km, approx. 20–25 minutes). Illuminated route with navigational markers.",
+            descCs: "Značená pěší trasa z hlavního nádraží Kutná Hora hl.n. k bráně festivalu (1,8 km, cca 20–25 minut). V noci plně osvětlena s navigačním značením.",
             link: "practical-info.html#pesi-trasa",
             linkTextEn: "[ View Walking Map → ]",
             linkTextCs: "[ Zobrazit pěší mapu → ]",
-            keywords: "walking pesi trasa mapa route foot walk chodci nadrazi kutna hora cesta"
+            keywords: "info walking pesi trasa mapa route foot walk chodci nadrazi kutna hora cesta znacka informace mapa arealu"
         },
         {
             id: "info-camping",
-            titleEn: "⛺ Tent Camp & Showers",
-            titleCs: "⛺ Stanové městečko a zázemí",
-            descEn: "Fenced campsite with 24/7 security, hot showers, drinking water, and phone charging lockers. Opens Friday 10:00, closes Monday 12:00.",
-            descCs: "Oplocené stanové městečko s nepřetržitou ostrahou 24/7, teplými sprchami, pitnou vodou a dobíjecími skříňkami.",
+            titleEn: "⛺ Tent Camp, Showers & Lodging",
+            titleCs: "⛺ Stanové městečko, sprchy a ubytování",
+            descEn: "Fenced campsite with 24/7 security, hot showers, drinking water, phone charging lockers, and quiet zone. Opens Friday 10:00, closes Monday 12:00.",
+            descCs: "Oplocené stanové městečko s nepřetržitou ostrahou 24/7, teplými sprchami, pitnou vodou, dobíjecími skříňkami a klidovou zónou. Otevírá v pátek v 10:00, končí v pondělí ve 12:00.",
             link: "practical-info.html#camping",
             linkTextEn: "[ Camping Guidelines → ]",
             linkTextCs: "[ Pravidla kempu → ]",
-            keywords: "camping kemp stan stanove mestecko sprchy tent ubytovani hygiene"
+            keywords: "info camping kemp stan stanove mestecko sprchy tent ubytovani hygiene sprchy voda informace stanovani"
         },
         {
             id: "info-cashless",
-            titleEn: "💳 Cashless Payment System",
-            titleCs: "💳 Bezkontaktní platby (Cashless)",
-            descEn: "100% cashless festival wristbands. Top up online before the event or at official top-up booths via debit/credit card or cash. Leftover balance refunded online.",
-            descCs: "100% cashless festivalové náramky s čipem. Dobíjení online předem i na místě kartou či hotovostí. Zbylý kredit je vrácen na účet.",
+            titleEn: "💳 Cashless Payment System & Refunds",
+            titleCs: "💳 Bezkontaktní platby (Cashless) & Vrácení kreditu",
+            descEn: "100% cashless festival wristbands. Top up online before the event or at official top-up booths via debit/credit card or cash. Leftover balance refunded online with zero fee.",
+            descCs: "100% cashless festivalové náramky s čipem. Dobíjení online předem i na místě kartou či hotovostí. Zbylý kredit je po akci bezplatně vrácen na bankovní účet.",
             link: "practical-info.html#cashless",
             linkTextEn: "[ Cashless Details → ]",
             linkTextCs: "[ Detaily o cashless → ]",
-            keywords: "cashless cip naramky platby payment card money kredit dobijeni nfc"
+            keywords: "info cashless cip naramky platby payment card money kredit dobijeni nfc vraceni refund ucet finance informace"
+        },
+        {
+            id: "info-faq",
+            titleEn: "❓ Frequently Asked Questions (FAQ) & Rules",
+            titleCs: "❓ Často kladené otázky (FAQ) & Pravidla",
+            descEn: "Festival FAQ covering ticket validation, re-entry rules, permitted bag sizes, prohibited items, cameras, and lost & found guidelines.",
+            descCs: "Často kladené dotazy k ověření vstupenek, opakovanému vstupu, povoleným zavazadlům, zakázaným předmětům a ztrátám a nálezům.",
+            link: "practical-info.html#faq",
+            linkTextEn: "[ Read Full FAQ → ]",
+            linkTextCs: "[ Číst celé FAQ → ]",
+            keywords: "info faq casto kladene otazky questions answers vstupenky tickets listky pravidla zakazy batohy refund dotazy pomoc help informace"
+        },
+        {
+            id: "info-first-aid",
+            titleEn: "🚑 Medical Assistance & Emergency Safety",
+            titleCs: "🚑 Zdravotní služba & Bezpečnost v areálu",
+            descEn: "24/7 Czech Red Cross medical post and dedicated first aid team situated near the festival entrance. Emergency contact phone: +420 800 202 600.",
+            descCs: "Nepřetržitá zdravotnická služba Českého červeného kříže a první pomoc u hlavního vstupu do areálu. Pohotovostní telefon: +420 800 202 600.",
+            link: "practical-info.html#faq",
+            linkTextEn: "[ View Safety & Medical Info → ]",
+            linkTextCs: "[ Zdravotní a bezpečnostní info → ]",
+            keywords: "info zdravotnici first aid zachranka pomoc osetreni emergency doctor lekari bezpecnost safety telefon emergency cerveny kriz informace"
+        },
+        {
+            id: "info-contact",
+            titleEn: "✉️ Festival Infopoint & Contact Support",
+            titleCs: "✉️ Festivalový infopoint & Kontaktní podpora",
+            descEn: "Central infopoint located at main gate for wristband issues, printed map guides, lost items, and visitor queries. Email: info@festivalofdarkness.com.",
+            descCs: "Centrální infopoint u hlavní brány pro řešení pásků, tištěné mapy, ztráty a dotazy návštěvníků. E-mail: info@festivalofdarkness.com.",
+            link: "practical-info.html#parametry",
+            linkTextEn: "[ Contact & Infopoint Details → ]",
+            linkTextCs: "[ Kontakt a infopoint → ]",
+            keywords: "info infopoint infocentrum ztraty a nalezy lost and found informace helpdesk dotazy recepce email telefon kontakt contact"
         },
         {
             id: "info-solar-stage",
@@ -122,7 +166,7 @@
             link: "stages.html#stage-solar",
             linkTextEn: "[ Stage Profile & Venue Map → ]",
             linkTextCs: "[ Profil scény & Mapa areálu → ]",
-            keywords: "solar horizon stage amfiteatr venkovni open air kapely stage main stage"
+            keywords: "info solar horizon stage amfiteatr venkovni open air kapely stage main stage velka scena informace"
         },
         {
             id: "info-lunar-stage",
@@ -133,7 +177,7 @@
             link: "stages.html#stage-lunar",
             linkTextEn: "[ Stage Profile & Shelter Map → ]",
             linkTextCs: "[ Profil scény & Mapa úkrytu → ]",
-            keywords: "lunar forest dome kryty stan shelter dest rain shelter destovy stan kupole geodesic techno dome"
+            keywords: "info lunar forest dome kryty stan shelter dest rain shelter destovy stan kupole geodesic techno dome informace"
         }
     ];
 
@@ -151,9 +195,47 @@
             .toLowerCase();
     }
 
+    // Helper: Match haystack against multi-word query tokens with synonym expansion
+    function matchesQuery(haystack, tokens) {
+        if (!tokens || tokens.length === 0) return true;
+        const normHaystack = normalizeStr(haystack);
+        return tokens.every(token => {
+            if (normHaystack.includes(token)) return true;
+            // Robust alias/synonym expansion for common queries
+            if (token === 'info') {
+                return normHaystack.includes('informac') ||
+                       normHaystack.includes('information') ||
+                       normHaystack.includes('praktick') ||
+                       normHaystack.includes('practical');
+            }
+            if (token === 'informace' || token === 'information') {
+                return normHaystack.includes('info') ||
+                       normHaystack.includes('praktick') ||
+                       normHaystack.includes('practical');
+            }
+            if (token === 'prakticke' || token === 'practical') {
+                return normHaystack.includes('info') || normHaystack.includes('informac');
+            }
+            if (token === 'bus' || token === 'autobus') {
+                return normHaystack.includes('shuttle') || normHaystack.includes('kyvadlov');
+            }
+            if (token === 'vlak' || token === 'train') {
+                return normHaystack.includes('nadrazi') || normHaystack.includes('station') || normHaystack.includes('shuttle');
+            }
+            if (token === 'ticket' || token === 'tickets' || token === 'listky' || token === 'vstupenky') {
+                return normHaystack.includes('vstupenk') || normHaystack.includes('ticket') || normHaystack.includes('faq');
+            }
+            if (token === 'dest' || token === 'rain' || token === 'shelter' || token === 'ukryt') {
+                return normHaystack.includes('lunar') || normHaystack.includes('shelter') || normHaystack.includes('dest');
+            }
+            return false;
+        });
+    }
+
     function initSearchEngine() {
         const input = document.getElementById('global-search-input');
         const form = document.getElementById('search-form');
+        const clearBtn = document.getElementById('search-clear-btn');
         const pills = document.querySelectorAll('.search-pill-btn');
         const queryTextSpan = document.getElementById('active-query-text');
         const countSpan = document.getElementById('results-count');
@@ -180,6 +262,7 @@
         function executeSearch(query) {
             const cleanQuery = (query || '').toLowerCase().trim();
             const normQuery = normalizeStr(query).trim();
+            const queryTokens = normQuery.split(/\s+/).filter(Boolean);
             const lang = getActiveLanguage();
             const isCs = lang === 'cs';
 
@@ -205,7 +288,7 @@
 
             // 1. Filter Performers
             const matchedPerformers = PERFORMERS_DATA.filter(p => {
-                if (normQuery === '') return true;
+                if (queryTokens.length === 0) return true;
                 const searchHaystack = [
                     p.id,
                     p.name,
@@ -213,36 +296,39 @@
                     p.origin,
                     p.stage,
                     p.day,
+                    p.time,
                     p.bioEn,
                     p.bioCs
                 ].join(' ');
-                return normalizeStr(searchHaystack).includes(normQuery);
+                return matchesQuery(searchHaystack, queryTokens);
             });
 
             // 2. Filter Timetable Slots
             const matchedTimetable = PERFORMERS_DATA.filter(p => {
-                if (normQuery === '') return true;
+                if (queryTokens.length === 0) return true;
                 const searchHaystack = [
                     p.name,
                     p.time,
                     p.day,
                     p.stage,
-                    p.genre
+                    p.genre,
+                    p.origin
                 ].join(' ');
-                return normalizeStr(searchHaystack).includes(normQuery);
+                return matchesQuery(searchHaystack, queryTokens);
             });
 
             // 3. Filter Practical Info
             const matchedInfo = PRACTICAL_INFO_DATA.filter(info => {
-                if (normQuery === '') return true;
+                if (queryTokens.length === 0) return true;
                 const searchHaystack = [
+                    info.id,
                     info.titleEn,
                     info.titleCs,
                     info.descEn,
                     info.descCs,
                     info.keywords
                 ].join(' ');
-                return normalizeStr(searchHaystack).includes(normQuery);
+                return matchesQuery(searchHaystack, queryTokens);
             });
 
             const totalResults = matchedPerformers.length + (cleanQuery ? matchedTimetable.length : 0) + matchedInfo.length;
@@ -279,7 +365,7 @@
 
             // Render Timetable
             if (timetableContainer && secTimetable) {
-                // To keep the view focused, show timetable slots when query is specific or contains time/stage keywords
+                // Show timetable slots when query is specific and matches occur
                 const showTimetable = cleanQuery !== '' && matchedTimetable.length > 0;
                 if (showTimetable) {
                     secTimetable.classList.remove('is-hidden');
@@ -336,15 +422,43 @@
                 }
             }
 
-            // Handle empty state
+            // Handle empty state with helpful quick suggestion chips
             if (emptyMsg) {
                 if (totalResults === 0) {
                     emptyMsg.classList.remove('is-hidden');
+                    const emptyTitle = isCs ? 'Pro váš dotaz nebyly nalezeny žádné výsledky.' : 'No results found matching your query.';
+                    const suggTitle = isCs ? 'Zkuste vyhledat některé z oblíbených témat:' : 'Try searching for one of these popular topics:';
+                    emptyMsg.innerHTML = `
+                        <p data-i18n="search_empty"><strong>${emptyTitle}</strong></p>
+                        <p class="search-empty-suggestions-hint">${suggTitle}</p>
+                        <div class="search-suggestions-chips" role="toolbar" aria-label="Search suggestions">
+                            <button type="button" class="btn-box search-suggestion-chip" data-suggest="info">[ ℹ️ ${isCs ? 'Praktické info' : 'Practical Info'} ]</button>
+                            <button type="button" class="btn-box search-suggestion-chip" data-suggest="shuttle">[ 🚆 ${isCs ? 'Kyvadlová doprava' : 'Shuttle Bus'} ]</button>
+                            <button type="button" class="btn-box search-suggestion-chip" data-suggest="techno">[ 🎹 Techno ]</button>
+                            <button type="button" class="btn-box search-suggestion-chip" data-suggest="ambient">[ 🌌 Ambient ]</button>
+                            <button type="button" class="btn-box search-suggestion-chip" data-suggest="lunar">[ 🌙 Lunar Dome ]</button>
+                            <button type="button" class="btn-box search-suggestion-chip" data-suggest="camping">[ ⛺ ${isCs ? 'Kemp' : 'Camping'} ]</button>
+                            <button type="button" class="btn-box search-suggestion-chip" data-suggest="cashless">[ 💳 Cashless ]</button>
+                        </div>
+                    `;
+                    if (typeof emptyMsg.querySelectorAll === 'function') {
+                        emptyMsg.querySelectorAll('.search-suggestion-chip').forEach(chip => {
+                            chip.addEventListener('click', () => {
+                                const sugg = chip.getAttribute('data-suggest') || '';
+                                input.value = sugg;
+                                executeSearch(sugg);
+                                input.focus();
+                            });
+                        });
+                    }
                 } else {
                     emptyMsg.classList.add('is-hidden');
                 }
             }
         }
+
+        // Expose executeSearch globally for tests / layout integrations
+        window.executeFestivalSearch = executeSearch;
 
         // Attach listeners
         input.addEventListener('input', function(e) {
@@ -355,6 +469,14 @@
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
                 executeSearch(input.value);
+            });
+        }
+
+        if (clearBtn) {
+            clearBtn.addEventListener('click', function() {
+                input.value = '';
+                executeSearch('');
+                input.focus();
             });
         }
 

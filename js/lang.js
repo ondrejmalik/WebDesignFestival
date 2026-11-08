@@ -347,7 +347,7 @@
             detail_btn_text: "[ ℹ️ Detail → ]",
             schedule_artist_detail_btn: "[ ℹ️ Artist Detail → ]",
             skip_to_content: "Skip to main content",
-            nav_search: "🔍 [ Search ]",
+            nav_search: "[ Search ]",
             sch_caption_day1: "Festival timetable for Friday, July 10, 2026",
             sch_caption_day2: "Festival timetable for Saturday, July 11, 2026",
             sch_caption_day3: "Festival timetable for Sunday, July 12, 2026",
@@ -359,7 +359,14 @@
             search_timetable: "Matching Timetable Slots",
             search_info: "Stages & Practical Information",
             search_empty: "No results found matching your query.",
-            search_quick_pill_all: "[ Show All ]"
+            search_quick_pill_all: "[ Show All ]",
+            search_quick_pill_info: "[ ℹ️ Practical Info ]",
+            search_clear_btn: "[ ✕ Clear ]",
+            search_suggestions_prefix: "Try searching for:",
+            search_artist_empty_title: "No performers match your search.",
+            search_artist_empty_hint: "Looking for festival practical info, shuttle buses, camping, or stages?",
+            search_artist_empty_link_search: "[ 🔍 Go to Festival Search → ]",
+            search_artist_empty_link_info: "[ 🚆 Practical Info → ]"
         },
         cs: {
             // Navigation
@@ -629,7 +636,7 @@
             detail_btn_text: "[ ℹ️ Detail → ]",
             schedule_artist_detail_btn: "[ ℹ️ Detail interpreta → ]",
             skip_to_content: "Přejít k hlavnímu obsahu",
-            nav_search: "🔍 [ Vyhledávání ]",
+            nav_search: "[ Vyhledávání ]",
             sch_caption_day1: "Harmonogram festivalu na pátek 10. července 2026",
             sch_caption_day2: "Harmonogram festivalu na sobotu 11. července 2026",
             sch_caption_day3: "Harmonogram festivalu na neděli 12. července 2026",
@@ -641,7 +648,14 @@
             search_timetable: "Odpovídající časové sloty",
             search_info: "Scény a praktické informace",
             search_empty: "Pro váš dotaz nebyly nalezeny žádné výsledky.",
-            search_quick_pill_all: "[ Zobrazit vše ]"
+            search_quick_pill_all: "[ Zobrazit vše ]",
+            search_quick_pill_info: "[ ℹ️ Praktické info ]",
+            search_clear_btn: "[ ✕ Vymazat ]",
+            search_suggestions_prefix: "Zkuste vyhledat:",
+            search_artist_empty_title: "Žádní účinkující neodpovídají hledání.",
+            search_artist_empty_hint: "Hledáte praktické informace o festivalu, kyvadlovou dopravu, kemp nebo scény?",
+            search_artist_empty_link_search: "[ 🔍 Přejít na vyhledávání festivalu → ]",
+            search_artist_empty_link_info: "[ 🚆 Praktické informace → ]"
         }
     };
 

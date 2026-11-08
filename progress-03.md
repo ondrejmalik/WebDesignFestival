@@ -8,86 +8,76 @@
 
 ## 1. Co je implementováno (Implemented Scope & User Scenarios)
 
-V rámci 4. cvičení (*první funkční implementace*) jsme dopracovali čistě klientskou (zero-server) implementaci celého webu ve složce `web/` (zrcadlené z kořene projektu), která je okamžitě spustitelná jak přes protokol `file:///`, tak na GitHub Pages bez nutnosti backendu či build nástrojů.
+Pro 4. cvičení (*první funkční implementace*) je kompletně implementován čistě klientský (zero-server) web ve složce `web/`, který je plně funkční při otevření přes `file:///` i na GitHub Pages bez nutnosti backendu či instalace.
 
-### A. Implementované stránky (8 propojených HTML5 dokumentů)
-1. **Úvodní stránka (`index.html`):** Identita festivalu s jasnou Hero sekcí a primárním CTA tlačítkem (`.btn-primary-cta`), živý telemetrický pás (*Mission Control* s lokálním časem a stavem oblačnosti), pohotovostní meteorologický alert pro okamžitý přesun pod střechu a kompaktní Bento Grid rozcestník.
-2. **Program (`program.html`):** Dvourozměrná rozvrhová matice (časy `13:00`–`04:00` × 2 scény *Solar Horizon Stage* a *Lunar Forest Dome* pro všechny 3 dny) s okamžitou filtrací podle dne, scény, žánru a záložek (`★`).
-3. **Katalog účinkujících (`artists.html`):** Kompletní přehled všech 60 interpretů (`perf-01` až `perf-60`) v responzivní mřížce s živým fulltextovým vyhledáváním, žánrovými filtry a záložkováním.
-4. **Detail účinkujícího (`artist-detail.html`):** Dynamický profil interpreta, bilingvní biografie s typograficky optimalizovanou šířkou řádku (`max-width: 72ch`), interaktivní simulátor audio ukázky (waveform přehrávač), přímé uložení do vlastního plánu a návrat na přesnou pozici v katalogu nebo rozvrhu se zvýrazněním (`.spot-highlight`).
-5. **Místa / Scény (`stages.html`):** Technické a kapacitní srovnání obou scén, interaktivní vektorová SVG mapa areálu v Kutné Hoře – Sedlci a přímé prokliky na filtrovaný program každé scény.
-6. **Praktické informace (`practical-info.html`):** Klíčové parametry ročníku 2026, jízdní řády kyvadlové dopravy (*Shuttle Bus*) ze stanice Kutná Hora hl. n., kroková mapa pěší trasy, pravidla stanování, cashless platby a strukturované FAQ.
-7. **Můj plán (`my-schedule.html`):** Osobní plánovač využívající `localStorage` (`festival_favorites`) s automatickým kolizním enginem, který detekuje časové překryvy mezi scénami (včetně nočních setů přes půlnoc) a umožňuje konflikt vyřešit jedním kliknutím.
-8. **Vyhledávání (`search.html`):** Dedikovaná vyhledávací stránka napříč interprety, scénami a praktickými informacemi s rychlými štítky (*Quick Search Pills*).
-
-### B. Implementované klíčové uživatelské scénáře
-- **Scénář 1 (Náhlý déšť v areálu):** Návštěvník na mobilu potřebuje rychle zjistit, kdo hraje pod střechou v *Lunar Forest Dome*. Z úvodní stránky se přes výrazný meteorologický banner dostane na vyfiltrovaný program kryté scény na **1 kliknutí** (případně na 2 kliknutí přes hlavní navigaci).
-- **Scénář 2 (Sestavení osobního programu bez kolizí):** Návštěvník si v programu nebo katalogu ukládá koncerty pomocí `★`. V sekci *Můj plán* algoritmus okamžitě vyhodnocuje intervaly (normalizované na spojitou osu $13:00 \rightarrow 04:00$ s přičtením $+1440$ minut pro časy po půlnoci) a červeně zvýrazní případné překryvy.
-- **Scénář 3 (Příjezd vlakem do Kutné Hory):** Návštěvník v sekci *Info* najde přesnou tabulku odjezdů shuttle busu navázanou na příjezdy vlaků R9/Ex i popis pěší trasy.
+- **8 propojených sémantických stránek:**
+  - `index.html` – Úvodní stránka s Hero sekcí (hlavní CTA tlačítko), živou telemetrií (*Mission Control*), dešťovým alertem a dlaždicovým rozcestníkem.
+  - `program.html` – Interaktivní 2D rozvrhová matice (`13:00`–`04:00`, 3 dny, 2 scény, 60 vystoupení) s filtrací podle dne, scény, žánru a oblíbených položek (`★`).
+  - `artists.html` & `artist-detail.html` – Katalog 60 interpretů s živým vyhledáváním, žánrovými filtry, detailem interpreta, simulátorem audio ukázky (waveform) a návratem na přesnou pozici (`.spot-highlight`).
+  - `stages.html` – Porovnání venkovní *Solar Horizon Stage* a kryté *Lunar Forest Dome* + vektorová SVG mapa areálu.
+  - `practical-info.html` – Klíčové parametry ročníku, jízdní řády kyvadlové dopravy (*Shuttle Bus*) z nádraží Kutná Hora, pěší trasa, kemp, cashless a FAQ.
+  - `my-schedule.html` – Osobní plánovač (`localStorage`) s automatickou detekcí časových kolizí (včetně nočních přechodů přes půlnoc).
+  - `search.html` – Celowebové vyhledávání napříč interprety, časovými sloty a praktickými informacemi.
+- **Průchod klíčovými uživatelskými scénáři:**
+  - **Scénář 1 (Náhlý déšť v areálu):** Přechod z úvodní stránky na filtrovaný program kryté scény *Lunar Forest Dome* na 1 kliknutí přes meteorologický banner.
+  - **Scénář 2 (Osobní itinerář a kolize):** Ukládání koncertů pomocí `★` s okamžitým výpočtem a zvýrazněním časových překryvů v `my-schedule.html`.
+  - **Scénář 3 (Doprava z nádraží):** Přehled intervalů shuttle busů a kroková mapa v `practical-info.html`.
 
 ---
 
 ## 2. Aktuální best practices a trendy v oblasti UX a designu a jejich implementace
 
-Při návrhu a úpravách pro 4. cvičení jsme vycházeli z aktuálního přehledu principů a trendů pro rok 2026 dle odborné metodiky **[Moderní web design – principy, trendy a UX webu (WebOptim.cz, P. Gáborík, 2026)](https://www.weboptim.cz/blog/web-design-trendy)**, standardu **WCAG 2.2** a doporučení **Google Search Central (Core Web Vitals)**:
+Při implementaci jsme vycházeli z principů a trendů pro rok 2026 dle metodiky **[Moderní web design – principy, trendy a UX webu (WebOptim.cz, P. Gáborík, 2026)](https://www.weboptim.cz/blog/web-design-trendy)**, standardu **WCAG 2.2 AA** a metrik **Google Core Web Vitals**:
 
 | Princip / Trend 2026 (dle WebOptim.cz) | Konkrétní implementace v projektu |
 | :--- | :--- |
-| **1. Kontextově adaptivní jednotná navigace & pojmenování slovy uživatelů** | Web využívá jediné sémantické `<nav>` menu se 7 srozumitelnými položkami (`Úvod`, `Program`, `Účinkující`, `Scény`, `Info`, `Můj plán`, `Hledat`). Na **desktopu (`@media (min-width: 769px)`)** je vykresleno nahoře v hlavičce jako vodorovná lišta. Na **mobilu (`@media (max-width: 768px)`)** se tentýž element přes CSS přemístí ke spodnímu okraji obrazovky do přirozené zóny palce (*Thumb Zone* dle Fittsova zákona), přičemž všechny dotykové plochy přesahují minimum WCAG 2.2 ($24\times 24\text{ px}$, u nás $\ge 44\times 44\text{ px}$). |
-| **2. Hero sekce se 3 odpověďmi a jedním primárním CTA (Princip č. 1 a 2)** | První obrazovka na `index.html` okamžitě odpovídá na 3 klíčové otázky (*co nabízíme*, *pro koho* a *co udělat dál*). Do Hero boxu jsme přidali akční lištu `.hero-cta-row` s jedním vizuálně dominantním primárním tlačítkem `.btn-primary-cta` (`[ Otevřít program → ]`) a sekundárním proklikem na účinkující. |
-| **3. Čitelnost a optimální délka řádku $\le 75$ znaků (Princip č. 3)** | Základní velikost písma je nastavena na čitelných `1rem` (`16px`) a pro delší textové bloky (biografie interpretů `.artist-detail-bio-text`, popisy scén, FAQ a úvodní anotace) je v `css/wireframe.css` vynuceno typografické pravidlo `max-width: 72ch`. Text se tak na širokých monitorech neroztahuje do nečitelných řádků. |
-| **4. Bento Grid (dlaždice) s prevencí dlouhého sloupce na mobilu (Trend 2026)** | Telemetrické a navigační panely na `index.html` využívají dlaždicové rozvržení (*Bento Grid* – `.control-grid`). Abychom předešli riziku zmiňovanému v analýze WebOptim.cz (*„Riziko Bento gridu: dlouhý sloupec na mobilu“*), upravili jsme `@media (max-width: 768px)` na kompaktní mřížku `minmax(160px, 1fr)` se sníženou výškou dlaždic (`min-height: 96px`). |
-| **5. Tmavý režim (Dark Mode) s dvojí kontrolou kontrastu (Trend 2026)** | Kompletní eliminace inline stylů (`0` výskytů `style="..."` v HTML). Veškeré barvy jsou řízeny přes CSS Custom Properties (`--wf-*`) a testovány jak ve světlém, tak v tmavém režimu (`html.dark-mode`), aby byl vždy dodržen kontrast min. $4.5:1$ dle WCAG. |
-| **6. Funkční mikrointerakce místo těžkých animací (Core Web Vitals: LCP, INP, CLS)** | Místo náročných videí či celostránkových efektů, které zhoršují metriky *Core Web Vitals*, používáme lehké CSS mikro-animace: pružné vyskočení hvězdičky při uložení koncertu (`@keyframes wf-star-pop`), pulzování dešťového radaru (`@keyframes wf-radar-pulse`) a hmatovou odezvu tlačítek (`:hover` / `:active`). Pro uživatele s citlivostí na pohyb pravidlo `@media (prefers-reduced-motion: reduce)` animace automaticky vypne. |
-| **7. Checklist před spuštěním: Klikací telefon a e-mail jedním klepnutím + Více stránek místo One-page** | V souladu s checklistem WebOptim.cz jsou kontakty v `<address>` implementovány jako aktivní odkazy `<a href="mailto:info@festivalofdarkness.com">` a `<a href="tel:+420800202600">` pro okamžité vytočení nebo napsání e-mailu jedním klepnutím na mobilu. Více-stránková architektura (8 samostatných URL + Schema.org JSON-LD) pak zajišťuje cílené indexování pro vyhledávače i AI agenty (SEO / AEO / GEO). |
+| **1. Mobile-First navigace a ergonomie palcové zóny (Thumb Zone / Fittsův zákon)** | Web zobrazuje vždy pouze **jedno aktivní menu podle typu zařízení** (přes CSS `@media` queries se shodnými 7 sekcemi). Z důvodu ergonomie **Thumb Zone** je na **mobilu (`<= 768px`)** položka **`🏠 Úvod` (`Home`) umístěna přesně uprostřed** spodního doku (4. ze 7 položek – nejsnáze dostupné místo pro palec), zatímco na **desktopu (`>= 769px`)** je v horním menu přirozeně **na začátku** seznamu. |
+| **2. Hero sekce s jedním primárním CTA (Princip č. 1 a 2)** | První obrazovka na `index.html` jasně sděluje *co nabízíme*, *pro koho* a *co udělat dál* pomocí vizuálně dominantního primárního tlačítka `.btn-primary-cta` (`[ Otevřít program → ]`). |
+| **3. Čitelnost a šířka řádku $\le 75$ znaků (Princip č. 3)** | Základní písmo má čitelných `16px` (`1rem`) a delší textové odstavce (biografie interpretů, popisy scén, FAQ) mají omezenou šířku řádku na `max-width: 72ch`. |
+| **4. Bento Grid bez dlouhého sloupce na mobilu (Trend 2026)** | Dlaždicový rozcestník (`.control-grid`) na `index.html` se na mobilu skládá do kompaktní mřížky `minmax(160px, 1fr)`, aby nevznikal příliš dlouhý vertikální sloupec. |
+| **5. Tmavý režim (Dark Mode) s kontrolou kontrastu (Trend 2026)** | Veškeré barvy jsou řízeny přes CSS Custom Properties (`--wf-*`) bez jediného inline stylu, což zaručuje plný kontrast ($\ge 4.5:1$) ve světlém i tmavém režimu (`html.dark-mode`). |
+| **6. Funkční mikrointerakce šetřící Core Web Vitals** | Místo těžkých animací zpomalujících načítání používáme lehké CSS mikro-animace: pružné vyskočení hvězdičky při uložení koncertu (`@keyframes wf-star-pop`), pulzování radaru (`@keyframes wf-radar-pulse`) a hmatovou odezvu tlačítek (`:hover` / `:active`) s plnou podporou `@media (prefers-reduced-motion: reduce)`. |
+| **7. Klikací kontakty na 1 dotyk & samostatné podstránky (Checklist WebOptim.cz)** | E-mail i telefon v patičce (`<address>`) jsou klikací (`mailto:` a `tel:`) jedním klepnutím na mobilu. Více-stránková architektura doplněná o strukturovaná data **Schema.org JSON-LD** zajišťuje čisté indexování pro vyhledávače i AI agenty (SEO / AEO / GEO). |
 
 ---
 
 ## 3. Co se proti prototypu (Cvičení 3) změnilo a proč
 
-1. **Odstranění dvojího menu a sjednocení navigace (přímá reakce na hodnocení Cvičení 3):**
-   - *Podnět (komentář vyučujícího k Cvičení 3):* **„Nemělo by být dvojí menu – navíc každé trochu jiné. Dejte jen jedno.“**
-   - *Původní stav:* V prototypu bylo současně viditelné horní tlačítko `[ ☰ Menu ]` (otevírající boční panel se 7 položkami) a zároveň spodní lišta (s 5 položkami v jiném pořadí a s odlišnými názvy).
-   - *Provedená změna:* Boční výsuvné menu bylo ze zobrazení vyřazeno. Celý web nyní používá **jediné hlavní menu** se 100% shodnými 7 položkami (`🏠 Úvod`, `📅 Program`, `🎤 Účinkující`, `⛺ Scény`, `🚆 Info`, `★ Můj plán`, `🔍 Hledat`). Pomocí CSS `@media` queries se toto jediné menu zobrazuje **na PC nahoře v hlavičce** (`>= 769px`) a **na mobilu dole u palce** (`<= 768px`).
-2. **Zvažované sloučení sekcí *Účinkující* a *Scény* (zamítnuto po týmové validaci a metodice WebOptim.cz):**
-   - *Diskuze v týmu:* Padl návrh spojit stránky `artists.html` a `stages.html` do jedné.
-   - *Rozhodnutí a zdůvodnění:* Návrh jsme zamítli. Jak uvádí i metodika WebOptim.cz (*„One page web, nebo více stránek“*), při více obsahově odlišných celcích je mnohem přehlednější samostatná stránka pro každý záměr uživatele. Spojení 60 karet interpretů s mapou areálu by navíc porušilo schválenou Informační architekturu z `project-specification.md`.
-3. **Doplnění primárního CTA do Hero sekce, klikacích kontaktů (`mailto:` / `tel:`) a omezení délky řádku (`72ch`):**
-   - *Důvod:* Aplikace konkrétních bodů z *Checklistu před spuštěním webu* a *7 principů dobrého web designu* (WebOptim.cz, 2026).
-4. **Přesun bloku *Klíčové parametry ročníku* z úvodní stránky do *Praktických informací*:**
-   - *Důvod:* Odlehčení úvodní stránky (`index.html`), aby se mobilní návštěvník v areálu okamžitě dostal k živé telemetrii a hlavnímu CTA bez nutnosti skrolovat přes faktografický souhrn.
+1. **Odstranění dvojího menu a sjednocení položek navigace (reakce na hodnocení Cvičení 3):**
+   - *Připomínka vyučujícího z Cvičení 3:* **„Nemělo by být dvojí menu – navíc každé trochu jiné. Dejte jen jedno.“**
+   - *Provedená změna:* Odstranili jsme souběžné zobrazování horního a spodního menu a sjednotili jejich obsah na identických 7 položek (`Úvod`, `Program`, `Účinkující`, `Scény`, `Info`, `Můj plán`, `Hledat`). Pomocí CSS `@media` queries je na **mobilu (`<= 768px`)** aktivní výhradně spodní palcový dok (s `🏠 Úvod` vycentrovaným uprostřed pro palec) a na **desktopu (`>= 769px`)** výhradně horní menu (kde je `🏠 Úvod` na prvním místě a spodní dok je skrytý).
+2. **Doplnění celowebového vyhledávání (`search.html`) a propojení s katalogem:**
+   - Doplněna samostatná stránka vyhledávání s rychlými štítky (*Quick Search Pills*) a našeptáváním témat při prázdném výsledku, propojená přímo s vyhledávacím polem v katalogu interpretů.
+3. **Refaktoring na nulové inline styly a sémantické HTML5 (WCAG 2.0/2.2 AA):**
+   - Odstraněno přes 200 původních `style="..."` atributů z prototypu a nahrazeno čistými CSS třídami v `css/wireframe.css`. Doplněny sémantické značky `<article>`, `<time>`, `<address>`, tabulkové hlavičky `scope` a klávesový `.skip-link`.
+4. **Přesun bloku *Klíčové parametry ročníku* do *Praktických informací* a doplnění primárního CTA do Hero sekce:**
+   - Úvodní stránka byla odlehčena pro rychlejší orientaci na mobilu a doplněna o jasnou primární výzvu k akci dle metodiky WebOptim.cz.
 
 ---
 
 ## 4. Jaké testy a kontroly jsme provedli
 
-Kvalita implementace byla ověřena víceúrovňovou sadou automatizovaných skriptů (`tests/` a `scripts/`) i manuálním testováním:
+Implementace byla ověřena sadou automatizovaných testů (`tests/` a `scripts/`) i kontrolou v prohlížeči:
 
-1. **Empirický test responzivního přepínání navigace (Headless Chrome CDP):**
-   - Na viewportu **Desktop (`1200×800`)** ověřeno, že `<nav class="bottom-nav-dock">` má `position: static`, `flex-direction: row` a je vykresleno nahoře v hlavičce (`top: 74px`), zatímco duplicitní tlačítko menu má `display: none`.
-   - Na viewportu **Mobile (`375×667`, iPhone SE)** v češtině i angličtině ověřeno, že tentýž `<nav>` má `position: fixed`, `bottom: 667px`, `flex-direction: column` a celková šířka dokumentu je přesně `scrollWidth === 375px` (nulové horizontální přetékání).
-2. **Automatizované regresní sady (8 testovacích sad, 250+ kontrolních bodů – vše `PASS`):**
-   - `tests/e2e_test_runner.js` – Integrita 60 interpretů, 60 programových slotů a relací 1:1.
-   - `tests/challenger_1_m0_r2_suite.js` & `tests/challenger_1_m1_suite.js` – Stres-testy kolizního algoritmu (přechody přes půlnoc `23:30–00:45` vs. `00:05–01:25`, navazující koncerty bez kolize `14:00–15:00` a `15:00–16:00`).
-   - `tests/dark_mode_test.js` – Ověření přepínání a persistence tmavého režimu v `localStorage`.
-   - `tests/lang_switcher_test.js` – Kontrola symetrie slovníků CZ/EN a nulového výskytu dvojjazyčných lomítek (200/200 `PASS`).
-   - `tests/sticky_nav_test.js` – Empirický test přichycení hlavičky (`top: 0`) při vertikálním skrolování o `600px` a `800px`.
-   - `tests/artist_detail_and_breadcrumbs_test.js` – Drobečková navigace a návrat na přesnou pozici s animací `.spot-highlight`.
-3. **Statické kontroly čistoty kódu (`scripts/package_submission.js`, `scripts/verify_integrity.js`):**
-   - `0` statických inline stylů (`style="..."`) ve všech 18 HTML souborech (kořen + `web/`).
-   - `0` poškozených znaků UTF-8 (`\uFFFD`).
-   - `0` nefunkčních interních odkazů, skriptů či stylopisů.
+1. **Automatizované testovací sady v Node.js (9 testovacích sad – vše `PASS`):**
+   - `tests/e2e_test_runner.js` – Kontrola 60 interpretů, 60 časových slotů a 1:1 vazeb.
+   - `tests/challenger_1_m0_r2_suite.js` & `tests/challenger_1_m1_suite.js` – Testy detekce časových kolizí včetně nočních koncertů přes půlnoc (`23:30–00:45` vs. `00:05–01:25`).
+   - `tests/bottom_switcher_test.js` & `tests/sticky_nav_test.js` – Ověření responzivní navigace, přichycené hlavičky (`position: sticky; top: 0`) a dotykových ploch.
+   - `tests/dark_mode_test.js` & `tests/lang_switcher_test.js` – Kontrola tmavého režimu, bilingvního překladu CZ/EN (včetně českého skloňování počítadel 1 / 2–4 / 5+) a absence lomítkových textů.
+   - `tests/artist_detail_and_breadcrumbs_test.js` & `tests/search_robustness_test.js` – Kontrola drobečkové navigace, návratu na pozici a vyhledávání.
+2. **Kontroly čistoty kódu a přenositelnosti (`scripts/package_submission.js`, `scripts/verify_integrity.js`):**
+   - `0` inline stylů (`style="..."`) ve všech HTML souborech.
+   - `0` poškozených znaků UTF-8 (`\uFFFD`) a nulové horizontální přetékání na mobilním viewportu (`375px`).
+   - Ověřeno bezchybné spuštění přímo ze souborového systému (`file:///`) bez lokálního serveru.
 
 ---
 
 ## 5. Použití AI a ověření AI výstupů
 
 1. **K čemu byla AI použita:**
-   - Refaktoring inline stylů do sémantických tříd a CSS proměnných v `css/wireframe.css`.
-   - Návrh CSS `@media` pravidel pro transformaci jednoho `<nav>` elementu mezi desktopovou horní lištou a mobilním spodním dokem.
-   - Analýza a zapracování doporučení z metodiky WebOptim.cz (primární CTA v Hero sekci, `max-width: 72ch`, kompaktní Bento grid na mobilu, 1-tap `mailto:` a `tel:` odkazy).
-   - Tvorba automatizovaných regresních skriptů nad Chrome DevTools Protocol (CDP) pro měření přesných souřadnic prvků a šířky viewportu.
+   - Refaktoring inline stylů z prototypu do sémantických tříd a CSS proměnných v `css/wireframe.css`.
+   - Implementace bilingvního slovníku (`js/lang.js`), fulltextového vyhledávání (`js/search.js`) a sady regresních testů v Node.js.
 2. **Jak byly výstupy ověřeny a co bylo upraveno / odmítnuto:**
-   - **Odmítnutí dvojí navigace:** Původní návrh kombinující horní zásuvkové menu (Alza Drawer) a spodní dok (Albert Dock) se v praxi ukázal jako matoucí, což oprávněně vytkl i vyučující při hodnocení Cvičení 3. Tento koncept jsme nahradili jedním responzivním menu se shodnými položkami.
-   - **Korekce šířky položek na malých mobilech (`375px`):** Při sjednocení všech 7 položek do spodní mobilní lišty měly původní CSS styly nastaveno `min-width: 44px` a `font-size: 0.72rem`, což u českých popisků (*Účinkující*, *Můj plán*) hrozilo těsným kontaktem textu. Ručně jsme upravili media queries pro `@media (max-width: 768px)` a `@media (max-width: 480px)` (`min-width: 0; font-size: 0.62rem; padding: 4px 1px;`) a empiricky ověřili v bezhlavém Chromu, že nedochází k žádnému přetékání (`scrollWidth === 375`).
-   - **Omezení přehnaných animací:** Navržené CSS transformace na obalových kontejnerech jsme zamítli, protože by v prohlížečích narušily fungování `position: sticky` a `position: fixed`. Ponechali jsme pouze čisté mikro-animace na koncových prvcích (hvězdička, karty, tlačítka) doplněné o pojistku `prefers-reduced-motion`.
+   - **Oprava dvojí navigace:** Původní AI návrh ponechával současně zobrazenou horní i spodní navigaci s rozdílným počtem položek. Na základě zpětné vazby vyučujícího jsme navigaci sjednotili na 7 shodných položek a pomocí `@media` queries oddělili mobilní spodní dok (s `Home` uprostřed v Thumb Zone) od desktopového horního menu (s `Home` na začátku).
+   - **Oprava skloňování a filtrace dnů v *Můj plán*:** AI původně generovala gramaticky chybný tvar `1 uložených vystoupení` a nekonzistentně porovnávala názvy dnů mezi katalogem a programem. Doplnili jsme třípádovou českou pluralizaci a kanonické mapování podle ID interpretů (`perf-01..20` = Pátek, `21..40` = Sobota, `41..60` = Neděle).
+   - **Odstranění přebytečných dekorací:** Navržené CSS stíny a zaoblené rohy jsme odmítli, aby zůstal zachován čistý, vysokokontrastní wireframe styl projektu.

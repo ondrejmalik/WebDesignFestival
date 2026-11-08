@@ -852,14 +852,14 @@
             originName = isCs ? 'Vyhledávání' : 'Search';
             originUrl = `search.html`;
             backText = isCs ? '[ ← Zpět do Vyhledávání ]' : '[ ← Back to Search ]';
-            originIcon = '🔍';
+            originIcon = '';
         }
 
         if (breadcrumbsEl) {
             breadcrumbsEl.innerHTML = `
                 <a href="index.html" data-i18n="nav_home">${isCs ? '🏠 [ Úvod ]' : '🏠 [ Home ]'}</a>
                 <span class="sep">&gt;</span>
-                <a href="${originUrl}">${originIcon} [ ${originName} ]</a>
+                <a href="${originUrl}">${originIcon ? originIcon + ' ' : ''}[ ${originName} ]</a>
                 <span class="sep">&gt;</span>
                 <span class="current"><strong>[ ${artist.name} ]</strong></span>
             `;
