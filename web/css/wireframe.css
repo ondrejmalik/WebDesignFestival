@@ -3432,3 +3432,77 @@ html.dark-mode .search-empty-box {
 }
 
 
+
+
+/* ==========================================================================
+   WebOptim 2026 UX Principles: Primary Hero CTA, 72ch Readability,
+   Compact Mobile Bento Grid & 1-Tap Mobile Contact Links
+   ========================================================================== */
+.hero-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.btn-primary-cta {
+    background: #222222;
+    color: #ffffff !important;
+    border: 2px solid #000000;
+    padding: 8px 18px;
+    font-weight: bold;
+}
+
+.btn-primary-cta:hover {
+    background: #000000;
+    color: #ffffff !important;
+}
+
+html.dark-mode .btn-primary-cta {
+    background: #e4e4e4 !important;
+    color: #111111 !important;
+    border-color: #ffffff !important;
+}
+
+html.dark-mode .btn-primary-cta:hover {
+    background: #ffffff !important;
+    color: #000000 !important;
+}
+
+/* Principle #3: Optimal line length (<= 75 chars) for comfortable reading */
+.artist-detail-bio-text,
+.artist-detail-stage-text,
+.faq-item p,
+.search-result-desc,
+.wf-readable-text {
+    max-width: 72ch;
+}
+
+/* 2026 Trend Bento Grid: Prevent overly tall vertical column on mobile */
+@media (max-width: 768px) {
+    .control-grid {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 8px;
+    }
+    .control-tile {
+        min-height: 96px;
+        padding: 10px;
+    }
+}
+
+/* Checklist: 1-tap accessible phone & email links in footer */
+.wf-address {
+    font-style: normal;
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+}
+
+.wf-contact-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    font-weight: 500;
+}
