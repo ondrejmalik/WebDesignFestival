@@ -1104,14 +1104,153 @@ html.dark-mode .fav-count-badge {
     color: #111;
 }
 
-/* Desktop viewport centering for bottom dock */
-@media (min-width: 960px) {
+/* Hide redundant second hamburger menu & drawer (Single Unified Menu per teacher feedback) */
+#menu-drawer-open-btn,
+.wf-menu-btn,
+.alza-drawer,
+.drawer-backdrop {
+    display: none !important;
+}
+
+/* Mobile-First (< 769px): Compact 7-item bottom thumb dock without horizontal overflow */
+@media (max-width: 768px) {
+    .bottom-dock-item {
+        min-width: 0;
+        padding: 4px 2px;
+        font-size: 0.68rem;
+    }
+    .bottom-dock-item .dock-icon {
+        font-size: 1.05rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .bottom-dock-item {
+        font-size: 0.62rem;
+        padding: 4px 1px;
+    }
+    .bottom-dock-item .dock-icon {
+        font-size: 0.98rem;
+    }
+}
+
+/* Desktop (>= 769px): Switch single <nav> from fixed bottom dock to horizontal Top Navigation Bar */
+@media (min-width: 769px) {
+    body {
+        padding-bottom: 16px;
+    }
+    #nav-placeholder .wf-top-bar-divider {
+        display: none;
+    }
     .bottom-nav-dock {
-        max-width: 960px;
-        left: 50%;
-        transform: translateX(-50%);
-        border-left: 2px solid #222;
-        border-right: 2px solid #222;
+        position: static;
+        width: 100%;
+        max-width: none;
+        left: auto;
+        bottom: auto;
+        transform: none;
+        border-top: 1px solid #333;
+        border-bottom: 2px solid #222;
+        border-left: none;
+        border-right: none;
+        min-height: 44px;
+        margin-top: 4px;
+    }
+    .bottom-dock-item {
+        flex-direction: row;
+        gap: 6px;
+        min-height: 42px;
+        padding: 6px 10px;
+        font-size: 0.88rem;
+    }
+    .bottom-dock-item .dock-icon {
+        font-size: 1rem;
+        margin-bottom: 0;
+    }
+    .bottom-dock-home .dock-icon {
+        font-size: 1.05rem;
+    }
+    html.dark-mode .bottom-nav-dock {
+        border-top-color: #444;
+        border-bottom-color: #555;
+    }
+}
+
+/* ==========================================================================
+   Exercise 4 Progressive Wireframe Micro-Animations & Interactive Polish
+   ========================================================================== */
+@keyframes wf-star-pop {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.26); }
+    75% { transform: scale(0.94); }
+    100% { transform: scale(1); }
+}
+
+@keyframes wf-radar-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.55; }
+}
+
+@keyframes wf-subtle-fade {
+    from { opacity: 0.85; }
+    to { opacity: 1; }
+}
+
+.btn-box,
+.filter-btn,
+.stage-tab-btn,
+.search-pill-btn,
+.bottom-dock-item,
+.sch-fav-btn {
+    transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.12s ease;
+}
+
+.btn-box:hover,
+.filter-btn:hover,
+.stage-tab-btn:hover,
+.search-pill-btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn-box:active,
+.filter-btn:active,
+.stage-tab-btn:active,
+.search-pill-btn:active,
+.bottom-dock-item:active,
+.sch-fav-btn:active {
+    transform: translateY(0) scale(0.97);
+}
+
+.artist-card,
+.control-tile,
+.search-result-item {
+    transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+.artist-card:hover,
+.control-tile:hover,
+.search-result-item:hover {
+    transform: translateY(-2px);
+}
+
+.sch-cell.is-favourite .sch-fav-btn,
+.artist-card.is-favourite .artist-fav-btn,
+#profile-star-btn.is-favourited,
+.nav-badge-count {
+    animation: wf-star-pop 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.telemetry-radar-alert {
+    animation: wf-radar-pulse 2.2s infinite ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }
 

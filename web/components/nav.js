@@ -56,11 +56,13 @@
         const mySchedule = isCs ? '[ Můj program ]' : '[ My Schedule ]';
         const search = isCs ? '[ Vyhledávání ]' : '[ Search ]';
 
-        const dockArtists = isCs ? 'Účinkující' : 'Artists';
-        const dockStages = isCs ? 'Scény' : 'Stages';
-        const dockHome = isCs ? 'ÚVOD' : 'HOME';
-        const dockTimetable = isCs ? 'Program' : 'Timetable';
-        const dockMyPlan = isCs ? 'Můj plán' : 'My Plan';
+        const dockHome = isCs ? "Úvod" : "Home";
+        const dockTimetable = isCs ? "Program" : "Program";
+        const dockArtists = isCs ? "Účinkující" : "Artists";
+        const dockStages = isCs ? "Scény" : "Stages";
+        const dockPractical = isCs ? "Info" : "Info";
+        const dockMyPlan = isCs ? "Můj plán" : "My Plan";
+        const dockSearch = isCs ? "Hledat" : "Search";
 
         const flagImg = isCs ? 'img/1f1e8-1f1ff.svg' : 'img/1f1ec-1f1e7.svg';
         const flagAlt = isCs ? 'CZ' : 'GB';
@@ -147,26 +149,34 @@
 </aside>
 
 <!-- 3. Ergonomic Bottom Thumb Navigation Dock (Albert App Style: Artists - Stages - HOME - Timetable - My Plan) -->
-<nav class="bottom-nav-dock" aria-label="Mobile Bottom Navigation">
-    <a href="artists.html" class="bottom-dock-item bottom-nav-item ${currentPath === 'artists.html' ? 'active' : ''}" id="dock-item-artists">
-        <span class="dock-icon">🎤</span>
-        <span class="dock-label" data-i18n="dock_artists">${dockArtists}</span>
-    </a>
-    <a href="stages.html" class="bottom-dock-item bottom-nav-item ${currentPath === 'stages.html' ? 'active' : ''}" id="dock-item-stages">
-        <span class="dock-icon">⛺</span>
-        <span class="dock-label" data-i18n="dock_stages">${dockStages}</span>
-    </a>
-    <a href="index.html" class="bottom-dock-item bottom-nav-item bottom-dock-home ${currentPath === 'index.html' ? 'active' : ''}" id="dock-item-home">
+<nav class="bottom-nav-dock" aria-label="Main Navigation">
+    <a href="index.html" class="bottom-dock-item bottom-nav-item bottom-dock-home ${currentPath === "index.html" ? "active" : ""}" id="dock-item-home">
         <span class="dock-icon">🏠</span>
         <span class="dock-label" data-i18n="dock_home">${dockHome}</span>
     </a>
-    <a href="program.html" class="bottom-dock-item bottom-nav-item ${currentPath === 'program.html' ? 'active' : ''}" id="dock-item-timetable">
+    <a href="program.html" class="bottom-dock-item bottom-nav-item ${currentPath === "program.html" ? "active" : ""}" id="dock-item-timetable">
         <span class="dock-icon">📅</span>
         <span class="dock-label" data-i18n="dock_timetable">${dockTimetable}</span>
     </a>
-    <a href="my-schedule.html" class="bottom-dock-item bottom-nav-item ${currentPath === 'my-schedule.html' ? 'active' : ''}" id="dock-item-myplan">
+    <a href="artists.html" class="bottom-dock-item bottom-nav-item ${currentPath === "artists.html" ? "active" : ""}" id="dock-item-artists">
+        <span class="dock-icon">🎤</span>
+        <span class="dock-label" data-i18n="dock_artists">${dockArtists}</span>
+    </a>
+    <a href="stages.html" class="bottom-dock-item bottom-nav-item ${currentPath === "stages.html" ? "active" : ""}" id="dock-item-stages">
+        <span class="dock-icon">⛺</span>
+        <span class="dock-label" data-i18n="dock_stages">${dockStages}</span>
+    </a>
+    <a href="practical-info.html" class="bottom-dock-item bottom-nav-item ${currentPath === "practical-info.html" ? "active" : ""}" id="dock-item-info">
+        <span class="dock-icon">🚆</span>
+        <span class="dock-label" data-i18n="dock_practical">${dockPractical}</span>
+    </a>
+    <a href="my-schedule.html" class="bottom-dock-item bottom-nav-item ${currentPath === "my-schedule.html" ? "active" : ""}" id="dock-item-myplan">
         <span class="dock-icon">★</span>
         <span class="dock-label"><span data-i18n="dock_myplan">${dockMyPlan}</span> <span class="nav-badge-count is-hidden">0</span></span>
+    </a>
+    <a href="search.html" class="bottom-dock-item bottom-nav-item ${currentPath === "search.html" ? "active" : ""}" id="dock-item-search">
+        <span class="dock-icon">🔍</span>
+        <span class="dock-label" data-i18n="dock_search">${dockSearch}</span>
     </a>
 </nav>
 `;
@@ -206,31 +216,39 @@
         const isCs = lang === 'cs';
         const dict = (window.FESTIVAL_I18N && window.FESTIVAL_I18N[lang]) || {};
 
-        const dockArtists = dict.dock_artists || (isCs ? 'Účinkující' : 'Artists');
-        const dockStages = dict.dock_stages || (isCs ? 'Scény' : 'Stages');
-        const dockHome = dict.dock_home || (isCs ? 'ÚVOD' : 'HOME');
-        const dockTimetable = dict.dock_timetable || (isCs ? 'Program' : 'Timetable');
-        const dockMyPlan = dict.dock_myplan || (isCs ? 'Můj plán' : 'My Plan');
+        const dockArtists = dict.dock_artists || (isCs ? "Účinkující" : "Artists");
+        const dockStages = dict.dock_stages || (isCs ? "Scény" : "Stages");
+        const dockHome = dict.dock_home || (isCs ? "Úvod" : "Home");
+        const dockTimetable = dict.dock_timetable || (isCs ? "Program" : "Program");
+        const dockPractical = dict.dock_practical || (isCs ? "Info" : "Info");
+        const dockMyPlan = dict.dock_myplan || (isCs ? "Můj plán" : "My Plan");
+        const dockSearch = dict.dock_search || (isCs ? "Hledat" : "Search");
 
-        const flagImg = isCs ? 'img/1f1e8-1f1ff.svg' : 'img/1f1ec-1f1e7.svg';
-        const flagAlt = isCs ? 'CZ' : 'GB';
-        const langText = isCs ? 'Jazyk' : 'Language';
-        const title = isCs ? 'Přepnout do angličtiny' : 'Switch language to Czech';
+        const flagImg = isCs ? "img/1f1e8-1f1ff.svg" : "img/1f1ec-1f1e7.svg";
+        const flagAlt = isCs ? "CZ" : "GB";
+        const langText = isCs ? "Jazyk" : "Language";
+        const title = isCs ? "Přepnout do angličtiny" : "Switch language to Czech";
 
-        const lblArtists = document.querySelector('[data-i18n="dock_artists"]');
+        const lblArtists = document.querySelector("[data-i18n=\"dock_artists\"]");
         if (lblArtists) lblArtists.textContent = dockArtists;
 
-        const lblStages = document.querySelector('[data-i18n="dock_stages"]');
+        const lblStages = document.querySelector("[data-i18n=\"dock_stages\"]");
         if (lblStages) lblStages.textContent = dockStages;
 
-        const lblHome = document.querySelector('[data-i18n="dock_home"]');
+        const lblHome = document.querySelector("[data-i18n=\"dock_home\"]");
         if (lblHome) lblHome.textContent = dockHome;
 
-        const lblTimetable = document.querySelector('[data-i18n="dock_timetable"]');
+        const lblTimetable = document.querySelector("[data-i18n=\"dock_timetable\"]");
         if (lblTimetable) lblTimetable.textContent = dockTimetable;
 
-        const lblMyPlan = document.querySelector('[data-i18n="dock_myplan"]');
+        const lblPractical = document.querySelector("[data-i18n=\"dock_practical\"]");
+        if (lblPractical) lblPractical.textContent = dockPractical;
+
+        const lblMyPlan = document.querySelector("[data-i18n=\"dock_myplan\"]");
         if (lblMyPlan) lblMyPlan.textContent = dockMyPlan;
+
+        const lblSearch = document.querySelector("[data-i18n=\"dock_search\"]");
+        if (lblSearch) lblSearch.textContent = dockSearch;
 
         document.querySelectorAll('.lang-switch-btn').forEach(btn => {
             const flagEl = btn.querySelector('.flag-icon, [id^="lang-flag"]');
