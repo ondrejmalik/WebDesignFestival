@@ -457,25 +457,34 @@ function setupFilters() {
             const genre = (cell.getAttribute('data-genre') || '').toLowerCase();
             const artist = (cell.getAttribute('data-artist') || '').toLowerCase();
             const stage = (cell.getAttribute('data-stage') || '').toLowerCase();
+            const day = (cell.getAttribute('data-day') || '').toLowerCase();
             const id = cell.getAttribute('data-id');
             const isFav = favIds.has(id);
 
-            let matches = true;
+            const matchesDay = currentDay === 'all'
+                || (currentDay === 'day1' && (day.includes('day 1') || day.includes('friday') || day.includes('pátek') || day.includes('patek')))
+                || (currentDay === 'day2' && (day.includes('day 2') || day.includes('saturday') || day.includes('sobota')))
+                || (currentDay === 'day3' && (day.includes('day 3') || day.includes('sunday') || day.includes('neděle') || day.includes('nedele')));
+            const matchesStage = currentStage === 'all'
+                || (currentStage === 'solar' && stage.includes('solar'))
+                || (currentStage === 'lunar' && stage.includes('lunar'));
+
+            let matches = matchesDay && matchesStage;
 
             // Genre check
-            if (currentGenre !== 'all') {
+            if (matches && currentGenre !== 'all') {
                 if (!genre.includes(currentGenre)) {
                     matches = false;
                 }
             }
 
             // Favourite check
-            if (onlyFavs && !isFav) {
+            if (matches && onlyFavs && !isFav) {
                 matches = false;
             }
 
             // Search query
-            if (searchQuery && !artist.includes(searchQuery) && !genre.includes(searchQuery) && !stage.includes(searchQuery)) {
+            if (matches && searchQuery && !artist.includes(searchQuery) && !genre.includes(searchQuery) && !stage.includes(searchQuery)) {
                 matches = false;
             }
 
@@ -501,9 +510,8 @@ function setupFilters() {
             } else {
                 filterStatusText.textContent = visibleCount === 1 ? `[ Showing 1 show${stageLabel} ]` : `[ Showing ${visibleCount} shows${stageLabel} ]`;
             }
-
-
         }
+
     }
 
     // Day button listeners
@@ -753,7 +761,7 @@ function renderMySchedule() {
 
     if (favs.length === 0) {
         const emptyTitle = isCs 
-            ? '[ Zatím nemáte v osobním plánu žádná uložená vystoupení ]'
+            ? '[ Zatím nemáte v osobním plánu žádna uložená vystoupení ]'
             : '[ You currently have no performances saved in your personal schedule ]';
         const emptyDesc = isCs
             ? 'Zatím nemáte v osobním programu uložena žádná vystoupení. Můžete si je přidat v sekci Program.'
@@ -837,7 +845,7 @@ function renderMySchedule() {
         let showsCountText = '';
         if (isCs) {
             if (typeof window.formatCzPlural === 'function') {
-                showsCountText = window.formatCzPlural(count, '1 uložené vystoupení', `${count} uložená vystoupení`, `${count} uložených vystoupení`);
+                showsCountText = window.formatCzPlural(count, 'uložené vystoupení', 'uložená vystoupení', 'uložených vystoupení');
             } else {
                 if (count === 1) showsCountText = '1 uložené vystoupení';
                 else if (count >= 2 && count <= 4) showsCountText = `${count} uložená vystoupení`;
@@ -1033,3 +1041,7 @@ window.addEventListener('languageChanged', () => {
         renderMySchedule();
     }
 });
+
+// locate text generation area around favorites summary
+
+// no-op placeholder to preserve file state before targeted fix
