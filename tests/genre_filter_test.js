@@ -26,6 +26,7 @@ for (const performance of performances) {
 assert(matchesGenreFilter('Alternative Rock', 'rock'), 'Rock finds rock subgenres');
 assert(matchesGenreFilter('Dream Pop', 'pop'), 'Pop finds dream pop');
 assert(matchesGenreFilter('Electro-Folk', 'electronic'), 'Electronic finds electro variants');
+assert(matchesGenreFilter('Hard Techno', 'electronic'), 'Electronic includes techno subgenres');
 assert(matchesGenreFilter('Hard Techno', 'techno'), 'Techno finds techno variants');
 assert(!matchesGenreFilter('Dream Pop', 'techno'), 'Techno does not match unrelated genres');
 

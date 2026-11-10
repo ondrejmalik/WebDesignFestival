@@ -11,7 +11,7 @@ const GENRE_FILTER_ALIASES = {
     indie: ['indie'],
     rock: ['rock', 'shoegaze', 'post-punk'],
     pop: ['pop', 'synthpop'],
-    electronic: ['electronic', 'electro', 'idm', 'glitch', 'house', 'dubstep', 'trance', 'progressive'],
+    electronic: ['electronic', 'electro', 'techno', 'idm', 'glitch', 'house', 'dubstep', 'trance', 'progressive'],
     dance: ['dance', 'disco', 'funk'],
     experimental: ['experimental', 'idm', 'glitch', 'drone', 'field recording', 'tape', 'leftfield'],
     folk: ['folk', 'acoustic'],
