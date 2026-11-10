@@ -2,6 +2,27 @@
 // Fully integrated with js/lang.js for English and Czech language switching.
 
 const STORAGE_KEY = 'festival_favorites';
+const TOTAL_PROGRAMS = 60;
+
+// Broad groups make related subgenres discoverable through one filter.
+const GENRE_FILTER_ALIASES = {
+    techno: ['techno'],
+    ambient: ['ambient', 'drone', 'field recording', 'tape'],
+    indie: ['indie'],
+    rock: ['rock', 'shoegaze', 'post-punk'],
+    pop: ['pop', 'synthpop'],
+    electronic: ['electronic', 'electro', 'idm', 'glitch', 'house', 'dubstep', 'trance', 'progressive'],
+    dance: ['dance', 'disco', 'funk'],
+    experimental: ['experimental', 'idm', 'glitch', 'drone', 'field recording', 'tape', 'leftfield'],
+    folk: ['folk', 'acoustic'],
+    bass: ['bass', 'dubstep', 'leftfield bass', 'dub']
+};
+
+function matchesGenreFilter(genre, filter) {
+    const normalizedGenre = String(genre || '').toLowerCase();
+    const aliases = GENRE_FILTER_ALIASES[String(filter || '').toLowerCase()];
+    return Boolean(aliases && aliases.some(alias => normalizedGenre.includes(alias)));
+}
 
 // Canonical artist biographies for all 60 performers (English fallback)
 const ARTIST_BIOS = {
@@ -472,10 +493,8 @@ function setupFilters() {
             let matches = matchesDay && matchesStage;
 
             // Genre check
-            if (matches && currentGenre !== 'all') {
-                if (!genre.includes(currentGenre)) {
-                    matches = false;
-                }
+            if (matches && currentGenre !== 'all' && !matchesGenreFilter(genre, currentGenre)) {
+                matches = false;
             }
 
             // Favourite check
@@ -504,11 +523,13 @@ function setupFilters() {
             const isCs = getActiveLanguage() === 'cs';
             const stageLabel = currentStage === 'lunar' ? ' (Lunar Forest Dome)' : (currentStage === 'solar' ? ' (Solar Horizon)' : '');
             if (isCs) {
-                if (visibleCount === 1) filterStatusText.textContent = `[ Zobrazeno 1 vystoupení${stageLabel} ]`;
-                else if (visibleCount >= 2 && visibleCount <= 4) filterStatusText.textContent = `[ Zobrazena ${visibleCount} vystoupení${stageLabel} ]`;
-                else filterStatusText.textContent = `[ Zobrazeno ${visibleCount} vystoupení${stageLabel} ]`;
+                if (visibleCount === 1) filterStatusText.textContent = `[ Zobrazeno 1 z ${TOTAL_PROGRAMS} vystoupení${stageLabel} ]`;
+                else if (visibleCount >= 2 && visibleCount <= 4) filterStatusText.textContent = `[ Zobrazena ${visibleCount} z ${TOTAL_PROGRAMS} vystoupení${stageLabel} ]`;
+                else filterStatusText.textContent = `[ Zobrazeno ${visibleCount} z ${TOTAL_PROGRAMS} vystoupení${stageLabel} ]`;
             } else {
-                filterStatusText.textContent = visibleCount === 1 ? `[ Showing 1 show${stageLabel} ]` : `[ Showing ${visibleCount} shows${stageLabel} ]`;
+                filterStatusText.textContent = visibleCount === 1
+                    ? `[ Showing 1 of ${TOTAL_PROGRAMS} shows${stageLabel} ]`
+                    : `[ Showing ${visibleCount} of ${TOTAL_PROGRAMS} shows${stageLabel} ]`;
             }
         }
 
@@ -1041,6 +1062,10 @@ window.addEventListener('languageChanged', () => {
         renderMySchedule();
     }
 });
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { GENRE_FILTER_ALIASES, matchesGenreFilter, TOTAL_PROGRAMS };
+}
 
 // locate text generation area around favorites summary
 
