@@ -170,7 +170,7 @@
             </form>
 
             <div class="search-pills-row" id="search-pills" role="toolbar" aria-label="Quick search query pills">
-                <button type="button" class="search-pill-btn active" data-query="techno">[ Techno ]</button>
+                <button type="button" class="search-pill-btn" data-query="techno">[ Techno ]</button>
                 <button type="button" class="search-pill-btn" data-query="ambient">[ Ambient ]</button>
                 <button type="button" class="search-pill-btn" data-query="post-rock">[ Post-Rock ]</button>
                 <button type="button" class="search-pill-btn" data-query="lunar">[ Lunar Forest Dome ]</button>
@@ -178,14 +178,14 @@
                 <button type="button" class="search-pill-btn" data-query="info" data-i18n="search_quick_pill_info">[ ℹ️
                     Practical Info ]
                 </button>
-                <button type="button" class="search-pill-btn" data-query="" data-i18n="search_quick_pill_all">[ Show All
+                <button type="button" class="search-pill-btn active" data-query="" data-i18n="search_quick_pill_all">[ Show All
                     ]
                 </button>
             </div>
 
             <div id="search-status-bar" class="search-status-bar" role="status" aria-live="polite">
                 <span data-i18n="search_results_for">Search Results for:</span> "<span
-                    id="active-query-text">techno</span>" (<span id="results-count">5</span> results)
+                    id="active-query-text">all</span>" (<span id="results-count">70</span> results)
             </div>
         </section>
 
@@ -196,52 +196,6 @@
             <h2 id="heading-performers" class="wf-page-title search-section-heading" data-i18n="search_performers">
                 Matching Performers</h2>
             <div id="performers-results-container">
-                <!-- Static Pre-Rendered Showcase Results for "techno" query -->
-                <article class="search-result-item"
-                         data-keywords="perf-13 deep texture dub techno electronic berlin lunar stage-lunar">
-                    <div class="search-result-row">
-                        <div class="search-result-content">
-                            <h3 class="search-result-title"><strong>Deep Texture</strong> <span
-                                    class="search-result-meta">[ Dub Techno / Electronic (DE) ]</span></h3>
-                            <p class="search-result-desc">Cavernous dub techno soundscapes with echoing chord stabs and
-                                deep sub-bass frequencies from Berlin underground.</p>
-                        </div>
-                        <div class="search-result-action">
-                            <a href="artist-detail.html?id=perf-13&amp;from=search#perf-13" class="btn-box">[ View
-                                Profile &rarr; ]</a>
-                        </div>
-                    </div>
-                </article>
-                <article class="search-result-item"
-                         data-keywords="perf-14 oscillator shift minimal techno electronic brno lunar stage-lunar">
-                    <div class="search-result-row">
-                        <div class="search-result-content">
-                            <h3 class="search-result-title"><strong>Oscillator Shift</strong> <span
-                                    class="search-result-meta">[ Minimal Techno / Electronic (CZ) ]</span></h3>
-                            <p class="search-result-desc">Hypnotic minimal techno driven by subtle groove modulations
-                                and percussive precision from Brno.</p>
-                        </div>
-                        <div class="search-result-action">
-                            <a href="artist-detail.html?id=perf-14&amp;from=search#perf-14" class="btn-box">[ View
-                                Profile &rarr; ]</a>
-                        </div>
-                    </div>
-                </article>
-                <article class="search-result-item"
-                         data-keywords="perf-16 phase shift deep techno budapest hungary lunar stage-lunar">
-                    <div class="search-result-row">
-                        <div class="search-result-content">
-                            <h3 class="search-result-title"><strong>Phase Shift</strong> <span
-                                    class="search-result-meta">[ Deep Techno / Electronic (HU) ]</span></h3>
-                            <p class="search-result-desc">Budapest club staple delivering relentless, hypnotic deep
-                                techno sets built around rolling basslines and dark modular loops.</p>
-                        </div>
-                        <div class="search-result-action">
-                            <a href="artist-detail.html?id=perf-16&amp;from=search#perf-16" class="btn-box">[ View
-                                Profile &rarr; ]</a>
-                        </div>
-                    </div>
-                </article>
             </div>
         </section>
 
@@ -250,23 +204,6 @@
             <h2 id="heading-timetable" class="wf-page-title search-section-heading" data-i18n="search_timetable">
                 Matching Timetable Slots</h2>
             <div id="timetable-results-container">
-                <div class="search-result-item"
-                     data-keywords="phase shift lunar dome saturday techno session late night">
-                    <div class="search-result-row">
-                        <div class="search-result-content">
-                            <h3 class="search-result-title"><strong>🌙 Lunar Forest Dome &mdash; Saturday, July 11,
-                                <time datetime="23:30">23:30</time> &ndash;
-                                <time datetime="01:00">01:00</time>
-                            </strong></h3>
-                            <p class="search-result-desc"><strong>Phase Shift</strong> &mdash; Late-night modular deep
-                                techno showcase in the covered weather-proof dome.</p>
-                        </div>
-                        <div class="search-result-action">
-                            <a href="program.html?day=2&amp;highlight=perf-16#perf-16" class="btn-box">[ View in
-                                Timetable Grid &rarr; ]</a>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -275,20 +212,6 @@
             <h2 id="heading-info" class="wf-page-title search-section-heading" data-i18n="search_info">Stages &amp;
                 Practical Information</h2>
             <div id="info-results-container">
-                <div class="search-result-item"
-                     data-keywords="lunar forest dome rain shelter covered tent weather techno ambient indoor">
-                    <div class="search-result-row">
-                        <div class="search-result-content">
-                            <h3 class="search-result-title"><strong>🌙 Lunar Forest Dome (Rain Shelter &amp; Techno
-                                Stage)</strong></h3>
-                            <p class="search-result-desc">All-weather geodesic dome with 1,800 capacity. Features
-                                continuous shelter, electronic music sets, and techno showcases when rain occurs.</p>
-                        </div>
-                        <div class="search-result-action">
-                            <a href="stages.html#stage-lunar" class="btn-box">[ Explore Stage Details &rarr; ]</a>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
 
