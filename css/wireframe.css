@@ -443,7 +443,7 @@ hr {
 }
 
 .genre-filter-row {
-    max-width: 860px;
+    width: 100%;
 }
 
 .filter-btn:hover {
