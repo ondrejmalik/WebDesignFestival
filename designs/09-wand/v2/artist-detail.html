@@ -1,16 +1,21 @@
-<!-- v2/artist-detail.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-design="09-wand" data-native-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Solar Flare — Festival of Darkness 2</title>
+  <title>Artist Detail - Festival of Darkness 2</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../../../shared/css/festival-features.css">
+  <script src="js/lang.js" defer></script>
+  <script src="../../../shared/js/festival-data.js" defer></script>
+  <script src="../../../shared/js/festival-core.js" defer></script>
+  <script src="../../../shared/js/festival-pages.js" defer></script>
 </head>
 <body class="wand-body">
+
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="brand" aria-label="Festival of Darkness 2">
@@ -21,7 +26,7 @@
       <nav class="main-nav" aria-label="Primary">
         <a href="index.html" class="nav-link" data-i18n="nav_home">Overview</a>
         <a href="program.html" class="nav-link" data-i18n="nav_program">Program</a>
-        <a href="artists.html" class="nav-link">Artists</a>
+        <a href="artists.html" class="nav-link active is-active" aria-current="page">Artists</a>
         <a href="stages.html" class="nav-link">Stages</a>
         <a href="practical-info.html" class="nav-link">Info</a>
         <a href="my-schedule.html" class="nav-link">My Schedule</a>
@@ -39,117 +44,13 @@
     </div>
   </header>
 
-  <main>
-    <section class="hero-section">
-      <div class="hero-glow" aria-hidden="true"></div>
-      <div class="container">
-        <div style="margin-bottom: 20px;">
-          <a href="artists.html" class="inline-link">← Back to Artists</a> / <a href="program.html" class="inline-link">Program</a>
-        </div>
-        <div class="pill-badge">
-          <span class="status-dot"></span>
-          <span>DE · Friday, July 10 · 22:00 – 23:10</span>
-        </div>
-        <h1 class="hero-title">Solar Flare</h1>
-        <p class="hero-lead">
-          Nu-Disco / Funk headliner performing live on the Solar Horizon Stage. Fusing deep rhythmic basslines with incandescent synth hooks and analog warmth.
-        </p>
-        <div class="hero-actions">
-          <a href="program.html" class="btn btn-primary" data-i18n="hero_cta_primary">Explore Full Program</a>
-          <a href="artists.html" class="btn btn-secondary">Browse All Artists</a>
-        </div>
-      </div>
-    </section>
+  
+<main>
+    <div class="container fod-mount">
+      <div id="fod-artist-detail-root"><h1>Echoes of Light</h1><p>Post-Rock / Ambient · Solar Horizon Stage · Friday, July 10, 2026 · 14:00 - 14:45</p></div>
+    </div>
+</main>
 
-    <section class="section">
-      <div class="container">
-        <div class="section-head">
-          <h2 class="section-title">Performance Details & Biography</h2>
-          <p class="section-desc">
-            One of the standout international acts of the 2026 edition, delivering a high-energy evening showcase under the open sky of Kutná Hora.
-          </p>
-        </div>
-
-        <div class="stages-grid" style="margin-bottom: 36px;">
-          <div class="stage-card stage-card--solar">
-            <div class="stage-top">
-              <span class="stage-chip chip-volt">Solar Horizon Stage</span>
-              <span class="stage-cap">Cap. 4,500</span>
-            </div>
-            <h3 class="stage-name">Friday, 10 July 2026</h3>
-            <p class="stage-text">
-              Set time: <strong>22:00 – 23:10</strong>
-            </p>
-            <ul class="stage-meta-list">
-              <li>Genre: Nu-Disco / Funk</li>
-              <li>Origin: Germany (DE)</li>
-              <li>Stage Type: Open-air main stage</li>
-            </ul>
-          </div>
-
-          <div class="hud-panel">
-            <div class="hud-header">
-              <span class="hud-label">ARTIST METADATA</span>
-              <span class="hud-tag">ID: PERF-08</span>
-            </div>
-            <div class="hud-stats">
-              <div class="hud-stat">
-                <span class="hud-val">02</span>
-                <span class="hud-key">Festival Edition</span>
-              </div>
-              <div class="hud-stat">
-                <span class="hud-val">70m</span>
-                <span class="hud-key">Set Duration</span>
-              </div>
-            </div>
-            <div class="hud-divider"></div>
-            <div class="hud-timeline-preview">
-              <div class="hud-row">
-                <span class="hud-time">STAGE SLOT</span>
-                <span class="hud-act">Solar Horizon · Main Headliner</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="section-head" style="margin-top: 48px;">
-          <h2 class="section-title">Related Headliners</h2>
-          <p class="section-desc">
-            Explore other key performances scheduled across the festival weekend.
-          </p>
-        </div>
-
-        <div class="lineup-grid">
-          <div class="artist-tile">
-            <div class="artist-top">
-              <span class="artist-day">Fri 10 Jul · 23:30</span>
-              <span class="artist-origin">FR</span>
-            </div>
-            <h3 class="artist-name">Starlight Odyssey</h3>
-            <p class="artist-genre">Electronic Indie · Solar Horizon Stage</p>
-          </div>
-
-          <div class="artist-tile">
-            <div class="artist-top">
-              <span class="artist-day">Sat 11 Jul · 21:40</span>
-              <span class="artist-origin">FR</span>
-            </div>
-            <h3 class="artist-name">Magnetic River</h3>
-            <p class="artist-genre">Indie Dance · Solar Horizon Stage</p>
-          </div>
-
-          <div class="artist-tile">
-            <div class="artist-top">
-              <span class="artist-day">Sun 12 Jul · 22:35</span>
-              <span class="artist-origin">DK</span>
-            </div>
-            <h3 class="artist-name">Starlight Runners</h3>
-            <p class="artist-genre">Electropop Headliner · Solar Horizon Stage</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
@@ -194,6 +95,6 @@
       <span class="dock-label" data-i18n="dock_search">Search</span>
     </a>
   </nav>
-<script src="js/lang.js" defer></script>
+
 </body>
 </html>

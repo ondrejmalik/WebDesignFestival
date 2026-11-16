@@ -1,6 +1,5 @@
-<!-- v2/index.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-design="10-wooting" data-native-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +8,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../../../shared/css/festival-features.css">
+  <script src="js/lang.js" defer></script>
+  <script src="../../../shared/js/festival-data.js" defer></script>
+  <script src="../../../shared/js/festival-core.js" defer></script>
+  <script src="../../../shared/js/festival-pages.js" defer></script>
 </head>
 <body>
+
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="brand">
@@ -18,9 +23,9 @@
         <span class="brand-name">Festival of Darkness 2</span>
       </a>
       <nav class="site-nav" aria-label="Main navigation">
-        <a href="index.html" class="nav-link is-active" data-i18n="nav.overview">Overview</a>
+        <a href="index.html" class="nav-link" data-i18n="nav.overview">Overview</a>
         <a href="program.html" class="nav-link" data-i18n="nav.schedule">Schedule</a>
-        <a href="artists.html" class="nav-link">Artists</a>
+        <a href="artists.html" class="nav-link active is-active" aria-current="page">Artists</a>
         <a href="stages.html" class="nav-link">Stages</a>
         <a href="practical-info.html" class="nav-link">Info</a>
         <a href="my-schedule.html" class="nav-link">My Schedule</a>
@@ -35,14 +40,13 @@
     </div>
   </header>
 
-  <main>
-    <section class="section-block">
-      <h1>Floating Points (Live)</h1>
-      <p>Electronic / Modular · Solar Horizon Stage · Fri 10 Jul 22:00–23:30</p>
-      <p>Sam Shepherd brings his full live modular and audiovisual ensemble to Kutná Hora for an exclusive open-air headline performance.</p>
-      <p><a href="artists.html">Back to Artists</a> · <a href="program.html">Full Program</a></p>
-    </section>
-  </main>
+  
+<main>
+    <div class="container fod-mount">
+      <div id="fod-artist-detail-root"><h1>Echoes of Light</h1><p>Post-Rock / Ambient · Solar Horizon Stage · Friday, July 10, 2026 · 14:00 - 14:45</p></div>
+    </div>
+</main>
+
 
   <footer class="site-footer">
     <div class="container footer-inner">
@@ -86,6 +90,6 @@
       <span class="dock-label" data-i18n="dock_search">Search</span>
     </a>
   </nav>
-<script src="js/lang.js"></script>
+
 </body>
 </html>

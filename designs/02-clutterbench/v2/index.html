@@ -1,6 +1,5 @@
-<!-- v2/index.html -->
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-design="02-clutterbench" data-native-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,13 +8,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../../../shared/css/festival-features.css">
+  <script src="js/lang.js" defer></script>
+  <script src="../../../shared/js/festival-data.js" defer></script>
+  <script src="../../../shared/js/festival-core.js" defer></script>
+  <script src="../../../shared/js/festival-pages.js" defer></script>
 </head>
 <body>
+
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="brand" data-i18n="brand">Festival of Darkness 2</a>
       <nav class="site-nav" aria-label="Main navigation">
-        <a href="index.html" class="nav-link active" data-i18n="navHome">Overview</a>
+        <a href="index.html" class="nav-link active is-active" data-i18n="navHome" aria-current="page">Overview</a>
         <a href="program.html" class="nav-link" data-i18n="navProgram">Program & Sets</a>
         <a href="artists.html" class="nav-link">Artists</a>
         <a href="stages.html" class="nav-link">Stages</a>
@@ -27,7 +32,9 @@
     </div>
   </header>
 
-  <main class="container main-content">
+  
+<main class="container main-content">
+
     <section class="hero-grid" aria-labelledby="hero-title">
       <div class="hero-copy">
         <h1 id="hero-title" class="page-title" data-i18n="heroTitle">Festival of Darkness 2</h1>
@@ -186,7 +193,9 @@
         </article>
       </div>
     </section>
-  </main>
+  
+</main>
+
 
   <footer class="site-footer">
     <div class="container footer-inner">
@@ -224,6 +233,6 @@
       <span class="dock-label" data-i18n="dock_search">Search</span>
     </a>
   </nav>
-<script src="js/lang.js"></script>
+
 </body>
 </html>

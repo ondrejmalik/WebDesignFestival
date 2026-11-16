@@ -1,17 +1,21 @@
-<!-- v2/stages.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-design="05-linear" data-native-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stages — Festival of Darkness 2</title>
+  <title>Stages - Festival of Darkness 2</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../../../shared/css/festival-features.css">
   <script src="js/lang.js" defer></script>
+  <script src="../../../shared/js/festival-data.js" defer></script>
+  <script src="../../../shared/js/festival-core.js" defer></script>
+  <script src="../../../shared/js/festival-pages.js" defer></script>
 </head>
 <body>
+
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="brand" aria-label="Festival of Darkness 2 Home">
@@ -22,7 +26,7 @@
         <a href="index.html" class="nav-link" data-i18n="nav.home">Overview</a>
         <a href="program.html" class="nav-link" data-i18n="nav.program">Program</a>
         <a href="artists.html" class="nav-link">Artists</a>
-        <a href="stages.html" class="nav-link">Stages</a>
+        <a href="stages.html" class="nav-link active is-active" aria-current="page">Stages</a>
         <a href="practical-info.html" class="nav-link">Info</a>
         <a href="my-schedule.html" class="nav-link">My Schedule</a>
         <a href="search.html" class="nav-link">Search</a>
@@ -35,202 +39,20 @@
     </div>
   </header>
 
-  <main>
+  
+<main>
     <section class="page-hero">
       <div class="container">
-        <div class="hero-meta">
-          <span class="meta-badge" data-i18n="hero.dates">10-12 Jul 2026</span>
-          <span class="meta-dot" aria-hidden="true"></span>
-          <span class="meta-location" data-i18n="hero.location">Kutná Hora, Czech Republic</span>
-        </div>
-        <h1 class="page-title" data-i18n="stages.heading">Two distinct environments</h1>
-        <p class="page-subtitle" data-i18n="stages.subheading">Engineered for daylight live instrumentation and late-night audiovisual immersion.</p>
-
-        <div class="hero-panel">
-          <div class="panel-header">
-            <div class="panel-dots" aria-hidden="true">
-              <span></span><span></span><span></span>
-            </div>
-            <span class="panel-title">Kutná Hora 2026 // Stage Architecture</span>
-            <span class="panel-status" data-i18n="panel.status">2 Stages Active</span>
-          </div>
-          <div class="panel-grid">
-            <div class="panel-stat">
-              <span class="stat-label" data-i18n="stats.capacityLabel">Total Capacity</span>
-              <span class="stat-value">6,300</span>
-              <span class="stat-detail" data-i18n="stats.capacityDetail">Open-air & 360° dome</span>
-            </div>
-            <div class="panel-stat">
-              <span class="stat-label">Solar Horizon Stage</span>
-              <span class="stat-value">4,500</span>
-              <span class="stat-detail" data-i18n="stages.solar.type">Open-air main stage</span>
-            </div>
-            <div class="panel-stat">
-              <span class="stat-label">Lunar Forest Dome</span>
-              <span class="stat-value">1,800</span>
-              <span class="stat-detail" data-i18n="stages.lunar.type">Covered audiovisual dome</span>
-            </div>
-          </div>
-        </div>
+        <p class="hero-meta">Kutná Hora, Czech Republic · 10-12 Jul 2026</p>
+      <h1 class="page-title"><span class="lang-en">Festival Stages & Grounds</span><span class="lang-cs is-hidden">Festivalová pódia a areál</span></h1>
+      <p class="page-subtitle"><span class="lang-en">Two contrasting stages in Kutná Hora: open-air Solar Horizon (4,500) and covered Lunar Forest Dome (1,800).</span><span class="lang-cs is-hidden">Dvě kontrastní scény v Kutné Hoře: venkovní Solar Horizon (4 500) a krytý Lunar Forest Dome (1 800).</span></p>
       </div>
     </section>
+    <div class="container fod-mount">
+      <div id="fod-stages-root"></div>
+    </div>
+</main>
 
-    <section class="section" id="solar">
-      <div class="container">
-        <div class="section-head section-head-row">
-          <div>
-            <h2 class="section-title">Solar Horizon Stage</h2>
-            <p class="section-desc" data-i18n="stages.solar.desc">Central open-air amphitheater for major band performances, indie rock, and dance headliners.</p>
-          </div>
-          <a href="program.html#solar" class="btn btn-primary" data-i18n="stages.viewSchedule">Stage schedule</a>
-        </div>
-
-        <div class="stages-grid">
-          <article class="stage-card">
-            <div class="stage-top">
-              <span class="stage-tag stage-tag-solar" data-i18n="stages.solar.type">Open-air main stage</span>
-              <span class="stage-cap">4,500 <span data-i18n="stages.capUnit">cap</span></span>
-            </div>
-            <h3 class="stage-name">Atmosphere & Sightlines</h3>
-            <p class="stage-desc">Set in a natural grass-terraced basin facing west, Solar Horizon captures golden-hour daylight before transitioning into open-sky night lighting. Wide lateral sightlines and terraced standing tiers ensure unobstructed views across the entire 4,500-person amphitheater.</p>
-            <div class="stage-footer">
-              <span class="stage-hours">Fri 14:00 · Sat 13:30 · Sun 13:00</span>
-              <a href="program.html#solar" class="stage-link" data-i18n="stages.viewSchedule">Stage schedule</a>
-            </div>
-          </article>
-
-          <article class="stage-card">
-            <div class="stage-top">
-              <span class="stage-tag stage-tag-solar">Acoustic & Rig Spec</span>
-              <span class="stage-cap">30 sets</span>
-            </div>
-            <h3 class="stage-name">Sound & Stage Architecture</h3>
-            <p class="stage-desc">Flown dual-hang line-array PA with cardioid sub-bass alignment minimizes spill toward the nearby woodland perimeter. Built with a 16m × 12m covered performance deck, quick-change rolling risers, and horizon-wide kinetic pixel bars synced to live instrumentation.</p>
-            <div class="stage-footer">
-              <span class="stage-hours">Closes 02:00 Fri–Sat · 01:15 Sun</span>
-              <a href="artists.html" class="stage-link">Lineup</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="lunar">
-      <div class="container">
-        <div class="section-head section-head-row">
-          <div>
-            <h2 class="section-title">Lunar Forest Dome</h2>
-            <p class="section-desc" data-i18n="stages.lunar.desc">Atmospheric covered indoor stage focusing on techno, ambient, experimental electronics, and 360-degree light projections.</p>
-          </div>
-          <a href="program.html#lunar" class="btn btn-primary" data-i18n="stages.viewSchedule">Stage schedule</a>
-        </div>
-
-        <div class="stages-grid">
-          <article class="stage-card">
-            <div class="stage-top">
-              <span class="stage-tag stage-tag-lunar" data-i18n="stages.lunar.type">Covered audiovisual dome</span>
-              <span class="stage-cap">1,800 <span data-i18n="stages.capUnit">cap</span></span>
-            </div>
-            <h3 class="stage-name">Atmosphere & Immersion</h3>
-            <p class="stage-desc">Sheltered beneath a 34-meter blackout geodesic structure tucked into the wooded edge of the grounds, Lunar Forest Dome operates as a weather-sealed nocturnal sanctuary. Low-lying haze, perimeter chill alcoves, and an in-the-round central booth draw dancers inside the projection canopy.</p>
-            <div class="stage-footer">
-              <span class="stage-hours">Fri 15:00 · Sat 14:30 · Sun 14:00</span>
-              <a href="program.html#lunar" class="stage-link" data-i18n="stages.viewSchedule">Stage schedule</a>
-            </div>
-          </article>
-
-          <article class="stage-card">
-            <div class="stage-top">
-              <span class="stage-tag stage-tag-lunar">360° AV & Spatial Audio</span>
-              <span class="stage-cap">30 sets</span>
-            </div>
-            <h3 class="stage-name">Projection & Sound Spec</h3>
-            <p class="stage-desc">Eight edge-blended laser projectors map real-time generative visuals across the full overhead hemisphere, paired with addressable LED ribs and an 8-point surround sound array tuned for sub-30 Hz tactile clarity during modular live sets and late-night techno sessions.</p>
-            <div class="stage-footer">
-              <span class="stage-hours">Closes 04:00 Fri–Sat · 03:00 Sun</span>
-              <a href="my-schedule.html" class="stage-link">My Schedule</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="section-head section-head-row">
-          <div>
-            <h2 class="section-title">Technical Comparison</h2>
-            <p class="section-desc">Side-by-side specifications across both Kutná Hora stages.</p>
-          </div>
-          <a href="program.html" class="btn btn-secondary" data-i18n="highlights.allLink">Full timetable</a>
-        </div>
-
-        <div class="schedule-table" role="table" aria-label="Stage technical comparison">
-          <div class="schedule-row schedule-row-head" role="row">
-            <span role="columnheader">Parameter</span>
-            <span role="columnheader">Solar Horizon Stage</span>
-            <span role="columnheader">Lunar Forest Dome</span>
-            <span role="columnheader" data-i18n="table.stage">Stage</span>
-          </div>
-
-          <div class="schedule-row" role="row">
-            <div class="cell-time" role="cell">
-              <span class="day-pill">Capacity</span>
-            </div>
-            <div class="cell-artist" role="cell">
-              <span class="artist-name">4,500 guests</span>
-            </div>
-            <div class="cell-genre" role="cell">1,800 guests</div>
-            <div class="cell-stage" role="cell"><span class="mono-time">6,300 total</span></div>
-          </div>
-
-          <div class="schedule-row" role="row">
-            <div class="cell-time" role="cell">
-              <span class="day-pill">Architecture</span>
-            </div>
-            <div class="cell-artist" role="cell">
-              <span class="artist-name">Open-air terraced amphitheater</span>
-            </div>
-            <div class="cell-genre" role="cell">34m blackout geodesic dome</div>
-            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span><span class="stage-dot lunar"></span>2 Spaces</div>
-          </div>
-
-          <div class="schedule-row" role="row">
-            <div class="cell-time" role="cell">
-              <span class="day-pill">Audio System</span>
-            </div>
-            <div class="cell-artist" role="cell">
-              <span class="artist-name">Flown line-array + cardioid subs</span>
-            </div>
-            <div class="cell-genre" role="cell">8-point spatial surround array</div>
-            <div class="cell-stage" role="cell"><span class="mono-time">L-Acoustics / D&B</span></div>
-          </div>
-
-          <div class="schedule-row" role="row">
-            <div class="cell-time" role="cell">
-              <span class="day-pill">Visuals</span>
-            </div>
-            <div class="cell-artist" role="cell">
-              <span class="artist-name">Daylight to kinetic horizon rig</span>
-            </div>
-            <div class="cell-genre" role="cell">360° 8-projector dome mapping</div>
-            <div class="cell-stage" role="cell"><span class="mono-time">Timecode AV</span></div>
-          </div>
-
-          <div class="schedule-row" role="row">
-            <div class="cell-time" role="cell">
-              <span class="day-pill">Programming</span>
-            </div>
-            <div class="cell-artist" role="cell">
-              <span class="artist-name">Live bands, indie, electropop</span>
-            </div>
-            <div class="cell-genre" role="cell">Techno, modular, dark ambient</div>
-            <div class="cell-stage" role="cell"><a href="program.html" class="stage-link" data-i18n="highlights.allLink">Full timetable</a></div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
@@ -241,11 +63,6 @@
       <div class="footer-links">
         <a href="index.html" data-i18n="nav.home">Overview</a>
         <a href="program.html" data-i18n="nav.program">Program</a>
-        <a href="artists.html">Artists</a>
-        <a href="stages.html">Stages</a>
-        <a href="practical-info.html">Practical Info</a>
-        <a href="my-schedule.html">My Schedule</a>
-        <a href="search.html">Search</a>
       </div>
     </div>
   </footer>
@@ -293,5 +110,6 @@
       <span class="dock-label" data-i18n="dock_search">Search</span>
     </a>
   </nav>
+
 </body>
 </html>

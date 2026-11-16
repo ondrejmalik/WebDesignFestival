@@ -1,15 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-design="08-sg-nabytek" data-native-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stages | Festival of Darkness 2</title>
+  <title>Stages - Festival of Darkness 2</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../../../shared/css/festival-features.css">
+  <script src="js/lang.js" defer></script>
+  <script src="../../../shared/js/festival-data.js" defer></script>
+  <script src="../../../shared/js/festival-core.js" defer></script>
+  <script src="../../../shared/js/festival-pages.js" defer></script>
 </head>
 <body>
+
   <header class="site-header">
     <div class="header-top">
       <div class="container header-top-inner">
@@ -32,57 +38,31 @@
           <a href="index.html" class="nav-link" data-i18n="nav.home">Overview</a>
           <a href="program.html" class="nav-link" data-i18n="nav.program">Schedule</a>
         <a href="artists.html" class="nav-link">Artists</a>
-        <a href="stages.html" class="nav-link">Stages</a>
+        <a href="stages.html" class="nav-link active is-active" aria-current="page">Stages</a>
         <a href="practical-info.html" class="nav-link">Info</a>
         <a href="my-schedule.html" class="nav-link">My Schedule</a>
         <a href="search.html" class="nav-link">Search</a>
-          <a href="stages.html" class="nav-link active" data-i18n="nav.stages">Stages</a>
+          <a href="index.html#stages" class="nav-link" data-i18n="nav.stages">Stages</a>
           <a href="index.html#highlights" class="nav-link" data-i18n="nav.highlights">Highlights</a>
         </nav>
       </div>
     </div>
   </header>
 
-  <main>
+  
+<main>
     <section class="page-banner">
       <div class="container">
-        <p class="eyebrow" data-i18n="hero.eyebrow">Edition 2026 | Kutná Hora</p>
-        <h1 data-i18n="stages.title">Two Distinct Performance Environments</h1>
-        <p class="page-lead" data-i18n="stages.subtitle">Engineered for contrasting acoustic experiences from afternoon indie sets to late-night audiovisual sessions.</p>
+        <p class="eyebrow">Kutná Hora, Czech Republic · 10-12 Jul 2026</p>
+      <h1><span class="lang-en">Festival Stages & Grounds</span><span class="lang-cs is-hidden">Festivalová pódia a areál</span></h1>
+      <p class="page-lead"><span class="lang-en">Two contrasting stages in Kutná Hora: open-air Solar Horizon (4,500) and covered Lunar Forest Dome (1,800).</span><span class="lang-cs is-hidden">Dvě kontrastní scény v Kutné Hoře: venkovní Solar Horizon (4 500) a krytý Lunar Forest Dome (1 800).</span></p>
       </div>
     </section>
+    <div class="container fod-mount">
+      <div id="fod-stages-root"></div>
+    </div>
+</main>
 
-    <section class="section-block">
-      <div class="container">
-        <div class="stages-grid">
-          <article class="stage-card">
-            <div class="stage-badge" data-i18n="stages.solar.type">Open-air main stage</div>
-            <h3>Solar Horizon Stage</h3>
-            <p data-i18n="stages.solar.desc">Central open-air amphitheater for major band performances, indie rock, and dance headliners.</p>
-            <div class="stage-meta">
-              <span class="meta-pill"><strong data-i18n="stages.capacityLabel">Capacity:</strong> 4,500</span>
-              <span class="meta-pill"><strong data-i18n="stages.hoursLabel">Hours:</strong> 13:00-02:00</span>
-            </div>
-            <div style="margin-top: 20px;">
-              <a href="program.html" class="btn btn-secondary">View Schedule</a>
-            </div>
-          </article>
-          <article class="stage-card">
-            <div class="stage-badge badge-accent" data-i18n="stages.lunar.type">Covered audiovisual dome</div>
-            <h3>Lunar Forest Dome</h3>
-            <p data-i18n="stages.lunar.desc">Atmospheric covered indoor stage focusing on techno, ambient, experimental electronics, and 360-degree light projections.</p>
-            <div class="stage-meta">
-              <span class="meta-pill"><strong data-i18n="stages.capacityLabel">Capacity:</strong> 1,800</span>
-              <span class="meta-pill"><strong data-i18n="stages.hoursLabel">Hours:</strong> 14:00-04:00</span>
-            </div>
-            <div style="margin-top: 20px;">
-              <a href="program.html" class="btn btn-secondary">View Schedule</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-  </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
@@ -93,7 +73,6 @@
       <div class="footer-links">
         <a href="index.html" data-i18n="nav.home">Overview</a>
         <a href="program.html" data-i18n="nav.program">Schedule</a>
-        <a href="stages.html" data-i18n="nav.stages">Stages</a>
       </div>
     </div>
   </footer>
@@ -127,6 +106,6 @@
       <span class="dock-label" data-i18n="dock_search">Search</span>
     </a>
   </nav>
-<script src="js/lang.js" defer></script>
+
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-design="08-sg-nabytek" data-native-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +8,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../../../shared/css/festival-features.css">
+  <script src="js/lang.js" defer></script>
+  <script src="../../../shared/js/festival-data.js" defer></script>
+  <script src="../../../shared/js/festival-core.js" defer></script>
+  <script src="../../../shared/js/festival-pages.js" defer></script>
 </head>
 <body>
+
   <header class="site-header">
     <div class="header-top">
       <div class="container header-top-inner">
@@ -29,32 +35,34 @@
           </span>
         </a>
         <nav class="main-nav" aria-label="Primary">
-          <a href="index.html" class="nav-link active" data-i18n="nav.home">Overview</a>
+          <a href="index.html" class="nav-link" data-i18n="nav.home">Overview</a>
           <a href="program.html" class="nav-link" data-i18n="nav.program">Schedule</a>
-        <a href="artists.html" class="nav-link">Artists</a>
+        <a href="artists.html" class="nav-link active is-active" aria-current="page">Artists</a>
         <a href="stages.html" class="nav-link">Stages</a>
         <a href="practical-info.html" class="nav-link">Info</a>
         <a href="my-schedule.html" class="nav-link">My Schedule</a>
         <a href="search.html" class="nav-link">Search</a>
-          <a href="#stages" class="nav-link" data-i18n="nav.stages">Stages</a>
-          <a href="#highlights" class="nav-link" data-i18n="nav.highlights">Highlights</a>
+          <a href="index.html#stages" class="nav-link" data-i18n="nav.stages">Stages</a>
+          <a href="index.html#highlights" class="nav-link" data-i18n="nav.highlights">Highlights</a>
         </nav>
       </div>
     </div>
   </header>
 
-  <main>
-    <section class="section-block">
-      <h1>Artists (60)</h1>
-      <p>Three days of electronic, alternative, and audiovisual music in Kutná Hora, 10–12 Jul 2026.</p>
-      <div class="stages-grid">
-        <article class="data-panel"><h2 class="panel-title"><a href="artist-detail.html">Floating Points (Live)</a></h2><p class="panel-desc">Electronic / Modular · Solar Horizon Stage · Fri 10 Jul 22:00</p></article>
-        <article class="data-panel"><h2 class="panel-title"><a href="artist-detail.html">Bicep (Chroma AV)</a></h2><p class="panel-desc">Breakbeat / House · Solar Horizon Stage · Sat 11 Jul 22:30</p></article>
-        <article class="data-panel"><h2 class="panel-title"><a href="artist-detail.html">Amelie Lens</a></h2><p class="panel-desc">Techno · Lunar Forest Dome · Sat 11 Jul 00:45</p></article>
-        <article class="data-panel"><h2 class="panel-title"><a href="artist-detail.html">Rival Consoles</a></h2><p class="panel-desc">IDM / Synth · Lunar Forest Dome · Fri 10 Jul 00:05</p></article>
+  
+<main>
+    <section class="page-banner">
+      <div class="container">
+        <p class="eyebrow">Kutná Hora, Czech Republic · 10-12 Jul 2026</p>
+      <h1><span class="lang-en">Artist Directory (60)</span><span class="lang-cs is-hidden">Katalog účinkujících (60)</span></h1>
+      <p class="page-lead"><span class="lang-en">Browse all 60 performers by day, genre, country, or keyword and save your favorites.</span><span class="lang-cs is-hidden">Procházejte všech 60 účinkujících podle dne, žánru, země nebo dotazu a ukládejte si oblíbené.</span></p>
       </div>
     </section>
-  </main>
+    <div class="container fod-mount">
+      <div id="fod-artists-root"></div>
+    </div>
+</main>
+
 
   <footer class="site-footer">
     <div class="container footer-inner">
@@ -98,6 +106,6 @@
       <span class="dock-label" data-i18n="dock_search">Search</span>
     </a>
   </nav>
-<script src="js/lang.js"></script>
+
 </body>
 </html>

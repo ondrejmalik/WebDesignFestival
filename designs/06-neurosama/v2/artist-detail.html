@@ -1,17 +1,21 @@
-<!-- v2/artist-detail.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-design="06-neurosama" data-native-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Starlight Runners — Artist Detail | Festival of Darkness 2</title>
+  <title>Artist Detail - Festival of Darkness 2</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../../../shared/css/festival-features.css">
   <script src="js/lang.js" defer></script>
+  <script src="../../../shared/js/festival-data.js" defer></script>
+  <script src="../../../shared/js/festival-core.js" defer></script>
+  <script src="../../../shared/js/festival-pages.js" defer></script>
 </head>
 <body>
+
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="brand-link" aria-label="Festival of Darkness 2 Home">
@@ -21,131 +25,23 @@
       <nav class="site-nav" aria-label="Main Navigation">
         <a href="index.html" class="nav-link" data-i18n="nav_home">Overview</a>
         <a href="program.html" class="nav-link" data-i18n="nav_program">Program</a>
-        <a href="artists.html" class="nav-link is-active">Artists</a>
+        <a href="artists.html" class="nav-link active is-active" aria-current="page">Artists</a>
+        <a href="stages.html" class="nav-link">Stages</a>
+        <a href="practical-info.html" class="nav-link">Info</a>
+        <a href="my-schedule.html" class="nav-link">My Schedule</a>
+        <a href="search.html" class="nav-link">Search</a>
         <button type="button" class="lang-toggle" id="lang-toggle" aria-label="Switch language">CZ</button>
       </nav>
     </div>
   </header>
 
-  <main>
-    <section class="hero-section">
-      <div class="hero-glow" aria-hidden="true"></div>
-      <div class="container hero-grid">
-        <div class="hero-card">
-          <div class="pill-badge">
-            <span class="badge-accent">Electropop Headliner</span>
-            <span class="badge-sep">/</span>
-            <span>Denmark (DK)</span>
-          </div>
-          <h1 class="hero-title">Starlight Runners</h1>
-          <p class="hero-subtitle">Copenhagen synth-driven electropop quartet closing out the Solar Horizon Stage headline slot on Sunday night in Kutná Hora with widescreen analog hooks, live percussion, and synchronized stage visuals.</p>
-          <div class="hero-actions">
-            <a href="program.html" class="btn btn-primary" data-i18n="cta_program">Explore Program</a>
-            <a href="artists.html" class="btn btn-secondary">All Artists</a>
-          </div>
-        </div>
+  
+<main>
+    <div class="container fod-mount">
+      <div id="fod-artist-detail-root"><h1>Echoes of Light</h1><p>Post-Rock / Ambient · Solar Horizon Stage · Friday, July 10, 2026 · 14:00 - 14:45</p></div>
+    </div>
+</main>
 
-        <aside class="info-stack" aria-label="Performance Details">
-          <div class="glass-card stat-card">
-            <h2 class="card-kicker">Set Information</h2>
-            <div class="time-grid">
-              <div class="time-tile">
-                <h3 class="tile-label">Day</h3>
-                <p class="tile-value" data-i18n="day3_short">Sun, 12 Jul</p>
-              </div>
-              <div class="time-tile">
-                <h3 class="tile-label">Set Time</h3>
-                <p class="tile-value">22:35 - 23:55</p>
-              </div>
-              <div class="time-tile">
-                <h3 class="tile-label">Stage</h3>
-                <p class="tile-value">Solar Horizon Stage</p>
-              </div>
-              <div class="time-tile">
-                <h3 class="tile-label">Origin & ID</h3>
-                <p class="tile-value">DK / perf-49</p>
-              </div>
-            </div>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section class="content-section">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="display-heading">Artist Profile & Stage Context</h2>
-          <p class="section-lead">Sunday peak-hour headline set on the 4,500-capacity open-air amphitheater.</p>
-        </div>
-
-        <div class="stages-grid">
-          <article class="glass-card stage-card">
-            <div class="stage-meta">
-              <span class="stage-tag tag-coral">Headliner Bio</span>
-              <span class="stage-cap">80-minute live set</span>
-            </div>
-            <h3 class="stage-title">About Starlight Runners</h3>
-            <p class="stage-desc">Formed in Copenhagen, Starlight Runners blend shimmering Nordic synth melodies with driving basslines and soaring vocal harmonies. Their 2026 live production pairs vintage polyphonic synthesizers with live drums and custom reactive lighting built for open-air night performances.</p>
-          </article>
-
-          <article class="glass-card stage-card">
-            <div class="stage-meta">
-              <span class="stage-tag tag-pink" data-i18n="solar_type">Open-air main stage</span>
-              <span class="stage-cap" data-i18n="solar_cap">Capacity: 4,500</span>
-            </div>
-            <h3 class="stage-title">Solar Horizon Stage</h3>
-            <p class="stage-desc" data-i18n="solar_desc">Central open-air amphitheater for major band performances, indie rock, and dance headliners.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="content-section">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="display-heading">Related Artists</h2>
-          <p class="section-lead">Electronic pop, indie dance, and Sunday night Solar Horizon Stage acts from the 2026 lineup.</p>
-        </div>
-
-        <div class="highlights-grid">
-          <article class="glass-card highlight-card">
-            <div class="highlight-top">
-              <span class="highlight-day" data-i18n="day3_short">Sun, 12 Jul</span>
-              <span class="highlight-time">21:10 - 22:15</span>
-            </div>
-            <h3 class="highlight-artist">Prismatics</h3>
-            <p class="highlight-genre">Dance Punk (UK)</p>
-            <span class="highlight-stage stage-pill-coral">Solar Horizon Stage</span>
-          </article>
-
-          <article class="glass-card highlight-card">
-            <div class="highlight-top">
-              <span class="highlight-day" data-i18n="day3_short">Sun, 12 Jul</span>
-              <span class="highlight-time">00:10 - 01:15</span>
-            </div>
-            <h3 class="highlight-artist">Final Cascade</h3>
-            <p class="highlight-genre">Orchestral Electronic (CZ)</p>
-            <span class="highlight-stage stage-pill-coral">Solar Horizon Stage</span>
-          </article>
-
-          <article class="glass-card highlight-card">
-            <div class="highlight-top">
-              <span class="highlight-day" data-i18n="day2_short">Sat, 11 Jul</span>
-              <span class="highlight-time">19:00 - 20:00</span>
-            </div>
-            <h3 class="highlight-artist">Horizon Glow</h3>
-            <p class="highlight-genre">Electronic Pop (SE)</p>
-            <span class="highlight-stage stage-pill-coral">Solar Horizon Stage</span>
-          </article>
-        </div>
-
-        <div class="section-footer-cta hero-actions">
-          <a href="artists.html" class="btn btn-secondary">Back to Artists</a>
-          <a href="program.html" class="btn btn-primary" data-i18n="cta_full_schedule">Open Full 3-Day Schedule</a>
-        </div>
-      </div>
-    </section>
-  </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
@@ -183,5 +79,6 @@
       <span class="dock-label" data-i18n="dock_search">Search</span>
     </a>
   </nav>
+
 </body>
 </html>

@@ -1,6 +1,5 @@
-<!-- v2/program.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-design="11-zzz" data-native-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +8,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../../../shared/css/festival-features.css">
+  <script src="js/lang.js" defer></script>
+  <script src="../../../shared/js/festival-data.js" defer></script>
+  <script src="../../../shared/js/festival-core.js" defer></script>
+  <script src="../../../shared/js/festival-pages.js" defer></script>
 </head>
 <body>
+
   <div class="app-shell">
     <aside class="side-rail" aria-label="Primary navigation">
       <a href="index.html" class="rail-brand" aria-label="Festival of Darkness 2">
@@ -23,21 +28,21 @@
           </svg>
           <span data-i18n="nav_home">Home</span>
         </a>
-        <a href="program.html" class="rail-link is-active" aria-current="page">
+        <a href="program.html" class="rail-link active is-active" aria-current="page">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <rect x="3" y="4" width="18" height="17" rx="2"/>
             <path d="M8 2v4M16 2v4M3 10h18"/>
           </svg>
           <span data-i18n="nav_program">Program</span>
         </a>
-        <a href="artists.html" class="rail-link is-">Artists</a>
-        <a href="stages.html" class="rail-link is-">Stages</a>
-        <a href="practical-info.html" class="rail-link is-">Info</a>
-        <a href="my-schedule.html" class="rail-link is-">My Schedule</a>
-        <a href="search.html" class="rail-link is-">Search</a>
+        <a href="artists.html" class="rail-link">Artists</a>
+        <a href="stages.html" class="rail-link">Stages</a>
+        <a href="practical-info.html" class="rail-link">Info</a>
+        <a href="my-schedule.html" class="rail-link">My Schedule</a>
+        <a href="search.html" class="rail-link">Search</a>
       </nav>
       <div class="rail-footer">
-        <button type="button" class="lang-btn" onclick="toggleFestivalLang()" aria-label="Switch language">
+        <button type="button" class="lang-btn" id="lang-toggle" onclick="toggleFestivalLang()" aria-label="Switch language">
           <span data-i18n="lang_code">CZ</span>
         </button>
       </div>
@@ -53,325 +58,25 @@
           <span class="topbar-location" data-i18n="hero_location">Kutná Hora, Czech Republic</span>
         </div>
         <div class="topbar-actions">
-          <a href="index.html" class="btn-secondary-dark" data-i18n="nav_home">Home</a>
+          <a href="program.html" class="btn-outline-cyan active is-active" data-i18n="topbar_timetable" aria-current="page">Timetable</a>
           <button type="button" class="lang-btn mobile-lang-btn" onclick="toggleFestivalLang()" aria-label="Switch language">
             <span data-i18n="lang_code">CZ</span>
           </button>
         </div>
       </header>
 
-      <main class="main-content">
-        <section class="page-header-panel">
-          <div>
-            <p class="hero-kicker" data-i18n="prog_kicker">TIMETABLE & STAGE DISPATCH</p>
-            <h1 class="page-title" data-i18n="prog_title">Festival Program 2026</h1>
-            <p class="hero-lead" data-i18n="prog_desc">Highlighted sets across Solar Horizon Stage and Lunar Forest Dome for 10-12 July 2026.</p>
-          </div>
-          <nav class="day-jump-bar" aria-label="Jump to day">
-            <a href="#day-1" class="day-chip" data-i18n="day1_tab">Day 1 / 10 Jul</a>
-            <a href="#day-2" class="day-chip" data-i18n="day2_tab">Day 2 / 11 Jul</a>
-            <a href="#day-3" class="day-chip" data-i18n="day3_tab">Day 3 / 12 Jul</a>
-          </nav>
-        </section>
-
-        <!-- DAY 1: 2026-07-10 (6 sets) -->
-        <div class="program-plan-bar" aria-live="polite">
-      <p class="plan-bar-copy">
-        <span data-i18n="prog_plan_label">My Schedule:</span>
-        <span class="plan-bar-count" id="plan-bar-count">0</span>
-      </p>
-      <a href="my-schedule.html" class="plan-bar-link" data-i18n="prog_open_plan">Open My Schedule</a>
+      
+<main class="main-content">
+    <section class="page-header-panel">
+      <p class="hero-kicker">Kutná Hora, Czech Republic · 10-12 Jul 2026</p>
+      <h1 class="page-title"><span class="lang-en">Festival Program</span><span class="lang-cs is-hidden">Program festivalu</span></h1>
+      <p class="hero-lead"><span class="lang-en">Complete 3-day timetable across Solar Horizon Stage and Lunar Forest Dome (60 sets).</span><span class="lang-cs is-hidden">Kompletní třídenní harmonogram na pódiích Solar Horizon Stage a Lunar Forest Dome (60 vystoupení).</span></p>
+    </section>
+    <div class="fod-mount">
+      <div id="fod-program-root"></div>
     </div>
-        <section id="day-1" class="section-block">
-          <div class="section-header">
-            <div>
-              <h2 class="section-title" data-i18n="day1_heading">Day 1: Friday, 10 July 2026</h2>
-              <p class="section-subtitle" data-i18n="day1_sub">Opening afternoon post-rock into late-night hardware and acid techno.</p>
-            </div>
-            <span class="count-badge" data-i18n="sets_six">6 featured sets</span>
-          </div>
+</main>
 
-          <div class="schedule-list">
-            <article class="set-row" data-perf-id="perf-01">
-              <div class="set-time">14:00 - 14:45</div>
-              <div class="set-main">
-                <h3 class="set-artist">Echoes of Light</h3>
-                <span class="set-genre">Post-Rock / Ambient</span>
-              </div>
-              <div class="set-meta">
-                <span class="stage-pill pill-solar">Solar Horizon</span>
-                <span class="origin-tag">CZ</span>
-              </div>
-            
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-01" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-            <article class="set-row" data-perf-id="perf-05">
-              <div class="set-time">18:15 - 19:05</div>
-              <div class="set-main">
-                <h3 class="set-artist">Prague Synth Collective</h3>
-                <span class="set-genre">Synthpop</span>
-              </div>
-              <div class="set-meta">
-                <span class="stage-pill pill-solar">Solar Horizon</span>
-                <span class="origin-tag">CZ</span>
-              </div>
-            
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-05" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-            <article class="set-row" data-perf-id="perf-07">
-              <div class="set-time">20:40 - 21:40</div>
-              <div class="set-main">
-                <h3 class="set-artist">Mirage Horizon</h3>
-                <span class="set-genre">Alternative Rock</span>
-              </div>
-              <div class="set-meta">
-                <span class="stage-pill pill-solar">Solar Horizon</span>
-                <span class="origin-tag">UK</span>
-              </div>
-            
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-07" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-            <article class="set-row" data-perf-id="perf-08">
-              <div class="set-time">22:00 - 23:10</div>
-              <div class="set-main">
-                <h3 class="set-artist">Solar Flare</h3>
-                <span class="set-genre">Nu-Disco / Funk</span>
-              </div>
-              <div class="set-meta">
-                <span class="stage-pill pill-solar">Solar Horizon</span>
-                <span class="origin-tag">DE</span>
-              </div>
-            
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-08" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-            <article class="set-row" data-perf-id="perf-17">
-              <div class="set-time">22:30 - 23:50</div>
-              <div class="set-main">
-                <h3 class="set-artist">Modular Horizon</h3>
-                <span class="set-genre">Live Hardware Techno</span>
-              </div>
-              <div class="set-meta">
-                <span class="stage-pill pill-lunar">Lunar Forest Dome</span>
-                <span class="origin-tag">DE</span>
-              </div>
-            
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-17" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-            <article class="set-row" data-perf-id="perf-19">
-              <div class="set-time">01:40 - 03:00</div>
-              <div class="set-main">
-                <h3 class="set-artist">Frequency 404</h3>
-                <span class="set-genre">Raw Acid Techno</span>
-              </div>
-              <div class="set-meta">
-                <span class="stage-pill pill-lunar">Lunar Forest Dome</span>
-                <span class="origin-tag">UK</span>
-              </div>
-            
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-19" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-          </div>
-        </section>
-
-        <!-- DAY 2: 2026-07-11 (6 sets) -->
-        <section id="day-2" class="section-block">
-          <div class="section-header">
-            <div>
-              <h2 class="section-title" data-i18n="day2_heading">Day 2: Saturday, 11 July 2026</h2>
-              <p class="section-subtitle" data-i18n="day2_sub">Shoegaze, indie dance, and high-velocity dome electronics.</p>
-            </div>
-            <span class="count-badge" data-i18n="sets_six">6 featured sets</span>
-          </div>
-
-          <div class="schedule-list">
-            <article class="set-row" data-perf-id="perf-25">
-              <div class="set-time">17:45 - 18:40</div>
-              <div class="set-main">
-                <h3 class="set-artist">Silver Tides</h3>
-                <span class="set-genre">Shoegaze</span>
-              </div>
-              <div class="set-meta">
-                <span class="stage-pill pill-solar">Solar Horizon</span>
-                <span class="origin-tag">CZ</span>
-              </div>
-            
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-25" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-            <article class="set-row" data-perf-id="perf-35">
-              <div class="set-time">19:15 - 20:15</div>
-              <div class="set-main">
-                <h3 class="set-artist">Monolith Audio</h3>
-                <span class="set-genre">Peak Time Techno</span>
-              </div>
-              <div class="set-meta">
-                <span class="stage-pill pill-lunar">Lunar Forest Dome</span>
-                <span class="origin-tag">DE</span>
-              </div>
-            
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-35" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-            <article class="set-row" data-perf-id="perf-28">
-              <div class="set-time">21:40 - 22:50</div>
-              <div class="set-main">
-                <h3 class="set-artist">Magnetic River</h3>
-                <span class="set-genre">Indie Dance</span>
-              </div>
-              <div class="set-meta">
-                <span class="stage-pill pill-solar">Solar Horizon</span>
-                <span class="origin-tag">FR</span>
-              </div>
-            
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-28" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-            <article class="set-row" data-perf-id="perf-29">
-              <div class="set-time">23:10 - 00:25</div>
-              <div class="set-main">
-                <h3 class="set-artist">Vortex Motion</h3>
-                <span class="set-genre">Nu-Electro</span>
-              </div>
-              <div class="set-meta">
-                <span class="stage-pill pill-solar">Solar Horizon</span>
-                <span class="origin-tag">UK</span>
-              </div>
-            
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-29" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-            <article class="set-row" data-perf-id="perf-38">
-              <div class="set-time">23:35 - 00:55</div>
-              <div class="set-main">
-                <h3 class="set-artist">Circuit Overload</h3>
-                <span class="set-genre">Hard Techno</span>
-              </div>
-              <div class="set-meta">
-                <span class="stage-pill pill-lunar">Lunar Forest Dome</span>
-                <span class="origin-tag">PL</span>
-              </div>
-            
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-38" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-            <article class="set-row" data-perf-id="perf-39">
-              <div class="set-time">01:10 - 02:30</div>
-              <div class="set-main">
-                <h3 class="set-artist">Neural Network Live</h3>
-                <span class="set-genre">Acid Techno</span>
-              </div>
-              <div class="set-meta">
-                <span class="stage-pill pill-lunar">Lunar Forest Dome</span>
-                <span class="origin-tag">BE</span>
-              </div>
-            
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-39" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-          </div>
-        </section>
-
-        <!-- DAY 3: 2026-07-12 (6 sets) -->
-        <section id="day-3" class="section-block">
-          <div class="section-header">
-            <div>
-              <h2 class="section-title" data-i18n="day3_heading">Day 3: Sunday, 12 July 2026</h2>
-              <p class="section-subtitle" data-i18n="day3_sub">Closing night headliners, melodic techno, and orchestral finale.</p>
-            </div>
-            <span class="count-badge" data-i18n="sets_six">6 featured sets</span>
-          </div>
-
-          <div class="schedule-list">
-            <article class="set-row" data-perf-id="perf-47">
-              <div class="set-time">19:50 - 20:50</div>
-              <div class="set-main">
-                <h3 class="set-artist">The Velvet Trails</h3>
-                <span class="set-genre">Space Rock</span>
-              </div>
-              <div class="set-meta">
-                <span class="stage-pill pill-solar">Solar Horizon</span>
-                <span class="origin-tag">SE</span>
-              </div>
-            
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-47" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-            <article class="set-row" data-perf-id="perf-48">
-              <div class="set-time">21:10 - 22:15</div>
-              <div class="set-main">
-                <h3 class="set-artist">Prismatics</h3>
-                <span class="set-genre">Dance Punk</span>
-              </div>
-              <div class="set-meta">
-                <span class="stage-pill pill-solar">Solar Horizon</span>
-                <span class="origin-tag">UK</span>
-              </div>
-            
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-48" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-            <article class="set-row" data-perf-id="perf-57">
-              <div class="set-time">21:30 - 22:45</div>
-              <div class="set-main">
-                <h3 class="set-artist">Galactic Orbit</h3>
-                <span class="set-genre">Melodic Techno</span>
-              </div>
-              <div class="set-meta">
-                <span class="stage-pill pill-lunar">Lunar Forest Dome</span>
-                <span class="origin-tag">IT</span>
-              </div>
-            
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-57" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-            <article class="set-row" data-perf-id="perf-49">
-              <div class="set-time">22:35 - 23:55</div>
-              <div class="set-main">
-                <h3 class="set-artist">Starlight Runners</h3>
-                <span class="set-genre">Electropop Headliner</span>
-              </div>
-              <div class="set-meta">
-                <span class="stage-pill pill-solar">Solar Horizon</span>
-                <span class="origin-tag">DK</span>
-              </div>
-            
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-49" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-            <article class="set-row" data-perf-id="perf-50">
-              <div class="set-time">00:10 - 01:15</div>
-              <div class="set-main">
-                <h3 class="set-artist">Final Cascade</h3>
-                <span class="set-genre">Orchestral Electronic</span>
-              </div>
-              <div class="set-meta">
-                <span class="stage-pill pill-solar">Solar Horizon</span>
-                <span class="origin-tag">CZ</span>
-              </div>
-            
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-50" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-            <article class="set-row" data-perf-id="perf-60">
-              <div class="set-time">02:00 - 03:00</div>
-              <div class="set-main">
-                <h3 class="set-artist">Equinox Farewell</h3>
-                <span class="set-genre">Down-tempo Ambient</span>
-              </div>
-              <div class="set-meta">
-                <span class="stage-pill pill-lunar">Lunar Forest Dome</span>
-                <span class="origin-tag">CZ</span>
-              </div>
-            
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-60" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-          </div>
-        </section>
-      </main>
 
       <footer class="site-footer">
         <div class="footer-left">
@@ -380,7 +85,7 @@
         </div>
         <nav class="footer-nav" aria-label="Footer navigation">
           <a href="index.html" data-i18n="nav_home">Home</a>
-          <a href="program.html" data-i18n="nav_program">Program</a>
+          <a href="program.html" data-i18n="nav_program" aria-current="page">Program</a>
         <a href="artists.html">Artists</a>
         <a href="stages.html">Stages</a>
         <a href="practical-info.html">Info</a>
@@ -455,113 +160,6 @@
       <span class="dock-label" data-i18n="dock_search">Search</span>
     </a>
   </nav>
-<script src="js/lang.js"></script>
-<script>
-  (function () {
-    var FAV_KEY = "festival_favorites";
-    var LABELS = {
-      en: { add: "+ Add", added: "✓ In Plan", countOne: "1 set", countMany: " sets" },
-      cs: { add: "+ Přidat", added: "✓ V plánu", countOne: "1 vystoupení", countFew: " vystoupení", countMany: " vystoupení" }
-    };
 
-    function getLang() {
-      if (typeof window.getFestivalLang === "function") return window.getFestivalLang();
-      return document.documentElement.lang === "cs" ? "cs" : "en";
-    }
-
-    function readFavorites() {
-      try {
-        var raw = window.localStorage.getItem(FAV_KEY);
-        if (!raw) return [];
-        var parsed = JSON.parse(raw);
-        if (Array.isArray(parsed)) {
-          return parsed.map(function (x) {
-            return typeof x === "string" ? x : (x && x.id ? String(x.id) : "");
-          }).filter(Boolean);
-        }
-      } catch (e) {}
-      return [];
-    }
-
-    function writeFavorites(ids) {
-      var seen = {};
-      var clean = [];
-      ids.forEach(function (id) {
-        if (id && !seen[id]) {
-          seen[id] = true;
-          clean.push(id);
-        }
-      });
-      try {
-        window.localStorage.setItem(FAV_KEY, JSON.stringify(clean));
-      } catch (e) {}
-      try {
-        window.dispatchEvent(new Event("favoritesUpdated"));
-      } catch (e) {}
-      syncUI();
-    }
-
-    function formatCount(n, lang) {
-      if (lang === "cs" && typeof window.formatCzPlural === "function") {
-        return window.formatCzPlural(n, "uložené vystoupení", "uložená vystoupení", "uložených vystoupení");
-      }
-      if (lang === "cs") {
-        if (n === 1) return "1 vystoupení";
-        return n + " vystoupení";
-      }
-      return n === 1 ? "1 set" : n + " sets";
-    }
-
-    function syncUI() {
-      var favs = readFavorites();
-      var lang = getLang();
-      var dict = LABELS[lang] || LABELS.en;
-
-      var countEl = document.getElementById("plan-bar-count");
-      if (countEl) countEl.textContent = formatCount(favs.length, lang);
-
-      var btns = document.querySelectorAll(".fav-toggle-btn[data-perf-id]");
-      for (var i = 0; i < btns.length; i++) {
-        var btn = btns[i];
-        var id = btn.getAttribute("data-perf-id");
-        var saved = favs.indexOf(id) !== -1;
-        btn.setAttribute("aria-pressed", saved ? "true" : "false");
-        btn.setAttribute("data-i18n", saved ? "prog_added" : "prog_add");
-        btn.classList.toggle("is-saved", saved);
-        btn.textContent = saved ? dict.added : dict.add;
-      }
-    }
-
-    document.addEventListener("click", function (ev) {
-      var btn = ev.target && ev.target.closest ? ev.target.closest(".fav-toggle-btn[data-perf-id]") : null;
-      if (!btn) return;
-      var id = btn.getAttribute("data-perf-id");
-      if (!id) return;
-      var favs = readFavorites();
-      var idx = favs.indexOf(id);
-      if (idx === -1) favs.push(id);
-      else favs.splice(idx, 1);
-      writeFavorites(favs);
-    });
-
-    window.addEventListener("storage", function (ev) {
-      if (!ev || ev.key === FAV_KEY) syncUI();
-    });
-    window.addEventListener("languageChanged", syncUI);
-
-    if (typeof MutationObserver === "function") {
-      new MutationObserver(syncUI).observe(document.documentElement, {
-        attributes: true,
-        attributeFilter: ["lang"]
-      });
-    }
-
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", syncUI);
-    } else {
-      syncUI();
-    }
-  })();
-</script>
 </body>
 </html>

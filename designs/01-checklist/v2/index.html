@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-design="01-checklist" data-native-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Festival of Darkness 2 - Kutna Hora 2026</title>
   <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../../../shared/css/festival-features.css">
   <script src="js/lang.js" defer></script>
+  <script src="../../../shared/js/festival-data.js" defer></script>
+  <script src="../../../shared/js/festival-core.js" defer></script>
+  <script src="../../../shared/js/festival-pages.js" defer></script>
 </head>
 <body>
+
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="brand">
@@ -15,7 +20,7 @@
         <span class="brand-name">Festival of Darkness 2</span>
       </a>
       <nav class="site-nav" aria-label="Main navigation">
-        <a href="index.html" class="nav-link active" data-i18n="nav_home">Overview</a>
+        <a href="index.html" class="nav-link active is-active" data-i18n="nav_home" aria-current="page">Overview</a>
         <a href="program.html" class="nav-link" data-i18n="nav_program">Program</a>
         <a href="artists.html" class="nav-link">Artists</a>
         <a href="stages.html" class="nav-link">Stages</a>
@@ -27,7 +32,9 @@
     </div>
   </header>
 
-  <main class="container">
+  
+<main class="container">
+
     <section class="hero">
       <p class="hero-meta" data-i18n="hero_meta">Kutná Hora, Czech Republic · 10-12 Jul 2026</p>
       <h1 class="hero-title" data-i18n="hero_title">Festival of Darkness 2</h1>
@@ -136,7 +143,9 @@
         <a href="program.html" class="btn-primary" data-i18n="cta_full_schedule">View Full Timetable</a>
       </div>
     </section>
-  </main>
+  
+</main>
+
 
   <footer class="site-footer">
     <div class="container footer-inner">
@@ -145,7 +154,7 @@
         <span class="footer-meta" data-i18n="footer_loc">Kutná Hora, Czech Republic · 10-12 Jul 2026</span>
       </div>
       <div class="footer-links">
-        <a href="index.html" data-i18n="nav_home">Overview</a>
+        <a href="index.html" data-i18n="nav_home" aria-current="page">Overview</a>
         <a href="program.html" data-i18n="nav_program">Program</a>
       </div>
     </div>
@@ -180,5 +189,6 @@
       <span class="dock-label" data-i18n="dock_search">Search</span>
     </a>
   </nav>
+
 </body>
 </html>
