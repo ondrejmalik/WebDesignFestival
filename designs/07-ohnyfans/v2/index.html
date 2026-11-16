@@ -1,0 +1,193 @@
+<!-- v2/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Festival of Darkness 2 - Kutna Hora 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/lang.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="Festival of Darkness 2">
+        <span class="brand-mark"></span>
+        <span class="brand-name">Festival of Darkness 2</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html" class="nav-link active" data-i18n="nav.home">Overview</a>
+        <a href="program.html" class="nav-link" data-i18n="nav.program">Program</a>
+        <button type="button" class="lang-toggle" id="lang-toggle" onclick="toggleFestivalLang()" aria-label="Switch language">CZ</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-meta">
+          <span class="meta-pill" data-i18n="hero.dates">10-12 Jul 2026</span>
+          <span class="meta-pill" data-i18n="hero.location">Kutna Hora, Czech Republic</span>
+          <span class="meta-pill" data-i18n="hero.edition">Edition 2026</span>
+        </div>
+        <h1 class="pixel-h1" data-i18n="hero.title">Festival of Darkness 2</h1>
+        <p class="hero-lead" data-i18n="hero.subtitle">Three days of electronic, alternative, and audiovisual music across two distinct stages in Kutna Hora.</p>
+        <div class="hero-actions">
+          <a href="program.html" class="btn-primary" data-i18n="hero.ctaProgram">View Full Schedule</a>
+          <a href="#stages" class="btn-secondary" data-i18n="hero.ctaStages">Explore Stages</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-bar" aria-label="Festival facts">
+      <div class="container stats-grid">
+        <div class="stat-card">
+          <span class="stat-value">3</span>
+          <span class="stat-label" data-i18n="stats.days">Festival Days</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">2</span>
+          <span class="stat-label" data-i18n="stats.stages">Distinct Stages</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">60</span>
+          <span class="stat-label" data-i18n="stats.artists">Live Sets</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">6,300</span>
+          <span class="stat-label" data-i18n="stats.capacity">Total Capacity</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="stages" class="section-block">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title" data-i18n="stages.heading">Two Acoustic Worlds</h2>
+          <p class="section-desc" data-i18n="stages.intro">Open-air amplitude meets 360-degree enclosed projection architecture.</p>
+        </div>
+
+        <div class="stages-grid">
+          <article class="vault-card stage-card">
+            <div class="card-top">
+              <span class="stage-tag tag-solar" data-i18n="stages.solar.type">Open-Air Main Stage</span>
+              <span class="capacity-badge" data-i18n="stages.solar.capacity">Cap. 4,500</span>
+            </div>
+            <h3 class="card-title">Solar Horizon Stage</h3>
+            <p class="card-body" data-i18n="stages.solar.desc">Central open-air amphitheater for major band performances, indie rock, post-rock, and late-night dance headliners.</p>
+            <div class="card-footer">
+              <span class="footer-note" data-i18n="stages.solar.hours">Daily 13:00 - 02:00</span>
+              <a href="program.html#day-1" class="text-link" data-i18n="stages.viewLineup">Stage timetable</a>
+            </div>
+          </article>
+
+          <article class="vault-card stage-card">
+            <div class="card-top">
+              <span class="stage-tag tag-lunar" data-i18n="stages.lunar.type">Covered Audiovisual Dome</span>
+              <span class="capacity-badge" data-i18n="stages.lunar.capacity">Cap. 1,800</span>
+            </div>
+            <h3 class="card-title">Lunar Forest Dome</h3>
+            <p class="card-body" data-i18n="stages.lunar.desc">Atmospheric covered indoor dome focusing on techno, modular ambient, experimental electronics, and 360-degree light projections.</p>
+            <div class="card-footer">
+              <span class="footer-note" data-i18n="stages.lunar.hours">Daily 14:00 - 04:00</span>
+              <a href="program.html#day-1" class="text-link" data-i18n="stages.viewLineup">Stage timetable</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title" data-i18n="highlights.heading">Program Highlights</h2>
+          <p class="section-desc" data-i18n="highlights.intro">Selected evening headliners across all three festival nights.</p>
+        </div>
+
+        <div class="highlights-grid">
+          <article class="vault-card highlight-card">
+            <div class="highlight-meta">
+              <span class="day-badge" data-i18n="days.friShort">Fri 10 Jul</span>
+              <span class="time-stamp">23:30 - 00:45</span>
+            </div>
+            <h3 class="card-title">Starlight Odyssey</h3>
+            <p class="genre-line">Electronic Indie (FR)</p>
+            <p class="stage-line">Solar Horizon Stage</p>
+          </article>
+
+          <article class="vault-card highlight-card">
+            <div class="highlight-meta">
+              <span class="day-badge" data-i18n="days.friShort">Fri 10 Jul</span>
+              <span class="time-stamp">22:30 - 23:50</span>
+            </div>
+            <h3 class="card-title">Modular Horizon</h3>
+            <p class="genre-line">Live Hardware Techno (DE)</p>
+            <p class="stage-line">Lunar Forest Dome</p>
+          </article>
+
+          <article class="vault-card highlight-card">
+            <div class="highlight-meta">
+              <span class="day-badge" data-i18n="days.satShort">Sat 11 Jul</span>
+              <span class="time-stamp">23:10 - 00:25</span>
+            </div>
+            <h3 class="card-title">Vortex Motion</h3>
+            <p class="genre-line">Nu-Electro (UK)</p>
+            <p class="stage-line">Solar Horizon Stage</p>
+          </article>
+
+          <article class="vault-card highlight-card">
+            <div class="highlight-meta">
+              <span class="day-badge" data-i18n="days.satShort">Sat 11 Jul</span>
+              <span class="time-stamp">23:35 - 00:55</span>
+            </div>
+            <h3 class="card-title">Circuit Overload</h3>
+            <p class="genre-line">Hard Techno (PL)</p>
+            <p class="stage-line">Lunar Forest Dome</p>
+          </article>
+
+          <article class="vault-card highlight-card">
+            <div class="highlight-meta">
+              <span class="day-badge" data-i18n="days.sunShort">Sun 12 Jul</span>
+              <span class="time-stamp">22:35 - 23:55</span>
+            </div>
+            <h3 class="card-title">Starlight Runners</h3>
+            <p class="genre-line">Electropop Headliner (DK)</p>
+            <p class="stage-line">Solar Horizon Stage</p>
+          </article>
+
+          <article class="vault-card highlight-card">
+            <div class="highlight-meta">
+              <span class="day-badge" data-i18n="days.sunShort">Sun 12 Jul</span>
+              <span class="time-stamp">00:10 - 01:15</span>
+            </div>
+            <h3 class="card-title">Final Cascade</h3>
+            <p class="genre-line">Orchestral Electronic (CZ)</p>
+            <p class="stage-line">Solar Horizon Stage</p>
+          </article>
+        </div>
+
+        <div class="section-cta-row">
+          <a href="program.html" class="btn-primary" data-i18n="highlights.allSets">Browse Complete 3-Day Program</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <span class="footer-brand">Festival of Darkness 2</span>
+        <p class="footer-copy" data-i18n="footer.location">Kutna Hora, Czech Republic - 10-12 July 2026</p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html" data-i18n="nav.home">Overview</a>
+        <a href="program.html" data-i18n="nav.program">Program</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
