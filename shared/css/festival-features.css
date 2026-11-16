@@ -2596,3 +2596,43 @@ a.rail-link-tickets:focus-visible,
 .fod-nav-schedule-badge:empty {
   display: none;
 }
+
+.fod-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.fod-filter-group-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--fod-muted, #888);
+}
+
+.fod-breadcrumbs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 0.85rem;
+  font-size: 0.88rem;
+  color: var(--fod-muted, #888);
+}
+
+.fod-breadcrumbs a {
+  color: var(--fod-accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.fod-breadcrumbs a:hover,
+.fod-breadcrumbs a:focus-visible {
+  text-decoration: underline;
+}
+
+.fod-breadcrumbs [aria-current="page"] {
+  color: var(--fod-text);
+  font-weight: 600;
+}

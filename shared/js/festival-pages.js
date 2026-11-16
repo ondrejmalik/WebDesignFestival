@@ -70,6 +70,11 @@
       ];
 
       root.innerHTML = `
+        <nav class="fod-breadcrumbs" aria-label="${isCs ? 'Drobečková navigace' : 'Breadcrumb'}">
+          <a href="program.html">${isCs ? 'Program' : 'Program'}</a>
+          <span class="fod-breadcrumb-sep" aria-hidden="true">&gt;</span>
+          <span aria-current="page">${isCs ? 'Můj plán' : 'My Schedule'}</span>
+        </nav>
         <div class="fod-toolbar-panel">
           <div class="fod-plan-summary-row">
             <div class="fod-plan-summary-left">
@@ -90,14 +95,19 @@
           </div>
 
           <div class="fod-filter-stack">
-            <div class="fod-filter-row" role="group" aria-label="${isCs ? 'Filtrovat podle dne' : 'Filter by day'}">
+            <div class="fod-filter-group">
+              <span class="fod-filter-group-label">${isCs ? 'Dny' : 'Days'}</span>
+              <div class="fod-filter-row" role="group" aria-label="${isCs ? 'Filtrovat podle dne' : 'Filter by day'}">
               <button type="button" class="fod-chip ${state.day === 'all' ? 'is-active' : ''}" data-filter-day="all">${isCs ? 'Všechny dny (60)' : 'All Days (60)'}</button>
               <button type="button" class="fod-chip ${state.day === 'day1' ? 'is-active' : ''}" data-filter-day="day1">${isCs ? 'Den 1 · Pá 10. 7.' : 'Day 1 · Fri 10 Jul'}</button>
               <button type="button" class="fod-chip ${state.day === 'day2' ? 'is-active' : ''}" data-filter-day="day2">${isCs ? 'Den 2 · So 11. 7.' : 'Day 2 · Sat 11 Jul'}</button>
               <button type="button" class="fod-chip ${state.day === 'day3' ? 'is-active' : ''}" data-filter-day="day3">${isCs ? 'Den 3 · Ne 12. 7.' : 'Day 3 · Sun 12 Jul'}</button>
             </div>
 
-            <div class="fod-filter-row" role="group" aria-label="${isCs ? 'Filtrovat podle pódia' : 'Filter by stage'}">
+            </div>
+            <div class="fod-filter-group">
+              <span class="fod-filter-group-label">${isCs ? 'Pódia' : 'Stages'}</span>
+              <div class="fod-filter-row" role="group" aria-label="${isCs ? 'Filtrovat podle pódia' : 'Filter by stage'}">
               <button type="button" class="fod-chip ${state.stage === 'all' ? 'is-active' : ''}" data-filter-stage="all">${isCs ? 'Všechna pódia' : 'All Stages'}</button>
               <button type="button" class="fod-chip ${state.stage === 'solar' ? 'is-active' : ''}" data-filter-stage="solar">Solar Horizon Stage</button>
               <button type="button" class="fod-chip ${state.stage === 'lunar' ? 'is-active' : ''}" data-filter-stage="lunar">Lunar Forest Dome</button>
@@ -106,12 +116,16 @@
               </button>
             </div>
 
-            <div class="fod-filter-row" role="group" aria-label="${isCs ? 'Filtrovat podle žánru' : 'Filter by genre'}">
+            </div>
+            <div class="fod-filter-group">
+              <span class="fod-filter-group-label">${isCs ? 'Žánry' : 'Genres'}</span>
+              <div class="fod-filter-row" role="group" aria-label="${isCs ? 'Filtrovat podle žánru' : 'Filter by genre'}">
               ${genres.map(g => `
                 <button type="button" class="fod-chip ${state.genre === g.key ? 'is-active' : ''}" data-filter-genre="${g.key}">
                   ${isCs ? g.cs : g.en}
                 </button>
               `).join('')}
+            </div>
             </div>
 
             <div class="fod-search-row">
@@ -1416,6 +1430,11 @@
       const { total: totalCollisions, byId: collisionMap } = computeCollisions(favs);
 
       root.innerHTML = `
+        <nav class="fod-breadcrumbs" aria-label="${isCs ? 'Drobečková navigace' : 'Breadcrumb'}">
+          <a href="program.html">${isCs ? 'Program' : 'Program'}</a>
+          <span class="fod-breadcrumb-sep" aria-hidden="true">&gt;</span>
+          <span aria-current="page">${isCs ? 'Můj plán' : 'My Schedule'}</span>
+        </nav>
         <div class="fod-toolbar-panel">
           <div class="fod-plan-summary-actions">
             <a href="program.html" class="fod-btn fod-btn-primary">${isCs ? '+ Přidat z Programu' : '+ Add from Program'}</a>
@@ -1625,6 +1644,11 @@
       const isCs = core.getLang() === 'cs';
 
       root.innerHTML = `
+        <nav class="fod-breadcrumbs" aria-label="${isCs ? 'Drobečková navigace' : 'Breadcrumb'}">
+          <a href="program.html">${isCs ? 'Program' : 'Program'}</a>
+          <span class="fod-breadcrumb-sep" aria-hidden="true">&gt;</span>
+          <span aria-current="page">${isCs ? 'Můj plán' : 'My Schedule'}</span>
+        </nav>
         <div class="fod-toolbar-panel">
           <form id="search-form" class="fod-search-row" role="search">
             <label for="global-search-input" class="fod-sr-only">${isCs ? 'Vyhledat na festivalu' : 'Search festival'}</label>
