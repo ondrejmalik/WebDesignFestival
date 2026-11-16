@@ -60,8 +60,13 @@
         { key: 'ambient', en: 'Ambient', cs: 'Ambient' },
         { key: 'indie', en: 'Indie', cs: 'Indie' },
         { key: 'rock', en: 'Rock', cs: 'Rock' },
-        { key: 'techno', en: 'Techno / Electronic', cs: 'Techno / Elektronika' },
-        { key: 'pop', en: 'Pop / Synth', cs: 'Pop / Synth' }
+        { key: 'pop', en: 'Pop', cs: 'Pop' },
+        { key: 'techno', en: 'Techno', cs: 'Techno' },
+        { key: 'electronic', en: 'Electronic', cs: 'Elektronika' },
+        { key: 'dance', en: 'Dance', cs: 'Taneční' },
+        { key: 'experimental', en: 'Experimental', cs: 'Experimentální' },
+        { key: 'folk', en: 'Folk', cs: 'Folk' },
+        { key: 'bass', en: 'Bass', cs: 'Bass' }
       ];
 
       root.innerHTML = `
@@ -764,6 +769,7 @@
               </div>
             </dl>
             <div class="fod-detail-links">
+              <a href="program.html?highlight=${artist.id}#${artist.id}" class="fod-btn fod-btn-secondary fod-btn-sm">${isCs ? 'Zobrazit v programu' : 'View in Timetable'}</a>
               <a href="stages.html#${stageMeta.id}" class="fod-btn fod-btn-secondary fod-btn-sm">${isCs ? 'Detaily pódia' : 'Stage Details'}</a>
               <a href="my-schedule.html#${artist.id}" class="fod-btn fod-btn-secondary fod-btn-sm">${isCs ? 'Můj plán' : 'My Schedule'}</a>
             </div>
@@ -1010,7 +1016,10 @@
       root.innerHTML = `
         <nav class="fod-filter-row" aria-label="${isCs ? 'Sekce praktických informací' : 'Practical Info Sections'}">
           <a href="#vstupenky" class="fod-chip">${isCs ? 'Vstupenky' : 'Tickets'}</a>
+          <a href="#parametry" class="fod-chip">${isCs ? 'Parametry 2026' : '2026 Key Facts'}</a>
           <a href="#doprava" class="fod-chip">${isCs ? 'Doprava a mapa' : 'Transit & Map'}</a>
+          <a href="#shuttle-bus" class="fod-chip">${isCs ? 'Jízdní řád Shuttle' : 'Shuttle Timetable'}</a>
+          <a href="#pesi-trasa" class="fod-chip">${isCs ? 'Pěší trasa' : 'Walking Route'}</a>
           <a href="#kemp" class="fod-chip">${isCs ? 'Kempování' : 'Camping'}</a>
           <a href="#cashless" class="fod-chip">${isCs ? 'Cashless & Bezpečí' : 'Cashless & Safety'}</a>
           <a href="#faq" class="fod-chip">FAQ</a>
@@ -1021,6 +1030,30 @@
           <p>${isCs
             ? 'Vstupenky jsou k dispozici jako třídenní festivalové pasy nebo jednodenní vstupenky pro pátek, sobotu či neděli. Po kontrole na Hlavní bráně (Vstup A) obdržíte identifikační RFID náramek.'
             : 'Passes are available as 3-day full festival tickets or single-day passes for Friday, Saturday, or Sunday. Upon arrival at Entrance A (Main Gate), every visitor receives an RFID wristband.'}</p>
+          <ul class="fod-feature-list">
+            <li>${isCs ? '3denní festivalový pas (Pá–Ne): 2 490 Kč / 99 EUR' : '3-Day Full Festival Pass (Fri–Sun): 2,490 CZK / 99 EUR'}</li>
+            <li>${isCs ? 'Jednodenní vstupenka (Pá / So / Ne): 1 090 Kč / 45 EUR' : 'Single-Day Ticket (Fri / Sat / Sun): 1,090 CZK / 45 EUR'}</li>
+            <li>${isCs ? 'Kempování ve stanovém městečku (3 noci): 490 Kč / 20 EUR' : 'Camping Pass (3 nights in Tent Village): 490 CZK / 20 EUR'}</li>
+            <li>${isCs ? 'Děti do 12 let v doprovodu dospělého: vstup ZDARMA' : 'Children under 12 accompanied by an adult: FREE entry'}</li>
+          </ul>
+        </section>
+
+        <section class="fod-panel" id="parametry">
+          <h2>${isCs ? 'Klíčové parametry ročníku 2026' : 'Key Parameters of the 2026 Edition'}</h2>
+          <div class="fod-info-grid">
+            <article class="fod-sub-card">
+              <h3>${isCs ? '3 festivalové dny' : '3 Festival Days'}</h3>
+              <p>${isCs ? 'Pátek 10. 7., sobota 11. 7., neděle 12. 7. 2026 (areál otevřen od 13:00 do 04:00).' : 'Friday July 10, Saturday July 11, Sunday July 12, 2026 (grounds open 13:00 to 04:00).'}</p>
+            </article>
+            <article class="fod-sub-card">
+              <h3>${isCs ? '2 odlišná pódia' : '2 Distinct Stages'}</h3>
+              <p>${isCs ? 'Solar Horizon Stage (venkovní amfiteátr, 4 500 míst) a krytý Lunar Forest Dome (1 800 míst).' : 'Solar Horizon Stage (open-air amphitheater, 4,500 cap) and covered Lunar Forest Dome (1,800 cap).'}</p>
+            </article>
+            <article class="fod-sub-card">
+              <h3>${isCs ? '60 živých vystoupení' : '60 Live Performances'}</h3>
+              <p>${isCs ? 'Kurátorovaný mezinárodní program elektroniky, post-rocku, indie, techna a audiovizuálních setů.' : 'Curated international lineup of electronic, post-rock, indie, techno, and audiovisual sets.'}</p>
+            </article>
+          </div>
         </section>
 
         <section class="fod-panel" id="doprava">
@@ -1029,14 +1062,38 @@
             <article class="fod-sub-card" id="shuttle-bus">
               <h3>${isCs ? 'Kyvadlový Shuttle Bus (ZDARMA)' : 'Festival Shuttle Bus (FREE)'}</h3>
               <p>${isCs
-                ? 'Bezplatná kyvadlová linka z hlavního nádraží Kutná Hora hl.n. přímo k Hlavní bráně (Vstup A). Jezdí každých 10 až 15 minut po celý den i v noci (doba jízdy 7 minut).'
-                : 'Free festival shuttle bus connecting Kutná Hora main railway station directly to Venue Entrance A. Departs every 10 to 15 minutes day and night (7 min travel time).'}</p>
+                ? 'Bezplatná kyvadlová linka z hlavního nádraží Kutná Hora hl.n. přímo k Hlavní bráně (Vstup A). Jezdí každých 10 až 15 minut po celý den i v noci (doba jízdy 7 minut). Garance návaznosti na rychlíky R9 z Prahy a Brna.'
+                : 'Free festival shuttle bus connecting Kutná Hora main railway station directly to Venue Entrance A. Departs every 10 to 15 minutes day and night (7 min travel time). Guaranteed sync with R9 express trains from Prague & Brno.'}</p>
+              <div class="fod-table-scroll">
+                <table class="fod-mini-table">
+                  <thead>
+                    <tr>
+                      <th>${isCs ? 'Den' : 'Day'}</th>
+                      <th>${isCs ? 'Provoz' : 'Hours'}</th>
+                      <th>${isCs ? 'Interval' : 'Frequency'}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>${isCs ? 'Pá 10. 7.' : 'Fri Jul 10'}</td><td>11:30–04:00</td><td>${isCs ? '10–15 min' : '10–15 min'}</td></tr>
+                    <tr><td>${isCs ? 'So 11. 7.' : 'Sat Jul 11'}</td><td>12:00–04:00</td><td>15 min</td></tr>
+                    <tr><td>${isCs ? 'Ne 12. 7.' : 'Sun Jul 12'}</td><td>12:00–03:30</td><td>15 min</td></tr>
+                    <tr><td>${isCs ? 'Po 13. 7. (Odjezdy)' : 'Mon Jul 13 (Departures)'}</td><td>07:00–13:00</td><td>15–20 min</td></tr>
+                  </tbody>
+                </table>
+              </div>
             </article>
             <article class="fod-sub-card" id="pesi-trasa">
-              <h3>${isCs ? 'Značená pěší trasa (1,8 km)' : 'Marked Walking Route (1.8 km)'}</h3>
+              <h3>${isCs ? 'Značená pěší trasa (1,8 km, 22–25 min)' : 'Marked Walking Route (1.8 km, 22–25 min)'}</h3>
               <p>${isCs
-                ? 'Osvětlená pěší trasa (22-25 min chůze) vede přes Sedlec (kolem Kostnice a Katedrály) po Vítězné a Zámecké ulici a přes lávku přes Vrchlici až k Vstupu A.'
-                : 'Illuminated walking corridor (22-25 min walk) passing Sedlec Ossuary along Vítězná & Zámecká streets and the Vrchlice footbridge straight to Entrance A.'}</p>
+                ? 'Osvětlená pěší trasa osazená žlutými reflexními směrovkami z nádraží až ke Vstupu A:'
+                : 'Illuminated walking corridor marked with yellow reflective signs from the station straight to Entrance A:'}</p>
+              <ol class="fod-feature-list">
+                <li>${isCs ? 'Kutná Hora hl. n. (0,0 km): vyjděte před nádraží a držte se vlevo do ulice Nádražní.' : 'Kutná Hora Main Station (0.0 km): exit straight onto the plaza and follow Nádražní St.'}</li>
+                <li>${isCs ? 'Nádražní → Křižovatka Sedlec (0,1–0,7 km): rovně kolem viaduktu ke Katedrále.' : 'Nádražní → Sedlec Junction (0.1–0.7 km): continue past the viaduct to the Cathedral.'}</li>
+                <li>${isCs ? 'Kolem Sedlecké kostnice do Zámecké (0,7–1,2 km): odbočte vpravo do Vítězné, poté vlevo do Zámecké.' : 'Past Sedlec Ossuary into Zámecká St (0.7–1.2 km): turn right on Vítězná, then left into Zámecká.'}</li>
+                <li>${isCs ? 'Lávka přes Vrchlici (1,2–1,6 km): osvětlená festivalová lávka do klidové zóny.' : 'Vrchlice Footbridge (1.2–1.6 km): cross the lit festival footbridge into the venue sector.'}</li>
+                <li>${isCs ? 'Hlavní brána – Vstup A (1,8 km): pokladna, RFID pásky a turniketový vstup.' : 'Main Gate – Entrance A (1.8 km): box office, RFID wristbands, and main entry.'}</li>
+              </ol>
             </article>
             <article class="fod-sub-card">
               <h3>${isCs ? 'Auto a Parkoviště P1' : 'Arrival by Car & Parking P1'}</h3>
@@ -1240,6 +1297,7 @@
         return;
       }
       const url = new URL(window.location.href);
+      url.hash = '';
       url.search = `?plan=${favs.map(f => f.id).join(',')}`;
       const shareStr = url.toString();
       if (navigator.clipboard && navigator.clipboard.writeText) {

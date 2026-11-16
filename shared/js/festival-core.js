@@ -215,7 +215,7 @@
     });
 
     // Update all language buttons consistently
-    document.querySelectorAll('#lang-toggle, .lang-btn, .lang-switch, .lang-toggle, .mobile-lang-btn').forEach(btn => {
+    document.querySelectorAll('#lang-toggle, .lang-btn, .lang-switch, .lang-toggle, .eb-lang-btn, .mobile-lang-btn').forEach(btn => {
       const optPills = btn.querySelectorAll('[data-lang-opt], [data-lang-option]');
       if (optPills.length > 0) {
         optPills.forEach(p => {
@@ -224,7 +224,7 @@
           p.classList.toggle('active', val === lang);
         });
       } else {
-        const textTarget = btn.querySelector('[data-i18n="lang_code"], [data-i18n="nav.langToggle"]') || btn;
+        const textTarget = btn.querySelector('[data-i18n="lang_code"], [data-i18n="lang_switch"], [data-i18n="nav.langToggle"]') || btn;
         if (textTarget === btn && btn.querySelector('.lang-indicator')) {
           const spans = btn.querySelectorAll('span:not(.lang-indicator)');
           if (spans.length) spans[0].textContent = isCs ? 'EN' : 'CZ';
@@ -242,7 +242,7 @@
   }
 
   function bindLangButtonsClean() {
-    document.querySelectorAll('#lang-toggle, .lang-btn, .lang-switch, .lang-toggle, .mobile-lang-btn').forEach(btn => {
+    document.querySelectorAll('#lang-toggle, .lang-btn, .lang-switch, .lang-toggle, .eb-lang-btn, .mobile-lang-btn').forEach(btn => {
       if (btn.dataset.fodLangBound) return;
       if (btn.getAttribute('onclick')) {
         btn.dataset.fodLangBound = '1';
@@ -500,27 +500,30 @@
   // HEADER & NAV ENHANCEMENTS (Theme button, Nav Badges, Active States)
   // =========================================================================
   function injectHeaderControls() {
-    // 1. Ensure Theme Switch button exists next to language toggle
-    if (!document.querySelector('.theme-switch-btn')) {
-      const langBtn = document.getElementById('lang-toggle') ||
-        document.querySelector('.lang-btn, .lang-switch, .lang-toggle, .eb-lang-btn');
-      if (langBtn && langBtn.parentElement) {
+    // 1. Ensure Theme Switch button exists next to every language toggle container (including mobile topbar in 11-zzz)
+    const langBtns = document.querySelectorAll('#lang-toggle, .lang-btn, .lang-switch, .lang-toggle, .eb-lang-btn, .mobile-lang-btn');
+    langBtns.forEach((langBtn, idx) => {
+      const parent = langBtn.parentElement;
+      if (!parent) return;
+      if (!parent.querySelector('.theme-switch-btn')) {
         const themeBtn = document.createElement('button');
         themeBtn.type = 'button';
-        themeBtn.id = 'theme-switch-btn';
-        themeBtn.className = 'fod-theme-btn theme-switch-btn';
-        themeBtn.innerHTML = '<span class="theme-icon" aria-hidden="true"></span><span class="theme-label"></span>';
-        themeBtn.addEventListener('click', toggleFestivalTheme);
-        langBtn.parentElement.insertBefore(themeBtn, langBtn);
-      }
-    } else {
-      document.querySelectorAll('.theme-switch-btn').forEach(btn => {
-        if (!btn.dataset.fodThemeBound) {
-          btn.dataset.fodThemeBound = '1';
-          btn.addEventListener('click', toggleFestivalTheme);
+        if (idx === 0 && !document.getElementById('theme-switch-btn')) {
+          themeBtn.id = 'theme-switch-btn';
         }
-      });
-    }
+        themeBtn.className = 'fod-theme-btn theme-switch-btn' + (langBtn.classList.contains('mobile-lang-btn') ? ' fod-mobile-theme-btn' : '');
+        themeBtn.innerHTML = '<span class="theme-icon" aria-hidden="true"></span><span class="theme-label"></span>';
+        themeBtn.dataset.fodThemeBound = '1';
+        themeBtn.addEventListener('click', toggleFestivalTheme);
+        parent.insertBefore(themeBtn, langBtn);
+      }
+    });
+    document.querySelectorAll('.theme-switch-btn').forEach(btn => {
+      if (!btn.dataset.fodThemeBound) {
+        btn.dataset.fodThemeBound = '1';
+        btn.addEventListener('click', toggleFestivalTheme);
+      }
+    });
     updateThemeButtons(getFestivalTheme());
 
     // 2. Ensure My Schedule links in nav & bottom dock carry a live count badge
