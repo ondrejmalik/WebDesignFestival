@@ -33,7 +33,14 @@ const FESTIVAL_I18N = {
     day1_heading: "Friday, 10 July 2026",
     day2_heading: "Saturday, 11 July 2026",
     day3_heading: "Sunday, 12 July 2026",
-    footer_meta: "Kutná Hora, Czech Republic | 10-12 Jul 2026"
+    footer_meta: "Kutná Hora, Czech Republic | 10-12 Jul 2026",
+    dock_artists: "Artists",
+    dock_stages: "Stages",
+    dock_info: "Info",
+    dock_home: "Home",
+    dock_program: "Program",
+    dock_plan: "My Plan",
+    dock_search: "Search"
   },
   cs: {
     nav_home: "Přehled",
@@ -68,7 +75,14 @@ const FESTIVAL_I18N = {
     day1_heading: "Pátek 10. července 2026",
     day2_heading: "Sobota 11. července 2026",
     day3_heading: "Neděle 12. července 2026",
-    footer_meta: "Kutná Hora, Česká republika | 10.-12. 7. 2026"
+    footer_meta: "Kutná Hora, Česká republika | 10.-12. 7. 2026",
+    dock_artists: "Umělci",
+    dock_stages: "Scény",
+    dock_info: "Info",
+    dock_home: "Domů",
+    dock_program: "Program",
+    dock_plan: "Můj plán",
+    dock_search: "Hledat"
   }
 };
 

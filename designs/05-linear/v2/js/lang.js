@@ -51,7 +51,14 @@
       "table.artist": "Artist",
       "table.genre": "Genre",
       "table.stage": "Stage",
-      "footer.location": "Kutná Hora, Czech Republic · 10-12 Jul 2026"
+      "footer.location": "Kutná Hora, Czech Republic · 10-12 Jul 2026",
+      "dock_artists": "Artists",
+      "dock_stages": "Stages",
+      "dock_info": "Info",
+      "dock_home": "Home",
+      "dock_program": "Program",
+      "dock_plan": "My Plan",
+      "dock_search": "Search"
     },
     cs: {
       "nav.home": "Přehled",
@@ -100,7 +107,14 @@
       "table.artist": "Interpret",
       "table.genre": "Žánr",
       "table.stage": "Scéna",
-      "footer.location": "Kutná Hora, Česká republika · 10.–12. července 2026"
+      "footer.location": "Kutná Hora, Česká republika · 10.–12. července 2026",
+      "dock_artists": "Umělci",
+      "dock_stages": "Scény",
+      "dock_info": "Info",
+      "dock_home": "Domů",
+      "dock_program": "Program",
+      "dock_plan": "Můj plán",
+      "dock_search": "Hledat"
     }
   };
 

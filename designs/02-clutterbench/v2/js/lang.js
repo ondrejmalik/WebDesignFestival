@@ -54,7 +54,14 @@
       colTime: "Time",
       colArtist: "Performer",
       colGenre: "Genre",
-      colOrigin: "Origin"
+      colOrigin: "Origin",
+      dock_artists: "Artists",
+      dock_stages: "Stages",
+      dock_info: "Info",
+      dock_home: "Home",
+      dock_program: "Program",
+      dock_plan: "My Plan",
+      dock_search: "Search"
     },
     cs: {
       brand: "Festival of Darkness 2",
@@ -107,7 +114,14 @@
       colTime: "Čas",
       colArtist: "Interpret",
       colGenre: "Žánr",
-      colOrigin: "Země"
+      colOrigin: "Země",
+      dock_artists: "Umělci",
+      dock_stages: "Scény",
+      dock_info: "Info",
+      dock_home: "Domů",
+      dock_program: "Program",
+      dock_plan: "Můj plán",
+      dock_search: "Hledat"
     }
   };
 

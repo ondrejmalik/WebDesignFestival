@@ -50,7 +50,14 @@ const FESTIVAL_I18N = {
     "schedule.badge": "Complete Timetable",
     "schedule.title": "Festival Schedule",
     "schedule.subtitle": "Full performance lineup sorted by day, stage, and time.",
-    "footer.location": "Kutná Hora, Czech Republic - 10-12 July 2026"
+    "footer.location": "Kutná Hora, Czech Republic - 10-12 July 2026",
+    "dock_artists": "Artists",
+    "dock_stages": "Stages",
+    "dock_info": "Info",
+    "dock_home": "Home",
+    "dock_program": "Program",
+    "dock_plan": "My Plan",
+    "dock_search": "Search"
   },
   cs: {
     "nav.home": "Přehled",
@@ -102,7 +109,14 @@ const FESTIVAL_I18N = {
     "schedule.badge": "Kompletní harmonogram",
     "schedule.title": "Festivalový harmonogram",
     "schedule.subtitle": "Přehled všech vystoupení seřazených podle dnů, scén a časů.",
-    "footer.location": "Kutná Hora, Česká republika - 10.-12. července 2026"
+    "footer.location": "Kutná Hora, Česká republika - 10.-12. července 2026",
+    "dock_artists": "Umělci",
+    "dock_stages": "Scény",
+    "dock_info": "Info",
+    "dock_home": "Domů",
+    "dock_program": "Program",
+    "dock_plan": "Můj plán",
+    "dock_search": "Hledat"
   }
 };
 

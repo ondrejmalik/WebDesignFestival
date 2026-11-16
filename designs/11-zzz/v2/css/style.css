@@ -817,3 +817,191 @@ button {
     padding: 18px 14px;
   }
 }
+
+/* === Responsive Mobile Bottom Navigation Dock === */
+/* Bottom Navigation Dock & 375px Mobile Responsive Overrides for 11-zzz */
+
+/* Desktop Default */
+.bottom-nav-dock {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  /* Hide side rail on mobile */
+  .side-rail {
+    display: none;
+  }
+
+  /* Remove left rail offset on workspace */
+  .workspace {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  /* Body bottom padding to clear fixed dock + safe area */
+  body {
+    padding-bottom: calc(74px + env(safe-area-inset-bottom, 0px));
+  }
+
+  /* Fixed bottom navigation dock */
+  .bottom-nav-dock {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 100;
+    background-color: var(--bg-surface);
+    border-top: 1px solid var(--border-subtle);
+    padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px));
+    justify-content: space-around;
+    align-items: center;
+    backdrop-filter: blur(12px);
+  }
+
+  /* Bottom dock item styling */
+  .bottom-dock-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    min-width: 0;
+    flex: 1 1 0;
+    gap: 3px;
+    padding: 4px 2px;
+    color: var(--text-muted);
+    font-size: 10px;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: color 0.15s ease, background-color 0.15s ease;
+  }
+
+  .bottom-dock-item .dock-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+  }
+
+  .bottom-dock-item .dock-label {
+    line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  .bottom-dock-item:hover,
+  .bottom-dock-item:focus-visible {
+    color: var(--accent-cyan);
+    background-color: var(--bg-elevated);
+  }
+
+  .bottom-dock-item.is-active,
+  .bottom-dock-item[aria-current="page"] {
+    color: var(--accent-cyan);
+    background-color: var(--bg-elevated);
+  }
+
+  .bottom-dock-item.bottom-dock-home {
+    color: var(--accent-cyan);
+  }
+
+  .app-shell {
+    padding-bottom: 0;
+  }
+
+  /* Ensure focus-visible is fully accessible and never removed */
+  :focus-visible {
+    outline: 2px solid var(--accent-cyan);
+    outline-offset: -2px;
+  }
+
+  /* Topbar and header adjustments for mobile */
+  .topbar {
+    padding: 0 12px;
+    height: 52px;
+  }
+
+  .topbar-location {
+    display: none;
+  }
+
+  .mobile-lang-btn {
+    display: inline-flex;
+  }
+
+  /* Main content padding adjustment */
+  .main-content {
+    padding: 16px 12px 32px;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* 375px safety audit: prevent grid and table overflows */
+  .hero-panel,
+  .page-header-panel,
+  .metric-grid,
+  .stages-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 16px;
+    max-width: 100%;
+  }
+
+  .metric-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 8px;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .set-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 12px;
+  }
+
+  .set-meta {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .site-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 16px 12px;
+  }
+
+  .footer-nav {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  html,
+  body {
+    overflow-x: clip;
+  }
+
+  img,
+  svg,
+  table {
+    max-width: 100%;
+  }
+}

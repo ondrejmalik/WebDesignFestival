@@ -828,3 +828,140 @@ a {
     justify-content: space-between;
   }
 }
+
+/* === Responsive Mobile Bottom Navigation Dock === */
+@media (min-width: 769px) {
+  .bottom-nav-dock {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-nav {
+    display: none !important;
+  }
+
+  body {
+    padding-bottom: calc(74px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .bottom-nav-dock {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 100;
+    background: rgba(13, 15, 18, 0.94);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid var(--border-subtle);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    height: 70px;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .bottom-dock-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    min-width: 0;
+    flex: 1 1 0;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 4px 2px;
+    gap: 3px;
+    transition: color 0.18s ease;
+  }
+
+  .bottom-dock-item:hover,
+  .bottom-dock-item.is-active {
+    color: var(--accent-volt);
+  }
+
+  .bottom-dock-home {
+    color: var(--text-primary);
+  }
+
+  .bottom-dock-home .dock-icon {
+    background: var(--accent-volt-tint);
+    border: 1px solid var(--accent-volt-border);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-volt);
+  }
+
+  .dock-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  .dock-label {
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent-volt);
+    outline-offset: -2px;
+  }
+
+  .container {
+    max-width: 100%;
+    padding-inline: 16px;
+  }
+
+  .slot-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .hero-grid,
+  .stages-grid,
+  .lineup-grid,
+  .hud-stats {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .hero-copy,
+  .hud-panel,
+  .stage-card,
+  .artist-tile,
+  .section-cta-bar {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 768px) {
+  html,
+  body {
+    overflow-x: clip;
+  }
+
+  img,
+  svg,
+  table {
+    max-width: 100%;
+  }
+}

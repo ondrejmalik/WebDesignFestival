@@ -654,3 +654,152 @@ a {
     margin-top: 4px;
   }
 }
+
+/* === Responsive Mobile Bottom Navigation Dock === */
+@media (min-width: 769px) {
+  .bottom-nav-dock {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: calc(74px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .site-nav .nav-link {
+    display: none;
+  }
+
+  .header-inner {
+    min-height: 56px;
+  }
+
+  .bottom-nav-dock {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: rgba(23, 20, 27, 0.94);
+    backdrop-filter: blur(16px);
+    border-top: 1px solid var(--border-subtle);
+    padding: 8px 6px calc(8px + env(safe-area-inset-bottom, 0px)) 6px;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  .bottom-dock-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    min-width: 0;
+    flex: 1 1 0;
+    padding: 4px 2px;
+    color: var(--text-muted);
+    font-size: 10px;
+    font-weight: 600;
+    text-align: center;
+    transition: color 0.2s ease, transform 0.15s ease;
+  }
+
+  .bottom-dock-item:hover,
+  .bottom-dock-item:focus-visible {
+    color: var(--text-cream);
+  }
+
+  .bottom-dock-item.is-active,
+  .bottom-dock-item[aria-current="page"] {
+    color: var(--accent-pink);
+  }
+
+  .bottom-dock-home {
+    transform: translateY(-6px);
+  }
+
+  .bottom-dock-home .dock-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: var(--accent-coral);
+    color: var(--text-cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(255, 88, 100, 0.4);
+    border: 2px solid var(--bg-canvas);
+  }
+
+  .bottom-dock-home.is-active .dock-icon,
+  .bottom-dock-home[aria-current="page"] .dock-icon {
+    background-color: var(--accent-crimson);
+  }
+
+  .dock-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2px;
+  }
+
+  .dock-label {
+    font-size: 10px;
+    line-height: 1.1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  .hero-grid,
+  .stages-grid,
+  .highlights-grid,
+  .time-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .slot-row {
+    grid-template-columns: 1fr !important;
+    gap: 8px;
+  }
+
+  .container {
+    padding-inline: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-name {
+    font-size: 14px;
+    max-width: 130px;
+  }
+
+  .hero-card,
+  .stat-card,
+  .stage-card,
+  .highlight-card {
+    padding: 16px;
+  }
+
+  .hero-title {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  html,
+  body {
+    overflow-x: clip;
+  }
+
+  img,
+  svg,
+  table {
+    max-width: 100%;
+  }
+}
