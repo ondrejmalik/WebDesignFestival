@@ -163,7 +163,7 @@
     'artists.html': { en: 'Artists & Stages', cs: 'Účinkující & Pódia' },
     'stages.html': { en: 'Artists & Stages', cs: 'Účinkující & Pódia' },
     'tickets.html': { en: 'Tickets', cs: 'Vstupenky' },
-    'practical-info.html': { en: 'Info', cs: 'Info' },
+    'practical-info.html': { en: 'Info & Search', cs: 'Info & Hledání' },
     'my-schedule.html': { en: 'My Schedule', cs: 'Můj plán' },
     'search.html': { en: 'Search', cs: 'Hledat' }
   };
@@ -494,6 +494,7 @@
       localStorage.setItem(CART_KEY, JSON.stringify(clean));
     } catch (e) {}
     updateAllCartBadges();
+    updateNavScheduleBadges();
     window.dispatchEvent(new CustomEvent('festivalCartChanged', { detail: { items: clean } }));
     return clean;
   }
@@ -674,6 +675,7 @@
 
     updateAllFavBadges();
     updateAllCartBadges();
+    updateNavScheduleBadges();
   }
 
   function enhanceHomepage() {
@@ -845,7 +847,28 @@
     boot();
   }
 
+  function updateNavScheduleBadges() {
+    const count = getFavorites().length;
+    document
+      .querySelectorAll('a[href$="program.html"]')
+      .forEach((link) => {
+        if (!link.closest('.site-nav, .rail-nav, .bottom-nav-dock, header, nav')) return;
+        let badge = link.querySelector('.fod-nav-schedule-badge');
+        if (count > 0) {
+          if (!badge) {
+            badge = document.createElement('span');
+            badge.className = 'fod-nav-schedule-badge';
+            link.appendChild(badge);
+          }
+          badge.textContent = String(count);
+        } else if (badge) {
+          badge.remove();
+        }
+      });
+  }
+
   window.addEventListener('festivalCartChanged', () => updateAllCartBadges());
+  window.addEventListener('festivalFavoritesChanged', () => updateNavScheduleBadges());
 
   window.addEventListener('storage', e => {
     if (!e || e.key === THEME_KEY) applyTheme(getFestivalTheme());

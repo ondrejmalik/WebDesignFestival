@@ -80,10 +80,7 @@
               <span class="fod-status-text" id="filter-status-text" aria-live="polite"></span>
             </div>
             <div class="fod-plan-summary-actions">
-              <button type="button" id="quick-lunar-btn" class="fod-btn fod-btn-accent">
-                ${isCs ? 'Prší? Krytý Lunar Dome (Den 1)' : 'Rain Shelter: Lunar Dome (Day 1)'}
-              </button>
-              <a href="my-schedule.html" class="fod-btn fod-btn-primary">
+              <a href="my-schedule.html" class="fod-btn fod-btn-primary fod-open-schedule-cta">
                 ${isCs ? 'Otevřít Můj plán' : 'Open My Schedule'} (<span class="fav-count-badge">${favCount}</span>)
               </a>
               <button type="button" id="clear-favorites-btn" class="fod-btn fod-btn-ghost">
