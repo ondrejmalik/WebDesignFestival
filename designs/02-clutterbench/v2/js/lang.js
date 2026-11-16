@@ -111,12 +111,12 @@
     }
   };
 
-  function formatCzPlural(count, forms) {
-    var n = Math.abs(Number(count)) || 0;
-    var tuple = Array.isArray(forms) ? forms : ["set", "sety", "setů"];
-    if (n === 1) {
-      return n + " " + tuple[0];
-    }
+  function formatCzPlural(n, one, few, many) {
+  const abs = Math.abs(Number(n)) || 0;
+  if (abs === 1) return one;
+  if (abs >= 2 && abs <= 4) return few;
+  return many;
+}
     if (n >= 2 && n <= 4) {
       return n + " " + tuple[1];
     }
