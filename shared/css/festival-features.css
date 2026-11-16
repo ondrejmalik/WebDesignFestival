@@ -2151,31 +2151,37 @@ html[data-design="11-zzz"] a.rail-link-tickets:hover {
 /* Mobile bottom-nav-dock Tickets CTA (zero overflow at 320px/375px) */
 .bottom-nav-dock a.bottom-dock-tickets {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-width: 0;
-  padding: 6px 4px;
-  border-radius: var(--fod-radius-sm, 8px);
-  background: var(--fod-accent);
-  color: var(--fod-accent-ink);
-  font-weight: 700;
-  text-decoration: none;
 }
 
-.bottom-nav-dock a.bottom-dock-tickets .dock-label {
-  color: var(--fod-accent-ink);
-  font-weight: 700;
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.bottom-nav-dock a.bottom-dock-home {
+  border-radius: 999px;
+  border: 1.5px solid var(--fod-border, rgba(128, 128, 128, 0.35));
+  background: var(--fod-surface, transparent);
 }
 
-.bottom-nav-dock a.bottom-dock-tickets svg {
-  color: var(--fod-accent-ink);
-  stroke: currentColor;
+.bottom-nav-dock a.active,
+.bottom-nav-dock a[aria-current="page"],
+.bottom-nav-dock a.bottom-dock-tickets.active,
+.bottom-nav-dock a.bottom-dock-tickets[aria-current="page"] {
+  color: var(--fod-accent);
+}
+
+.bottom-nav-dock a.active svg,
+.bottom-nav-dock a[aria-current="page"] svg,
+.bottom-nav-dock a.bottom-dock-tickets.active svg,
+.bottom-nav-dock a.bottom-dock-tickets[aria-current="page"] svg {
+  color: var(--fod-accent);
+}
+
+.bottom-nav-dock a.bottom-dock-home.active,
+.bottom-nav-dock a.bottom-dock-home[aria-current="page"] {
+  color: var(--fod-accent);
+  border-color: var(--fod-accent);
+}
+
+.bottom-nav-dock a.bottom-dock-home.active svg,
+.bottom-nav-dock a.bottom-dock-home[aria-current="page"] svg {
+  color: var(--fod-accent);
 }
 
 /* Cart count badge on desktop header, 11-zzz rail, and mobile dock */
