@@ -880,6 +880,60 @@ a {
   }
 }
 
+@media (min-width: 769px) and (max-width: 1180px) {
+  .header-inner {
+    gap: 0.5rem;
+    padding-inline: 1rem;
+  }
+
+  .brand {
+    font-size: 0.9rem;
+  }
+
+  .primary-nav {
+    gap: 0.125rem;
+  }
+
+  .nav-link {
+    font-size: 0.84rem;
+    padding: 0.45rem 0.5rem;
+    white-space: nowrap;
+  }
+
+  .header-actions {
+    gap: 0.35rem;
+  }
+
+  .btn-sm {
+    padding: 0.45rem 0.65rem;
+    font-size: 0.8125rem;
+    white-space: nowrap;
+  }
+}
+
+html[data-design="03-deepl"][data-theme="dark"] .nav-link {
+  color: #cbd5e1;
+}
+
+html[data-design="03-deepl"][data-theme="dark"] .nav-link:hover {
+  color: #ffffff;
+  background-color: #222630;
+}
+
+html[data-design="03-deepl"][data-theme="dark"] .nav-link.is-active {
+  color: #ffffff;
+  background-color: #1e3a8a;
+}
+
+html[data-design="03-deepl"][data-theme="dark"] .stats-strip {
+  background-color: #0f2b46;
+}
+
+.bottom-nav-dock .dock-label {
+  font-size: 11px;
+  line-height: 1.15;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

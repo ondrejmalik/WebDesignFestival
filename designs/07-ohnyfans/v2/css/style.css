@@ -1135,3 +1135,34 @@ a {
   font-size: 16px;
   max-width: 44ch;
 }
+
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+}
+
+.bottom-nav-dock .dock-label {
+  font-size: 11px;
+  line-height: 1.15;
+}
+
+html[data-design="07-ohnyfans"][data-theme="dark"] .nav-link {
+  color: #cbd5e1;
+}
+
+html[data-design="07-ohnyfans"][data-theme="dark"] .nav-link.active {
+  color: #ffffff;
+  background-color: #222630;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

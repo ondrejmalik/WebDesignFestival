@@ -96,6 +96,13 @@ a {
   font-size: 15px;
   letter-spacing: -0.02em;
   white-space: nowrap;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.brand-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .brand-mark {
@@ -231,8 +238,8 @@ a {
 .hero-glow {
   position: absolute;
   top: -140px;
-  right: -120px;
-  width: 480px;
+  right: 0;
+  width: min(480px, 100%);
   height: 480px;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(231, 255, 12, 0.13) 0%, rgba(3, 245, 112, 0.04) 45%, transparent 72%);
@@ -836,9 +843,47 @@ a {
   }
 }
 
+@media (min-width: 768px) and (max-width: 1180px) {
+  .header-inner {
+    gap: 8px;
+  }
+
+  .brand {
+    font-size: 14px;
+  }
+
+  .main-nav {
+    gap: 12px;
+  }
+
+  .nav-link {
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .header-actions {
+    flex-shrink: 0;
+    gap: 6px;
+  }
+
+  .header-actions .btn-sm {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+}
+
 @media (max-width: 768px) {
   .main-nav {
     display: none !important;
+  }
+
+  .header-actions > .btn-primary {
+    display: none;
+  }
+
+  .header-actions {
+    flex-shrink: 0;
+    gap: 6px;
   }
 
   body {
@@ -909,9 +954,9 @@ a {
   }
 
   .dock-label {
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 500;
-    line-height: 1;
+    line-height: 1.15;
     letter-spacing: -0.01em;
     white-space: nowrap;
     overflow: hidden;
@@ -956,7 +1001,7 @@ a {
 @media (max-width: 768px) {
   html,
   body {
-    overflow-x: clip;
+    overflow-x: hidden;
   }
 
   img,
@@ -1100,5 +1145,87 @@ a {
     min-height: 44px;
     width: 100%;
     justify-content: center;
+  }
+}
+
+.inline-link,
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+}
+
+html[data-design="09-wand"][data-theme="light"] .site-header {
+  background: rgba(255, 255, 255, 0.96);
+}
+
+html[data-design="09-wand"][data-theme="light"] .nav-link {
+  color: #374151;
+}
+
+html[data-design="09-wand"][data-theme="light"] .nav-link:hover,
+html[data-design="09-wand"][data-theme="light"] .nav-link.is-active {
+  color: #111827;
+}
+
+html[data-design="09-wand"][data-theme="light"] .btn-primary {
+  background: #4338ca;
+  color: #ffffff;
+  border-color: #4338ca;
+}
+
+html[data-design="09-wand"][data-theme="light"] .btn-primary:hover {
+  background: #3730a3;
+}
+
+html[data-design="09-wand"][data-theme="light"] .btn-secondary {
+  background: #f1f5f9;
+  color: #111827;
+  border-color: #cbd5e1;
+}
+
+html[data-design="09-wand"][data-theme="light"] .stage-card,
+html[data-design="09-wand"][data-theme="light"] .hud-panel,
+html[data-design="09-wand"][data-theme="light"] .artist-tile,
+html[data-design="09-wand"][data-theme="light"] .schedule-item-card,
+html[data-design="09-wand"][data-theme="light"] .program-plan-bar {
+  background-color: #ffffff;
+  background-image: none;
+  color: #111827;
+  transition: none;
+}
+
+html[data-design="09-wand"][data-theme="light"] .chip-volt {
+  background: #eef2ff;
+  color: #3730a3;
+  border-color: #c7d2fe;
+}
+
+html[data-design="09-wand"][data-theme="light"] .chip-emerald {
+  background: #ecfdf5;
+  color: #065f46;
+  border-color: #a7f3d0;
+}
+
+html[data-design="09-wand"][data-theme="light"] .inline-link {
+  color: #3730a3;
+}
+
+html[data-design="09-wand"][data-theme="light"] .stage-card--lunar .inline-link {
+  color: #065f46;
+}
+
+html[data-design="09-wand"][data-theme="light"] .bottom-nav-dock {
+  background: rgba(255, 255, 255, 0.96);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

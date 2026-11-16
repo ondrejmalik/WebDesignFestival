@@ -150,7 +150,8 @@ button {
 .lang-btn:focus-visible {
   border-color: var(--accent-cyan);
   color: var(--accent-cyan);
-  outline: none;
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
 }
 
 .mobile-lang-btn {
@@ -872,7 +873,7 @@ button {
     gap: 3px;
     padding: 4px 2px;
     color: var(--text-muted);
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600;
     border-radius: 6px;
     transition: color 0.15s ease, background-color 0.15s ease;
@@ -922,12 +923,21 @@ button {
 
   /* Topbar and header adjustments for mobile */
   .topbar {
-    padding: 0 12px;
-    height: 52px;
+    padding: 6px 12px;
+    height: auto;
+    min-height: 52px;
+    flex-wrap: wrap;
+    gap: 8px;
   }
 
   .topbar-location {
     display: none;
+  }
+
+  .topbar-actions {
+    gap: 6px;
+    flex-wrap: wrap;
+    flex-shrink: 0;
   }
 
   .mobile-lang-btn {
@@ -1169,4 +1179,81 @@ button {
   flex-direction: column;
   align-items: center;
   gap: 16px;
+}
+
+@media (max-width: 560px) {
+  .topbar-actions .btn-outline-cyan {
+    display: none;
+  }
+
+  .status-badge {
+    font-size: 11px;
+    padding: 4px 8px;
+    gap: 6px;
+  }
+}
+
+.panel-footer a,
+.footer-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+}
+
+html[data-design="11-zzz"][data-theme="light"] {
+  --accent-cyan: #0369a1;
+  --accent-cyan-tint: rgba(3, 105, 161, 0.1);
+  --accent-cyan-border: rgba(3, 105, 161, 0.32);
+}
+
+html[data-design="11-zzz"][data-theme="light"] .topbar {
+  background-color: rgba(255, 255, 255, 0.96);
+}
+
+html[data-design="11-zzz"][data-theme="light"] .rail-link {
+  color: #374151;
+}
+
+html[data-design="11-zzz"][data-theme="light"] .rail-link.is-active {
+  color: #075985;
+  background-color: #e0f2fe;
+  border-color: #7dd3fc;
+}
+
+html[data-design="11-zzz"][data-theme="light"] .btn-primary-cyan {
+  background-color: #0369a1;
+  border-color: #0369a1;
+  color: #ffffff;
+}
+
+html[data-design="11-zzz"][data-theme="light"] .btn-outline-cyan,
+html[data-design="11-zzz"][data-theme="light"] .plan-bar-link,
+html[data-design="11-zzz"][data-theme="light"] .status-badge {
+  color: #075985;
+  background-color: #f0f9ff;
+  border-color: #7dd3fc;
+}
+
+html[data-design="11-zzz"][data-theme="light"] .rail-brand {
+  background-color: #f0f9ff;
+  border-color: #7dd3fc;
+}
+
+html[data-design="11-zzz"][data-theme="light"] .brand-glyph {
+  color: #075985;
+}
+
+html[data-design="11-zzz"][data-theme="light"] .bottom-nav-dock {
+  background-color: rgba(255, 255, 255, 0.96);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

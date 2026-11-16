@@ -1,9 +1,9 @@
 :root {
   --color-navy: #274b79;
   --color-navy-dark: #1d395c;
-  --color-navy-muted: #758ba6;
-  --color-magenta: #c84079;
-  --color-magenta-dark: #a63062;
+  --color-navy-muted: #4a607a;
+  --color-magenta: #a6265c;
+  --color-magenta-dark: #881c4a;
   --color-bg: #ffffff;
   --color-surface-soft: #f4f6f8;
   --color-surface-tint: #f8f8fb;
@@ -727,11 +727,35 @@ p {
     display: none;
   }
 
+  .header-top-inner {
+    min-height: 36px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    gap: 8px;
+    flex-wrap: nowrap;
+  }
+
+  .top-meta {
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+  }
+
+  .top-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+  }
+
   .header-main-inner {
     flex-wrap: nowrap;
     justify-content: space-between;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
   }
 
   .brand-title {
@@ -779,9 +803,9 @@ p {
   }
 
   .bottom-dock-item .dock-label {
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600;
-    line-height: 1.1;
+    line-height: 1.15;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1079,4 +1103,53 @@ p {
 .empty-plan-box h3 {
   color: var(--color-navy);
   margin-bottom: 8px;
+}
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+}
+
+.bottom-nav-dock .dock-label {
+  font-size: 11px;
+  line-height: 1.15;
+}
+
+html[data-design="08-sg-nabytek"][data-theme="dark"] .badge-accent {
+  background-color: rgba(244, 114, 182, 0.16);
+  color: #f9a8d4;
+}
+
+html[data-design="08-sg-nabytek"][data-theme="dark"] #lang-toggle {
+  background-color: #191c23;
+  color: #f1f5f9;
+  border-color: #3f4758;
+}
+
+html[data-design="08-sg-nabytek"][data-theme="dark"] .nav-link {
+  color: #cbd5e1;
+}
+
+html[data-design="08-sg-nabytek"][data-theme="dark"] .nav-link.active {
+  color: #f9a8d4;
+  border-bottom-color: #f9a8d4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

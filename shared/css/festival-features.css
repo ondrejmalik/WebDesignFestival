@@ -6,7 +6,7 @@
 :root {
   --fod-bg: var(--bg-page, var(--bg-canvas, var(--eb-bg, var(--color-bg, var(--bg-obsidian, #ffffff)))));
   --fod-surface: var(--bg-surface, var(--surface-card, var(--bg-card, var(--eb-surface-subtle, var(--color-surface-soft, #ffffff)))));
-  --fod-subtle: var(--bg-subtle, var(--bg-muted, var(--bg-elevated, var(--eb-surface-warm, var(--color-surface-tint, #f4f4f5)))));
+  --fod-subtle: var(--bg-subtle, var(--bg-muted, var(--bg-elevated, var(--eb-surface-warm, var(--color-surface-tint, var(--surface-elevated, #f4f4f5))))));
   --fod-border: var(--border-color, var(--border-subtle, var(--border-light, var(--eb-border, var(--color-border, #e4e4e7)))));
   --fod-border-strong: var(--border-strong, var(--border-mid, var(--eb-border-strong, var(--fod-border))));
   --fod-text: var(--text-primary, var(--ink-primary, var(--eb-ink-primary, var(--color-text, var(--text-cream, #111827)))));
@@ -15,6 +15,8 @@
   --fod-accent-ink: #ffffff;
   --fod-solar: var(--accent-amber, var(--accent-solar, #d97706));
   --fod-lunar: var(--accent-indigo, var(--accent-lunar, var(--blue-accent, var(--accent-cyan, #4f46e5))));
+  --fod-lunar-bg: var(--fod-lunar);
+  --fod-lunar-ink: #ffffff;
   --fod-success: #15803d;
   --fod-success-bg: rgba(22, 163, 74, 0.12);
   --fod-danger: #dc2626;
@@ -24,29 +26,71 @@
   --fod-radius-pill: var(--radius-pill, var(--eb-radius-pill, 999px));
 }
 
+html[data-design="01-checklist"] {
+  --fod-lunar-bg: #1d4ed8;
+  --fod-lunar-ink: #ffffff;
+}
+
+html[data-design="02-clutterbench"] {
+  --fod-lunar-bg: #b45309;
+  --fod-lunar-ink: #ffffff;
+}
+
+html[data-design="03-deepl"] {
+  --fod-lunar-bg: #1d4ed8;
+  --fod-lunar-ink: #ffffff;
+}
+
+html[data-design="04-eventbrite"] {
+  --fod-lunar-bg: #1d4ed8;
+  --fod-lunar-ink: #ffffff;
+}
+
 html[data-design="05-linear"] {
   --fod-accent: var(--accent-indigo, #5e6ad2);
   --fod-accent-ink: #ffffff;
+  --fod-lunar-bg: #4f46e5;
+  --fod-lunar-ink: #ffffff;
 }
 
 html[data-design="06-neurosama"] {
   --fod-accent: var(--accent-pink, #ffacb5);
   --fod-accent-ink: #17141b;
+  --fod-lunar-bg: #6d28d9;
+  --fod-lunar-ink: #ffffff;
+}
+
+html[data-design="07-ohnyfans"] {
+  --fod-accent: #b45309;
+  --fod-accent-ink: #ffffff;
+  --fod-lunar-bg: #1d4ed8;
+  --fod-lunar-ink: #ffffff;
+}
+
+html[data-design="08-sg-nabytek"] {
+  --fod-lunar-bg: #1d4ed8;
+  --fod-lunar-ink: #ffffff;
 }
 
 html[data-design="09-wand"] {
   --fod-accent: var(--accent-volt, #e7ff0c);
   --fod-accent-ink: #09090b;
+  --fod-lunar-bg: #4f46e5;
+  --fod-lunar-ink: #ffffff;
 }
 
 html[data-design="10-wooting"] {
   --fod-accent: var(--accent-amber, #ffb900);
   --fod-accent-ink: #09090b;
+  --fod-lunar-bg: #4f46e5;
+  --fod-lunar-ink: #ffffff;
 }
 
 html[data-design="11-zzz"] {
   --fod-accent: var(--accent-cyan, #38bdf8);
   --fod-accent-ink: #04121a;
+  --fod-lunar-bg: #0369a1;
+  --fod-lunar-ink: #ffffff;
 }
 
 /* =========================================================================
@@ -112,6 +156,8 @@ html[data-native-theme="light"][data-theme="dark"] {
   --fod-muted: #94a3b8;
   --fod-accent: #6d28d9;
   --fod-accent-ink: #ffffff;
+  --fod-lunar-bg: #4338ca;
+  --fod-lunar-ink: #ffffff;
   --fod-success: #4ade80;
   --fod-danger: #f87171;
 }
@@ -193,6 +239,15 @@ html[data-design="04-eventbrite"][data-theme="dark"] .eb-footer {
   color: #f1f5f9;
 }
 
+html[data-design="04-eventbrite"][data-theme="dark"] .eb-org-avatar {
+  background-color: #222630;
+  color: #f1f5f9;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .eb-text-link {
+  color: #93c5fd;
+}
+
 html[data-design="08-sg-nabytek"][data-theme="dark"] .day-tag,
 html[data-design="08-sg-nabytek"][data-theme="dark"] .spec-card,
 html[data-design="08-sg-nabytek"][data-theme="dark"] .stage-card,
@@ -249,6 +304,8 @@ html[data-native-theme="dark"][data-theme="light"] {
   --fod-text: #111827;
   --fod-muted: #4b5563;
   --fod-accent-ink: #ffffff;
+  --fod-lunar-bg: #4338ca;
+  --fod-lunar-ink: #ffffff;
 }
 
 html[data-native-theme="dark"][data-theme="light"] body,
@@ -331,6 +388,35 @@ html[data-design="11-zzz"][data-theme="light"] .lang-btn {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 8px;
+  z-index: 10000;
+  padding: 10px 16px;
+  min-height: 44px;
+  border-radius: var(--fod-radius-sm);
+  background: var(--fod-accent);
+  color: var(--fod-accent-ink);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  left: 12px;
+  display: inline-flex;
+  align-items: center;
+  outline: 2px solid var(--fod-text);
+  outline-offset: 2px;
+}
+
+.bottom-nav-dock .dock-label {
+  font-size: 11px;
+  line-height: 1.15;
 }
 
 .fod-theme-btn {
@@ -602,10 +688,11 @@ html[data-design="11-zzz"] .rail-footer .fod-theme-btn .theme-label {
   color: var(--fod-text);
 }
 
-.fod-btn-accent {
-  background: var(--fod-lunar);
-  border-color: var(--fod-lunar);
-  color: #ffffff;
+.fod-btn-accent,
+#quick-lunar-btn {
+  background: var(--fod-lunar-bg, var(--fod-lunar));
+  border-color: var(--fod-lunar-bg, var(--fod-lunar));
+  color: var(--fod-lunar-ink, #ffffff);
 }
 
 .fod-btn-ghost {
@@ -739,6 +826,9 @@ html[data-design="11-zzz"] .rail-footer .fod-theme-btn .theme-label {
 }
 
 .fod-slot-artist {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
   font-weight: 700;
   color: var(--fod-text);
   text-decoration: none;
@@ -814,6 +904,9 @@ html[data-design="11-zzz"] .rail-footer .fod-theme-btn .theme-label {
 }
 
 .fod-card-title a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
   color: inherit;
   text-decoration: none;
 }
@@ -877,7 +970,11 @@ html[data-design="11-zzz"] .rail-footer .fod-theme-btn .theme-label {
   color: var(--fod-muted);
 }
 
-.fod-breadcrumbs a {
+.fod-breadcrumbs a,
+.fod-inline-artist-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
   color: var(--fod-text);
 }
 
@@ -1362,4 +1459,33 @@ html[data-design="11-zzz"] .rail-footer .fod-theme-btn .theme-label {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+/* =========================================================================
+   8. MOBILE TOUCH TARGETS & REDUCED MOTION
+   ========================================================================= */
+@media (max-width: 768px) {
+  .fod-btn,
+  .fod-btn-sm,
+  .fod-chip,
+  .fod-theme-btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .fod-btn-sm {
+    padding: 8px 12px;
+    font-size: 0.875rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

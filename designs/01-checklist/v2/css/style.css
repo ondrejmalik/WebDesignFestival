@@ -105,11 +105,16 @@ a {
   transition: background-color 0.15s ease, color 0.15s ease;
 }
 
-.nav-link:hover,
+.nav-link:hover {
+  color: var(--text-strong);
+  background-color: var(--border-color);
+}
+
 .nav-link:focus-visible {
   color: var(--text-strong);
   background-color: var(--border-color);
-  outline: none;
+  outline: 2px solid var(--text-strong);
+  outline-offset: 2px;
 }
 
 .nav-link.active {
@@ -133,10 +138,14 @@ a {
   transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
-.lang-btn:hover,
+.lang-btn:hover {
+  border-color: var(--text-primary);
+}
+
 .lang-btn:focus-visible {
   border-color: var(--text-primary);
-  outline: none;
+  outline: 2px solid var(--text-strong);
+  outline-offset: 2px;
 }
 
 /* Hero & Page Head */
@@ -1009,5 +1018,38 @@ a {
     min-height: 44px;
     padding: 8px 16px;
     font-size: 14px;
+  }
+}
+
+.brand,
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+}
+
+.bottom-nav-dock .dock-label {
+  font-size: 11px;
+  line-height: 1.15;
+}
+
+html[data-design="01-checklist"][data-theme="dark"] .nav-link {
+  color: #cbd5e1;
+}
+
+html[data-design="01-checklist"][data-theme="dark"] .nav-link.active {
+  color: #ffffff;
+  background-color: #222630;
+  border-color: #3f4758;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

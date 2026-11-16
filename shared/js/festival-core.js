@@ -192,6 +192,12 @@
     document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('is-hidden', isCs));
     document.querySelectorAll('.lang-cs').forEach(el => el.classList.toggle('is-hidden', !isCs));
 
+    document.querySelectorAll('.skip-link').forEach(el => {
+      const existingKey = el.getAttribute('data-i18n');
+      if (existingKey && Object.prototype.hasOwnProperty.call(dict, existingKey)) return;
+      el.textContent = isCs ? 'Přeskočit na hlavní obsah' : 'Skip to main content';
+    });
+
     // Translate header/footer nav links that do not already have a valid dict key
     document.querySelectorAll('header nav a, footer a, .side-rail nav a').forEach(a => {
       if (a.classList.contains('brand') || a.classList.contains('eb-logo') || a.classList.contains('rail-brand')) return;
@@ -234,8 +240,19 @@
           btn.textContent = isCs ? 'EN' : 'CZ';
         }
       }
-      btn.setAttribute('aria-label', isCs ? 'Switch to English' : 'Přepnout do češtiny');
-      btn.setAttribute('title', isCs ? 'Switch to English' : 'Přepnout do češtiny');
+      const visibleText = (btn.innerText || btn.textContent || '').replace(/\s+/g, ' ').trim();
+      let a11yLabel;
+      if (optPills.length > 0 || visibleText.includes('/')) {
+        a11yLabel = `${visibleText || 'CZ / EN'} - ${isCs ? 'Přepnout jazyk' : 'Switch language'}`;
+      } else if (visibleText.toUpperCase() === 'EN') {
+        a11yLabel = 'EN - Switch to English';
+      } else if (visibleText.toUpperCase() === 'CZ') {
+        a11yLabel = 'CZ - Přepnout do češtiny';
+      } else {
+        a11yLabel = `${visibleText ? visibleText + ' - ' : ''}${isCs ? 'Switch to English' : 'Přepnout do češtiny'}`;
+      }
+      btn.setAttribute('aria-label', a11yLabel);
+      btn.setAttribute('title', a11yLabel);
     });
 
     updateThemeButtons(getFestivalTheme());
@@ -675,6 +692,8 @@
   };
 
   function boot() {
+    const mainEl = document.querySelector('main');
+    if (mainEl && !mainEl.id) mainEl.id = 'main-content';
     applyTheme(getFestivalTheme());
     installLanguageBridge();
     injectHeaderControls();

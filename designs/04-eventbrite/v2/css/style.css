@@ -6,8 +6,8 @@
   --eb-ink-primary: #161719;
   --eb-ink-secondary: #3d3f43;
   --eb-ink-muted: #696c71;
-  --eb-accent-orange: #f05537;
-  --eb-accent-orange-hover: #d14124;
+  --eb-accent-orange: #c93b1f;
+  --eb-accent-orange-hover: #a82d15;
   --eb-accent-indigo: #3659e3;
   --eb-accent-green: #026b23;
   --eb-border: #e4e4e7;
@@ -129,11 +129,35 @@ a {
   }
 }
 
+@media (min-width: 768px) and (max-width: 1320px) {
+  .eb-header-inner {
+    gap: 8px;
+  }
+
+  .eb-logo-text {
+    font-size: 14px;
+  }
+
+  .eb-nav {
+    gap: 12px;
+  }
+
+  .eb-nav-link {
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .eb-header-actions {
+    gap: 6px;
+  }
+}
+
 .eb-nav-link {
   font-size: 14px;
   font-weight: 500;
   color: var(--eb-ink-secondary);
   padding: 8px 4px;
+  white-space: nowrap;
   border-bottom: 2px solid transparent;
   transition: color 0.15s ease, border-color 0.15s ease;
 }
@@ -1233,5 +1257,41 @@ a {
   .fav-toggle-btn {
     min-height: 44px;
     width: 100%;
+  }
+}
+
+.eb-footer-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+}
+
+.bottom-nav-dock .dock-label {
+  font-size: 11px;
+  line-height: 1.15;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .eb-nav-link {
+  color: #cbd5e1;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .eb-nav-link:hover,
+html[data-design="04-eventbrite"][data-theme="dark"] .eb-nav-link.is-active {
+  color: #ff8a70;
+  border-bottom-color: #ff8a70;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .eb-event-date-top {
+  color: #ff8a70;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

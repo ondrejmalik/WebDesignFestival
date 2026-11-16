@@ -39,6 +39,8 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: var(--bg-page);
+  color: var(--ink-primary);
   overflow-x: hidden;
 }
 
@@ -582,7 +584,7 @@ a {
   padding: 1px 6px;
   border-radius: 4px;
   background-color: var(--bg-muted);
-  color: var(--ink-muted);
+  color: #52525b;
   font-size: 0.75rem;
   font-weight: 600;
 }
@@ -1195,4 +1197,48 @@ a {
   font-size: 0.9375rem;
   color: var(--ink-secondary);
   max-width: 40ch;
+}
+
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+}
+
+.bottom-nav-dock .dock-label {
+  font-size: 11px;
+  line-height: 1.15;
+}
+
+html[data-design="10-wooting"][data-theme="dark"] .site-header {
+  background-color: rgba(17, 19, 24, 0.94);
+}
+
+html[data-design="10-wooting"][data-theme="dark"] .nav-link {
+  color: #cbd5e1;
+}
+
+html[data-design="10-wooting"][data-theme="dark"] .nav-link.is-active {
+  color: #fbbf24;
+  background-color: #222630;
+}
+
+html[data-design="10-wooting"][data-theme="dark"] .origin-tag {
+  background-color: #222630;
+  color: #cbd5e1;
+}
+
+html[data-design="10-wooting"][data-theme="dark"] .bottom-nav-dock {
+  background-color: rgba(17, 19, 24, 0.94);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

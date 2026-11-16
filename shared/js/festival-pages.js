@@ -847,21 +847,27 @@
     const core = C();
     const data = D();
     let activeDay = 'day1';
+    let activeStage = window.location.hash === '#stage-lunar' ? 'lunar' : 'solar';
 
-    function updateStageTabs() {
+    function updateStageTabs(shouldScroll) {
       const hash = window.location.hash;
+      if (hash === '#stage-lunar') activeStage = 'lunar';
+      else if (hash === '#stage-solar') activeStage = 'solar';
+
       const tabSolar = document.getElementById('tab-stage-solar');
       const tabLunar = document.getElementById('tab-stage-lunar');
       const secSolar = document.getElementById('stage-solar');
       const secLunar = document.getElementById('stage-lunar');
       if (!tabSolar || !tabLunar) return;
 
-      const isLunar = hash === '#stage-lunar';
-      const isSolar = hash === '#stage-solar';
+      const isLunar = activeStage === 'lunar';
+      const isSolar = !isLunar;
       tabSolar.classList.toggle('is-active', isSolar);
       tabLunar.classList.toggle('is-active', isLunar);
+      tabSolar.setAttribute('aria-selected', String(isSolar));
+      tabLunar.setAttribute('aria-selected', String(isLunar));
 
-      const target = isLunar ? secLunar : (isSolar ? secSolar : null);
+      const target = shouldScroll ? (isLunar ? secLunar : secSolar) : (hash === '#stage-lunar' ? secLunar : (hash === '#stage-solar' ? secSolar : null));
       if (target) {
         setTimeout(() => {
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -903,8 +909,10 @@
 
       root.innerHTML = `
         <nav class="fod-filter-row fod-stage-tabs" aria-label="${isCs ? 'Přepínač pódií' : 'Stage Tabs'}">
-          <a href="#stage-solar" id="tab-stage-solar" class="fod-chip">${core.escapeHtml(solar.name)} (4,500)</a>
-          <a href="#stage-lunar" id="tab-stage-lunar" class="fod-chip">${core.escapeHtml(lunar.name)} (1,800 · ${isCs ? 'Kryté' : 'Covered'})</a>
+          <div class="fod-filter-row" role="tablist" aria-label="${isCs ? 'Pódia' : 'Stages'}">
+            <a href="#stage-solar" id="tab-stage-solar" role="tab" aria-controls="stage-solar" aria-selected="${activeStage === 'solar'}" class="fod-chip ${activeStage === 'solar' ? 'is-active' : ''}">${core.escapeHtml(solar.name)} (4,500)</a>
+            <a href="#stage-lunar" id="tab-stage-lunar" role="tab" aria-controls="stage-lunar" aria-selected="${activeStage === 'lunar'}" class="fod-chip ${activeStage === 'lunar' ? 'is-active' : ''}">${core.escapeHtml(lunar.name)} (1,800 · ${isCs ? 'Kryté' : 'Covered'})</a>
+          </div>
           <div class="fod-stage-day-switch" role="group" aria-label="${isCs ? 'Den náhledu' : 'Preview Day'}">
             ${data.DAYS.map(d => `
               <button type="button" class="fod-chip ${activeDay === d.key ? 'is-active' : ''}" data-stage-day="${d.key}">
@@ -971,7 +979,31 @@
         });
       });
 
-      updateStageTabs();
+      const tabSolarEl = document.getElementById('tab-stage-solar');
+      const tabLunarEl = document.getElementById('tab-stage-lunar');
+      [
+        [tabSolarEl, 'solar', '#stage-solar', tabLunarEl],
+        [tabLunarEl, 'lunar', '#stage-lunar', tabSolarEl]
+      ].forEach(([tabEl, stageKey, hashVal, otherTab]) => {
+        if (!tabEl) return;
+        tabEl.addEventListener('click', e => {
+          e.preventDefault();
+          activeStage = stageKey;
+          if (window.location.hash !== hashVal) {
+            history.replaceState(null, '', hashVal);
+          }
+          updateStageTabs(true);
+        });
+        tabEl.addEventListener('keydown', e => {
+          if ((e.key === 'ArrowRight' || e.key === 'ArrowLeft') && otherTab) {
+            e.preventDefault();
+            otherTab.focus();
+            otherTab.click();
+          }
+        });
+      });
+
+      updateStageTabs(false);
     }
 
     root.addEventListener('click', e => {
@@ -981,7 +1013,7 @@
       render();
     });
 
-    window.addEventListener('hashchange', updateStageTabs);
+    window.addEventListener('hashchange', () => updateStageTabs(true));
     window.addEventListener('languageChanged', render);
     window.addEventListener('favoritesUpdated', render);
     render();
@@ -1270,7 +1302,7 @@
           `DTSTART;TZID=Europe/Prague:${fmtDt(dayKey, s)}`,
           `DTEND;TZID=Europe/Prague:${fmtDt(dayKey, e || s)}`,
           `SUMMARY:${p.name || p.artist} - Festival of Darkness 2`,
-          `LOCATION:${p.stage}, Kutna Hora`,
+          `LOCATION:${p.stage}, Kutná Hora`,
           `DESCRIPTION:${p.genre}`,
           'END:VEVENT'
         );
