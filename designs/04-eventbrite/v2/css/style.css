@@ -914,3 +914,200 @@ a {
 .eb-footer-links a:hover {
   color: var(--eb-accent-orange);
 }
+
+/* === Responsive Mobile Bottom Navigation Dock === */
+/* Bottom Navigation Dock & Mobile Overrides for 04-eventbrite */
+.bottom-nav-dock {
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .bottom-nav-dock {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: calc(74px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .eb-nav {
+    display: none !important;
+  }
+
+  .eb-header-inner {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .eb-logo {
+    max-width: calc(100% - 130px);
+  }
+
+  .eb-logo-text {
+    font-size: 14px;
+  }
+
+  .eb-header-actions {
+    flex-shrink: 0;
+    gap: 6px;
+  }
+
+  .eb-lang-btn {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+
+  .eb-btn-sm {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .bottom-nav-dock {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: calc(64px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    background-color: var(--eb-bg);
+    border-top: 1px solid var(--eb-border);
+    z-index: 100;
+    box-shadow: 0 -4px 16px rgba(22, 23, 25, 0.08);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .bottom-dock-item {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 4px 2px;
+    color: var(--eb-ink-muted);
+    font-size: 10px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.15s ease;
+  }
+
+  .bottom-dock-item .dock-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  .bottom-dock-item .dock-label {
+    font-size: 10px;
+    line-height: 1;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .bottom-dock-item:hover,
+  .bottom-dock-item.is-active,
+  .bottom-dock-item[aria-current="page"] {
+    color: var(--eb-accent-orange);
+  }
+
+  .bottom-dock-home {
+    color: var(--eb-accent-orange);
+    font-weight: 600;
+  }
+
+  .bottom-dock-item:focus-visible {
+    outline: 2px solid var(--eb-accent-orange);
+    outline-offset: -2px;
+  }
+
+  /* Prevent horizontal overflow across all grids and cards at 375px */
+  .eb-container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .eb-two-col {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .eb-meta-grid,
+  .eb-stages-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .eb-slot-row,
+  .eb-schedule-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .eb-schedule-card {
+    display: flex;
+  }
+
+  .eb-slot-time {
+    min-width: 0;
+  }
+
+  .eb-organizer-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .eb-organizer-bar .eb-btn {
+    width: 100%;
+  }
+
+  .eb-hero-banner {
+    padding: 20px 16px;
+  }
+
+  .eb-poster-display {
+    font-size: 26px;
+  }
+
+  .eb-event-title {
+    font-size: 28px;
+  }
+
+  .eb-jump-bar {
+    gap: 6px;
+  }
+
+  .eb-jump-pill {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  html,
+  body {
+    overflow-x: clip;
+  }
+
+  img,
+  svg,
+  table {
+    max-width: 100%;
+  }
+}

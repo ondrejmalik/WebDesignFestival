@@ -60,7 +60,14 @@ const FESTIVAL_I18N = {
     "program.day2_heading": "Saturday, July 11, 2026",
     "program.day3_tag": "Day 3",
     "program.day3_heading": "Sunday, July 12, 2026",
-    "program.sets_shown": "5 highlighted sets"
+    "program.sets_shown": "5 highlighted sets",
+    "dock_artists": "Artists",
+    "dock_stages": "Stages",
+    "dock_info": "Info",
+    "dock_home": "Home",
+    "dock_program": "Program",
+    "dock_plan": "My Plan",
+    "dock_search": "Search"
   },
   cs: {
     "brand.short": "Festival of Darkness 2",
@@ -122,7 +129,14 @@ const FESTIVAL_I18N = {
     "program.day2_heading": "Sobota 11. července 2026",
     "program.day3_tag": "Den 3",
     "program.day3_heading": "Neděle 12. července 2026",
-    "program.sets_shown": "5 vybraných setů"
+    "program.sets_shown": "5 vybraných setů",
+    "dock_artists": "Umělci",
+    "dock_stages": "Scény",
+    "dock_info": "Info",
+    "dock_home": "Domů",
+    "dock_program": "Program",
+    "dock_plan": "Můj plán",
+    "dock_search": "Hledat"
   }
 };
 

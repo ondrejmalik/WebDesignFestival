@@ -1,96 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Solar Flare — Festival of Darkness 2</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body class="wand-body">
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="index.html" class="brand" aria-label="Festival of Darkness 2">
-        <span class="brand-mark" aria-hidden="true"></span>
-        <span class="brand-name">Festival of Darkness <span class="brand-num">2</span></span>
-      </a>
-
-      <nav class="main-nav" aria-label="Primary">
-        <a href="index.html" class="nav-link" data-i18n="nav_home">Overview</a>
-        <a href="program.html" class="nav-link" data-i18n="nav_program">Program</a>
-        <a href="artists.html" class="nav-link is-active">Artists</a>
-        <a href="stages.html" class="nav-link" data-i18n="nav_stages">Stages</a>
-      </nav>
-
-      <div class="header-actions">
-        <button type="button" class="lang-btn" id="lang-toggle" onclick="toggleFestivalLang()" aria-label="Switch language">
-          <span class="lang-code" data-i18n="lang_switch">CZ</span>
-        </button>
-        <a href="program.html" class="btn btn-primary btn-sm" data-i18n="cta_schedule">Full Schedule</a>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <section class="page-hero">
-      <div class="container">
-        <div class="pill-badge" style="margin-bottom: 16px;">
-          <span class="status-dot"></span>
-          <span>Friday, July 10 · 22:00 – 23:10 · Solar Horizon Stage</span>
-        </div>
-        <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 16px; margin-bottom: 12px;">
-          <h1 class="page-title" style="margin: 0;">Solar Flare</h1>
-          <span class="origin-tag" style="font-size: 13px; padding: 4px 10px;">DE</span>
-        </div>
-        <p class="page-lead">
-          Nu-Disco / Funk headliner fusing hypnotic analog basslines, shimmering synth melodies, and energetic live instrumentation on the main outdoor stage.
-        </p>
-        <div class="day-nav" style="margin-top: 24px;">
-          <a href="artists.html" class="day-pill">← Back to Artists</a>
-          <a href="program.html" class="day-pill">View Timetable</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container" style="display: grid; grid-template-columns: 1fr; gap: 32px;">
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;">
-          <div class="hud-panel" style="padding: 24px;">
-            <span class="hud-label">PERFORMANCE METADATA</span>
-            <h3 style="margin: 12px 0 8px; font-size: 20px; font-weight: 500;">Set Details</h3>
-            <ul class="stage-meta-list" style="margin-top: 12px;">
-              <li><strong>Stage:</strong> Solar Horizon Stage</li>
-              <li><strong>Date:</strong> Friday, 10 July 2026</li>
-              <li><strong>Time:</strong> 22:00 – 23:10 (70 min set)</li>
-              <li><strong>Origin:</strong> Germany (DE)</li>
-            </ul>
-          </div>
-
-          <div class="hud-panel" style="padding: 24px;">
-            <span class="hud-label">ABOUT THE ARTIST</span>
-            <h3 style="margin: 12px 0 8px; font-size: 20px; font-weight: 500;">Bio & Sound</h3>
-            <p style="margin: 0; color: var(--text-secondary); font-size: 15px; line-height: 1.6;">
-              Solar Flare is renowned across European festival circuits for bridging retro-futuristic disco grooves with heavyweight modern sound design. Expect an immersive twilight performance as the main amphitheater transitions into night.
-            </p>
-          </div>
-        </div>
-
-        <div class="section-alt" style="padding: 32px; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle);">
-          <h2 style="margin: 0 0 16px; font-size: 22px; font-weight: 500;">Related Headliners on Day 1</h2>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px;">
-            <a href="artist-detail.html?id=perf-09" class="artist-tile" style="display: block;">
-              <div class="artist-top">
-                <span class="artist-day">Fri 10 Jul · 23:30</span>
-                <span class="artist-origin">FR</span>
-              </div>
-              <h3 class="artist-name" style="font-size: 18px;">Starlight Odyssey</h3>
-              <p class="artist-genre">Electronic Indie</p>
-            </a>
-            <a href="artist-detail.html?id=perf-10" class="artist-tile" style="display: block;">
-              <div class="artist-top">
-                <span class="artist-```html
 <!-- v2/artist-detail.html -->
 <!DOCTYPE html>
 <html lang="en">
@@ -257,7 +164,36 @@
       </div>
     </div>
   </footer>
-
-  <script src="js/lang.js" defer></script>
+  <nav class="bottom-nav-dock" aria-label="Mobile navigation">
+    <a href="artists.html" data-page="artists.html" class="bottom-dock-item active is-active" aria-current="page">
+      <span class="dock-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></span>
+      <span class="dock-label" data-i18n="dock_artists">Artists</span>
+    </a>
+    <a href="stages.html" data-page="stages.html" class="bottom-dock-item">
+      <span class="dock-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"></path><path d="M20 12v8H4v-8"></path><path d="m15 5-3-3-3 3"></path><path d="M12 2v10"></path></svg></span>
+      <span class="dock-label" data-i18n="dock_stages">Stages</span>
+    </a>
+    <a href="practical-info.html" data-page="practical-info.html" class="bottom-dock-item">
+      <span class="dock-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></span>
+      <span class="dock-label" data-i18n="dock_info">Info</span>
+    </a>
+    <a href="index.html" data-page="index.html" class="bottom-dock-item bottom-dock-home">
+      <span class="dock-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></span>
+      <span class="dock-label" data-i18n="dock_home">Home</span>
+    </a>
+    <a href="program.html" data-page="program.html" class="bottom-dock-item">
+      <span class="dock-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></span>
+      <span class="dock-label" data-i18n="dock_program">Program</span>
+    </a>
+    <a href="my-schedule.html" data-page="my-schedule.html" class="bottom-dock-item">
+      <span class="dock-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></span>
+      <span class="dock-label" data-i18n="dock_plan">My Plan</span>
+    </a>
+    <a href="search.html" data-page="search.html" class="bottom-dock-item">
+      <span class="dock-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
+      <span class="dock-label" data-i18n="dock_search">Search</span>
+    </a>
+  </nav>
+<script src="js/lang.js" defer></script>
 </body>
 </html>

@@ -46,7 +46,14 @@ const FESTIVAL_I18N = {
     day2_sub: "Shoegaze, post-punk revival, and peak-time dome techno into early morning.",
     day3_heading: "Day 3 - Sunday, 12 July 2026",
     day3_sub: "Chamber pop, psych rock, melodic techno, and closing orchestral electronics.",
-    footer_loc: "Kutná Hora, Czech Republic · 10-12 Jul 2026"
+    footer_loc: "Kutná Hora, Czech Republic · 10-12 Jul 2026",
+    dock_artists: "Artists",
+    dock_stages: "Stages",
+    dock_info: "Info",
+    dock_home: "Home",
+    dock_program: "Program",
+    dock_plan: "My Plan",
+    dock_search: "Search"
   },
   cs: {
     nav_home: "Přehled",
@@ -94,7 +101,14 @@ const FESTIVAL_I18N = {
     day2_sub: "Shoegaze, post-punk revival a vrcholné techno v kupoli až do brzkého rána.",
     day3_heading: "Den 3 - Neděle 12. července 2026",
     day3_sub: "Chamber pop, psych rock, melodické techno a závěrečná orchestrální elektronika.",
-    footer_loc: "Kutná Hora, Česká republika · 10.-12. 7. 2026"
+    footer_loc: "Kutná Hora, Česká republika · 10.-12. 7. 2026",
+    dock_artists: "Umělci",
+    dock_stages: "Scény",
+    dock_info: "Info",
+    dock_home: "Domů",
+    dock_program: "Program",
+    dock_plan: "Můj plán",
+    dock_search: "Hledat"
   }
 };
 

@@ -42,7 +42,14 @@
       'days.friFull': 'Friday, 10 July',
       'days.satFull': 'Saturday, 11 July',
       'days.sunFull': 'Sunday, 12 July',
-      'footer.location': 'Kutná Hora, Czech Republic - 10-12 July 2026'
+      'footer.location': 'Kutná Hora, Czech Republic - 10-12 July 2026',
+      'dock_artists': 'Artists',
+      'dock_stages': 'Stages',
+      'dock_info': 'Info',
+      'dock_home': 'Home',
+      'dock_program': 'Program',
+      'dock_plan': 'My Plan',
+      'dock_search': 'Search'
     },
     cs: {
       'nav.overview': 'Přehled',
@@ -83,7 +90,14 @@
       'days.friFull': 'Pátek, 10. července',
       'days.satFull': 'Sobota, 11. července',
       'days.sunFull': 'Neděle, 12. července',
-      'footer.location': 'Kutná Hora, Česká republika - 10.–12. července 2026'
+      'footer.location': 'Kutná Hora, Česká republika - 10.–12. července 2026',
+      'dock_artists': 'Umělci',
+      'dock_stages': 'Scény',
+      'dock_info': 'Info',
+      'dock_home': 'Domů',
+      'dock_program': 'Program',
+      'dock_plan': 'Můj plán',
+      'dock_search': 'Hledat'
     }
   };
 

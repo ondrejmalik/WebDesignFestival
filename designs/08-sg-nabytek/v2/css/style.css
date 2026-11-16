@@ -694,3 +694,154 @@ p {
     gap: 40px;
   }
 }
+
+/* === Responsive Mobile Bottom Navigation Dock === */
+@media (min-width: 769px) {
+  .bottom-nav-dock {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .bottom-nav-dock {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 100;
+    background-color: var(--color-bg);
+    border-top: 1px solid var(--color-border);
+    box-shadow: 0 -4px 16px rgba(39, 75, 121, 0.08);
+    backdrop-filter: blur(8px);
+    background-color: rgba(255, 255, 255, 0.95);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  body {
+    padding-bottom: calc(74px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .main-nav {
+    display: none;
+  }
+
+  .header-main-inner {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .brand-title {
+    font-size: 16px;
+  }
+
+  .brand-sub {
+    display: none;
+  }
+
+  .brand-mark {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .bottom-dock-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 56px;
+    min-width: 0;
+    flex: 1 1 0;
+    padding: 6px 2px;
+    color: var(--color-navy-muted);
+    text-decoration: none;
+    transition: color 0.15s ease, background-color 0.15s ease;
+    position: relative;
+  }
+
+  .bottom-dock-item .dock-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    margin-bottom: 3px;
+  }
+
+  .bottom-dock-item svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+  }
+
+  .bottom-dock-item .dock-label {
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  .bottom-dock-item:hover,
+  .bottom-dock-item:focus,
+  .bottom-dock-item.active,
+  .bottom-dock-item[aria-current="page"] {
+    color: var(--color-magenta);
+  }
+
+  .bottom-dock-home {
+    background-color: var(--color-surface-soft);
+    border-top: 3px solid var(--color-magenta);
+    margin-top: -6px;
+    padding-top: 9px;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  }
+
+  .hero-grid,
+  .stages-grid,
+  .highlights-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bottom-dock-item .dock-label {
+    font-size: 9px;
+  }
+  
+  .bottom-dock-item {
+    padding: 6px 1px;
+  }
+}
+
+@media (max-width: 768px) {
+  html,
+  body {
+    overflow-x: clip;
+  }
+
+  img,
+  svg,
+  table {
+    max-width: 100%;
+  }
+}

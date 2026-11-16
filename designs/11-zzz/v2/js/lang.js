@@ -62,7 +62,14 @@
       day3_heading: "Day 3: Sunday, 12 July 2026",
       day3_sub: "Closing night headliners, melodic techno, and orchestral finale.",
       sets_six: "6 featured sets",
-      footer_info: "10-12 Jul 2026 / Kutná Hora, Czech Republic"
+      footer_info: "10-12 Jul 2026 / Kutná Hora, Czech Republic",
+      dock_artists: "Artists",
+      dock_stages: "Stages",
+      dock_info: "Info",
+      dock_home: "Home",
+      dock_program: "Program",
+      dock_plan: "My Plan",
+      dock_search: "Search"
     },
     cs: {
       lang_code: "EN",
@@ -121,7 +128,14 @@
       day3_heading: "Den 3: Neděle 12. července 2026",
       day3_sub: "Závěreční headlineři, melodické techno a orchestrální finále.",
       sets_six: "6 vybraných setů",
-      footer_info: "10.–12. 7. 2026 / Kutná Hora, Česká republika"
+      footer_info: "10.–12. 7. 2026 / Kutná Hora, Česká republika",
+      dock_artists: "Umělci",
+      dock_stages: "Scény",
+      dock_info: "Info",
+      dock_home: "Domů",
+      dock_program: "Program",
+      dock_plan: "Můj plán",
+      dock_search: "Hledat"
     }
   };
 

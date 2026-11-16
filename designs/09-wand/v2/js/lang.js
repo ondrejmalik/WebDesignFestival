@@ -66,7 +66,14 @@
       day2_kicker: "DAY 02 · SATURDAY",
       day2_heading: "11 July 2026",
       day3_kicker: "DAY 03 · SUNDAY",
-      day3_heading: "12 July 2026"
+      day3_heading: "12 July 2026",
+      dock_artists: "Artists",
+      dock_stages: "Stages",
+      dock_info: "Info",
+      dock_home: "Home",
+      dock_program: "Program",
+      dock_plan: "My Plan",
+      dock_search: "Search"
     },
     cs: {
       lang_switch: "EN",
@@ -129,7 +136,14 @@
       day2_kicker: "DEN 02 · SOBOTA",
       day2_heading: "11. července 2026",
       day3_kicker: "DEN 03 · NEDĚLE",
-      day3_heading: "12. července 2026"
+      day3_heading: "12. července 2026",
+      dock_artists: "Umělci",
+      dock_stages: "Scény",
+      dock_info: "Info",
+      dock_home: "Domů",
+      dock_program: "Program",
+      dock_plan: "Můj plán",
+      dock_search: "Hledat"
     }
   };
 
