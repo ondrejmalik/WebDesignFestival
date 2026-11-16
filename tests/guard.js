@@ -21,13 +21,30 @@ else if (args[0] === '--changed') {
 } else designs = args.map(a => a.replace(/\\/g, '/').replace(/\/$/, ''));
 if (!designs.length) { console.error('Usage: node tests/guard.js designs/NN-name | --changed | --all'); process.exit(2); }
 let bad = [];
+let hasPlaywright = true;
+try {
+  require.resolve('playwright');
+} catch (_) {
+  hasPlaywright = false;
+}
+
 for (const d of designs) {
   console.log('\n######## ' + d + ' ########');
   const run = (...x) => { const r = spawnSync('node', x, { cwd: root, encoding: 'utf8', maxBuffer: 1 << 26 }); const out = (r.stdout || '') + (r.stderr || '');
     console.log(process.argv.includes('--verbose') ? out : out.split('\n').filter(l => /FAIL|WARN|Error/.test(l)).join('\n')); return r; };
   const a = run('tests/ci_smoke_test.js', '--root', d + (fs.existsSync(path.join(root, d, 'v2', 'index.html')) ? '/v2' : '/web')); console.log('  smoke: ' + (a.status ? 'FAILED' : 'ok'));
   const b = run('tests/lang_test.js', d); console.log('  lang:  ' + (b.status ? 'FAILED' : 'ok'));
-  if (a.status !== 0 || b.status !== 0) bad.push(d + (a.status ? ' [smoke]' : '') + (b.status ? ' [lang]' : ''));
+  let e2eFailed = false;
+  if (hasPlaywright && !process.argv.includes('--skip-e2e')) {
+    const e2eArgs = ['tests/e2e/run-e2e.js', d, '--fast'];
+    if (process.argv.includes('--verbose')) e2eArgs.push('--verbose');
+    const c = run(...e2eArgs);
+    e2eFailed = c.status !== 0;
+    console.log('  e2e:   ' + (e2eFailed ? 'FAILED' : 'ok'));
+  } else {
+    console.log('  e2e:   skipped (' + (hasPlaywright ? '--skip-e2e' : 'playwright not installed') + ')');
+  }
+  if (a.status !== 0 || b.status !== 0 || e2eFailed) bad.push(d + (a.status ? ' [smoke]' : '') + (b.status ? ' [lang]' : '') + (e2eFailed ? ' [e2e]' : ''));
 }
 if (bad.length) { console.error('\nGUARD FAILED: ' + bad.join(', ')); process.exit(1); }
 console.log('\nGUARD PASSED: ' + designs.join(', '));
