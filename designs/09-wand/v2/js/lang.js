@@ -133,18 +133,20 @@
     }
   };
 
-  function formatCzPlural(count, forms) {
+  function formatCzPlural(count, one, few, many) {
     var n = Math.abs(Number(count)) || 0;
-    var one = forms && forms.one ? forms.one : "set";
-    var few = forms && forms.few ? forms.few : "sety";
-    var many = forms && forms.many ? forms.many : "setů";
-    var word = many;
-    if (n === 1) {
-      word = one;
-    } else if (n >= 2 && n <= 4) {
-      word = few;
+    if (one && typeof one === "object") {
+      few = one.few;
+      many = one.many;
+      one = one.one;
     }
-    return n + " " + word;
+    var word = many || "setů";
+    if (n === 1) {
+      word = one || "set";
+    } else if (n >= 2 && n <= 4) {
+      word = few || "sety";
+    }
+    return few && !many ? n + " " + word : word;
   }
 
   function getFestivalLang() {
