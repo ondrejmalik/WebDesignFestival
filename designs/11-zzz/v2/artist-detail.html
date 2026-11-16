@@ -36,11 +36,24 @@
           </svg>
           <span data-i18n="nav_program">Program</span>
         </a>
-        <a href="artists.html" class="rail-link active is-active" aria-current="page">Artists</a>
-        <a href="stages.html" class="rail-link">Stages</a>
-        <a href="practical-info.html" class="rail-link">Info</a>
-        <a href="my-schedule.html" class="rail-link">My Schedule</a>
-        <a href="search.html" class="rail-link">Search</a>
+        <a href="artists.html" class="rail-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/><circle cx="12" cy="12" r="10"/>
+          </svg>
+          <span>Artists &amp; Stages</span>
+        </a>
+        <a href="practical-info.html" class="rail-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
+          </svg>
+          <span>Info</span>
+        </a>
+        <a href="tickets.html" class="rail-link rail-link-tickets">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/>
+          </svg>
+          <span>Tickets</span>
+        </a>
       </nav>
       <div class="rail-footer">
         <button type="button" class="lang-btn" id="lang-toggle" onclick="toggleFestivalLang()" aria-label="Switch language">
@@ -75,85 +88,114 @@
 
 
       <footer class="site-footer">
-        <div class="footer-left">
-          <span class="footer-brand">Festival of Darkness 2</span>
-          <span class="footer-meta" data-i18n="footer_info">10-12 Jul 2026 / Kutná Hora, Czech Republic</span>
+    <div class="fod-footer-inner">
+      <div class="fod-footer-top">
+        <div class="fod-footer-brand-col">
+          <div class="fod-footer-wordmark">
+            <span class="fod-wordmark-top">FESTIVAL</span>
+            <span class="fod-wordmark-main">TEMNOTY <span class="fod-wordmark-num">2</span></span>
+          </div>
+          <div class="fod-footer-meta-stack">
+            <p class="fod-footer-meta-line" data-i18n="fod_footer_dates">10-12 / 07.2026</p>
+            <p class="fod-footer-meta-line" data-i18n="fod_footer_venue">SEDLEC · KUTNÁ HORA</p>
+          </div>
         </div>
-        <nav class="footer-nav" aria-label="Footer navigation">
-          <a href="index.html" data-i18n="nav_home">Home</a>
-          <a href="program.html" data-i18n="nav_program">Program</a>
-        <a href="artists.html" aria-current="page">Artists</a>
-        <a href="stages.html">Stages</a>
-        <a href="practical-info.html">Info</a>
-        <a href="my-schedule.html">My Schedule</a>
-        <a href="search.html">Search</a>
-        </nav>
-      </footer>
+
+        <div class="fod-footer-col">
+          <p class="fod-footer-heading" id="fod-footer-nav-festival" data-i18n="fod_footer_col_festival">FESTIVAL</p>
+          <nav aria-labelledby="fod-footer-nav-festival">
+            <ul class="fod-footer-list">
+              <li><a href="index.html" data-i18n="fod_footer_nav_home">Overview</a></li>
+              <li><a href="program.html" data-i18n="fod_footer_nav_program">Program</a></li>
+              <li><a href="artists.html" data-i18n="fod_footer_nav_artists">Artists</a></li>
+              <li><a href="artist-detail.html" data-i18n="fod_footer_nav_artist_detail" aria-current="page">Artist Spotlight</a></li>
+              <li><a href="stages.html" data-i18n="fod_footer_nav_stages">Stages &amp; Grounds</a></li>
+              <li><a href="tickets.html" data-i18n="fod_footer_nav_tickets">Tickets &amp; Passes</a></li>
+              <li><a href="my-schedule.html" data-i18n="fod_footer_nav_schedule">My Schedule</a></li>
+              <li><a href="search.html" data-i18n="fod_footer_nav_search">Search</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="fod-footer-col">
+          <p class="fod-footer-heading" id="fod-footer-nav-info" data-i18n="fod_footer_col_info">PRACTICAL INFO</p>
+          <nav aria-labelledby="fod-footer-nav-info">
+            <ul class="fod-footer-list">
+              <li><a href="practical-info.html" data-i18n="fod_footer_info_all">Practical Info</a></li>
+              <li><a href="tickets.html" data-i18n="fod_footer_info_tickets">Tickets &amp; Entry</a></li>
+              <li><a href="practical-info.html#doprava" data-i18n="fod_footer_info_travel">Getting There</a></li>
+              <li><a href="practical-info.html#kemp" data-i18n="fod_footer_info_camp">Camping &amp; Stay</a></li>
+              <li><a href="practical-info.html#cashless" data-i18n="fod_footer_info_cashless">Cashless &amp; Grounds</a></li>
+              <li><a href="practical-info.html#faq" data-i18n="fod_footer_info_faq">FAQ</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="fod-footer-col">
+          <p class="fod-footer-heading" data-i18n="fod_footer_col_contact">CONTACT</p>
+          <address class="fod-footer-address">
+            <span data-i18n="fod_footer_addr_line1">Sedlec Festival Grounds</span>
+            <span data-i18n="fod_footer_addr_line2">284 03 Kutná Hora</span>
+            <a href="mailto:info@festivaltemnoty.cz" class="fod-footer-mail">info@festivaltemnoty.cz</a>
+            <a href="practical-info.html#parametry" class="fod-footer-ext" data-i18n="fod_footer_contact_link">Site &amp; Contact Info ↗</a>
+          </address>
+
+          <p class="fod-footer-heading fod-footer-follow-heading" id="fod-footer-social-label" data-i18n="fod_footer_follow">FOLLOW US</p>
+          <div class="fod-social-row" role="group" aria-labelledby="fod-footer-social-label">
+            <button type="button" class="fod-social-btn" data-social-platform="Facebook" data-i18n-title="fod_footer_social_fb" title="Facebook (placeholder)">
+              <svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              <span class="fod-sr-only" data-i18n="fod_footer_social_fb">Facebook (placeholder)</span>
+            </button>
+            <button type="button" class="fod-social-btn" data-social-platform="Instagram" data-i18n-title="fod_footer_social_ig" title="Instagram (placeholder)">
+              <svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+              <span class="fod-sr-only" data-i18n="fod_footer_social_ig">Instagram (placeholder)</span>
+            </button>
+            <button type="button" class="fod-social-btn" data-social-platform="Spotify" data-i18n-title="fod_footer_social_sp" title="Spotify (placeholder)">
+              <svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 10.5c2.7-.8 5.7-.6 8.2.5"/><path d="M8.8 13.5c2.2-.6 4.6-.4 6.6.4"/><path d="M9.6 16.4c1.6-.4 3.4-.3 4.9.3"/></svg>
+              <span class="fod-sr-only" data-i18n="fod_footer_social_sp">Spotify (placeholder)</span>
+            </button>
+            <button type="button" class="fod-social-btn" data-social-platform="YouTube" data-i18n-title="fod_footer_social_yt" title="YouTube (placeholder)">
+              <svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+              <span class="fod-sr-only" data-i18n="fod_footer_social_yt">YouTube (placeholder)</span>
+            </button>
+            <button type="button" class="fod-social-btn" data-social-platform="X" data-i18n-title="fod_footer_social_x" title="X (placeholder)">
+              <svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l16 16"/><path d="M20 4L4 20"/></svg>
+              <span class="fod-sr-only" data-i18n="fod_footer_social_x">X (placeholder)</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="fod-footer-bottom">
+        <div class="fod-footer-bottom-meta">
+          <p class="fod-footer-copy" data-i18n="fod_footer_copy">© 2026 Festival Temnoty 2 · Kutná Hora</p>
+        </div>
+        <button type="button" class="fod-footer-top-btn" data-footer-top="true" data-i18n="fod_footer_top">BACK TO TOP ↑</button>
+      </div>
+    </div>
+  </footer>
     </div>
   </div>
   <nav class="bottom-nav-dock" aria-label="Mobile navigation">
-    <a href="artists.html" data-page="artists.html" class="bottom-dock-item active is-active" aria-current="page">
-      <span class="dock-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-          <circle cx="9" cy="7" r="4"></circle>
-          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-        </svg>
-      </span>
-      <span class="dock-label" data-i18n="dock_artists">Artists</span>
+    <a href="artists.html" class="bottom-dock-item" data-page="artists.html">
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/><circle cx="12" cy="12" r="10"/></svg></span>
+      <span class="dock-label">Artists & Stages</span>
     </a>
-    <a href="stages.html" data-page="stages.html" class="bottom-dock-item">
-      <span class="dock-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <path d="M2 12h20M2 6h20M2 18h20"></path>
-        </svg>
-      </span>
-      <span class="dock-label" data-i18n="dock_stages">Stages</span>
-    </a>
-    <a href="practical-info.html" data-page="practical-info.html" class="bottom-dock-item">
-      <span class="dock-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="12" y1="16" x2="12" y2="12"></line>
-          <line x1="12" y1="8" x2="12.01" y2="8"></line>
-        </svg>
-      </span>
+    <a href="practical-info.html" class="bottom-dock-item" data-page="practical-info.html">
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span>
       <span class="dock-label" data-i18n="dock_info">Info</span>
     </a>
-    <a href="index.html" data-page="index.html" class="bottom-dock-item bottom-dock-home">
-      <span class="dock-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-9.5z"/>
-        </svg>
-      </span>
+    <a href="index.html" class="bottom-dock-item bottom-dock-home" data-page="index.html">
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
       <span class="dock-label" data-i18n="dock_home">Home</span>
     </a>
-    <a href="program.html" data-page="program.html" class="bottom-dock-item">
-      <span class="dock-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <rect x="3" y="4" width="18" height="17" rx="2"/>
-          <path d="M8 2v4M16 2v4M3 10h18"/>
-        </svg>
-      </span>
+    <a href="program.html" class="bottom-dock-item" data-page="program.html">
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg></span>
       <span class="dock-label" data-i18n="dock_program">Program</span>
     </a>
-    <a href="my-schedule.html" data-page="my-schedule.html" class="bottom-dock-item">
-      <span class="dock-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
-        </svg>
-      </span>
-      <span class="dock-label" data-i18n="dock_plan">My Plan</span>
-    </a>
-    <a href="search.html" data-page="search.html" class="bottom-dock-item">
-      <span class="dock-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-      </span>
-      <span class="dock-label" data-i18n="dock_search">Search</span>
+    <a href="tickets.html" class="bottom-dock-item bottom-dock-tickets" data-page="tickets.html">
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg></span>
+      <span class="dock-label">Tickets</span>
     </a>
   </nav>
 

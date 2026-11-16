@@ -3,6 +3,7 @@
   'use strict';
 
   const FAV_KEY = 'festival_favorites';
+  const CART_KEY = 'festival_cart';
   const THEME_KEY = 'festival_theme';
   const LANG_COMPAT_KEY = 'festival_language';
   const DARK_NATIVE_DESIGNS = new Set(['05-linear', '06-neurosama', '09-wand', '11-zzz']);
@@ -28,7 +29,7 @@
     if (!page.includes('.')) page += '.html';
     const valid = [
       'index.html', 'program.html', 'artists.html', 'artist-detail.html',
-      'stages.html', 'practical-info.html', 'my-schedule.html', 'search.html'
+      'stages.html', 'tickets.html', 'practical-info.html', 'my-schedule.html', 'search.html'
     ];
     if (valid.includes(page)) return page;
     for (let i = 0; i < valid.length; i++) {
@@ -159,8 +160,9 @@
   const NAV_LABELS = {
     'index.html': { en: 'Overview', cs: 'Přehled' },
     'program.html': { en: 'Program', cs: 'Program' },
-    'artists.html': { en: 'Artists', cs: 'Účinkující' },
-    'stages.html': { en: 'Stages', cs: 'Pódia' },
+    'artists.html': { en: 'Artists & Stages', cs: 'Účinkující & Pódia' },
+    'stages.html': { en: 'Artists & Stages', cs: 'Účinkující & Pódia' },
+    'tickets.html': { en: 'Tickets', cs: 'Vstupenky' },
     'practical-info.html': { en: 'Info', cs: 'Info' },
     'my-schedule.html': { en: 'My Schedule', cs: 'Můj plán' },
     'search.html': { en: 'Search', cs: 'Hledat' }
@@ -198,24 +200,47 @@
       el.textContent = isCs ? 'Přeskočit na hlavní obsah' : 'Skip to main content';
     });
 
-    // Translate header/footer nav links that do not already have a valid dict key
-    document.querySelectorAll('header nav a, footer a, .side-rail nav a').forEach(a => {
+    // Translate header/footer/rail/dock nav links that do not already have a valid dict key
+    document.querySelectorAll('header nav a, footer a, .side-rail nav a, .bottom-nav-dock a').forEach(a => {
       if (a.classList.contains('brand') || a.classList.contains('eb-logo') || a.classList.contains('rail-brand')) return;
       const existingKey = a.getAttribute('data-i18n');
       if (existingKey && Object.prototype.hasOwnProperty.call(dict, existingKey)) return;
+      const dockLabel = a.querySelector('.dock-label');
+      const dockKey = dockLabel && dockLabel.getAttribute('data-i18n');
+      if (dockKey && Object.prototype.hasOwnProperty.call(dict, dockKey)) return;
       const href = (a.getAttribute('href') || '').split('#')[0].split('?')[0];
       if (!NAV_LABELS[href]) return;
-      const badge = a.querySelector('.nav-badge-count');
-      const labelSpan = a.querySelector('span:not(.nav-badge-count)');
+      const favBadge = a.querySelector('.nav-badge-count:not(.fod-cart-badge)');
+      const cartBadge = a.querySelector('.fod-cart-badge');
+      const labelSpan = dockLabel || a.querySelector('span:not(.nav-badge-count):not(.fod-cart-badge):not(.dock-icon)');
       const labelText = isCs ? NAV_LABELS[href].cs : NAV_LABELS[href].en;
       if (labelSpan) {
-        labelSpan.textContent = labelText;
+        if (!favBadge && !cartBadge) {
+          labelSpan.textContent = labelText;
+        } else {
+          // Replace leading text node inside labelSpan cleanly while preserving badge child
+          let replaced = false;
+          for (let i = 0; i < labelSpan.childNodes.length; i++) {
+            if (labelSpan.childNodes[i].nodeType === 3) {
+              labelSpan.childNodes[i].nodeValue = labelText + ' ';
+              replaced = true;
+              break;
+            }
+          }
+          if (!replaced) {
+            labelSpan.insertBefore(document.createTextNode(labelText + ' '), labelSpan.firstChild);
+          }
+        }
       } else {
-        // Preserve badge node if present
+        // Preserve badge nodes if present directly inside anchor
         a.textContent = labelText;
-        if (badge) {
+        if (favBadge) {
           a.appendChild(document.createTextNode(' '));
-          a.appendChild(badge);
+          a.appendChild(favBadge);
+        }
+        if (cartBadge) {
+          a.appendChild(document.createTextNode(' '));
+          a.appendChild(cartBadge);
         }
       }
     });
@@ -430,6 +455,63 @@
   window.updateNavBadge = function () { updateAllFavBadges(); };
 
   // =========================================================================
+  // TICKET CART PERSISTENCE (localStorage 'festival_cart') & BADGE SYNC
+  // =========================================================================
+  function sanitizeCartItems(items) {
+    if (!Array.isArray(items)) return [];
+    const merged = new Map();
+    items.forEach(raw => {
+      if (!raw || !raw.id) return;
+      const id = String(raw.id).trim();
+      const qty = Math.max(0, parseInt(raw.qty, 10) || 0);
+      if (!id || qty <= 0) return;
+      const prev = merged.get(id);
+      merged.set(id, {
+        id,
+        qty: prev ? prev.qty + qty : qty,
+        priceCzk: Math.max(0, Number(raw.priceCzk) || (prev ? prev.priceCzk : 0)),
+        category: String(raw.category || (prev ? prev.category : '')),
+        nameEn: String(raw.nameEn || (prev ? prev.nameEn : id)),
+        nameCs: String(raw.nameCs || raw.nameEn || (prev ? prev.nameCs : id))
+      });
+    });
+    return Array.from(merged.values());
+  }
+
+  function getCart() {
+    try {
+      const raw = localStorage.getItem(CART_KEY);
+      if (!raw) return [];
+      return sanitizeCartItems(JSON.parse(raw));
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function setCart(items) {
+    const clean = sanitizeCartItems(items);
+    try {
+      localStorage.setItem(CART_KEY, JSON.stringify(clean));
+    } catch (e) {}
+    updateAllCartBadges();
+    window.dispatchEvent(new CustomEvent('festivalCartChanged', { detail: { items: clean } }));
+    return clean;
+  }
+
+  function getCartCount() {
+    return getCart().reduce((sum, item) => sum + (parseInt(item.qty, 10) || 0), 0);
+  }
+
+  function updateAllCartBadges() {
+    const count = getCartCount();
+    document.querySelectorAll('.fod-cart-badge').forEach(el => {
+      el.textContent = count > 0 ? String(count) : '';
+      el.setAttribute('data-count', String(count));
+      el.classList.toggle('is-hidden', count === 0);
+    });
+  }
+
+  // =========================================================================
   // TIME & SCHEDULE COLLISION UTILITIES
   // =========================================================================
   function timeToMinutes(timeStr) {
@@ -555,12 +637,30 @@
       }
     });
 
+    // 2b. Ensure Tickets nav links carry highlight CTA class and live cart badge
+    document.querySelectorAll('header nav a[href="tickets.html"], .side-rail nav a[href="tickets.html"], .bottom-nav-dock a[href="tickets.html"]').forEach(a => {
+      if (a.closest('.bottom-nav-dock')) {
+        a.classList.add('bottom-dock-tickets');
+      } else if (a.closest('.side-rail')) {
+        a.classList.add('rail-link-tickets');
+      } else {
+        a.classList.add('nav-link-tickets');
+      }
+      if (!a.querySelector('.fod-cart-badge')) {
+        const badge = document.createElement('span');
+        badge.className = 'fod-cart-badge is-hidden';
+        badge.setAttribute('data-count', '0');
+        badge.setAttribute('aria-hidden', 'true');
+        a.appendChild(badge);
+      }
+    });
+
     // 3. Highlight active page in header nav & bottom dock
     const current = getCurrentPage();
     document.querySelectorAll('header nav a, .side-rail nav a, .bottom-nav-dock a').forEach(a => {
       const href = (a.getAttribute('href') || '').split('#')[0].split('?')[0];
       if (!href || href.startsWith('#')) return;
-      const isMatch = href === current || (current === 'artist-detail.html' && href === 'artists.html');
+      const isMatch = href === current || ((current === 'artist-detail.html' || current === 'stages.html') && href === 'artists.html');
       if (a.closest('.bottom-nav-dock')) {
         a.classList.toggle('active', isMatch);
         a.classList.toggle('is-active', isMatch);
@@ -573,6 +673,7 @@
     });
 
     updateAllFavBadges();
+    updateAllCartBadges();
   }
 
   function enhanceHomepage() {
@@ -587,6 +688,17 @@
       tick();
       setInterval(tick, 1000);
     }
+
+    // Wire clickable stage table rows (e.g. 02-clutterbench stages table)
+    document.querySelectorAll('tr[data-href]').forEach(row => {
+      if (row.dataset.hrefWired) return;
+      row.dataset.hrefWired = '1';
+      row.addEventListener('click', e => {
+        if (e.target && e.target.closest('a, button')) return;
+        const href = row.getAttribute('data-href');
+        if (href) window.location.href = href;
+      });
+    });
 
     // Wire highlight artist cards on homepage to their real artist-detail pages
     const performers = (window.FESTIVAL_DATA && window.FESTIVAL_DATA.PERFORMERS) || [];
@@ -681,6 +793,10 @@
     toggleFavoriteById,
     clearFavorites,
     updateAllFavBadges,
+    getCart,
+    setCart,
+    getCartCount,
+    updateAllCartBadges,
     timeToMinutes,
     isOverlapping,
     normalizeStageKey,
@@ -691,6 +807,23 @@
     showToast
   };
 
+  function setupFooterActions() {
+    document.addEventListener('click', e => {
+      const topBtn = e.target && e.target.closest ? e.target.closest('[data-footer-top]') : null;
+      if (topBtn) {
+        const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+        return;
+      }
+
+      const socialBtn = e.target && e.target.closest ? e.target.closest('.fod-social-btn[data-social-platform]') : null;
+      if (socialBtn) {
+        const platform = socialBtn.getAttribute('data-social-platform') || 'Social';
+        showToast(t(`${platform}: social channel coming soon`, `${platform}: sociální kanál připravujeme`));
+      }
+    });
+  }
+
   function boot() {
     const mainEl = document.querySelector('main');
     if (mainEl && !mainEl.id) mainEl.id = 'main-content';
@@ -699,6 +832,7 @@
     injectHeaderControls();
     enhanceHomepage();
     setupGlobalKeyboard();
+    setupFooterActions();
     setTimeout(() => {
       bindLangButtonsClean();
       applyExtraTranslations(getLang());
@@ -711,9 +845,12 @@
     boot();
   }
 
+  window.addEventListener('festivalCartChanged', () => updateAllCartBadges());
+
   window.addEventListener('storage', e => {
     if (!e || e.key === THEME_KEY) applyTheme(getFestivalTheme());
     if (!e || e.key === FAV_KEY) updateAllFavBadges();
+    if (!e || e.key === CART_KEY) updateAllCartBadges();
     if (!e || e.key === LANG_COMPAT_KEY) {
       const target = e.newValue === 'cs' ? 'cs' : 'en';
       if (target !== getLang() && typeof window.setFestivalLang === 'function') {

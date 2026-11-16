@@ -423,6 +423,24 @@ a {
   border-radius: var(--eb-radius-pill);
 }
 
+.eb-count-link {
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.eb-count-link:hover {
+  color: var(--eb-accent-orange);
+  border-color: var(--eb-accent-orange);
+  background-color: var(--eb-bg);
+}
+
+.eb-count-link:focus-visible {
+  outline: 2px solid var(--eb-accent-orange);
+  outline-offset: 2px;
+  color: var(--eb-accent-orange);
+  border-color: var(--eb-accent-orange);
+}
+
 .eb-text-link {
   font-size: 14px;
   font-weight: 600;
@@ -518,10 +536,50 @@ a {
 }
 
 .eb-stage-card {
+  position: relative;
   border: 1px solid var(--eb-border);
   border-radius: var(--eb-radius-md);
   padding: 20px;
   background-color: var(--eb-bg);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.eb-stage-card:hover {
+  border-color: var(--eb-accent-orange);
+  box-shadow: var(--eb-shadow-card);
+  transform: translateY(-2px);
+}
+
+.eb-stage-card:has(.stage-card-link:focus-visible) {
+  border-color: var(--eb-accent-orange);
+  box-shadow: var(--eb-shadow-card);
+  outline: 2px solid var(--eb-accent-orange);
+  outline-offset: 2px;
+}
+
+.eb-stage-card .stage-card-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.eb-stage-card .stage-card-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.eb-stage-card:hover .stage-card-link,
+.eb-stage-card .stage-card-link:focus-visible {
+  color: var(--eb-accent-orange);
+  outline: none;
+}
+
+.eb-stage-card a:not(.stage-card-link),
+.eb-stage-card button {
+  position: relative;
+  z-index: 2;
 }
 
 .eb-stage-top {
@@ -1285,6 +1343,30 @@ html[data-design="04-eventbrite"][data-theme="dark"] .eb-event-date-top {
   color: #ff8a70;
 }
 
+html[data-design="04-eventbrite"][data-theme="dark"] .eb-count-link:hover,
+html[data-design="04-eventbrite"][data-theme="dark"] .eb-count-link:focus-visible {
+  color: #ff8a70;
+  border-color: #ff8a70;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .eb-count-link:focus-visible {
+  outline-color: #ff8a70;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .eb-stage-card:hover,
+html[data-design="04-eventbrite"][data-theme="dark"] .eb-stage-card:has(.stage-card-link:focus-visible) {
+  border-color: #ff8a70;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .eb-stage-card:has(.stage-card-link:focus-visible) {
+  outline-color: #ff8a70;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .eb-stage-card:hover .stage-card-link,
+html[data-design="04-eventbrite"][data-theme="dark"] .eb-stage-card .stage-card-link:focus-visible {
+  color: #ff8a70;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -1293,5 +1375,222 @@ html[data-design="04-eventbrite"][data-theme="dark"] .eb-event-date-top {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* =========================================================
+   04-eventbrite: Full-Bleed Dramatic Hero Redesign
+   ========================================================= */
+.eb-main {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+.eb-main .eb-hero-banner {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-height: clamp(480px, 68vh, 720px);
+  border-radius: 0;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background-color: #0b0d13;
+  color: #ffffff;
+}
+
+.eb-main .eb-hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.eb-main .eb-hero-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 38%;
+  filter: contrast(1.06) saturate(1.12);
+}
+
+.eb-main .eb-hero-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(10, 12, 18, 0.92) 0%,
+      rgba(10, 12, 18, 0.78) 44%,
+      rgba(10, 12, 18, 0.34) 76%,
+      rgba(10, 12, 18, 0.22) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(10, 12, 18, 0.94) 0%,
+      rgba(10, 12, 18, 0.56) 36%,
+      rgba(10, 12, 18, 0.18) 100%
+    );
+}
+
+.eb-main .eb-hero-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding-block: clamp(40px, 7vh, 72px);
+}
+
+.eb-main .eb-hero-content {
+  max-width: 780px;
+  min-width: 0;
+}
+
+html[data-theme="light"] .eb-main .eb-hero-banner,
+html[data-theme="dark"] .eb-main .eb-hero-banner {
+  color: #ffffff;
+  background-color: #0b0d13;
+}
+
+.eb-main .eb-hero-kicker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-bottom: 14px;
+  font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #f3f4f6;
+}
+
+.eb-main .eb-hero-location {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background-color: #c93b1f;
+  color: #ffffff;
+}
+
+.eb-main .eb-hero-badge {
+  color: #f3f4f6;
+}
+
+.eb-main .eb-hero-title,
+html[data-theme="light"] .eb-main .eb-hero-title,
+html[data-theme="dark"] .eb-main .eb-hero-title {
+  margin: 0 0 12px;
+  font-size: clamp(2.1rem, 6.2vw, 4.75rem);
+  font-weight: 900;
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.55);
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.eb-main .eb-hero-date,
+html[data-theme="light"] .eb-main .eb-hero-date,
+html[data-theme="dark"] .eb-main .eb-hero-date {
+  margin: 0 0 12px;
+  font-size: clamp(1.2rem, 2.8vw, 1.9rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ff9c82;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+.eb-main .eb-hero-subtitle,
+html[data-theme="light"] .eb-main .eb-hero-subtitle,
+html[data-theme="dark"] .eb-main .eb-hero-subtitle {
+  margin: 0 0 26px;
+  max-width: 60ch;
+  font-size: clamp(0.975rem, 1.6vw, 1.125rem);
+  line-height: 1.55;
+  color: #f3f4f6;
+}
+
+.eb-main .eb-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+}
+
+.eb-main .eb-hero-actions .eb-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 11px 26px;
+  border-radius: 9999px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: 2px solid transparent;
+}
+
+.eb-main .eb-hero-actions .eb-btn-primary,
+html[data-theme="light"] .eb-main .eb-hero-actions .eb-btn-primary,
+html[data-theme="dark"] .eb-main .eb-hero-actions .eb-btn-primary {
+  background-color: #c93b1f;
+  border-color: #c93b1f;
+  color: #ffffff;
+}
+
+.eb-main .eb-hero-actions .eb-btn-primary:hover,
+.eb-main .eb-hero-actions .eb-btn-primary:focus-visible {
+  background-color: #a82d15;
+  border-color: #a82d15;
+  color: #ffffff;
+}
+
+.eb-main .eb-hero-actions .eb-btn-outline,
+html[data-theme="light"] .eb-main .eb-hero-actions .eb-btn-outline,
+html[data-theme="dark"] .eb-main .eb-hero-actions .eb-btn-outline {
+  background-color: rgba(15, 18, 26, 0.65);
+  border-color: rgba(255, 255, 255, 0.88);
+  color: #ffffff;
+  backdrop-filter: blur(6px);
+}
+
+.eb-main .eb-hero-actions .eb-btn-outline:hover,
+.eb-main .eb-hero-actions .eb-btn-outline:focus-visible {
+  background-color: #ffffff;
+  border-color: #ffffff;
+  color: #111827;
+}
+
+@media (max-width: 768px) {
+  .eb-main .eb-hero-banner {
+    min-height: 440px;
+  }
+
+  .eb-main .eb-hero-scrim {
+    background: linear-gradient(
+      0deg,
+      rgba(10, 12, 18, 0.95) 0%,
+      rgba(10, 12, 18, 0.78) 54%,
+      rgba(10, 12, 18, 0.34) 100%
+    );
+  }
+}
+
+@media (max-width: 420px) {
+  .eb-main .eb-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .eb-main .eb-hero-actions .eb-btn {
+    width: 100%;
   }
 }

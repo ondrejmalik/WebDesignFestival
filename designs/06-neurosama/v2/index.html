@@ -24,61 +24,88 @@
         <span class="brand-name">Festival of Darkness 2</span>
       </a>
       <nav class="site-nav" aria-label="Main Navigation">
-        <a href="index.html" class="nav-link active is-active" data-i18n="nav_home" aria-current="page">Overview</a>
+        <a href="index.html" class="nav-link" data-i18n="nav_home">Overview</a>
         <a href="program.html" class="nav-link" data-i18n="nav_program">Program</a>
-        <a href="artists.html" class="nav-link">Artists</a>
-        <a href="stages.html" class="nav-link">Stages</a>
+        <a href="artists.html" class="nav-link">Artists &amp; Stages</a>
         <a href="practical-info.html" class="nav-link">Info</a>
-        <a href="my-schedule.html" class="nav-link">My Schedule</a>
-        <a href="search.html" class="nav-link">Search</a>
+        <a href="tickets.html" class="nav-link nav-link-tickets">Tickets</a>
         <button type="button" class="lang-toggle" id="lang-toggle" aria-label="Switch language">CZ</button>
       </nav>
     </div>
   </header>
 
   
-<main>
+<main id="main-content" class="ns-home-main">
 
-    <section class="hero-section">
-      <div class="hero-glow" aria-hidden="true"></div>
-      <div class="container hero-grid">
-        <div class="hero-card">
-          <div class="pill-badge">
-            <span class="badge-accent" data-i18n="hero_dates">10-12 Jul 2026</span>
-            <span class="badge-sep">/</span>
+    <section class="ns-hero" aria-labelledby="ns-hero-title">
+      <div class="ns-hero-media">
+        <img
+          src="img/hero.jpg"
+          alt="Festival of Darkness 2 open-air Solar Horizon concert stage illuminated at dusk with a cheering crowd and historic Czech town skyline in the background"
+          class="ns-hero-img"
+          loading="eager"
+          decoding="async"
+        />
+        <div class="ns-hero-vignette" aria-hidden="true"></div>
+      </div>
+
+      <div class="ns-hero-overlay">
+        <div class="ns-hero-header">
+          <div class="ns-location-pill">
+            <span class="ns-pill-dot" aria-hidden="true"></span>
             <span data-i18n="hero_location">Kutná Hora, Czechia</span>
           </div>
-          <h1 class="hero-title" data-i18n="hero_title">Festival of Darkness 2</h1>
-          <p class="hero-subtitle" data-i18n="hero_subtitle">Three days of electronic, alternative, and audiovisual music across two distinct stages in Kutná Hora.</p>
-          <div class="hero-actions">
-            <a href="program.html" class="btn btn-primary" data-i18n="cta_program">Explore Program</a>
-            <a href="#stages" class="btn btn-secondary" data-i18n="cta_stages">View Stages</a>
-          </div>
+
+          <h1 id="ns-hero-title" class="ns-hero-title" data-i18n="hero_title">
+            Festival of Darkness 2
+          </h1>
+
+          <p class="ns-hero-tagline" data-i18n="hero_subtitle">
+            Three days of electronic, alternative, and audiovisual music across two distinct stages in Kutná Hora.
+          </p>
         </div>
 
-        <aside class="info-stack" aria-label="Event Quick Facts">
-          <div class="glass-card stat-card">
-            <h2 class="card-kicker" data-i18n="facts_heading">Start Times & Doors</h2>
-            <div class="time-grid">
-              <div class="time-tile">
-                <h3 class="tile-label" data-i18n="day1_short">Fri, 10 Jul</h3>
-                <p class="tile-value">14:00 - 04:00</p>
-              </div>
-              <div class="time-tile">
-                <h3 class="tile-label" data-i18n="day2_short">Sat, 11 Jul</h3>
-                <p class="tile-value">13:30 - 04:00</p>
-              </div>
-              <div class="time-tile">
-                <h3 class="tile-label" data-i18n="day3_short">Sun, 12 Jul</h3>
-                <p class="tile-value">13:00 - 03:00</p>
-              </div>
-              <div class="time-tile">
-                <h3 class="tile-label" data-i18n="lineup_count_label">Lineup Scale</h3>
-                <p class="tile-value" id="artist-count-display">60 artists</p>
-              </div>
+        <div class="ns-hero-hud">
+          <div class="ns-hud-col ns-hud-left">
+            <span class="ns-hud-label" data-i18n="hero_venue_label">VENUE & ACCESS</span>
+            <p class="ns-hud-value" data-i18n="hero_venue_name">Kutná Hora Open-Air Arena</p>
+            <div class="ns-hud-actions">
+              <a href="tickets.html" class="ns-btn-primary">
+                <span class="lang-en">Get Tickets</span>
+                <span class="lang-cs is-hidden">Vstupenky</span>
+              </a>
+              <a href="program.html" class="ns-btn-secondary" data-i18n="cta_program">
+                Explore Program
+              </a>
+              <a href="#stages" class="ns-btn-secondary" data-i18n="cta_stages">
+                View Stages
+              </a>
             </div>
           </div>
-        </aside>
+
+          <div class="ns-hud-col ns-hud-center">
+            <span class="ns-hud-label" data-i18n="facts_heading">Start Times & Doors</span>
+            <p class="ns-hud-dates" data-i18n="hero_dates">10-12 Jul 2026</p>
+            <p class="ns-hud-sub" data-i18n="hero_doors_value">Doors 14:00 - 04:00 Daily</p>
+          </div>
+
+          <div class="ns-hud-col ns-hud-right">
+            <span class="ns-hud-label" data-i18n="hero_stages_label">2 STAGES / 60 ARTISTS</span>
+            <ul class="ns-hud-facts">
+              <li>
+                <span class="ns-fact-stage">Solar Horizon Stage</span>
+                <span class="ns-fact-time">13:00-02:00</span>
+              </li>
+              <li>
+                <span class="ns-fact-stage">Lunar Forest Dome</span>
+                <span class="ns-fact-time">14:00-04:00</span>
+              </li>
+              <li class="ns-fact-highlight">
+                <span id="artist-count-display">60 artists</span>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -95,7 +122,7 @@
               <span class="stage-tag tag-coral" data-i18n="solar_type">Open-air main stage</span>
               <span class="stage-cap" data-i18n="solar_cap">Capacity: 4,500</span>
             </div>
-            <h3 class="stage-title">Solar Horizon Stage</h3>
+            <h3 class="stage-title"><a href="stages.html#stage-solar" class="stage-card-link">Solar Horizon Stage</a></h3>
             <p class="stage-desc" data-i18n="solar_desc">Central open-air amphitheater for major band performances, indie rock, and dance headliners.</p>
           </article>
 
@@ -104,7 +131,7 @@
               <span class="stage-tag tag-pink" data-i18n="lunar_type">Covered audiovisual dome</span>
               <span class="stage-cap" data-i18n="lunar_cap">Capacity: 1,800</span>
             </div>
-            <h3 class="stage-title">Lunar Forest Dome</h3>
+            <h3 class="stage-title"><a href="stages.html#stage-lunar" class="stage-card-link">Lunar Forest Dome</a></h3>
             <p class="stage-desc" data-i18n="lunar_desc">Atmospheric covered indoor stage focusing on techno, ambient, experimental electronics, and 360-degree light projections.</p>
           </article>
         </div>
@@ -190,39 +217,112 @@
 
 
   <footer class="site-footer">
-    <div class="container footer-inner">
-      <p class="footer-title">Festival of Darkness 2</p>
-      <p class="footer-meta" data-i18n="footer_meta">Kutná Hora, Czech Republic | 10-12 Jul 2026</p>
+    <div class="container fod-footer-inner">
+      <div class="fod-footer-top">
+        <div class="fod-footer-brand-col">
+          <div class="fod-footer-wordmark">
+            <span class="fod-wordmark-top">FESTIVAL</span>
+            <span class="fod-wordmark-main">TEMNOTY <span class="fod-wordmark-num">2</span></span>
+          </div>
+          <div class="fod-footer-meta-stack">
+            <p class="fod-footer-meta-line" data-i18n="fod_footer_dates">10-12 / 07.2026</p>
+            <p class="fod-footer-meta-line" data-i18n="fod_footer_venue">SEDLEC · KUTNÁ HORA</p>
+          </div>
+        </div>
+
+        <div class="fod-footer-col">
+          <p class="fod-footer-heading" id="fod-footer-nav-festival" data-i18n="fod_footer_col_festival">FESTIVAL</p>
+          <nav aria-labelledby="fod-footer-nav-festival">
+            <ul class="fod-footer-list">
+              <li><a href="index.html" data-i18n="fod_footer_nav_home" aria-current="page">Overview</a></li>
+              <li><a href="program.html" data-i18n="fod_footer_nav_program">Program</a></li>
+              <li><a href="artists.html" data-i18n="fod_footer_nav_artists">Artists</a></li>
+              <li><a href="artist-detail.html" data-i18n="fod_footer_nav_artist_detail">Artist Spotlight</a></li>
+              <li><a href="stages.html" data-i18n="fod_footer_nav_stages">Stages &amp; Grounds</a></li>
+              <li><a href="tickets.html" data-i18n="fod_footer_nav_tickets">Tickets &amp; Passes</a></li>
+              <li><a href="my-schedule.html" data-i18n="fod_footer_nav_schedule">My Schedule</a></li>
+              <li><a href="search.html" data-i18n="fod_footer_nav_search">Search</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="fod-footer-col">
+          <p class="fod-footer-heading" id="fod-footer-nav-info" data-i18n="fod_footer_col_info">PRACTICAL INFO</p>
+          <nav aria-labelledby="fod-footer-nav-info">
+            <ul class="fod-footer-list">
+              <li><a href="practical-info.html" data-i18n="fod_footer_info_all">Practical Info</a></li>
+              <li><a href="tickets.html" data-i18n="fod_footer_info_tickets">Tickets &amp; Entry</a></li>
+              <li><a href="practical-info.html#doprava" data-i18n="fod_footer_info_travel">Getting There</a></li>
+              <li><a href="practical-info.html#kemp" data-i18n="fod_footer_info_camp">Camping &amp; Stay</a></li>
+              <li><a href="practical-info.html#cashless" data-i18n="fod_footer_info_cashless">Cashless &amp; Grounds</a></li>
+              <li><a href="practical-info.html#faq" data-i18n="fod_footer_info_faq">FAQ</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="fod-footer-col">
+          <p class="fod-footer-heading" data-i18n="fod_footer_col_contact">CONTACT</p>
+          <address class="fod-footer-address">
+            <span data-i18n="fod_footer_addr_line1">Sedlec Festival Grounds</span>
+            <span data-i18n="fod_footer_addr_line2">284 03 Kutná Hora</span>
+            <a href="mailto:info@festivaltemnoty.cz" class="fod-footer-mail">info@festivaltemnoty.cz</a>
+            <a href="practical-info.html#parametry" class="fod-footer-ext" data-i18n="fod_footer_contact_link">Site &amp; Contact Info ↗</a>
+          </address>
+
+          <p class="fod-footer-heading fod-footer-follow-heading" id="fod-footer-social-label" data-i18n="fod_footer_follow">FOLLOW US</p>
+          <div class="fod-social-row" role="group" aria-labelledby="fod-footer-social-label">
+            <button type="button" class="fod-social-btn" data-social-platform="Facebook" data-i18n-title="fod_footer_social_fb" title="Facebook (placeholder)">
+              <svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              <span class="fod-sr-only" data-i18n="fod_footer_social_fb">Facebook (placeholder)</span>
+            </button>
+            <button type="button" class="fod-social-btn" data-social-platform="Instagram" data-i18n-title="fod_footer_social_ig" title="Instagram (placeholder)">
+              <svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+              <span class="fod-sr-only" data-i18n="fod_footer_social_ig">Instagram (placeholder)</span>
+            </button>
+            <button type="button" class="fod-social-btn" data-social-platform="Spotify" data-i18n-title="fod_footer_social_sp" title="Spotify (placeholder)">
+              <svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 10.5c2.7-.8 5.7-.6 8.2.5"/><path d="M8.8 13.5c2.2-.6 4.6-.4 6.6.4"/><path d="M9.6 16.4c1.6-.4 3.4-.3 4.9.3"/></svg>
+              <span class="fod-sr-only" data-i18n="fod_footer_social_sp">Spotify (placeholder)</span>
+            </button>
+            <button type="button" class="fod-social-btn" data-social-platform="YouTube" data-i18n-title="fod_footer_social_yt" title="YouTube (placeholder)">
+              <svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+              <span class="fod-sr-only" data-i18n="fod_footer_social_yt">YouTube (placeholder)</span>
+            </button>
+            <button type="button" class="fod-social-btn" data-social-platform="X" data-i18n-title="fod_footer_social_x" title="X (placeholder)">
+              <svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l16 16"/><path d="M20 4L4 20"/></svg>
+              <span class="fod-sr-only" data-i18n="fod_footer_social_x">X (placeholder)</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="fod-footer-bottom">
+        <div class="fod-footer-bottom-meta">
+          <p class="fod-footer-copy" data-i18n="fod_footer_copy">© 2026 Festival Temnoty 2 · Kutná Hora</p>
+        </div>
+        <button type="button" class="fod-footer-top-btn" data-footer-top="true" data-i18n="fod_footer_top">BACK TO TOP ↑</button>
+      </div>
     </div>
   </footer>
   <nav class="bottom-nav-dock" aria-label="Mobile navigation">
     <a href="artists.html" class="bottom-dock-item" data-page="artists.html">
-      <span class="dock-icon"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></span>
-      <span class="dock-label" data-i18n="dock_artists">Artists</span>
-    </a>
-    <a href="stages.html" class="bottom-dock-item" data-page="stages.html">
-      <span class="dock-icon"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></span>
-      <span class="dock-label" data-i18n="dock_stages">Stages</span>
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/><circle cx="12" cy="12" r="10"/></svg></span>
+      <span class="dock-label">Artists & Stages</span>
     </a>
     <a href="practical-info.html" class="bottom-dock-item" data-page="practical-info.html">
-      <span class="dock-icon"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></span>
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span>
       <span class="dock-label" data-i18n="dock_info">Info</span>
     </a>
-    <a href="index.html" class="bottom-dock-item bottom-dock-home active is-active" data-page="index.html" aria-current="page">
-      <span class="dock-icon"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></span>
+    <a href="index.html" class="bottom-dock-item bottom-dock-home" data-page="index.html">
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
       <span class="dock-label" data-i18n="dock_home">Home</span>
     </a>
     <a href="program.html" class="bottom-dock-item" data-page="program.html">
-      <span class="dock-icon"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></span>
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg></span>
       <span class="dock-label" data-i18n="dock_program">Program</span>
     </a>
-    <a href="my-schedule.html" class="bottom-dock-item" data-page="my-schedule.html">
-      <span class="dock-icon"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></span>
-      <span class="dock-label" data-i18n="dock_plan">My Plan</span>
-    </a>
-    <a href="search.html" class="bottom-dock-item" data-page="search.html">
-      <span class="dock-icon"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
-      <span class="dock-label" data-i18n="dock_search">Search</span>
+    <a href="tickets.html" class="bottom-dock-item bottom-dock-tickets" data-page="tickets.html">
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg></span>
+      <span class="dock-label">Tickets</span>
     </a>
   </nav>
 

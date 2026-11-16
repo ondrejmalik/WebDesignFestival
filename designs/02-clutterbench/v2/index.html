@@ -21,86 +21,115 @@
     <div class="container header-inner">
       <a href="index.html" class="brand" data-i18n="brand">Festival of Darkness 2</a>
       <nav class="site-nav" aria-label="Main navigation">
-        <a href="index.html" class="nav-link active is-active" data-i18n="navHome" aria-current="page">Overview</a>
+        <a href="index.html" class="nav-link" data-i18n="navHome">Overview</a>
         <a href="program.html" class="nav-link" data-i18n="navProgram">Program & Sets</a>
-        <a href="artists.html" class="nav-link">Artists</a>
-        <a href="stages.html" class="nav-link">Stages</a>
+        <a href="artists.html" class="nav-link">Artists &amp; Stages</a>
         <a href="practical-info.html" class="nav-link">Info</a>
-        <a href="my-schedule.html" class="nav-link">My Schedule</a>
-        <a href="search.html" class="nav-link">Search</a>
+        <a href="tickets.html" class="nav-link nav-link-tickets">Tickets</a>
         <button type="button" class="lang-toggle" id="lang-toggle" aria-label="Switch language">CZ</button>
       </nav>
     </div>
   </header>
 
   
-<main class="container main-content">
+<main id="main-content" class="container main-content cb-main">
 
-    <section class="hero-grid" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <h1 id="hero-title" class="page-title" data-i18n="heroTitle">Festival of Darkness 2</h1>
-        <p class="hero-subtitle" data-i18n="heroSubtitle">
-          Three-day festival of electronic, alternative, and audiovisual music in Kutná Hora, Czech Republic. July 10–12, 2026 across two distinct stages.
+    <section class="cb-hero-band" aria-labelledby="hero-title">
+      <div class="cb-hero-visual-frame">
+        <img
+          src="img/hero.jpg"
+          alt="Festival of Darkness 2 live stage lights and night crowd in Kutná Hora"
+          class="cb-hero-media"
+          loading="eager"
+          decoding="async"
+        />
+        <div class="cb-hero-scrim" aria-hidden="true"></div>
+
+        <div class="cb-hero-overlay">
+          <div class="cb-hero-content">
+            <div class="cb-hero-kicker-row">
+              <span class="cb-kicker-badge" data-i18n="hero.kicker">10-12 JUL 2026 | KUTNÁ HORA, CZ</span>
+              <span class="cb-kicker-tag" data-i18n="hero.edition">EDITION 02 // LIVE ELECTRONIC</span>
+            </div>
+
+            <h1 id="hero-title" class="cb-hero-title" data-i18n="heroTitle">Festival of Darkness 2</h1>
+
+            <p class="cb-hero-subtitle" data-i18n="heroSubtitle">
+              Three-day festival of electronic, alternative, and audiovisual music in Kutná Hora, Czech Republic. July 10-12, 2026 across two distinct stages.
+            </p>
+
+            <div class="cb-hero-actions">
+              <a href="tickets.html" class="cb-btn cb-btn-primary"><span class="lang-en">Tickets & Passes</span><span class="lang-cs is-hidden">Vstupenky a pasy</span></a>
+              <a href="program.html" class="cb-btn cb-btn-secondary" data-i18n="ctaSchedule">Explore full schedule</a>
+              <a href="artists.html" class="cb-btn cb-btn-secondary" data-i18n="hero.cta_lineup">Explore 60 Artists</a>
+            </div>
+
+            <dl class="cb-stat-pills" aria-label="Festival key metrics">
+              <div class="cb-stat-pill">
+                <dt class="cb-stat-label" data-i18n="hero.stat_artists_label">Artists</dt>
+                <dd class="cb-stat-value">60</dd>
+              </div>
+              <div class="cb-stat-pill">
+                <dt class="cb-stat-label" data-i18n="hero.stat_stages_label">Stages</dt>
+                <dd class="cb-stat-value">2</dd>
+              </div>
+              <div class="cb-stat-pill">
+                <dt class="cb-stat-label" data-i18n="hero.stat_days_label">Days</dt>
+                <dd class="cb-stat-value">3</dd>
+              </div>
+              <div class="cb-stat-pill">
+                <dt class="cb-stat-label" data-i18n="statCapacity">Combined capacity</dt>
+                <dd class="cb-stat-value">6,300</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+
+      <aside class="cb-density-panel" aria-labelledby="density-heading">
+        <div class="cb-panel-header">
+          <div>
+            <span class="cb-panel-eyebrow" data-i18n="density.eyebrow">SCHEDULE TELEMETRY</span>
+            <h2 id="density-heading" class="cb-panel-title" data-i18n="chartTitle">Program density by stage</h2>
+          </div>
+          <span class="cb-panel-total" data-i18n="chartSub">30 sets per stage · 3 days</span>
+        </div>
+
+        <p class="cb-panel-desc" data-i18n="density.desc">
+          Balanced set distribution between main outdoor arena production and late-night forest dome acoustics.
         </p>
-        <div class="hero-actions">
-          <a href="program.html" class="btn-primary" data-i18n="ctaSchedule">Explore full schedule</a>
-          <a href="#stages" class="btn-secondary" data-i18n="ctaStages">Compare stages</a>
-        </div>
-        <div class="stat-strip">
-          <div class="stat-item">
-            <span class="stat-value">60</span>
-            <span class="stat-label" data-i18n="statSets">Total sets</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-value">6,300</span>
-            <span class="stat-label" data-i18n="statCapacity">Combined capacity</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-value">10–12.7</span>
-            <span class="stat-label" data-i18n="statDates">Kutná Hora, 2026</span>
-          </div>
-        </div>
-      </div>
 
-      <div class="panel-card breakdown-panel" aria-label="Festival set distribution">
-        <div class="panel-header">
-          <h2 class="panel-title" data-i18n="chartTitle">Program density by stage</h2>
-          <span class="panel-meta" data-i18n="chartSub">30 sets per stage · 3 days</span>
-        </div>
-        <div class="metric-row">
-          <div class="metric-head">
-            <span class="metric-name">
-              <span class="dot dot-solar" aria-hidden="true"></span>
-              <span data-i18n="solarName">Solar Horizon Stage</span>
-            </span>
-            <span class="metric-num">4,500 cap · 50%</span>
+        <div class="cb-density-bars">
+          <div class="cb-density-row">
+            <div class="cb-density-meta">
+              <span class="cb-stage-dot cb-stage-dot-solar" aria-hidden="true"></span>
+              <span class="cb-density-stage-name" data-i18n="solarName">Solar Horizon Stage</span>
+              <span class="cb-density-count" data-i18n="density.solar_count">30 sets (50%)</span>
+            </div>
+            <div class="cb-bar-track" role="img" aria-label="Solar Horizon Stage: 30 sets, 4500 capacity">
+              <div class="cb-bar-fill cb-bar-solar"></div>
+            </div>
+            <div class="cb-density-sub" data-i18n="solarShort">Open-air amphitheater for indie rock, synthpop, and dance headliners.</div>
           </div>
-          <div class="bar-track" role="img" aria-label="Solar Horizon Stage: 30 sets, 4500 capacity">
-            <div class="bar-fill bar-solar"></div>
+
+          <div class="cb-density-row">
+            <div class="cb-density-meta">
+              <span class="cb-stage-dot cb-stage-dot-lunar" aria-hidden="true"></span>
+              <span class="cb-density-stage-name" data-i18n="lunarName">Lunar Forest Dome</span>
+              <span class="cb-density-count" data-i18n="density.lunar_count">30 sets (50%)</span>
+            </div>
+            <div class="cb-bar-track" role="img" aria-label="Lunar Forest Dome: 30 sets, 1800 capacity">
+              <div class="cb-bar-fill cb-bar-lunar"></div>
+            </div>
+            <div class="cb-density-sub" data-i18n="lunarShort">Covered audiovisual marquee for techno, ambient, and 360-degree light projections.</div>
           </div>
-          <p class="metric-desc" data-i18n="solarShort">Open-air amphitheater for indie rock, synthpop, and dance headliners.</p>
         </div>
 
-        <div class="metric-row">
-          <div class="metric-head">
-            <span class="metric-name">
-              <span class="dot dot-lunar" aria-hidden="true"></span>
-              <span data-i18n="lunarName">Lunar Forest Dome</span>
-            </span>
-            <span class="metric-num">1,800 cap · 50%</span>
-          </div>
-          <div class="bar-track" role="img" aria-label="Lunar Forest Dome: 30 sets, 1800 capacity">
-            <div class="bar-fill bar-lunar"></div>
-          </div>
-          <p class="metric-desc" data-i18n="lunarShort">Covered audiovisual marquee for techno, ambient, and 360-degree light projections.</p>
+        <div class="cb-density-footer">
+          <span class="cb-density-footnote" data-i18n="density.footnote">Daily sets from 13:00 until 04:00 across both stages.</span>
+          <a href="program.html" class="cb-inline-link" data-i18n="density.timetable_link">View Timetable</a>
         </div>
-
-        <div class="panel-footer">
-          <span class="legend-item"><span class="dot dot-solar"></span> <span data-i18n="legendSolar">Open-Air Main</span></span>
-          <span class="legend-item"><span class="dot dot-lunar"></span> <span data-i18n="legendLunar">Audiovisual Dome</span></span>
-          <span class="legend-item"><span class="dot dot-peak"></span> <span data-i18n="legendPeak">Late-Night Peak</span></span>
-        </div>
-      </div>
+      </aside>
     </section>
 
     <section id="stages" class="section-block" aria-labelledby="stages-heading">
@@ -121,11 +150,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr data-href="stages.html#stage-solar">
               <td>
                 <div class="cell-primary">
                   <span class="dot dot-solar" aria-hidden="true"></span>
-                  <span data-i18n="solarName">Solar Horizon Stage</span>
+                  <a href="stages.html#stage-solar" class="stage-row-link" data-i18n="solarName">Solar Horizon Stage</a>
                 </div>
               </td>
               <td data-i18n="solarType">Open-air main stage</td>
@@ -133,11 +162,11 @@
               <td class="num-cell">13:00 – 02:00</td>
               <td data-i18n="solarGenres">Indie Rock, Synthpop, Nu-Disco, Electropop</td>
             </tr>
-            <tr>
+            <tr data-href="stages.html#stage-lunar">
               <td>
                 <div class="cell-primary">
                   <span class="dot dot-lunar" aria-hidden="true"></span>
-                  <span data-i18n="lunarName">Lunar Forest Dome</span>
+                  <a href="stages.html#stage-lunar" class="stage-row-link" data-i18n="lunarName">Lunar Forest Dome</a>
                 </div>
               </td>
               <td data-i18n="lunarType">Covered audiovisual dome</td>
@@ -199,39 +228,113 @@
 
 
   <footer class="site-footer">
-    <div class="container footer-inner">
-      <span data-i18n="footerLocation">Kutná Hora, Czech Republic · July 10–12, 2026</span>
-      <span id="plural-summary" class="footer-meta">60 sets</span>
+    <div class="container fod-footer-inner">
+      <div class="fod-footer-top">
+        <div class="fod-footer-brand-col">
+          <div class="fod-footer-wordmark">
+            <span class="fod-wordmark-top">FESTIVAL</span>
+            <span class="fod-wordmark-main">TEMNOTY <span class="fod-wordmark-num">2</span></span>
+          </div>
+          <div class="fod-footer-meta-stack">
+            <p class="fod-footer-meta-line" data-i18n="fod_footer_dates">10-12 / 07.2026</p>
+            <p class="fod-footer-meta-line" data-i18n="fod_footer_venue">SEDLEC · KUTNÁ HORA</p>
+          </div>
+        </div>
+
+        <div class="fod-footer-col">
+          <p class="fod-footer-heading" id="fod-footer-nav-festival" data-i18n="fod_footer_col_festival">FESTIVAL</p>
+          <nav aria-labelledby="fod-footer-nav-festival">
+            <ul class="fod-footer-list">
+              <li><a href="index.html" data-i18n="fod_footer_nav_home" aria-current="page">Overview</a></li>
+              <li><a href="program.html" data-i18n="fod_footer_nav_program">Program</a></li>
+              <li><a href="artists.html" data-i18n="fod_footer_nav_artists">Artists</a></li>
+              <li><a href="artist-detail.html" data-i18n="fod_footer_nav_artist_detail">Artist Spotlight</a></li>
+              <li><a href="stages.html" data-i18n="fod_footer_nav_stages">Stages &amp; Grounds</a></li>
+              <li><a href="tickets.html" data-i18n="fod_footer_nav_tickets">Tickets &amp; Passes</a></li>
+              <li><a href="my-schedule.html" data-i18n="fod_footer_nav_schedule">My Schedule</a></li>
+              <li><a href="search.html" data-i18n="fod_footer_nav_search">Search</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="fod-footer-col">
+          <p class="fod-footer-heading" id="fod-footer-nav-info" data-i18n="fod_footer_col_info">PRACTICAL INFO</p>
+          <nav aria-labelledby="fod-footer-nav-info">
+            <ul class="fod-footer-list">
+              <li><a href="practical-info.html" data-i18n="fod_footer_info_all">Practical Info</a></li>
+              <li><a href="tickets.html" data-i18n="fod_footer_info_tickets">Tickets &amp; Entry</a></li>
+              <li><a href="practical-info.html#doprava" data-i18n="fod_footer_info_travel">Getting There</a></li>
+              <li><a href="practical-info.html#kemp" data-i18n="fod_footer_info_camp">Camping &amp; Stay</a></li>
+              <li><a href="practical-info.html#cashless" data-i18n="fod_footer_info_cashless">Cashless &amp; Grounds</a></li>
+              <li><a href="practical-info.html#faq" data-i18n="fod_footer_info_faq">FAQ</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="fod-footer-col">
+          <p class="fod-footer-heading" data-i18n="fod_footer_col_contact">CONTACT</p>
+          <address class="fod-footer-address">
+            <span data-i18n="fod_footer_addr_line1">Sedlec Festival Grounds</span>
+            <span data-i18n="fod_footer_addr_line2">284 03 Kutná Hora</span>
+            <a href="mailto:info@festivaltemnoty.cz" class="fod-footer-mail">info@festivaltemnoty.cz</a>
+            <a href="practical-info.html#parametry" class="fod-footer-ext" data-i18n="fod_footer_contact_link">Site &amp; Contact Info ↗</a>
+          </address>
+
+          <p class="fod-footer-heading fod-footer-follow-heading" id="fod-footer-social-label" data-i18n="fod_footer_follow">FOLLOW US</p>
+          <div class="fod-social-row" role="group" aria-labelledby="fod-footer-social-label">
+            <button type="button" class="fod-social-btn" data-social-platform="Facebook" data-i18n-title="fod_footer_social_fb" title="Facebook (placeholder)">
+              <svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              <span class="fod-sr-only" data-i18n="fod_footer_social_fb">Facebook (placeholder)</span>
+            </button>
+            <button type="button" class="fod-social-btn" data-social-platform="Instagram" data-i18n-title="fod_footer_social_ig" title="Instagram (placeholder)">
+              <svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+              <span class="fod-sr-only" data-i18n="fod_footer_social_ig">Instagram (placeholder)</span>
+            </button>
+            <button type="button" class="fod-social-btn" data-social-platform="Spotify" data-i18n-title="fod_footer_social_sp" title="Spotify (placeholder)">
+              <svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 10.5c2.7-.8 5.7-.6 8.2.5"/><path d="M8.8 13.5c2.2-.6 4.6-.4 6.6.4"/><path d="M9.6 16.4c1.6-.4 3.4-.3 4.9.3"/></svg>
+              <span class="fod-sr-only" data-i18n="fod_footer_social_sp">Spotify (placeholder)</span>
+            </button>
+            <button type="button" class="fod-social-btn" data-social-platform="YouTube" data-i18n-title="fod_footer_social_yt" title="YouTube (placeholder)">
+              <svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+              <span class="fod-sr-only" data-i18n="fod_footer_social_yt">YouTube (placeholder)</span>
+            </button>
+            <button type="button" class="fod-social-btn" data-social-platform="X" data-i18n-title="fod_footer_social_x" title="X (placeholder)">
+              <svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l16 16"/><path d="M20 4L4 20"/></svg>
+              <span class="fod-sr-only" data-i18n="fod_footer_social_x">X (placeholder)</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="fod-footer-bottom">
+        <div class="fod-footer-bottom-meta">
+          <p class="fod-footer-copy" data-i18n="fod_footer_copy">© 2026 Festival Temnoty 2 · Kutná Hora</p>
+        <span id="plural-summary" class="footer-meta">60 sets</span>
+        </div>
+        <button type="button" class="fod-footer-top-btn" data-footer-top="true" data-i18n="fod_footer_top">BACK TO TOP ↑</button>
+      </div>
     </div>
   </footer>
   <nav class="bottom-nav-dock" aria-label="Mobile navigation">
     <a href="artists.html" class="bottom-dock-item" data-page="artists.html">
-      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-      <span class="dock-label" data-i18n="dock_artists">Artists</span>
-    </a>
-    <a href="stages.html" class="bottom-dock-item" data-page="stages.html">
-      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></span>
-      <span class="dock-label" data-i18n="dock_stages">Stages</span>
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/><circle cx="12" cy="12" r="10"/></svg></span>
+      <span class="dock-label">Artists & Stages</span>
     </a>
     <a href="practical-info.html" class="bottom-dock-item" data-page="practical-info.html">
-      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span>
       <span class="dock-label" data-i18n="dock_info">Info</span>
     </a>
-    <a href="index.html" class="bottom-dock-item bottom-dock-home active is-active" data-page="index.html" aria-current="page">
+    <a href="index.html" class="bottom-dock-item bottom-dock-home" data-page="index.html">
       <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
       <span class="dock-label" data-i18n="dock_home">Home</span>
     </a>
     <a href="program.html" class="bottom-dock-item" data-page="program.html">
-      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg></span>
       <span class="dock-label" data-i18n="dock_program">Program</span>
     </a>
-    <a href="my-schedule.html" class="bottom-dock-item" data-page="my-schedule.html">
-      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></span>
-      <span class="dock-label" data-i18n="dock_plan">My Plan</span>
-    </a>
-    <a href="search.html" class="bottom-dock-item" data-page="search.html">
-      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
-      <span class="dock-label" data-i18n="dock_search">Search</span>
+    <a href="tickets.html" class="bottom-dock-item bottom-dock-tickets" data-page="tickets.html">
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg></span>
+      <span class="dock-label">Tickets</span>
     </a>
   </nav>
 

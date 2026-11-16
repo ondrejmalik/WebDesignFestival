@@ -257,6 +257,37 @@ a {
   color: var(--ink-secondary);
 }
 
+.stat-card-link {
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.stat-card-link .stat-label {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--border-strong);
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+.stat-card-link:hover {
+  background-color: var(--bg-muted);
+}
+
+.stat-card-link:hover .stat-label {
+  color: var(--ink-primary);
+  text-decoration-color: var(--ink-primary);
+}
+
+.stat-card-link:focus-visible {
+  outline: 2px solid var(--ink-primary);
+  outline-offset: -2px;
+  background-color: var(--bg-muted);
+}
+
+.stat-card-link:focus-visible .stat-label {
+  color: var(--ink-primary);
+}
+
 /* Sections & Cards */
 .section-block {
   padding-block: 56px;
@@ -300,6 +331,46 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.stage-card {
+  position: relative;
+  transition: border-color 0.15s ease, background-color 0.15s ease, transform 0.15s ease;
+}
+
+.stage-card:hover {
+  border-color: var(--ink-primary);
+  background-color: var(--bg-surface);
+}
+
+.stage-card:has(.stage-card-link:focus-visible) {
+  border-color: var(--ink-primary);
+  outline: 2px solid var(--ink-primary);
+  outline-offset: 2px;
+}
+
+.stage-card-link {
+  color: var(--ink-primary);
+  text-decoration: none;
+}
+
+.stage-card-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+.stage-card:hover .stage-card-link {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.stage-card-link:focus-visible {
+  outline: none;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .card-top,
@@ -364,9 +435,22 @@ a {
 }
 
 .text-link {
+  position: relative;
+  z-index: 2;
   font-weight: 700;
+  color: var(--ink-primary);
   text-decoration: underline;
   text-underline-offset: 3px;
+  border-radius: 3px;
+}
+
+.text-link:hover {
+  opacity: 0.8;
+}
+
+.text-link:focus-visible {
+  outline: 2px solid var(--ink-primary);
+  outline-offset: 2px;
 }
 
 .genre-line {
@@ -1156,6 +1240,16 @@ html[data-design="07-ohnyfans"][data-theme="dark"] .nav-link.active {
   background-color: #222630;
 }
 
+html[data-design="07-ohnyfans"][data-theme="dark"] .stat-card-link:hover,
+html[data-design="07-ohnyfans"][data-theme="dark"] .stat-card-link:focus-visible {
+  background-color: var(--bg-muted);
+}
+
+html[data-design="07-ohnyfans"][data-theme="dark"] .stage-card:hover {
+  background-color: var(--bg-surface);
+  border-color: var(--ink-primary);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -1164,5 +1258,238 @@ html[data-design="07-ohnyfans"][data-theme="dark"] .nav-link.active {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* === 07-ohnyfans Neo-Retro Tactile Zine Hero Stage === */
+.zine-home-main {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+.zine-home-main .hero-zine-stage {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  padding-block: 1.5rem 2rem;
+  overflow-x: clip;
+}
+
+.zine-home-main .hero-zine-frame {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 360px;
+  width: 100%;
+  max-width: 100%;
+  background-color: #121314;
+  border: 3px solid #121314;
+  box-shadow: 8px 8px 0px #121314;
+  overflow: hidden;
+}
+
+html[data-theme="dark"] .zine-home-main .hero-zine-frame {
+  border-color: #e9edf1;
+  box-shadow: 8px 8px 0px #3b5bfd;
+}
+
+.zine-home-main .hero-media-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.zine-home-main .hero-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 72% center;
+  display: block;
+}
+
+.zine-home-main .hero-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(18, 19, 20, 0.94) 0%,
+    rgba(18, 19, 20, 0.88) 44%,
+    rgba(18, 19, 20, 0.48) 74%,
+    rgba(18, 19, 20, 0.2) 100%
+  );
+  pointer-events: none;
+}
+
+.zine-home-main .hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 680px;
+  min-width: 0;
+  padding: 2rem 1.5rem;
+  color: #ffffff;
+}
+
+.zine-home-main .hero-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.zine-home-main .zine-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.65rem;
+  font-family: var(--font-pixel);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  border: 2px solid #121314;
+  text-transform: uppercase;
+}
+
+.zine-home-main .zine-pill-amber,
+html[data-theme="light"] .zine-home-main .zine-pill-amber,
+html[data-theme="dark"] .zine-home-main .zine-pill-amber {
+  background-color: #b45309;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.zine-home-main .zine-pill-ink,
+html[data-theme="light"] .zine-home-main .zine-pill-ink,
+html[data-theme="dark"] .zine-home-main .zine-pill-ink {
+  background-color: #121314;
+  color: #fbbf24;
+  border-color: #fbbf24;
+}
+
+.zine-home-main .zine-pill-cobalt,
+html[data-theme="light"] .zine-home-main .zine-pill-cobalt,
+html[data-theme="dark"] .zine-home-main .zine-pill-cobalt {
+  background-color: #3b5bfd;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.zine-home-main .hero-content .pixel-h1.hero-title,
+html[data-theme="light"] .zine-home-main .hero-content .pixel-h1.hero-title,
+html[data-theme="dark"] .zine-home-main .hero-content .pixel-h1.hero-title {
+  font-family: var(--font-pixel);
+  font-size: clamp(1.7rem, 4.2vw, 3.2rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  text-shadow: 3px 3px 0px #121314;
+  margin: 0 0 1rem;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.zine-home-main .hero-content .hero-subtitle,
+html[data-theme="light"] .zine-home-main .hero-content .hero-subtitle,
+html[data-theme="dark"] .zine-home-main .hero-content .hero-subtitle {
+  font-family: var(--font-sans);
+  font-size: clamp(0.95rem, 1.5vw, 1.125rem);
+  line-height: 1.55;
+  color: #f3f4f6;
+  max-width: 54ch;
+  margin: 0 0 1.5rem;
+}
+
+.zine-home-main .hero-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  align-items: center;
+}
+
+.zine-home-main .btn-zine {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.7rem 1.35rem;
+  font-family: var(--font-pixel);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  border: 2px solid #ffffff;
+  box-shadow: 4px 4px 0px #121314;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+  cursor: pointer;
+}
+
+.zine-home-main .btn-zine:hover,
+.zine-home-main .btn-zine:focus-visible {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #121314;
+}
+
+.zine-home-main .btn-zine-primary,
+html[data-theme="light"] .zine-home-main .btn-zine-primary,
+html[data-theme="dark"] .zine-home-main .btn-zine-primary {
+  background-color: #3b5bfd;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.zine-home-main .btn-zine-primary:hover {
+  background-color: #2948eb;
+}
+
+.zine-home-main .btn-zine-secondary,
+html[data-theme="light"] .zine-home-main .btn-zine-secondary,
+html[data-theme="dark"] .zine-home-main .btn-zine-secondary {
+  background-color: #121314;
+  color: #fbbf24;
+  border-color: #fbbf24;
+}
+
+.zine-home-main .btn-zine-secondary:hover {
+  background-color: #1f2226;
+}
+
+@media (min-width: 768px) {
+  .zine-home-main .hero-zine-frame {
+    min-height: 460px;
+  }
+
+  .zine-home-main .hero-content {
+    padding: 3rem 2.75rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .zine-home-main .hero-scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(18, 19, 20, 0.88) 0%,
+      rgba(18, 19, 20, 0.86) 62%,
+      rgba(18, 19, 20, 0.45) 100%
+    );
+  }
+
+  .zine-home-main .hero-bg-img {
+    object-position: center center;
+  }
+}
+
+@media (max-width: 420px) {
+  .zine-home-main .hero-zine-frame {
+    box-shadow: 5px 5px 0px #121314;
+  }
+
+  .zine-home-main .hero-content {
+    padding: 1.5rem 1rem;
+  }
+
+  .zine-home-main .btn-zine {
+    width: 100%;
   }
 }

@@ -1326,6 +1326,17 @@
 ],
     PRACTICAL_INFO: [
     {
+        "id": "info-tickets",
+        "titleEn": "Tickets, Camping, Parking & Reduced Passes",
+        "titleCs": "Vstupenky, kempování, parkování a zlevněné pasy",
+        "descEn": "3-day passes, Comfy+ upgrade, 1-day tickets, tent village, glamping, Parking P1, and Junior, Senior & ZTP/ZTP/P admission.",
+        "descCs": "Třídenní pasy, Comfy+ upgrade, jednodenní vstupenky, stanové městečko, glamping, parkování P1 a vstupné Junior, Senior a ZTP/ZTP/P.",
+        "link": "tickets.html",
+        "linkTextEn": "[ View Tickets & Passes -> ]",
+        "linkTextCs": "[ Zobrazit vstupenky -> ]",
+        "keywords": "tickets vstupenky listky pass passes comfy camping glamping parking ztp junior senior children"
+    },
+    {
         "id": "info-general",
         "titleEn": "ℹ️ Practical Info & Visitor Overview",
         "titleCs": "ℹ️ Praktické informace & Přehled pro návštěvníky",

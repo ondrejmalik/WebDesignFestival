@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en" data-design="09-wand" data-native-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tickets - Festival of Darkness 2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../../../shared/css/festival-features.css">
+  <script src="js/lang.js" defer></script>
+  <script src="../../../shared/js/festival-data.js" defer></script>
+  <script src="../../../shared/js/festival-core.js" defer></script>
+  <script src="../../../shared/js/festival-pages.js" defer></script>
+</head>
+<body class="wand-body">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="Festival of Darkness 2">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">Festival of Darkness <span class="brand-num">2</span></span>
+      </a>
+
+      <nav class="main-nav" aria-label="Primary">
+        <a href="index.html" class="nav-link" data-i18n="nav_home">Overview</a>
+        <a href="program.html" class="nav-link" data-i18n="nav_program">Program</a>
+        <a href="artists.html" class="nav-link">Artists &amp; Stages</a>
+        <a href="practical-info.html" class="nav-link">Info</a>
+        <a href="tickets.html" class="nav-link nav-link-tickets">Tickets</a>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" class="lang-btn" id="lang-toggle" onclick="toggleFestivalLang()" aria-label="Switch language">
+          <span class="lang-code" data-i18n="lang_switch">CZ</span>
+        </button>
+        <a href="program.html" class="btn btn-primary btn-sm" data-i18n="cta_schedule">Full Schedule</a>
+      </div>
+    </div>
+  </header>
+
+  
+<main id="main-content">
+    <section class="page-hero">
+      <div class="container">
+        <p class="hero-meta">Kutná Hora, Czech Republic · 10-12 Jul 2026</p>
+      <h1 class="page-title"><span class="lang-en">Tickets & Passes</span><span class="lang-cs is-hidden">Vstupenky a pasy</span></h1>
+      <p class="page-lead"><span class="lang-en">3-day passes, Comfy+ upgrades, single-day tickets, camping, parking, and reduced admission for Kutná Hora 2026.</span><span class="lang-cs is-hidden">Třídenní pasy, Comfy+ upgrade, jednodenní vstupenky, kempování, parkování a zvýhodněné vstupné pro Kutnou Horu 2026.</span></p>
+      </div>
+    </section>
+    <div class="container fod-mount">
+      <div class="fod-tickets-workspace">
+        <div class="fod-tickets-main fod-tickets-root">
+<!-- Availability / Edition Banner -->
+      <section class="fod-panel" role="status" aria-live="polite">
+        <div class="fod-panel-head">
+          <div>
+            <span class="fod-badge is-active">
+              <span class="lang-en">WAVE 1 · EARLY EDITION IN SALE</span>
+              <span class="lang-cs is-hidden">VLNA 1 · EARLY EDICE V PRODEJI</span>
+            </span>
+            <h2>
+              <span class="lang-en">Limited Wave 1 Allocation Active</span>
+              <span class="lang-cs is-hidden">Omezená kapacita 1. vlny v prodeji</span>
+            </h2>
+          </div>
+          <p class="fod-muted">
+            <span class="lang-en">Next wave releases at a higher price once Wave 1 sells out.</span>
+            <span class="lang-cs is-hidden">Další vlna bude spuštěna za vyšší cenu po vyprodání 1. vlny.</span>
+          </p>
+        </div>
+        <p>
+          <span class="lang-en">All passes are exchanged for an RFID cashless wristband upon arrival at Entrance A. Online checkout opens in the next release; review categories and rates below to plan your group.</span>
+          <span class="lang-cs is-hidden">Všechny vstupenky se při příchodu u Vstupu A mění za bezhotovostní RFID náramek. Online pokladna se otevírá v příštím vydání; níže najdete přehled kategorií a cen.</span>
+        </p>
+      </section>
+
+      <!-- Category Filter Tabs -->
+      <section class="fod-toolbar-panel" aria-label="Ticket categories">
+        <div class="fod-filter-row" role="group" aria-label="Filter tickets by category">
+          <button type="button" class="fod-chip is-active" data-filter="all" aria-pressed="true">
+            <span class="lang-en">All</span>
+            <span class="lang-cs is-hidden">Vše</span>
+          </button>
+          <button type="button" class="fod-chip" data-filter="passes" aria-pressed="false">
+            <span class="lang-en">Festival Passes</span>
+            <span class="lang-cs is-hidden">Festivalové vstupenky</span>
+          </button>
+          <button type="button" class="fod-chip" data-filter="camping" aria-pressed="false">
+            <span class="lang-en">Camping & Glamping</span>
+            <span class="lang-cs is-hidden">Kempování a glamping</span>
+          </button>
+          <button type="button" class="fod-chip" data-filter="parking" aria-pressed="false">
+            <span class="lang-en">Parking</span>
+            <span class="lang-cs is-hidden">Parkování</span>
+          </button>
+          <button type="button" class="fod-chip" data-filter="special" aria-pressed="false">
+            <span class="lang-en">Special & Reduced</span>
+            <span class="lang-cs is-hidden">Speciální vstupné</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Festival Passes -->
+      <section class="fod-panel" data-category-section="passes">
+        <div class="fod-panel-head">
+          <h2>
+            <span class="lang-en">Festival Passes</span>
+            <span class="lang-cs is-hidden">Festivalové vstupenky</span>
+          </h2>
+          <span class="fod-muted">
+            <span class="lang-en">Solar Horizon Stage & Lunar Forest Dome · 60 sets</span>
+            <span class="lang-cs is-hidden">Solar Horizon Stage a Lunar Forest Dome · 60 setů</span>
+          </span>
+        </div>
+
+        <div class="fod-cards-grid">
+          <article class="fod-sub-card" data-category="passes" data-ticket-id="pass-3day-full" data-price-czk="2490" data-name-en="3-Day Full Pass" data-name-cs="3denní celofestivalový pas">
+            <div class="fod-sub-card-head">
+              <span class="fod-badge">
+                <span class="lang-en">3 DAYS · WAVE 1</span>
+                <span class="lang-cs is-hidden">3 DNY · VLNA 1</span>
+              </span>
+              <strong>2,490 CZK / 99 EUR</strong>
+            </div>
+            <h3>
+              <span class="lang-en">3-Day Full Pass</span>
+              <span class="lang-cs is-hidden">Třídenní Full Pass</span>
+            </h3>
+            <p class="fod-muted">
+              <span class="lang-en">Complete weekend access from Friday 10 Jul afternoon to Sunday 12 Jul late night.</span>
+              <span class="lang-cs is-hidden">Kompletní víkendový vstup od pátečního odpoledne 10. 7. do nedělní noci 12. 7.</span>
+            </p>
+            <ul class="fod-feature-list">
+              <li>
+                <span class="lang-en">Entry to both Solar Horizon Stage and Lunar Forest Dome</span>
+                <span class="lang-cs is-hidden">Vstup na obě scény: Solar Horizon Stage i Lunar Forest Dome</span>
+              </li>
+              <li>
+                <span class="lang-en">All 60 live performances and late-night DJ sets</span>
+                <span class="lang-cs is-hidden">Všech 60 živých vystoupení a nočních DJ setů</span>
+              </li>
+              <li>
+                <span class="lang-en">RFID cashless wristband exchange at Entrance A</span>
+                <span class="lang-cs is-hidden">Výměna za bezhotovostní RFID náramek u Vstupu A</span>
+              </li>
+            </ul>
+          </article>
+
+          <article class="fod-sub-card" data-category="passes" data-ticket-id="pass-3day-comfy" data-price-czk="3690" data-name-en="3-Day Comfy+ Pass" data-name-cs="3denní Comfy+ pas">
+            <div class="fod-sub-card-head">
+              <span class="fod-badge is-active">
+                <span class="lang-en">COMFY+ · LIMITED</span>
+                <span class="lang-cs is-hidden">COMFY+ · OMEZENO</span>
+              </span>
+              <strong>3,690 CZK / 149 EUR</strong>
+            </div>
+            <h3>
+              <span class="lang-en">3-Day Comfy+ Pass</span>
+              <span class="lang-cs is-hidden">Třídenní Comfy+ Pass</span>
+            </h3>
+            <p class="fod-muted">
+              <span class="lang-en">Upgraded festival experience with dedicated fast-track lane and private comfort facilities.</span>
+              <span class="lang-cs is-hidden">Rozšířený festivalový komfort s přednostním vstupem a soukromým zázemím.</span>
+            </p>
+            <ul class="fod-feature-list">
+              <li>
+                <span class="lang-en">Dedicated fast-track wristband check-in at Entrance A</span>
+                <span class="lang-cs is-hidden">Přednostní odbavení fast-track u Vstupu A</span>
+              </li>
+              <li>
+                <span class="lang-en">Access to Comfy+ elevated lounge and private cocktail bar</span>
+                <span class="lang-cs is-hidden">Přístup do vyvýšené Comfy+ zóny a soukromého baru</span>
+              </li>
+              <li>
+                <span class="lang-en">Free ceramic flush WC and 24-hour site re-entry access</span>
+                <span class="lang-cs is-hidden">Keramické toalety zdarma a nepřetržitý 24h vstup do areálu</span>
+              </li>
+            </ul>
+          </article>
+
+          <article class="fod-sub-card" data-category="passes" data-ticket-id="pass-1day" data-price-czk="1090" data-name-en="1-Day Ticket (Fri / Sat / Sun)" data-name-cs="1denní vstupenka (Pá / So / Ne)">
+            <div class="fod-sub-card-head">
+              <span class="fod-badge">
+                <span class="lang-en">SINGLE DAY</span>
+                <span class="lang-cs is-hidden">JEDNODENNÍ</span>
+              </span>
+              <strong>1,090 CZK / 45 EUR</strong>
+            </div>
+            <h3>
+              <span class="lang-en">1-Day Ticket (Fri / Sat / Sun)</span>
+              <span class="lang-cs is-hidden">Jednodenní vstupenka (Pá / So / Ne)</span>
+            </h3>
+            <p class="fod-muted">
+              <span class="lang-en">Valid for one selected festival day from gate opening until 04:00 dome closing.</span>
+              <span class="lang-cs is-hidden">Platí pro jeden zvolený festivalový den od otevření bran do 04:00.</span>
+            </p>
+            <ul class="fod-feature-list">
+              <li>
+                <span class="lang-en">Choose Friday 10 Jul, Saturday 11 Jul, or Sunday 12 Jul</span>
+                <span class="lang-cs is-hidden">Výběr z pátku 10. 7., soboty 11. 7. nebo neděle 12. 7.</span>
+              </li>
+              <li>
+                <span class="lang-en">Full access to both stages during your chosen day</span>
+                <span class="lang-cs is-hidden">Plný přístup na obě scény během zvoleného dne</span>
+              </li>
+              <li>
+                <span class="lang-en">Free shuttle bus transfer from Kutná Hora station included</span>
+                <span class="lang-cs is-hidden">Bezplatný shuttle bus z nádraží Kutná Hora v ceně</span>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- Camping & Glamping -->
+      <section class="fod-panel" data-category-section="camping">
+        <div class="fod-panel-head">
+          <h2>
+            <span class="lang-en">Camping & Glamping</span>
+            <span class="lang-cs is-hidden">Kempování a glamping</span>
+          </h2>
+          <span class="fod-muted">
+            <span class="lang-en">Valid festival pass required for camp entry</span>
+            <span class="lang-cs is-hidden">Pro vstup do kempu je nutná platná festivalová vstupenka</span>
+          </span>
+        </div>
+
+        <div class="fod-cards-grid">
+          <article class="fod-sub-card" data-category="camping" data-ticket-id="camp-standard" data-price-czk="490" data-name-en="Standard Tent Village (3 Nights)" data-name-cs="Standardní stanové městečko (3 noci)">
+            <div class="fod-sub-card-head">
+              <span class="fod-badge">
+                <span class="lang-en">3 NIGHTS · PER PERSON</span>
+                <span class="lang-cs is-hidden">3 NOCI · ZA OSOBU</span>
+              </span>
+              <strong>490 CZK / 20 EUR</strong>
+            </div>
+            <h3>
+              <span class="lang-en">Standard Tent Village (3 Nights)</span>
+              <span class="lang-cs is-hidden">Standardní stanové městečko (3 noci)</span>
+            </h3>
+            <p class="fod-muted">
+              <span class="lang-en">Bring your own tent to the fenced grass meadow 250 m from Entrance A.</span>
+              <span class="lang-cs is-hidden">Vlastní stan na oplocené travnaté louce 250 m od Vstupu A.</span>
+            </p>
+            <ul class="fod-feature-list">
+              <li>
+                <span class="lang-en">Open Friday 10 Jul 10:00 through Monday 13 Jul 12:00</span>
+                <span class="lang-cs is-hidden">Otevřeno od pátku 10. 7. 10:00 do pondělí 13. 7. 12:00</span>
+              </li>
+              <li>
+                <span class="lang-en">24-hour security reception, drinking water, and showers</span>
+                <span class="lang-cs is-hidden">Nepřetržitá ostraha, pitná voda a sprchy v areálu kempu</span>
+              </li>
+            </ul>
+          </article>
+
+          <article class="fod-sub-card" data-category="camping" data-ticket-id="camp-ztp" data-price-czk="490" data-name-en="Accessible Camp ZTP / ZTP/P" data-name-cs="Bezbariérový kemp ZTP / ZTP/P">
+            <div class="fod-sub-card-head">
+              <span class="fod-badge">
+                <span class="lang-en">ACCESSIBLE · ZTP</span>
+                <span class="lang-cs is-hidden">BEZBARIÉROVÝ · ZTP</span>
+              </span>
+              <strong>490 CZK / 20 EUR</strong>
+            </div>
+            <h3>
+              <span class="lang-en">Accessible Camp ZTP / ZTP/P</span>
+              <span class="lang-cs is-hidden">Bezbariérový kemp ZTP / ZTP/P</span>
+            </h3>
+            <p class="fod-muted">
+              <span class="lang-en">Level ground zone directly adjacent to Entrance A with wheelchair-accessible facilities.</span>
+              <span class="lang-cs is-hidden">Rovinatý sektor přímo u Vstupu A s bezbariérovým sociálním zázemím.</span>
+            </p>
+            <ul class="fod-feature-list">
+              <li>
+                <span class="lang-en">Step-free path to Entrance A and accessible sanitary units</span>
+                <span class="lang-cs is-hidden">Bezbariérová cesta ke Vstupu A a upravené toalety a sprchy</span>
+              </li>
+              <li>
+                <span class="lang-en">Power outlets available for medical device charging</span>
+                <span class="lang-cs is-hidden">Elektrické přípojky pro dobíjení zdravotních pomůcek</span>
+              </li>
+            </ul>
+          </article>
+
+          <article class="fod-sub-card" data-category="camping" data-ticket-id="camp-comfort" data-price-czk="2990" data-name-en="Pre-Pitched Comfort Tent (2 Persons)" data-name-cs="Postavený Comfort stan (2 osoby)">
+            <div class="fod-sub-card-head">
+              <span class="fod-badge is-active">
+                <span class="lang-en">GLAMPING · 2 PERSONS</span>
+                <span class="lang-cs is-hidden">GLAMPING · 2 OSOBY</span>
+              </span>
+              <strong>2,990 CZK / 119 EUR</strong>
+            </div>
+            <h3>
+              <span class="lang-en">Pre-Pitched Comfort Tent (2 Persons)</span>
+              <span class="lang-cs is-hidden">Předem postavený Comfort stan (2 osoby)</span>
+            </h3>
+            <p class="fod-muted">
+              <span class="lang-en">Ready on arrival with mattresses, fitted sheets, blankets, and solar lantern.</span>
+              <span class="lang-cs is-hidden">Připraveno po příjezdu včetně matrací, prostěradel, dek a solární lampy.</span>
+            </p>
+            <ul class="fod-feature-list">
+              <li>
+                <span class="lang-en">Price covers 2 guests for all 3 nights (Fri to Mon)</span>
+                <span class="lang-cs is-hidden">Cena zahrnuje ubytování pro 2 osoby na všechny 3 noci (Pá-Po)</span>
+              </li>
+              <li>
+                <span class="lang-en">Dedicated check-in desk and lockable tent zipper</span>
+                <span class="lang-cs is-hidden">Vyhrazená recepce a uzamykatelný vchod stanu</span>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- Parking -->
+      <section class="fod-panel" data-category-section="parking">
+        <div class="fod-panel-head">
+          <h2>
+            <span class="lang-en">Parking</span>
+            <span class="lang-cs is-hidden">Parkování</span>
+          </h2>
+          <span class="fod-muted">
+            <span class="lang-en">Note: No sleeping in cars on parking lots</span>
+            <span class="lang-cs is-hidden">Upozornění: Přespávání v autech na parkovištích je zakázáno</span>
+          </span>
+        </div>
+
+        <div class="fod-cards-grid">
+          <article class="fod-sub-card" data-category="parking" data-ticket-id="parking-p1-3day" data-price-czk="250" data-name-en="Parking P1 (3-Day Pass)" data-name-cs="Parkování P1 (3denní)">
+            <div class="fod-sub-card-head">
+              <span class="fod-badge">
+                <span class="lang-en">3 DAYS · LOT P1</span>
+                <span class="lang-cs is-hidden">3 DNY · PARKOVIŠTĚ P1</span>
+              </span>
+              <strong>250 CZK / 10 EUR</strong>
+            </div>
+            <h3>
+              <span class="lang-en">Parking P1 (3-Day Pass)</span>
+              <span class="lang-cs is-hidden">Parkování P1 (třídenní)</span>
+            </h3>
+            <p class="fod-muted">
+              <span class="lang-en">Official festival car park 400 m from Entrance A, valid Friday to Monday noon.</span>
+              <span class="lang-cs is-hidden">Oficiální festivalové parkoviště 400 m od Vstupu A, platné od pátku do pondělí 12:00.</span>
+            </p>
+            <ul class="fod-feature-list">
+              <li>
+                <span class="lang-en">Passenger cars up to 3.5 t; re-entry permitted</span>
+                <span class="lang-cs is-hidden">Osobní automobily do 3,5 t; opakovaný vjezd povolen</span>
+              </li>
+              <li>
+                <span class="lang-en">Overnight sleeping inside vehicles is strictly prohibited</span>
+                <span class="lang-cs is-hidden">Přespávání uvnitř vozidel na parkovišti je přísně zakázáno</span>
+              </li>
+            </ul>
+          </article>
+
+          <article class="fod-sub-card" data-category="parking" data-ticket-id="parking-p1-1day" data-price-czk="100" data-name-en="1-Day Parking P1" data-name-cs="1denní parkování P1">
+            <div class="fod-sub-card-head">
+              <span class="fod-badge">
+                <span class="lang-en">1 DAY · LOT P1</span>
+                <span class="lang-cs is-hidden">1 DEN · PARKOVIŠTĚ P1</span>
+              </span>
+              <strong>100 CZK / 4 EUR</strong>
+            </div>
+            <h3>
+              <span class="lang-en">1-Day Parking P1</span>
+              <span class="lang-cs is-hidden">Jednodenní parkování P1</span>
+            </h3>
+            <p class="fod-muted">
+              <span class="lang-en">Single-day vehicle space on Lot P1 valid until 06:00 the following morning.</span>
+              <span class="lang-cs is-hidden">Jednodenní parkovací místo na ploše P1 platné do 06:00 následujícího rána.</span>
+            </p>
+            <ul class="fod-feature-list">
+              <li>
+                <span class="lang-en">Ideal for 1-day ticket holders driving to Kutná Hora</span>
+                <span class="lang-cs is-hidden">Ideální pro návštěvníky s jednodenní vstupenkou</span>
+              </li>
+              <li>
+                <span class="lang-en">No overnight camping or sleeping in cars on parking lots</span>
+                <span class="lang-cs is-hidden">Zákaz kempování a přespávání v autech na parkovištích</span>
+              </li>
+            </ul>
+          </article>
+
+          <article class="fod-sub-card" data-category="parking" data-ticket-id="parking-ztp" data-price-czk="0" data-name-en="Accessible Parking ZTP / ZTP/P" data-name-cs="Bezbariérové parkování ZTP / ZTP/P">
+            <div class="fod-sub-card-head">
+              <span class="fod-badge is-active">
+                <span class="lang-en">ZTP / ZTP/P PERMIT</span>
+                <span class="lang-cs is-hidden">PRŮKAZ ZTP / ZTP/P</span>
+              </span>
+              <strong>
+                <span class="lang-en">Free with permit</span>
+                <span class="lang-cs is-hidden">Zdarma s průkazem</span>
+              </strong>
+            </div>
+            <h3>
+              <span class="lang-en">Accessible Parking ZTP / ZTP/P</span>
+              <span class="lang-cs is-hidden">Bezbariérové parkování ZTP / ZTP/P</span>
+            </h3>
+            <p class="fod-muted">
+              <span class="lang-en">Reserved paved spaces directly next to Entrance A for vehicles displaying a valid disability parking card.</span>
+              <span class="lang-cs is-hidden">Vyhrazená zpevněná místa přímo u Vstupu A pro vozidla s platným parkovacím průkazem OZP.</span>
+            </p>
+            <ul class="fod-feature-list">
+              <li>
+                <span class="lang-en">Valid ZTP / ZTP/P card and vehicle permit required at gate</span>
+                <span class="lang-cs is-hidden">Nutno předložit platný průkaz ZTP / ZTP/P a označení vozidla</span>
+              </li>
+              <li>
+                <span class="lang-en">Direct level access to wristband exchange</span>
+                <span class="lang-cs is-hidden">Přímý bezbariérový přístup k výměně náramků</span>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- Special & Reduced -->
+      <section class="fod-panel" data-category-section="special">
+        <div class="fod-panel-head">
+          <h2>
+            <span class="lang-en">Special & Reduced</span>
+            <span class="lang-cs is-hidden">Speciální vstupné</span>
+          </h2>
+          <span class="fod-muted">
+            <span class="lang-en">Photo ID or ZTP card verified at Entrance A</span>
+            <span class="lang-cs is-hidden">Kontrola dokladu totožnosti nebo průkazu ZTP u Vstupu A</span>
+          </span>
+        </div>
+
+        <div class="fod-cards-grid">
+          <article class="fod-sub-card" data-category="special" data-ticket-id="special-child" data-price-czk="0" data-name-en="Children under 12" data-name-cs="Děti do 12 let">
+            <div class="fod-sub-card-head">
+              <span class="fod-badge is-active">
+                <span class="lang-en">UNDER 12 YRS</span>
+                <span class="lang-cs is-hidden">DO 12 LET</span>
+              </span>
+              <strong>
+                <span class="lang-en">Free with adult</span>
+                <span class="lang-cs is-hidden">Zdarma s dospělým</span>
+              </strong>
+            </div>
+            <h3>
+              <span class="lang-en">Children under 12</span>
+              <span class="lang-cs is-hidden">Děti do 12 let</span>
+            </h3>
+            <p class="fod-muted">
+              <span class="lang-en">Children aged 0 to 11 enter free when accompanied by a parent or legal guardian with a valid pass.</span>
+              <span class="lang-cs is-hidden">Děti od 0 do 11 let mají vstup zdarma v doprovodu rodiče nebo zákonného zástupce s platnou vstupenkou.</span>
+            </p>
+            <ul class="fod-feature-list">
+              <li>
+                <span class="lang-en">Child safety ID wristband issued at Entrance A</span>
+                <span class="lang-cs is-hidden">Dětský bezpečnostní náramek vydáván u Vstupu A</span>
+              </li>
+              <li>
+                <span class="lang-en">Hearing protection strongly recommended near stages</span>
+                <span class="lang-cs is-hidden">V blízkosti scén důrazně doporučujeme ochranu sluchu</span>
+              </li>
+            </ul>
+          </article>
+
+          <article class="fod-sub-card" data-category="special" data-ticket-id="special-junior" data-price-czk="1690" data-name-en="Junior (12-17 yrs)" data-name-cs="Junior (12-17 let)">
+            <div class="fod-sub-card-head">
+              <span class="fod-badge">
+                <span class="lang-en">AGES 12-17 · 3 DAYS</span>
+                <span class="lang-cs is-hidden">12-17 LET · 3 DNY</span>
+              </span>
+              <strong>1,690 CZK / 69 EUR</strong>
+            </div>
+            <h3>
+              <span class="lang-en">Junior (12-17 yrs)</span>
+              <span class="lang-cs is-hidden">Junior (12-17 let)</span>
+            </h3>
+            <p class="fod-muted">
+              <span class="lang-en">Full 3-day festival pass for visitors aged 12 to 17 on the opening day of the festival.</span>
+              <span class="lang-cs is-hidden">Plnohodnotný třídenní pass pro návštěvníky ve věku 12 až 17 let v den zahájení festivalu.</span>
+            </p>
+            <ul class="fod-feature-list">
+              <li>
+                <span class="lang-en">Valid photo ID showing date of birth required at Entrance A</span>
+                <span class="lang-cs is-hidden">Nutno předložit platný doklad s datem narození u Vstupu A</span>
+              </li>
+              <li>
+                <span class="lang-en">Visitors under 15 must be accompanied by an adult</span>
+                <span class="lang-cs is-hidden">Návštěvníci mladší 15 let pouze v doprovodu dospělé osoby</span>
+              </li>
+            </ul>
+          </article>
+
+          <article class="fod-sub-card" data-category="special" data-ticket-id="special-senior" data-price-czk="1790" data-name-en="Senior (65+)" data-name-cs="Senior (65+)">
+            <div class="fod-sub-card-head">
+              <span class="fod-badge">
+                <span class="lang-en">AGES 65+ · 3 DAYS</span>
+                <span class="lang-cs is-hidden">65+ LET · 3 DNY</span>
+              </span>
+              <strong>1,790 CZK / 72 EUR</strong>
+            </div>
+            <h3>
+              <span class="lang-en">Senior (65+)</span>
+              <span class="lang-cs is-hidden">Senior (65+)</span>
+            </h3>
+            <p class="fod-muted">
+              <span class="lang-en">Reduced 3-day pass for visitors aged 65 and older across all stages and festival zones.</span>
+              <span class="lang-cs is-hidden">Zvýhodněný třídenní pass pro návštěvníky od 65 let na všechny scény a festivalové zóny.</span>
+            </p>
+            <ul class="fod-feature-list">
+              <li>
+                <span class="lang-en">Valid photo ID showing date of birth verified at Entrance A</span>
+                <span class="lang-cs is-hidden">Kontrola platného dokladu s datem narození u Vstupu A</span>
+              </li>
+              <li>
+                <span class="lang-en">Includes shaded seating areas at Solar Horizon Stage</span>
+                <span class="lang-cs is-hidden">Zahrnuje přístup do zastíněných odpočinkových zón u Solar Horizon Stage</span>
+              </li>
+            </ul>
+          </article>
+
+          <article class="fod-sub-card" data-category="special" data-ticket-id="special-ztp" data-price-czk="1490" data-name-en="ZTP / ZTP/P &amp; ZTP/P Companion" data-name-cs="ZTP / ZTP/P a doprovod ZTP/P">
+            <div class="fod-sub-card-head">
+              <span class="fod-badge">
+                <span class="lang-en">ZTP / ZTP/P · 3 DAYS</span>
+                <span class="lang-cs is-hidden">ZTP / ZTP/P · 3 DNY</span>
+              </span>
+              <strong>1,490 CZK / 59 EUR</strong>
+            </div>
+            <h3>
+              <span class="lang-en">ZTP / ZTP/P & ZTP/P Companion</span>
+              <span class="lang-cs is-hidden">ZTP / ZTP/P a doprovod ZTP/P</span>
+            </h3>
+            <p class="fod-muted">
+              <span class="lang-en">Reduced 3-day pass for ZTP and ZTP/P cardholders. One companion for a ZTP/P holder enters free.</span>
+              <span class="lang-cs is-hidden">Zvýhodněný třídenní pass pro držitele průkazu ZTP a ZTP/P. Jeden doprovod držitele ZTP/P má vstup zdarma.</span>
+            </p>
+            <ul class="fod-feature-list">
+              <li>
+                <span class="lang-en">Valid ZTP or ZTP/P card required at Entrance A</span>
+                <span class="lang-cs is-hidden">Platný průkaz ZTP nebo ZTP/P je nutné předložit u Vstupu A</span>
+              </li>
+              <li>
+                <span class="lang-en">Access to raised viewing platforms at both stages</span>
+                <span class="lang-cs is-hidden">Přístup na vyvýšené bezbariérové plošiny u obou scén</span>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- Booking Notes & Cross-Links -->
+      <section class="fod-panel">
+        <div class="fod-panel-head">
+          <h2>
+            <span class="lang-en">Booking Notes & Festival Transit</span>
+            <span class="lang-cs is-hidden">Podmínky nákupu a doprava</span>
+          </h2>
+        </div>
+
+        <details class="fod-faq-item" open>
+          <summary>
+            <span class="lang-en">Ticketing fees & online checkout release</span>
+            <span class="lang-cs is-hidden">Servisní poplatky a spuštění online prodeje</span>
+          </summary>
+          <p>
+            <span class="lang-en">All listed prices exclude ticketing service fees. Online checkout opens in the next release; no payment details are collected on this preview page.</span>
+            <span class="lang-cs is-hidden">Všechny uvedené ceny jsou bez servisních poplatků prodejce. Online pokladna se otevírá v příštím vydání; na této stránce se nevybírají žádné platební údaje.</span>
+          </p>
+        </details>
+
+        <details class="fod-faq-item">
+          <summary>
+            <span class="lang-en">RFID cashless wristband & Entrance A check-in</span>
+            <span class="lang-cs is-hidden">Bezhotovostní RFID náramek a odbavení u Vstupu A</span>
+          </summary>
+          <p>
+            <span class="lang-en">Every festival pass is exchanged for a personal RFID wristband at Entrance A. Top up credit online before arrival or at cashless stations inside the grounds.</span>
+            <span class="lang-cs is-hidden">Každá vstupenka se u Vstupu A mění za osobní RFID náramek. Kredit lze dobít online před příjezdem nebo na dobíjecích místech v areálu.</span>
+          </p>
+        </details>
+
+        <details class="fod-faq-item">
+          <summary>
+            <span class="lang-en">Shuttle bus, route map & practical guide</span>
+            <span class="lang-cs is-hidden">Shuttle bus, mapa trasy a praktický průvodce</span>
+          </summary>
+          <p>
+            <span class="lang-en">Check <a href="practical-info.html" class="inline-link">Practical Info & Transit</a> for free shuttle bus timetables from Kutná Hora station, the interactive route map, and full cashless rules.</span>
+            <span class="lang-cs is-hidden">Podrobnosti o bezplatném shuttle busu z nádraží Kutná Hora, interaktivní mapu trasy a pravidla cashless najdete v sekci <a href="practical-info.html" class="inline-link">Praktické informace a doprava</a>.</span>
+          </p>
+        </details>
+      </section>
+        </div>
+        <aside id="fod-ticket-cart" class="fod-cart-panel" aria-live="polite" aria-label="Ticket Cart"></aside>
+      </div>
+      <div id="fod-mobile-cart-bar" class="fod-mobile-cart-bar is-empty" hidden></div>
+    </div>
+</main>
+
+
+  <footer class="site-footer">
+    <div class="container fod-footer-inner">
+      <div class="fod-footer-top">
+        <div class="fod-footer-brand-col">
+          <div class="fod-footer-wordmark">
+            <span class="fod-wordmark-top">FESTIVAL</span>
+            <span class="fod-wordmark-main">TEMNOTY <span class="fod-wordmark-num">2</span></span>
+          </div>
+          <div class="fod-footer-meta-stack">
+            <p class="fod-footer-meta-line" data-i18n="fod_footer_dates">10-12 / 07.2026</p>
+            <p class="fod-footer-meta-line" data-i18n="fod_footer_venue">SEDLEC · KUTNÁ HORA</p>
+          </div>
+        </div>
+
+        <div class="fod-footer-col">
+          <p class="fod-footer-heading" id="fod-footer-nav-festival" data-i18n="fod_footer_col_festival">FESTIVAL</p>
+          <nav aria-labelledby="fod-footer-nav-festival">
+            <ul class="fod-footer-list">
+              <li><a href="index.html" data-i18n="fod_footer_nav_home">Overview</a></li>
+              <li><a href="program.html" data-i18n="fod_footer_nav_program">Program</a></li>
+              <li><a href="artists.html" data-i18n="fod_footer_nav_artists">Artists</a></li>
+              <li><a href="artist-detail.html" data-i18n="fod_footer_nav_artist_detail">Artist Spotlight</a></li>
+              <li><a href="stages.html" data-i18n="fod_footer_nav_stages">Stages &amp; Grounds</a></li>
+              <li><a href="tickets.html" data-i18n="fod_footer_nav_tickets" aria-current="page">Tickets &amp; Passes</a></li>
+              <li><a href="my-schedule.html" data-i18n="fod_footer_nav_schedule">My Schedule</a></li>
+              <li><a href="search.html" data-i18n="fod_footer_nav_search">Search</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="fod-footer-col">
+          <p class="fod-footer-heading" id="fod-footer-nav-info" data-i18n="fod_footer_col_info">PRACTICAL INFO</p>
+          <nav aria-labelledby="fod-footer-nav-info">
+            <ul class="fod-footer-list">
+              <li><a href="practical-info.html" data-i18n="fod_footer_info_all">Practical Info</a></li>
+              <li><a href="tickets.html" data-i18n="fod_footer_info_tickets">Tickets &amp; Entry</a></li>
+              <li><a href="practical-info.html#doprava" data-i18n="fod_footer_info_travel">Getting There</a></li>
+              <li><a href="practical-info.html#kemp" data-i18n="fod_footer_info_camp">Camping &amp; Stay</a></li>
+              <li><a href="practical-info.html#cashless" data-i18n="fod_footer_info_cashless">Cashless &amp; Grounds</a></li>
+              <li><a href="practical-info.html#faq" data-i18n="fod_footer_info_faq">FAQ</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="fod-footer-col">
+          <p class="fod-footer-heading" data-i18n="fod_footer_col_contact">CONTACT</p>
+          <address class="fod-footer-address">
+            <span data-i18n="fod_footer_addr_line1">Sedlec Festival Grounds</span>
+            <span data-i18n="fod_footer_addr_line2">284 03 Kutná Hora</span>
+            <a href="mailto:info@festivaltemnoty.cz" class="fod-footer-mail">info@festivaltemnoty.cz</a>
+            <a href="practical-info.html#parametry" class="fod-footer-ext" data-i18n="fod_footer_contact_link">Site &amp; Contact Info ↗</a>
+          </address>
+
+          <p class="fod-footer-heading fod-footer-follow-heading" id="fod-footer-social-label" data-i18n="fod_footer_follow">FOLLOW US</p>
+          <div class="fod-social-row" role="group" aria-labelledby="fod-footer-social-label">
+            <button type="button" class="fod-social-btn" data-social-platform="Facebook" data-i18n-title="fod_footer_social_fb" title="Facebook (placeholder)">
+              <svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              <span class="fod-sr-only" data-i18n="fod_footer_social_fb">Facebook (placeholder)</span>
+            </button>
+            <button type="button" class="fod-social-btn" data-social-platform="Instagram" data-i18n-title="fod_footer_social_ig" title="Instagram (placeholder)">
+              <svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+              <span class="fod-sr-only" data-i18n="fod_footer_social_ig">Instagram (placeholder)</span>
+            </button>
+            <button type="button" class="fod-social-btn" data-social-platform="Spotify" data-i18n-title="fod_footer_social_sp" title="Spotify (placeholder)">
+              <svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 10.5c2.7-.8 5.7-.6 8.2.5"/><path d="M8.8 13.5c2.2-.6 4.6-.4 6.6.4"/><path d="M9.6 16.4c1.6-.4 3.4-.3 4.9.3"/></svg>
+              <span class="fod-sr-only" data-i18n="fod_footer_social_sp">Spotify (placeholder)</span>
+            </button>
+            <button type="button" class="fod-social-btn" data-social-platform="YouTube" data-i18n-title="fod_footer_social_yt" title="YouTube (placeholder)">
+              <svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 2C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+              <span class="fod-sr-only" data-i18n="fod_footer_social_yt">YouTube (placeholder)</span>
+            </button>
+            <button type="button" class="fod-social-btn" data-social-platform="X" data-i18n-title="fod_footer_social_x" title="X (placeholder)">
+              <svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l16 16"/><path d="M20 4L4 20"/></svg>
+              <span class="fod-sr-only" data-i18n="fod_footer_social_x">X (placeholder)</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="fod-footer-bottom">
+        <div class="fod-footer-bottom-meta">
+          <p class="fod-footer-copy" data-i18n="fod_footer_copy">© 2026 Festival Temnoty 2 · Kutná Hora</p>
+        </div>
+        <button type="button" class="fod-footer-top-btn" data-footer-top="true" data-i18n="fod_footer_top">BACK TO TOP ↑</button>
+      </div>
+    </div>
+  </footer>
+  <nav class="bottom-nav-dock" aria-label="Mobile navigation">
+    <a href="artists.html" class="bottom-dock-item" data-page="artists.html">
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/><circle cx="12" cy="12" r="10"/></svg></span>
+      <span class="dock-label">Artists & Stages</span>
+    </a>
+    <a href="practical-info.html" class="bottom-dock-item" data-page="practical-info.html">
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span>
+      <span class="dock-label" data-i18n="dock_info">Info</span>
+    </a>
+    <a href="index.html" class="bottom-dock-item bottom-dock-home" data-page="index.html">
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+      <span class="dock-label" data-i18n="dock_home">Home</span>
+    </a>
+    <a href="program.html" class="bottom-dock-item" data-page="program.html">
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg></span>
+      <span class="dock-label" data-i18n="dock_program">Program</span>
+    </a>
+    <a href="tickets.html" class="bottom-dock-item bottom-dock-tickets" data-page="tickets.html">
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg></span>
+      <span class="dock-label">Tickets</span>
+    </a>
+  </nav>
+
+  <script>
+    (function () {
+      var chips = document.querySelectorAll('.fod-chip[data-filter]');
+      var sections = document.querySelectorAll('[data-category-section]');
+      var cards = document.querySelectorAll('#tickets-grid .fod-sub-card[data-category]');
+      if (!chips.length) return;
+
+      chips.forEach(function (chip) {
+        chip.addEventListener('click', function () {
+          var filter = chip.getAttribute('data-filter');
+          chips.forEach(function (btn) {
+            var active = btn === chip;
+            btn.classList.toggle('is-active', active);
+            btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+          });
+          if (sections.length) {
+            sections.forEach(function (sec) {
+              var cat = sec.getAttribute('data-category-section');
+              var show = filter === 'all' || cat === filter;
+              sec.classList.toggle('is-hidden', !show);
+            });
+          } else if (cards.length) {
+            cards.forEach(function (card) {
+              var cat = card.getAttribute('data-category');
+              var show = filter === 'all' || cat === filter;
+              card.classList.toggle('is-hidden', !show);
+            });
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

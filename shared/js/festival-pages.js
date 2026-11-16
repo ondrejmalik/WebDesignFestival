@@ -147,7 +147,9 @@
 
       if (statusEl) {
         const total = data.PERFORMERS.length;
-        const stageLabel = state.stage === 'lunar' ? ' (Lunar Forest Dome)' : (state.stage === 'solar' ? ' (Solar Horizon)' : '');
+        const stageLabel = state.stage === 'lunar'
+          ? ' (Lunar Forest Dome)'
+          : (state.stage === 'solar' ? ' (Solar Horizon Stage)' : '');
         statusEl.textContent = isCs
           ? `Zobrazeno ${matched.length} z ${total} vystoupení${stageLabel}`
           : `Showing ${matched.length} of ${total} shows${stageLabel}`;
@@ -177,6 +179,57 @@
         return;
       }
 
+      function getNormalizedHour(startStr) {
+        const h = parseInt(String(startStr || '0').split(':')[0], 10) || 0;
+        return h < 8 ? h + 24 : h;
+      }
+
+      function formatHourSlotLabel(normHour) {
+        const startH = normHour >= 24 ? normHour - 24 : normHour;
+        const endH = (startH + 1) % 24;
+        return `${String(startH).padStart(2, '0')}:00 - ${String(endH).padStart(2, '0')}:00`;
+      }
+
+      function renderPerformerCard(p) {
+        const isFav = favIds.has(p.id);
+        const stageCls = p.stageKey === 'lunar' ? 'is-lunar' : 'is-solar';
+        const hlCls = state.highlightId === p.id ? 'spot-highlight' : '';
+        return `
+          <article class="fod-timetable-card ${stageCls} ${isFav ? 'is-saved' : ''} ${hlCls}" id="${p.id}" data-id="${p.id}">
+            <div class="fod-timetable-card-top">
+              <span class="fod-slot-time">${core.escapeHtml(p.time)}</span>
+              <span class="fod-stage-pill ${stageCls}">${core.escapeHtml(p.stage)}</span>
+            </div>
+            <div class="fod-timetable-card-body">
+              <a href="artist-detail.html?id=${p.id}&from=program#${p.id}" class="fod-slot-artist">
+                ${core.escapeHtml(p.name)}
+              </a>
+              <div class="fod-timetable-card-meta">
+                <span class="fod-origin-pill">${core.escapeHtml(p.origin)}</span>
+                <span class="fod-slot-genre">${core.escapeHtml(p.genre)}</span>
+              </div>
+            </div>
+            <div class="fod-slot-actions">
+              <a href="artist-detail.html?id=${p.id}&from=program#${p.id}" class="fod-btn fod-btn-ghost fod-btn-sm">
+                Detail<span class="fod-sr-only"> (${core.escapeHtml(p.name)})</span>
+              </a>
+              <button type="button" class="fod-btn fod-btn-sm fav-toggle-btn ${isFav ? 'is-saved' : ''}" data-perf-id="${p.id}" aria-pressed="${isFav}">
+                ${isFav ? (isCs ? '✓ V plánu' : '✓ In Plan') : (isCs ? '+ Přidat' : '+ Add')}<span class="fod-sr-only"> (${core.escapeHtml(p.name)})</span>
+              </button>
+            </div>
+          </article>
+        `;
+      }
+
+      function renderEmptySlotCell() {
+        const hasSecondaryFilter = state.genre !== 'all' || state.onlyFavs || state.query.trim() !== '';
+        const label = hasSecondaryFilter
+          ? (isCs ? 'Bez odpovídajícího setu' : 'No matching set')
+          : (isCs ? 'Přestavba pódia' : 'Stage changeover');
+        return `<div class="fod-slot-empty">${label}</div>`;
+      }
+
+      const isSingleStage = state.stage === 'solar' || state.stage === 'lunar';
       const daysToShow = data.DAYS.filter(d => state.day === 'all' || state.day === d.key);
       daysContainer.innerHTML = daysToShow.map(day => {
         const items = matched
@@ -189,6 +242,79 @@
           ? core.formatCzPlural(items.length, 'vystoupení', 'vystoupení', 'vystoupení')
           : (items.length === 1 ? '1 set' : `${items.length} sets`);
 
+        const bucketMap = new Map();
+        items.forEach(p => {
+          const normHour = getNormalizedHour(p.start);
+          if (!bucketMap.has(normHour)) {
+            bucketMap.set(normHour, { normHour, solar: [], lunar: [] });
+          }
+          const bucket = bucketMap.get(normHour);
+          if (p.stageKey === 'lunar') bucket.lunar.push(p);
+          else bucket.solar.push(p);
+        });
+
+        const buckets = Array.from(bucketMap.values()).sort((a, b) => a.normHour - b.normHour);
+
+        const headHtml = isSingleStage
+          ? `
+            <div class="fod-timetable-head is-single">
+              <div class="fod-th-time">${isCs ? 'Časový slot' : 'Time Slot'}</div>
+              <div class="fod-th-stage ${state.stage === 'lunar' ? 'is-lunar' : 'is-solar'}">
+                <span class="fod-stage-pill ${state.stage === 'lunar' ? 'is-lunar' : 'is-solar'}">
+                  ${state.stage === 'lunar'
+                    ? (isCs ? 'Lunar Forest Dome (Kryté)' : 'Lunar Forest Dome (Covered)')
+                    : (isCs ? 'Solar Horizon Stage (Venkovní)' : 'Solar Horizon Stage (Open-air)')}
+                </span>
+              </div>
+            </div>
+          `
+          : `
+            <div class="fod-timetable-head is-parallel">
+              <div class="fod-th-time">${isCs ? 'Časový slot' : 'Time Slot'}</div>
+              <div class="fod-th-stage is-solar">
+                <span class="fod-stage-pill is-solar">${isCs ? 'Solar Horizon Stage (Venkovní)' : 'Solar Horizon Stage (Open-air)'}</span>
+              </div>
+              <div class="fod-th-stage is-lunar">
+                <span class="fod-stage-pill is-lunar">${isCs ? 'Lunar Forest Dome (Kryté)' : 'Lunar Forest Dome (Covered)'}</span>
+              </div>
+            </div>
+          `;
+
+        const rowsHtml = buckets.map(bucket => {
+          const hourLabel = formatHourSlotLabel(bucket.normHour);
+
+          if (isSingleStage) {
+            const stageItems = state.stage === 'lunar' ? bucket.lunar : bucket.solar;
+            return `
+              <div class="fod-time-row is-single">
+                <div class="fod-time-cell">${hourLabel}</div>
+                <div class="fod-stage-cell is-${state.stage}">
+                  ${stageItems.map(p => renderPerformerCard(p)).join('')}
+                </div>
+              </div>
+            `;
+          }
+
+          const solarHtml = bucket.solar.length > 0
+            ? bucket.solar.map(p => renderPerformerCard(p)).join('')
+            : renderEmptySlotCell();
+          const lunarHtml = bucket.lunar.length > 0
+            ? bucket.lunar.map(p => renderPerformerCard(p)).join('')
+            : renderEmptySlotCell();
+
+          return `
+            <div class="fod-time-row is-parallel">
+              <div class="fod-time-cell">${hourLabel}</div>
+              <div class="fod-stage-cell is-solar">
+                ${solarHtml}
+              </div>
+              <div class="fod-stage-cell is-lunar">
+                ${lunarHtml}
+              </div>
+            </div>
+          `;
+        }).join('');
+
         return `
           <section class="fod-day-section" data-day="${day.key}" id="program-${day.key}">
             <div class="fod-day-header">
@@ -199,35 +325,11 @@
               <span class="fod-badge">${countLabel}</span>
             </div>
 
-            <div class="fod-timetable-list" role="list">
-              ${items.map(p => {
-                const isFav = favIds.has(p.id);
-                const stageCls = p.stageKey === 'lunar' ? 'is-lunar' : 'is-solar';
-                const hlCls = state.highlightId === p.id ? 'spot-highlight' : '';
-                return `
-                  <article class="fod-slot-row ${isFav ? 'is-saved' : ''} ${hlCls}" role="listitem" id="${p.id}" data-id="${p.id}">
-                    <div class="fod-slot-time">${core.escapeHtml(p.time)}</div>
-                    <div class="fod-slot-stage">
-                      <span class="fod-stage-pill ${stageCls}">${core.escapeHtml(p.stage)}</span>
-                    </div>
-                    <div class="fod-slot-main">
-                      <a href="artist-detail.html?id=${p.id}&from=program#${p.id}" class="fod-slot-artist">
-                        ${core.escapeHtml(p.name)}
-                      </a>
-                      <span class="fod-origin-pill">${core.escapeHtml(p.origin)}</span>
-                      <div class="fod-slot-genre">${core.escapeHtml(p.genre)}</div>
-                    </div>
-                    <div class="fod-slot-actions">
-                      <a href="artist-detail.html?id=${p.id}&from=program#${p.id}" class="fod-btn fod-btn-ghost fod-btn-sm">
-                        ${isCs ? 'Detail' : 'Detail'}
-                      </a>
-                      <button type="button" class="fod-btn fod-btn-sm fav-toggle-btn ${isFav ? 'is-saved' : ''}" data-perf-id="${p.id}" aria-pressed="${isFav}">
-                        ${isFav ? (isCs ? '✓ V plánu' : '✓ In Plan') : (isCs ? '+ Přidat' : '+ Add')}
-                      </button>
-                    </div>
-                  </article>
-                `;
-              }).join('')}
+            <div class="fod-timetable-grid ${isSingleStage ? 'is-single' : 'is-parallel'}">
+              ${headHtml}
+              <div class="fod-timetable-body">
+                ${rowsHtml}
+              </div>
             </div>
           </section>
         `;
@@ -377,9 +479,23 @@
       });
     }
 
+    function getArtistInitials(name) {
+      const words = String(name || '')
+        .trim()
+        .split(/[\s\-_./]+/)
+        .map(w => w.replace(/^[^A-Za-z0-9À-ž]+|[^A-Za-z0-9À-ž]+$/g, ''))
+        .filter(Boolean);
+      if (words.length >= 2) {
+        return words.slice(0, 3).map(w => w[0].toUpperCase()).join('');
+      }
+      const single = words[0] || String(name || '').trim();
+      return single.slice(0, 2).toUpperCase() || 'FD';
+    }
+
     function renderShell() {
       const isCs = core.getLang() === 'cs';
       const favCount = core.getFavorites().length;
+      const hasStagesOnPage = Boolean(document.getElementById('fod-stages-root'));
       const genres = [
         { key: 'all', en: 'All Genres', cs: 'Všechny žánry' },
         { key: 'techno', en: 'Techno', cs: 'Techno' },
@@ -391,6 +507,15 @@
       ];
 
       root.innerHTML = `
+        ${hasStagesOnPage ? `
+          <div class="fod-merged-section-head">
+            <h2>${isCs ? 'Účinkující a program (60)' : 'Artists & Lineup (60)'}</h2>
+            <a href="#fod-stages-root" class="fod-btn fod-btn-secondary fod-btn-sm">
+              ${isCs ? 'Přejít na pódia' : 'Jump to Stages'}
+            </a>
+          </div>
+        ` : ''}
+
         <div class="fod-toolbar-panel">
           <div class="fod-plan-summary-row">
             <div class="fod-plan-summary-left">
@@ -502,9 +627,15 @@
         const bio = isCs ? p.bioCs : p.bioEn;
         const dayShort = isCs ? p.dayShortCs : p.dayShortEn;
         const hlCls = state.hashId === p.id ? 'spot-highlight' : '';
+        const initials = getArtistInitials(p.name);
+        const thumbAlt = isCs ? `${p.name} ilustrační vizuál interpreta` : `${p.name} artist visual`;
 
         return `
           <article class="fod-artist-card ${isFav ? 'is-saved' : ''} ${hlCls}" id="${p.id}" data-id="${p.id}">
+            <figure class="fod-artist-thumb is-${p.stageKey}">
+              <img src="../../../shared/img/artist-placeholder-${p.stageKey}.svg" alt="${core.escapeHtml(thumbAlt)}" width="400" height="225">
+              <span class="fod-artist-monogram" aria-hidden="true">${core.escapeHtml(initials)}</span>
+            </figure>
             <div class="fod-card-top">
               <span class="fod-stage-pill ${stageCls}">${core.escapeHtml(p.stage)}</span>
               <span class="fod-origin-pill" title="${core.escapeHtml(country)}">${core.escapeHtml(p.origin)}</span>
@@ -838,7 +969,7 @@
   }
 
   // =========================================================================
-  // 4. STAGES PAGE (Tabs, Hash highlighting, Stage Lineup Preview)
+  // 4. STAGES PAGE (Tabs, Hash highlighting, Stage Info & Photos)
   // =========================================================================
   function initStagesPage() {
     const root = document.getElementById('fod-stages-root');
@@ -846,28 +977,12 @@
 
     const core = C();
     const data = D();
-    let activeDay = 'day1';
-    let activeStage = window.location.hash === '#stage-lunar' ? 'lunar' : 'solar';
 
-    function updateStageTabs(shouldScroll) {
+    function highlightStageFromHash() {
       const hash = window.location.hash;
-      if (hash === '#stage-lunar') activeStage = 'lunar';
-      else if (hash === '#stage-solar') activeStage = 'solar';
-
-      const tabSolar = document.getElementById('tab-stage-solar');
-      const tabLunar = document.getElementById('tab-stage-lunar');
       const secSolar = document.getElementById('stage-solar');
       const secLunar = document.getElementById('stage-lunar');
-      if (!tabSolar || !tabLunar) return;
-
-      const isLunar = activeStage === 'lunar';
-      const isSolar = !isLunar;
-      tabSolar.classList.toggle('is-active', isSolar);
-      tabLunar.classList.toggle('is-active', isLunar);
-      tabSolar.setAttribute('aria-selected', String(isSolar));
-      tabLunar.setAttribute('aria-selected', String(isLunar));
-
-      const target = shouldScroll ? (isLunar ? secLunar : secSolar) : (hash === '#stage-lunar' ? secLunar : (hash === '#stage-solar' ? secSolar : null));
+      const target = hash === '#stage-lunar' ? secLunar : (hash === '#stage-solar' ? secSolar : null);
       if (target) {
         setTimeout(() => {
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -879,51 +994,25 @@
 
     function render() {
       const isCs = core.getLang() === 'cs';
-      const favIds = new Set(core.getFavorites().map(f => f.id));
       const solar = data.STAGES.solar;
       const lunar = data.STAGES.lunar;
-
-      const renderStagePreview = stageKey => {
-        const sets = data.PERFORMERS
-          .filter(p => p.stageKey === stageKey && p.dayKey === activeDay)
-          .sort((a, b) => core.timeToMinutes(a.start) - core.timeToMinutes(b.start));
-
-        return `
-          <div class="fod-stage-preview-list">
-            ${sets.map(p => {
-              const saved = favIds.has(p.id);
-              return `
-                <div class="fod-stage-preview-item">
-                  <span class="fod-slot-time">${core.escapeHtml(p.start)}</span>
-                  <a href="artist-detail.html?id=${p.id}&from=stages#${p.id}" class="fod-slot-artist">${core.escapeHtml(p.name)}</a>
-                  <span class="fod-stage-genre">${core.escapeHtml(p.genre)}</span>
-                  <button type="button" class="fod-btn fod-btn-sm fav-toggle-btn ${saved ? 'is-saved' : ''}" data-perf-id="${p.id}" aria-pressed="${saved}">
-                    ${saved ? '✓' : '+'}
-                  </button>
-                </div>
-              `;
-            }).join('')}
-          </div>
-        `;
-      };
+      const hasArtistsOnPage = Boolean(document.getElementById('fod-artists-root'));
 
       root.innerHTML = `
-        <nav class="fod-filter-row fod-stage-tabs" aria-label="${isCs ? 'Přepínač pódií' : 'Stage Tabs'}">
-          <div class="fod-filter-row" role="tablist" aria-label="${isCs ? 'Pódia' : 'Stages'}">
-            <a href="#stage-solar" id="tab-stage-solar" role="tab" aria-controls="stage-solar" aria-selected="${activeStage === 'solar'}" class="fod-chip ${activeStage === 'solar' ? 'is-active' : ''}">${core.escapeHtml(solar.name)} (4,500)</a>
-            <a href="#stage-lunar" id="tab-stage-lunar" role="tab" aria-controls="stage-lunar" aria-selected="${activeStage === 'lunar'}" class="fod-chip ${activeStage === 'lunar' ? 'is-active' : ''}">${core.escapeHtml(lunar.name)} (1,800 · ${isCs ? 'Kryté' : 'Covered'})</a>
-          </div>
-          <div class="fod-stage-day-switch" role="group" aria-label="${isCs ? 'Den náhledu' : 'Preview Day'}">
-            ${data.DAYS.map(d => `
-              <button type="button" class="fod-chip ${activeDay === d.key ? 'is-active' : ''}" data-stage-day="${d.key}">
-                ${isCs ? d.shortCs : d.shortEn}
-              </button>
-            `).join('')}
-          </div>
-        </nav>
+        <div class="fod-merged-section-head">
+          <h2>${isCs ? 'Pódia a areál' : 'Stages & Grounds'}</h2>
+          ${hasArtistsOnPage ? `
+            <a href="#fod-artists-root" class="fod-btn fod-btn-secondary fod-btn-sm">
+              ${isCs ? 'Přejít na účinkující' : 'Jump to Artists'}
+            </a>
+          ` : ''}
+        </div>
 
         <div class="fod-stages-grid">
-          <section class="fod-panel" id="stage-solar">
+          <section class="fod-panel fod-stage-card" id="stage-solar">
+            <figure class="fod-stage-photo">
+              <img src="../../../shared/img/stage-solar.jpg" alt="${isCs ? 'Ilustrační fotografie venkovního amfiteátru Solar Horizon Stage při západu slunce' : 'Placeholder photo of the open-air Solar Horizon Stage amphitheater at sunset'}" width="1280" height="720">
+            </figure>
             <div class="fod-card-top">
               <span class="fod-stage-pill is-solar">${core.escapeHtml(isCs ? solar.typeCs : solar.typeEn)}</span>
               <span class="fod-badge">${solar.capacity.toLocaleString()} ${isCs ? 'kapacita' : 'capacity'}</span>
@@ -934,14 +1023,15 @@
             <ul class="fod-feature-list">
               ${(isCs ? solar.featuresCs : solar.featuresEn).map(f => `<li>${core.escapeHtml(f)}</li>`).join('')}
             </ul>
-            <h3>${isCs ? 'Vybraný denní program (10 setů)' : 'Day Timetable Preview (10 sets)'}</h3>
-            ${renderStagePreview('solar')}
             <div class="fod-card-actions">
-              <a href="program.html?stage=solar&day=${activeDay}" class="fod-btn fod-btn-primary">${isCs ? 'Otevřít v Programu' : 'Open Solar Schedule'}</a>
+              <a href="program.html?stage=solar" class="fod-btn fod-btn-primary">${isCs ? 'Otevřít v Programu' : 'Open Solar Schedule'}</a>
             </div>
           </section>
 
-          <section class="fod-panel" id="stage-lunar">
+          <section class="fod-panel fod-stage-card" id="stage-lunar">
+            <figure class="fod-stage-photo">
+              <img src="../../../shared/img/stage-lunar.jpg" alt="${isCs ? 'Ilustrační fotografie kryté kupole Lunar Forest Dome v lese za soumraku' : 'Placeholder photo of the covered Lunar Forest Dome marquee in the forest at twilight'}" width="1280" height="720">
+            </figure>
             <div class="fod-card-top">
               <span class="fod-stage-pill is-lunar">${core.escapeHtml(isCs ? lunar.typeCs : lunar.typeEn)}</span>
               <span class="fod-badge">${lunar.capacity.toLocaleString()} ${isCs ? 'kapacita' : 'capacity'}</span>
@@ -953,10 +1043,8 @@
             <ul class="fod-feature-list">
               ${(isCs ? lunar.featuresCs : lunar.featuresEn).map(f => `<li>${core.escapeHtml(f)}</li>`).join('')}
             </ul>
-            <h3>${isCs ? 'Vybraný denní program (10 setů)' : 'Day Timetable Preview (10 sets)'}</h3>
-            ${renderStagePreview('lunar')}
             <div class="fod-card-actions">
-              <a href="program.html?stage=lunar&day=${activeDay}" class="fod-btn fod-btn-primary">${isCs ? 'Otevřít v Programu' : 'Open Lunar Schedule'}</a>
+              <a href="program.html?stage=lunar" class="fod-btn fod-btn-primary">${isCs ? 'Otevřít v Programu' : 'Open Lunar Schedule'}</a>
             </div>
           </section>
         </div>
@@ -966,56 +1054,24 @@
             <h2>${isCs ? 'Orientace v areálu Kutná Hora' : 'Festival Grounds Orientation'}</h2>
             <p>${isCs ? 'Vstup A (Hlavní brána) · Solar Horizon Stage · Lunar Forest Dome (Krytý) · Kemp · Cashless zóna · Zastávka Shuttle Busu' : 'Entrance A (Main Gate) · Solar Horizon Stage · Lunar Forest Dome (Covered) · Camping Ground · Cashless Zone · Shuttle Bus Stop'}</p>
           </div>
-          <a href="practical-info.html#doprava" class="fod-btn fod-btn-secondary">
-            ${isCs ? 'Doprava z nádraží a mapa trasy' : 'Transit & Route Map'}
-          </a>
+          <div class="fod-card-actions">
+            ${hasArtistsOnPage ? `
+              <a href="#fod-artists-root" class="fod-btn fod-btn-secondary">
+                ${isCs ? 'Přejít na účinkující' : 'Jump to Artists'}
+              </a>
+            ` : ''}
+            <a href="practical-info.html#doprava" class="fod-btn fod-btn-secondary">
+              ${isCs ? 'Doprava z nádraží a mapa trasy' : 'Transit & Route Map'}
+            </a>
+          </div>
         </section>
       `;
 
-      root.querySelectorAll('[data-stage-day]').forEach(btn => {
-        btn.addEventListener('click', () => {
-          activeDay = btn.getAttribute('data-stage-day');
-          render();
-        });
-      });
-
-      const tabSolarEl = document.getElementById('tab-stage-solar');
-      const tabLunarEl = document.getElementById('tab-stage-lunar');
-      [
-        [tabSolarEl, 'solar', '#stage-solar', tabLunarEl],
-        [tabLunarEl, 'lunar', '#stage-lunar', tabSolarEl]
-      ].forEach(([tabEl, stageKey, hashVal, otherTab]) => {
-        if (!tabEl) return;
-        tabEl.addEventListener('click', e => {
-          e.preventDefault();
-          activeStage = stageKey;
-          if (window.location.hash !== hashVal) {
-            history.replaceState(null, '', hashVal);
-          }
-          updateStageTabs(true);
-        });
-        tabEl.addEventListener('keydown', e => {
-          if ((e.key === 'ArrowRight' || e.key === 'ArrowLeft') && otherTab) {
-            e.preventDefault();
-            otherTab.focus();
-            otherTab.click();
-          }
-        });
-      });
-
-      updateStageTabs(false);
+      highlightStageFromHash();
     }
 
-    root.addEventListener('click', e => {
-      const btn = e.target && e.target.closest && e.target.closest('.fav-toggle-btn[data-perf-id]');
-      if (!btn) return;
-      core.toggleFavoriteById(btn.getAttribute('data-perf-id'));
-      render();
-    });
-
-    window.addEventListener('hashchange', () => updateStageTabs(true));
+    window.addEventListener('hashchange', highlightStageFromHash);
     window.addEventListener('languageChanged', render);
-    window.addEventListener('favoritesUpdated', render);
     render();
   }
 
@@ -1046,8 +1102,15 @@
     function render() {
       const isCs = core.getLang() === 'cs';
       root.innerHTML = `
-        <nav class="fod-filter-row" aria-label="${isCs ? 'Sekce praktických informací' : 'Practical Info Sections'}">
-          <a href="#vstupenky" class="fod-chip">${isCs ? 'Vstupenky' : 'Tickets'}</a>
+        <form action="search.html" method="get" class="fod-toolbar-panel fod-search-row" role="search">
+          <label for="info-search-input" class="fod-sr-only">${isCs ? 'Vyhledat na festivalu' : 'Search festival'}</label>
+          <input type="search" id="info-search-input" name="q" class="fod-input"
+            placeholder="${isCs ? 'Hledat interprety, pódia, shuttle bus, kemp nebo FAQ...' : 'Search artists, stages, shuttle bus, camping, or FAQ...'}">
+          <button type="submit" class="fod-btn fod-btn-primary">${isCs ? 'Hledat' : 'Search'}</button>
+          <a href="my-schedule.html" class="fod-btn fod-btn-secondary">${isCs ? 'Můj plán' : 'My Schedule'}</a>
+        </form>
+
+        <nav class="fod-filter-row fod-info-nav" aria-label="${isCs ? 'Sekce praktických informací' : 'Practical Info Sections'}">
           <a href="#parametry" class="fod-chip">${isCs ? 'Parametry 2026' : '2026 Key Facts'}</a>
           <a href="#doprava" class="fod-chip">${isCs ? 'Doprava a mapa' : 'Transit & Map'}</a>
           <a href="#shuttle-bus" class="fod-chip">${isCs ? 'Jízdní řád Shuttle' : 'Shuttle Timetable'}</a>
@@ -1056,19 +1119,6 @@
           <a href="#cashless" class="fod-chip">${isCs ? 'Cashless & Bezpečí' : 'Cashless & Safety'}</a>
           <a href="#faq" class="fod-chip">FAQ</a>
         </nav>
-
-        <section class="fod-panel" id="vstupenky">
-          <h2>${isCs ? 'Vstupenky a vstup do areálu' : 'Tickets & Festival Entry'}</h2>
-          <p>${isCs
-            ? 'Vstupenky jsou k dispozici jako třídenní festivalové pasy nebo jednodenní vstupenky pro pátek, sobotu či neděli. Po kontrole na Hlavní bráně (Vstup A) obdržíte identifikační RFID náramek.'
-            : 'Passes are available as 3-day full festival tickets or single-day passes for Friday, Saturday, or Sunday. Upon arrival at Entrance A (Main Gate), every visitor receives an RFID wristband.'}</p>
-          <ul class="fod-feature-list">
-            <li>${isCs ? '3denní festivalový pas (Pá–Ne): 2 490 Kč / 99 EUR' : '3-Day Full Festival Pass (Fri–Sun): 2,490 CZK / 99 EUR'}</li>
-            <li>${isCs ? 'Jednodenní vstupenka (Pá / So / Ne): 1 090 Kč / 45 EUR' : 'Single-Day Ticket (Fri / Sat / Sun): 1,090 CZK / 45 EUR'}</li>
-            <li>${isCs ? 'Kempování ve stanovém městečku (3 noci): 490 Kč / 20 EUR' : 'Camping Pass (3 nights in Tent Village): 490 CZK / 20 EUR'}</li>
-            <li>${isCs ? 'Děti do 12 let v doprovodu dospělého: vstup ZDARMA' : 'Children under 12 accompanied by an adult: FREE entry'}</li>
-          </ul>
-        </section>
 
         <section class="fod-panel" id="parametry">
           <h2>${isCs ? 'Klíčové parametry ročníku 2026' : 'Key Parameters of the 2026 Edition'}</h2>
@@ -1366,56 +1416,15 @@
     function render() {
       const isCs = core.getLang() === 'cs';
       const favs = core.getFavorites();
-      const solarCount = favs.filter(f => core.normalizeStageKey(f.stage) === 'solar').length;
-      const lunarCount = favs.filter(f => core.normalizeStageKey(f.stage) === 'lunar').length;
       const { total: totalCollisions, byId: collisionMap } = computeCollisions(favs);
-      const quickIds = ['perf-01', 'perf-02', 'perf-11', 'perf-09', 'perf-17', 'perf-28', 'perf-39', 'perf-49', 'perf-57'];
-      const favIds = new Set(favs.map(f => f.id));
 
       root.innerHTML = `
         <div class="fod-toolbar-panel">
           <div class="fod-plan-summary-actions">
             <a href="program.html" class="fod-btn fod-btn-primary">${isCs ? '+ Přidat z Programu' : '+ Add from Program'}</a>
-            <button type="button" id="load-sample-btn" class="fod-btn fod-btn-secondary">${isCs ? 'Načíst ukázkový plán' : 'Load Curated Sample'}</button>
-            <button type="button" id="load-conflict-demo-btn" class="fod-btn fod-btn-secondary">${isCs ? 'Ukázka kolize' : 'Demo Overlap'}</button>
             <button type="button" id="share-schedule-btn" class="fod-btn fod-btn-secondary">${isCs ? 'Sdílet plán' : 'Share My Plan'}</button>
             <button type="button" id="export-schedule-btn" class="fod-btn fod-btn-secondary">${isCs ? 'Export .ics' : 'Export .ics'}</button>
             <button type="button" id="clear-favorites-btn" class="fod-btn fod-btn-ghost">${isCs ? 'Vymazat vše' : 'Clear All'}</button>
-          </div>
-
-          <div class="fod-metrics-grid">
-            <div class="fod-metric-box">
-              <strong id="saved-total-count">${favs.length}</strong>
-              <span>${isCs ? 'Uložených setů' : 'Saved Sets'}</span>
-            </div>
-            <div class="fod-metric-box ${totalCollisions > 0 ? 'is-conflict' : ''}">
-              <strong id="saved-conflicts-count">${totalCollisions}</strong>
-              <span>${isCs ? 'Časových kolizí' : 'Time Overlaps'}</span>
-            </div>
-            <div class="fod-metric-box">
-              <strong id="saved-solar-count">${solarCount}</strong>
-              <span>Solar Horizon</span>
-            </div>
-            <div class="fod-metric-box">
-              <strong id="saved-lunar-count">${lunarCount}</strong>
-              <span>Lunar Forest Dome</span>
-            </div>
-          </div>
-
-          <div class="fod-quick-add-strip">
-            <span class="fod-quick-label">${isCs ? 'Rychle přidat / odebrat:' : 'Quick-toggle sets:'}</span>
-            <div class="fod-filter-row">
-              ${quickIds.map(qid => {
-                const p = data.PERFORMERS.find(x => x.id === qid);
-                if (!p) return '';
-                const saved = favIds.has(p.id);
-                return `
-                  <button type="button" class="fod-chip ${saved ? 'is-active' : ''}" data-quick-toggle="${p.id}" aria-pressed="${saved}">
-                    ${saved ? '✓' : '+'} ${core.escapeHtml(p.name)} (${core.escapeHtml(p.start)})
-                  </button>
-                `;
-              }).join('')}
-            </div>
           </div>
         </div>
 
@@ -1541,19 +1550,8 @@
         core.showToast(isCs ? 'Načten ukázkový bezkolizní plán.' : 'Loaded curated conflict-free sample.');
         render();
       };
-      const loadSampleBtn = document.getElementById('load-sample-btn');
       const emptySampleBtn = document.getElementById('empty-sample-btn');
-      if (loadSampleBtn) loadSampleBtn.addEventListener('click', sampleFn);
       if (emptySampleBtn) emptySampleBtn.addEventListener('click', sampleFn);
-
-      const demoBtn = document.getElementById('load-conflict-demo-btn');
-      if (demoBtn) {
-        demoBtn.addEventListener('click', () => {
-          core.saveFavorites(data.CONFLICT_DEMO_IDS);
-          core.showToast(isCs ? 'Načtena ukázka časové kolize (Velvet Morning vs Subtle Resonances).' : 'Loaded overlap demo (Velvet Morning vs Subtle Resonances).');
-          render();
-        });
-      }
 
       const shareBtn = document.getElementById('share-schedule-btn');
       if (shareBtn) shareBtn.addEventListener('click', shareSchedule);
@@ -1583,12 +1581,6 @@
     }
 
     root.addEventListener('click', e => {
-      const quick = e.target && e.target.closest && e.target.closest('[data-quick-toggle]');
-      if (quick) {
-        core.toggleFavoriteById(quick.getAttribute('data-quick-toggle'));
-        render();
-        return;
-      }
       const rem = e.target && e.target.closest && e.target.closest('.remove-btn[data-id]');
       if (rem) {
         core.toggleFavoriteById(rem.getAttribute('data-id'));
@@ -1634,15 +1626,6 @@
 
     function renderShell() {
       const isCs = core.getLang() === 'cs';
-      const pills = [
-        { q: '', en: 'All', cs: 'Vše' },
-        { q: 'techno', en: 'Techno', cs: 'Techno' },
-        { q: 'ambient', en: 'Ambient', cs: 'Ambient' },
-        { q: 'post-rock', en: 'Post-Rock', cs: 'Post-Rock' },
-        { q: 'lunar', en: 'Lunar Dome', cs: 'Lunar Dome' },
-        { q: 'shuttle', en: 'Shuttle Bus', cs: 'Shuttle Bus' },
-        { q: 'info', en: 'Practical Info', cs: 'Praktické info' }
-      ];
 
       root.innerHTML = `
         <div class="fod-toolbar-panel">
@@ -1654,12 +1637,6 @@
             <button type="button" id="search-clear-btn" class="fod-btn fod-btn-secondary">${isCs ? 'Vymazat' : 'Clear'}</button>
             <button type="submit" id="search-submit-btn" class="fod-btn fod-btn-primary">${isCs ? 'Hledat' : 'Search'}</button>
           </form>
-
-          <div class="fod-filter-row" id="search-pills" role="group" aria-label="${isCs ? 'Rychlé filtry' : 'Quick searches'}">
-            ${pills.map(p => `
-              <button type="button" class="fod-chip search-pill-btn" data-query="${p.q}">${isCs ? p.cs : p.en}</button>
-            `).join('')}
-          </div>
 
           <div class="fod-plan-summary-row" id="search-status-bar">
             <span class="fod-status-text">
@@ -1706,13 +1683,6 @@
         executeSearch('');
         input.focus();
       });
-      root.querySelectorAll('.search-pill-btn').forEach(pill => {
-        pill.addEventListener('click', () => {
-          initialQuery = pill.getAttribute('data-query') || '';
-          input.value = initialQuery;
-          executeSearch(initialQuery);
-        });
-      });
 
       executeSearch(initialQuery);
     }
@@ -1739,11 +1709,6 @@
         const newUrl = cleanQuery ? `search.html?q=${encodeURIComponent(cleanQuery)}` : 'search.html';
         window.history.replaceState({}, '', newUrl);
       } catch (e) {}
-
-      root.querySelectorAll('.search-pill-btn').forEach(p => {
-        const pq = (p.getAttribute('data-query') || '').toLowerCase();
-        p.classList.toggle('is-active', pq === cleanQuery);
-      });
 
       const matchedPerformers = data.PERFORMERS.filter(p => {
         if (!tokens.length) return true;
@@ -1853,6 +1818,367 @@
   }
 
   // =========================================================================
+  // 8. TICKETS PAGE (Category Filters + Interactive Cart + Mobile Summary Bar)
+  // =========================================================================
+  function initTicketsPage() {
+    const ticketCards = Array.from(document.querySelectorAll('article[data-ticket-id]'));
+    const ticketsRoot = document.querySelector('.fod-tickets-workspace') || document.querySelector('.fod-mount');
+    const cartPanel = document.getElementById('fod-ticket-cart');
+    const mobileBar = document.getElementById('fod-mobile-cart-bar');
+
+    if (!ticketCards.length && !cartPanel && !mobileBar) return;
+
+    const core = C();
+    const CART_STORAGE_KEY = 'festival_cart';
+    const state = {
+      filter: 'all',
+      reviewOpen: false
+    };
+
+    function getLang() {
+      return core && typeof core.getLang === 'function' ? core.getLang() : 'en';
+    }
+
+    function escapeText(str) {
+      if (core && typeof core.escapeHtml === 'function') return core.escapeHtml(str);
+      return String(str == null ? '' : str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function formatItemsCount(count, isCs) {
+      if (!isCs) return count === 1 ? '1 item' : `${count} items`;
+      if (typeof window.formatCzPlural === 'function') {
+        return `${count} ${window.formatCzPlural(count, 'položka', 'položky', 'položek')}`;
+      }
+      if (count === 1) return '1 položka';
+      if (count >= 2 && count <= 4) return `${count} položky`;
+      return `${count} položek`;
+    }
+
+    function readCart() {
+      if (core && typeof core.getCart === 'function') {
+        const list = core.getCart();
+        return Array.isArray(list) ? list : [];
+      }
+      try {
+        const raw = window.localStorage.getItem(CART_STORAGE_KEY);
+        const parsed = raw ? JSON.parse(raw) : [];
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function writeCart(nextCart) {
+      const normalized = Array.isArray(nextCart)
+        ? nextCart
+            .map(item => ({
+              id: String(item.id || ''),
+              qty: Math.max(0, parseInt(item.qty, 10) || 0),
+              priceCzk: Number(item.priceCzk) || 0,
+              category: String(item.category || ''),
+              nameEn: String(item.nameEn || item.id || ''),
+              nameCs: String(item.nameCs || item.nameEn || item.id || '')
+            }))
+            .filter(item => item.id && item.qty > 0)
+        : [];
+
+      if (core && typeof core.setCart === 'function') {
+        core.setCart(normalized);
+        return;
+      }
+      try {
+        window.localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(normalized));
+      } catch (e) {}
+      window.dispatchEvent(new CustomEvent('festivalCartChanged', { detail: { items: normalized } }));
+    }
+
+    function getCardCatalog() {
+      const map = new Map();
+      ticketCards.forEach(card => {
+        const id = card.getAttribute('data-ticket-id');
+        if (!id) return;
+        map.set(id, {
+          id,
+          priceCzk: Number(card.getAttribute('data-price-czk')) || 0,
+          category: card.getAttribute('data-category') || 'all',
+          nameEn: card.getAttribute('data-name-en') || id,
+          nameCs: card.getAttribute('data-name-cs') || card.getAttribute('data-name-en') || id
+        });
+      });
+      return map;
+    }
+
+    function setTicketQty(ticketId, deltaOrExact, isExact) {
+      const catalog = getCardCatalog();
+      const cart = readCart();
+      const idx = cart.findIndex(item => item.id === ticketId);
+      const meta = catalog.get(ticketId) || (idx >= 0 ? cart[idx] : null);
+      if (!meta) return;
+
+      const currentQty = idx >= 0 ? (parseInt(cart[idx].qty, 10) || 0) : 0;
+      const nextQty = isExact ? Math.max(0, deltaOrExact) : Math.max(0, currentQty + deltaOrExact);
+
+      if (nextQty === 0) {
+        if (idx >= 0) cart.splice(idx, 1);
+        if (cart.length === 0) state.reviewOpen = false;
+      } else if (idx >= 0) {
+        cart[idx] = {
+          ...cart[idx],
+          qty: nextQty,
+          priceCzk: meta.priceCzk || cart[idx].priceCzk || 0,
+          category: meta.category || cart[idx].category || '',
+          nameEn: meta.nameEn || cart[idx].nameEn || ticketId,
+          nameCs: meta.nameCs || cart[idx].nameCs || ticketId
+        };
+      } else {
+        cart.push({
+          id: ticketId,
+          qty: nextQty,
+          priceCzk: meta.priceCzk,
+          category: meta.category,
+          nameEn: meta.nameEn,
+          nameCs: meta.nameCs
+        });
+      }
+
+      writeCart(cart);
+      renderAll();
+    }
+
+    function applyFilter() {
+      const scope = ticketsRoot || document;
+      scope.querySelectorAll('.fod-filter-row [data-filter]').forEach(chip => {
+        const val = chip.getAttribute('data-filter') || 'all';
+        const active = val === state.filter;
+        chip.classList.toggle('is-active', active);
+        chip.setAttribute('aria-pressed', String(active));
+      });
+
+      const targetFilter = state.filter.toLowerCase();
+      ticketCards.forEach(card => {
+        const cat = (card.getAttribute('data-category') || '').toLowerCase();
+        const visible = targetFilter === 'all' || cat === targetFilter;
+        card.classList.toggle('is-hidden', !visible);
+      });
+
+      scope.querySelectorAll('[data-category-section]').forEach(sec => {
+        const secCat = (sec.getAttribute('data-category-section') || '').toLowerCase();
+        const visible = targetFilter === 'all' || secCat === targetFilter;
+        sec.classList.toggle('is-hidden', !visible);
+      });
+    }
+
+    function renderCardActions() {
+      const isCs = getLang() === 'cs';
+      const cart = readCart();
+      const qtyById = new Map(cart.map(item => [item.id, parseInt(item.qty, 10) || 0]));
+
+      ticketCards.forEach(card => {
+        const id = card.getAttribute('data-ticket-id');
+        if (!id) return;
+        let actionsBox = card.querySelector('.fod-ticket-card-actions');
+        if (!actionsBox) {
+          actionsBox = document.createElement('div');
+          actionsBox.className = 'fod-ticket-card-actions';
+          card.appendChild(actionsBox);
+        }
+
+        const qty = qtyById.get(id) || 0;
+        const title = isCs
+          ? (card.getAttribute('data-name-cs') || card.getAttribute('data-name-en') || id)
+          : (card.getAttribute('data-name-en') || id);
+
+        if (qty <= 0) {
+          actionsBox.innerHTML = `
+            <button type="button" class="fod-btn fod-btn-primary fod-btn-sm fod-ticket-add-btn" data-ticket-action="inc" data-ticket-id="${escapeText(id)}">
+              ${isCs ? '+ Přidat do košíku' : '+ Add to Cart'}
+            </button>
+          `;
+        } else {
+          actionsBox.innerHTML = `
+            <div class="fod-qty-stepper" role="group" aria-label="${escapeText(title)}">
+              <button type="button" data-ticket-action="dec" data-ticket-id="${escapeText(id)}" aria-label="${isCs ? 'Snížit počet' : 'Decrease quantity'}">-</button>
+              <span class="fod-qty-value" aria-live="polite">${qty}</span>
+              <button type="button" data-ticket-action="inc" data-ticket-id="${escapeText(id)}" aria-label="${isCs ? 'Zvýšit počet' : 'Increase quantity'}">+</button>
+            </div>
+          `;
+        }
+      });
+    }
+
+    function renderCartPanel() {
+      if (!cartPanel) return;
+      const isCs = getLang() === 'cs';
+      const catalog = getCardCatalog();
+      const cart = readCart();
+
+      const enriched = cart.map(item => {
+        const meta = catalog.get(item.id) || {};
+        const qty = parseInt(item.qty, 10) || 0;
+        const priceCzk = Number(item.priceCzk || meta.priceCzk) || 0;
+        const title = isCs
+          ? (item.nameCs || meta.nameCs || item.nameEn || meta.nameEn || item.id)
+          : (item.nameEn || meta.nameEn || item.id);
+        return {
+          id: item.id,
+          qty,
+          priceCzk,
+          lineTotal: qty * priceCzk,
+          title
+        };
+      }).filter(item => item.qty > 0);
+
+      const totalCount = enriched.reduce((sum, item) => sum + item.qty, 0);
+      const subtotalCzk = enriched.reduce((sum, item) => sum + item.lineTotal, 0);
+      const eurApprox = Math.round(subtotalCzk / 25);
+
+      if (enriched.length === 0) {
+        cartPanel.innerHTML = `
+          <div class="fod-cart-head">
+            <h2>${isCs ? 'Košík vstupenek' : 'Ticket Cart'}</h2>
+            <span class="fod-badge">${formatItemsCount(0, isCs)}</span>
+          </div>
+          <p class="fod-cart-empty">
+            ${isCs ? 'Váš košík je zatím prázdný. Vyberte vstupenku nebo kemp výše.' : 'Your cart is empty. Select a pass or camping option above.'}
+          </p>
+        `;
+        return;
+      }
+
+      cartPanel.innerHTML = `
+        <div class="fod-cart-head">
+          <h2>${isCs ? 'Košík vstupenek' : 'Ticket Cart'} (${totalCount})</h2>
+          <button type="button" class="fod-btn fod-btn-secondary fod-btn-sm" data-ticket-action="clear">
+            ${isCs ? 'Vyprázdnit košík' : 'Clear Cart'}
+          </button>
+        </div>
+
+        <ul class="fod-cart-list">
+          ${enriched.map(item => `
+            <li class="fod-cart-line">
+              <div class="fod-cart-line-info">
+                <strong>${escapeText(item.title)}</strong>
+                <span class="fod-card-meta">${item.priceCzk.toLocaleString()} CZK / ${isCs ? 'ks' : 'ea'}</span>
+              </div>
+              <div class="fod-cart-line-controls">
+                <div class="fod-qty-stepper">
+                  <button type="button" data-ticket-action="dec" data-ticket-id="${escapeText(item.id)}" aria-label="${isCs ? 'Snížit počet' : 'Decrease quantity'}">-</button>
+                  <span class="fod-qty-value">${item.qty}</span>
+                  <button type="button" data-ticket-action="inc" data-ticket-id="${escapeText(item.id)}" aria-label="${isCs ? 'Zvýšit počet' : 'Increase quantity'}">+</button>
+                </div>
+                <strong class="fod-cart-line-total">${item.lineTotal.toLocaleString()} CZK</strong>
+                <button type="button" class="fod-btn fod-btn-secondary fod-btn-sm" data-ticket-action="remove" data-ticket-id="${escapeText(item.id)}">
+                  ${isCs ? 'Odebrat' : 'Remove'}
+                </button>
+              </div>
+            </li>
+          `).join('')}
+        </ul>
+
+        <div class="fod-cart-summary">
+          <div class="fod-cart-subtotal-row">
+            <span>${isCs ? 'Mezisoučet' : 'Subtotal'}</span>
+            <strong>${subtotalCzk.toLocaleString()} CZK</strong>
+          </div>
+          <p class="fod-card-meta">
+            ${isCs ? `Orientační přepočet: ~${eurApprox.toLocaleString()} EUR` : `Estimated equivalent: ~${eurApprox.toLocaleString()} EUR`}
+          </p>
+        </div>
+
+        <div class="fod-card-actions">
+          <button type="button" class="fod-btn fod-btn-primary" data-ticket-action="toggle-review" aria-expanded="${state.reviewOpen}">
+            ${isCs ? 'Zkontrolovat souhrn objednávky' : 'Review Order Summary'}
+          </button>
+        </div>
+
+        ${state.reviewOpen ? `
+          <div class="fod-order-confirm" role="status">
+            <p><strong>${isCs ? 'Souhrn ukázkové objednávky:' : 'Demo Order Summary:'}</strong> ${formatItemsCount(totalCount, isCs)} · ${subtotalCzk.toLocaleString()} CZK (~${eurApprox.toLocaleString()} EUR)</p>
+            <p>${isCs ? 'Souhrn ukázkové objednávky je připraven. Platební brána bude spuštěna v příští verzi.' : 'Demo order summary ready. Payment checkout opens in the next release.'}</p>
+          </div>
+        ` : ''}
+      `;
+    }
+
+    function renderMobileBar() {
+      if (!mobileBar) return;
+      const isCs = getLang() === 'cs';
+      const catalog = getCardCatalog();
+      const cart = readCart();
+
+      const totalCount = cart.reduce((sum, item) => sum + (parseInt(item.qty, 10) || 0), 0);
+      const subtotalCzk = cart.reduce((sum, item) => {
+        const meta = catalog.get(item.id) || {};
+        const qty = parseInt(item.qty, 10) || 0;
+        const price = Number(item.priceCzk || meta.priceCzk) || 0;
+        return sum + qty * price;
+      }, 0);
+
+      const isEmpty = totalCount === 0;
+      mobileBar.classList.toggle('is-empty', isEmpty);
+      mobileBar.hidden = isEmpty;
+
+      if (isEmpty) {
+        mobileBar.innerHTML = '';
+        return;
+      }
+
+      mobileBar.innerHTML = `
+        <span class="fod-mobile-cart-summary">${formatItemsCount(totalCount, isCs)} · ${subtotalCzk.toLocaleString()} CZK</span>
+        <a href="#fod-ticket-cart" class="fod-btn fod-btn-primary fod-btn-sm">
+          ${isCs ? 'Zobrazit košík' : 'Review Cart'}
+        </a>
+      `;
+    }
+
+    function renderAll() {
+      applyFilter();
+      renderCardActions();
+      renderCartPanel();
+      renderMobileBar();
+    }
+
+    document.addEventListener('click', e => {
+      const filterBtn = e.target && e.target.closest && e.target.closest('.fod-filter-row [data-filter]');
+      if (filterBtn && (!ticketsRoot || ticketsRoot.contains(filterBtn))) {
+        state.filter = filterBtn.getAttribute('data-filter') || 'all';
+        applyFilter();
+        return;
+      }
+
+      const actionBtn = e.target && e.target.closest && e.target.closest('[data-ticket-action]');
+      if (!actionBtn) return;
+
+      const action = actionBtn.getAttribute('data-ticket-action');
+      const ticketId = actionBtn.getAttribute('data-ticket-id');
+
+      if (action === 'inc' && ticketId) {
+        setTicketQty(ticketId, 1, false);
+      } else if (action === 'dec' && ticketId) {
+        setTicketQty(ticketId, -1, false);
+      } else if (action === 'remove' && ticketId) {
+        setTicketQty(ticketId, 0, true);
+      } else if (action === 'clear') {
+        state.reviewOpen = false;
+        writeCart([]);
+        renderAll();
+      } else if (action === 'toggle-review') {
+        state.reviewOpen = !state.reviewOpen;
+        renderCartPanel();
+      }
+    });
+
+    window.addEventListener('languageChanged', renderAll);
+    window.addEventListener('festivalCartChanged', renderAll);
+    renderAll();
+  }
+
+  // =========================================================================
   // BOOTSTRAP BY CURRENT PAGE
   // =========================================================================
   function bootPages() {
@@ -1863,6 +2189,7 @@
     initPracticalInfoPage();
     initMySchedulePage();
     initSearchPage();
+    initTicketsPage();
   }
 
   if (document.readyState === 'loading') {
