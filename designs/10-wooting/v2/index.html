@@ -1,6 +1,5 @@
-<!-- v2/index.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-design="10-wooting" data-native-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +8,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../../../shared/css/festival-features.css">
+  <script src="js/lang.js" defer></script>
+  <script src="../../../shared/js/festival-data.js" defer></script>
+  <script src="../../../shared/js/festival-core.js" defer></script>
+  <script src="../../../shared/js/festival-pages.js" defer></script>
 </head>
 <body>
+
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="brand">
@@ -18,7 +23,7 @@
         <span class="brand-name">Festival of Darkness 2</span>
       </a>
       <nav class="site-nav" aria-label="Main navigation">
-        <a href="index.html" class="nav-link is-active" data-i18n="nav.overview">Overview</a>
+        <a href="index.html" class="nav-link active is-active" data-i18n="nav.overview" aria-current="page">Overview</a>
         <a href="program.html" class="nav-link" data-i18n="nav.schedule">Schedule</a>
         <a href="artists.html" class="nav-link">Artists</a>
         <a href="stages.html" class="nav-link">Stages</a>
@@ -35,7 +40,9 @@
     </div>
   </header>
 
-  <main>
+  
+<main>
+
     <section class="hero-section">
       <div class="container hero-grid">
         <div class="hero-copy">
@@ -184,7 +191,9 @@
         </div>
       </div>
     </section>
-  </main>
+  
+</main>
+
 
   <footer class="site-footer">
     <div class="container footer-inner">
@@ -193,7 +202,7 @@
         <span data-i18n="footer.location">Kutná Hora, Czech Republic - 10-12 July 2026</span>
       </div>
       <div class="footer-links">
-        <a href="index.html" data-i18n="nav.overview">Overview</a>
+        <a href="index.html" data-i18n="nav.overview" aria-current="page">Overview</a>
         <a href="program.html" data-i18n="nav.schedule">Schedule</a>
       </div>
     </div>
@@ -228,6 +237,6 @@
       <span class="dock-label" data-i18n="dock_search">Search</span>
     </a>
   </nav>
-<script src="js/lang.js"></script>
+
 </body>
 </html>

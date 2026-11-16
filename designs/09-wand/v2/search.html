@@ -1,6 +1,5 @@
-<!-- v2/index.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-design="09-wand" data-native-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +8,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../../../shared/css/festival-features.css">
+  <script src="js/lang.js" defer></script>
+  <script src="../../../shared/js/festival-data.js" defer></script>
+  <script src="../../../shared/js/festival-core.js" defer></script>
+  <script src="../../../shared/js/festival-pages.js" defer></script>
 </head>
 <body class="wand-body">
+
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="brand" aria-label="Festival of Darkness 2">
@@ -19,15 +24,15 @@
       </a>
 
       <nav class="main-nav" aria-label="Primary">
-        <a href="index.html" class="nav-link is-active" data-i18n="nav_home">Overview</a>
+        <a href="index.html" class="nav-link" data-i18n="nav_home">Overview</a>
         <a href="program.html" class="nav-link" data-i18n="nav_program">Program</a>
         <a href="artists.html" class="nav-link">Artists</a>
         <a href="stages.html" class="nav-link">Stages</a>
         <a href="practical-info.html" class="nav-link">Info</a>
         <a href="my-schedule.html" class="nav-link">My Schedule</a>
-        <a href="search.html" class="nav-link">Search</a>
-        <a href="#stages" class="nav-link" data-i18n="nav_stages">Stages</a>
-        <a href="#highlights" class="nav-link" data-i18n="nav_highlights">Lineup</a>
+        <a href="search.html" class="nav-link active is-active" aria-current="page">Search</a>
+        <a href="index.html#stages" class="nav-link" data-i18n="nav_stages">Stages</a>
+        <a href="index.html#highlights" class="nav-link" data-i18n="nav_highlights">Lineup</a>
       </nav>
 
       <div class="header-actions">
@@ -39,17 +44,20 @@
     </div>
   </header>
 
-  <main>
-    <section class="section-block">
-      <h1>Search</h1>
-      <p>Find artists, stages, and practical information for Festival of Darkness 2.</p>
-      <ul>
-        <li><a href="artist-detail.html">Floating Points (Live)</a> — Solar Horizon Stage</li>
-        <li><a href="stages.html">Lunar Forest Dome</a> — 360° Audiovisual Stage</li>
-        <li><a href="practical-info.html">Transport &amp; Camping</a> — Kutná Hora</li>
-      </ul>
+  
+<main>
+    <section class="page-hero">
+      <div class="container">
+        <p class="hero-meta">Kutná Hora, Czech Republic · 10-12 Jul 2026</p>
+      <h1 class="page-title"><span class="lang-en">Search Festival</span><span class="lang-cs is-hidden">Vyhledávání na festivalu</span></h1>
+      <p class="page-lead"><span class="lang-en">Search across all 60 artists, timetable slots, stages, shuttle buses, camping, and practical info.</span><span class="lang-cs is-hidden">Hledejte napříč všemi 60 interprety, časovými sloty, pódii, dopravou, kempem i praktickými informacemi.</span></p>
+      </div>
     </section>
-  </main>
+    <div class="container fod-mount">
+      <div id="fod-search-root"></div>
+    </div>
+</main>
+
 
   <footer class="site-footer">
     <div class="container footer-inner">
@@ -94,6 +102,6 @@
       <span class="dock-label" data-i18n="dock_search">Search</span>
     </a>
   </nav>
-<script src="js/lang.js"></script>
+
 </body>
 </html>

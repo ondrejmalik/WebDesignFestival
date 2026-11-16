@@ -1,14 +1,18 @@
-<!-- v2/index.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-design="04-eventbrite" data-native-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Festival of Darkness 2 | Kutná Hora, 10–12 Jul 2026</title>
   <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../../../shared/css/festival-features.css">
   <script src="js/lang.js" defer></script>
+  <script src="../../../shared/js/festival-data.js" defer></script>
+  <script src="../../../shared/js/festival-core.js" defer></script>
+  <script src="../../../shared/js/festival-pages.js" defer></script>
 </head>
 <body>
+
   <header class="eb-header">
     <div class="eb-container eb-header-inner">
       <a href="index.html" class="eb-logo" aria-label="Festival of Darkness 2 Home">
@@ -16,7 +20,7 @@
         <span class="eb-logo-text" data-i18n="brand.short">Festival of Darkness 2</span>
       </a>
       <nav class="eb-nav" aria-label="Primary Navigation">
-        <a href="index.html" class="eb-nav-link is-active" data-i18n="nav.overview">Event Overview</a>
+        <a href="index.html" class="eb-nav-link active is-active" data-i18n="nav.overview" aria-current="page">Event Overview</a>
         <a href="program.html" class="eb-nav-link" data-i18n="nav.program">Lineup & Schedule</a>
         <a href="artists.html" class="eb-nav-link">Artists</a>
         <a href="stages.html" class="eb-nav-link">Stages</a>
@@ -33,7 +37,9 @@
     </div>
   </header>
 
-  <main>
+  
+<main>
+
     <section class="eb-hero-band">
       <div class="eb-container">
         <div class="eb-hero-banner" role="img" aria-label="Festival of Darkness 2 stage atmosphere in Kutná Hora">
@@ -231,7 +237,9 @@
         </aside>
       </div>
     </section>
-  </main>
+  
+</main>
+
 
   <footer class="eb-footer">
     <div class="eb-container eb-footer-inner">
@@ -240,7 +248,7 @@
         <p class="eb-footer-copy" data-i18n="footer.location">Kutná Hora, Czech Republic • 10–12 July 2026</p>
       </div>
       <div class="eb-footer-links">
-        <a href="index.html" data-i18n="nav.overview">Event Overview</a>
+        <a href="index.html" data-i18n="nav.overview" aria-current="page">Event Overview</a>
         <a href="program.html" data-i18n="nav.program">Lineup & Schedule</a>
       </div>
     </div>
@@ -275,5 +283,6 @@
       <span class="dock-label" data-i18n="dock_search">Search</span>
     </a>
   </nav>
+
 </body>
 </html>

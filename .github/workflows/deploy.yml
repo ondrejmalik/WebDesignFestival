@@ -35,7 +35,7 @@ jobs:
         run: |
           mkdir -p _site
           cp index.html _site/
-          cp -r designs data _site/
+          cp -r designs data shared _site/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

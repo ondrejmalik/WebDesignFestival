@@ -1,16 +1,21 @@
-<!-- v2/program.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-design="06-neurosama" data-native-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Program | Festival of Darkness 2</title>
+  <title>Program - Festival of Darkness 2</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../../../shared/css/festival-features.css">
+  <script src="js/lang.js" defer></script>
+  <script src="../../../shared/js/festival-data.js" defer></script>
+  <script src="../../../shared/js/festival-core.js" defer></script>
+  <script src="../../../shared/js/festival-pages.js" defer></script>
 </head>
 <body>
+
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="brand-link" aria-label="Festival of Darkness 2 Home">
@@ -19,310 +24,31 @@
       </a>
       <nav class="site-nav" aria-label="Main Navigation">
         <a href="index.html" class="nav-link" data-i18n="nav_home">Overview</a>
-        <a href="program.html" class="nav-link is-active" data-i18n="nav_program">Program</a>
-        <a href="artists.html" class="nav-link is-">Artists</a>
-        <a href="stages.html" class="nav-link is-">Stages</a>
-        <a href="practical-info.html" class="nav-link is-">Info</a>
-        <a href="my-schedule.html" class="nav-link is-">My Schedule</a>
-        <a href="search.html" class="nav-link is-">Search</a>
+        <a href="program.html" class="nav-link active is-active" data-i18n="nav_program" aria-current="page">Program</a>
+        <a href="artists.html" class="nav-link">Artists</a>
+        <a href="stages.html" class="nav-link">Stages</a>
+        <a href="practical-info.html" class="nav-link">Info</a>
+        <a href="my-schedule.html" class="nav-link">My Schedule</a>
+        <a href="search.html" class="nav-link">Search</a>
         <button type="button" class="lang-toggle" id="lang-toggle" aria-label="Switch language">CZ</button>
       </nav>
     </div>
   </header>
 
-  <main>
+  
+<main>
     <section class="page-intro">
       <div class="container">
-        <div class="pill-badge">
-          <span class="badge-accent" data-i18n="hero_dates">10-12 Jul 2026</span>
-          <span class="badge-sep">/</span>
-          <span data-i18n="hero_location">Kutná Hora, Czechia</span>
-        </div>
-        <h1 class="display-heading page-title" data-i18n="program_title">Festival Timetable</h1>
-        <p class="section-lead" data-i18n="program_lead">Key evening and late-night sets across Solar Horizon Stage and Lunar Forest Dome.</p>
-
-        <nav class="day-jump-bar" aria-label="Jump to festival day">
-          <a href="#day-1" class="jump-pill" data-i18n="day1_tab">Day 1: Fri 10 Jul</a>
-          <a href="#day-2" class="jump-pill" data-i18n="day2_tab">Day 2: Sat 11 Jul</a>
-          <a href="#day-3" class="jump-pill" data-i18n="day3_tab">Day 3: Sun 12 Jul</a>
-        </nav>
+        <p class="hero-meta">Kutná Hora, Czech Republic · 10-12 Jul 2026</p>
+      <h1 class="display-heading page-title"><span class="lang-en">Festival Program</span><span class="lang-cs is-hidden">Program festivalu</span></h1>
+      <p class="section-lead"><span class="lang-en">Complete 3-day timetable across Solar Horizon Stage and Lunar Forest Dome (60 sets).</span><span class="lang-cs is-hidden">Kompletní třídenní harmonogram na pódiích Solar Horizon Stage a Lunar Forest Dome (60 vystoupení).</span></p>
       </div>
     </section>
-
-    <div class="program-plan-bar" aria-live="polite">
-      <p class="plan-bar-copy">
-        <span data-i18n="prog_plan_label">My Schedule:</span>
-        <span class="plan-bar-count" id="plan-bar-count">0</span>
-      </p>
-      <a href="my-schedule.html" class="plan-bar-link" data-i18n="prog_open_plan">Open My Schedule</a>
+    <div class="container fod-mount">
+      <div id="fod-program-root"></div>
     </div>
-    <section id="day-1" class="schedule-day-section">
-      <div class="container">
-        <div class="day-banner">
-          <h2 class="day-heading" data-i18n="day1_heading">Friday, 10 July 2026</h2>
-          <span class="day-count" id="day1-count">6 featured sets</span>
-        </div>
+</main>
 
-        <div class="slot-list">
-          <article class="glass-card slot-row" data-perf-id="perf-05">
-            <div class="slot-time">18:15 - 19:05</div>
-            <div class="slot-main">
-              <h3 class="slot-artist">Prague Synth Collective</h3>
-              <p class="slot-genre">Synthpop (CZ)</p>
-            </div>
-            <div class="slot-stage">
-              <span class="highlight-stage stage-pill-coral">Solar Horizon Stage</span>
-            </div>
-          
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-05" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-          <article class="glass-card slot-row" data-perf-id="perf-15">
-            <div class="slot-time">19:45 - 20:45</div>
-            <div class="slot-main">
-              <h3 class="slot-artist">Echo Chamber</h3>
-              <p class="slot-genre">Dark Ambient (SK)</p>
-            </div>
-            <div class="slot-stage">
-              <span class="highlight-stage stage-pill-pink">Lunar Forest Dome</span>
-            </div>
-          
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-15" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-          <article class="glass-card slot-row" data-perf-id="perf-07">
-            <div class="slot-time">20:40 - 21:40</div>
-            <div class="slot-main">
-              <h3 class="slot-artist">Mirage Horizon</h3>
-              <p class="slot-genre">Alternative Rock (UK)</p>
-            </div>
-            <div class="slot-stage">
-              <span class="highlight-stage stage-pill-coral">Solar Horizon Stage</span>
-            </div>
-          
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-07" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-          <article class="glass-card slot-row" data-perf-id="perf-08">
-            <div class="slot-time">22:00 - 23:10</div>
-            <div class="slot-main">
-              <h3 class="slot-artist">Solar Flare</h3>
-              <p class="slot-genre">Nu-Disco / Funk (DE)</p>
-            </div>
-            <div class="slot-stage">
-              <span class="highlight-stage stage-pill-coral">Solar Horizon Stage</span>
-            </div>
-          
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-08" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-          <article class="glass-card slot-row" data-perf-id="perf-17">
-            <div class="slot-time">22:30 - 23:50</div>
-            <div class="slot-main">
-              <h3 class="slot-artist">Modular Horizon</h3>
-              <p class="slot-genre">Live Hardware Techno (DE)</p>
-            </div>
-            <div class="slot-stage">
-              <span class="highlight-stage stage-pill-pink">Lunar Forest Dome</span>
-            </div>
-          
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-17" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-          <article class="glass-card slot-row" data-perf-id="perf-18">
-            <div class="slot-time">00:05 - 01:25</div>
-            <div class="slot-main">
-              <h3 class="slot-artist">Analog Void</h3>
-              <p class="slot-genre">Industrial Techno (NL)</p>
-            </div>
-            <div class="slot-stage">
-              <span class="highlight-stage stage-pill-pink">Lunar Forest Dome</span>
-            </div>
-          
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-18" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="day-2" class="schedule-day-section">
-      <div class="container">
-        <div class="day-banner">
-          <h2 class="day-heading" data-i18n="day2_heading">Saturday, 11 July 2026</h2>
-          <span class="day-count" id="day2-count">6 featured sets</span>
-        </div>
-
-        <div class="slot-list">
-          <article class="glass-card slot-row" data-perf-id="perf-25">
-            <div class="slot-time">17:45 - 18:40</div>
-            <div class="slot-main">
-              <h3 class="slot-artist">Silver Tides</h3>
-              <p class="slot-genre">Shoegaze (CZ)</p>
-            </div>
-            <div class="slot-stage">
-              <span class="highlight-stage stage-pill-coral">Solar Horizon Stage</span>
-            </div>
-          
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-25" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-          <article class="glass-card slot-row" data-perf-id="perf-35">
-            <div class="slot-time">19:15 - 20:15</div>
-            <div class="slot-main">
-              <h3 class="slot-artist">Monolith Audio</h3>
-              <p class="slot-genre">Peak Time Techno (DE)</p>
-            </div>
-            <div class="slot-stage">
-              <span class="highlight-stage stage-pill-pink">Lunar Forest Dome</span>
-            </div>
-          
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-35" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-          <article class="glass-card slot-row" data-perf-id="perf-27">
-            <div class="slot-time">20:20 - 21:20</div>
-            <div class="slot-main">
-              <h3 class="slot-artist">Wild Horizon</h3>
-              <p class="slot-genre">Post-Punk Revival (DE)</p>
-            </div>
-            <div class="slot-stage">
-              <span class="highlight-stage stage-pill-coral">Solar Horizon Stage</span>
-            </div>
-          
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-27" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-          <article class="glass-card slot-row" data-perf-id="perf-37">
-            <div class="slot-time">22:00 - 23:20</div>
-            <div class="slot-main">
-              <h3 class="slot-artist">Shadowplay DJ</h3>
-              <p class="slot-genre">Dark Wave Techno (CZ)</p>
-            </div>
-            <div class="slot-stage">
-              <span class="highlight-stage stage-pill-pink">Lunar Forest Dome</span>
-            </div>
-          
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-37" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-          <article class="glass-card slot-row" data-perf-id="perf-29">
-            <div class="slot-time">23:10 - 00:25</div>
-            <div class="slot-main">
-              <h3 class="slot-artist">Vortex Motion</h3>
-              <p class="slot-genre">Nu-Electro (UK)</p>
-            </div>
-            <div class="slot-stage">
-              <span class="highlight-stage stage-pill-coral">Solar Horizon Stage</span>
-            </div>
-          
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-29" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-          <article class="glass-card slot-row" data-perf-id="perf-39">
-            <div class="slot-time">01:10 - 02:30</div>
-            <div class="slot-main">
-              <h3 class="slot-artist">Neural Network Live</h3>
-              <p class="slot-genre">Acid Techno (BE)</p>
-            </div>
-            <div class="slot-stage">
-              <span class="highlight-stage stage-pill-pink">Lunar Forest Dome</span>
-            </div>
-          
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-39" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="day-3" class="schedule-day-section">
-      <div class="container">
-        <div class="day-banner">
-          <h2 class="day-heading" data-i18n="day3_heading">Sunday, 12 July 2026</h2>
-          <span class="day-count" id="day3-count">6 featured sets</span>
-        </div>
-
-        <div class="slot-list">
-          <article class="glass-card slot-row" data-perf-id="perf-45">
-            <div class="slot-time">17:15 - 18:10</div>
-            <div class="slot-main">
-              <h3 class="slot-artist">Urban Echo</h3>
-              <p class="slot-genre">Art Pop (CZ)</p>
-            </div>
-            <div class="slot-stage">
-              <span class="highlight-stage stage-pill-coral">Solar Horizon Stage</span>
-            </div>
-          
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-45" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-          <article class="glass-card slot-row" data-perf-id="perf-55">
-            <div class="slot-time">18:45 - 19:45</div>
-            <div class="slot-main">
-              <h3 class="slot-artist">Dark Matter</h3>
-              <p class="slot-genre">Deep Progressive (CZ)</p>
-            </div>
-            <div class="slot-stage">
-              <span class="highlight-stage stage-pill-pink">Lunar Forest Dome</span>
-            </div>
-          
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-55" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-          <article class="glass-card slot-row" data-perf-id="perf-48">
-            <div class="slot-time">21:10 - 22:15</div>
-            <div class="slot-main">
-              <h3 class="slot-artist">Prismatics</h3>
-              <p class="slot-genre">Dance Punk (UK)</p>
-            </div>
-            <div class="slot-stage">
-              <span class="highlight-stage stage-pill-coral">Solar Horizon Stage</span>
-            </div>
-          
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-48" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-          <article class="glass-card slot-row" data-perf-id="perf-57">
-            <div class="slot-time">21:30 - 22:45</div>
-            <div class="slot-main">
-              <h3 class="slot-artist">Galactic Orbit</h3>
-              <p class="slot-genre">Melodic Techno (IT)</p>
-            </div>
-            <div class="slot-stage">
-              <span class="highlight-stage stage-pill-pink">Lunar Forest Dome</span>
-            </div>
-          
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-57" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-          <article class="glass-card slot-row" data-perf-id="perf-49">
-            <div class="slot-time">22:35 - 23:55</div>
-            <div class="slot-main">
-              <h3 class="slot-artist">Starlight Runners</h3>
-              <p class="slot-genre">Electropop Headliner (DK)</p>
-            </div>
-            <div class="slot-stage">
-              <span class="highlight-stage stage-pill-coral">Solar Horizon Stage</span>
-            </div>
-          
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-49" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-
-          <article class="glass-card slot-row" data-perf-id="perf-60">
-            <div class="slot-time">02:00 - 03:00</div>
-            <div class="slot-main">
-              <h3 class="slot-artist">Equinox Farewell</h3>
-              <p class="slot-genre">Down-tempo Ambient (CZ)</p>
-            </div>
-            <div class="slot-stage">
-              <span class="highlight-stage stage-pill-pink">Lunar Forest Dome</span>
-            </div>
-          
-            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-60" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
-          </article>
-        </div>
-      </div>
-    </section>
-  </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
@@ -360,113 +86,6 @@
       <span class="dock-label" data-i18n="dock_search">Search</span>
     </a>
   </nav>
-<script src="js/lang.js"></script>
-<script>
-  (function () {
-    var FAV_KEY = "festival_favorites";
-    var LABELS = {
-      en: { add: "+ Add", added: "✓ In Plan", countOne: "1 set", countMany: " sets" },
-      cs: { add: "+ Přidat", added: "✓ V plánu", countOne: "1 vystoupení", countFew: " vystoupení", countMany: " vystoupení" }
-    };
 
-    function getLang() {
-      if (typeof window.getFestivalLang === "function") return window.getFestivalLang();
-      return document.documentElement.lang === "cs" ? "cs" : "en";
-    }
-
-    function readFavorites() {
-      try {
-        var raw = window.localStorage.getItem(FAV_KEY);
-        if (!raw) return [];
-        var parsed = JSON.parse(raw);
-        if (Array.isArray(parsed)) {
-          return parsed.map(function (x) {
-            return typeof x === "string" ? x : (x && x.id ? String(x.id) : "");
-          }).filter(Boolean);
-        }
-      } catch (e) {}
-      return [];
-    }
-
-    function writeFavorites(ids) {
-      var seen = {};
-      var clean = [];
-      ids.forEach(function (id) {
-        if (id && !seen[id]) {
-          seen[id] = true;
-          clean.push(id);
-        }
-      });
-      try {
-        window.localStorage.setItem(FAV_KEY, JSON.stringify(clean));
-      } catch (e) {}
-      try {
-        window.dispatchEvent(new Event("favoritesUpdated"));
-      } catch (e) {}
-      syncUI();
-    }
-
-    function formatCount(n, lang) {
-      if (lang === "cs" && typeof window.formatCzPlural === "function") {
-        return window.formatCzPlural(n, "uložené vystoupení", "uložená vystoupení", "uložených vystoupení");
-      }
-      if (lang === "cs") {
-        if (n === 1) return "1 vystoupení";
-        return n + " vystoupení";
-      }
-      return n === 1 ? "1 set" : n + " sets";
-    }
-
-    function syncUI() {
-      var favs = readFavorites();
-      var lang = getLang();
-      var dict = LABELS[lang] || LABELS.en;
-
-      var countEl = document.getElementById("plan-bar-count");
-      if (countEl) countEl.textContent = formatCount(favs.length, lang);
-
-      var btns = document.querySelectorAll(".fav-toggle-btn[data-perf-id]");
-      for (var i = 0; i < btns.length; i++) {
-        var btn = btns[i];
-        var id = btn.getAttribute("data-perf-id");
-        var saved = favs.indexOf(id) !== -1;
-        btn.setAttribute("aria-pressed", saved ? "true" : "false");
-        btn.setAttribute("data-i18n", saved ? "prog_added" : "prog_add");
-        btn.classList.toggle("is-saved", saved);
-        btn.textContent = saved ? dict.added : dict.add;
-      }
-    }
-
-    document.addEventListener("click", function (ev) {
-      var btn = ev.target && ev.target.closest ? ev.target.closest(".fav-toggle-btn[data-perf-id]") : null;
-      if (!btn) return;
-      var id = btn.getAttribute("data-perf-id");
-      if (!id) return;
-      var favs = readFavorites();
-      var idx = favs.indexOf(id);
-      if (idx === -1) favs.push(id);
-      else favs.splice(idx, 1);
-      writeFavorites(favs);
-    });
-
-    window.addEventListener("storage", function (ev) {
-      if (!ev || ev.key === FAV_KEY) syncUI();
-    });
-    window.addEventListener("languageChanged", syncUI);
-
-    if (typeof MutationObserver === "function") {
-      new MutationObserver(syncUI).observe(document.documentElement, {
-        attributes: true,
-        attributeFilter: ["lang"]
-      });
-    }
-
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", syncUI);
-    } else {
-      syncUI();
-    }
-  })();
-</script>
 </body>
 </html>

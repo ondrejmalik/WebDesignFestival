@@ -1,6 +1,5 @@
-<!-- v2/index.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-design="11-zzz" data-native-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,15 +8,21 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../../../shared/css/festival-features.css">
+  <script src="js/lang.js" defer></script>
+  <script src="../../../shared/js/festival-data.js" defer></script>
+  <script src="../../../shared/js/festival-core.js" defer></script>
+  <script src="../../../shared/js/festival-pages.js" defer></script>
 </head>
 <body>
+
   <div class="app-shell">
     <aside class="side-rail" aria-label="Primary navigation">
       <a href="index.html" class="rail-brand" aria-label="Festival of Darkness 2">
         <span class="brand-glyph">FD2</span>
       </a>
       <nav class="rail-nav">
-        <a href="index.html" class="rail-link is-active" aria-current="page">
+        <a href="index.html" class="rail-link">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-9.5z"/>
           </svg>
@@ -31,7 +36,7 @@
           <span data-i18n="nav_program">Program</span>
         </a>
         <a href="artists.html" class="rail-link">Artists</a>
-        <a href="stages.html" class="rail-link">Stages</a>
+        <a href="stages.html" class="rail-link active is-active" aria-current="page">Stages</a>
         <a href="practical-info.html" class="rail-link">Info</a>
         <a href="my-schedule.html" class="rail-link">My Schedule</a>
         <a href="search.html" class="rail-link">Search</a>
@@ -60,15 +65,18 @@
         </div>
       </header>
 
-      <main class="main-content">
-    <section class="section-block">
-      <h1>Stages</h1>
-      <div class="stages-grid">
-        <article class="data-panel"><h2 class="panel-title">Solar Horizon Stage</h2><p class="panel-desc">Open-air main stage · Capacity 4,500 · 13:00–02:00</p><a href="program.html">View schedule</a></article>
-        <article class="data-panel"><h2 class="panel-title">Lunar Forest Dome</h2><p class="panel-desc">Covered 360° audiovisual dome · Capacity 1,800 · 14:00–04:00</p><a href="program.html">View schedule</a></article>
-      </div>
+      
+<main class="main-content">
+    <section class="page-header-panel">
+      <p class="hero-kicker">Kutná Hora, Czech Republic · 10-12 Jul 2026</p>
+      <h1 class="page-title"><span class="lang-en">Festival Stages & Grounds</span><span class="lang-cs is-hidden">Festivalová pódia a areál</span></h1>
+      <p class="hero-lead"><span class="lang-en">Two contrasting stages in Kutná Hora: open-air Solar Horizon (4,500) and covered Lunar Forest Dome (1,800).</span><span class="lang-cs is-hidden">Dvě kontrastní scény v Kutné Hoře: venkovní Solar Horizon (4 500) a krytý Lunar Forest Dome (1 800).</span></p>
     </section>
-  </main>
+    <div class="fod-mount">
+      <div id="fod-stages-root"></div>
+    </div>
+</main>
+
 
       <footer class="site-footer">
         <div class="footer-left">
@@ -79,7 +87,7 @@
           <a href="index.html" data-i18n="nav_home">Home</a>
           <a href="program.html" data-i18n="nav_program">Program</a>
         <a href="artists.html">Artists</a>
-        <a href="stages.html">Stages</a>
+        <a href="stages.html" aria-current="page">Stages</a>
         <a href="practical-info.html">Info</a>
         <a href="my-schedule.html">My Schedule</a>
         <a href="search.html">Search</a>
@@ -152,6 +160,6 @@
       <span class="dock-label" data-i18n="dock_search">Search</span>
     </a>
   </nav>
-<script src="js/lang.js"></script>
+
 </body>
 </html>

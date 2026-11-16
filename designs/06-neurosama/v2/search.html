@@ -1,17 +1,21 @@
-<!-- v2/search.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-design="06-neurosama" data-native-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Search | Festival of Darkness 2</title>
+  <title>Search - Festival of Darkness 2</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../../../shared/css/festival-features.css">
   <script src="js/lang.js" defer></script>
+  <script src="../../../shared/js/festival-data.js" defer></script>
+  <script src="../../../shared/js/festival-core.js" defer></script>
+  <script src="../../../shared/js/festival-pages.js" defer></script>
 </head>
 <body>
+
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="brand-link" aria-label="Festival of Darkness 2 Home">
@@ -25,138 +29,26 @@
         <a href="stages.html" class="nav-link">Stages</a>
         <a href="practical-info.html" class="nav-link">Info</a>
         <a href="my-schedule.html" class="nav-link">My Schedule</a>
-        <a href="search.html" class="nav-link is-active">Search</a>
+        <a href="search.html" class="nav-link active is-active" aria-current="page">Search</a>
         <button type="button" class="lang-toggle" id="lang-toggle" aria-label="Switch language">CZ</button>
       </nav>
     </div>
   </header>
 
-  <main>
+  
+<main>
     <section class="page-intro">
       <div class="container">
-        <div class="pill-badge">
-          <span class="badge-accent" data-i18n="hero_dates">10-12 Jul 2026</span>
-          <span class="badge-sep">/</span>
-          <span data-i18n="hero_location">Kutná Hora, Czechia</span>
-        </div>
-        <h1 class="hero-title page-title">Search Festival</h1>
-        <p class="section-lead">Find artists, stages, timetable slots, and visitor guidance across Festival of Darkness 2.</p>
-
-        <form class="hero-actions" action="search.html" method="get" role="search" aria-label="Search festival">
-          <label for="festival-search-input" class="tile-label">Search query</label>
-          <input
-            type="search"
-            id="festival-search-input"
-            name="q"
-            class="jump-pill"
-            placeholder="Search artists, genres, stages, or info..."
-            aria-label="Search artists, genres, stages, or info"
-          >
-          <button type="submit" class="btn btn-primary">Search</button>
-        </form>
-
-        <div class="day-jump-bar" role="group" aria-label="Filter search results">
-          <button type="button" class="jump-pill is-active" data-filter="all" aria-pressed="true">All</button>
-          <button type="button" class="jump-pill" data-filter="artists" aria-pressed="false">Artists</button>
-          <button type="button" class="jump-pill" data-filter="stages" aria-pressed="false">Stages</button>
-          <button type="button" class="jump-pill" data-filter="info" aria-pressed="false">Info</button>
-        </div>
+        <p class="hero-meta">Kutná Hora, Czech Republic · 10-12 Jul 2026</p>
+      <h1 class="display-heading page-title"><span class="lang-en">Search Festival</span><span class="lang-cs is-hidden">Vyhledávání na festivalu</span></h1>
+      <p class="section-lead"><span class="lang-en">Search across all 60 artists, timetable slots, stages, shuttle buses, camping, and practical info.</span><span class="lang-cs is-hidden">Hledejte napříč všemi 60 interprety, časovými sloty, pódii, dopravou, kempem i praktickými informacemi.</span></p>
       </div>
     </section>
+    <div class="container fod-mount">
+      <div id="fod-search-root"></div>
+    </div>
+</main>
 
-    <section class="content-section">
-      <div class="container">
-        <div class="day-banner">
-          <h2 class="day-heading">Search Results</h2>
-          <span class="day-count" id="search-results-count">8 matches</span>
-        </div>
-
-        <div class="highlights-grid" id="search-results-grid">
-          <article class="glass-card highlight-card" data-category="artists">
-            <div class="highlight-top">
-              <span class="highlight-day">Artist</span>
-              <span class="highlight-time" data-i18n="day1_short">Fri, 10 Jul</span>
-            </div>
-            <h3 class="highlight-artist"><a href="artist-detail.html?id=perf-08">Solar Flare</a></h3>
-            <p class="highlight-genre">Nu-Disco / Funk (DE) • 22:00 - 23:10 • Solar Horizon Stage</p>
-            <a href="artist-detail.html?id=perf-08" class="highlight-stage stage-pill-coral">Artist Profile</a>
-          </article>
-
-          <article class="glass-card highlight-card" data-category="artists">
-            <div class="highlight-top">
-              <span class="highlight-day">Artist</span>
-              <span class="highlight-time" data-i18n="day1_short">Fri, 10 Jul</span>
-            </div>
-            <h3 class="highlight-artist"><a href="artist-detail.html?id=perf-17">Modular Horizon</a></h3>
-            <p class="highlight-genre">Live Hardware Techno (DE) • 22:30 - 23:50 • Lunar Forest Dome</p>
-            <a href="artist-detail.html?id=perf-17" class="highlight-stage stage-pill-pink">Artist Profile</a>
-          </article>
-
-          <article class="glass-card highlight-card" data-category="artists">
-            <div class="highlight-top">
-              <span class="highlight-day">Artist</span>
-              <span class="highlight-time" data-i18n="day2_short">Sat, 11 Jul</span>
-            </div>
-            <h3 class="highlight-artist"><a href="artist-detail.html?id=perf-39">Neural Network Live</a></h3>
-            <p class="highlight-genre">Acid Techno (BE) • 01:10 - 02:30 • Lunar Forest Dome</p>
-            <a href="artist-detail.html?id=perf-39" class="highlight-stage stage-pill-pink">Artist Profile</a>
-          </article>
-
-          <article class="glass-card highlight-card" data-category="artists">
-            <div class="highlight-top">
-              <span class="highlight-day">Artist</span>
-              <span class="highlight-time" data-i18n="day3_short">Sun, 12 Jul</span>
-            </div>
-            <h3 class="highlight-artist"><a href="artist-detail.html?id=perf-49">Starlight Runners</a></h3>
-            <p class="highlight-genre">Electropop Headliner (DK) • 22:35 - 23:55 • Solar Horizon Stage</p>
-            <a href="artist-detail.html?id=perf-49" class="highlight-stage stage-pill-coral">Artist Profile</a>
-          </article>
-
-          <article class="glass-card highlight-card" data-category="stages">
-            <div class="highlight-top">
-              <span class="highlight-day">Stage</span>
-              <span class="highlight-time" data-i18n="solar_cap">Capacity: 4,500</span>
-            </div>
-            <h3 class="highlight-artist"><a href="stages.html#stage-solar">Solar Horizon Stage</a></h3>
-            <p class="highlight-genre" data-i18n="solar_desc">Central open-air amphitheater for major band performances, indie rock, and dance headliners.</p>
-            <a href="stages.html" class="highlight-stage stage-pill-coral">Stage Details</a>
-          </article>
-
-          <article class="glass-card highlight-card" data-category="stages">
-            <div class="highlight-top">
-              <span class="highlight-day">Stage</span>
-              <span class="highlight-time" data-i18n="lunar_cap">Capacity: 1,800</span>
-            </div>
-            <h3 class="highlight-artist"><a href="stages.html#stage-lunar">Lunar Forest Dome</a></h3>
-            <p class="highlight-genre" data-i18n="lunar_desc">Atmospheric covered indoor stage focusing on techno, ambient, experimental electronics, and 360-degree light projections.</p>
-            <a href="stages.html" class="highlight-stage stage-pill-pink">Stage Details</a>
-          </article>
-
-          <article class="glass-card highlight-card" data-category="info">
-            <div class="highlight-top">
-              <span class="highlight-day">Info</span>
-              <span class="highlight-time" data-i18n="hero_dates">10-12 Jul 2026</span>
-            </div>
-            <h3 class="highlight-artist"><a href="program.html">Full 3-Day Timetable & Door Times</a></h3>
-            <p class="highlight-genre">Daily opening hours (Fri 14:00, Sat 13:30, Sun 13:00) and all 60 scheduled sets in Kutná Hora.</p>
-            <a href="program.html" class="highlight-stage stage-pill-coral">Open Program</a>
-          </article>
-
-          <article class="glass-card highlight-card" data-category="info">
-            <div class="highlight-top">
-              <span class="highlight-day">Info</span>
-              <span class="highlight-time" data-i18n="hero_location">Kutná Hora, Czechia</span>
-            </div>
-            <h3 class="highlight-artist"><a href="practical-info.html">Travel, Entry & Venue Guide</a></h3>
-            <p class="highlight-genre">Getting to Kutná Hora, wristband exchange, camping, cashless payments, and site accessibility.</p>
-            <a href="practical-info.html" class="highlight-stage stage-pill-pink">Practical Info</a>
-          </article>
-        </div>
-
-        <p class="section-lead" id="search-empty-state" hidden>No matching artists, stages, or info found. Try another keyword or reset the filter to All.</p>
-      </div>
-    </section>
-  </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
@@ -194,73 +86,6 @@
       <span class="dock-label" data-i18n="dock_search">Search</span>
     </a>
   </nav>
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const searchInput = document.getElementById("festival-search-input");
-      const filterButtons = Array.from(document.querySelectorAll("[data-filter]"));
-      const cards = Array.from(document.querySelectorAll("#search-results-grid [data-category]"));
-      const countEl = document.getElementById("search-results-count");
-      const emptyEl = document.getElementById("search-empty-state");
-      const form = searchInput ? searchInput.closest("form") : null;
 
-      let activeCategory = "all";
-
-      const params = new URLSearchParams(window.location.search);
-      const initialQuery = params.get("q");
-      if (initialQuery && searchInput) {
-        searchInput.value = initialQuery;
-      }
-
-      function applySearchAndFilter() {
-        const query = (searchInput ? searchInput.value : "").trim().toLowerCase();
-        let visibleCount = 0;
-
-        cards.forEach((card) => {
-          const category = card.getAttribute("data-category") || "";
-          const text = card.textContent.toLowerCase();
-          const matchesCategory = activeCategory === "all" || category === activeCategory;
-          const matchesQuery = !query || text.includes(query);
-          const isVisible = matchesCategory && matchesQuery;
-
-          card.hidden = !isVisible;
-          if (isVisible) {
-            visibleCount += 1;
-          }
-        });
-
-        if (countEl) {
-          countEl.textContent = visibleCount === 1 ? "1 match" : `${visibleCount} matches`;
-        }
-        if (emptyEl) {
-          emptyEl.hidden = visibleCount > 0;
-        }
-      }
-
-      filterButtons.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          activeCategory = btn.getAttribute("data-filter") || "all";
-          filterButtons.forEach((item) => {
-            const selected = item === btn;
-            item.classList.toggle("is-active", selected);
-            item.setAttribute("aria-pressed", String(selected));
-          });
-          applySearchAndFilter();
-        });
-      });
-
-      if (searchInput) {
-        searchInput.addEventListener("input", applySearchAndFilter);
-      }
-
-      if (form) {
-        form.addEventListener("submit", (event) => {
-          event.preventDefault();
-          applySearchAndFilter();
-        });
-      }
-
-      applySearchAndFilter();
-    });
-  </script>
 </body>
 </html>

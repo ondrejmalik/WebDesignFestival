@@ -1,14 +1,18 @@
-<!-- v2/practical-info.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-design="04-eventbrite" data-native-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Practical Info | Festival of Darkness 2 — Kutná Hora, 10–12 Jul 2026</title>
+  <title>Practical Info - Festival of Darkness 2</title>
   <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../../../shared/css/festival-features.css">
   <script src="js/lang.js" defer></script>
+  <script src="../../../shared/js/festival-data.js" defer></script>
+  <script src="../../../shared/js/festival-core.js" defer></script>
+  <script src="../../../shared/js/festival-pages.js" defer></script>
 </head>
 <body>
+
   <header class="eb-header">
     <div class="eb-container eb-header-inner">
       <a href="index.html" class="eb-logo" aria-label="Festival of Darkness 2 Home">
@@ -20,11 +24,11 @@
         <a href="program.html" class="eb-nav-link" data-i18n="nav.program">Lineup & Schedule</a>
         <a href="artists.html" class="eb-nav-link">Artists</a>
         <a href="stages.html" class="eb-nav-link">Stages</a>
-        <a href="practical-info.html" class="eb-nav-link is-active">Practical Info</a>
+        <a href="practical-info.html" class="eb-nav-link active is-active" aria-current="page">Info</a>
         <a href="my-schedule.html" class="eb-nav-link">My Schedule</a>
+        <a href="search.html" class="eb-nav-link">Search</a>
       </nav>
       <div class="eb-header-actions">
-        <a href="search.html" class="eb-lang-btn" aria-label="Search lineup and info">Search</a>
         <button type="button" id="lang-toggle" class="eb-lang-btn" onclick="toggleFestivalLang()" aria-label="Switch language">
           CZ / EN
         </button>
@@ -33,379 +37,20 @@
     </div>
   </header>
 
-  <main>
+  
+<main>
     <section class="eb-program-hero">
       <div class="eb-container">
-        <nav class="eb-breadcrumb" aria-label="Breadcrumb">
-          <a href="index.html" data-i18n="nav.overview">Event Overview</a>
-          <span aria-hidden="true">/</span>
-          <span>Practical Info</span>
-        </nav>
-        <h1 class="eb-page-title">Practical Guide & Festival Info</h1>
-        <p class="eb-page-subtitle">
-          Kutná Hora Festival Grounds • 10–12 July 2026 • Everything you need for arrival, camping, cashless wristbands, accessibility, and safety.
-        </p>
-        <div class="eb-jump-bar" aria-label="Jump to section">
-          <a href="#venue-transport" class="eb-jump-pill">Venue & Transport</a>
-          <a href="#camping-stay" class="eb-jump-pill">Camping & Stay</a>
-          <a href="#cashless-food" class="eb-jump-pill">Cashless & Food</a>
-          <a href="#accessibility" class="eb-jump-pill">Accessibility</a>
-          <a href="#safety-faq" class="eb-jump-pill">Safety & FAQ</a>
-        </div>
+        <p class="hero-meta">Kutná Hora, Czech Republic · 10-12 Jul 2026</p>
+      <h1 class="eb-page-title"><span class="lang-en">Practical Info & Transit</span><span class="lang-cs is-hidden">Praktické informace a doprava</span></h1>
+      <p class="eb-page-subtitle"><span class="lang-en">Tickets, free shuttle bus from Kutná Hora station, interactive route map, camping, cashless RFID, and FAQ.</span><span class="lang-cs is-hidden">Vstupenky, bezplatný shuttle bus z nádraží Kutná Hora, interaktivní mapa trasy, kemp, cashless a FAQ.</span></p>
       </div>
     </section>
+    <div class="eb-container fod-mount">
+      <div id="fod-practical-root"></div>
+    </div>
+</main>
 
-    <section class="eb-main-layout">
-      <div class="eb-container eb-two-col">
-        <div class="eb-content-col">
-          <div class="eb-highlights-strip">
-            <div class="eb-highlight-chip">
-              <span class="eb-chip-icon" aria-hidden="true">🚪</span>
-              <span>Box Office Opens Fri 10 Jul at 11:00</span>
-            </div>
-            <div class="eb-highlight-chip">
-              <span class="eb-chip-icon" aria-hidden="true">🚆</span>
-              <span>45 min direct train from Prague</span>
-            </div>
-            <div class="eb-highlight-chip">
-              <span class="eb-chip-icon" aria-hidden="true">💳</span>
-              <span>100% NFC Cashless Grounds</span>
-            </div>
-          </div>
-
-          <section id="venue-transport" class="eb-section-block" aria-labelledby="venue-heading">
-            <div class="eb-section-head-row">
-              <h2 id="venue-heading" class="eb-section-title">1. Venue & Transport</h2>
-              <span class="eb-count-pill">Kutná Hora, CZ</span>
-            </div>
-            <p class="eb-body-copy">
-              The Kutná Hora Festival Grounds sit on the green edge of town, 2.2 km from Kutná Hora hlavní nádraží (main railway station) and 1.5 km from St. Barbara's Cathedral.
-            </p>
-            <div class="eb-meta-grid">
-              <div class="eb-meta-item">
-                <div class="eb-meta-icon" aria-hidden="true">🚆</div>
-                <div>
-                  <h3 class="eb-meta-label">By Train (ČD / RegioJet)</h3>
-                  <p class="eb-meta-value">
-                    Hourly direct R9 fast trains from Praha hlavní nádraží reach Kutná Hora hl.n. in 48 minutes. Dedicated festival shuttle buses run every 20 minutes from the station forecourt (Fri 10:30 – Sun 03:30, 50 CZK single ride).
-                  </p>
-                </div>
-              </div>
-              <div class="eb-meta-item">
-                <div class="eb-meta-icon" aria-hidden="true">🚗</div>
-                <div>
-                  <h3 class="eb-meta-label">By Car & Parking</h3>
-                  <p class="eb-meta-value">
-                    Take D11 Exit 42 toward Kolín / Kutná Hora via Road I/38. Secured P1 Festival Parking is 400 m from the main gate (350 CZK weekend pass; pre-booking recommended).
-                  </p>
-                </div>
-              </div>
-              <div class="eb-meta-item">
-                <div class="eb-meta-icon" aria-hidden="true">🚌</div>
-                <div>
-                  <h3 class="eb-meta-label">Night Return Shuttles</h3>
-                  <p class="eb-meta-value">
-                    Late-night shuttles depart Main Gate East at 01:30, 02:30, and 03:30 each night directly to Kutná Hora hl.n. and the historic town center.
-                  </p>
-                </div>
-              </div>
-              <div class="eb-meta-item">
-                <div class="eb-meta-icon" aria-hidden="true">🚲</div>
-                <div>
-                  <h3 class="eb-meta-label">Cycling & Drop-Off</h3>
-                  <p class="eb-meta-value">
-                    Free guarded bike racks operate 24/7 beside Gate North. Taxi and rideshare kiss-and-ride drop-off is located on Masarykova avenue, 150 m from check-in.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section id="camping-stay" class="eb-section-block" aria-labelledby="camping-heading">
-            <div class="eb-section-head-row">
-              <h2 id="camping-heading" class="eb-section-title">2. Camping & Accommodation</h2>
-              <span class="eb-count-pill">Opens Thu 9 Jul, 16:00</span>
-            </div>
-            <p class="eb-body-copy">
-              Stay right next to Solar Horizon Stage and Lunar Forest Dome in our shaded oak and birch grove, or choose partner hotels across Kutná Hora.
-            </p>
-            <div class="eb-stages-grid">
-              <article class="eb-stage-card">
-                <div class="eb-stage-top">
-                  <span class="eb-stage-tag eb-tag-solar">Tent Village</span>
-                  <span class="eb-stage-cap">Included in Camping Pass</span>
-                </div>
-                <h3 class="eb-stage-name">Kutná Hora Grove Camp</h3>
-                <p class="eb-stage-desc">
-                  Grassy pitches 3 minutes from the arena entrance. Includes 24/7 security, hot showers (07:00–23:00), drinking water points, and a 24-hour phone charging station.
-                </p>
-              </article>
-              <article class="eb-stage-card">
-                <div class="eb-stage-top">
-                  <span class="eb-stage-tag eb-tag-lunar">Pre-Pitched & Vans</span>
-                  <span class="eb-stage-cap">Limited Capacity</span>
-                </div>
-                <h3 class="eb-stage-name">Chill Glamping & Camper Zone</h3>
-                <p class="eb-stage-desc">
-                  Pre-pitched 2- and 4-person bell tents with foam mattresses and solar lanterns, plus a dedicated campervan field with optional 230V electric hookups.
-                </p>
-              </article>
-            </div>
-            <div class="eb-featured-list">
-              <div class="eb-slot-row">
-                <div class="eb-slot-time">
-                  <span class="eb-slot-day">Check-In</span>
-                  <strong>Thu 16:00 – Sun 12:00</strong>
-                </div>
-                <div class="eb-slot-info">
-                  <h3 class="eb-slot-artist">Campground Rules & Quiet Zone</h3>
-                  <p class="eb-slot-meta">Open fires, gas stoves, and glass bottles are strictly prohibited inside the camp. Family & Quiet Sector B enforces low noise from 01:00 to 08:00.</p>
-                </div>
-                <span class="eb-stage-dot eb-dot-solar" aria-hidden="true"></span>
-              </div>
-              <div class="eb-slot-row">
-                <div class="eb-slot-time">
-                  <span class="eb-slot-day">Town Hotels</span>
-                  <strong>1.5 – 3.0 km away</strong>
-                </div>
-                <div class="eb-slot-info">
-                  <h3 class="eb-slot-artist">Partner Guesthouses in Kutná Hora</h3>
-                  <p class="eb-slot-meta">Use code DARKNESS26 when booking at Hotel U Kata, Penzion Barbora, or Boutique Hotel Hubert for late checkout until 13:00 on Monday, July 13.</p>
-                </div>
-                <span class="eb-stage-dot eb-dot-lunar" aria-hidden="true"></span>
-              </div>
-            </div>
-          </section>
-
-          <section id="cashless-food" class="eb-section-block" aria-labelledby="cashless-heading">
-            <div class="eb-section-head-row">
-              <h2 id="cashless-heading" class="eb-section-title">3. Cashless Wristbands & Food</h2>
-              <span class="eb-count-pill">NFC Wristband System</span>
-            </div>
-            <p class="eb-body-copy">
-              All bars, food trucks, and official merch stalls operate exclusively via NFC festival wristbands. Cash and bank cards are accepted at top-up kiosks to load credit onto your chip.
-            </p>
-            <div class="eb-meta-grid">
-              <div class="eb-meta-item">
-                <div class="eb-meta-icon" aria-hidden="true">⌚</div>
-                <div>
-                  <h3 class="eb-meta-label">Top-Up & Auto-Refund</h3>
-                  <p class="eb-meta-value">
-                    Pre-load your wristband online before arrival or top up at 6 yellow NFC booths on site (CZK or EUR). Unspent balances over 50 CZK are refunded automatically to your bank account within 5 business days.
-                  </p>
-                </div>
-              </div>
-              <div class="eb-meta-item">
-                <div class="eb-meta-icon" aria-hidden="true">🥗</div>
-                <div>
-                  <h3 class="eb-meta-label">Food Village & Dietary Options</h3>
-                  <p class="eb-meta-value">
-                    22 street-food vendors serving Czech craft classics, wood-fired pizza, Asian bowls, and specialty coffee. Over 60% of stalls offer labeled vegan, vegetarian, and gluten-free menus.
-                  </p>
-                </div>
-              </div>
-              <div class="eb-meta-item">
-                <div class="eb-meta-icon" aria-hidden="true">💧</div>
-                <div>
-                  <h3 class="eb-meta-label">Free Drinking Water & Cups</h3>
-                  <p class="eb-meta-value">
-                    Free potable water refill stations are located beside Solar Horizon Stage, outside Lunar Forest Dome, and at the main toilets. Reusable festival cups carry a 50 CZK refundable deposit.
-                  </p>
-                </div>
-              </div>
-              <div class="eb-meta-item">
-                <div class="eb-meta-icon" aria-hidden="true">🛍️</div>
-                <div>
-                  <h3 class="eb-meta-label">Official Merch & Vinyl Store</h3>
-                  <p class="eb-meta-value">
-                    Located by the central plaza. Stocks limited Festival of Darkness 2 screen-printed tees, artist records, earplugs, and rain ponchos.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section id="accessibility" class="eb-section-block" aria-labelledby="accessibility-heading">
-            <div class="eb-section-head-row">
-              <h2 id="accessibility-heading" class="eb-section-title">4. Accessibility & Inclusion</h2>
-              <span class="eb-count-pill">ZTP / ZTP-P Welcome</span>
-            </div>
-            <p class="eb-body-copy">
-              Festival of Darkness 2 is committed to step-free access across both stages, sanitary facilities, and viewing areas.
-            </p>
-            <div class="eb-featured-list">
-              <div class="eb-slot-row">
-                <div class="eb-slot-time">
-                  <span class="eb-slot-day">Companion Pass</span>
-                  <strong>Free Companion</strong>
-                </div>
-                <div class="eb-slot-info">
-                  <h3 class="eb-slot-artist">ZTP / ZTP-P Ticket Policy</h3>
-                  <p class="eb-slot-meta">Holders of a valid ZTP/P card (or international equivalent) receive free entry for one accompanying assistant upon presenting their pass at the Dedicated Accessibility Check-In lane.</p>
-                </div>
-                <span class="eb-stage-dot eb-dot-lunar" aria-hidden="true"></span>
-              </div>
-              <div class="eb-slot-row">
-                <div class="eb-slot-time">
-                  <span class="eb-slot-day">Viewing Decks</span>
-                  <strong>Both Stages</strong>
-                </div>
-                <div class="eb-slot-info">
-                  <h3 class="eb-slot-artist">Elevated Wheelchair Platforms</h3>
-                  <p class="eb-slot-meta">Ramped viewing decks with clear sightlines and power outlets for electric wheelchairs are available at Solar Horizon Stage and inside Lunar Forest Dome.</p>
-                </div>
-                <span class="eb-stage-dot eb-dot-solar" aria-hidden="true"></span>
-              </div>
-              <div class="eb-slot-row">
-                <div class="eb-slot-time">
-                  <span class="eb-slot-day">Sensory Care</span>
-                  <strong>Quiet Zone</strong>
-                </div>
-                <div class="eb-slot-info">
-                  <h3 class="eb-slot-artist">Accessible Restrooms & Low-Sensory Lounge</h3>
-                  <p class="eb-slot-meta">Euro-key wheelchair toilets are positioned at every sanitary block. A low-stimulation chillout tent near First Aid offers seating, shade, and free foam earplugs.</p>
-                </div>
-                <span class="eb-stage-dot eb-dot-lunar" aria-hidden="true"></span>
-              </div>
-            </div>
-          </section>
-
-          <section id="safety-faq" class="eb-section-block" aria-labelledby="safety-heading">
-            <div class="eb-section-head-row">
-              <h2 id="safety-heading" class="eb-section-title">5. Safety, Permitted Items & FAQ</h2>
-              <span class="eb-count-pill">24/7 Medical & Welfare</span>
-            </div>
-            <p class="eb-body-copy">
-              Bag checks take place at all gates to keep the arena safe. Strobe and intense 360-degree laser visuals are used inside Lunar Forest Dome after 20:00.
-            </p>
-            <div class="eb-stages-grid">
-              <article class="eb-stage-card">
-                <div class="eb-stage-top">
-                  <span class="eb-stage-tag eb-tag-solar">Allowed Inside</span>
-                </div>
-                <h3 class="eb-stage-name">What to Bring</h3>
-                <p class="eb-stage-desc">
-                  Empty soft plastic water bottle (up to 1L), small daypack (max 25L), compact point-and-shoot camera, sunscreen, prescription medication with ID, and rainwear.
-                </p>
-              </article>
-              <article class="eb-stage-card">
-                <div class="eb-stage-top">
-                  <span class="eb-stage-tag eb-tag-lunar">Not Permitted</span>
-                </div>
-                <h3 class="eb-stage-name">Prohibited Items</h3>
-                <p class="eb-stage-desc">
-                  Glass bottles, cans, outside alcohol, drones, professional detachable-lens cameras without press accreditation, umbrellas, weapons, fireworks, and pets (except assistance dogs).
-                </p>
-              </article>
-            </div>
-
-            <div class="eb-schedule-table">
-              <article class="eb-schedule-card">
-                <div class="eb-sch-time">
-                  <span class="eb-stage-pill eb-tag-solar">Entry & Re-Entry</span>
-                  <span class="eb-time-range">Unlimited with Wristband</span>
-                </div>
-                <div>
-                  <h3 class="eb-sch-artist">Can I leave and re-enter the festival grounds?</h3>
-                  <p class="eb-sch-genre">
-                    Yes. Once your digital e-ticket is scanned and exchanged for a fabric NFC wristband, you may exit and re-enter freely throughout the weekend.
-                  </p>
-                </div>
-                <span class="eb-origin-badge">FAQ 01</span>
-              </article>
-
-              <article class="eb-schedule-card">
-                <div class="eb-sch-time">
-                  <span class="eb-stage-pill eb-tag-lunar">Age Policy</span>
-                  <span class="eb-time-range">15+ Solo / Under 15 w/ Adult</span>
-                </div>
-                <div>
-                  <h3 class="eb-sch-artist">Is there a minimum age requirement?</h3>
-                  <p class="eb-sch-genre">
-                    Visitors aged 15 and older may enter independently with valid photo ID. Children under 15 are welcome when accompanied by a parent or legal guardian (under 10 enters free).
-                  </p>
-                </div>
-                <span class="eb-origin-badge">FAQ 02</span>
-              </article>
-
-              <article class="eb-schedule-card">
-                <div class="eb-sch-time">
-                  <span class="eb-stage-pill eb-tag-solar">Medical & Harm Reduction</span>
-                  <span class="eb-time-range">24/7 On-Site</span>
-                </div>
-                <div>
-                  <h3 class="eb-sch-artist">Where do I find medical help or Safe Space support?</h3>
-                  <p class="eb-sch-genre">
-                    Two staffed Red Cross ambulance points and our non-judgmental Safe Space welfare tent operate continuously between Solar Horizon Stage and the Main Gate. Emergency line: +420 800 555 019.
-                  </p>
-                </div>
-                <span class="eb-origin-badge">FAQ 03</span>
-              </article>
-
-              <article class="eb-schedule-card">
-                <div class="eb-sch-time">
-                  <span class="eb-stage-pill eb-tag-lunar">Lockers & Lost Property</span>
-                  <span class="eb-time-range">Main Plaza</span>
-                </div>
-                <div>
-                  <h3 class="eb-sch-artist">Are lockers and lost-and-found available?</h3>
-                  <p class="eb-sch-genre">
-                    PIN-code lockers with USB-C charging ports can be rented by the day or weekend near Gate South. Lost & Found is hosted at the Info Booth during festival hours and at Kutná Hora Town Info on Monday.
-                  </p>
-                </div>
-                <span class="eb-origin-badge">FAQ 04</span>
-              </article>
-            </div>
-          </section>
-        </div>
-
-        <aside class="eb-sidebar-col" aria-label="Quick Festival Essentials">
-          <div class="eb-ticket-box">
-            <div class="eb-ticket-box-header">
-              <span class="eb-ticket-status">Kutná Hora • 10–12 Jul 2026</span>
-              <p class="eb-ticket-price-range">Key Hours & Contacts</p>
-            </div>
-
-            <div class="eb-ticket-tiers">
-              <div class="eb-tier-item">
-                <div>
-                  <p class="eb-tier-name">Campground Gates</p>
-                  <p class="eb-tier-sub">Kutná Hora Grove Camp</p>
-                </div>
-                <span class="eb-tier-price">Thu 16:00</span>
-              </div>
-              <div class="eb-tier-item">
-                <div>
-                  <p class="eb-tier-name">Arena Doors Open</p>
-                  <p class="eb-tier-sub">Fri 13:00 • Sat 12:30 • Sun 12:00</p>
-                </div>
-                <span class="eb-tier-price">Daily</span>
-              </div>
-              <div class="eb-tier-item">
-                <div>
-                  <p class="eb-tier-name">Shuttle Bus Fare</p>
-                  <p class="eb-tier-sub">Kutná Hora hl.n. ↔ Grounds</p>
-                </div>
-                <span class="eb-tier-price">50 CZK</span>
-              </div>
-              <div class="eb-tier-item">
-                <div>
-                  <p class="eb-tier-name">24/7 Info & Welfare</p>
-                  <p class="eb-tier-sub">info@darknessfest.cz</p>
-                </div>
-                <span class="eb-tier-price">Gate South</span>
-              </div>
-            </div>
-
-            <a href="program.html" class="eb-btn eb-btn-primary eb-btn-block" data-i18n="org.view_schedule">Full Timetable</a>
-            <p class="eb-ticket-footnote">
-              Need to plan your sets? Build a personal lineup in <a href="my-schedule.html" class="eb-text-link">My Schedule</a>.
-            </p>
-          </div>
-        </aside>
-      </div>
-    </section>
-  </main>
 
   <footer class="eb-footer">
     <div class="eb-container eb-footer-inner">
@@ -416,11 +61,6 @@
       <div class="eb-footer-links">
         <a href="index.html" data-i18n="nav.overview">Event Overview</a>
         <a href="program.html" data-i18n="nav.program">Lineup & Schedule</a>
-        <a href="artists.html">Artists</a>
-        <a href="stages.html">Stages</a>
-        <a href="practical-info.html">Practical Info</a>
-        <a href="my-schedule.html">My Schedule</a>
-        <a href="search.html">Search</a>
       </div>
     </div>
   </footer>
@@ -454,5 +94,6 @@
       <span class="dock-label" data-i18n="dock_search">Search</span>
     </a>
   </nav>
+
 </body>
 </html>

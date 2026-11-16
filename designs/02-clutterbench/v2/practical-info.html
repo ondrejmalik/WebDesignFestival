@@ -1,17 +1,21 @@
-<!-- v2/practical-info.html -->
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-design="02-clutterbench" data-native-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Practical Info — Festival of Darkness 2 · Kutná Hora 2026</title>
+  <title>Practical Info - Festival of Darkness 2</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../../../shared/css/festival-features.css">
   <script src="js/lang.js" defer></script>
+  <script src="../../../shared/js/festival-data.js" defer></script>
+  <script src="../../../shared/js/festival-core.js" defer></script>
+  <script src="../../../shared/js/festival-pages.js" defer></script>
 </head>
 <body>
+
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="brand" data-i18n="brand">Festival of Darkness 2</a>
@@ -20,7 +24,7 @@
         <a href="program.html" class="nav-link" data-i18n="navProgram">Program & Sets</a>
         <a href="artists.html" class="nav-link">Artists</a>
         <a href="stages.html" class="nav-link">Stages</a>
-        <a href="practical-info.html" class="nav-link active">Practical Info</a>
+        <a href="practical-info.html" class="nav-link active is-active" aria-current="page">Info</a>
         <a href="my-schedule.html" class="nav-link">My Schedule</a>
         <a href="search.html" class="nav-link">Search</a>
         <button type="button" class="lang-toggle" id="lang-toggle" aria-label="Switch language">CZ</button>
@@ -28,288 +32,18 @@
     </div>
   </header>
 
-  <main class="container main-content">
-    <div class="page-head">
-      <h1 class="page-title">Practical Info & Visitor Guide</h1>
-      <p class="hero-subtitle">
-        Essential logistics for Festival of Darkness 2 in Kutná Hora, Czech Republic (July 10–12, 2026). Plan your arrival, overnight stay, cashless payments, accessibility, and safety.
-      </p>
-      <div class="day-jump" aria-label="Jump to practical info section">
-        <a href="#transport" class="jump-pill">Venue & Transport</a>
-        <a href="#camping" class="jump-pill">Camping & Stay</a>
-        <a href="#cashless" class="jump-pill">Cashless & Food</a>
-        <a href="#accessibility" class="jump-pill">Accessibility</a>
-        <a href="#safety" class="jump-pill">Safety & FAQ</a>
-      </div>
+  
+<main class="container main-content">
+    <section class="page-head">
+      <p class="hero-meta">Kutná Hora, Czech Republic · 10-12 Jul 2026</p>
+      <h1 class="page-title"><span class="lang-en">Practical Info & Transit</span><span class="lang-cs is-hidden">Praktické informace a doprava</span></h1>
+      <p class="hero-subtitle"><span class="lang-en">Tickets, free shuttle bus from Kutná Hora station, interactive route map, camping, cashless RFID, and FAQ.</span><span class="lang-cs is-hidden">Vstupenky, bezplatný shuttle bus z nádraží Kutná Hora, interaktivní mapa trasy, kemp, cashless a FAQ.</span></p>
+    </section>
+    <div class="fod-mount">
+      <div id="fod-practical-root"></div>
     </div>
+</main>
 
-    <div class="stat-strip">
-      <div class="stat-item">
-        <span class="stat-value">12:00</span>
-        <span class="stat-label">Fri 10 Jul gates open</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-value">100%</span>
-        <span class="stat-label">NFC wristband & card</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-value">24/7</span>
-        <span class="stat-label">Medical & safe space</span>
-      </div>
-    </div>
-
-    <section id="transport" class="section-block" aria-labelledby="transport-heading">
-      <div class="section-header">
-        <h2 id="transport-heading" class="section-title">Venue & Transport</h2>
-        <p class="section-lead">
-          Located on the wooded edge of Kutná Hora (Sedlec / Kaňk ridge), 70 km east of Prague and 15 minutes from UNESCO heritage landmarks.
-        </p>
-      </div>
-
-      <div class="table-wrap">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th scope="col">Mode</th>
-              <th scope="col">Route & Hub</th>
-              <th scope="col">Duration</th>
-              <th scope="col">Operating Window & Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <div class="cell-primary">
-                  <span class="dot dot-solar" aria-hidden="true"></span>
-                  <span>Train (ČD / RegioJet)</span>
-                </div>
-              </td>
-              <td>Praha hl.n. → Kutná Hora hl.n.</td>
-              <td class="num-cell">52 min</td>
-              <td>Hourly fast trains; transfer to free festival shuttle outside main station.</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="cell-primary">
-                  <span class="dot dot-lunar" aria-hidden="true"></span>
-                  <span>Festival Shuttle Bus</span>
-                </div>
-              </td>
-              <td>Kutná Hora hl.n. ↔ Main Gate</td>
-              <td class="num-cell">10 min</td>
-              <td>Every 20 min from Fri 11:00 to Sun 04:30; free with valid festival wristband.</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="cell-primary">
-                  <span class="dot dot-solar" aria-hidden="true"></span>
-                  <span>Car & Parking P1/P2</span>
-                </div>
-              </td>
-              <td>D11 Exit 42 / Road I/38</td>
-              <td class="num-cell">60 min</td>
-              <td>Follow signs to Sedlec North Meadow; pre-booked weekend pass 350 CZK.</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="cell-primary">
-                  <span class="dot dot-peak" aria-hidden="true"></span>
-                  <span>Bicycle & On Foot</span>
-                </div>
-              </td>
-              <td>Kutná Hora Centrum → Forest Trail</td>
-              <td class="num-cell">25 min</td>
-              <td>Waymarked pedestrian path from Sedlec Ossuary; guarded bike racks at Gate A.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section id="camping" class="section-block" aria-labelledby="camping-heading">
-      <div class="section-header">
-        <h2 id="camping-heading" class="section-title">Camping & Accommodation</h2>
-        <p class="section-lead">
-          On-site tent fields open Friday, July 10 at 10:00 and close Sunday, July 12 at 15:00.
-        </p>
-      </div>
-
-      <div class="cards-grid">
-        <article class="panel-card">
-          <div class="card-meta">
-            <span class="badge badge-solar">Standard Camp</span>
-            <span class="time-stamp">450 CZK / weekend</span>
-          </div>
-          <h3 class="card-title">Meadow Tent Zone</h3>
-          <p class="card-sub">
-            Grassy pitches 250 m from Solar Horizon Stage. Includes 24-hour freshwater stations, ceramic toilets, hot showers (07:00–22:00), and free phone charging lockers at Info Tent.
-          </p>
-        </article>
-
-        <article class="panel-card">
-          <div class="card-meta">
-            <span class="badge badge-lunar">Quiet Forest Camp</span>
-            <span class="time-stamp">650 CZK / weekend</span>
-          </div>
-          <h3 class="card-title">Shaded Pine Grove</h3>
-          <p class="card-sub">
-            Acoustic buffer zone behind Lunar Forest Dome with enforced quiet hours (02:00–09:00), dedicated shower block, and shaded hammock lounge.
-          </p>
-        </article>
-
-        <article class="panel-card">
-          <div class="card-meta">
-            <span class="badge badge-solar">Campervan & Car</span>
-            <span class="time-stamp">1,100 CZK / pitch</span>
-          </div>
-          <h3 class="card-title">Caravan & Roof-Tent Lot</h3>
-          <p class="card-sub">
-            Level gravel plots (7 × 5 m) next to Gate B with chemical toilet disposal, potable water refill, and optional 16A CEE power hookup.
-          </p>
-        </article>
-
-        <article class="panel-card">
-          <div class="card-meta">
-            <span class="badge badge-peak">Town Hotels</span>
-            <span class="time-stamp">2.5 km away</span>
-          </div>
-          <h3 class="card-title">Kutná Hora Partner Stays</h3>
-          <p class="card-sub">
-            Guesthouses and hotels in Kutná Hora historic center and Sedlec are served by the night shuttle loop running until 04:30 every night.
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <section id="cashless" class="section-block" aria-labelledby="cashless-heading">
-      <div class="section-header">
-        <h2 id="cashless-heading" class="section-title">Cashless Payments & Food</h2>
-        <p class="section-lead">
-          All bars, food trucks, and merchandise stalls operate strictly cashless for fast service between sets.
-        </p>
-      </div>
-
-      <div class="cards-grid">
-        <article class="panel-card">
-          <div class="card-meta">
-            <span class="badge badge-solar">NFC & Contactless</span>
-            <span class="time-stamp">0 CZK activation</span>
-          </div>
-          <h3 class="card-title">Wristband Chip & Bank Cards</h3>
-          <p class="card-sub">
-            Pay directly with Visa, Mastercard, Apple Pay, Google Pay, or top up your NFC festival wristband online or at four cash/card top-up kiosks. Unused balances over 50 CZK are refunded free within 14 days.
-          </p>
-        </article>
-
-        <article class="panel-card">
-          <div class="card-meta">
-            <span class="badge badge-lunar">Local & Plant-Based</span>
-            <span class="time-stamp">12:00 – 03:30</span>
-          </div>
-          <h3 class="card-title">Food Court & Free Water</h3>
-          <p class="card-sub">
-            18 street-food vendors offering Czech craft specialties, vegan/vegetarian bowls, and gluten-free options. Free drinking-water refill taps are located beside both stages; reusable returnable cups carry a 50 CZK deposit.
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <section id="accessibility" class="section-block" aria-labelledby="accessibility-heading">
-      <div class="section-header">
-        <h2 id="accessibility-heading" class="section-title">Accessibility (ZTP / ZTP/P)</h2>
-        <p class="section-lead">
-          Step-free routes connect the accessible entrance, both stages, sanitation facilities, and the shuttle drop-off.
-        </p>
-      </div>
-
-      <div class="table-wrap">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th scope="col">Service</th>
-              <th scope="col">Location</th>
-              <th scope="col">Details & Eligibility</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="artist-cell">Viewing Platforms</td>
-              <td>Solar Horizon & Lunar Dome</td>
-              <td>Elevated wheelchair-accessible decks with clear sightlines and companion seating.</td>
-            </tr>
-            <tr>
-              <td class="artist-cell">Companion Pass</td>
-              <td>Main Accreditation Gate</td>
-              <td>ZTP/P cardholders receive one complimentary companion ticket upon ID verification.</td>
-            </tr>
-            <tr>
-              <td class="artist-cell">Accessible Facilities</td>
-              <td>Both Stages & Quiet Camp</td>
-              <td>Hard-surface trackway mats, widened accessible restrooms, and electric wheelchair charging.</td>
-            </tr>
-            <tr>
-              <td class="artist-cell">Sensory Quiet Room</td>
-              <td>Welfare & Medical Hub</td>
-              <td>Low-light, low-decibel recovery space with free foam earplugs available on request.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section id="safety" class="section-block" aria-labelledby="safety-heading">
-      <div class="section-header">
-        <h2 id="safety-heading" class="section-title">Safety, Entry Rules & FAQ</h2>
-        <a href="program.html" class="inline-link" data-i18n="viewAllLink">Full 3-day timetable →</a>
-      </div>
-
-      <div class="cards-grid">
-        <article class="panel-card">
-          <div class="card-meta">
-            <span class="badge badge-peak">24/7 Care</span>
-            <span class="time-stamp">Emergency 112</span>
-          </div>
-          <h3 class="card-title">Medical, Harm Reduction & Awareness</h3>
-          <p class="card-sub">
-            The staffed medical station and Safe Space awareness tent sit midway between Solar Horizon Stage and Lunar Forest Dome. Trained medics and harm-reduction counselors are on duty around the clock.
-          </p>
-        </article>
-
-        <article class="panel-card">
-          <div class="card-meta">
-            <span class="badge badge-solar">Gate Check</span>
-            <span class="time-stamp">Max bag 40 × 30 × 20 cm</span>
-          </div>
-          <h3 class="card-title">Permitted & Prohibited Items</h3>
-          <p class="card-sub">
-            Allowed: empty reusable plastic/aluminum bottles up to 0.75 L, sunscreen, rain ponchos, compact cameras. Prohibited: glass containers, outside alcohol, open flames, drones, and professional audio/video rigs without press accreditation.
-          </p>
-        </article>
-
-        <article class="panel-card">
-          <div class="card-meta">
-            <span class="badge badge-lunar">Re-Entry & Age</span>
-            <span class="time-stamp">18+ after 22:00</span>
-          </div>
-          <h3 class="card-title">Wristbands & Age Policy</h3>
-          <p class="card-sub">
-            3-day wristbands allow unlimited re-entry through Gate A. Visitors under 15 must be accompanied by a legal guardian; after 22:00, Lunar Forest Dome is restricted to guests aged 18 and over.
-          </p>
-        </article>
-
-        <article class="panel-card">
-          <div class="card-meta">
-            <span class="badge badge-solar">Lockers & Lost/Found</span>
-            <span class="time-stamp">Gate A Info Desk</span>
-          </div>
-          <h3 class="card-title">Storage & Weather Contingency</h3>
-          <p class="card-sub">
-            PIN-code lockers (150 CZK/day) are available inside the main entrance. Performances continue in light rain; in severe weather alerts, pause instructions are broadcast on stage screens and PA systems.
-          </p>
-        </article>
-      </div>
-    </section>
-  </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
@@ -347,5 +81,6 @@
       <span class="dock-label" data-i18n="dock_search">Search</span>
     </a>
   </nav>
+
 </body>
 </html>
