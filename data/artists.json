@@ -1,0 +1,542 @@
+[
+  {
+    "id": "perf-01",
+    "name": "Echoes of Light",
+    "genre": "Post-Rock / Ambient",
+    "origin": "CZ",
+    "day": "Friday, July 10",
+    "time": "14:00 – 14:45",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-02",
+    "name": "Velvet Morning",
+    "genre": "Dream Pop",
+    "origin": "SK",
+    "day": "Friday, July 10",
+    "time": "15:00 – 15:45",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-03",
+    "name": "Nordic Wave",
+    "genre": "Indie Rock",
+    "origin": "SE",
+    "day": "Friday, July 10",
+    "time": "16:00 – 16:50",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-04",
+    "name": "The Daylight Project",
+    "genre": "Indie Pop",
+    "origin": "CZ",
+    "day": "Friday, July 10",
+    "time": "17:05 – 17:55",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-05",
+    "name": "Prague Synth Collective",
+    "genre": "Synthpop",
+    "origin": "CZ",
+    "day": "Friday, July 10",
+    "time": "18:15 – 19:05",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-06",
+    "name": "Electric Meadow",
+    "genre": "Electro-Folk",
+    "origin": "AT",
+    "day": "Friday, July 10",
+    "time": "19:25 – 20:20",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-07",
+    "name": "Mirage Horizon",
+    "genre": "Alternative Rock",
+    "origin": "UK",
+    "day": "Friday, July 10",
+    "time": "20:40 – 21:40",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-08",
+    "name": "Solar Flare",
+    "genre": "Nu-Disco / Funk",
+    "origin": "DE",
+    "day": "Friday, July 10",
+    "time": "22:00 – 23:10",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-09",
+    "name": "Starlight Odyssey",
+    "genre": "Electronic Indie",
+    "origin": "FR",
+    "day": "Friday, July 10",
+    "time": "23:30 – 00:45",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-10",
+    "name": "Midnight Pulse",
+    "genre": "Electro Rock",
+    "origin": "CZ",
+    "day": "Friday, July 10",
+    "time": "01:00 – 02:00",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-11",
+    "name": "Subtle Resonances",
+    "genre": "Modular Ambient",
+    "origin": "CZ",
+    "day": "Friday, July 10",
+    "time": "15:00 – 15:50",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-12",
+    "name": "Binary Fields",
+    "genre": "IDM / Glitch",
+    "origin": "PL",
+    "day": "Friday, July 10",
+    "time": "16:05 – 17:00",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-13",
+    "name": "Deep Texture",
+    "genre": "Dub Techno",
+    "origin": "DE",
+    "day": "Friday, July 10",
+    "time": "17:15 – 18:15",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-14",
+    "name": "Oscillator Shift",
+    "genre": "Minimal Techno",
+    "origin": "CZ",
+    "day": "Friday, July 10",
+    "time": "18:30 – 19:30",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-15",
+    "name": "Echo Chamber",
+    "genre": "Dark Ambient",
+    "origin": "SK",
+    "day": "Friday, July 10",
+    "time": "19:45 – 20:45",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-16",
+    "name": "Krypton DJ",
+    "genre": "Hypnotic Techno",
+    "origin": "HU",
+    "day": "Friday, July 10",
+    "time": "21:00 – 22:15",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-17",
+    "name": "Modular Horizon",
+    "genre": "Live Hardware Techno",
+    "origin": "DE",
+    "day": "Friday, July 10",
+    "time": "22:30 – 23:50",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-18",
+    "name": "Analog Void",
+    "genre": "Industrial Techno",
+    "origin": "NL",
+    "day": "Friday, July 10",
+    "time": "00:05 – 01:25",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-19",
+    "name": "Frequency 404",
+    "genre": "Raw Acid Techno",
+    "origin": "UK",
+    "day": "Friday, July 10",
+    "time": "01:40 – 03:00",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-20",
+    "name": "Dawn Ritual",
+    "genre": "Atmospheric Ambient",
+    "origin": "CZ",
+    "day": "Friday, July 10",
+    "time": "03:10 – 04:00",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-21",
+    "name": "Sunburst Trio",
+    "genre": "Acoustic Indie",
+    "origin": "CZ",
+    "day": "Saturday, July 11",
+    "time": "13:30 – 14:15",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-22",
+    "name": "Coastline Drift",
+    "genre": "Surf Rock",
+    "origin": "ES",
+    "day": "Saturday, July 11",
+    "time": "14:30 – 15:15",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-23",
+    "name": "The Urban Poets",
+    "genre": "Indie Soul",
+    "origin": "UK",
+    "day": "Saturday, July 11",
+    "time": "15:30 – 16:20",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-24",
+    "name": "Neon Youth",
+    "genre": "Indie Pop",
+    "origin": "SK",
+    "day": "Saturday, July 11",
+    "time": "16:35 – 17:25",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-25",
+    "name": "Silver Tides",
+    "genre": "Shoegaze",
+    "origin": "CZ",
+    "day": "Saturday, July 11",
+    "time": "17:45 – 18:40",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-26",
+    "name": "Horizon Glow",
+    "genre": "Electronic Pop",
+    "origin": "SE",
+    "day": "Saturday, July 11",
+    "time": "19:00 – 20:00",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-27",
+    "name": "Wild Horizon",
+    "genre": "Post-Punk Revival",
+    "origin": "DE",
+    "day": "Saturday, July 11",
+    "time": "20:20 – 21:20",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-28",
+    "name": "Magnetic River",
+    "genre": "Indie Dance",
+    "origin": "FR",
+    "day": "Saturday, July 11",
+    "time": "21:40 – 22:50",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-29",
+    "name": "Vortex Motion",
+    "genre": "Nu-Electro",
+    "origin": "UK",
+    "day": "Saturday, July 11",
+    "time": "23:10 – 00:25",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-30",
+    "name": "Aura Soundsystem",
+    "genre": "Progressive Dance",
+    "origin": "CZ",
+    "day": "Saturday, July 11",
+    "time": "00:45 – 02:00",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-31",
+    "name": "Dronescape",
+    "genre": "Drone Music",
+    "origin": "CZ",
+    "day": "Saturday, July 11",
+    "time": "14:30 – 15:20",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-32",
+    "name": "Glitch Garden",
+    "genre": "Microhouse",
+    "origin": "AT",
+    "day": "Saturday, July 11",
+    "time": "15:35 – 16:30",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-33",
+    "name": "Forest Whispers",
+    "genre": "Organic House",
+    "origin": "SK",
+    "day": "Saturday, July 11",
+    "time": "16:45 – 17:45",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-34",
+    "name": "Low Frequency Unit",
+    "genre": "Deep Dubstep",
+    "origin": "UK",
+    "day": "Saturday, July 11",
+    "time": "18:00 – 19:00",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-35",
+    "name": "Monolith Audio",
+    "genre": "Peak Time Techno",
+    "origin": "DE",
+    "day": "Saturday, July 11",
+    "time": "19:15 – 20:15",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-36",
+    "name": "Sine Wave Syndicate",
+    "genre": "Electro Techno",
+    "origin": "FR",
+    "day": "Saturday, July 11",
+    "time": "20:30 – 21:45",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-37",
+    "name": "Shadowplay DJ",
+    "genre": "Dark Wave Techno",
+    "origin": "CZ",
+    "day": "Saturday, July 11",
+    "time": "22:00 – 23:20",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-38",
+    "name": "Circuit Overload",
+    "genre": "Hard Techno",
+    "origin": "PL",
+    "day": "Saturday, July 11",
+    "time": "23:35 – 00:55",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-39",
+    "name": "Neural Network Live",
+    "genre": "Acid Techno",
+    "origin": "BE",
+    "day": "Saturday, July 11",
+    "time": "01:10 – 02:30",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-40",
+    "name": "Solar Wind",
+    "genre": "Chillout Ambient",
+    "origin": "CZ",
+    "day": "Saturday, July 11",
+    "time": "02:40 – 04:00",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-41",
+    "name": "Morning Breeze",
+    "genre": "Folk Indie",
+    "origin": "CZ",
+    "day": "Sunday, July 12",
+    "time": "13:00 – 13:45",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-42",
+    "name": "Silent Pines",
+    "genre": "Chamber Pop",
+    "origin": "SK",
+    "day": "Sunday, July 12",
+    "time": "14:00 – 14:45",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-43",
+    "name": "Sunken Ship",
+    "genre": "Psych Rock",
+    "origin": "UK",
+    "day": "Sunday, July 12",
+    "time": "15:00 – 15:50",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-44",
+    "name": "Amber Boulevard",
+    "genre": "Dream Indie",
+    "origin": "DE",
+    "day": "Sunday, July 12",
+    "time": "16:05 – 16:55",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-45",
+    "name": "Urban Echo",
+    "genre": "Art Pop",
+    "origin": "CZ",
+    "day": "Sunday, July 12",
+    "time": "17:15 – 18:10",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-46",
+    "name": "Luminous Band",
+    "genre": "Indie Funk",
+    "origin": "IT",
+    "day": "Sunday, July 12",
+    "time": "18:30 – 19:30",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-47",
+    "name": "The Velvet Trails",
+    "genre": "Space Rock",
+    "origin": "SE",
+    "day": "Sunday, July 12",
+    "time": "19:50 – 20:50",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-48",
+    "name": "Prismatics",
+    "genre": "Dance Punk",
+    "origin": "UK",
+    "day": "Sunday, July 12",
+    "time": "21:10 – 22:15",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-49",
+    "name": "Starlight Runners",
+    "genre": "Electropop Headliner",
+    "origin": "DK",
+    "day": "Sunday, July 12",
+    "time": "22:35 – 23:55",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-50",
+    "name": "Final Cascade",
+    "genre": "Orchestral Electronic",
+    "origin": "CZ",
+    "day": "Sunday, July 12",
+    "time": "00:10 – 01:15",
+    "stage": "Solar Horizon Stage"
+  },
+  {
+    "id": "perf-51",
+    "name": "Static Drift",
+    "genre": "Field Recording / Ambient",
+    "origin": "CZ",
+    "day": "Sunday, July 12",
+    "time": "14:00 – 14:50",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-52",
+    "name": "Resonance Space",
+    "genre": "Deep Ambient",
+    "origin": "AT",
+    "day": "Sunday, July 12",
+    "time": "15:05 – 16:00",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-53",
+    "name": "Tape Loop Experiment",
+    "genre": "Tape Ambient",
+    "origin": "PL",
+    "day": "Sunday, July 12",
+    "time": "16:15 – 17:15",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-54",
+    "name": "Minimal Horizon",
+    "genre": "Micro Techno",
+    "origin": "DE",
+    "day": "Sunday, July 12",
+    "time": "17:30 – 18:30",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-55",
+    "name": "Dark Matter",
+    "genre": "Deep Progressive",
+    "origin": "CZ",
+    "day": "Sunday, July 12",
+    "time": "18:45 – 19:45",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-56",
+    "name": "Hyperspace DJ",
+    "genre": "Psy Techno",
+    "origin": "IL",
+    "day": "Sunday, July 12",
+    "time": "20:00 – 21:15",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-57",
+    "name": "Galactic Orbit",
+    "genre": "Melodic Techno",
+    "origin": "IT",
+    "day": "Sunday, July 12",
+    "time": "21:30 – 22:45",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-58",
+    "name": "Bass Distortion",
+    "genre": "Leftfield Bass",
+    "origin": "UK",
+    "day": "Sunday, July 12",
+    "time": "23:00 – 00:15",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-59",
+    "name": "Cosmic Pulse",
+    "genre": "Uplifting Trance Techno",
+    "origin": "NL",
+    "day": "Sunday, July 12",
+    "time": "00:30 – 01:45",
+    "stage": "Lunar Forest Dome"
+  },
+  {
+    "id": "perf-60",
+    "name": "Equinox Farewell",
+    "genre": "Down-tempo Ambient",
+    "origin": "CZ",
+    "day": "Sunday, July 12",
+    "time": "02:00 – 03:00",
+    "stage": "Lunar Forest Dome"
+  }
+]

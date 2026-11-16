@@ -1,0 +1,187 @@
+<!-- v2/artist-detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starlight Odyssey - Festival of Darkness 2</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/lang.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">Festival of Darkness 2</span>
+      </a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html" class="nav-link" data-i18n="nav_home">Overview</a>
+        <a href="program.html" class="nav-link" data-i18n="nav_program">Program</a>
+        <a href="artists.html" class="nav-link">Artists</a>
+        <a href="stages.html" class="nav-link">Stages</a>
+        <a href="practical-info.html" class="nav-link">Info</a>
+        <a href="my-schedule.html" class="nav-link">My Schedule</a>
+        <a href="search.html" class="nav-link">Search</a>
+        <button type="button" class="lang-btn" id="lang-toggle" onclick="toggleFestivalLang()" aria-label="Switch language">CZ</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="page-head">
+      <p class="hero-meta">Electronic Indie · FR · Headline Set</p>
+      <h1 class="page-title">Starlight Odyssey</h1>
+      <p class="page-lead">Parisian electronic indie duo blending analog modular synthesizers, live percussion, and widescreen cinematic guitar textures for peak-hour open-air amphitheater sets.</p>
+      <div class="hero-actions">
+        <a href="program.html" class="btn-primary" data-i18n="cta_full_schedule">View Full Timetable</a>
+        <a href="artists.html" class="btn-secondary">Back to All Artists</a>
+      </div>
+    </section>
+
+    <section class="stats-strip" aria-label="Performance details">
+      <div class="stat-item">
+        <span class="stat-value">Fri 10 Jul</span>
+        <span class="stat-label">Performance Day</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">23:30–00:45</span>
+        <span class="stat-label">75-Minute Headline Set</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">Solar Horizon</span>
+        <span class="stat-label" data-i18n="stage_solar_type">Open-air main stage</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">France (FR)</span>
+        <span class="stat-label">Artist Origin</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Artist Profile & Set Overview</h2>
+        <p class="section-sub">Friday night open-air headline performance at Solar Horizon Stage (4,500 capacity).</p>
+      </div>
+
+      <div class="card-grid">
+        <article class="card">
+          <div class="card-top">
+            <span class="badge badge-solar" data-i18n="stage_solar_type">Open-air main stage</span>
+            <span class="capacity-tag">ID: perf-09</span>
+          </div>
+          <h3 class="card-title">Biography</h3>
+          <p class="card-body">Formed in Paris in 2019, Starlight Odyssey bridges French electro-pop craftsmanship with driving post-rock dynamics. Their live show centers on hardware sequencers, vocoder harmonies, and custom reactive stage lighting built specifically for open-air night slots.</p>
+          <ul class="checklist">
+            <li class="check-item">Full live hardware and multi-instrumentalist stage setup</li>
+            <li class="check-item">Extended 75-minute festival headline arrangement (23:30–00:45)</li>
+            <li class="check-item">Synchronized open-air light choreography on Solar Horizon Stage</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <span class="day-pill" data-i18n="day1_short">Fri 10 Jul</span>
+            <span class="stage-dot solar-dot">Solar Horizon Stage</span>
+          </div>
+          <h3 class="card-title">Surrounding Stage Flow</h3>
+          <p class="card-body">Starlight Odyssey anchors the late-evening peak of Day 1 between nu-disco funk and electro-rock closers.</p>
+          <ul class="checklist">
+            <li class="check-item">22:00–23:10 · Solar Flare (Nu-Disco / Funk · DE)</li>
+            <li class="check-item">23:30–00:45 · Starlight Odyssey (Electronic Indie · FR)</li>
+            <li class="check-item">01:00–02:00 · Midnight Pulse (Electro Rock · CZ)</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Related Artists on the Lineup</h2>
+        <p class="section-sub">Performers sharing electronic indie, synthpop, and open-air dance aesthetics across the weekend.</p>
+      </div>
+
+      <div class="card-grid three-col">
+        <article class="card">
+          <div class="card-top">
+            <span class="day-pill" data-i18n="day1_short">Fri 10 Jul</span>
+            <span class="stage-dot solar-dot">Solar Horizon</span>
+          </div>
+          <h3 class="card-title">Solar Flare</h3>
+          <p class="card-meta">Nu-Disco / Funk · DE · 22:00–23:10</p>
+          <p class="card-body">Warm analog basslines and live disco-funk grooves leading directly into Starlight Odyssey on Friday night.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <span class="day-pill" data-i18n="day2_short">Sat 11 Jul</span>
+            <span class="stage-dot solar-dot">Solar Horizon</span>
+          </div>
+          <h3 class="card-title">Magnetic River</h3>
+          <p class="card-meta">Indie Dance · FR · 21:40–22:50</p>
+          <p class="card-body">Fellow French electronic-indie outfit bringing rhythmic guitar hooks and club-ready percussion to Saturday evening.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <span class="day-pill" data-i18n="day3_short">Sun 12 Jul</span>
+            <span class="stage-dot solar-dot">Solar Horizon</span>
+          </div>
+          <h3 class="card-title">Starlight Runners</h3>
+          <p class="card-meta">Electropop Headliner · DK · 22:35–23:55</p>
+          <p class="card-body">Danish synth-driven headliners closing Sunday night on the Solar Horizon open-air amphitheater stage.</p>
+        </article>
+      </div>
+
+      <div class="section-footer hero-actions">
+        <a href="artists.html" class="btn-primary">Browse Full Artist Lineup</a>
+        <a href="program.html" class="btn-secondary" data-i18n="cta_program">Explore 3-Day Program</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="brand-name">Festival of Darkness 2</span>
+        <span class="footer-meta" data-i18n="footer_loc">Kutná Hora, Czech Republic · 10-12 Jul 2026</span>
+      </div>
+      <div class="footer-links">
+        <a href="index.html" data-i18n="nav_home">Overview</a>
+        <a href="program.html" data-i18n="nav_program">Program</a>
+        <a href="artists.html">Artists</a>
+      </div>
+    </div>
+  </footer>
+  <nav class="bottom-nav-dock" aria-label="Mobile navigation">
+    <a href="artists.html" class="bottom-dock-item active is-active" data-page="artists.html" aria-current="page">
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/><circle cx="12" cy="12" r="10"/></svg></span>
+      <span class="dock-label" data-i18n="dock_artists">Artists</span>
+    </a>
+    <a href="stages.html" class="bottom-dock-item" data-page="stages.html">
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h20"/><path d="M12 2v20"/><path d="m4.93 4.93 14.14 14.14"/><path d="m19.07 4.93-14.14 14.14"/></svg></span>
+      <span class="dock-label" data-i18n="dock_stages">Stages</span>
+    </a>
+    <a href="practical-info.html" class="bottom-dock-item" data-page="practical-info.html">
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span>
+      <span class="dock-label" data-i18n="dock_info">Info</span>
+    </a>
+    <a href="index.html" class="bottom-dock-item bottom-dock-home" data-page="index.html">
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+      <span class="dock-label" data-i18n="dock_home">Home</span>
+    </a>
+    <a href="program.html" class="bottom-dock-item" data-page="program.html">
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg></span>
+      <span class="dock-label" data-i18n="dock_program">Program</span>
+    </a>
+    <a href="my-schedule.html" class="bottom-dock-item" data-page="my-schedule.html">
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+      <span class="dock-label" data-i18n="dock_plan">My Plan</span>
+    </a>
+    <a href="search.html" class="bottom-dock-item" data-page="search.html">
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></span>
+      <span class="dock-label" data-i18n="dock_search">Search</span>
+    </a>
+  </nav>
+</body>
+</html>

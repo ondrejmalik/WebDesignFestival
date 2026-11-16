@@ -1,0 +1,199 @@
+<!-- v2/artist-detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solar Flare — Festival of Darkness 2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="wand-body">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="Festival of Darkness 2">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">Festival of Darkness <span class="brand-num">2</span></span>
+      </a>
+
+      <nav class="main-nav" aria-label="Primary">
+        <a href="index.html" class="nav-link" data-i18n="nav_home">Overview</a>
+        <a href="program.html" class="nav-link" data-i18n="nav_program">Program</a>
+        <a href="artists.html" class="nav-link">Artists</a>
+        <a href="stages.html" class="nav-link">Stages</a>
+        <a href="practical-info.html" class="nav-link">Info</a>
+        <a href="my-schedule.html" class="nav-link">My Schedule</a>
+        <a href="search.html" class="nav-link">Search</a>
+        <a href="index.html#stages" class="nav-link" data-i18n="nav_stages">Stages</a>
+        <a href="index.html#highlights" class="nav-link" data-i18n="nav_highlights">Lineup</a>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" class="lang-btn" id="lang-toggle" onclick="toggleFestivalLang()" aria-label="Switch language">
+          <span class="lang-code" data-i18n="lang_switch">CZ</span>
+        </button>
+        <a href="program.html" class="btn btn-primary btn-sm" data-i18n="cta_schedule">Full Schedule</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-section">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="container">
+        <div style="margin-bottom: 20px;">
+          <a href="artists.html" class="inline-link">← Back to Artists</a> / <a href="program.html" class="inline-link">Program</a>
+        </div>
+        <div class="pill-badge">
+          <span class="status-dot"></span>
+          <span>DE · Friday, July 10 · 22:00 – 23:10</span>
+        </div>
+        <h1 class="hero-title">Solar Flare</h1>
+        <p class="hero-lead">
+          Nu-Disco / Funk headliner performing live on the Solar Horizon Stage. Fusing deep rhythmic basslines with incandescent synth hooks and analog warmth.
+        </p>
+        <div class="hero-actions">
+          <a href="program.html" class="btn btn-primary" data-i18n="hero_cta_primary">Explore Full Program</a>
+          <a href="artists.html" class="btn btn-secondary">Browse All Artists</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Performance Details & Biography</h2>
+          <p class="section-desc">
+            One of the standout international acts of the 2026 edition, delivering a high-energy evening showcase under the open sky of Kutná Hora.
+          </p>
+        </div>
+
+        <div class="stages-grid" style="margin-bottom: 36px;">
+          <div class="stage-card stage-card--solar">
+            <div class="stage-top">
+              <span class="stage-chip chip-volt">Solar Horizon Stage</span>
+              <span class="stage-cap">Cap. 4,500</span>
+            </div>
+            <h3 class="stage-name">Friday, 10 July 2026</h3>
+            <p class="stage-text">
+              Set time: <strong>22:00 – 23:10</strong>
+            </p>
+            <ul class="stage-meta-list">
+              <li>Genre: Nu-Disco / Funk</li>
+              <li>Origin: Germany (DE)</li>
+              <li>Stage Type: Open-air main stage</li>
+            </ul>
+          </div>
+
+          <div class="hud-panel">
+            <div class="hud-header">
+              <span class="hud-label">ARTIST METADATA</span>
+              <span class="hud-tag">ID: PERF-08</span>
+            </div>
+            <div class="hud-stats">
+              <div class="hud-stat">
+                <span class="hud-val">02</span>
+                <span class="hud-key">Festival Edition</span>
+              </div>
+              <div class="hud-stat">
+                <span class="hud-val">70m</span>
+                <span class="hud-key">Set Duration</span>
+              </div>
+            </div>
+            <div class="hud-divider"></div>
+            <div class="hud-timeline-preview">
+              <div class="hud-row">
+                <span class="hud-time">STAGE SLOT</span>
+                <span class="hud-act">Solar Horizon · Main Headliner</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-head" style="margin-top: 48px;">
+          <h2 class="section-title">Related Headliners</h2>
+          <p class="section-desc">
+            Explore other key performances scheduled across the festival weekend.
+          </p>
+        </div>
+
+        <div class="lineup-grid">
+          <div class="artist-tile">
+            <div class="artist-top">
+              <span class="artist-day">Fri 10 Jul · 23:30</span>
+              <span class="artist-origin">FR</span>
+            </div>
+            <h3 class="artist-name">Starlight Odyssey</h3>
+            <p class="artist-genre">Electronic Indie · Solar Horizon Stage</p>
+          </div>
+
+          <div class="artist-tile">
+            <div class="artist-top">
+              <span class="artist-day">Sat 11 Jul · 21:40</span>
+              <span class="artist-origin">FR</span>
+            </div>
+            <h3 class="artist-name">Magnetic River</h3>
+            <p class="artist-genre">Indie Dance · Solar Horizon Stage</p>
+          </div>
+
+          <div class="artist-tile">
+            <div class="artist-top">
+              <span class="artist-day">Sun 12 Jul · 22:35</span>
+              <span class="artist-origin">DK</span>
+            </div>
+            <h3 class="artist-name">Starlight Runners</h3>
+            <p class="artist-genre">Electropop Headliner · Solar Horizon Stage</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Festival of Darkness 2</span>
+      </div>
+      <p class="footer-meta" data-i18n="footer_meta">Kutná Hora, Czech Republic · 10–12 July 2026</p>
+      <div class="footer-links">
+        <a href="index.html" data-i18n="nav_home">Overview</a>
+        <a href="program.html" data-i18n="nav_program">Program</a>
+      </div>
+    </div>
+  </footer>
+  <nav class="bottom-nav-dock" aria-label="Mobile navigation">
+    <a href="artists.html" data-page="artists.html" class="bottom-dock-item active is-active" aria-current="page">
+      <span class="dock-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></span>
+      <span class="dock-label" data-i18n="dock_artists">Artists</span>
+    </a>
+    <a href="stages.html" data-page="stages.html" class="bottom-dock-item">
+      <span class="dock-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"></path><path d="M20 12v8H4v-8"></path><path d="m15 5-3-3-3 3"></path><path d="M12 2v10"></path></svg></span>
+      <span class="dock-label" data-i18n="dock_stages">Stages</span>
+    </a>
+    <a href="practical-info.html" data-page="practical-info.html" class="bottom-dock-item">
+      <span class="dock-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></span>
+      <span class="dock-label" data-i18n="dock_info">Info</span>
+    </a>
+    <a href="index.html" data-page="index.html" class="bottom-dock-item bottom-dock-home">
+      <span class="dock-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></span>
+      <span class="dock-label" data-i18n="dock_home">Home</span>
+    </a>
+    <a href="program.html" data-page="program.html" class="bottom-dock-item">
+      <span class="dock-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></span>
+      <span class="dock-label" data-i18n="dock_program">Program</span>
+    </a>
+    <a href="my-schedule.html" data-page="my-schedule.html" class="bottom-dock-item">
+      <span class="dock-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></span>
+      <span class="dock-label" data-i18n="dock_plan">My Plan</span>
+    </a>
+    <a href="search.html" data-page="search.html" class="bottom-dock-item">
+      <span class="dock-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
+      <span class="dock-label" data-i18n="dock_search">Search</span>
+    </a>
+  </nav>
+<script src="js/lang.js" defer></script>
+</body>
+</html>

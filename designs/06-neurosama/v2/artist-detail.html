@@ -1,0 +1,187 @@
+<!-- v2/artist-detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starlight Runners — Artist Detail | Festival of Darkness 2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/lang.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-link" aria-label="Festival of Darkness 2 Home">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span class="brand-name">Festival of Darkness 2</span>
+      </a>
+      <nav class="site-nav" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link" data-i18n="nav_home">Overview</a>
+        <a href="program.html" class="nav-link" data-i18n="nav_program">Program</a>
+        <a href="artists.html" class="nav-link is-active">Artists</a>
+        <button type="button" class="lang-toggle" id="lang-toggle" aria-label="Switch language">CZ</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-section">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="container hero-grid">
+        <div class="hero-card">
+          <div class="pill-badge">
+            <span class="badge-accent">Electropop Headliner</span>
+            <span class="badge-sep">/</span>
+            <span>Denmark (DK)</span>
+          </div>
+          <h1 class="hero-title">Starlight Runners</h1>
+          <p class="hero-subtitle">Copenhagen synth-driven electropop quartet closing out the Solar Horizon Stage headline slot on Sunday night in Kutná Hora with widescreen analog hooks, live percussion, and synchronized stage visuals.</p>
+          <div class="hero-actions">
+            <a href="program.html" class="btn btn-primary" data-i18n="cta_program">Explore Program</a>
+            <a href="artists.html" class="btn btn-secondary">All Artists</a>
+          </div>
+        </div>
+
+        <aside class="info-stack" aria-label="Performance Details">
+          <div class="glass-card stat-card">
+            <h2 class="card-kicker">Set Information</h2>
+            <div class="time-grid">
+              <div class="time-tile">
+                <h3 class="tile-label">Day</h3>
+                <p class="tile-value" data-i18n="day3_short">Sun, 12 Jul</p>
+              </div>
+              <div class="time-tile">
+                <h3 class="tile-label">Set Time</h3>
+                <p class="tile-value">22:35 - 23:55</p>
+              </div>
+              <div class="time-tile">
+                <h3 class="tile-label">Stage</h3>
+                <p class="tile-value">Solar Horizon Stage</p>
+              </div>
+              <div class="time-tile">
+                <h3 class="tile-label">Origin & ID</h3>
+                <p class="tile-value">DK / perf-49</p>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="display-heading">Artist Profile & Stage Context</h2>
+          <p class="section-lead">Sunday peak-hour headline set on the 4,500-capacity open-air amphitheater.</p>
+        </div>
+
+        <div class="stages-grid">
+          <article class="glass-card stage-card">
+            <div class="stage-meta">
+              <span class="stage-tag tag-coral">Headliner Bio</span>
+              <span class="stage-cap">80-minute live set</span>
+            </div>
+            <h3 class="stage-title">About Starlight Runners</h3>
+            <p class="stage-desc">Formed in Copenhagen, Starlight Runners blend shimmering Nordic synth melodies with driving basslines and soaring vocal harmonies. Their 2026 live production pairs vintage polyphonic synthesizers with live drums and custom reactive lighting built for open-air night performances.</p>
+          </article>
+
+          <article class="glass-card stage-card">
+            <div class="stage-meta">
+              <span class="stage-tag tag-pink" data-i18n="solar_type">Open-air main stage</span>
+              <span class="stage-cap" data-i18n="solar_cap">Capacity: 4,500</span>
+            </div>
+            <h3 class="stage-title">Solar Horizon Stage</h3>
+            <p class="stage-desc" data-i18n="solar_desc">Central open-air amphitheater for major band performances, indie rock, and dance headliners.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="display-heading">Related Artists</h2>
+          <p class="section-lead">Electronic pop, indie dance, and Sunday night Solar Horizon Stage acts from the 2026 lineup.</p>
+        </div>
+
+        <div class="highlights-grid">
+          <article class="glass-card highlight-card">
+            <div class="highlight-top">
+              <span class="highlight-day" data-i18n="day3_short">Sun, 12 Jul</span>
+              <span class="highlight-time">21:10 - 22:15</span>
+            </div>
+            <h3 class="highlight-artist">Prismatics</h3>
+            <p class="highlight-genre">Dance Punk (UK)</p>
+            <span class="highlight-stage stage-pill-coral">Solar Horizon Stage</span>
+          </article>
+
+          <article class="glass-card highlight-card">
+            <div class="highlight-top">
+              <span class="highlight-day" data-i18n="day3_short">Sun, 12 Jul</span>
+              <span class="highlight-time">00:10 - 01:15</span>
+            </div>
+            <h3 class="highlight-artist">Final Cascade</h3>
+            <p class="highlight-genre">Orchestral Electronic (CZ)</p>
+            <span class="highlight-stage stage-pill-coral">Solar Horizon Stage</span>
+          </article>
+
+          <article class="glass-card highlight-card">
+            <div class="highlight-top">
+              <span class="highlight-day" data-i18n="day2_short">Sat, 11 Jul</span>
+              <span class="highlight-time">19:00 - 20:00</span>
+            </div>
+            <h3 class="highlight-artist">Horizon Glow</h3>
+            <p class="highlight-genre">Electronic Pop (SE)</p>
+            <span class="highlight-stage stage-pill-coral">Solar Horizon Stage</span>
+          </article>
+        </div>
+
+        <div class="section-footer-cta hero-actions">
+          <a href="artists.html" class="btn btn-secondary">Back to Artists</a>
+          <a href="program.html" class="btn btn-primary" data-i18n="cta_full_schedule">Open Full 3-Day Schedule</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-title">Festival of Darkness 2</p>
+      <p class="footer-meta" data-i18n="footer_meta">Kutná Hora, Czech Republic | 10-12 Jul 2026</p>
+    </div>
+  </footer>
+  <nav class="bottom-nav-dock" aria-label="Mobile navigation">
+    <a href="artists.html" class="bottom-dock-item active is-active" data-page="artists.html" aria-current="page">
+      <span class="dock-icon"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></span>
+      <span class="dock-label" data-i18n="dock_artists">Artists</span>
+    </a>
+    <a href="stages.html" class="bottom-dock-item" data-page="stages.html">
+      <span class="dock-icon"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></span>
+      <span class="dock-label" data-i18n="dock_stages">Stages</span>
+    </a>
+    <a href="practical-info.html" class="bottom-dock-item" data-page="practical-info.html">
+      <span class="dock-icon"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></span>
+      <span class="dock-label" data-i18n="dock_info">Info</span>
+    </a>
+    <a href="index.html" class="bottom-dock-item bottom-dock-home" data-page="index.html">
+      <span class="dock-icon"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></span>
+      <span class="dock-label" data-i18n="dock_home">Home</span>
+    </a>
+    <a href="program.html" class="bottom-dock-item" data-page="program.html">
+      <span class="dock-icon"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></span>
+      <span class="dock-label" data-i18n="dock_program">Program</span>
+    </a>
+    <a href="my-schedule.html" class="bottom-dock-item" data-page="my-schedule.html">
+      <span class="dock-icon"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></span>
+      <span class="dock-label" data-i18n="dock_plan">My Plan</span>
+    </a>
+    <a href="search.html" class="bottom-dock-item" data-page="search.html">
+      <span class="dock-icon"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
+      <span class="dock-label" data-i18n="dock_search">Search</span>
+    </a>
+  </nav>
+</body>
+</html>

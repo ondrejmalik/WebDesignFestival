@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Program — Festival of Darkness 2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="Festival of Darkness 2 Home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">Festival of Darkness 2</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html" class="nav-link" data-i18n="nav.home">Overview</a>
+        <a href="program.html" class="nav-link active" data-i18n="nav.program">Program</a>
+        <a href="artists.html" class="nav-link">Artists</a>
+        <a href="stages.html" class="nav-link">Stages</a>
+        <a href="practical-info.html" class="nav-link">Info</a>
+        <a href="my-schedule.html" class="nav-link">My Schedule</a>
+        <a href="search.html" class="nav-link">Search</a>
+        <button type="button" class="lang-toggle" id="lang-toggle" aria-label="Switch language">
+          <span class="lang-pill" data-lang-option="en">EN</span>
+          <span class="lang-sep">/</span>
+          <span class="lang-pill" data-lang-option="cs">CZ</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="hero-meta">
+          <span class="meta-badge" data-i18n="hero.dates">10-12 Jul 2026</span>
+          <span class="meta-dot" aria-hidden="true"></span>
+          <span class="meta-location" data-i18n="hero.location">Kutná Hora, Czech Republic</span>
+        </div>
+        <h1 class="page-title" data-i18n="program.title">Festival Program</h1>
+        <p class="page-subtitle" data-i18n="program.subtitle">Curated daily running order across Solar Horizon Stage and Lunar Forest Dome.</p>
+
+        <div class="filter-bar" role="toolbar" aria-label="Schedule filters">
+          <div class="filter-group" role="group" aria-label="Filter by day">
+            <button type="button" class="filter-btn active" data-filter-day="all" data-i18n="filters.allDays">All days</button>
+            <button type="button" class="filter-btn" data-filter-day="2026-07-10" data-i18n="days.fri">Friday 10 Jul</button>
+            <button type="button" class="filter-btn" data-filter-day="2026-07-11" data-i18n="days.sat">Saturday 11 Jul</button>
+            <button type="button" class="filter-btn" data-filter-day="2026-07-12" data-i18n="days.sun">Sunday 12 Jul</button>
+          </div>
+          <div class="filter-group" role="group" aria-label="Filter by stage">
+            <button type="button" class="filter-btn active" data-filter-stage="all" data-i18n="filters.allStages">All stages</button>
+            <button type="button" class="filter-btn" data-filter-stage="stage-solar">Solar Horizon</button>
+            <button type="button" class="filter-btn" data-filter-stage="stage-lunar">Lunar Forest</button>
+          </div>
+          <span class="filter-count" id="visible-sets-count">18 sets</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section program-section">
+      <div class="container">
+        <!-- DAY 1: FRIDAY 2026-07-10 -->
+            <div class="program-plan-bar" aria-live="polite">
+      <p class="plan-bar-copy">
+        <span data-i18n="prog_plan_label">My Schedule:</span>
+        <span class="plan-bar-count" id="plan-bar-count">0</span>
+      </p>
+      <a href="my-schedule.html" class="plan-bar-link" data-i18n="prog_open_plan">Open My Schedule</a>
+    </div>
+        <div class="day-block" data-day="2026-07-10">
+          <div class="day-header">
+            <h2 class="day-title" data-i18n="days.friFull">Friday, 10 July 2026</h2>
+            <span class="day-meta" data-day-count="6">6 sets</span>
+          </div>
+
+          <div class="schedule-table" role="table" aria-label="Friday 10 July 2026 schedule">
+            <div class="schedule-row schedule-row-head" role="row">
+              <span role="columnheader" data-i18n="table.time">Time</span>
+              <span role="columnheader" data-i18n="table.artist">Artist</span>
+              <span role="columnheader" data-i18n="table.genre">Genre</span>
+              <span role="columnheader" data-i18n="table.stage">Stage</span>
+              <span role="columnheader" data-i18n="col_plan">Plan</span>
+            </div>
+
+            <div class="schedule-row" role="row" data-stage="stage-solar" data-perf-id="perf-01">
+              <div class="cell-time" role="cell"><span class="mono-time">14:00 - 14:45</span></div>
+              <div class="cell-artist" role="cell"><span class="artist-name">Echoes of Light</span><span class="origin-tag">CZ</span></div>
+              <div class="cell-genre" role="cell">Post-Rock / Ambient</div>
+              <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+            
+            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-01" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
+          </div>
+
+            <div class="schedule-row" role="row" data-stage="stage-lunar" data-perf-id="perf-13">
+              <div class="cell-time" role="cell"><span class="mono-time">17:15 - 18:15</span></div>
+              <div class="cell-artist" role="cell"><span class="artist-name">Deep Texture</span><span class="origin-tag">DE</span></div>
+              <div class="cell-genre" role="cell">Dub Techno</div>
+              <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+            
+            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-13" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
+          </div>
+
+            <div class="schedule-row" role="row" data-stage="stage-solar" data-perf-id="perf-07">
+              <div class="cell-time" role="cell"><span class="mono-time">20:40 - 21:40</span></div>
+              <div class="cell-artist" role="cell"><span class="artist-name">Mirage Horizon</span><span class="origin-tag">UK</span></div>
+              <div class="cell-genre" role="cell">Alternative Rock</div>
+              <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+            
+            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-07" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
+          </div>
+
+            <div class="schedule-row" role="row" data-stage="stage-lunar" data-perf-id="perf-17">
+              <div class="cell-time" role="cell"><span class="mono-time">22:30 - 23:50</span></div>
+              <div class="cell-artist" role="cell"><span class="artist-name">Modular Horizon</span><span class="origin-tag">DE</span></div>
+              <div class="cell-genre" role="cell">Live Hardware Techno</div>
+              <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+            
+            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-17" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
+          </div>
+
+            <div class="schedule-row" role="row" data-stage="stage-solar" data-perf-id="perf-09">
+              <div class="cell-time" role="cell"><span class="mono-time">23:30 - 00:45</span></div>
+              <div class="cell-artist" role="cell"><span class="artist-name">Starlight Odyssey</span><span class="origin-tag">FR</span></div>
+              <div class="cell-genre" role="cell">Electronic Indie</div>
+              <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+            
+            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-09" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
+          </div>
+
+            <div class="schedule-row" role="row" data-stage="stage-lunar" data-perf-id="perf-19">
+              <div class="cell-time" role="cell"><span class="mono-time">01:40 - 03:00</span></div>
+              <div class="cell-artist" role="cell"><span class="artist-name">Frequency 404</span><span class="origin-tag">UK</span></div>
+              <div class="cell-genre" role="cell">Raw Acid Techno</div>
+              <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+            
+            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-19" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
+          </div>
+          </div>
+        </div>
+
+        <!-- DAY 2: SATURDAY 2026-07-11 -->
+        <div class="day-block" data-day="2026-07-11">
+          <div class="day-header">
+            <h2 class="day-title" data-i18n="days.satFull">Saturday, 11 July 2026</h2>
+            <span class="day-meta" data-day-count="6">6 sets</span>
+          </div>
+
+          <div class="schedule-table" role="table" aria-label="Saturday 11 July 2026 schedule">
+            <div class="schedule-row schedule-row-head" role="row">
+              <span role="columnheader" data-i18n="table.time">Time</span>
+              <span role="columnheader" data-i18n="table.artist">Artist</span>
+              <span role="columnheader" data-i18n="table.genre">Genre</span>
+              <span role="columnheader" data-i18n="table.stage">Stage</span>
+              <span role="columnheader" data-i18n="col_plan">Plan</span>
+            </div>
+
+            <div class="schedule-row" role="row" data-stage="stage-solar" data-perf-id="perf-25">
+              <div class="cell-time" role="cell"><span class="mono-time">17:45 - 18:40</span></div>
+              <div class="cell-artist" role="cell"><span class="artist-name">Silver Tides</span><span class="origin-tag">CZ</span></div>
+              <div class="cell-genre" role="cell">Shoegaze</div>
+              <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+            
+            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-25" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
+          </div>
+
+            <div class="schedule-row" role="row" data-stage="stage-lunar" data-perf-id="perf-35">
+              <div class="cell-time" role="cell"><span class="mono-time">19:15 - 20:15</span></div>
+              <div class="cell-artist" role="cell"><span class="artist-name">Monolith Audio</span><span class="origin-tag">DE</span></div>
+              <div class="cell-genre" role="cell">Peak Time Techno</div>
+              <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+            
+            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-35" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
+          </div>
+
+            <div class="schedule-row" role="row" data-stage="stage-solar" data-perf-id="perf-28">
+              <div class="cell-time" role="cell"><span class="mono-time">21:40 - 22:50</span></div>
+              <div class="cell-artist" role="cell"><span class="artist-name">Magnetic River</span><span class="origin-tag">FR</span></div>
+              <div class="cell-genre" role="cell">Indie Dance</div>
+              <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+            
+            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-28" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
+          </div>
+
+            <div class="schedule-row" role="row" data-stage="stage-lunar" data-perf-id="perf-37">
+              <div class="cell-time" role="cell"><span class="mono-time">22:00 - 23:20</span></div>
+              <div class="cell-artist" role="cell"><span class="artist-name">Shadowplay DJ</span><span class="origin-tag">CZ</span></div>
+              <div class="cell-genre" role="cell">Dark Wave Techno</div>
+              <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+            
+            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-37" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
+          </div>
+
+            <div class="schedule-row" role="row" data-stage="stage-solar" data-perf-id="perf-29">
+              <div class="cell-time" role="cell"><span class="mono-time">23:10 - 00:25</span></div>
+              <div class="cell-artist" role="cell"><span class="artist-name">Vortex Motion</span><span class="origin-tag">UK</span></div>
+              <div class="cell-genre" role="cell">Nu-Electro</div>
+              <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+            
+            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-29" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
+          </div>
+
+            <div class="schedule-row" role="row" data-stage="stage-lunar" data-perf-id="perf-39">
+              <div class="cell-time" role="cell"><span class="mono-time">01:10 - 02:30</span></div>
+              <div class="cell-artist" role="cell"><span class="artist-name">Neural Network Live</span><span class="origin-tag">BE</span></div>
+              <div class="cell-genre" role="cell">Acid Techno</div>
+              <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+            
+            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-39" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
+          </div>
+          </div>
+        </div>
+
+        <!-- DAY 3: SUNDAY 2026-07-12 -->
+        <div class="day-block" data-day="2026-07-12">
+          <div class="day-header">
+            <h2 class="day-title" data-i18n="days.sunFull">Sunday, 12 July 2026</h2>
+            <span class="day-meta" data-day-count="6">6 sets</span>
+          </div>
+
+          <div class="schedule-table" role="table" aria-label="Sunday 12 July 2026 schedule">
+            <div class="schedule-row schedule-row-head" role="row">
+              <span role="columnheader" data-i18n="table.time">Time</span>
+              <span role="columnheader" data-i18n="table.artist">Artist</span>
+              <span role="columnheader" data-i18n="table.genre">Genre</span>
+              <span role="columnheader" data-i18n="table.stage">Stage</span>
+              <span role="columnheader" data-i18n="col_plan">Plan</span>
+            </div>
+
+            <div class="schedule-row" role="row" data-stage="stage-solar" data-perf-id="perf-44">
+              <div class="cell-time" role="cell"><span class="mono-time">16:05 - 16:55</span></div>
+              <div class="cell-artist" role="cell"><span class="artist-name">Amber Boulevard</span><span class="origin-tag">DE</span></div>
+              <div class="cell-genre" role="cell">Dream Indie</div>
+              <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+            
+            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-44" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
+          </div>
+
+            <div class="schedule-row" role="row" data-stage="stage-lunar" data-perf-id="perf-55">
+              <div class="cell-time" role="cell"><span class="mono-time">18:45 - 19:45</span></div>
+              <div class="cell-artist" role="cell"><span class="artist-name">Dark Matter</span><span class="origin-tag">CZ</span></div>
+              <div class="cell-genre" role="cell">Deep Progressive</div>
+              <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+            
+            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-55" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
+          </div>
+
+            <div class="schedule-row" role="row" data-stage="stage-solar" data-perf-id="perf-48">
+              <div class="cell-time" role="cell"><span class="mono-time">21:10 - 22:15</span></div>
+              <div class="cell-artist" role="cell"><span class="artist-name">Prismatics</span><span class="origin-tag">UK</span></div>
+              <div class="cell-genre" role="cell">Dance Punk</div>
+              <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+            
+            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-48" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
+          </div>
+
+            <div class="schedule-row" role="row" data-stage="stage-lunar" data-perf-id="perf-57">
+              <div class="cell-time" role="cell"><span class="mono-time">21:30 - 22:45</span></div>
+              <div class="cell-artist" role="cell"><span class="artist-name">Galactic Orbit</span><span class="origin-tag">IT</span></div>
+              <div class="cell-genre" role="cell">Melodic Techno</div>
+              <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+            
+            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-57" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
+          </div>
+
+            <div class="schedule-row" role="row" data-stage="stage-solar" data-perf-id="perf-49">
+              <div class="cell-time" role="cell"><span class="mono-time">22:35 - 23:55</span></div>
+              <div class="cell-artist" role="cell"><span class="artist-name">Starlight Runners</span><span class="origin-tag">DK</span></div>
+              <div class="cell-genre" role="cell">Electropop Headliner</div>
+              <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+            
+            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-49" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
+          </div>
+
+            <div class="schedule-row" role="row" data-stage="stage-lunar" data-perf-id="perf-60">
+              <div class="cell-time" role="cell"><span class="mono-time">02:00 - 03:00</span></div>
+              <div class="cell-artist" role="cell"><span class="artist-name">Equinox Farewell</span><span class="origin-tag">CZ</span></div>
+              <div class="cell-genre" role="cell">Down-tempo Ambient</div>
+              <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+            
+            <div class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-60" aria-pressed="false" data-i18n="prog_add">+ Add</button></div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <span class="footer-brand">Festival of Darkness 2</span>
+        <span class="footer-meta" data-i18n="footer.location">Kutná Hora, Czech Republic · 10-12 Jul 2026</span>
+      </div>
+      <div class="footer-links">
+        <a href="index.html" data-i18n="nav.home">Overview</a>
+        <a href="program.html" data-i18n="nav.program">Program</a>
+      </div>
+    </div>
+  </footer>
+  <nav class="bottom-nav-dock" aria-label="Mobile navigation">
+    <a href="artists.html" class="bottom-dock-item" data-page="artists.html">
+      <span class="dock-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      </span>
+      <span class="dock-label" data-i18n="dock_artists">Artists</span>
+    </a>
+    <a href="stages.html" class="bottom-dock-item" data-page="stages.html">
+      <span class="dock-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      </span>
+      <span class="dock-label" data-i18n="dock_stages">Stages</span>
+    </a>
+    <a href="practical-info.html" class="bottom-dock-item" data-page="practical-info.html">
+      <span class="dock-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      </span>
+      <span class="dock-label" data-i18n="dock_info">Info</span>
+    </a>
+    <a href="index.html" class="bottom-dock-item bottom-dock-home" data-page="index.html">
+      <span class="dock-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </span>
+      <span class="dock-label" data-i18n="dock_home">Home</span>
+    </a>
+    <a href="program.html" class="bottom-dock-item active is-active" data-page="program.html" aria-current="page">
+      <span class="dock-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </span>
+      <span class="dock-label" data-i18n="dock_program">Program</span>
+    </a>
+    <a href="my-schedule.html" class="bottom-dock-item" data-page="my-schedule.html">
+      <span class="dock-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      </span>
+      <span class="dock-label" data-i18n="dock_plan">My Plan</span>
+    </a>
+    <a href="search.html" class="bottom-dock-item" data-page="search.html">
+      <span class="dock-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </span>
+      <span class="dock-label" data-i18n="dock_search">Search</span>
+    </a>
+  </nav>
+<script src="js/lang.js"></script>
+<script>
+  (function () {
+    var FAV_KEY = "festival_favorites";
+    var LABELS = {
+      en: { add: "+ Add", added: "✓ In Plan", countOne: "1 set", countMany: " sets" },
+      cs: { add: "+ Přidat", added: "✓ V plánu", countOne: "1 vystoupení", countFew: " vystoupení", countMany: " vystoupení" }
+    };
+
+    function getLang() {
+      if (typeof window.getFestivalLang === "function") return window.getFestivalLang();
+      return document.documentElement.lang === "cs" ? "cs" : "en";
+    }
+
+    function readFavorites() {
+      try {
+        var raw = window.localStorage.getItem(FAV_KEY);
+        if (!raw) return [];
+        var parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) {
+          return parsed.map(function (x) {
+            return typeof x === "string" ? x : (x && x.id ? String(x.id) : "");
+          }).filter(Boolean);
+        }
+      } catch (e) {}
+      return [];
+    }
+
+    function writeFavorites(ids) {
+      var seen = {};
+      var clean = [];
+      ids.forEach(function (id) {
+        if (id && !seen[id]) {
+          seen[id] = true;
+          clean.push(id);
+        }
+      });
+      try {
+        window.localStorage.setItem(FAV_KEY, JSON.stringify(clean));
+      } catch (e) {}
+      try {
+        window.dispatchEvent(new Event("favoritesUpdated"));
+      } catch (e) {}
+      syncUI();
+    }
+
+    function formatCount(n, lang) {
+      if (lang === "cs" && typeof window.formatCzPlural === "function") {
+        return window.formatCzPlural(n, "uložené vystoupení", "uložená vystoupení", "uložených vystoupení");
+      }
+      if (lang === "cs") {
+        if (n === 1) return "1 vystoupení";
+        return n + " vystoupení";
+      }
+      return n === 1 ? "1 set" : n + " sets";
+    }
+
+    function syncUI() {
+      var favs = readFavorites();
+      var lang = getLang();
+      var dict = LABELS[lang] || LABELS.en;
+
+      var countEl = document.getElementById("plan-bar-count");
+      if (countEl) countEl.textContent = formatCount(favs.length, lang);
+
+      var btns = document.querySelectorAll(".fav-toggle-btn[data-perf-id]");
+      for (var i = 0; i < btns.length; i++) {
+        var btn = btns[i];
+        var id = btn.getAttribute("data-perf-id");
+        var saved = favs.indexOf(id) !== -1;
+        btn.setAttribute("aria-pressed", saved ? "true" : "false");
+        btn.setAttribute("data-i18n", saved ? "prog_added" : "prog_add");
+        btn.classList.toggle("is-saved", saved);
+        btn.textContent = saved ? dict.added : dict.add;
+      }
+    }
+
+    document.addEventListener("click", function (ev) {
+      var btn = ev.target && ev.target.closest ? ev.target.closest(".fav-toggle-btn[data-perf-id]") : null;
+      if (!btn) return;
+      var id = btn.getAttribute("data-perf-id");
+      if (!id) return;
+      var favs = readFavorites();
+      var idx = favs.indexOf(id);
+      if (idx === -1) favs.push(id);
+      else favs.splice(idx, 1);
+      writeFavorites(favs);
+    });
+
+    window.addEventListener("storage", function (ev) {
+      if (!ev || ev.key === FAV_KEY) syncUI();
+    });
+    window.addEventListener("languageChanged", syncUI);
+
+    if (typeof MutationObserver === "function") {
+      new MutationObserver(syncUI).observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["lang"]
+      });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", syncUI);
+    } else {
+      syncUI();
+    }
+  })();
+</script>
+</body>
+</html>

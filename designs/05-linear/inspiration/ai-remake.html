@@ -1,0 +1,4023 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Linear – The system for product development</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-primary: #08090a;
+      --bg-secondary: #0f1011;
+      --bg-tertiary: #141517;
+      --bg-elevated: #191a1d;
+      --bg-surface: rgba(255, 255, 255, 0.03);
+      --bg-surface-hover: rgba(255, 255, 255, 0.06);
+      --border-hairline: rgba(255, 255, 255, 0.08);
+      --border-subtle: rgba(255, 255, 255, 0.12);
+      --border-strong: rgba(255, 255, 255, 0.18);
+      --text-primary: #f7f8f8;
+      --text-secondary: #d0d6e0;
+      --text-tertiary: #8a8f98;
+      --text-quaternary: #62666d;
+      --brand-indigo: #5e6ad2;
+      --brand-indigo-glow: rgba(94, 106, 210, 0.25);
+      --color-yellow: #f2c94c;
+      --color-green: #27a644;
+      --color-emerald: #4cb782;
+      --color-orange: #f2994a;
+      --color-red: #eb5757;
+      --color-blue: #4ea7fc;
+      --color-cyan: #26b5ce;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --radius-xl: 18px;
+      --container-max: 1248px;
+    }
+
+    html[data-theme="light"] {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f7f8fa;
+      --bg-tertiary: #eff1f5;
+      --bg-elevated: #ffffff;
+      --bg-surface: rgba(0, 0, 0, 0.025);
+      --bg-surface-hover: rgba(0, 0, 0, 0.05);
+      --border-hairline: rgba(0, 0, 0, 0.08);
+      --border-subtle: rgba(0, 0, 0, 0.12);
+      --border-strong: rgba(0, 0, 0, 0.2);
+      --text-primary: #0f1012;
+      --text-secondary: #2e3238;
+      --text-tertiary: #5c626d;
+      --text-quaternary: #8a909b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      background: none;
+      border: none;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    code, kbd {
+      font-family: var(--font-mono);
+    }
+
+    kbd {
+      display: inline-flex;
+      align-items: center;
+      padding: 1px 6px;
+      font-size: 11px;
+      line-height: 1.4;
+      color: var(--text-secondary);
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+    }
+
+    /* Layout Helpers */
+    .inset-container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .inset-narrow {
+      width: 100%;
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      background: rgba(8, 9, 10, 0.78);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border-hairline);
+    }
+
+    html[data-theme="light"] .site-header {
+      background: rgba(255, 255, 255, 0.82);
+    }
+
+    .header-inner {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo-link {
+      display: inline-flex;
+      align-items: center;
+      color: var(--text-primary);
+      transition: opacity 0.15s ease;
+    }
+
+    .logo-link:hover {
+      opacity: 0.85;
+    }
+
+    .nav-center {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      border-radius: var(--radius-sm);
+      transition: color 0.15s ease, background 0.15s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--text-primary);
+      background: var(--bg-surface-hover);
+    }
+
+    .nav-dropdown {
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 0;
+      width: 540px;
+      background: #121316;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.65);
+      display: none;
+      z-index: 120;
+    }
+
+    html[data-theme="light"] .nav-dropdown {
+      background: #ffffff;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.12);
+    }
+
+    .nav-dropdown.open {
+      display: block;
+      animation: fadeSlideDown 0.16s ease-out;
+    }
+
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .dropdown-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 0.85fr;
+      gap: 12px;
+    }
+
+    .dropdown-col {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .dropdown-link {
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      transition: background 0.15s ease;
+    }
+
+    .dropdown-link:hover {
+      background: var(--bg-surface-hover);
+    }
+
+    .dropdown-link-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .dropdown-link-desc {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      line-height: 1.35;
+    }
+
+    .dropdown-footer {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-hairline);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-ghost {
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      border-radius: var(--radius-sm);
+      transition: color 0.15s ease, background 0.15s ease;
+    }
+
+    .btn-ghost:hover {
+      color: var(--text-primary);
+      background: var(--bg-surface-hover);
+    }
+
+    .btn-invert {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 13px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #08090a;
+      background: #e6e8eb;
+      border-radius: 7px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      transition: background 0.15s ease, transform 0.1s ease;
+    }
+
+    html[data-theme="light"] .btn-invert {
+      background: #141517;
+      color: #ffffff;
+    }
+
+    .btn-invert:hover {
+      background: #ffffff;
+    }
+
+    html[data-theme="light"] .btn-invert:hover {
+      background: #27292d;
+    }
+
+    .btn-invert.btn-lg {
+      padding: 10px 18px;
+      font-size: 14px;
+      border-radius: 9px;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 18px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9px;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-surface-hover);
+      border-color: var(--border-strong);
+    }
+
+    /* Page View Switcher Pill in Header */
+    .view-switcher-pill {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-hairline);
+      border-radius: 999px;
+      padding: 2px;
+      gap: 2px;
+    }
+
+    .view-pill-btn {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 999px;
+      color: var(--text-tertiary);
+      transition: all 0.15s ease;
+    }
+
+    .view-pill-btn.active {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-primary);
+    }
+
+    /* Page Container Toggle */
+    .page-view {
+      display: none;
+    }
+
+    .page-view.active {
+      display: block;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      padding-top: 96px;
+      position: relative;
+    }
+
+    .hero-title {
+      font-size: clamp(38px, 5.4vw, 68px);
+      font-weight: 500;
+      line-height: 1.04;
+      letter-spacing: -0.036em;
+      color: var(--text-primary);
+      max-width: 920px;
+    }
+
+    .hero-subrow {
+      margin-top: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      line-height: 1.5;
+      color: var(--text-tertiary);
+      max-width: 560px;
+    }
+
+    .loops-badge-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 14px 6px 8px;
+      border-radius: 999px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      font-size: 13px;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .loops-badge-link:hover {
+      border-color: var(--border-strong);
+      background: var(--bg-surface-hover);
+    }
+
+    .loops-pill-new {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(94, 106, 210, 0.22);
+      color: #9ba5ff;
+      border: 1px solid rgba(94, 106, 210, 0.38);
+    }
+
+    /* Hero App Frame */
+    .hero-stage {
+      margin-top: 56px;
+      position: relative;
+      padding: 0 24px;
+    }
+
+    .hero-ambient-glow {
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 82%;
+      height: 360px;
+      background: radial-gradient(ellipse at 50% 25%, rgba(94, 106, 210, 0.18), rgba(45, 130, 183, 0.06) 48%, transparent 75%);
+      pointer-events: none;
+      filter: blur(28px);
+    }
+
+    .app-frame {
+      position: relative;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      background: #0c0d0f;
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      box-shadow: 0 32px 90px rgba(0, 0, 0, 0.78), 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+      display: grid;
+      grid-template-columns: 224px 1fr;
+      min-height: 620px;
+      overflow: hidden;
+    }
+
+    .app-sidebar {
+      background: #0a0b0d;
+      border-right: 1px solid var(--border-hairline);
+      padding: 14px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      user-select: none;
+    }
+
+    .sidebar-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4px 8px 10px;
+    }
+
+    .workspace-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .workspace-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 5px;
+      background: #1b1d22;
+      border: 1px solid var(--border-subtle);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sidebar-actions {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--text-tertiary);
+    }
+
+    .sidebar-icon-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 5px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-tertiary);
+    }
+
+    .sidebar-icon-btn:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-primary);
+    }
+
+    .sidebar-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      width: 100%;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: #9c9da1;
+      text-align: left;
+      transition: background 0.12s ease, color 0.12s ease;
+    }
+
+    .sidebar-nav-item:hover {
+      background: rgba(255, 255, 255, 0.045);
+      color: #e2e4e6;
+    }
+
+    .sidebar-nav-item.active {
+      background: rgba(255, 255, 255, 0.075);
+      color: #f7f8f8;
+    }
+
+    .sidebar-section-label {
+      margin-top: 14px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 500;
+      color: #62666d;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .app-main {
+      display: flex;
+      flex-direction: column;
+      background: #0e0f12;
+      position: relative;
+    }
+
+    .app-topbar {
+      height: 44px;
+      padding: 0 18px;
+      border-bottom: 1px solid var(--border-hairline);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12.5px;
+    }
+
+    .app-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-secondary);
+    }
+
+    .app-issue-layout {
+      display: grid;
+      grid-template-columns: 1fr 248px;
+      flex: 1;
+      position: relative;
+    }
+
+    .app-issue-content {
+      padding: 24px 32px 180px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .issue-title-h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #f7f8f8;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .issue-desc-p {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: #b4bcd0;
+      max-width: 540px;
+    }
+
+    .issue-code-inline {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-size: 12px;
+      color: #e2e4e7;
+    }
+
+    .activity-heading {
+      margin-top: 24px;
+      margin-bottom: 14px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-tertiary);
+    }
+
+    .activity-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: #8a8f98;
+      margin-bottom: 10px;
+    }
+
+    .activity-row strong {
+      color: #d0d6e0;
+      font-weight: 500;
+    }
+
+    .avatar-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .comment-card {
+      margin-top: 14px;
+      background: #131519;
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 12px 14px;
+      max-width: 520px;
+    }
+
+    .comment-entry {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .comment-meta {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+
+    .comment-meta strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .comment-body {
+      font-size: 13px;
+      color: #d0d6e0;
+      padding-left: 23px;
+    }
+
+    .comment-divider {
+      height: 1px;
+      background: var(--border-hairline);
+      margin: 10px 0;
+    }
+
+    .connected-pr-card {
+      margin-top: 12px;
+      background: #131519;
+      border: 1px solid var(--border-hairline);
+      border-radius: 10px;
+      padding: 10px 14px;
+      max-width: 520px;
+      font-size: 12px;
+      color: var(--text-tertiary);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .app-properties-rail {
+      border-left: 1px solid var(--border-hairline);
+      padding: 18px 16px;
+      background: #0c0d10;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .prop-group-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: #62666d;
+      margin-bottom: 8px;
+    }
+
+    .prop-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      color: #d0d6e0;
+      padding: 4px 0;
+    }
+
+    .prop-label-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-hairline);
+      color: #d0d6e0;
+    }
+
+    .prop-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+    }
+
+    /* Floating Agent Chat Card inside Hero App Frame */
+    .hero-agent-float {
+      position: absolute;
+      right: 20px;
+      bottom: 18px;
+      width: 390px;
+      max-width: calc(100% - 40px);
+      background: #14161b;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 12px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85), 0 0 30px rgba(94, 106, 210, 0.16);
+      overflow: hidden;
+      z-index: 15;
+    }
+
+    .agent-float-header {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border-hairline);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .agent-id {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: #f7f8f8;
+    }
+
+    .model-tag {
+      font-size: 11px;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.06);
+      color: #8a8f98;
+    }
+
+    .agent-float-body {
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 12.5px;
+    }
+
+    .agent-user-bubble {
+      align-self: flex-end;
+      background: rgba(94, 106, 210, 0.22);
+      border: 1px solid rgba(94, 106, 210, 0.35);
+      color: #eef0ff;
+      padding: 7px 11px;
+      border-radius: 10px;
+      max-width: 88%;
+      line-height: 1.4;
+    }
+
+    .agent-context-line {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      color: #8a8f98;
+    }
+
+    .agent-pr-box {
+      background: #0e1014;
+      border: 1px solid var(--border-hairline);
+      border-radius: 8px;
+      padding: 9px 11px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .agent-reply-bar {
+      padding: 8px 12px;
+      border-top: 1px solid var(--border-hairline);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #101216;
+    }
+
+    .agent-reply-input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text-primary);
+      font-size: 12px;
+      width: 100%;
+    }
+
+    /* Logo Strip */
+    .logos-section {
+      padding: 64px 24px 24px;
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    .logos-grid {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 28px;
+      opacity: 0.88;
+    }
+
+    .logos-caption {
+      margin-top: 28px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-quaternary);
+    }
+
+    /* Section Intro Statement */
+    .statement-section {
+      padding: 72px 24px 56px;
+      max-width: var(--container-max);
+      margin: 0 auto;
+    }
+
+    .statement-heading {
+      font-size: clamp(28px, 3.8vw, 48px);
+      font-weight: 500;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      color: var(--text-tertiary);
+      max-width: 1040px;
+    }
+
+    .statement-heading strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    /* 3-Column Benefits Grid */
+    .benefits-grid {
+      max-width: var(--container-max);
+      margin: 0 auto 120px;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--border-hairline);
+      border-bottom: 1px solid var(--border-hairline);
+    }
+
+    .benefit-card {
+      padding: 28px 28px 36px;
+      border-right: 1px solid var(--border-hairline);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 360px;
+      transition: background 0.2s ease;
+    }
+
+    .benefit-card:last-child {
+      border-right: none;
+    }
+
+    .benefit-card:hover {
+      background: rgba(255, 255, 255, 0.015);
+    }
+
+    .benefit-fig {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-quaternary);
+    }
+
+    .benefit-illus {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 210px;
+      margin: 12px 0;
+    }
+
+    .benefit-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .benefit-desc {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      line-height: 1.5;
+    }
+
+    /* Keyline Divider */
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-subtle) 15%, var(--border-subtle) 85%, transparent);
+      margin: 0 auto;
+    }
+
+    /* Product Pillar Sections */
+    .pillar-section {
+      padding: 88px 0 64px;
+    }
+
+    .pillar-header {
+      max-width: var(--container-max);
+      margin: 0 auto 52px;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: end;
+    }
+
+    .pillar-title {
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 500;
+      line-height: 1.06;
+      letter-spacing: -0.032em;
+      color: var(--text-primary);
+    }
+
+    .pillar-desc {
+      font-size: 16px;
+      line-height: 1.55;
+      color: var(--text-tertiary);
+      max-width: 460px;
+    }
+
+    .arrow-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color 0.15s ease;
+    }
+
+    .arrow-link:hover {
+      color: var(--text-primary);
+    }
+
+    .arrow-link span.arrow {
+      transition: transform 0.15s ease;
+    }
+
+    .arrow-link:hover span.arrow {
+      transform: translateX(3px);
+    }
+
+    /* Pillar Stage Illustrations */
+    .pillar-stage {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+    }
+
+    /* Pillar 1: Kanban Board + Floating Slack Thread */
+    .intake-stage-grid {
+      position: relative;
+      padding-bottom: 44px;
+    }
+
+    .kanban-panel {
+      background: #0c0d10;
+      border: 1px solid var(--border-hairline);
+      border-radius: 14px;
+      padding: 18px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      overflow: hidden;
+    }
+
+    .kanban-col {
+      background: rgba(255, 255, 255, 0.015);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 10px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .kanban-col-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      padding: 2px 4px 6px;
+    }
+
+    .kanban-card {
+      background: #13151a;
+      border: 1px solid var(--border-hairline);
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: border-color 0.15s ease, transform 0.15s ease;
+    }
+
+    .kanban-card:hover {
+      border-color: var(--border-subtle);
+      transform: translateY(-1px);
+    }
+
+    .kanban-card-id {
+      font-size: 11px;
+      color: var(--text-quaternary);
+      font-family: var(--font-mono);
+    }
+
+    .kanban-card-title {
+      font-size: 12px;
+      font-weight: 500;
+      color: #e2e4e7;
+      line-height: 1.35;
+    }
+
+    .kanban-card-tags {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+      margin-top: 2px;
+    }
+
+    .mini-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10.5px;
+      color: var(--text-tertiary);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-hairline);
+      border-radius: 4px;
+      padding: 1px 6px;
+    }
+
+    .slack-float-card {
+      position: absolute;
+      right: 40px;
+      bottom: 0;
+      width: 440px;
+      max-width: calc(100% - 48px);
+      background: #14161b;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 14px;
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.85), 0 0 40px rgba(94, 106, 210, 0.14);
+      overflow: hidden;
+    }
+
+    .slack-header {
+      padding: 11px 16px;
+      border-bottom: 1px solid var(--border-hairline);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12.5px;
+    }
+
+    .slack-messages {
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .slack-msg {
+      display: flex;
+      gap: 10px;
+      font-size: 12.5px;
+    }
+
+    .slack-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 11px;
+      color: #fff;
+    }
+
+    .slack-composer {
+      margin: 0 14px 14px;
+      background: #0d0f13;
+      border: 1px solid var(--border-subtle);
+      border-radius: 9px;
+      padding: 9px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .slack-mention {
+      background: rgba(94, 106, 210, 0.24);
+      color: #a5afff;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-weight: 500;
+      font-size: 12px;
+    }
+
+    .slack-send-btn {
+      background: var(--brand-indigo);
+      color: #fff;
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 11.5px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .slack-send-btn:hover {
+      background: #6e7ae2;
+    }
+
+    /* Pillar 2: Planning Roadmap + Cycle Time Chart */
+    .plan-stage-grid {
+      position: relative;
+      padding-bottom: 48px;
+    }
+
+    .roadmap-panel {
+      background: #0c0d10;
+      border: 1px solid var(--border-hairline);
+      border-radius: 14px;
+      padding: 20px;
+      overflow-x: auto;
+    }
+
+    .roadmap-months {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      border-bottom: 1px solid var(--border-hairline);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-quaternary);
+    }
+
+    .roadmap-tracks {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding: 8px 0 24px;
+    }
+
+    .roadmap-track {
+      position: relative;
+      height: 36px;
+      display: flex;
+      align-items: center;
+    }
+
+    .roadmap-bar {
+      position: absolute;
+      height: 32px;
+      background: #171920;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 0 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #e2e4e7;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    }
+
+    .roadmap-tail {
+      position: absolute;
+      height: 32px;
+      border: 1px dashed rgba(255, 255, 255, 0.16);
+      border-left: none;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .insights-float-card {
+      position: absolute;
+      right: 36px;
+      bottom: 0;
+      width: 470px;
+      max-width: calc(100% - 48px);
+      background: #13151a;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 14px;
+      padding: 16px 18px;
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.85);
+    }
+
+    .insights-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    /* Pillar 3: AI Agents Carousel */
+    .agents-track {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .agent-window {
+      background: #101216;
+      border: 1px solid var(--border-hairline);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .agent-window.featured {
+      border-color: rgba(94, 106, 210, 0.45);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 36px rgba(94, 106, 210, 0.14);
+      background: #13151b;
+    }
+
+    .agent-window-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .agent-issue-list {
+      background: #0b0c0f;
+      border: 1px solid var(--border-hairline);
+      border-radius: 8px;
+      padding: 6px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .agent-issue-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #d0d6e0;
+      padding: 3px 0;
+    }
+
+    .thinking-shimmer {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: #8a8f98;
+      background: linear-gradient(90deg, #62666d 0%, #d0d6e0 50%, #62666d 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmerText 2.4s linear infinite;
+    }
+
+    @keyframes shimmerText {
+      to { background-position: 200% center; }
+    }
+
+    /* Pillar 4: Build, Review, and Ship (Issue List + Editable Code Diff) */
+    .build-stage-wrapper {
+      position: relative;
+      padding-bottom: 48px;
+    }
+
+    .build-list-panel {
+      background: #0c0d10;
+      border: 1px solid var(--border-hairline);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .build-group-header {
+      padding: 9px 16px;
+      background: rgba(255, 255, 255, 0.02);
+      border-bottom: 1px solid var(--border-hairline);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .build-issue-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      font-size: 12.5px;
+      width: 100%;
+      text-align: left;
+      transition: background 0.12s ease;
+    }
+
+    .build-issue-row:hover {
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .build-issue-row.selected-row {
+      background: rgba(94, 106, 210, 0.12);
+    }
+
+    .diff-overlay-panel {
+      margin-top: -36px;
+      margin-left: auto;
+      width: 82%;
+      max-width: 920px;
+      background: #111318;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.85);
+      overflow: hidden;
+      position: relative;
+      z-index: 10;
+    }
+
+    .diff-header {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border-hairline);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: #15181e;
+    }
+
+    .diff-filepath {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .diff-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      line-height: 1.6;
+    }
+
+    .diff-col {
+      padding: 12px 0;
+      overflow-x: auto;
+    }
+
+    .diff-col:first-child {
+      border-right: 1px solid var(--border-hairline);
+    }
+
+    .code-line {
+      padding: 0 14px;
+      white-space: pre;
+      color: #d0d6e0;
+    }
+
+    .code-line.diff-old {
+      background: rgba(243, 78, 82, 0.12);
+    }
+
+    .code-line.diff-new {
+      background: rgba(39, 166, 68, 0.1);
+    }
+
+    .tok-kw { color: #f79ce0; }
+    .tok-var { color: #55cdff; }
+    .tok-str { color: #ffc47c; }
+    .tok-fn { color: #8fa4ff; }
+    .tok-tag { color: #89d196; }
+
+    /* Pillar Footer Feature Pills */
+    .pillar-footer {
+      max-width: var(--container-max);
+      margin: 36px auto 0;
+      padding: 24px 24px 0;
+      border-top: 1px solid var(--border-hairline);
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .pillar-footer-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-quaternary);
+      padding-top: 6px;
+    }
+
+    .feature-pills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 260px));
+      gap: 10px 32px;
+    }
+
+    .feature-pill-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 0;
+      font-size: 14px;
+      color: var(--text-tertiary);
+      border-bottom: 1px solid transparent;
+      transition: color 0.15s ease;
+      text-align: left;
+    }
+
+    .feature-pill-btn:hover {
+      color: var(--text-primary);
+    }
+
+    .feature-pill-plus {
+      color: var(--text-quaternary);
+      font-weight: 400;
+    }
+
+    /* Changelog Section on Homepage */
+    .changelog-section {
+      padding: 120px 24px;
+      max-width: var(--container-max);
+      margin: 0 auto;
+    }
+
+    .changelog-heading {
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      margin-bottom: 56px;
+    }
+
+    .changelog-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+      position: relative;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-hairline);
+    }
+
+    .changelog-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: opacity 0.15s ease;
+    }
+
+    .changelog-card::before {
+      content: '';
+      position: absolute;
+      top: -28px;
+      left: 0;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--text-quaternary);
+    }
+
+    .changelog-card.first::before {
+      background: var(--brand-indigo);
+      box-shadow: 0 0 10px var(--brand-indigo);
+    }
+
+    .changelog-card:hover .changelog-card-title {
+      color: #ffffff;
+    }
+
+    .changelog-card-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color 0.15s ease;
+    }
+
+    .changelog-card-excerpt {
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: var(--text-tertiary);
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .changelog-card-date {
+      margin-top: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--text-quaternary);
+    }
+
+    /* Customer Quotes Section */
+    .quotes-section {
+      max-width: var(--container-max);
+      margin: 0 auto 120px;
+      padding: 0 24px;
+    }
+
+    .quotes-grid {
+      display: grid;
+      grid-template-columns: 1.45fr 1fr;
+      gap: 16px;
+    }
+
+    .quote-card {
+      border-radius: 16px;
+      padding: 36px;
+      min-height: 340px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: #08090a;
+      transition: transform 0.2s ease;
+    }
+
+    .quote-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .quote-card.openai {
+      background: linear-gradient(0deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.4) 100%), linear-gradient(180deg, #b2d5ff 0%, #dfd1ff 100%);
+    }
+
+    .quote-card.ramp {
+      background: #e4f222;
+    }
+
+    .quote-text {
+      font-size: clamp(20px, 2.2vw, 26px);
+      font-weight: 500;
+      line-height: 1.28;
+      letter-spacing: -0.02em;
+    }
+
+    .quote-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 32px;
+    }
+
+    .quote-author-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #08090a;
+    }
+
+    .quote-author-role {
+      font-size: 13px;
+      color: rgba(8, 9, 10, 0.65);
+    }
+
+    .quotes-footer {
+      margin-top: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 14px;
+      color: var(--text-tertiary);
+    }
+
+    .quotes-footer strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    /* Prefooter CTA */
+    .prefooter-cta {
+      padding: 96px 24px 128px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .prefooter-heading {
+      font-size: clamp(34px, 4.6vw, 56px);
+      font-weight: 500;
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+      max-width: 620px;
+    }
+
+    /* CHANGELOG DETAIL PAGE (04-2026-11-04-mobile-diffs) */
+    .changelog-detail-wrapper {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 64px 24px 136px;
+      display: grid;
+      grid-template-columns: 220px minmax(0, 680px) 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      transition: color 0.15s ease;
+    }
+
+    .back-link:hover {
+      color: var(--text-primary);
+    }
+
+    .entry-header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .entry-date {
+      font-size: 14px;
+      color: var(--text-tertiary);
+    }
+
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text-tertiary);
+      padding: 5px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border-hairline);
+      background: var(--bg-surface);
+      transition: all 0.15s ease;
+    }
+
+    .share-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--border-subtle);
+    }
+
+    .entry-title {
+      font-size: clamp(28px, 3.4vw, 38px);
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 28px;
+    }
+
+    /* Rich Self-Contained Mobile Diffs Artwork */
+    .mobile-diffs-showcase {
+      background: radial-gradient(circle at 50% 0%, rgba(94, 106, 210, 0.24), rgba(16, 18, 24, 0.95) 70%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 32px 24px 0;
+      margin-bottom: 28px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .phone-mockup {
+      width: 270px;
+      background: #0d0e11;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-bottom: none;
+      border-radius: 26px 26px 0 0;
+      padding: 14px 14px 22px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .phone-notch {
+      width: 68px;
+      height: 16px;
+      background: #050507;
+      border-radius: 999px;
+      margin: 0 auto 4px;
+    }
+
+    .phone-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-secondary);
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border-hairline);
+    }
+
+    .phone-diff-card {
+      background: #14161c;
+      border: 1px solid var(--border-hairline);
+      border-radius: 10px;
+      padding: 10px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      line-height: 1.55;
+    }
+
+    .phone-diff-add {
+      background: rgba(39, 166, 68, 0.16);
+      color: #7ee787;
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+
+    .phone-diff-del {
+      background: rgba(243, 78, 82, 0.16);
+      color: #ffa198;
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+
+    .prose-body p {
+      font-size: 15.5px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .prose-body > ul {
+      margin: 0 0 20px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      color: var(--text-secondary);
+      font-size: 15.5px;
+    }
+
+    .prose-body a {
+      color: #8fa4ff;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* Collapsible Accordions on Changelog Detail */
+    .collapsible-list {
+      margin-top: 28px;
+      border-top: 1px solid var(--border-hairline);
+    }
+
+    .collapsible-item {
+      border-bottom: 1px solid var(--border-hairline);
+    }
+
+    .collapsible-trigger {
+      width: 100%;
+      padding: 16px 4px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-primary);
+      text-align: left;
+      transition: color 0.15s ease;
+    }
+
+    .collapsible-trigger:hover {
+      color: #ffffff;
+    }
+
+    .collapsible-chevron {
+      transition: transform 0.2s ease;
+      color: var(--text-tertiary);
+      display: inline-flex;
+    }
+
+    .collapsible-item.open .collapsible-chevron {
+      transform: rotate(90deg);
+    }
+
+    .collapsible-count {
+      margin-left: auto;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-quaternary);
+    }
+
+    .collapsible-panel {
+      display: none;
+      padding: 4px 0 24px 24px;
+    }
+
+    .collapsible-item.open .collapsible-panel {
+      display: block;
+    }
+
+    .release-notes-list {
+      list-style: disc;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    .area-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11.5px;
+      font-weight: 500;
+      padding: 1px 7px;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-hairline);
+      color: var(--text-primary);
+      margin-right: 4px;
+      vertical-align: baseline;
+    }
+
+    .area-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--badge-color, #8a8f98);
+    }
+
+    /* Side Panel Modal for Feature Ingredients */
+    .side-panel-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      display: none;
+      justify-content: flex-end;
+    }
+
+    .side-panel-backdrop.open {
+      display: flex;
+    }
+
+    .side-panel-drawer {
+      width: 100%;
+      max-width: 540px;
+      height: 100%;
+      background: #101114;
+      border-left: 1px solid var(--border-subtle);
+      padding: 28px 32px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      animation: slideLeft 0.2s ease-out;
+    }
+
+    @keyframes slideLeft {
+      from { transform: translateX(28px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    .side-panel-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .side-panel-table th,
+    .side-panel-table td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border-hairline);
+      vertical-align: top;
+    }
+
+    .side-panel-table th {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-quaternary);
+    }
+
+    /* Footer */
+    .site-footer {
+      border-top: 1px solid var(--border-hairline);
+      padding: 64px 24px 72px;
+      background: var(--bg-primary);
+    }
+
+    .footer-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.2fr repeat(5, 1fr) auto;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .footer-col-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 14px;
+    }
+
+    .footer-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-link {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      transition: color 0.15s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--text-primary);
+    }
+
+    .theme-toggle-group {
+      display: inline-flex;
+      align-items: center;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-hairline);
+      border-radius: 999px;
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .theme-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-tertiary);
+      transition: all 0.15s ease;
+    }
+
+    .theme-btn.active {
+      background: var(--bg-elevated);
+      color: var(--text-primary);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Toast Notification */
+    .toast-banner {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #181a20;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+      z-index: 300;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: all 0.2s ease;
+    }
+
+    .toast-banner.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 1024px) {
+      .app-frame { grid-template-columns: 1fr; }
+      .app-sidebar { display: none; }
+      .app-issue-layout { grid-template-columns: 1fr; }
+      .app-properties-rail { display: none; }
+      .benefits-grid { grid-template-columns: 1fr; }
+      .benefit-card { border-right: none; border-bottom: 1px solid var(--border-hairline); }
+      .pillar-header { grid-template-columns: 1fr; gap: 16px; }
+      .kanban-panel { grid-template-columns: repeat(2, 1fr); }
+      .agents-track { grid-template-columns: 1fr; }
+      .diff-overlay-panel { width: 100%; margin-top: 16px; }
+      .changelog-grid { grid-template-columns: repeat(2, 1fr); }
+      .quotes-grid { grid-template-columns: 1fr; }
+      .changelog-detail-wrapper { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 680px) {
+      .nav-center { display: none; }
+      .kanban-panel { grid-template-columns: 1fr; }
+      .diff-columns { grid-template-columns: 1fr; }
+      .changelog-grid { grid-template-columns: 1fr; }
+      .mobile-diffs-showcase { flex-direction: column; align-items: center; }
+      .footer-inner { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sticky Navigation Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div style="display:flex;align-items:center;gap:16px;">
+        <a href="#home" class="logo-link" data-route="home" aria-label="Navigate to home">
+          <svg height="20" viewBox="0 0 400 100" fill="currentColor" aria-label="Linear">
+            <path d="M12.927 16.371a1.47 1.47 0 0 0 .061 2.027l68.595 68.594c.555.555 1.446.59 2.026.062 10.058-9.152 16.372-22.348 16.372-37.018C99.98 22.402 77.579 0 49.945 0c-14.67 0-27.866 6.313-37.018 16.371M4.353 29.39a1.47 1.47 0 0 0 .309 1.648L68.943 95.32c.434.434 1.09.562 1.648.308a50 50 0 0 0 4.335-2.227c.834-.482.962-1.62.28-2.3L8.882 24.773c-.68-.68-1.818-.553-2.3.281a50 50 0 0 0-2.228 4.334m-3.9 18.407a1.48 1.48 0 0 1-.432-1.14q.2-2.986.74-5.866c.215-1.15 1.62-1.55 2.448-.722l56.703 56.704c.828.827.429 2.233-.722 2.448a50 50 0 0 1-5.865.74 1.48 1.48 0 0 1-1.14-.433zm3.48 13.963c-1.033-1.033-2.7-.143-2.322 1.268C6.221 80.22 19.761 93.76 36.954 98.37c1.41.379 2.3-1.289 1.268-2.322z"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M201.602 27.536c3.587 0 6.494-2.918 6.494-6.518s-2.907-6.517-6.494-6.517-6.493 2.918-6.493 6.518 2.907 6.517 6.493 6.517m-55.621 56.84v-69.87h11.54v59.648h31.115v10.223zm82.136-28.511v28.51h-11.166V34.857h11.026v8.487l.14-.094q1.682-3.986 5.42-6.659 3.737-2.72 9.531-2.72 5.139 0 9.344 2.299 4.204 2.25 6.727 6.611 2.523 4.362 2.523 10.692v30.903h-11.166V55.02q0-5.628-2.99-8.535-2.943-2.954-7.896-2.954-3.177 0-5.793 1.313t-4.158 4.032-1.542 6.988M329.222 83.53q3.831 1.642 8.783 1.642 4.065 0 6.961-1.032 2.898-1.078 4.766-2.86 1.915-1.782 3.037-3.893h.187v6.988h10.699V50.283q0-3.61-1.402-6.612-1.401-3-4.065-5.205-2.616-2.205-6.354-3.376-3.737-1.22-8.409-1.22-6.4 0-11.073 2.205-4.625 2.157-7.242 5.814t-2.85 8.254h10.793a7.15 7.15 0 0 1 1.495-3.846q1.308-1.687 3.551-2.626 2.242-.984 5.186-.984t4.999.984q2.102.986 3.223 2.673 1.122 1.689 1.122 3.94v.375q0 1.687-1.168 2.485-1.122.797-3.831 1.172-2.664.375-7.289.891a59 59 0 0 0-7.288 1.266q-3.504.844-6.261 2.486a12.25 12.25 0 0 0-4.298 4.36q-1.588 2.72-1.588 6.988 0 4.923 2.242 8.253 2.243 3.282 6.074 4.97m18.081-8.3q-2.71 1.454-6.681 1.454-4.019 0-6.401-1.688-2.383-1.736-2.383-4.736 0-2.345 1.308-3.799 1.356-1.454 3.551-2.297t4.765-1.173q1.869-.281 3.645-.562 1.775-.329 3.317-.61 1.542-.329 2.616-.657 1.122-.328 1.635-.703v5.533q0 2.908-1.355 5.346-1.308 2.392-4.017 3.892m26.094 9.145v-49.52h10.745v8.16h.141q1.354-4.22 4.251-6.425 2.943-2.25 7.709-2.25 1.169 0 2.102.093.982.048 1.636.094V44.61a41 41 0 0 0-2.149-.234 36 36 0 0 0-3.271-.14q-2.756 0-5.046 1.265-2.29 1.267-3.644 3.892-1.308 2.58-1.308 6.518v28.465zm-177.401 0v-49.52h11.166v49.52zm84.238-2.204q5.373 3.33 12.755 3.329 5.7 0 10.372-2.063 4.719-2.11 7.849-5.768 3.13-3.705 4.065-8.535h-10.512a10.1 10.1 0 0 1-2.29 3.892q-1.541 1.642-3.877 2.58-2.337.937-5.42.937-4.158 0-7.148-1.875-2.943-1.876-4.485-5.205-1.4-3.065-1.529-6.94h35.915V59.52q0-5.721-1.682-10.41-1.682-4.735-4.766-8.16-3.082-3.47-7.428-5.345-4.298-1.875-9.578-1.876-6.867 0-12.147 3.33t-8.27 9.19-2.99 13.412q0 7.503 2.897 13.364 2.897 5.815 8.269 9.145m23.501-32.779q-1.542-3.189-4.392-4.923-2.85-1.736-6.728-1.736-3.831 0-6.681 1.736-2.802 1.734-4.391 4.923-1.134 2.31-1.434 5.252h25.059q-.3-2.942-1.433-5.252"></path>
+          </svg>
+        </a>
+
+        <!-- Page Switcher for attached pages -->
+        <div class="view-switcher-pill" role="tablist" aria-label="Attached pages">
+          <button type="button" class="view-pill-btn active" data-switch-page="home">Home</button>
+          <button type="button" class="view-pill-btn" data-switch-page="mobile-diffs">Changelog: Mobile Diffs</button>
+        </div>
+      </div>
+
+      <nav class="nav-center" aria-label="Main">
+        <div class="nav-item">
+          <button type="button" class="nav-link" data-dropdown-toggle="product">Product</button>
+          <div class="nav-dropdown" id="dropdown-product">
+            <div class="dropdown-grid">
+              <div class="dropdown-col">
+                <a href="#pillar-intake" class="dropdown-link" data-route="home">
+                  <span class="dropdown-link-title">Intake</span>
+                  <span class="dropdown-link-desc">Bring requests and context in from every tool you use</span>
+                </a>
+                <a href="#pillar-plan" class="dropdown-link" data-route="home">
+                  <span class="dropdown-link-title">Plan and monitor</span>
+                  <span class="dropdown-link-desc">Set the plan and follow it from idea to launch</span>
+                </a>
+              </div>
+              <div class="dropdown-col">
+                <a href="#pillar-ai" class="dropdown-link" data-route="home">
+                  <span class="dropdown-link-title">AI and automations</span>
+                  <span class="dropdown-link-desc">Agents that follow work from conversation to code</span>
+                </a>
+                <a href="#pillar-build" class="dropdown-link" data-route="home">
+                  <span class="dropdown-link-title">Build, review and ship</span>
+                  <span class="dropdown-link-desc">Write code and review pull requests inside Linear</span>
+                </a>
+              </div>
+              <div class="dropdown-col">
+                <a href="#pillar-intake" class="dropdown-link" data-route="home"><span class="dropdown-link-title">Integration directory</span></a>
+                <a href="#changelog-section" class="dropdown-link" data-route="home"><span class="dropdown-link-title">Changelog</span></a>
+                <a href="#mobile-diffs" class="dropdown-link" data-route="mobile-diffs"><span class="dropdown-link-title">Mobile</span></a>
+                <a href="#footer" class="dropdown-link"><span class="dropdown-link-title">Security</span></a>
+              </div>
+            </div>
+            <div class="dropdown-footer">
+              <span><strong style="color:#f7f8f8;">New</strong> &nbsp;Bring your own key (BYOK)</span>
+              <a href="#changelog-section" data-route="home" style="color:#d0d6e0;">Learn more →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-item">
+          <button type="button" class="nav-link" data-dropdown-toggle="resources">Resources</button>
+          <div class="nav-dropdown" id="dropdown-resources">
+            <div class="dropdown-grid">
+              <div class="dropdown-col">
+                <a href="#footer" class="dropdown-link">
+                  <span class="dropdown-link-title">About</span>
+                  <span class="dropdown-link-desc">Meet the team and the story behind Linear</span>
+                </a>
+                <a href="#footer" class="dropdown-link">
+                  <span class="dropdown-link-title">Careers</span>
+                  <span class="dropdown-link-desc">Come work with us on the tools our teams use daily</span>
+                </a>
+              </div>
+              <div class="dropdown-col">
+                <a href="#footer" class="dropdown-link">
+                  <span class="dropdown-link-title">Docs</span>
+                  <span class="dropdown-link-desc">Learn how to use every part of Linear</span>
+                </a>
+                <a href="#footer" class="dropdown-link">
+                  <span class="dropdown-link-title">Developers</span>
+                  <span class="dropdown-link-desc">Build on the Linear API and developer platform</span>
+                </a>
+              </div>
+              <div class="dropdown-col">
+                <a href="#footer" class="dropdown-link"><span class="dropdown-link-title">Switch to Linear</span></a>
+                <a href="#footer" class="dropdown-link"><span class="dropdown-link-title">For enterprise</span></a>
+                <a href="#footer" class="dropdown-link"><span class="dropdown-link-title">For startups</span></a>
+                <a href="#footer" class="dropdown-link"><span class="dropdown-link-title">Download</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="#customers" class="nav-link" data-route="home">Customers</a>
+        <a href="#prefooter" class="nav-link" data-route="home">Pricing</a>
+        <a href="#changelog-section" class="nav-link" data-route="home">Now</a>
+        <a href="#prefooter" class="nav-link" data-route="home">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" class="btn-ghost" onclick="showToast('Log in modal ready')">Log in</button>
+        <button type="button" class="btn-invert" onclick="showToast('Workspace onboarding initialized')">Sign up</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================================================================== -->
+  <!-- PAGE 1: HOMEPAGE (01-index)                                           -->
+  <!-- ===================================================================== -->
+  <main id="page-home" class="page-view active">
+    <!-- Hero -->
+    <section class="hero-section">
+      <div class="inset-container">
+        <h1 class="hero-title">The product development<br>system for teams and agents</h1>
+        <div class="hero-subrow">
+          <p class="hero-subtitle">Purpose-built for planning and building products. Designed for the AI era.</p>
+          <a href="#changelog-section" class="loops-badge-link">
+            <span class="loops-pill-new">New</span>
+            <span style="font-weight:500;color:var(--text-primary);">Loops →</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Interactive App Frame Showcase -->
+      <div class="hero-stage">
+        <div class="hero-ambient-glow"></div>
+        <div class="app-frame">
+          <!-- Left App Sidebar -->
+          <aside class="app-sidebar">
+            <div class="sidebar-top">
+              <div class="workspace-btn">
+                <span class="workspace-icon">
+                  <svg width="11" height="11" viewBox="0 0 100 100" fill="#E2E4E6">
+                    <path d="M12.927 16.371a1.47 1.47 0 0 0 .061 2.027l68.595 68.594c.555.555 1.446.59 2.026.062 10.058-9.152 16.372-22.348 16.372-37.018C99.98 22.402 77.579 0 49.945 0c-14.67 0-27.866 6.313-37.018 16.371M4.353 29.39a1.47 1.47 0 0 0 .309 1.648L68.943 95.32c.434.434 1.09.562 1.648.308a50 50 0 0 0 4.335-2.227c.834-.482.962-1.62.28-2.3L8.882 24.773c-.68-.68-1.818-.553-2.3.281a50 50 0 0 0-2.228 4.334m-3.9 18.407a1.48 1.48 0 0 1-.432-1.14q.2-2.986.74-5.866c.215-1.15 1.62-1.55 2.448-.722l56.703 56.704c.828.827.429 2.233-.722 2.448a50 50 0 0 1-5.865.74 1.48 1.48 0 0 1-1.14-.433zm3.48 13.963c-1.033-1.033-2.7-.143-2.322 1.268C6.221 80.22 19.761 93.76 36.954 98.37c1.41.379 2.3-1.289 1.268-2.322z"></path>
+                  </svg>
+                </span>
+                <span>Linear</span>
+              </div>
+              <div class="sidebar-actions">
+                <button class="sidebar-icon-btn" title="Search" onclick="showToast('Quick search (Cmd+K)')">⌕</button>
+                <button class="sidebar-icon-btn" title="New issue" onclick="showToast('New issue composer opened')">✎</button>
+              </div>
+            </div>
+
+            <button class="sidebar-nav-item" data-hero-issue="pulse">⚡ Pulse</button>
+            <button class="sidebar-nav-item" data-hero-issue="inbox">📥 Inbox</button>
+            <button class="sidebar-nav-item" data-hero-issue="my-issues">◎ My issues</button>
+            <button class="sidebar-nav-item" data-hero-issue="reviews">⑂ Reviews</button>
+
+            <div class="sidebar-section-label">Workspace ▾</div>
+            <button class="sidebar-nav-item">◈ Initiatives</button>
+            <button class="sidebar-nav-item">⬡ Projects</button>
+            <button class="sidebar-nav-item">••• More</button>
+
+            <div class="sidebar-section-label">Favorites ▾</div>
+            <button class="sidebar-nav-item active" data-hero-fav="DRV-8852">
+              <span style="color:#f2c94c;">◐</span> Faster app launch
+            </button>
+            <button class="sidebar-nav-item" data-hero-fav="DRV-364">
+              <span style="color:#8a8f98;">➤</span> Agent tasks
+            </button>
+            <button class="sidebar-nav-item" data-hero-fav="INS-104">
+              <span style="color:#5e6ad2;">▮</span> Agent Insights
+            </button>
+            <button class="sidebar-nav-item" data-hero-fav="UI-209">
+              <span style="color:#f2994a;">✎</span> UI Refresh
+            </button>
+          </aside>
+
+          <!-- Main Issue Canvas -->
+          <div class="app-main">
+            <div class="app-topbar">
+              <div class="app-breadcrumb">
+                <span style="color:#f2c94c;">◐</span>
+                <span id="hero-issue-code" style="color:#8a8f98;font-family:var(--font-mono);font-size:12px;">DRV-8852</span>
+                <span id="hero-issue-crumb">Faster app launch</span>
+                <span style="color:#f2c94c;">★</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;color:#8a8f98;font-size:12px;">
+                <span><strong style="color:#e2e4e7;">1</strong> / 84</span>
+                <span>↑ ↓</span>
+              </div>
+            </div>
+
+            <div class="app-issue-layout">
+              <div class="app-issue-content">
+                <h3 class="issue-title-h3" id="hero-issue-title">Faster app launch</h3>
+                <p class="issue-desc-p" id="hero-issue-desc">
+                  Render UI before <code class="issue-code-inline">vehicle_state</code> sync when minimum required state is present, instead of blocking on full refresh during iOS startup.
+                </p>
+
+                <h4 class="activity-heading">Activity</h4>
+                <div class="activity-row">
+                  <span class="avatar-dot" style="background:#5e6ad2;">K</span>
+                  <span><strong>Linear</strong> created the issue via <strong>Slack</strong> on behalf of <strong>Karri</strong> · 2min ago</span>
+                </div>
+                <div class="activity-row">
+                  <span class="avatar-dot" style="background:#2e3238;">🏷</span>
+                  <span><strong>Triage Intelligence</strong> added the labels <strong>Performance</strong> and <strong>iOS</strong> · 2min ago</span>
+                </div>
+
+                <div class="comment-card">
+                  <div class="comment-entry">
+                    <div class="comment-meta">
+                      <span class="avatar-dot" style="background:#3b82f6;">K</span>
+                      <strong>karri</strong> · 4 min ago
+                    </div>
+                    <p class="comment-body">Right now we show a spinner forever, which makes it look like the car disappeared...</p>
+                  </div>
+                  <div class="comment-divider"></div>
+                  <div class="comment-entry">
+                    <div class="comment-meta">
+                      <span class="avatar-dot" style="background:#10b981;">J</span>
+                      <strong>jori</strong> · just now
+                    </div>
+                    <p class="comment-body"><span style="color:#8fa4ff;">@Linear</span> can you take a stab at this?</p>
+                  </div>
+                </div>
+
+                <div class="connected-pr-card">
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <span class="avatar-dot" style="background:#5e6ad2;">L</span>
+                    <span><strong style="color:#f7f8f8;">Linear</strong> connected by <strong style="color:#d0d6e0;">Jori</strong> · 2 min ago</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px;padding-top:6px;border-top:1px solid var(--border-hairline);">
+                    <span style="color:#27a644;">⑂</span>
+                    <span><strong style="color:#d0d6e0;">Changed 2 files</strong> · Draft PR awaiting your review · 2 min ago</span>
+                  </div>
+                </div>
+
+                <!-- Floating Linear Agent Panel -->
+                <div class="hero-agent-float">
+                  <div class="agent-float-header">
+                    <div class="agent-id">
+                      <span class="avatar-dot" style="background:#5e6ad2;">L</span>
+                      <span>Linear</span>
+                      <span class="model-tag">Opus 5.5</span>
+                    </div>
+                    <span style="color:#62666d;font-size:12px;">— ⤢ ✕</span>
+                  </div>
+                  <div class="agent-float-body" id="hero-agent-messages">
+                    <div class="agent-user-bubble">Fix the dimmed ride rows that never reset and open a PR</div>
+                    <div class="agent-context-line">
+                      <span style="color:#f2c94c;">◐</span>
+                      <strong style="color:#d0d6e0;">DRV-364</strong>
+                      <span>added to context</span>
+                    </div>
+                    <div style="font-size:11.5px;color:#8a8f98;">Worked for 10 sec ▸</div>
+                    <p style="color:#d0d6e0;line-height:1.45;">
+                      Pushed and opened a draft PR. Removed dimmedIds — isItemDimmed now checks waitingStatusById directly.
+                    </p>
+                    <div class="agent-pr-box">
+                      <div>
+                        <div style="font-size:11.5px;color:#d0d6e0;">
+                          Changed <strong>2 files</strong> <span style="color:#27a644;">+22</span> <span style="color:#eb5757;">−10</span>
+                        </div>
+                        <div style="font-size:11px;color:#8a8f98;margin-top:2px;">
+                          <span style="color:#f2c94c;">Draft</span> · Reset dimmed ride rows
+                        </div>
+                      </div>
+                      <button type="button" class="btn-ghost" style="font-size:11px;border:1px solid var(--border-subtle);" onclick="document.getElementById('pillar-build').scrollIntoView({behavior:'smooth'})">
+                        Preview
+                      </button>
+                    </div>
+                  </div>
+                  <form class="agent-reply-bar" id="hero-agent-form">
+                    <input type="text" class="agent-reply-input" id="hero-agent-input" placeholder="Reply to Linear agent…" />
+                    <button type="submit" style="color:#8fa4ff;font-size:12px;font-weight:600;padding:2px 6px;">↑</button>
+                  </form>
+                </div>
+              </div>
+
+              <!-- Right Properties Rail -->
+              <aside class="app-properties-rail">
+                <div>
+                  <div class="prop-group-title">Reviews</div>
+                  <div class="prop-row"><span style="color:#5e6ad2;">⑂</span> Revert</div>
+                </div>
+                <div>
+                  <div class="prop-group-title">Properties</div>
+                  <div class="prop-row"><span style="color:#f2c94c;">◐</span> In Progress</div>
+                  <div class="prop-row"><span style="color:#8a8f98;">▮▮▯</span> Medium</div>
+                  <div class="prop-row"><span class="avatar-dot" style="background:#3b82f6;">K</span> Karri</div>
+                  <div class="prop-row" style="padding-left:14px;"><span class="avatar-dot" style="background:#5e6ad2;">L</span> Linear</div>
+                  <div class="prop-row"><span style="color:#8a8f98;">↻</span> Cycle 144</div>
+                </div>
+                <div>
+                  <div class="prop-group-title">Labels</div>
+                  <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                    <span class="prop-label-pill"><span class="prop-dot" style="background:#27a644;"></span>Performance</span>
+                    <span class="prop-label-pill"><span class="prop-dot" style="background:#f2c94c;"></span>iOS</span>
+                  </div>
+                </div>
+                <div>
+                  <div class="prop-group-title">Releases</div>
+                  <div class="prop-row" style="font-size:12px;">
+                    <span style="color:#5e6ad2;">▲</span> Linear App <span style="color:#62666d;">1.6881 · Jun 25</span>
+                  </div>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Customer Logos Strip -->
+    <section class="logos-section">
+      <div class="logos-grid">
+        <span style="font-size:18px;font-weight:600;letter-spacing:-0.02em;color:var(--text-primary);">OpenAI</span>
+        <span style="font-size:18px;font-weight:700;letter-spacing:-0.03em;color:var(--text-primary);">▲ Vercel</span>
+        <span style="font-size:17px;font-weight:600;font-style:italic;color:var(--text-primary);">salesforce</span>
+        <span style="font-size:18px;font-weight:600;letter-spacing:-0.02em;color:var(--text-primary);">Figma</span>
+        <span style="font-size:16px;font-weight:700;letter-spacing:0.06em;color:var(--text-primary);">⬡ CURSOR</span>
+        <span style="font-size:18px;font-weight:700;letter-spacing:-0.03em;color:var(--text-primary);">coinbase</span>
+        <span style="font-size:18px;font-weight:600;letter-spacing:-0.02em;color:var(--text-primary);">ramp ↗</span>
+      </div>
+      <p class="logos-caption">Powering the companies building the future</p>
+    </section>
+
+    <!-- Product Philosophy Statement -->
+    <section class="statement-section">
+      <h2 class="statement-heading">
+        <strong>A new species of product tool.</strong> Purpose-built for modern teams with AI workflows at its core, Linear sets a new standard for planning and building products.
+      </h2>
+    </section>
+
+    <!-- 3-Column Benefits Cards -->
+    <section class="benefits-grid">
+      <div class="benefit-card">
+        <span class="benefit-fig">Fig 0.1</span>
+        <div class="benefit-illus">
+          <svg width="210" height="190" viewBox="0 0 265 262" fill="none">
+            <path fill="#0c0d10" stroke="#62666d" stroke-width="0.8" d="M250.355 179.668a3.43 3.43 0 0 1 1.895 3.067v16.302a3.43 3.43 0 0 1-1.895 3.067L136.85 258.855a10.29 10.29 0 0 1-9.2 0L14.145 202.103a3.43 3.43 0 0 1-1.895-3.067V182.735c0-1.299.734-2.486 1.895-3.067L129.183 122.149a6.86 6.86 0 0 1 6.134 0z"/>
+            <path fill="#0c0d10" stroke="#8a8f98" stroke-width="0.8" d="M250.355 147.065a3.43 3.43 0 0 1 1.895 3.067v16.302a3.43 3.43 0 0 1-1.895 3.067L136.85 226.252a10.29 10.29 0 0 1-9.2 0L14.145 169.5a3.43 3.43 0 0 1-1.895-3.067V150.132c0-1.299.734-2.486 1.895-3.067L129.183 89.546a6.86 6.86 0 0 1 6.134 0z"/>
+            <path fill="#0c0d10" stroke="#b4bcd0" stroke-width="0.8" d="M250.355 114.462a3.43 3.43 0 0 1 1.895 3.067v16.302a3.43 3.43 0 0 1-1.895 3.067L136.85 193.649a10.29 10.29 0 0 1-9.2 0L14.145 136.897a3.43 3.43 0 0 1-1.895-3.067V117.529c0-1.299.734-2.486 1.895-3.067L129.183 56.943a6.86 6.86 0 0 1 6.134 0z"/>
+            <path fill="#13151a" stroke="#e2e4e7" stroke-width="1" d="M250.355 66.493a3.43 3.43 0 0 1 1.895 3.067v16.302a3.43 3.43 0 0 1-1.895 3.067L136.85 145.681a10.29 10.29 0 0 1-9.2 0L14.145 88.929a3.43 3.43 0 0 1-1.895-3.067V69.56c0-1.299.734-2.486 1.895-3.067L129.183 8.974a6.86 6.86 0 0 1 6.134 0z"/>
+            <path stroke="#5e6ad2" stroke-width="1" d="m19.107 71.726 108.543 54.272a10.29 10.29 0 0 0 9.2 0l108.543-54.272"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="benefit-title">Purpose-built</h3>
+          <p class="benefit-desc">Linear is shaped by the practices and principles of world-class product teams.</p>
+        </div>
+      </div>
+
+      <div class="benefit-card">
+        <span class="benefit-fig">Fig 0.2</span>
+        <div class="benefit-illus">
+          <svg width="220" height="190" viewBox="0 0 304 281" fill="none">
+            <path fill="#0c0d10" stroke="#d0d6e0" stroke-width="0.8" d="M148.534 1.068a7.75 7.75 0 0 1 6.932 0l50.211 25.106a3.75 3.75 0 0 1 2.073 3.354v125.056c0 1.42-.803 2.718-2.073 3.354l-50.211 25.105a7.75 7.75 0 0 1-6.932 0l-50.21-25.105a3.75 3.75 0 0 1-2.074-3.354V29.528a3.75 3.75 0 0 1 2.073-3.354z"/>
+            <path fill="#12141a" stroke="#8a8f98" stroke-width="0.8" d="M84.534 53.069a7.75 7.75 0 0 1 6.932 0l50.211 25.105a3.75 3.75 0 0 1 2.073 3.353v73.057c0 1.42-.803 2.718-2.073 3.354l-50.211 25.105a7.75 7.75 0 0 1-6.932 0l-50.21-25.105a3.75 3.75 0 0 1-2.074-3.354V81.528a3.75 3.75 0 0 1 2.073-3.354z"/>
+            <path fill="#12141a" stroke="#8a8f98" stroke-width="0.8" d="M212.534 97.069a7.75 7.75 0 0 1 6.932 0l50.211 25.105a3.75 3.75 0 0 1 2.073 3.353v61.057c0 1.42-.803 2.718-2.073 3.354l-50.211 25.105a7.75 7.75 0 0 1-6.932 0l-50.211-25.105a3.75 3.75 0 0 1-2.073-3.354v-61.057a3.75 3.75 0 0 1 2.073-3.353z"/>
+            <path fill="#161922" stroke="#5e6ad2" stroke-width="1" d="M148.534 145.068a7.76 7.76 0 0 1 6.932 0l50.211 25.106a3.75 3.75 0 0 1 2.073 3.353v45.057c0 1.42-.803 2.718-2.073 3.354l-50.211 25.105a7.75 7.75 0 0 1-6.932 0l-50.21-25.105a3.75 3.75 0 0 1-2.074-3.354v-45.057a3.75 3.75 0 0 1 2.073-3.353z"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="benefit-title">Powered by agents</h3>
+          <p class="benefit-desc">Designed for workflows shared by humans and agents. From drafting PRDs to pushing PRs.</p>
+        </div>
+      </div>
+
+      <div class="benefit-card">
+        <span class="benefit-fig">Fig 0.3</span>
+        <div class="benefit-illus">
+          <svg width="210" height="190" viewBox="0 0 272 267" fill="none">
+            <path fill="#0c0d10" stroke="#62666d" stroke-width="0.7" d="M137.044 107.668a1.44 1.44 0 0 1 1.288 0l115.686 57.843a3.13 3.13 0 0 1 1.73 2.8v20.529l-119.462-57.843z"/>
+            <path fill="#0e1015" stroke="#8a8f98" stroke-width="0.8" d="M120.144 82.316a1.44 1.44 0 0 1 1.288 0l115.686 57.843a3.13 3.13 0 0 1 1.73 2.8v54.331l-119.462-57.843z"/>
+            <path fill="#14171f" stroke="#d0d6e0" stroke-width="0.9" d="M103.244 16.4a1.44 1.44 0 0 1 1.288 0l115.686 57.843a3.13 3.13 0 0 1 1.73 2.8v128.697l-119.462-57.843z"/>
+            <path fill="#111319" stroke="#8a8f98" stroke-width="0.8" d="M86.344 99.216a1.44 1.44 0 0 1 1.288 0l115.686 57.843a3.13 3.13 0 0 1 1.73 2.8v54.331l-119.462-57.843z"/>
+            <path fill="#0c0d10" stroke="#62666d" stroke-width="0.7" d="M60.994 152.459a1.44 1.44 0 0 1 1.288 0l115.686 57.843a3.13 3.13 0 0 1 1.73 2.8v13.768l-119.462-57.843z"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="benefit-title">Designed for speed</h3>
+          <p class="benefit-desc">Reduces noise and restores momentum to help teams ship with high velocity and focus.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- PILLAR 1: INTAKE AND INTEGRATIONS -->
+    <section class="pillar-section" id="pillar-intake">
+      <div class="pillar-header">
+        <h2 class="pillar-title">Intake<br>and integrations</h2>
+        <div>
+          <p class="pillar-desc">Automatically turn conversations and customer feedback into actionable issues that are instantly routed, labeled, and prioritized for the right team.</p>
+          <a href="#pillar-intake" class="arrow-link" onclick="openSidePanel('linear-agent');return false;">Learn more <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <div class="pillar-stage">
+        <div class="intake-stage-grid">
+          <div class="kanban-panel">
+            <!-- Backlog -->
+            <div class="kanban-col">
+              <div class="kanban-col-header">
+                <span>◌ Backlog <span style="color:var(--text-quaternary);">8</span></span>
+                <span style="color:var(--text-quaternary);">+ •••</span>
+              </div>
+              <div class="kanban-card">
+                <span class="kanban-card-id">ENG-2085</span>
+                <span class="kanban-card-title">Reduce UI flicker during autonomy…</span>
+              </div>
+              <div class="kanban-card">
+                <span class="kanban-card-id">ENG-2094</span>
+                <span class="kanban-card-title">Add buffering for autonomy event streams</span>
+              </div>
+              <div class="kanban-card">
+                <span class="kanban-card-id">ENG-2092</span>
+                <span class="kanban-card-title">Reduce startup delay caused by vehicle sync</span>
+              </div>
+              <div class="kanban-card">
+                <span class="kanban-card-id">ENG-2200</span>
+                <span class="kanban-card-title">Fix delayed route updates during rerouting</span>
+              </div>
+            </div>
+
+            <!-- Todo -->
+            <div class="kanban-col">
+              <div class="kanban-col-header">
+                <span>○ Todo <span style="color:var(--text-quaternary);">71</span></span>
+                <span style="color:var(--text-quaternary);">+ •••</span>
+              </div>
+              <div class="kanban-card">
+                <span class="kanban-card-id">ENG-926</span>
+                <span class="kanban-card-title">Remove UI inconsistencies</span>
+                <div class="kanban-card-tags">
+                  <span class="mini-tag"><span class="prop-dot" style="background:#eb5757;"></span>Bug</span>
+                  <span class="mini-tag"><span class="prop-dot" style="background:#4ea7fc;"></span>Design</span>
+                </div>
+              </div>
+              <div class="kanban-card">
+                <span class="kanban-card-id">ENG-2088</span>
+                <span class="kanban-card-title">TypeError: Cannot read properties</span>
+                <div class="kanban-card-tags">
+                  <span class="mini-tag"><span class="prop-dot" style="background:#eb5757;"></span>Bug</span>
+                </div>
+              </div>
+              <div class="kanban-card">
+                <span class="kanban-card-id">ENG-924</span>
+                <span class="kanban-card-title">Upgrade to Claude Opus 5.5</span>
+                <div class="kanban-card-tags">
+                  <span class="mini-tag"><span class="prop-dot" style="background:#26b5ce;"></span>AI</span>
+                </div>
+              </div>
+              <div class="kanban-card">
+                <span class="kanban-card-id">ENG-1882</span>
+                <span class="kanban-card-title">Optimize load times</span>
+                <div class="kanban-card-tags">
+                  <span class="mini-tag"><span class="prop-dot" style="background:#27a644;"></span>Performance</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- In Progress -->
+            <div class="kanban-col">
+              <div class="kanban-col-header">
+                <span><span style="color:#f2c94c;">◐</span> In Progress <span style="color:var(--text-quaternary);">3</span></span>
+                <span style="color:var(--text-quaternary);">+ •••</span>
+              </div>
+              <div class="kanban-card">
+                <span class="kanban-card-id">ENG-1487</span>
+                <span class="kanban-card-title">Remove contentData from GraphQL API</span>
+                <div class="kanban-card-tags">
+                  <span class="mini-tag">⑂ 61039</span>
+                </div>
+              </div>
+              <div class="kanban-card">
+                <span class="kanban-card-id">MKT-1028</span>
+                <span class="kanban-card-title">Launch page assets</span>
+                <div class="kanban-card-tags">
+                  <span class="mini-tag"><span class="prop-dot" style="background:#4ea7fc;"></span>Design</span>
+                </div>
+              </div>
+              <div class="kanban-card">
+                <span class="kanban-card-id">ENG-2187</span>
+                <span class="kanban-card-title">Prevent duplicate ride requests on poor…</span>
+                <div class="kanban-card-tags">
+                  <span class="mini-tag"><span class="prop-dot" style="background:#eb5757;"></span>Bug</span>
+                  <span class="mini-tag">⑂ 62048</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Done -->
+            <div class="kanban-col" id="intake-done-col">
+              <div class="kanban-col-header">
+                <span><span style="color:#5e6ad2;">●</span> Done <span style="color:var(--text-quaternary);">53</span></span>
+                <span style="color:var(--text-quaternary);">+ •••</span>
+              </div>
+              <div class="kanban-card">
+                <span class="kanban-card-id">ENG-2074</span>
+                <span class="kanban-card-title">Clean up deprecated APIs…</span>
+                <div class="kanban-card-tags">
+                  <span class="mini-tag"><span class="prop-dot" style="background:#4ea7fc;"></span>API</span>
+                </div>
+              </div>
+              <div class="kanban-card">
+                <span class="kanban-card-id">ENG-1912</span>
+                <span class="kanban-card-title">Reduce latency in autonomy st…</span>
+              </div>
+              <div class="kanban-card">
+                <span class="kanban-card-id">ENG-1951</span>
+                <span class="kanban-card-title">Reduce ETA fluctuations durin…</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating Slack Thread Card -->
+          <div class="slack-float-card">
+            <div class="slack-header">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span style="color:#e01e5a;font-weight:700;">#</span>
+                <strong style="color:#f7f8f8;">Thread</strong>
+                <span style="color:var(--text-tertiary);">#product</span>
+              </div>
+              <span style="color:var(--text-quaternary);">⋮</span>
+            </div>
+            <div class="slack-messages">
+              <div class="slack-msg">
+                <div class="slack-avatar" style="background:#2563eb;">L</div>
+                <div>
+                  <div style="font-size:12px;"><strong style="color:#f7f8f8;">lena</strong> <span style="color:#62666d;font-size:11px;">3:16 AM</span></div>
+                  <p style="color:#c4cad4;margin-top:2px;">Anyone else noticing the iOS app feels slow to open if you haven’t used it in a bit?</p>
+                </div>
+              </div>
+              <div class="slack-msg">
+                <div class="slack-avatar" style="background:#059669;">D</div>
+                <div>
+                  <div style="font-size:12px;"><strong style="color:#f7f8f8;">didier</strong> <span style="color:#62666d;font-size:11px;">3:16 AM</span></div>
+                  <p style="color:#c4cad4;margin-top:2px;">Yea, we’re still blocking initial render on a full vehicle_state sync every time…</p>
+                </div>
+              </div>
+              <div class="slack-msg">
+                <div class="slack-avatar" style="background:#7c3aed;">A</div>
+                <div>
+                  <div style="font-size:12px;"><strong style="color:#f7f8f8;">andreas</strong> <span style="color:#62666d;font-size:11px;">3:16 AM</span></div>
+                  <p style="color:#c4cad4;margin-top:2px;">Feels like we could render sooner and load the rest in the background. Probably also worth tracking startup timing!</p>
+                </div>
+              </div>
+            </div>
+            <div class="slack-composer">
+              <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:#e2e4e7;">
+                <span class="slack-mention">@Linear</span>
+                <span>create issues and assign to me</span>
+              </div>
+              <button type="button" class="slack-send-btn" id="slack-create-issue-btn">Create ↵</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pillar-footer">
+        <span class="pillar-footer-label">Features</span>
+        <div class="feature-pills-grid">
+          <button type="button" class="feature-pill-btn" onclick="openSidePanel('linear-agent')"><span>Linear Agent</span><span class="feature-pill-plus">+</span></button>
+          <button type="button" class="feature-pill-btn" onclick="openSidePanel('customer-requests')"><span>Customer Requests</span><span class="feature-pill-plus">+</span></button>
+          <button type="button" class="feature-pill-btn" onclick="openSidePanel('triage')"><span>Triage</span><span class="feature-pill-plus">+</span></button>
+          <button type="button" class="feature-pill-btn" onclick="openSidePanel('linear-asks')"><span>Linear Asks</span><span class="feature-pill-plus">+</span></button>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- PILLAR 2: PLANNING AND MONITORING -->
+    <section class="pillar-section" id="pillar-plan">
+      <div class="pillar-header">
+        <h2 class="pillar-title">Planning<br>and monitoring</h2>
+        <div>
+          <p class="pillar-desc">Plan and navigate from idea to launch. Align your team with product initiatives, strategic roadmaps, and clear, up-to-date PRDs.</p>
+          <a href="#pillar-plan" class="arrow-link" onclick="openSidePanel('projects');return false;">Learn more <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <div class="pillar-stage">
+        <div class="plan-stage-grid">
+          <div class="roadmap-panel">
+            <div class="roadmap-months">
+              <span>MAR · 2 9 16 23</span>
+              <span>APR · 6 13 20 27</span>
+              <span>MAY · 4 11 18 25</span>
+              <span>JUN · 1 8 15 22</span>
+              <span>JUL · 6 13 20 27</span>
+              <span>AUG · 3 10 17 24</span>
+              <span>SEP · 7 14 21 28</span>
+            </div>
+            <div class="roadmap-tracks">
+              <div class="roadmap-track">
+                <div class="roadmap-bar" style="left:28%;width:30%;">
+                  <span><span style="color:#26b5ce;">✎</span> UI Refresh</span>
+                  <span style="font-size:11px;color:#8a8f98;">◆ Core screens &nbsp; ◇ Polish</span>
+                </div>
+                <div class="roadmap-tail" style="left:58%;width:12%;border-color:rgba(235,87,87,0.4);"></div>
+              </div>
+              <div class="roadmap-track">
+                <div class="roadmap-bar" style="left:36%;width:38%;">
+                  <span><span style="color:#27a644;">💵</span> Split fares</span>
+                  <span style="font-size:11px;color:#8a8f98;">◆ Internal &nbsp; ◇ Public Beta</span>
+                </div>
+                <div class="roadmap-tail" style="left:74%;width:16%;"></div>
+              </div>
+              <div class="roadmap-track">
+                <div class="roadmap-bar" style="left:52%;width:34%;">
+                  <span><span style="color:#5e6ad2;">🤖</span> Autonomy status clarity</span>
+                  <span style="font-size:11px;color:#8a8f98;">◇ Alpha</span>
+                </div>
+              </div>
+              <div class="roadmap-track">
+                <div class="roadmap-bar" style="left:16%;width:42%;">
+                  <span><span style="color:#f2994a;">🚗</span> Autonomy telemetry reliability</span>
+                  <span style="font-size:11px;color:#8a8f98;">◆ Beta &nbsp; ◆ GA</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cycle Time Scatter Plot Card -->
+          <div class="insights-float-card">
+            <div class="insights-card-header">
+              <span>Cycle time by agent</span>
+              <span style="font-size:11px;color:var(--text-quaternary);font-family:var(--font-mono);">P90 · P75 · P50</span>
+            </div>
+            <svg viewBox="0 0 440 160" width="100%" height="150" fill="none">
+              <line x1="0" y1="30" x2="440" y2="30" stroke="rgba(255,255,255,0.06)" />
+              <line x1="0" y1="65" x2="440" y2="65" stroke="rgba(255,255,255,0.06)" />
+              <line x1="0" y1="100" x2="440" y2="100" stroke="rgba(255,255,255,0.06)" />
+              <line x1="0" y1="135" x2="440" y2="135" stroke="rgba(255,255,255,0.12)" />
+              <!-- Percentile Trend Curves -->
+              <path d="M0 54 L80 54 L105 42 L175 42 L195 60 L265 60 L285 52 L355 52 L375 44 L440 44" stroke="#5e6ad2" stroke-width="1.5" />
+              <path d="M0 82 L80 82 L105 92 L175 92 L195 85 L265 85 L285 102 L355 102 L375 94 L440 94" stroke="#26b5ce" stroke-width="1.5" />
+              <path d="M0 105 L80 105 L105 118 L175 118 L195 128 L265 128 L285 112 L355 112 L375 106 L440 106" stroke="#4cb782" stroke-width="1.5" />
+              <!-- Data Scatter Clusters -->
+              <g fill="#5e6ad2" opacity="0.75">
+                <circle cx="42" cy="96" r="2.5"/><circle cx="48" cy="112" r="2.5"/><circle cx="38" cy="84" r="2.5"/><circle cx="52" cy="74" r="2.5"/><circle cx="44" cy="122" r="2.5"/>
+                <circle cx="132" cy="108" r="2.5"/><circle cx="138" cy="92" r="2.5"/><circle cx="126" cy="118" r="2.5"/><circle cx="135" cy="44" r="2.5"/><circle cx="142" cy="102" r="2.5"/>
+                <circle cx="222" cy="82" r="2.5"/><circle cx="228" cy="64" r="2.5"/><circle cx="216" cy="95" r="2.5"/><circle cx="225" cy="48" r="2.5"/><circle cx="232" cy="110" r="2.5"/>
+                <circle cx="312" cy="94" r="2.5"/><circle cx="318" cy="56" r="2.5"/><circle cx="308" cy="108" r="2.5"/><circle cx="315" cy="46" r="2.5"/><circle cx="322" cy="88" r="2.5"/>
+                <circle cx="398" cy="42" r="2.5"/><circle cx="404" cy="58" r="2.5"/><circle cx="392" cy="34" r="2.5"/><circle cx="401" cy="102" r="2.5"/><circle cx="408" cy="114" r="2.5"/>
+              </g>
+            </svg>
+            <div style="display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:10px;color:var(--text-quaternary);margin-top:4px;">
+              <span>Oct 2025</span>
+              <span>Nov 2025</span>
+              <span>Dec 2025</span>
+              <span>Jan 2026</span>
+              <span>Feb 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pillar-footer">
+        <span class="pillar-footer-label">Features</span>
+        <div class="feature-pills-grid">
+          <button type="button" class="feature-pill-btn" onclick="openSidePanel('projects')"><span>Projects</span><span class="feature-pill-plus">+</span></button>
+          <button type="button" class="feature-pill-btn" onclick="openSidePanel('documents')"><span>Documents</span><span class="feature-pill-plus">+</span></button>
+          <button type="button" class="feature-pill-btn" onclick="openSidePanel('pulse')"><span>Pulse</span><span class="feature-pill-plus">+</span></button>
+          <button type="button" class="feature-pill-btn" onclick="openSidePanel('initiatives')"><span>Initiatives</span><span class="feature-pill-plus">+</span></button>
+          <button type="button" class="feature-pill-btn" onclick="openSidePanel('visual-planning')"><span>Visual planning</span><span class="feature-pill-plus">+</span></button>
+          <button type="button" class="feature-pill-btn" onclick="openSidePanel('insights')"><span>Insights</span><span class="feature-pill-plus">+</span></button>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- PILLAR 3: AI AND AUTOMATIONS -->
+    <section class="pillar-section" id="pillar-ai">
+      <div class="pillar-header">
+        <h2 class="pillar-title">AI and<br>automations</h2>
+        <div>
+          <p class="pillar-desc">Build and deploy AI agents that work alongside you as teammates. Work on complex tasks together or delegate entire issues end-to-end.</p>
+          <a href="#pillar-ai" class="arrow-link" onclick="openSidePanel('cloud-coding-agent');return false;">Learn more <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <div class="pillar-stage">
+        <div class="agents-track">
+          <!-- Agent Card 1: Linear -->
+          <div class="agent-window">
+            <div class="agent-float-header">
+              <div class="agent-id">
+                <span class="avatar-dot" style="background:#5e6ad2;">L</span>
+                <span>Linear</span>
+                <span class="model-tag">Opus 5.5</span>
+              </div>
+              <span style="color:#62666d;font-size:12px;">— ⤢ ✕</span>
+            </div>
+            <div class="agent-window-body">
+              <div class="agent-user-bubble">what are the three most important customer requests around permissions? add them to the Access Controls project</div>
+              <div style="font-size:11.5px;color:#8a8f98;">Worked for 8 sec ▸</div>
+              <p style="font-size:12.5px;color:#d0d6e0;">Three issues ranked by customer impact:</p>
+              <div class="agent-issue-list">
+                <div class="agent-issue-item"><span style="color:#f2994a;">▲</span><span style="color:#62666d;font-family:var(--font-mono);">ENG-2298</span><span>Add granular project permissions</span></div>
+                <div class="agent-issue-item"><span style="color:#8a8f98;">▮▮▯</span><span style="color:#62666d;font-family:var(--font-mono);">ENG-2647</span><span>Let guests access multiple teams</span></div>
+                <div class="agent-issue-item"><span style="color:#8a8f98;">▮▮▮</span><span style="color:#62666d;font-family:var(--font-mono);">ENG-2352</span><span>Create custom roles with scoped access</span></div>
+              </div>
+              <div style="font-size:12px;color:#8a8f98;">
+                I’ve added them to <span class="mini-tag" style="color:#f2c94c;">⬡ Access Controls</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Agent Card 2: Cursor (Highlighted Center) -->
+          <div class="agent-window featured">
+            <div class="agent-float-header">
+              <div class="agent-id">
+                <span class="avatar-dot" style="background:#272a34;">⬡</span>
+                <span>Cursor</span>
+              </div>
+              <span style="color:#62666d;font-size:12px;">— ⤢ ✕</span>
+            </div>
+            <div class="agent-window-body">
+              <div class="agent-user-bubble">add retry handling for failed image uploads described in this issue</div>
+              <div class="agent-context-line">
+                <span style="color:#f2c94c;">◐</span>
+                <strong style="color:#d0d6e0;">ENG-2844</strong>
+                <span>added to context</span>
+              </div>
+              <div style="margin-top:8px;">
+                <span class="thinking-shimmer">Thinking…</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Agent Card 3: ChatPRD -->
+          <div class="agent-window">
+            <div class="agent-float-header">
+              <div class="agent-id">
+                <span class="avatar-dot" style="background:#db2777;">C</span>
+                <span>ChatPRD</span>
+              </div>
+              <span style="color:#62666d;font-size:12px;">— ⤢ ✕</span>
+            </div>
+            <div class="agent-window-body">
+              <div class="agent-user-bubble">review this issue, draft complete offline mode requirements, and break the work into sub-issues</div>
+              <div class="agent-context-line">
+                <span style="color:#f2c94c;">◐</span>
+                <strong style="color:#d0d6e0;">ENG-2521</strong>
+                <span>added to context</span>
+              </div>
+              <div style="font-size:11.5px;color:#8a8f98;">Worked for 1 min ▸</div>
+              <p style="font-size:12.5px;color:#d0d6e0;">Updated the issue with requirements, open product decisions, and acceptance criteria.</p>
+              <div class="agent-issue-list">
+                <div class="agent-issue-item"><span style="color:#8a8f98;">▮▮▮</span><span style="color:#62666d;font-family:var(--font-mono);">ENG-2920</span><span>Define offline mode requirements</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pillar-footer">
+        <span class="pillar-footer-label">Features</span>
+        <div class="feature-pills-grid">
+          <button type="button" class="feature-pill-btn" onclick="openSidePanel('linear-agent')"><span>Linear Agent</span><span class="feature-pill-plus">+</span></button>
+          <button type="button" class="feature-pill-btn" onclick="openSidePanel('cloud-coding-agent')"><span>Cloud Coding Agent</span><span class="feature-pill-plus">+</span></button>
+          <button type="button" class="feature-pill-btn" onclick="openSidePanel('triage')"><span>Triage</span><span class="feature-pill-plus">+</span></button>
+          <button type="button" class="feature-pill-btn" onclick="openSidePanel('linear-mcp')"><span>Linear MCP</span><span class="feature-pill-plus">+</span></button>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- PILLAR 4: BUILD, REVIEW, AND SHIP -->
+    <section class="pillar-section" id="pillar-build">
+      <div class="pillar-header">
+        <h2 class="pillar-title">Build, review,<br>and ship</h2>
+        <div>
+          <p class="pillar-desc">Streamline code reviews with clear diffs, better context, and fewer back-and-forth comments. Keep PRs moving without sacrificing quality.</p>
+          <a href="#pillar-build" class="arrow-link" onclick="openSidePanel('diffs');return false;">Learn more <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <div class="pillar-stage">
+        <div class="build-stage-wrapper">
+          <div class="build-list-panel">
+            <div class="build-group-header">
+              <span style="color:#27a644;">◔</span> In Review <span style="color:var(--text-quaternary);">3</span>
+            </div>
+            <button type="button" class="build-issue-row" data-diff-idx="1">
+              <span style="display:flex;align-items:center;gap:10px;">
+                <span style="color:#8a8f98;">▮▮▯</span>
+                <span style="font-family:var(--font-mono);color:#62666d;">ENG-2498</span>
+                <span style="color:#27a644;">◔</span>
+                <span style="color:#e2e4e7;">Replace isFullySynced with a sync status</span>
+              </span>
+              <span style="display:flex;align-items:center;gap:8px;">
+                <span class="mini-tag" style="color:#4cb782;">⑂ #54910</span>
+                <span class="mini-tag"><span class="prop-dot" style="background:#f2c94c;"></span>iOS</span>
+                <span style="color:#62666d;font-size:11.5px;">Oct 9</span>
+              </span>
+            </button>
+            <button type="button" class="build-issue-row" data-diff-idx="2">
+              <span style="display:flex;align-items:center;gap:10px;">
+                <span style="color:#8a8f98;">▮▯▯</span>
+                <span style="font-family:var(--font-mono);color:#62666d;">ENG-2380</span>
+                <span style="color:#27a644;">◔</span>
+                <span style="color:#e2e4e7;">Show a stale data banner while syncing</span>
+              </span>
+              <span style="display:flex;align-items:center;gap:8px;">
+                <span class="mini-tag" style="color:#4cb782;">⑂ #55167</span>
+                <span class="mini-tag"><span class="prop-dot" style="background:#5e6ad2;"></span>Reliability</span>
+                <span style="color:#62666d;font-size:11.5px;">Oct 9</span>
+              </span>
+            </button>
+            <button type="button" class="build-issue-row selected-row" data-diff-idx="0">
+              <span style="display:flex;align-items:center;gap:10px;">
+                <span style="color:#62666d;">---</span>
+                <span style="font-family:var(--font-mono);color:#62666d;">ENG-2039</span>
+                <span style="color:#27a644;">◔</span>
+                <span style="color:#e2e4e7;">Pass sync status to the dashboard</span>
+              </span>
+              <span style="display:flex;align-items:center;gap:8px;">
+                <span class="mini-tag" style="color:#4cb782;">⑂ #55209</span>
+                <span class="mini-tag"><span class="prop-dot" style="background:#eb5757;"></span>Bug</span>
+                <span class="mini-tag"><span class="prop-dot" style="background:#5e6ad2;"></span>Reliability</span>
+                <span style="color:#62666d;font-size:11.5px;">Oct 8</span>
+              </span>
+            </button>
+
+            <div class="build-group-header">
+              <span style="color:#f2c94c;">◐</span> In Progress <span style="color:var(--text-quaternary);">4</span>
+            </div>
+            <div class="build-issue-row">
+              <span style="display:flex;align-items:center;gap:10px;">
+                <span style="color:#8a8f98;">▮▮▯</span>
+                <span style="font-family:var(--font-mono);color:#62666d;">ENG-2076</span>
+                <span style="color:#f2c94c;">◐</span>
+                <span style="color:#e2e4e7;">Reduce ETA jitter</span>
+              </span>
+              <span style="display:flex;align-items:center;gap:8px;">
+                <span class="mini-tag">⑂ #55423</span>
+                <span class="mini-tag"><span class="prop-dot" style="background:#27a644;"></span>Performance</span>
+                <span class="thinking-shimmer" style="font-size:11px;">Working…</span>
+              </span>
+            </div>
+            <div class="build-issue-row">
+              <span style="display:flex;align-items:center;gap:10px;">
+                <span style="color:#8a8f98;">▮▮▯</span>
+                <span style="font-family:var(--font-mono);color:#62666d;">ENG-2108</span>
+                <span style="color:#f2c94c;">◐</span>
+                <span style="color:#e2e4e7;">Handle GPS dropouts gracefully</span>
+              </span>
+              <span style="display:flex;align-items:center;gap:8px;">
+                <span class="mini-tag">⑂ #55409</span>
+                <span class="mini-tag"><span class="prop-dot" style="background:#ffebc6;"></span>Maps</span>
+                <span class="thinking-shimmer" style="font-size:11px;">Working…</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Interactive Side-by-Side Code Diff Panel -->
+          <div class="diff-overlay-panel" id="diff-panel-box">
+            <div class="diff-header">
+              <div class="diff-filepath">
+                <span style="color:#8a8f98;">📄</span>
+                <span id="diff-file-title">kinetic-ios/src/screens/Home/HomeScreen.tsx</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span style="font-size:11px;color:var(--text-quaternary);">Click an In Review row above to switch diff</span>
+                <select id="diff-theme-select" style="background:#1c1f26;color:#d0d6e0;border:1px solid var(--border-subtle);border-radius:6px;padding:3px 8px;font-size:11.5px;">
+                  <option value="linear">Linear</option>
+                  <option value="nord">Nord</option>
+                  <option value="monokai">Monokai</option>
+                </select>
+              </div>
+            </div>
+            <div class="diff-columns">
+              <div class="diff-col" id="diff-old-col"></div>
+              <div class="diff-col" id="diff-new-col"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pillar-footer">
+        <span class="pillar-footer-label">Features</span>
+        <div class="feature-pills-grid">
+          <button type="button" class="feature-pill-btn" onclick="openSidePanel('issues')"><span>Issues</span><span class="feature-pill-plus">+</span></button>
+          <button type="button" class="feature-pill-btn" onclick="openSidePanel('git-automations')"><span>Git automations</span><span class="feature-pill-plus">+</span></button>
+          <button type="button" class="feature-pill-btn" onclick="openSidePanel('guided-reviews')"><span>Guided reviews</span><span class="feature-pill-plus">+</span></button>
+          <button type="button" class="feature-pill-btn" onclick="openSidePanel('cycles')"><span>Cycles</span><span class="feature-pill-plus">+</span></button>
+          <button type="button" class="feature-pill-btn" onclick="openSidePanel('diffs')"><span>Diffs</span><span class="feature-pill-plus">+</span></button>
+          <button type="button" class="feature-pill-btn" onclick="openSidePanel('releases')"><span>Releases</span><span class="feature-pill-plus">+</span></button>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- CHANGELOG SECTION -->
+    <section class="changelog-section" id="changelog-section">
+      <h2 class="changelog-heading">Changelog</h2>
+      <div class="changelog-grid">
+        <a href="#changelog-section" class="changelog-card first" onclick="showToast('Viewing: Bring your own key (BYOK)');return false;">
+          <h3 class="changelog-card-title">Bring your own key (BYOK)</h3>
+          <p class="changelog-card-excerpt">You can now bring your own key to Linear’s cloud coding agent and use your existing provider credits and negotiated rates.</p>
+          <span class="changelog-card-date">Nov 12, 2026</span>
+        </a>
+
+        <a href="#mobile-diffs" class="changelog-card" data-route="mobile-diffs">
+          <h3 class="changelog-card-title">Mobile Diffs</h3>
+          <p class="changelog-card-excerpt">Diffs, Linear’s fast and focused review experience, is now available for iOS and Android.</p>
+          <span class="changelog-card-date">Nov 4, 2026</span>
+        </a>
+
+        <a href="#changelog-section" class="changelog-card" onclick="showToast('Viewing: Slack and GitHub loop triggers');return false;">
+          <h3 class="changelog-card-title">Slack and GitHub loop triggers</h3>
+          <p class="changelog-card-excerpt">Loops automate product work by responding to changes in Linear and connected tools. You can now trigger them from Slack and GitHub, share them as templates, and customize their reasoning levels.</p>
+          <span class="changelog-card-date">Oct 22, 2026</span>
+        </a>
+
+        <a href="#changelog-section" class="changelog-card" onclick="showToast('Viewing: Stacked pull requests');return false;">
+          <h3 class="changelog-card-title">Stacked pull requests</h3>
+          <p class="changelog-card-excerpt">Stacked pull requests are now displayed in Linear Diffs. Move through a stack and see review, CI, and merge status at a glance. Related PRs are grouped into a single collapsible row in Reviews, alongside their issue and project context.</p>
+          <span class="changelog-card-date">Oct 8, 2026</span>
+        </a>
+      </div>
+
+      <div style="margin-top:44px;">
+        <a href="#mobile-diffs" class="arrow-link" data-route="mobile-diffs">View all <span class="arrow">→</span></a>
+      </div>
+    </section>
+
+    <!-- CUSTOMER QUOTES -->
+    <section class="quotes-section" id="customers">
+      <div class="quotes-grid">
+        <a href="#customers" class="quote-card openai" onclick="showToast('Customer story: OpenAI');return false;">
+          <blockquote class="quote-text">“You’ll probably build a better product, just because of the craft that using Linear infuses on your brain.”</blockquote>
+          <div class="quote-author">
+            <svg width="36" height="36" viewBox="0 0 56 56" fill="#08090a">
+              <path d="M43.446 29.783v.015c-.004 3.273-2.207 6.483-5.633 7.37a7.654 7.654 0 0 1-7.493 6.123h-.015a7.672 7.672 0 0 1-5.35-2.204 7.28 7.28 0 0 1-2.418.398c-4.102 0-7.653-3.276-7.653-7.654 0-.642.092-1.285.245-1.928-1.653-1.5-2.572-3.581-2.572-5.724 0-3.276 2.204-6.49 5.633-7.378a7.654 7.654 0 0 1 7.5-6.122c2.082 0 3.98.857 5.357 2.204a7.28 7.28 0 0 1 2.419-.398c4.102 0 7.653 3.275 7.653 7.653 0 .642-.092 1.285-.245 1.928 1.651 1.499 2.57 3.577 2.572 5.717Z"/>
+            </svg>
+            <div>
+              <div class="quote-author-name">Gabriel Peal</div>
+              <div class="quote-author-role">Staff Software Engineer, OpenAI</div>
+            </div>
+          </div>
+        </a>
+
+        <a href="#customers" class="quote-card ramp" onclick="showToast('Customer story: Ramp');return false;">
+          <blockquote class="quote-text">“Our speed is intense and Linear helps us be action biased.”</blockquote>
+          <div class="quote-author">
+            <svg width="36" height="36" viewBox="0 0 56 56" fill="#08090a">
+              <path d="M43 40.8774V40.9922L26.6608 40.998V40.8774C29.017 39.5187 30.6433 38.1346 32.1066 36.6884H38.8158L43 40.8774ZM38.9515 19.1483L34.81 15H34.6896C34.6896 15 34.7595 22.731 27.806 29.7621C21.0017 36.6436 13 36.6591 13 36.6591V36.7797L17.2192 41C17.2192 41 25.1044 41.0796 32.0698 34.1029C39.0098 27.1495 38.9515 19.1483 38.9515 19.1483Z"/>
+            </svg>
+            <div>
+              <div class="quote-author-name">Nik Koblov</div>
+              <div class="quote-author-role">Head of Engineering, Ramp</div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="quotes-footer">
+        <p>Linear powers over <strong>50,000</strong> product teams. From ambitious startups to major enterprises.</p>
+        <a href="#customers" class="arrow-link" style="margin-top:0;" onclick="showToast('Opening customer directory');return false;">Customer stories <span class="arrow">→</span></a>
+      </div>
+    </section>
+
+    <!-- PREFOOTER CTA -->
+    <section class="prefooter-cta" id="prefooter">
+      <h2 class="prefooter-heading">Built for the future. Available today.</h2>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+        <button type="button" class="btn-invert btn-lg" onclick="showToast('Starting your Linear workspace')">Get started</button>
+        <button type="button" class="btn-secondary" onclick="showToast('Contacting Linear enterprise sales')">Contact sales</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- PAGE 2: CHANGELOG DETAIL – MOBILE DIFFS (04-2026-11-04-mobile-diffs)   -->
+  <!-- ===================================================================== -->
+  <main id="page-mobile-diffs" class="page-view">
+    <div class="changelog-detail-wrapper">
+      <!-- Left Back Link Column -->
+      <div>
+        <a href="#home" class="back-link" data-route="home">
+          <span>‹</span>
+          <span>Changelog</span>
+        </a>
+      </div>
+
+      <!-- Center Editorial Column -->
+      <article>
+        <div class="entry-header-bar">
+          <span class="entry-date">November 5, 2026</span>
+          <button type="button" class="share-btn" id="share-entry-btn">
+            <span>🔗</span>
+            <span>Share</span>
+          </button>
+        </div>
+
+        <h1 class="entry-title">Mobile Diffs</h1>
+
+        <!-- Multi-layered iOS & Android Mobile Diffs Showcase -->
+        <div class="mobile-diffs-showcase" aria-label="Code diff displayed on Linear iOS app">
+          <div class="phone-mockup">
+            <div class="phone-notch"></div>
+            <div class="phone-nav">
+              <span>‹ Reviews</span>
+              <strong style="color:#f7f8f8;">#54910</strong>
+              <span style="color:#27a644;">Approved</span>
+            </div>
+            <div style="font-size:11.5px;font-weight:600;color:#f7f8f8;">Replace isFullySynced with syncStatus</div>
+            <div style="display:flex;gap:6px;">
+              <span class="mini-tag" style="color:#8fa4ff;">Guide 3/3</span>
+              <span class="mini-tag" style="color:#4cb782;">+22 −10</span>
+            </div>
+            <div class="phone-diff-card">
+              <div style="color:#62666d;margin-bottom:4px;">src/screens/HomeScreen.tsx</div>
+              <div class="phone-diff-del">- const { isFullySynced } = useVehicle()</div>
+              <div class="phone-diff-add">+ const { syncStatus } = useVehicle()</div>
+              <div style="color:#d0d6e0;margin-top:4px;">  if (syncStatus === SyncStatus.PENDING)</div>
+              <div class="phone-diff-add">+   return &lt;StaleBanner /&gt;</div>
+            </div>
+            <div style="margin-top:auto;padding-top:8px;display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:10.5px;color:#8a8f98;">Preview ↗</span>
+              <span style="background:#27a644;color:#fff;font-size:10.5px;font-weight:600;padding:4px 10px;border-radius:6px;">Merge PR</span>
+            </div>
+          </div>
+
+          <div class="phone-mockup" style="transform:translateY(18px);">
+            <div class="phone-notch"></div>
+            <div class="phone-nav">
+              <span>Guided Review</span>
+              <span style="color:#8fa4ff;">2 of 3</span>
+            </div>
+            <div style="font-size:11.5px;font-weight:600;color:#f7f8f8;">State Machine &amp; Enum Migration</div>
+            <p style="font-size:11px;color:#8a8f98;line-height:1.45;">
+              Replaces boolean loading flag with explicit <code style="color:#d0d6e0;">SyncStatus</code> enum so cached telemetry renders immediately.
+            </p>
+            <div class="phone-diff-card">
+              <div class="phone-diff-add">+ export enum SyncStatus {</div>
+              <div class="phone-diff-add">+   PENDING = 'pending',</div>
+              <div class="phone-diff-add">+   SYNCED = 'synced'</div>
+              <div class="phone-diff-add">+ }</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="prose-body">
+          <p>Diffs, Linear’s fast and focused review experience, is now available for iOS and Android.</p>
+          <p>Here’s what you can do from your phone:</p>
+          <ul>
+            <li>Understand changes with Guided Reviews</li>
+            <li>Start on mobile, continue on desktop</li>
+            <li>See what needs review in your inbox</li>
+            <li>View preview links</li>
+            <li>Work with review and cloud coding agents</li>
+            <li>Merge approved changes</li>
+          </ul>
+          <p>Try it from the Reviews tab in your Linear mobile app, or learn more in our <a href="#mobile-diffs" onclick="showToast('Opening Mobile Diffs announcement post');return false;">blog post</a>.</p>
+          <p>If you’re not yet reviewing in Linear, get started <a href="#mobile-diffs" onclick="showToast('Opening Linear Reviews setup guide');return false;">here.</a></p>
+        </div>
+
+        <!-- 4 Collapsible Release Note Sections (100% Full Lists) -->
+        <div class="collapsible-list" id="changelog-collapsibles"></div>
+      </article>
+
+      <div></div>
+    </div>
+  </main>
+
+  <!-- Feature Details Slide-Over Drawer -->
+  <div class="side-panel-backdrop" id="side-panel-backdrop">
+    <div class="side-panel-drawer" role="dialog" aria-modal="true" aria-labelledby="side-panel-title">
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <span id="side-panel-sec" style="font-family:var(--font-mono);font-size:11px;color:var(--text-quaternary);">1.1 · FEATURE</span>
+        <button type="button" class="btn-ghost" onclick="closeSidePanel()">✕ Close</button>
+      </div>
+      <h2 id="side-panel-title" style="font-size:24px;font-weight:500;letter-spacing:-0.02em;">Linear Agent</h2>
+      <div id="side-panel-body" style="font-size:14px;line-height:1.65;color:var(--text-secondary);display:flex;flex-direction:column;gap:16px;"></div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-banner" id="toast-banner" role="status" aria-live="polite"></div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer" id="footer">
+    <div class="footer-inner">
+      <div>
+        <a href="#home" class="logo-link" data-route="home" aria-label="Linear Logo">
+          <svg width="20" height="20" viewBox="0 0 100 100" fill="currentColor">
+            <path d="M12.927 16.371a1.47 1.47 0 0 0 .061 2.027l68.595 68.594c.555.555 1.446.59 2.026.062 10.058-9.152 16.372-22.348 16.372-37.018C99.98 22.402 77.579 0 49.945 0c-14.67 0-27.866 6.313-37.018 16.371M4.353 29.39a1.47 1.47 0 0 0 .309 1.648L68.943 95.32c.434.434 1.09.562 1.648.308a50 50 0 0 0 4.335-2.227c.834-.482.962-1.62.28-2.3L8.882 24.773c-.68-.68-1.818-.553-2.3.281a50 50 0 0 0-2.228 4.334m-3.9 18.407a1.48 1.48 0 0 1-.432-1.14q.2-2.986.74-5.866c.215-1.15 1.62-1.55 2.448-.722l56.703 56.704c.828.827.429 2.233-.722 2.448a50 50 0 0 1-5.865.74 1.48 1.48 0 0 1-1.14-.433zm3.48 13.963c-1.033-1.033-2.7-.143-2.322 1.268C6.221 80.22 19.761 93.76 36.954 98.37c1.41.379 2.3-1.289 1.268-2.322z"></path>
+          </svg>
+        </a>
+      </div>
+
+      <div>
+        <h3 class="footer-col-title">Product</h3>
+        <ul class="footer-list">
+          <li><a href="#pillar-intake" class="footer-link" data-route="home">Intake</a></li>
+          <li><a href="#pillar-plan" class="footer-link" data-route="home">Plan</a></li>
+          <li><a href="#pillar-ai" class="footer-link" data-route="home">AI</a></li>
+          <li><a href="#pillar-build" class="footer-link" data-route="home">Build</a></li>
+          <li><a href="#prefooter" class="footer-link" data-route="home">Pricing</a></li>
+          <li><a href="#footer" class="footer-link">Security</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="footer-col-title">Features</h3>
+        <ul class="footer-list">
+          <li><a href="#pillar-intake" class="footer-link" onclick="openSidePanel('linear-asks');return false;">Asks</a></li>
+          <li><a href="#pillar-ai" class="footer-link" onclick="openSidePanel('linear-agent');return false;">Agents</a></li>
+          <li><a href="#pillar-ai" class="footer-link" onclick="openSidePanel('cloud-coding-agent');return false;">Cloud Coding Agent</a></li>
+          <li><a href="#pillar-intake" class="footer-link" onclick="openSidePanel('customer-requests');return false;">Customer Requests</a></li>
+          <li><a href="#pillar-plan" class="footer-link" onclick="openSidePanel('insights');return false;">Insights</a></li>
+          <li><a href="#mobile-diffs" class="footer-link" data-route="mobile-diffs">Mobile</a></li>
+          <li><a href="#pillar-build" class="footer-link" onclick="openSidePanel('guided-reviews');return false;">Reviews</a></li>
+          <li><a href="#pillar-intake" class="footer-link" data-route="home">Integrations</a></li>
+          <li><a href="#changelog-section" class="footer-link" data-route="home">Changelog</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="footer-col-title">Company</h3>
+        <ul class="footer-list">
+          <li><a href="#footer" class="footer-link">About</a></li>
+          <li><a href="#customers" class="footer-link" data-route="home">Customers</a></li>
+          <li><a href="#footer" class="footer-link">Careers</a></li>
+          <li><a href="#changelog-section" class="footer-link" data-route="home">Now</a></li>
+          <li><a href="#footer" class="footer-link">Method</a></li>
+          <li><a href="#footer" class="footer-link">Quality</a></li>
+          <li><a href="#footer" class="footer-link">Brand</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="footer-col-title">Resources</h3>
+        <ul class="footer-list">
+          <li><a href="#footer" class="footer-link">Switch</a></li>
+          <li><a href="#footer" class="footer-link">Download</a></li>
+          <li><a href="#footer" class="footer-link">Documentation</a></li>
+          <li><a href="#footer" class="footer-link">Developers</a></li>
+          <li><a href="#footer" class="footer-link">Enterprise</a></li>
+          <li><a href="#footer" class="footer-link">Startups</a></li>
+          <li><a href="#footer" class="footer-link">Status</a></li>
+          <li><a href="#footer" class="footer-link">Legal</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="footer-col-title">Connect</h3>
+        <ul class="footer-list">
+          <li><a href="#prefooter" class="footer-link" data-route="home">Contact us</a></li>
+          <li><a href="#footer" class="footer-link">Community</a></li>
+          <li><a href="#footer" class="footer-link">X (Twitter)</a></li>
+          <li><a href="#footer" class="footer-link">GitHub</a></li>
+          <li><a href="#footer" class="footer-link">YouTube</a></li>
+        </ul>
+      </div>
+
+      <!-- Theme Switcher (Extracted from 04-2026-11-04-mobile-diffs.html) -->
+      <div>
+        <div class="theme-toggle-group" role="group" aria-label="Theme switcher">
+          <button type="button" class="theme-btn active" id="theme-dark-btn" aria-label="Dark theme" title="Dark theme">
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M11.39 10.106c-3.271 0-5.363-2.053-5.363-5.327 0-.68.163-1.644.38-2.152a.7.7 0 0 0 .063-.284A.344.344 0 0 0 6.115 2c-.064 0-.204.014-.345.068-2.236.893-3.737 3.296-3.737 5.839C2.033 11.459 4.742 14 8.29 14c2.604 0 4.865-1.579 5.616-3.55.048-.14.06-.281.06-.339a.367.367 0 0 0-.354-.371 1 1 0 0 0-.257.047 6.7 6.7 0 0 1-1.964.32"></path>
+            </svg>
+          </button>
+          <button type="button" class="theme-btn" id="theme-light-btn" aria-label="Light theme" title="Light theme">
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M8.759 14.24a.76.76 0 0 1-1.52 0v-1.48a.76.76 0 1 1 1.52 0zm-3.587-3.413a.76.76 0 0 0-1.075 0L3.05 11.873a.76.76 0 1 0 1.075 1.075l1.047-1.046a.76.76 0 0 0 0-1.075m5.657 0a.76.76 0 0 0 0 1.074l1.046 1.047a.76.76 0 1 0 1.075-1.075l-1.047-1.046a.76.76 0 0 0-1.074 0m-.715-4.943a3 3 0 1 1-4.242 4.242 3 3 0 0 1 4.242-4.242M3.05 4.123a.76.76 0 1 1 1.075-1.075l1.047 1.047A.76.76 0 1 1 4.097 5.17zm8.825-1.074a.76.76 0 1 1 1.075 1.074L11.903 5.17a.76.76 0 1 1-1.075-1.075zm2.365 4.19a.76.76 0 1 1 0 1.52h-1.48a.76.76 0 0 1 0-1.52zM4 7.998a.76.76 0 0 0-.76-.76H1.76a.76.76 0 1 0 0 1.52h1.48c.42 0 .76-.34.76-.76M7.998 4c.42 0 .76-.34.76-.76V1.76a.76.76 0 0 0-1.52 0v1.48c0 .42.34.76.76.76"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // =========================================================================
+    // 1. NAVIGATION & ROUTING BETWEEN ATTACHED PAGES
+    // =========================================================================
+    function switchPage(pageName) {
+      document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.view-pill-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.switchPage === pageName);
+      });
+      const target = document.getElementById('page-' + pageName);
+      if (target) {
+        target.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    document.querySelectorAll('[data-switch-page]').forEach(btn => {
+      btn.addEventListener('click', () => switchPage(btn.dataset.switchPage));
+    });
+
+    document.querySelectorAll('[data-route]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const route = link.dataset.route;
+        const href = link.getAttribute('href');
+        switchPage(route);
+        if (href && href.startsWith('#') && href.length > 1) {
+          setTimeout(() => {
+            const anchor = document.querySelector(href);
+            if (anchor) anchor.scrollIntoView({ behavior: 'smooth' });
+          }, 40);
+        }
+      });
+    });
+
+    // Dropdown toggles in top nav
+    document.querySelectorAll('[data-dropdown-toggle]').forEach(trigger => {
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const key = trigger.dataset.dropdownToggle;
+        const menu = document.getElementById('dropdown-' + key);
+        const wasOpen = menu.classList.contains('open');
+        document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+        if (!wasOpen) menu.classList.add('open');
+      });
+    });
+
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+    });
+
+    // =========================================================================
+    // 2. TOAST & THEME SWITCHER
+    // =========================================================================
+    let toastTimer = null;
+    function showToast(msg) {
+      const el = document.getElementById('toast-banner');
+      el.textContent = msg;
+      el.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => el.classList.remove('show'), 2600);
+    }
+
+    const darkBtn = document.getElementById('theme-dark-btn');
+    const lightBtn = document.getElementById('theme-light-btn');
+    darkBtn.addEventListener('click', () => {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      darkBtn.classList.add('active');
+      lightBtn.classList.remove('active');
+    });
+    lightBtn.addEventListener('click', () => {
+      document.documentElement.setAttribute('data-theme', 'light');
+      lightBtn.classList.add('active');
+      darkBtn.classList.remove('active');
+    });
+
+    // Share button on Mobile Diffs page
+    document.getElementById('share-entry-btn').addEventListener('click', () => {
+      const url = 'https://linear.app/changelog/2026-11-04-mobile-diffs';
+      const ta = document.createElement('textarea');
+      ta.value = url;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast('Copied changelog link to clipboard');
+    });
+
+    // =========================================================================
+    // 3. HERO INTERACTIVITY (FAVORITES SWITCHER + LIVE AGENT REPLY)
+    // =========================================================================
+    const heroIssues = {
+      'DRV-8852': {
+        code: 'DRV-8852',
+        title: 'Faster app launch',
+        desc: 'Render UI before <code class="issue-code-inline">vehicle_state</code> sync when minimum required state is present, instead of blocking on full refresh during iOS startup.'
+      },
+      'DRV-364': {
+        code: 'DRV-364',
+        title: 'Reset dimmed ride rows after sync completes',
+        desc: 'Derive row opacity directly from <code class="issue-code-inline">waitingStatusById</code> instead of persisting stale entries in <code class="issue-code-inline">dimmedIds</code>.'
+      },
+      'INS-104': {
+        code: 'INS-104',
+        title: 'Agent Insights cycle time distribution',
+        desc: 'Segment P50, P75, and P90 cycle times across cloud coding sessions and human-authored pull requests.'
+      },
+      'UI-209': {
+        code: 'UI-209',
+        title: 'UI Refresh core navigation surfaces',
+        desc: 'Align mobile and desktop diff headers, hairline borders, and tactile action groups across themes.'
+      }
+    };
+
+    document.querySelectorAll('[data-hero-fav]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-hero-fav]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const data = heroIssues[btn.dataset.heroFav];
+        if (data) {
+          document.getElementById('hero-issue-code').textContent = data.code;
+          document.getElementById('hero-issue-crumb').textContent = data.title;
+          document.getElementById('hero-issue-title').textContent = data.title;
+          document.getElementById('hero-issue-desc').innerHTML = data.desc;
+        }
+      });
+    });
+
+    document.getElementById('hero-agent-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = document.getElementById('hero-agent-input');
+      const val = input.value.trim();
+      if (!val) return;
+      const box = document.getElementById('hero-agent-messages');
+      const userMsg = document.createElement('div');
+      userMsg.className = 'agent-user-bubble';
+      userMsg.textContent = val;
+      box.appendChild(userMsg);
+      input.value = '';
+      setTimeout(() => {
+        const reply = document.createElement('p');
+        reply.style.cssText = 'color:#d0d6e0;line-height:1.45;';
+        reply.textContent = 'Updated the draft PR branch and triggered CI checks.';
+        box.appendChild(reply);
+      }, 450);
+    });
+
+    // Slack Create Issue interactive button in Pillar 1
+    document.getElementById('slack-create-issue-btn').addEventListener('click', () => {
+      const doneCol = document.getElementById('intake-done-col');
+      if (doneCol && !document.getElementById('created-from-slack-card')) {
+        const card = document.createElement('div');
+        card.id = 'created-from-slack-card';
+        card.className = 'kanban-card';
+        card.style.borderColor = 'rgba(94,106,210,0.6)';
+        card.innerHTML = `
+          <span class="kanban-card-id" style="color:#8fa4ff;">ENG-2241 · NEW</span>
+          <span class="kanban-card-title">Track iOS startup timing & non-blocking vehicle_state render</span>
+          <div class="kanban-card-tags"><span class="mini-tag"><span class="prop-dot" style="background:#27a644;"></span>Performance</span></div>
+        `;
+        doneCol.appendChild(card);
+        showToast('Created ENG-2241 from Slack thread');
+      } else {
+        showToast('Issue ENG-2241 already synced');
+      }
+    });
+
+    // =========================================================================
+    // 4. EDITABLE / SWITCHABLE CODE DIFF IN PILLAR 4
+    // =========================================================================
+    const diffSnippets = [
+      {
+        file: 'kinetic-ios/src/screens/Home/HomeScreen.tsx',
+        oldLines: [
+          { text: "import React from 'react'", type: '' },
+          { text: "import { View, ActivityIndicator } from 'react-native'", type: '' },
+          { text: "import { useVehicleState } from '@hooks/useVehicleState'", type: 'diff-old' },
+          { text: "import { Dashboard } from '@components/Dashboard'", type: '' },
+          { text: "", type: '' },
+          { text: "export const HomeScreen = () => {", type: '' },
+          { text: "  const { vehicleState, isFullySynced } = useVehicleState()", type: 'diff-old' },
+          { text: "  if (!isFullySynced) {", type: 'diff-old' },
+          { text: '    return <ActivityIndicator size="large" />', type: '' },
+          { text: "  }", type: '' },
+          { text: "  return (", type: '' },
+          { text: "    <View>", type: '' },
+          { text: "      <Dashboard state={vehicleState} />", type: 'diff-old' },
+          { text: "    </View>", type: '' },
+          { text: "  )", type: '' },
+          { text: "}", type: '' }
+        ],
+        newLines: [
+          { text: "import React from 'react'", type: '' },
+          { text: "import { View, ActivityIndicator } from 'react-native'", type: '' },
+          { text: "import { useVehicleState, SyncStatus } from '@hooks/useVehicleState'", type: 'diff-new' },
+          { text: "import { Dashboard } from '@components/Dashboard'", type: '' },
+          { text: "", type: '' },
+          { text: "export const HomeScreen = () => {", type: '' },
+          { text: "  const { vehicleState, syncStatus } = useVehicleState()", type: 'diff-new' },
+          { text: "  if (syncStatus === SyncStatus.PENDING) {", type: 'diff-new' },
+          { text: '    return <ActivityIndicator size="large" />', type: '' },
+          { text: "  }", type: '' },
+          { text: "  return (", type: '' },
+          { text: "    <View>", type: '' },
+          { text: "      <Dashboard state={vehicleState} syncStatus={syncStatus} />", type: 'diff-new' },
+          { text: "    </View>", type: '' },
+          { text: "  )", type: '' },
+          { text: "}", type: '' }
+        ]
+      },
+      {
+        file: 'kinetic-ios/src/hooks/useVehicleState.ts',
+        oldLines: [
+          { text: "import { useEffect, useState } from 'react'", type: '' },
+          { text: "import { subscribe } from '@lib/socket'", type: '' },
+          { text: "import type { VehicleState } from '@types/vehicle'", type: '' },
+          { text: "", type: '' },
+          { text: "export const useVehicleState = () => {", type: '' },
+          { text: "  const [state, setState] = useState<VehicleState>()", type: '' },
+          { text: "  const [isFullySynced, setIsFullySynced] = useState(false)", type: 'diff-old' },
+          { text: "  useEffect(() => {", type: '' },
+          { text: "    return subscribe('vehicle', event => {", type: '' },
+          { text: "      setState(event.state)", type: '' },
+          { text: "      setIsFullySynced(event.pending === 0)", type: 'diff-old' },
+          { text: "    })", type: '' },
+          { text: "  }, [])", type: '' },
+          { text: "  return { vehicleState: state, isFullySynced }", type: 'diff-old' },
+          { text: "}", type: '' }
+        ],
+        newLines: [
+          { text: "import { useEffect, useState } from 'react'", type: '' },
+          { text: "import { subscribe } from '@lib/socket'", type: '' },
+          { text: "import type { VehicleState } from '@types/vehicle'", type: '' },
+          { text: "export enum SyncStatus { PENDING = 'pending', SYNCED = 'synced' }", type: 'diff-new' },
+          { text: "export const useVehicleState = () => {", type: '' },
+          { text: "  const [state, setState] = useState<VehicleState>()", type: '' },
+          { text: "  const [syncStatus, setSyncStatus] = useState(SyncStatus.PENDING)", type: 'diff-new' },
+          { text: "  useEffect(() => {", type: '' },
+          { text: "    return subscribe('vehicle', event => {", type: '' },
+          { text: "      setState(event.state)", type: '' },
+          { text: "      setSyncStatus(event.pending ? SyncStatus.PENDING : SyncStatus.SYNCED)", type: 'diff-new' },
+          { text: "    })", type: '' },
+          { text: "  }, [])", type: '' },
+          { text: "  return { vehicleState: state, syncStatus }", type: 'diff-new' },
+          { text: "}", type: '' }
+        ]
+      },
+      {
+        file: 'kinetic-ios/src/components/Dashboard.tsx',
+        oldLines: [
+          { text: "import React from 'react'", type: '' },
+          { text: "import { View } from 'react-native'", type: '' },
+          { text: "import { Map } from '@components/Map'", type: '' },
+          { text: "import { RideList } from '@components/RideList'", type: '' },
+          { text: "type Props = { state: VehicleState }", type: 'diff-old' },
+          { text: "export const Dashboard = ({ state }: Props) => {", type: 'diff-old' },
+          { text: "  return (", type: '' },
+          { text: "    <View>", type: '' },
+          { text: "      <Map vehicles={state.vehicles} />", type: '' },
+          { text: "      <RideList rides={state.rides} />", type: '' },
+          { text: "    </View>", type: '' },
+          { text: "  )", type: '' },
+          { text: "}", type: '' }
+        ],
+        newLines: [
+          { text: "import React from 'react'", type: '' },
+          { text: "import { View } from 'react-native'", type: '' },
+          { text: "import { StaleBanner } from '@components/StaleBanner'", type: 'diff-new' },
+          { text: "import { SyncStatus } from '@hooks/useVehicleState'", type: 'diff-new' },
+          { text: "type Props = { state: VehicleState; syncStatus: SyncStatus }", type: 'diff-new' },
+          { text: "export const Dashboard = ({ state, syncStatus }: Props) => {", type: 'diff-new' },
+          { text: "  return (", type: '' },
+          { text: "    <View>", type: '' },
+          { text: "      {syncStatus === SyncStatus.PENDING ? <StaleBanner /> : null}", type: 'diff-new' },
+          { text: "      <Map vehicles={state.vehicles} />", type: '' },
+          { text: "      <RideList rides={state.rides} />", type: '' },
+          { text: "    </View>", type: '' },
+          { text: "  )", type: '' },
+          { text: "}", type: '' }
+        ]
+      }
+    ];
+
+    function renderDiff(idx) {
+      const snip = diffSnippets[idx] || diffSnippets[0];
+      document.getElementById('diff-file-title').textContent = snip.file;
+      document.getElementById('diff-old-col').innerHTML = snip.oldLines
+        .map(l => `<div class="code-line ${l.type}">${l.text.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</div>`)
+        .join('');
+      document.getElementById('diff-new-col').innerHTML = snip.newLines
+        .map(l => `<div class="code-line ${l.type}" contenteditable="true" spellcheck="false">${l.text.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</div>`)
+        .join('');
+    }
+    renderDiff(0);
+
+    document.querySelectorAll('[data-diff-idx]').forEach(row => {
+      row.addEventListener('click', () => {
+        document.querySelectorAll('[data-diff-idx]').forEach(r => r.classList.remove('selected-row'));
+        row.classList.add('selected-row');
+        renderDiff(Number(row.dataset.diffIdx));
+      });
+    });
+
+    document.getElementById('diff-theme-select').addEventListener('change', (e) => {
+      const panel = document.getElementById('diff-panel-box');
+      const v = e.target.value;
+      if (v === 'nord') panel.style.background = '#171c26';
+      else if (v === 'monokai') panel.style.background = '#1a1917';
+      else panel.style.background = '#111318';
+    });
+
+    // =========================================================================
+    // 5. FEATURE SIDE PANEL CONTENT (FROM 01-index.html RSC PAYLOAD)
+    // =========================================================================
+    const sidePanelData = {
+      'linear-agent': {
+        sec: '1.1 · INTAKE',
+        title: 'Linear Agent',
+        desc: 'The Linear Agent is an AI agent available in Linear’s intake integrations. It converts supported conversations into Linear issues by extracting requests, summarizing context, and populating issue fields.',
+        rows: [
+          ['Slack', 'Converts Slack threads into issues by mentioning @Linear with full thread context.'],
+          ['Microsoft Teams', 'Converts Teams conversations into issues by mentioning @Linear.'],
+          ['Intercom', 'Analyzes full customer conversations and files issues with concise summaries and screenshots.'],
+          ['Zendesk', 'Analyzes Zendesk tickets and creates structured bug or feature request issues.'],
+          ['Gong', 'Automatically extracts product feedback and feature requests from call transcripts.']
+        ]
+      },
+      'customer-requests': {
+        sec: '1.3 · INTAKE',
+        title: 'Customer Requests',
+        desc: 'Customer Requests links customer feedback and customer metadata to issues and projects in Linear for filtering, prioritization, and reporting across the workspace.',
+        rows: [
+          ['Intake sources', 'Intercom, Zendesk, Email, Salesforce, Linear API, Slack, Front, Linear Asks, Attio'],
+          ['Synced attributes', 'Customer name, Owner, Size, Tier, Domain, Revenue, Status']
+        ]
+      },
+      'triage': {
+        sec: '2.2 · INTAKE',
+        title: 'Triage',
+        desc: 'Triage is an AI-powered inbox for teams to manage unplanned work such as incoming bug reports and feature requests before they enter the team workflow.',
+        rows: [
+          ['Triage Intelligence', 'Automatically suggests teams, projects, assignees, labels, and duplicate issues.'],
+          ['Triage Responsibility', 'Defines on-call triage rotations natively or via PagerDuty, Opsgenie, Rootly, and Incident.io.'],
+          ['Triage Rules', 'Auto-routes incoming issues and delegates to agents based on filterable properties.']
+        ]
+      },
+      'linear-asks': {
+        sec: '1.4 · INTAKE',
+        title: 'Linear Asks',
+        desc: 'Linear Asks supports collecting internal workplace requests from Slack, email, and web forms, and converting them into issues for triage—even from users without Linear accounts.',
+        rows: [
+          ['Slack', 'Bi-directionally synced threads, emoji reaction triggers, DM asks, and channel templates.'],
+          ['Email', 'Turn emails into asks with bi-directionally synced replies and custom email domains.'],
+          ['Web forms', 'Structured intake forms for bug reports, IT help desk, HR, and operations tickets.']
+        ]
+      },
+      'projects': {
+        sec: '2.1 · PLAN',
+        title: 'Projects',
+        desc: 'Projects are units of work with a clear outcome or planned completion timeframe, comprised of issues, an overview, milestones, progress graph, and documents.',
+        rows: [
+          ['Properties', 'Lead, Members, Labels, Start & Target dates, Priority, Teams, Dependencies, Initiatives'],
+          ['Tracking', 'Milestones, Project updates, Customer requests, Templates, and Realtime documents']
+        ]
+      },
+      'documents': {
+        sec: '2.2 · PLAN',
+        title: 'Documents',
+        desc: 'Documents are collaborative, realtime pages that can be attached to projects and initiatives with inline comments, templates, and issue references.',
+        rows: [
+          ['Formatting', 'Headers (H1–H3), Lists & Checklists, Codeblocks, Blockquotes, Collapsibles, Mermaid diagrams']
+        ]
+      },
+      'pulse': {
+        sec: '5.1 · PLAN',
+        title: 'Pulse',
+        desc: 'Pulse is a centralized feed of project and initiative updates that provides visibility into ongoing work across a workspace.',
+        rows: [
+          ['Feed & Digest', 'For me, Recent, Popular, custom feeds, daily/weekly Inbox digests, and Pulse audio playback.']
+        ]
+      },
+      'initiatives': {
+        sec: '2.3 · PLAN',
+        title: 'Initiatives',
+        desc: 'Initiatives are workspace-level groupings of projects aligned to company objectives, supporting nested sub-initiatives, owners, and progress reporting.',
+        rows: [
+          ['Properties', 'Status, Priority, Owner, Target date, Initiative labels, Documents, Updates, Sub-initiatives']
+        ]
+      },
+      'visual-planning': {
+        sec: '2.4 · PLAN',
+        title: 'Visual planning',
+        desc: 'Visual planning provides List, Board (with swimlanes), and chronological Timeline views with saved filters, grouping, and ordering.',
+        rows: [
+          ['List & Board', 'Table-based scanning and column-based workflow stages with swimlanes.'],
+          ['Timeline', 'Chronological roadmap view for planning and tracking projects and milestones across time.']
+        ]
+      },
+      'insights': {
+        sec: '5.2 · PLAN',
+        title: 'Insights',
+        desc: 'Insights provides real-time analytics across Linear issue data, allowing teams to analyze work patterns, throughput, and bottlenecks.',
+        rows: [
+          ['Measures', 'Issue count, Effort, Cycle time, Triage time, Lead time, Issue age'],
+          ['Chart types', 'Scatter plot (latency), Bar chart (distribution), Burn-up chart (cumulative flow)']
+        ]
+      },
+      'cloud-coding-agent': {
+        sec: '3.2 · AI',
+        title: 'Coding sessions',
+        desc: 'Coding sessions let you run agentic coding workflows in Linear. Delegate an issue to start a secure session through Claude Code or Codex, opening a draft PR with diffs for review.',
+        rows: [
+          ['Coding agents & models', 'Claude Code & Codex · Auto, Claude Fable 5, Claude Opus 5, Claude Sonnet 5, GPT-5.6 Sol, GPT-5.5'],
+          ['Runtimes', 'Node.js, Python, Ruby, Go, Rust, Java in a managed development sandbox']
+        ]
+      },
+      'linear-mcp': {
+        sec: '3.3 · AI',
+        title: 'Linear MCP',
+        desc: 'The Linear MCP server exposes a standardized interface allowing AI models and agents to securely read from and write to Linear via Model Context Protocol.',
+        rows: [
+          ['AI Clients', 'Claude, Cursor, OpenAI Codex, Replit, Windsurf, Zed, Figma, v0']
+        ]
+      },
+      'issues': {
+        sec: '3.1 · BUILD',
+        title: 'Issues',
+        desc: 'Issues are Linear’s atomic work item, used to track tasks, bugs, and requests—assignable to teammates or delegated end-to-end to AI agents.',
+        rows: [
+          ['Core Properties', 'Assignee, Delegated Agent, Status, Priority, Estimate, Labels, SLAs, Cycles, Releases']
+        ]
+      },
+      'git-automations': {
+        sec: '3.4 · BUILD',
+        title: 'Git automations',
+        desc: 'GitHub and GitLab integrations connect Linear issues with pull requests or merge requests to synchronize planning and code execution.',
+        rows: [
+          ['GitHub & GitLab', 'PR/MR linking, branch name formatting, status automation, magic words, and commit linking.']
+        ]
+      },
+      'guided-reviews': {
+        sec: '3.6 · BUILD',
+        title: 'Guided reviews',
+        desc: 'Guided Reviews organize large pull requests into a clear semantic path through the implementation with contextual explanations alongside diffs.',
+        rows: [
+          ['Capabilities', 'Semantic ordering, Structured sections, Explanations in context, Direct diff navigation']
+        ]
+      },
+      'cycles': {
+        sec: '3.5 · BUILD',
+        title: 'Cycles',
+        desc: 'Cycles are time-boxed planning periods used to organize work into a consistent team cadence with automatic rollover and capacity tracking.',
+        rows: [
+          ['Settings', '1–8 week durations, cooldown periods, auto-rollover of unfinished work']
+        ]
+      },
+      'diffs': {
+        sec: '3.7 · BUILD',
+        title: 'Diffs',
+        desc: 'Linear Diffs brings code review into the product development workflow across desktop, web, iOS, and Android.',
+        rows: [
+          ['Capabilities', 'Review inbox, Guided Reviews, Structural highlighting, Unified & split views, Merge queue']
+        ]
+      },
+      'releases': {
+        sec: '3.8 · BUILD',
+        title: 'Releases',
+        desc: 'Releases connect product work in Linear to what reaches customers via CI/CD pipelines, deployment tracking, and generated release notes.',
+        rows: [
+          ['Pipelines', 'Continuous and scheduled release pipelines with monorepo glob path filters']
+        ]
+      }
+    };
+
+    function openSidePanel(key) {
+      const item = sidePanelData[key] || sidePanelData['linear-agent'];
+      document.getElementById('side-panel-sec').textContent = item.sec;
+      document.getElementById('side-panel-title').textContent = item.title;
+      document.getElementById('side-panel-body').innerHTML = `
+        <p>${item.desc}</p>
+        <table class="side-panel-table">
+          <thead><tr><th>Category</th><th>Details</th></tr></thead>
+          <tbody>
+            ${item.rows.map(r => `<tr><td style="font-weight:500;color:var(--text-primary);width:34%;">${r[0]}</td><td>${r[1]}</td></tr>`).join('')}
+          </tbody>
+        </table>
+      `;
+      document.getElementById('side-panel-backdrop').classList.add('open');
+    }
+
+    function closeSidePanel() {
+      document.getElementById('side-panel-backdrop').classList.remove('open');
+    }
+
+    document.getElementById('side-panel-backdrop').addEventListener('click', (e) => {
+      if (e.target.id === 'side-panel-backdrop') closeSidePanel();
+    });
+
+    // =========================================================================
+    // 6. FULL RELEASE NOTES DATA FOR 04-2026-11-04-mobile-diffs (100% COVERAGE)
+    // =========================================================================
+    const mobileDiffsAccordions = [
+      {
+        title: 'Fixes',
+        defaultOpen: true,
+        items: [
+          { area: 'Agent', color: '#f2994a', text: 'Suggested next steps in agent replies now show in one row when they fit, and stack in one column when they don’t, instead of wrapping onto a partial second row' },
+          { area: 'Agent', color: '#f2994a', text: 'Code diffs beside an Agent chat no longer cut off the right side of files in a narrow panel' },
+          { area: 'Agent', color: '#f2994a', text: 'Fixed agent chats started in the split view no longer going missing from the sidebar when you navigate away or close the tab right after sending' },
+          { area: 'Agents', color: '#4cb782', text: 'File paths mentioned in the agent input no longer show spelling underlines' },
+          { area: 'Android', color: '#f7c8c1', text: 'Fixed downloads that restart after the app closes no longer leaving extra files in the Downloads folder' },
+          { area: 'Android', color: '#f7c8c1', text: 'Fixed document notification links opened from outside the app now open the document' },
+          { area: 'API', color: '#5e6ad2', text: 'Replacing an expired app developer token now keeps the previous token’s scopes' },
+          { area: 'Board', color: '#eb5757', text: 'Fixed going back to a board with sub-grouping now returning you to the same horizontal scroll position, not the leftmost column' },
+          { area: 'Board', color: '#eb5757', text: 'Fixed cards dropped at the top of a scrolled board column staying in view instead of landing above the visible area' },
+          { area: 'Coding sessions', color: '#f2994a', text: 'Fixed files added to a coding environment, such as shell scripts and <code>.npmrc</code>, now getting syntax highlighting based on their file name' },
+          { area: 'Coding sessions', color: '#f2994a', text: 'Coding sessions that use workspace credentials can post Linear comments again' },
+          { area: 'Custom views', color: '#eb5757', text: 'Fixed the Save button moving off screen when you edit a view whose advanced filter has long names' },
+          { area: 'Customer requests', color: '#f2994a', text: 'Undo now removes a customer request you just added from an issue or project instead of undoing the action before it' },
+          { area: 'Customer Requests', color: '#f7c8c1', text: 'Undo now reverts an edit to a customer request on an issue or project page, including a removed or changed source link, and removes a customer created along with a new request' },
+          { area: 'Customer Requests', color: '#f7c8c1', text: 'Fixed links to replies in customer request threads not opening the request panel and highlighting the reply' },
+          { area: 'Customers', color: '#f7c8c1', text: 'Project customer pills now show customer logos and names immediately instead of a placeholder until hovered' },
+          { area: 'Customers', color: '#f7c8c1', text: 'Fixed customer requests on duplicate issues or paused projects disappearing when grouping customer requests by status type' },
+          { area: 'Cycles', color: '#f2c94c', text: 'Saving the same next cycle start date again no longer moves upcoming cycles by a week' },
+          { area: 'Cycles', color: '#f2c94c', text: 'Moving the next cycle’s start date earlier no longer leaves the active cycle overlapping it by an hour around DST changes' },
+          { area: 'Desktop', color: '#f2c94c', text: 'Fixed a flicker on the new tab button after opening a tab' },
+          { area: 'Diffs', color: '#26b5ce', text: 'Opening or closing the agent sidebar on a pull request no longer blanks the page on slow connections' },
+          { area: 'Diffs', color: '#26b5ce', text: 'Fixed marking a file reviewed on short pull requests now keeps the next file’s “Reviewed” checkbox under the pointer' },
+          { area: 'Diffs', color: '#26b5ce', text: 'Fixed received pull request reviews sometimes appearing more than once' },
+          { area: 'Diffs', color: '#26b5ce', text: 'Fixed review request notifications sent when a draft pull request is published to name the person who published it, not the pull request author' },
+          { area: 'Diffs', color: '#26b5ce', text: 'Fixed Codex missing from the reviewer dropdown' },
+          { area: 'Diffs', color: '#26b5ce', text: 'Fixed pull request actions such as merge, close, and auto-merge failing for guests with a connected GitHub account' },
+          { area: 'Diffs', color: '#26b5ce', text: 'Fixed draft pull requests requiring reviewer selection when no reviewers are available' },
+          { area: 'Documents', color: '#26b5ce', text: 'Fixed creating an issue from a selection in a cycle document not creating it in the cycle’s team' },
+          { area: 'Documents', color: '#26b5ce', text: 'Fixed a duplicate scrollbar appearing on documents opened from a change notification in Inbox' },
+          { area: 'Editor', color: '#bec2c8', text: 'Clicking anywhere in the Leave Feedback box now focuses the text field' },
+          { area: 'Editor', color: '#bec2c8', text: 'Fixed video controls in small players not matching the player’s rounded bottom corners' },
+          { area: 'Editor', color: '#bec2c8', text: 'Copying a list and pasting it as plain text now keeps the list numbers and bullets' },
+          { area: 'Editor', color: '#bec2c8', text: 'Pressing Enter at the end of a collapsible section title now always creates a new line instead of moving the cursor to the next block' },
+          { area: 'Editor', color: '#bec2c8', text: 'Fixed wide tables in issue inline comments not always scrolling horizontally' },
+          { area: 'Email', color: '#eb5757', text: 'Replies to synced email threads no longer include quoted history from mail clients that use translated header labels, such as German Outlook' },
+          { area: 'Email intake', color: '#95a2b3', text: 'Email replies whose text starts with “On” no longer lose that text' },
+          { area: 'Exports', color: '#4cb782', text: 'Fixed CSV exports not listing issues in the order the view shows them when groups have a custom order' },
+          { area: 'Filters', color: '#f2994a', text: 'Fixed the “options not matching any…” action in grouped filter menus, such as Team, not sitting in its own section at the bottom of the list' },
+          { area: 'Front', color: '#eb5757', text: 'The Front integration now allows multiple labels from multi-select label groups' },
+          { area: 'GitHub', color: '#f2994a', text: 'You can now dismiss the GitHub sync error on an issue when creating the linked GitHub issue failed' },
+          { area: 'GitHub', color: '#f2994a', text: 'Manually added GitHub commit webhooks now work when their content type is set to <code>application/x-www-form-urlencoded</code>' },
+          { area: 'GitHub', color: '#f2994a', text: 'Fixed mentioning a project ID such as P-ENG-123 in a pull request title no longer linking the pull request' },
+          { area: 'Inbox', color: '#f2c94c', text: 'Issue due date notifications indicate when the issue is due (e.g. “Due today”) instead of a generic “Due date” label' },
+          { area: 'Inbox', color: '#f2c94c', text: 'Fixed filtering the Inbox by project now includes pull request notifications whose linked issues belong to that project' },
+          { area: 'Inbox', color: '#f2c94c', text: 'Fixed the find field animation in the inbox so it no longer shrinks as it closes' },
+          { area: 'Inbox', color: '#f2c94c', text: 'Fixed ↑/↓ and j/k scrolling the diff instead of moving through the Inbox when a review’s diff tab is open' },
+          { area: 'Inbox', color: '#f2c94c', text: 'Fixed “Agent finished” notifications for issues with a GitLab merge request opening the issue instead of the merge request' },
+          { area: 'Initiatives', color: '#4cb782', text: 'Fixed the initiatives overview crashing when a saved grouping preference was invalid' },
+          { area: 'Insights', color: '#5e6ad2', text: 'Fixed Insights charts timing out in workspaces with many teams' },
+          { area: 'Insights', color: '#5e6ad2', text: 'Fixed drilling into a weekly or monthly due date insight dropping or adding issues at the period edges in timezones behind UTC' },
+          { area: 'Insights', color: '#5e6ad2', text: 'Fixed the measure picker to always separate bar chart measures from scatter plot measures' },
+          { area: 'Insights', color: '#5e6ad2', text: 'Fixed scatter plots split by labels or customers to count each issue once in their statistics' },
+          { area: 'Insights', color: '#5e6ad2', text: 'Fixed insights sliced by customer to count archived issues under their customers instead of “No customer” when archived issues are included' },
+          { area: 'Insights', color: '#5e6ad2', text: 'Fixed issues whose customer requests have no customer to show as “Unknown customer” instead of a second “No customer” row when slicing by customer' },
+          { area: 'Insights', color: '#5e6ad2', text: 'Fixed scatter plot insights that failed to load when they had a very large number of data points' },
+          { area: 'Integrations', color: '#f2994a', text: 'Password fields show a masked placeholder by default' },
+          { area: 'iOS', color: '#bec2c8', text: 'Fixed the Merge button in the code review toolbar being truncated on iPhone' },
+          { area: 'iOS', color: '#bec2c8', text: 'Canceling sign-in in the browser no longer shows a login error' },
+          { area: 'iOS', color: '#bec2c8', text: 'Project and initiative reminder notifications now show the reminder icon in the inbox' },
+          { area: 'iOS', color: '#bec2c8', text: 'The inbox tab no longer shows an unread dot in the expanded sidebar when all notifications are read' },
+          { area: 'iOS', color: '#bec2c8', text: 'Loops created by Linear Agent now show as a Loop card instead of an internal ID' },
+          { area: 'iOS', color: '#bec2c8', text: 'Fixed deleted issues not disappearing from issue lists right away' },
+          { area: 'iOS', color: '#bec2c8', text: 'Fixed issue titles and subtitles in the Delegated section of My Issues not matching the text size of the issue list below them' },
+          { area: 'iOS', color: '#bec2c8', text: 'The iOS app no longer shows notifications for the agent chat you are viewing' },
+          { area: 'iOS', color: '#bec2c8', text: 'Fixed letters below the baseline being cut off in the team view picker' },
+          { area: 'Issues', color: '#95a2b3', text: 'Changing the cycle or status of issues in a manually ordered list no longer changes their order' },
+          { area: 'Jira', color: '#26b5ce', text: 'Jira sync no longer drops labels that belong to the same multi-select label group' },
+          { area: 'Linear Agent', color: '#5e6ad2', text: 'Branches the Linear Agent creates while coding from an issue, including Loop runs, now follow the workspace’s branch naming format for that issue' },
+          { area: 'Linear Agent', color: '#5e6ad2', text: 'Linear Agent can now convert links already attached to an issue into customer requests, like the in-app “Convert to customer request” action' },
+          { area: 'Linear Agent', color: '#5e6ad2', text: 'Fixed the agent’s thinking indicator not staying below a message you send while it’s still working, so it’s clear the agent hasn’t finished' },
+          { area: 'Linear Agent', color: '#5e6ad2', text: 'New Linear Agent chats keep the coding environment you last picked, including after a refresh' },
+          { area: 'Linear Agent', color: '#5e6ad2', text: 'Fixed action label alignment and entity choices remaining visible after submission' },
+          { area: 'Loops', color: '#bec2c8', text: 'A loop that waits on one approval no longer sends the owner a new approval message each time it resumes' },
+          { area: 'Loops', color: '#bec2c8', text: 'Loops now always reply when you mention Linear in a loop’s comment thread' },
+          { area: 'Loops', color: '#bec2c8', text: 'People who can edit a loop can now delete the comments it posted from any chat or the comment menu' },
+          { area: 'Loops', color: '#bec2c8', text: 'Loop pages now show which team a triage trigger watches, and Team access shows the team’s name instead of “This team”' },
+          { area: 'Loops', color: '#bec2c8', text: 'Fixed the Run history tab no longer showing as selected when a single run opens on its own page' },
+          { area: 'Loops', color: '#bec2c8', text: 'Fixed the “configured repositories” link in a Loop’s code access setting to look like a link and open during Loop creation' },
+          { area: 'Loops', color: '#bec2c8', text: 'Loops can now delete comments they posted' },
+          { area: 'MCP', color: '#f2c94c', text: 'Reconnecting or adding an MCP connector on mobile Safari now opens the provider’s authorization page' },
+          { area: 'OAuth', color: '#4cb782', text: 'Fixed client-credentials tokens granting access to public teams outside the app user’s selected teams' },
+          { area: 'Onboarding', color: '#4cb782', text: 'The create workspace form now flags names containing a URL or domain before submitting' },
+          { area: 'Projects', color: '#4cb782', text: 'Fixed the project menu in the agent sidebar, Inbox, and search results to match the menu on the project page, including “Show description history”' },
+          { area: 'Projects', color: '#4cb782', text: 'Starting a project without a start date now uses the current date in the lead team’s timezone instead of the UTC date' },
+          { area: 'Projects', color: '#4cb782', text: 'The footer border in the new project modal now matches the modal border' },
+          { area: 'Reviews', color: '#bec2c8', text: 'Fixed the markdown preview now expanding long code blocks and collapsed sections that hide a change' },
+          { area: 'Reviews', color: '#bec2c8', text: 'Fixed pull request activity no longer showing a Codex review as running after Codex stopped without finishing it' },
+          { area: 'Reviews', color: '#bec2c8', text: 'On narrow review pages, header controls now wrap instead of overlapping, and Guide progress text is hidden' },
+          { area: 'Reviews', color: '#bec2c8', text: 'Fixed notifications stopping for users who need to reconnect GitHub with code access, matching the disabled notification settings' },
+          { area: 'Reviews', color: '#bec2c8', text: 'Search in reviews no longer misses matches in code shown in the Guide' },
+          { area: 'SCIM', color: '#26b5ce', text: 'Fixed SCIM PATCH requests with an invalid <code>userName</code> partially applying an earlier email change in the same request' },
+          { area: 'Sentry', color: '#4cb782', text: 'Reassigning a Linear issue linked to a Sentry issue now assigns the matching Sentry user when Sentry’s user record has an empty or incomplete list of additional emails' },
+          { area: 'Settings', color: '#eb5757', text: 'Tooltips on disabled team permission options no longer cover the menu’s other options' },
+          { area: 'Settings', color: '#eb5757', text: 'Fixed long commit signing key names overflowing the Signed commits setting' },
+          { area: 'Settings', color: '#eb5757', text: 'Fixed the loading indicator on the “Enable integration” button in AI settings not matching the button’s text color' },
+          { area: 'Slack', color: '#5e6ad2', text: 'Fixed Slack notifications no longer linking a comment author through a Slack account from another workspace or a stale connection' },
+          { area: 'Slack', color: '#5e6ad2', text: 'Screenshots in Linear Agent replies in Slack now show as images instead of links' },
+          { area: 'Slack', color: '#5e6ad2', text: 'Files in Slack Connect messages no longer go missing from synced comments when Slack briefly fails to return their details' },
+          { area: 'Slack', color: '#5e6ad2', text: 'Slack now delivers notifications for long comments on reviews, with a shortened excerpt and a link to the full comment' },
+          { area: 'Teams', color: '#5e6ad2', text: 'Deleting a sub-team inside a private team’s boundary now stays private if restored' },
+          { area: 'Teams', color: '#5e6ad2', text: 'Fixed SCIM allowing team names that bypassed normal name restrictions' },
+          { area: 'Templates', color: '#4cb782', text: 'Sub-issues created from an issue template now keep their saved status instead of switching to Triage on triage-enabled teams' },
+          { area: 'Templates', color: '#4cb782', text: 'Fixed undo after applying a template to an issue not keeping the labels the issue already had' },
+          { area: 'Triage', color: '#26b5ce', text: 'Fixed timestamps in crowded triage rows no longer getting cut off at narrow widths' },
+          { area: 'Views', color: '#95a2b3', text: 'Fixed the group ordering panel now placing a newly shown group in the same position as the list and board, instead of at the bottom' }
+        ]
+      },
+      {
+        title: 'Improvements',
+        defaultOpen: false,
+        items: [
+          { area: 'Agent', color: '#f2994a', text: 'Review cards in agent chat show the line count next to the status' },
+          { area: 'Agent', color: '#f2994a', text: 'Coding environments can open beside Agent chats, and environment settings now have an Agent side panel' },
+          { area: 'Agent', color: '#f2994a', text: 'Going to actions in Agent split views and slide-ins now shows a right arrow instead of an external link icon' },
+          { area: 'Agent', color: '#f2994a', text: 'Improved double-clicking the divider in the Agent split view to widen the chat in agent sessions or the opened item in chats, as far as dragging would' },
+          { area: 'AI', color: '#bec2c8', text: 'Modifying coding sessions or Loops access at the workspace level now asks for confirmation and explains what happens to work in progress' },
+          { area: 'Android', color: '#f7c8c1', text: 'You can now open an issue’s project from the issue menu' },
+          { area: 'Android', color: '#f7c8c1', text: 'Reviews now show who opened pull requests from GitHub accounts and bots that aren’t linked to a Linear user' },
+          { area: 'Asks', color: '#bec2c8', text: 'Asks web forms show selected labels in multi-select label groups as removable chips. Rows no longer move when you select labels' },
+          { area: 'Code review', color: '#f7c8c1', text: 'Pull request descriptions are now always shown in full, without a “Description” header' },
+          { area: 'Code Review', color: '#95a2b3', text: 'Image, video, audio, and font diffs stack the previous version above the new one on small screens' },
+          { area: 'Code Review', color: '#95a2b3', text: 'Audio files in diffs can now be played directly in the diff' },
+          { area: 'Coding agents', color: '#5e6ad2', text: 'Added the ability for coding agents to re-run failed GitHub Actions jobs on their pull requests' },
+          { area: 'Customers', color: '#f7c8c1', text: 'Customer logos have crisper edges against light and dark backgrounds' },
+          { area: 'Dashboards', color: '#bec2c8', text: 'Default names of project and initiative insights that count issues, customers, or projects now indicate whose property they group by, such as “Issue count by project status type”' },
+          { area: 'Dashboards', color: '#bec2c8', text: 'You can add an insight about projects to a dashboard from the insight menu of a project list' },
+          { area: 'Dashboards', color: '#bec2c8', text: 'Dashboard and widget filters no longer offer “Current user” or “My teams”, since every reader of a dashboard sees the same results. Team filters saved with “My teams” show the teams of the user who saved them, such as “Paul’s teams”' },
+          { area: 'Dashboards', color: '#bec2c8', text: 'New widgets now appear at the top of a dashboard instead of the bottom' },
+          { area: 'Desktop', color: '#f2c94c', text: '<kbd>Cmd/Ctrl Click</kbd> on a page that is already open in a desktop tab now switches to that tab. Shift-click to open a new tab.' },
+          { area: 'Diffs', color: '#26b5ce', text: 'Added copying selected lines from pull request diffs on iOS' },
+          { area: 'Diffs', color: '#26b5ce', text: 'On comments from agents like Codex, Send to agent now sits in the comment toolbar instead of the overflow menu' },
+          { area: 'Diffs', color: '#26b5ce', text: 'Merging a pull request opened by Linear or another bot no longer asks for confirmation when no one owns it' },
+          { area: 'Diffs', color: '#26b5ce', text: 'Test and generated file diffs now show by default when they are the only changes in a pull request' },
+          { area: 'Diffs', color: '#26b5ce', text: 'Added an option to expand or collapse all unchanged code to the file menus in Diffs, with keyboard shortcut <kbd>Alt E</kbd>' },
+          { area: 'Diffs', color: '#26b5ce', text: 'Improved recognition of Netlify preview links from GitHub checks' },
+          { area: 'Diffs', color: '#26b5ce', text: 'Click the draft comment count in the “Submit without draft comments?” warning to see your draft comments in Diff' },
+          { area: 'Diffs', color: '#26b5ce', text: 'Added “Go to file” (<kbd>Cmd/Ctrl P</kbd>), “Go to symbol” (<kbd>Shift Cmd/Ctrl E</kbd>), and “Go to Guide section” (<kbd>Alt Cmd/Ctrl G</kbd>) commands to Diffs' },
+          { area: 'Diffs', color: '#26b5ce', text: 'The reviewer picker now prioritizes people within working hours in their local time zone when requesting a review' },
+          { area: 'Diffs', color: '#26b5ce', text: 'Made GitHub links and review requests from email and Slack open Guide automatically when a guide is available' },
+          { area: 'Diffs', color: '#26b5ce', text: 'Improved the preview button on pull requests, which is now split into a button group with clear “Open one” and “See more” sections' },
+          { area: 'Diffs', color: '#26b5ce', text: 'Improved the preview button on pull requests, which now shows the name of the preview it opens' },
+          { area: 'Diffs', color: '#26b5ce', text: 'Improved the preview button to indicate when its preview is behind the latest commit' },
+          { area: 'Documents', color: '#26b5ce', text: 'Right-click a document group to collapse or expand it, or all groups at once' },
+          { area: 'Editor', color: '#bec2c8', text: 'Added support for selecting non-adjacent table cells with <kbd>Cmd/Ctrl Click</kbd>' },
+          { area: 'Editor', color: '#bec2c8', text: 'Moving the caret up and down through a table now keeps its horizontal position' },
+          { area: 'Editor', color: '#bec2c8', text: 'Improved dragging images and files into editors, so drops go to the nearest editor from anywhere on the page and drop targets are more consistent' },
+          { area: 'Editor', color: '#bec2c8', text: 'Timestamps like 0:23 in a comment or description with a single video now jump the video to that time when clicked' },
+          { area: 'Editor', color: '#bec2c8', text: 'Formatting a partially bold, italic, underlined, or struck-through selection now applies the format to the whole selection instead of removing it' },
+          { area: 'Editor', color: '#bec2c8', text: 'Added a Copy link action and button to all file cards in the editor, not only PDFs' },
+          { area: 'Insights', color: '#5e6ad2', text: 'Initiative insights can now be added to a dashboard from their menu, like issue insights' },
+          { area: 'Insights', color: '#5e6ad2', text: 'Improved insights chart; the template and the copies sub-teams inherit from it as one template, and drilling into it lists the same issues or projects' },
+          { area: 'iOS', color: '#bec2c8', text: 'You can now move a favorite into a folder from its context menu on the Favorites tab' },
+          { area: 'iOS', color: '#bec2c8', text: 'Improved ability to copy a document as Markdown from the document menu on iPhone' },
+          { area: 'Issues', color: '#95a2b3', text: 'Improved due dates in the issue sidebar, so they show as “Oct 9” instead of the full localized date (e.g. 10/09/2026)' },
+          { area: 'Labels', color: '#bec2c8', text: 'Label menus list each selected label from a multi-select group as its own row' },
+          { area: 'Loops', color: '#bec2c8', text: 'The loop run list loads faster because it reads what each run did instead of loading every run’s transcript' },
+          { area: 'Loops', color: '#bec2c8', text: 'Loop runs that write a summary or notify someone no longer fold into runs without changes' },
+          { area: 'Loops', color: '#bec2c8', text: 'Workspace admins can turn on “Workspace administration” in a loop’s settings so the loop can perform workspace administration actions, starting with listing and unsuspending suspended users' },
+          { area: 'Loops', color: '#bec2c8', text: 'Failed loop runs without error details now show a clearer message' },
+          { area: 'Loops', color: '#bec2c8', text: 'Added Resume and Run again actions to failed loop runs' },
+          { area: 'Loops', color: '#bec2c8', text: 'Loops can now notify more than 10 people in a single run' },
+          { area: 'Loops', color: '#bec2c8', text: 'Loop runs blocked by the AI model provider’s cybersecurity policy now say so in run history, instead of showing a generic failure' },
+          { area: 'Loops', color: '#bec2c8', text: 'The Security alerts loop template can now trigger on more than one label or project, or on the issue’s content' },
+          { area: 'Loops', color: '#bec2c8', text: 'The Featured tab in the loop template picker now shows up to eight templates' },
+          { area: 'Loops', color: '#bec2c8', text: 'Five more loop templates are now generally available: Update issue priority based on demand, Draft customer follow-ups, Maintain changelog, Respond to unanswered questions, and Propose test cases' },
+          { area: 'Members', color: '#95a2b3', text: 'The Members page keeps your search when you open a profile and return' },
+          { area: 'Notifications', color: '#bec2c8', text: 'Improved pull request titles in notification emails to look like links' },
+          { area: 'Projects', color: '#4cb782', text: 'Project leads and members can get an Inbox notification when a document is added to a project they’re subscribed to' },
+          { area: 'Reviews', color: '#bec2c8', text: 'Reviews tab tooltips now show how many reviews are waiting for you or ready to merge' },
+          { area: 'Reviews', color: '#bec2c8', text: 'Copying a pull request’s GitHub URL now confirms with “Copied GitHub URL to clipboard,” so it’s distinct from copying the Linear review link' },
+          { area: 'Reviews', color: '#bec2c8', text: 'Improved filtering of the Reviews list by approver, change requests, number of approvals, checks, conflicts, merge status, size, and the project, team, and priority of linked issues' },
+          { area: 'Reviews', color: '#bec2c8', text: 'Reviewed files in the Diff tab’s file list now show a gray check, matching the Guide' },
+          { area: 'Reviews', color: '#bec2c8', text: 'Line counts in diffs and reviews now use your locale’s number format, such as +87,858' },
+          { area: 'Reviews', color: '#bec2c8', text: 'Improved the Guide to show which files you have marked as reviewed, both in each section’s file list and in the outline' },
+          { area: 'Reviews', color: '#bec2c8', text: 'The preview button now sits to the left of the merge and review actions in the pull request header' },
+          { area: 'Reviews', color: '#bec2c8', text: 'Hover a check’s status icon in the pull request checks menu to see its status' },
+          { area: 'Reviews', color: '#bec2c8', text: 'Removed the full window buttons from the review header. Press <kbd>.</kbd> to toggle full window and <kbd>Escape</kbd> to exit' },
+          { area: 'Reviews', color: '#bec2c8', text: 'Reviews now remembers your last tab, other than All, and opens it in new windows' },
+          { area: 'Reviews', color: '#bec2c8', text: 'Added a display option to show GitHub labels on the reviews list' },
+          { area: 'Reviews', color: '#bec2c8', text: 'Hovering a GitHub team in a pull request’s reviewers now shows the team’s members' },
+          { area: 'Search', color: '#bec2c8', text: 'Improved reviews search results, which can now be filtered by author, reviewers, repository, and opened, updated, merged, or closed date' },
+          { area: 'Settings', color: '#eb5757', text: 'The “Revoke access” action for workspace applications now always shows an ellipsis since it opens a confirmation dialog' },
+          { area: 'Slack', color: '#5e6ad2', text: 'Synced Slack threads now include the root message and no longer show a duplicate attachment in the resources section' },
+          { area: 'Team settings', color: '#f2c94c', text: 'Simplified the issue sharing copy in team security settings' },
+          { area: 'Triage', color: '#26b5ce', text: 'Improved triage responsibility schedules now show who is covering a shift when a connected schedule annotates overrides' },
+          { area: 'Views', color: '#95a2b3', text: 'Added entity-specific labels and a no-results state to the pinned views menu' }
+        ]
+      },
+      {
+        title: 'API',
+        defaultOpen: false,
+        items: [
+          { text: 'Comment mutations now return a normal “not found” input error when given an ID that isn’t a UUID, instead of an internal server error' },
+          { text: '<code>list_cycles</code> and <code>list_users</code> accept a team name, key, or ID' },
+          { text: 'Added OAuth apps that act as an app user can request the <code>customView:read</code> scope to read custom views shared with the whole workspace' },
+          { text: 'Added <code>documentCreated</code> to <code>OtherNotificationType</code> for app user notification webhooks' },
+          { text: 'Creating comments on a single issue is now limited to 200 per minute. Requests over the limit fail with <code>RATELIMITED</code>' },
+          { text: 'Filters that combine <code>null: false</code> with another condition on an optional relation, such as “has a creator or the creator is me,” return the correct results' },
+          { text: 'Customer tier filters accept <code>null</code> to match customers without a tier' },
+          { text: 'Changed GraphQL request rate limit errors to return HTTP 429 instead of 400. The response body still contains the <code>RATELIMITED</code> error code. Note that the <code>Retry-After</code> header gives the number of seconds to wait before you retry' },
+          { text: '<code>airbyteIntegrationConnect</code> now rejects API keys that are not 40 letters and digits (optionally prefixed with <code>lin_integration_</code>)' }
+        ]
+      },
+      {
+        title: 'MCP server',
+        defaultOpen: false,
+        items: [
+          { text: 'The Linear MCP server now gives clients default instructions on how to use its tools effectively' },
+          { text: '<code>list_issues</code> can now filter issues by completion date with <code>completedAt</code>, accepting an ISO-8601 date or duration such as <code>-P7D</code>' },
+          { text: 'The read-only MCP endpoint is now listed in the MCP registry' },
+          { text: 'You can now assign users by part of their name, and a name that matches more than one user returns the possible matches' }
+        ]
+      }
+    ];
+
+    const collapsiblesHost = document.getElementById('changelog-collapsibles');
+    mobileDiffsAccordions.forEach((sec) => {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'collapsible-item' + (sec.defaultOpen ? ' open' : '');
+
+      const listHtml = sec.items.map(it => {
+        if (it.area) {
+          return `<li><span class="area-badge" style="--badge-color:${it.color}">${it.area}</span> ${it.text}</li>`;
+        }
+        return `<li>${it.text}</li>`;
+      }).join('');
+
+      wrapper.innerHTML = `
+        <button type="button" class="collapsible-trigger" aria-expanded="${sec.defaultOpen}">
+          <span class="collapsible-chevron">▸</span>
+          <span>${sec.title}</span>
+          <span class="collapsible-count">${sec.items.length}</span>
+        </button>
+        <div class="collapsible-panel">
+          <ul class="release-notes-list">${listHtml}</ul>
+        </div>
+      `;
+
+      const trigger = wrapper.querySelector('.collapsible-trigger');
+      trigger.addEventListener('click', () => {
+        const isOpen = wrapper.classList.toggle('open');
+        trigger.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      collapsiblesHost.appendChild(wrapper);
+    });
+  </script>
+</body>
+</html>

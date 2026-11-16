@@ -1,0 +1,3 @@
+@charset "UTF-8";
+@layer reset, base, app.base;
+.BBAEKq_root{align-items:baseline}.BBAEKq_asset{flex-shrink:0}.BBAEKq_center{vertical-align:middle;height:0;display:inline-block}@supports (vertical-align:1cap){.BBAEKq_center{vertical-align:.5cap}}.BBAEKq_center>*{display:block;translate:0 -50%}
