@@ -1,0 +1,4078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eventbrite — Events, Organizer Platform, Pricing & Product Updates</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --eb-orange: #FF5010;
+      --eb-orange-hover: #E04309;
+      --eb-orange-soft: #FFF1EB;
+      --eb-bg-base: #F5F5F0;
+      --eb-bg-raised: #FFFFFF;
+      --eb-bg-subtle: #EEEDE8;
+      --eb-fg-primary: #161719;
+      --eb-fg-secondary: #3D3F43;
+      --eb-fg-muted: #585163;
+      --eb-fg-subtle: #6F7287;
+      --eb-border: #E2E0D8;
+      --eb-border-strong: #C9C6BC;
+      --eb-blue: #3659E3;
+      --eb-green-bg: #D9F99D;
+      --eb-green-fg: #006B23;
+      --eb-pink-bg: #FF8DA1;
+      --eb-gradient-pink-orange: linear-gradient(115deg, #FBD5E5 0%, #FFE2D1 45%, #FF6B2B 100%);
+      --eb-gradient-glow-orange: linear-gradient(110deg, #F7F5EE 0%, #FDE2CE 42%, #FF6B26 78%, #FF4E0C 100%);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-pill: 9999px;
+      --shadow-sm: 0 2px 8px rgba(22, 23, 25, 0.06);
+      --shadow-md: 0 8px 24px rgba(22, 23, 25, 0.09);
+      --shadow-lg: 0 16px 40px rgba(22, 23, 25, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--eb-fg-primary);
+      background: var(--eb-bg-base);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    /* Prototype View Switcher Pill Bar (Subtle floating bar for switching all 4 captured pages) */
+    .proto-switcher {
+      position: fixed;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 900;
+      background: rgba(22, 23, 25, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      padding: 6px;
+      border-radius: var(--radius-pill);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+      max-width: calc(100vw - 24px);
+      overflow-x: auto;
+    }
+
+    .proto-switcher-label {
+      color: #A9A8B3;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0 10px 0 12px;
+      white-space: nowrap;
+    }
+
+    .proto-tab {
+      color: #E2E0D8;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 7px 13px;
+      border-radius: var(--radius-pill);
+      white-space: nowrap;
+      transition: all 0.18s ease;
+    }
+
+    .proto-tab:hover {
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .proto-tab.active {
+      background: var(--eb-orange);
+      color: #FFFFFF;
+    }
+
+    /* Page View Containers */
+    .page-view {
+      display: none;
+    }
+    .page-view.active {
+      display: block;
+    }
+
+    /* Shared Buttons */
+    .btn-primary-dark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #161719;
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 12px 22px;
+      border-radius: var(--radius-pill);
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+    .btn-primary-dark:hover {
+      background: #2C2E33;
+      transform: translateY(-1px);
+    }
+
+    .btn-primary-orange {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--eb-orange);
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: var(--radius-pill);
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+    .btn-primary-orange:hover {
+      background: var(--eb-orange-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(22, 23, 25, 0.06);
+      color: #161719;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 12px 22px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(22, 23, 25, 0.12);
+      transition: background 0.15s ease;
+    }
+    .btn-secondary-pill:hover {
+      background: rgba(22, 23, 25, 0.11);
+    }
+
+    .inline-link-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #161719;
+      transition: gap 0.18s ease, color 0.15s ease;
+    }
+    .inline-link-arrow:hover {
+      gap: 10px;
+      color: var(--eb-orange);
+    }
+
+    /* ==========================================================================
+       ORGANIZER HEADER (Shared across Overview, Pricing, Product Updates)
+       ========================================================================== */
+    .org-header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      height: 64px;
+      background: rgba(245, 245, 240, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--eb-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+    }
+
+    .org-header-left {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .org-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 19px;
+      letter-spacing: -0.03em;
+      color: #161719;
+    }
+
+    .org-nav-list {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      list-style: none;
+    }
+
+    .org-nav-item {
+      position: relative;
+    }
+
+    .org-nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 8px 13px;
+      border-radius: var(--radius-pill);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--eb-fg-primary);
+      transition: background 0.15s ease;
+    }
+
+    .org-nav-btn:hover,
+    .org-nav-btn.active {
+      background: rgba(22, 23, 25, 0.06);
+    }
+
+    .org-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      min-width: 580px;
+      background: #FFFFFF;
+      border: 1px solid var(--eb-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      padding: 24px;
+      display: none;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      z-index: 300;
+    }
+
+    .org-nav-item.open .org-dropdown-menu {
+      display: grid;
+    }
+
+    .org-dropdown-col-title {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--eb-fg-subtle);
+      margin-bottom: 10px;
+    }
+
+    .org-dropdown-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .org-dropdown-links a {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--eb-fg-primary);
+      transition: color 0.15s ease;
+    }
+
+    .org-dropdown-links a:hover {
+      color: var(--eb-orange);
+    }
+
+    .org-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* ==========================================================================
+       CONSUMER HEADER (Page 01: Event Listing)
+       ========================================================================== */
+    .consumer-header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      height: 68px;
+      background: #FFFFFF;
+      border-bottom: 1px solid #EAE8EE;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      gap: 16px;
+    }
+
+    .consumer-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--eb-orange);
+      font-weight: 800;
+      font-size: 22px;
+      letter-spacing: -0.04em;
+      flex-shrink: 0;
+    }
+
+    .consumer-search-pill {
+      display: flex;
+      align-items: center;
+      background: #F8F7FA;
+      border: 1px solid #DCD9E2;
+      border-radius: var(--radius-pill);
+      padding: 4px 5px 4px 16px;
+      flex: 1;
+      max-width: 540px;
+      transition: box-shadow 0.15s ease, border-color 0.15s ease;
+    }
+
+    .consumer-search-pill:focus-within {
+      border-color: #3659E3;
+      background: #FFFFFF;
+      box-shadow: 0 2px 10px rgba(54, 89, 227, 0.12);
+    }
+
+    .search-field-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .search-field-group input {
+      border: none;
+      background: transparent;
+      font-size: 14px;
+      color: #1E0A3C;
+      width: 100%;
+      outline: none;
+    }
+
+    .search-divider {
+      width: 1px;
+      height: 22px;
+      background: #D2CFD9;
+      margin: 0 12px;
+    }
+
+    .search-submit-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--eb-orange);
+      color: #FFFFFF;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.15s ease;
+    }
+
+    .search-submit-btn:hover {
+      background: var(--eb-orange-hover);
+    }
+
+    .consumer-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: #39364F;
+      white-space: nowrap;
+    }
+
+    .consumer-nav-links a:hover,
+    .consumer-nav-links button:hover {
+      color: var(--eb-orange);
+    }
+
+    .consumer-nav-create {
+      background: var(--eb-orange);
+      color: #FFFFFF !important;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    .consumer-nav-create:hover {
+      background: var(--eb-orange-hover);
+    }
+
+    /* ==========================================================================
+       PAGE 01: EVENT LISTING STYLES (01-index)
+       ========================================================================== */
+    .listing-surface {
+      background: #FFFFFF;
+      color: #1E0A3C;
+    }
+
+    .event-hero-band {
+      position: relative;
+      width: 100%;
+      background: #1C1226;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      padding: 0 24px;
+    }
+
+    .event-hero-ambient {
+      position: absolute;
+      inset: -20px;
+      background: radial-gradient(circle at 30% 40%, #8FD3F4 0%, #D4A5FF 35%, #FF6B8B 70%, #2B103A 100%);
+      filter: blur(36px) saturate(1.3);
+      opacity: 0.65;
+    }
+
+    .event-hero-poster {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 940px;
+      aspect-ratio: 2 / 1;
+      min-height: 360px;
+      background: linear-gradient(135deg, #2A254B 0%, #3E2753 48%, #21152E 100%);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .event-signals-bar {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 16px 24px 0;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .icon-circle-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid #E6E4EC;
+      background: #FFFFFF;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #3A3247;
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+
+    .icon-circle-btn:hover {
+      background: #F4F3F7;
+      transform: translateY(-1px);
+    }
+
+    .icon-circle-btn.liked {
+      color: #E0245E;
+      border-color: #FAD1DF;
+      background: #FFF5F8;
+    }
+
+    .listing-grid {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 12px 24px 80px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 360px;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .listing-title {
+      font-size: clamp(28px, 3.6vw, 40px);
+      font-weight: 800;
+      color: #1E0A3C;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .organizer-banner-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 0;
+      margin-bottom: 20px;
+    }
+
+    .organizer-banner-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .org-avatar-badge-wrap {
+      position: relative;
+      width: 54px;
+      height: 54px;
+      flex-shrink: 0;
+    }
+
+    .org-avatar-circle {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: #111111;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Georgia, serif;
+      font-size: 28px;
+      font-weight: 700;
+      border: 1px solid #E2E0E8;
+    }
+
+    .top-org-crown {
+      position: absolute;
+      right: -2px;
+      bottom: -2px;
+      width: 22px;
+      height: 22px;
+      background: var(--eb-orange);
+      border: 2px solid #FFFFFF;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+    }
+
+    .top-org-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #39364F;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .org-name-line {
+      font-size: 15px;
+      color: #39364F;
+    }
+
+    .org-name-line strong {
+      color: #1E0A3C;
+      font-weight: 700;
+    }
+
+    .org-meta-line {
+      font-size: 13px;
+      color: #6F7287;
+      margin-top: 3px;
+    }
+
+    .btn-follow-outline {
+      padding: 9px 20px;
+      border-radius: 6px;
+      border: 1px solid #D2CFD9;
+      background: #FFFFFF;
+      color: #1E0A3C;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.15s ease;
+    }
+
+    .btn-follow-outline:hover {
+      background: #F8F7FA;
+      border-color: #1E0A3C;
+    }
+
+    .btn-follow-outline.following {
+      background: #1E0A3C;
+      color: #FFFFFF;
+      border-color: #1E0A3C;
+    }
+
+    .event-meta-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 32px;
+      font-size: 15px;
+      color: #39364F;
+    }
+
+    .event-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .listing-section-h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1E0A3C;
+      margin-bottom: 14px;
+    }
+
+    .overview-body {
+      font-size: 15px;
+      line-height: 1.65;
+      color: #39364F;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .overview-collapsed {
+      max-height: 150px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .overview-collapsed::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 54px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0), #FFFFFF);
+    }
+
+    .read-more-link {
+      color: #3659E3;
+      font-weight: 600;
+      font-size: 14px;
+      margin-top: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .listing-divider {
+      height: 1px;
+      background: #EAE8EE;
+      margin: 32px 0;
+    }
+
+    .lineup-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .artist-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      border: 1px solid #E6E4EC;
+      border-radius: 12px;
+      background: #FFFFFF;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      cursor: pointer;
+    }
+
+    .artist-card:hover {
+      border-color: #1E0A3C;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .artist-card-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .artist-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      color: #FFFFFF;
+    }
+
+    .g2k-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .g2k-card {
+      border: 1px solid #E6E4EC;
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .g2k-card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1E0A3C;
+      margin-bottom: 12px;
+    }
+
+    .g2k-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 14px;
+      color: #39364F;
+    }
+
+    .g2k-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .location-box {
+      border: 1px solid #E6E4EC;
+      border-radius: 12px;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .travel-modes {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 14px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #3659E3;
+    }
+
+    .travel-modes li a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .map-preview-card {
+      position: relative;
+      height: 150px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #DCD9E2;
+      background: #E9EEF5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sticky-checkout-card {
+      position: sticky;
+      top: 92px;
+      background: #FFFFFF;
+      border: 1px solid #E6E4EC;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 6px 24px rgba(30, 10, 60, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .checkout-status-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1E0A3C;
+    }
+
+    .checkout-status-sub {
+      font-size: 13px;
+      color: #6F7287;
+      margin-top: 3px;
+    }
+
+    .btn-waitlist {
+      background: #D1410C;
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 12px 22px;
+      border-radius: 6px;
+      white-space: nowrap;
+      transition: background 0.15s ease;
+    }
+
+    .btn-waitlist:hover {
+      background: #B63608;
+    }
+
+    .event-tags-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      list-style: none;
+      margin-top: 14px;
+    }
+
+    .event-tag-pill {
+      padding: 8px 14px;
+      background: #F8F7FA;
+      border-radius: var(--radius-pill);
+      font-size: 13px;
+      font-weight: 500;
+      color: #39364F;
+      transition: background 0.15s ease;
+    }
+
+    .event-tag-pill:hover {
+      background: #EAE8EE;
+    }
+
+    /* Consumer Footer */
+    .consumer-footer {
+      background: #1E0A3C;
+      color: #DBDAE3;
+      padding: 48px 24px 96px;
+      font-size: 13px;
+    }
+
+    .consumer-footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .consumer-footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      padding-bottom: 36px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .consumer-footer h3 {
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .consumer-footer ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .consumer-footer a:hover {
+      color: #FFFFFF;
+      text-decoration: underline;
+    }
+
+    /* ==========================================================================
+       ORGANIZER MARKETING SECTIONS (Pages 02, 03, 04)
+       ========================================================================== */
+    .container-1344 {
+      max-width: 1344px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .breadcrumbs-bar {
+      max-width: 1344px;
+      margin: 0 auto;
+      padding: 16px 32px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--eb-fg-secondary);
+    }
+
+    .breadcrumbs-bar a:hover {
+      text-decoration: underline;
+    }
+
+    .breadcrumbs-current {
+      color: var(--eb-fg-subtle);
+    }
+
+    /* Overview Hero */
+    .overview-hero-wrap {
+      padding: 20px 32px 32px;
+      max-width: 1408px;
+      margin: 0 auto;
+    }
+
+    .overview-hero-card {
+      background: var(--eb-gradient-pink-orange);
+      border-radius: 20px;
+      padding: 56px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 48px;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hero-display-h1 {
+      font-size: clamp(36px, 4.4vw, 60px);
+      font-weight: 700;
+      line-height: 1.04;
+      letter-spacing: -0.025em;
+      text-transform: uppercase;
+      color: #161719;
+      margin-bottom: 20px;
+    }
+
+    .hero-subcopy {
+      font-size: 18px;
+      line-height: 1.45;
+      color: #25272B;
+      margin-bottom: 28px;
+      max-width: 540px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Feature Split Sections */
+    .org-section {
+      padding: 64px 0;
+    }
+
+    .org-section-raised {
+      background: #FFFFFF;
+      border-radius: 24px;
+      margin: 24px auto;
+      max-width: 1344px;
+      padding: 64px 56px;
+    }
+
+    .section-header-center {
+      text-align: center;
+      max-width: 780px;
+      margin: 0 auto 48px;
+    }
+
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--eb-fg-secondary);
+      margin-bottom: 10px;
+    }
+
+    .section-h2 {
+      font-size: clamp(28px, 3.2vw, 42px);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      color: #161719;
+      margin-bottom: 14px;
+    }
+
+    .section-lead {
+      font-size: 17px;
+      line-height: 1.5;
+      color: var(--eb-fg-secondary);
+    }
+
+    .split-feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .split-feature-grid.reverse .split-media {
+      order: -1;
+    }
+
+    .accordion-feature-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .accordion-feature-item {
+      padding: 22px 0;
+      border-bottom: 1px solid var(--eb-border);
+      cursor: pointer;
+      transition: opacity 0.15s ease;
+    }
+
+    .accordion-feature-item:last-child {
+      border-bottom: none;
+    }
+
+    .accordion-feature-item h3 {
+      font-size: 19px;
+      font-weight: 700;
+      color: #161719;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .accordion-feature-item p {
+      font-size: 15.5px;
+      line-height: 1.55;
+      color: var(--eb-fg-secondary);
+    }
+
+    .accordion-feature-item.active h3 {
+      color: var(--eb-orange);
+    }
+
+    /* Tools 4-Col Grid */
+    .tools-4-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .tool-card {
+      background: var(--eb-bg-base);
+      border-radius: 16px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
+      border: 1px solid rgba(22, 23, 25, 0.06);
+    }
+
+    .tool-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #161719;
+    }
+
+    .tool-card p {
+      font-size: 14.5px;
+      line-height: 1.5;
+      color: var(--eb-fg-secondary);
+    }
+
+    /* Solutions 2x2 Grid */
+    .solutions-2x2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+    }
+
+    .solution-card {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 22px;
+      align-items: center;
+      background: #FFFFFF;
+      border-radius: 16px;
+      padding: 18px;
+      border: 1px solid var(--eb-border);
+    }
+
+    .solution-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .solution-card p {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--eb-fg-secondary);
+      margin-bottom: 12px;
+    }
+
+    /* Testimonials */
+    .testimonials-2-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .testimonial-card {
+      background: var(--eb-bg-base);
+      border-radius: 16px;
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .quote-mark {
+      font-size: 44px;
+      line-height: 1;
+      font-weight: 800;
+      color: #161719;
+      margin-bottom: 12px;
+    }
+
+    .quote-body {
+      font-size: 18px;
+      line-height: 1.5;
+      font-weight: 500;
+      color: #161719;
+      margin-bottom: 24px;
+    }
+
+    .quote-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--eb-fg-secondary);
+    }
+
+    .quote-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #161719;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    /* Blog 3-Col */
+    .blog-3-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .blog-card {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .blog-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .blog-card p {
+      font-size: 14.5px;
+      line-height: 1.5;
+      color: var(--eb-fg-secondary);
+    }
+
+    /* Checklist List */
+    .check-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .check-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 15px;
+      line-height: 1.45;
+      color: var(--eb-fg-secondary);
+    }
+
+    .check-icon {
+      color: var(--eb-green-fg);
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ==========================================================================
+       PAGE 04: PRICING SPECIFIC STYLES
+       ========================================================================== */
+    .pricing-hero {
+      text-align: center;
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 44px 24px 48px;
+    }
+
+    .pricing-3-col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .pricing-pillar-card {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .pricing-pillar-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .pricing-pillar-card > p {
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--eb-fg-secondary);
+    }
+
+    .kpi-gradient-banner {
+      background: var(--eb-gradient-glow-orange);
+      padding: 72px 24px;
+      text-align: center;
+      margin: 32px 0;
+    }
+
+    .kpi-3-grid {
+      max-width: 1060px;
+      margin: 40px auto 36px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .kpi-caption {
+      font-size: 14px;
+      font-weight: 500;
+      color: #25272B;
+      margin-bottom: 6px;
+    }
+
+    .kpi-number {
+      font-size: clamp(44px, 5vw, 68px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: #161719;
+      margin-bottom: 6px;
+    }
+
+    .kpi-label {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #161719;
+    }
+
+    /* Interactive Fee Calculator Card inside Pricing */
+    .fee-calc-box {
+      margin-top: 20px;
+      background: var(--eb-bg-base);
+      border: 1px solid var(--eb-border);
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .fee-calc-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+
+    .fee-calc-input {
+      width: 110px;
+      padding: 7px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--eb-border-strong);
+      font-weight: 600;
+      font-size: 14px;
+      background: #FFFFFF;
+    }
+
+    /* Comparison Table */
+    .comparison-table-wrap {
+      overflow-x: auto;
+      margin-top: 32px;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 680px;
+      text-align: center;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 20px 16px;
+      border-bottom: 1px solid var(--eb-border);
+      font-size: 15px;
+    }
+
+    .comparison-table th:first-child,
+    .comparison-table td:first-child {
+      text-align: left;
+      font-weight: 500;
+      color: #161719;
+      width: 34%;
+    }
+
+    .comparison-table th:nth-child(2),
+    .comparison-table td:nth-child(2) {
+      background: #FAF9F5;
+      border-left: 1px solid var(--eb-border);
+      border-right: 1px solid var(--eb-border);
+    }
+
+    .comparison-table thead th:nth-child(2) {
+      border-top: 1px solid var(--eb-border);
+      border-radius: 14px 14px 0 0;
+    }
+
+    /* FAQ Accordion */
+    .faq-container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--eb-border-strong);
+    }
+
+    .faq-trigger {
+      width: 100%;
+      padding: 22px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      text-align: left;
+      font-size: 18px;
+      font-weight: 600;
+      color: #161719;
+    }
+
+    .faq-trigger svg {
+      transition: transform 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .faq-item.open .faq-trigger svg {
+      transform: rotate(180deg);
+    }
+
+    .faq-panel {
+      display: none;
+      padding-bottom: 22px;
+      font-size: 15.5px;
+      line-height: 1.6;
+      color: var(--eb-fg-secondary);
+    }
+
+    .faq-panel a {
+      text-decoration: underline;
+      font-weight: 600;
+      color: #161719;
+    }
+
+    .faq-item.open .faq-panel {
+      display: block;
+    }
+
+    /* ==========================================================================
+       PAGE 02: PRODUCT UPDATES SPECIFIC STYLES
+       ========================================================================== */
+    .updates-hero {
+      position: relative;
+      max-width: 920px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 40px 24px 28px;
+    }
+
+    .updates-hero-title {
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      text-transform: uppercase;
+      color: #161719;
+      margin: 8px 0 16px;
+    }
+
+    .updates-hero-sub {
+      font-size: 16px;
+      line-height: 1.55;
+      color: var(--eb-fg-secondary);
+      margin-bottom: 20px;
+    }
+
+    .updates-hero-sub a {
+      text-decoration: underline;
+      font-weight: 600;
+      color: #161719;
+    }
+
+    .updates-counter-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--eb-green-bg);
+      color: #161719;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 6px;
+    }
+
+    .month-selector-bar {
+      max-width: 960px;
+      margin: 12px auto 40px;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .month-chip {
+      padding: 9px 18px;
+      border-radius: var(--radius-pill);
+      background: #FFFFFF;
+      border: 1px solid var(--eb-border);
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #161719;
+      transition: all 0.15s ease;
+    }
+
+    .month-chip:hover {
+      border-color: #161719;
+    }
+
+    .month-chip.active {
+      background: #FFFFFF;
+      border: 2px solid #161719;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .month-header-block {
+      text-align: center;
+      margin-bottom: 44px;
+    }
+
+    .month-label-text {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--eb-fg-secondary);
+      margin-bottom: 8px;
+    }
+
+    .badge-green-lg {
+      display: inline-block;
+      background: var(--eb-green-bg);
+      color: #161719;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      padding: 4px 14px;
+      border-radius: 6px;
+    }
+
+    .announcements-list {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 64px;
+    }
+
+    .announcement-row {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .announcement-date {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--eb-fg-subtle);
+      margin-bottom: 8px;
+    }
+
+    .announcement-title {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #161719;
+      margin-bottom: 12px;
+    }
+
+    .announcement-summary {
+      font-size: 16px;
+      line-height: 1.55;
+      color: var(--eb-fg-secondary);
+    }
+
+    .announcement-media-card {
+      background: #FFFFFF;
+      border: 1px solid var(--eb-border);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .what-else-wrap {
+      position: relative;
+      max-width: 1080px;
+      margin: 88px auto 72px;
+      padding: 0 24px;
+    }
+
+    .what-else-card {
+      background: #FFFFFF;
+      border-radius: 24px;
+      padding: 52px 56px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .badge-pink-lg {
+      display: inline-block;
+      background: var(--eb-pink-bg);
+      color: #161719;
+      font-size: 22px;
+      font-weight: 800;
+      padding: 4px 14px;
+      border-radius: 6px;
+    }
+
+    .minor-list {
+      list-style: none;
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .minor-item {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--eb-border);
+    }
+
+    .minor-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .minor-item h3 {
+      font-size: 19px;
+      font-weight: 700;
+      margin: 4px 0 8px;
+    }
+
+    .minor-item p {
+      font-size: 15.5px;
+      line-height: 1.55;
+      color: var(--eb-fg-secondary);
+    }
+
+    /* ==========================================================================
+       ORGANIZER MARKETING FOOTER (Pages 02, 03, 04)
+       ========================================================================== */
+    .org-footer {
+      background: #EAE8E1;
+      border-top: 1px solid var(--eb-border-strong);
+      padding: 64px 32px 104px;
+      color: #161719;
+    }
+
+    .org-footer-inner {
+      max-width: 1344px;
+      margin: 0 auto;
+    }
+
+    .org-footer-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 32px 24px;
+      margin-bottom: 40px;
+    }
+
+    .org-footer-col-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #161719;
+      margin-bottom: 12px;
+    }
+
+    .org-footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--eb-fg-secondary);
+    }
+
+    .org-footer-links a:hover {
+      color: #161719;
+      text-decoration: underline;
+    }
+
+    .org-footer-actions-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--eb-border-strong);
+    }
+
+    .social-icons-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .social-circle {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(22, 23, 25, 0.08);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      transition: background 0.15s ease;
+    }
+
+    .social-circle:hover {
+      background: rgba(22, 23, 25, 0.16);
+    }
+
+    .org-footer-legal {
+      padding-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 12.5px;
+      color: var(--eb-fg-secondary);
+    }
+
+    .org-footer-legal-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      list-style: none;
+    }
+
+    .country-select {
+      padding: 8px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--eb-border-strong);
+      background: transparent;
+      font-size: 13px;
+      font-weight: 500;
+      color: #161719;
+    }
+
+    /* ==========================================================================
+       MODALS & TOAST NOTIFICATION
+       ========================================================================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(22, 23, 25, 0.55);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-dialog {
+      background: #FFFFFF;
+      border-radius: 18px;
+      max-width: 480px;
+      width: 100%;
+      padding: 28px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #F4F3F7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 11px 14px;
+      border-radius: 10px;
+      border: 1px solid #D2CFD9;
+      font-size: 14px;
+      margin-top: 6px;
+      margin-bottom: 14px;
+    }
+
+    .toast-banner {
+      position: fixed;
+      top: 80px;
+      right: 24px;
+      z-index: 1100;
+      background: #161719;
+      color: #FFFFFF;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-size: 13.5px;
+      font-weight: 500;
+      box-shadow: var(--shadow-lg);
+      opacity: 0;
+      transform: translateY(-10px);
+      pointer-events: none;
+      transition: all 0.2s ease;
+    }
+
+    .toast-banner.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 960px) {
+      .listing-grid {
+        grid-template-columns: 1fr;
+      }
+      .sticky-checkout-card {
+        position: static;
+      }
+      .overview-hero-card,
+      .split-feature-grid,
+      .announcement-row,
+      .location-box {
+        grid-template-columns: 1fr;
+      }
+      .tools-4-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .solutions-2x2,
+      .testimonials-2-grid,
+      .blog-3-grid,
+      .pricing-3-col,
+      .kpi-3-grid {
+        grid-template-columns: 1fr;
+      }
+      .org-footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .consumer-nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .org-header {
+        padding: 0 16px;
+      }
+      .org-nav-list {
+        display: none;
+      }
+      .overview-hero-card,
+      .org-section-raised,
+      .what-else-card {
+        padding: 28px 20px;
+      }
+      .tools-4-grid,
+      .lineup-grid,
+      .g2k-grid,
+      .solution-card {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Page View Switcher (Allows switching seamlessly across all 4 attached pages) -->
+  <nav class="proto-switcher" aria-label="Captured Pages Switcher">
+    <span class="proto-switcher-label">Pages:</span>
+    <button class="proto-tab active" data-page="page-index">01 · Event Listing</button>
+    <button class="proto-tab" data-page="page-overview">03 · Organizer Overview</button>
+    <button class="proto-tab" data-page="page-pricing">04 · Pricing</button>
+    <button class="proto-tab" data-page="page-updates">02 · Product Updates</button>
+  </nav>
+
+  <!-- Toast Banner -->
+  <div id="toastBanner" class="toast-banner" role="status" aria-live="polite"></div>
+
+  <!-- ========================================================================
+       PAGE 01: EVENT LISTING (01-index.html / 01-index.jpg)
+       ======================================================================== -->
+  <div id="page-index" class="page-view active listing-surface">
+    <!-- Consumer Global Header -->
+    <header class="consumer-header">
+      <a href="#top" class="consumer-brand" onclick="switchPage('page-index'); return false;">
+        <svg width="22" height="26" viewBox="0 0 17 21" fill="none">
+          <path d="M16.5463 16.3681C16.5463 15.2039 16.0111 14.1653 15.1736 13.4838L8.52595 8.3005C8.41581 8.21623 8.52817 8.04547 8.65014 8.11348L11.2462 9.56749C12.423 10.2269 13.9103 9.84543 14.6236 8.70041C15.3747 7.49255 14.9777 5.90179 13.744 5.18994L9.93339 2.98785C9.8129 2.91763 9.90161 2.73431 10.0324 2.78531L11.7829 3.48608C11.7873 3.48755 11.828 3.50234 11.8442 3.50825C12.0305 3.5733 12.2294 3.60878 12.4378 3.60878C13.3877 3.60878 14.1668 2.85775 14.2341 1.9648C14.3213 0.808687 13.4365 0 12.3809 0H4.28885C3.25027 0 2.37727 0.849343 2.39132 1.8857C2.39797 2.43641 2.64486 2.92798 3.03147 3.26505C3.32271 3.5186 4.30363 4.30363 4.77007 4.67619C4.8536 4.74272 4.80629 4.87578 4.69984 4.87578H3.08025C1.37713 4.88612 0 6.26991 0 7.97451C0 8.83642 0.35186 9.61628 0.920306 10.1773L10.2963 19.0884C10.9601 19.7071 11.8501 20.0863 12.8296 20.0863C14.8831 20.0863 16.5463 18.4209 16.5463 16.3681Z" fill="#FF5010"/>
+        </svg>
+        <span>eventbrite</span>
+      </a>
+
+      <form class="consumer-search-pill" onsubmit="event.preventDefault(); showToast('Searching events in ' + document.getElementById('locInput').value + '...');">
+        <div class="search-field-group">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#6F7287"><path d="M10 14c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zm3.5.9c-1 .7-2.2 1.1-3.5 1.1-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6c0 1.3-.4 2.5-1.1 3.4l5.1 5.1-1.5 1.5-5-5.1z"/></svg>
+          <input type="search" placeholder="Search events" aria-label="Search events" />
+        </div>
+        <div class="search-divider"></div>
+        <div class="search-field-group" style="max-width: 150px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#6F7287"><path d="M11.6 11.6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm0-7.6C8.5 4 6 6.5 6 9.6 6 13.8 11.6 20 11.6 20s5.6-6.2 5.6-10.4c0-3.1-2.5-5.6-5.6-5.6z"/></svg>
+          <input id="locInput" type="text" value="Praha" aria-label="Location" />
+        </div>
+        <button type="submit" class="search-submit-btn" aria-label="Search">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M14.906 16.32a8 8 0 1 1 1.414-1.414l5.682 5.682-1.414 1.414zM16 10a6 6 0 1 1-12 0 6 6 0 0 1 12 0"/></svg>
+        </button>
+      </form>
+
+      <div class="consumer-nav-links">
+        <a href="#updates" onclick="switchPage('page-updates'); return false;">Updates</a>
+        <a href="#find" onclick="showToast('Browsing events near Praha'); return false;">Find Events</a>
+        <a href="#overview" class="consumer-nav-create" onclick="switchPage('page-overview'); return false;">Create Events</a>
+        <a href="#pricing" onclick="switchPage('page-pricing'); return false;">Help Center ▾</a>
+        <a href="#tickets" onclick="openModal('waitlistModal'); return false;">Find my tickets</a>
+        <a href="#signin" onclick="openModal('waitlistModal'); return false;">Sign in</a>
+      </div>
+    </header>
+
+    <!-- Event Hero Visual Banner (Multi-layered SVG concert artwork matching screenshot) -->
+    <div class="event-hero-band">
+      <div class="event-hero-ambient"></div>
+      <div class="event-hero-poster">
+        <svg viewBox="0 0 940 470" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" role="img" aria-label="NEURO & EVIL: THE LIVE CONCERT Poster">
+          <defs>
+            <radialGradient id="stageGlowLeft" cx="30%" cy="45%" r="45%">
+              <stop offset="0%" stop-color="#86E3FF" stop-opacity="0.55"/>
+              <stop offset="100%" stop-color="#86E3FF" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="stageGlowRight" cx="72%" cy="45%" r="45%">
+              <stop offset="0%" stop-color="#FF3D71" stop-opacity="0.55"/>
+              <stop offset="100%" stop-color="#FF3D71" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="neuroHair" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#F7D6C4"/>
+              <stop offset="100%" stop-color="#D49B8C"/>
+            </linearGradient>
+            <linearGradient id="evilHair" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#7B435B"/>
+              <stop offset="100%" stop-color="#3C1E2E"/>
+            </linearGradient>
+          </defs>
+          <!-- Stage Background & Pixel Heart LED Screen -->
+          <rect width="940" height="470" fill="#1F1630"/>
+          <rect width="940" height="470" fill="url(#stageGlowLeft)"/>
+          <rect width="940" height="470" fill="url(#stageGlowRight)"/>
+          <!-- LED Grid dots -->
+          <g fill="#FF75B5" opacity="0.24">
+            <rect x="425" y="45" width="22" height="22" rx="4"/>
+            <rect x="493" y="45" width="22" height="22" rx="4"/>
+            <rect x="400" y="70" width="140" height="22" rx="4"/>
+            <rect x="415" y="95" width="110" height="22" rx="4"/>
+            <rect x="440" y="120" width="60" height="22" rx="4"/>
+            <rect x="458" y="145" width="24" height="22" rx="4"/>
+          </g>
+          <!-- Stage Spotlights -->
+          <polygon points="120,0 260,0 380,470 40,470" fill="#A5E8FF" opacity="0.09"/>
+          <polygon points="680,0 820,0 900,470 560,470" fill="#FF5A8A" opacity="0.09"/>
+
+          <!-- Left Character: Neuro-sama (Pastel Cyan & Cream Idol Outfit) -->
+          <g transform="translate(170, 35)">
+            <!-- Twin-tails -->
+            <path d="M90 110 C20 130, 10 230, 45 290 C65 230, 80 180, 105 145 Z" fill="url(#neuroHair)"/>
+            <path d="M210 110 C280 130, 290 230, 255 290 C235 230, 220 180, 195 145 Z" fill="url(#neuroHair)"/>
+            <!-- Idol Dress -->
+            <path d="M95 225 L205 225 L235 370 L65 370 Z" fill="#BCEEFF"/>
+            <path d="M115 225 L185 225 L195 310 L105 310 Z" fill="#FFFFFF"/>
+            <!-- Bow -->
+            <polygon points="150,235 125,222 125,248" fill="#5AC8FA"/>
+            <polygon points="150,235 175,222 175,248" fill="#5AC8FA"/>
+            <circle cx="150" cy="235" r="7" fill="#FF70A6"/>
+            <!-- Head & Face -->
+            <circle cx="150" cy="145" r="64" fill="#FFE6DC"/>
+            <!-- Hair Bangs -->
+            <path d="M84 140 C86 80, 214 80, 216 140 C200 115, 175 110, 150 132 C125 110, 100 115, 84 140 Z" fill="url(#neuroHair)"/>
+            <!-- Hair Clip Heart -->
+            <circle cx="192" cy="104" r="10" fill="#FF4F8B" stroke="#8CE5FF" stroke-width="3"/>
+            <!-- Eyes -->
+            <ellipse cx="126" cy="152" rx="11" ry="14" fill="#3B82F6"/>
+            <circle cx="123" cy="147" r="4" fill="#FFFFFF"/>
+            <ellipse cx="174" cy="152" rx="11" ry="14" fill="#3B82F6"/>
+            <circle cx="171" cy="147" r="4" fill="#FFFFFF"/>
+            <!-- Smile -->
+            <path d="M142 174 Q150 183 158 174" stroke="#E06D7E" stroke-width="3" fill="none" stroke-linecap="round"/>
+          </g>
+
+          <!-- Right Character: Evil Neuro (Crimson & Black Gothic Idol Outfit) -->
+          <g transform="translate(485, 35)">
+            <!-- Twin-tails -->
+            <path d="M85 110 C15 135, 5 235, 42 295 C62 235, 78 185, 102 145 Z" fill="url(#evilHair)"/>
+            <path d="M215 110 C285 135, 295 235, 258 295 C238 235, 222 185, 198 145 Z" fill="url(#evilHair)"/>
+            <!-- Gothic Dress -->
+            <path d="M92 225 L208 225 L240 370 L60 370 Z" fill="#1C1926"/>
+            <path d="M115 225 L185 225 L195 310 L105 310 Z" fill="#B91C1C"/>
+            <!-- Crimson Bow -->
+            <polygon points="150,235 124,220 124,250" fill="#EF4444"/>
+            <polygon points="150,235 176,220 176,250" fill="#EF4444"/>
+            <circle cx="150" cy="235" r="7" fill="#161719"/>
+            <!-- Head & Face -->
+            <circle cx="150" cy="145" r="64" fill="#FFE2DA"/>
+            <!-- Hair Bangs -->
+            <path d="M84 140 C86 80, 214 80, 216 140 C200 115, 175 110, 150 132 C125 110, 100 115, 84 140 Z" fill="url(#evilHair)"/>
+            <!-- Black Headband -->
+            <path d="M92 120 Q150 84 208 120" stroke="#161719" stroke-width="7" fill="none"/>
+            <!-- Eyes (Crimson) -->
+            <ellipse cx="126" cy="152" rx="11" ry="14" fill="#DC2626"/>
+            <circle cx="123" cy="147" r="4" fill="#FFFFFF"/>
+            <ellipse cx="174" cy="152" rx="11" ry="14" fill="#DC2626"/>
+            <circle cx="171" cy="147" r="4" fill="#FFFFFF"/>
+            <!-- Smirk -->
+            <path d="M141 175 Q152 182 160 171" stroke="#B91C1C" stroke-width="3" fill="none" stroke-linecap="round"/>
+          </g>
+
+          <!-- Center Event Title Lockup -->
+          <g transform="translate(470, 315)" text-anchor="middle">
+            <text y="-38" fill="#FFFFFF" font-family="Inter, sans-serif" font-weight="800" font-size="13" letter-spacing="3">@ LOS ANGELES</text>
+            <text y="6" fill="#FFB3A7" stroke="#24132C" stroke-width="6" paint-order="stroke" font-family="Inter, sans-serif" font-weight="900" font-size="52" letter-spacing="1">NEURO</text>
+            <text y="58" fill="#FF4B6E" stroke="#24132C" stroke-width="6" paint-order="stroke" font-family="Inter, sans-serif" font-weight="900" font-size="54" letter-spacing="1">&amp; EVIL</text>
+            <text y="86" fill="#FFFFFF" font-family="Inter, sans-serif" font-weight="800" font-size="14" letter-spacing="3.5">THE LIVE CONCERT</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Action Bar (Share & Like) -->
+    <div class="event-signals-bar">
+      <button class="icon-circle-btn" onclick="openModal('shareModal')" aria-label="Share this event" title="Share">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 16v2H6v-2H4v4h16v-4z"/><path d="M12 4L7 9l1.4 1.4L11 7.8V16h2V7.8l2.6 2.6L17 9l-5-5z"/></svg>
+      </button>
+      <button id="likeBtn" class="icon-circle-btn" onclick="toggleLikeEvent(this)" aria-label="Like event" aria-pressed="false" title="Save event">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16.024 5c-1.02 0-2.041.398-2.815 1.193L11.99 7.445l-1.2-1.233a3.915 3.915 0 0 0-5.629 0c-1.548 1.591-1.548 4.193 0 5.784L12 19l6.839-7.023c1.548-1.591 1.548-4.194 0-5.784A3.92 3.92 0 0 0 16.024 5m0 2c.522 0 1.012.209 1.381.588.79.811.79 2.182.001 2.993l-5.408 5.554-5.404-5.534c-.79-.811-.79-2.182 0-2.994a1.914 1.914 0 0 1 2.763 0l1.2 1.233 1.433 1.473 1.433-1.473 1.22-1.252A1.91 1.91 0 0 1 16.024 7"/></svg>
+      </button>
+    </div>
+
+    <!-- Main 2-Column Listing Content -->
+    <div class="listing-grid">
+      <main>
+        <h1 class="listing-title">NEURO &amp; EVIL: THE LIVE CONCERT</h1>
+
+        <!-- Top Organizer Bar -->
+        <div class="organizer-banner-card">
+          <div class="organizer-banner-left">
+            <div class="org-avatar-badge-wrap">
+              <div class="org-avatar-circle">V</div>
+              <div class="top-org-crown" title="Top Organizer">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/></svg>
+              </div>
+            </div>
+            <div>
+              <span class="top-org-eyebrow">TOP ORGANIZER</span>
+              <div class="org-name-line">by <a href="#organizer-card"><strong>The Vermont Hollywood</strong></a></div>
+              <div class="org-meta-line">2.7k followers &nbsp;•&nbsp; 131 events &nbsp;•&nbsp; 2y hosting &nbsp;•&nbsp; 62.9k total attendees</div>
+            </div>
+          </div>
+          <button class="btn-follow-outline" onclick="toggleFollow(this)">Follow</button>
+        </div>
+
+        <!-- Venue & Date -->
+        <div class="event-meta-stack">
+          <div class="event-meta-row">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="#39364F"><path d="M8 8.66797C9.10457 8.66797 10 7.77254 10 6.66797C10 5.5634 9.10457 4.66797 8 4.66797C6.89543 4.66797 6 5.5634 6 6.66797C6 7.77254 6.89543 8.66797 8 8.66797Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M14 6.66797C14 10.668 8 15.3346 8 15.3346C8 15.3346 2 10.668 2 6.66797C2 3.0013 4.68629 0.667969 8 0.667969C11.3137 0.667969 14 3.0013 14 6.66797ZM12.6667 6.66797C12.6667 7.34885 12.4052 8.15861 11.9004 9.05595C11.4026 9.94098 10.7207 10.8185 10.0089 11.6093C9.30105 12.3959 8.58882 13.069 8.05168 13.5464L8 13.5922L7.94832 13.5464C7.41118 13.069 6.69895 12.3959 5.99106 11.6093C5.2793 10.8185 4.59743 9.94098 4.0996 9.05595C3.59485 8.15861 3.33333 7.34885 3.33333 6.66797C3.33333 3.78927 5.37 2.0013 8 2.0013C10.63 2.0013 12.6667 3.78927 12.6667 6.66797Z"/></svg>
+            <a href="#location">Vermont Hollywood &nbsp;•&nbsp; Los Angeles, CA</a>
+          </div>
+          <div class="event-meta-row">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="#39364F"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.00065 1.33203H6.33398V1.9987H9.66732V1.33203H11.0007V1.9987H14.6673V13.9987H1.33398V1.9987H5.00065V1.33203ZM5.00065 3.33203H2.66732V12.6654H13.334V3.33203H11.0007V3.9987H9.66732V3.33203H6.33398V3.9987H5.00065V3.33203Z"/></svg>
+            <time datetime="2026-12-19T20:19:00Z">Saturday, December 19 &nbsp;•&nbsp; Starts at 12:19 PM</time>
+          </div>
+        </div>
+
+        <!-- Overview -->
+        <section>
+          <h2 class="listing-section-h2">Overview</h2>
+          <div id="overviewText" class="overview-body overview-collapsed">
+            <p>AI twins Neuro-sama &amp; Evil Neuro with a live band will perform their first extended-reality live concert at 12:19pm (midday) Dec. 19 2026.</p>
+            <p>NEURO &amp; EVIL: THE LIVE CONCERT is a special matinee performance (12:19pm) by the twins in celebration of Neuro's birthday on December 19, 2022.</p>
+            <p>Created by UK-based developer Vedal, Neuro and Evil have become known for their unpredictable livestreams and contrasting personalities. Neuro mixes mischief with unexpected sweetness, while Evil aspires to villainy but keeps revealing a softer side. Their music pairs synthetically produced vocals with original songwriting and production by human musicians, with vocal production by QueenPB.</p>
+            <p>While the twins have covered a lot of musical ground across their collaborative songs and numerous covers, their distinct personalities shine through in their respective original tracks. Neuro’s music is generally brighter and more uplifting, inspired by earlier works of Porter Robinson, sasakure.UK, wistful Japanese City Pop, and modern alternative synthpop music. Evil’s music is more intense, drawing on modern alt rock and nu-metal as well as darker EDM and bass music influences. Touch points include Bring Me The Horizon, Evanescence, and South Arcade.</p>
+            <p>The night is produced by Vedal AI, ETC and rust.</p>
+            <p><strong>FOLLOW NEURO &amp; EVIL:</strong><br/>
+            Twitch (1M followers) &nbsp;•&nbsp; YouTube (916k followers)<br/>
+            Spotify: Neuro-sama (~46k monthly listeners) &nbsp;•&nbsp; Evil Neuro (~52k monthly listeners)</p>
+          </div>
+          <button id="readMoreBtn" class="read-more-link" type="button" onclick="toggleOverview()">Read more</button>
+        </section>
+
+        <div class="listing-divider"></div>
+
+        <!-- Lineup -->
+        <section>
+          <h2 class="listing-section-h2">Lineup</h2>
+          <div class="lineup-grid">
+            <div class="artist-card" onclick="openArtistModal('Neuro-sama')">
+              <div class="artist-card-left">
+                <div class="artist-avatar" style="background: linear-gradient(135deg, #60A5FA, #F472B6);">NS</div>
+                <div>
+                  <div style="font-weight:700; font-size:15px; color:#1E0A3C;">Neuro-sama</div>
+                  <div style="font-size:12.5px; color:#6F7287;">AI Vocalist • 3M+ followers</div>
+                </div>
+              </div>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#3A3247"><path d="m10.224 17 4.936-5-4.936-5-1.397 1.414L12.367 12l-3.54 3.585z"/></svg>
+            </div>
+
+            <div class="artist-card" onclick="openArtistModal('Evil Neuro')">
+              <div class="artist-card-left">
+                <div class="artist-avatar" style="background: linear-gradient(135deg, #DC2626, #1E1B4B);">EN</div>
+                <div>
+                  <div style="font-weight:700; font-size:15px; color:#1E0A3C;">Evil Neuro</div>
+                  <div style="font-size:12.5px; color:#6F7287;">AI Vocalist • Twin Counterpart</div>
+                </div>
+              </div>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#3A3247"><path d="m10.224 17 4.936-5-4.936-5-1.397 1.414L12.367 12l-3.54 3.585z"/></svg>
+            </div>
+          </div>
+        </section>
+
+        <div class="listing-divider"></div>
+
+        <!-- Good to know -->
+        <section>
+          <h2 class="listing-section-h2">Good to know</h2>
+          <div class="g2k-grid">
+            <div class="g2k-card">
+              <div class="g2k-card-title">Highlights</div>
+              <ul class="g2k-list">
+                <li><span>🪪</span> ages 18+</li>
+                <li><span>📍</span> In person</li>
+                <li><span>🚪</span> Doors at 11 AM</li>
+              </ul>
+            </div>
+            <div class="g2k-card">
+              <div class="g2k-card-title">Refund Policy</div>
+              <p style="font-size:14px; color:#39364F;">No refunds</p>
+            </div>
+          </div>
+        </section>
+
+        <div class="listing-divider"></div>
+
+        <!-- Location -->
+        <section id="location">
+          <h2 class="listing-section-h2">Location</h2>
+          <div class="location-box">
+            <div>
+              <div style="font-weight:700; font-size:16px; color:#1E0A3C; margin-bottom:4px;">Vermont Hollywood</div>
+              <div style="font-size:14px; color:#39364F;">1020 n. Vermont Ave</div>
+              <div style="font-size:14px; color:#39364F;">Los Angeles, CA 90029</div>
+              <div style="font-size:13.5px; font-weight:600; color:#1E0A3C; margin-top:16px;">How do you want to get there?</div>
+              <ul class="travel-modes">
+                <li><a href="https://maps.google.com?daddr=34.0903958,-118.2914681&mode=driving" target="_blank" rel="noreferrer">🚗 Driving</a></li>
+                <li><a href="https://maps.google.com?daddr=34.0903958,-118.2914681&mode=transit" target="_blank" rel="noreferrer">🚌 Public transport</a></li>
+                <li><a href="https://maps.google.com?daddr=34.0903958,-118.2914681&mode=bicycling" target="_blank" rel="noreferrer">🚲 Biking</a></li>
+                <li><a href="https://maps.google.com?daddr=34.0903958,-118.2914681&mode=walking" target="_blank" rel="noreferrer">🚶 Walking</a></li>
+              </ul>
+            </div>
+            <div class="map-preview-card">
+              <svg viewBox="0 0 220 150" width="100%" height="100%">
+                <rect width="220" height="150" fill="#E6ECF5"/>
+                <path d="M0 35 L220 35 M0 105 L220 105 M65 0 L65 150 M155 0 L155 150" stroke="#FFFFFF" stroke-width="6"/>
+                <path d="M0 72 L220 72" stroke="#FCD34D" stroke-width="5"/>
+                <rect x="75" y="44" width="70" height="20" rx="4" fill="#D1FAE5"/>
+                <circle cx="110" cy="72" r="14" fill="#FF5010" fill-opacity="0.22"/>
+                <circle cx="110" cy="72" r="6" fill="#FF5010" stroke="#FFFFFF" stroke-width="2"/>
+              </svg>
+              <button type="button" onclick="showToast('Interactive venue map centered on 1020 N. Vermont Ave, LA')" style="position:absolute; bottom:10px; background:#FFFFFF; border:1px solid #D2CFD9; padding:6px 12px; border-radius:6px; font-size:12px; font-weight:600; color:#1E0A3C;">Show map</button>
+            </div>
+          </div>
+        </section>
+
+        <div class="listing-divider"></div>
+
+        <!-- Event FAQs -->
+        <section>
+          <h2 class="listing-section-h2">Frequently asked questions</h2>
+          <div class="faq-item">
+            <button type="button" class="faq-trigger" onclick="toggleFaq(this)">
+              <span>What things are ok to bring and do?</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#3A3247"><path d="m7 10.224 5 4.936 5-4.936-1.414-1.397L12 12.367l-3.585-3.54z"/></svg>
+            </button>
+            <div class="faq-panel">Penlights &amp; UO, Plushies, Cosplay, Phone Photography/Video</div>
+          </div>
+          <div class="faq-item">
+            <button type="button" class="faq-trigger" onclick="toggleFaq(this)">
+              <span>What Can't I Do?</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#3A3247"><path d="m7 10.224 5 4.936 5-4.936-1.414-1.397L12 12.367l-3.585-3.54z"/></svg>
+            </button>
+            <div class="faq-panel">Everything that the venue website says you can't bring and/or do, and no flash photography, lifts &amp; carrying, outside food &amp; beverage, cosplay weapons and props, pro recording equipment. All pro recording video must be approved in writing in advance by venue and the producers.</div>
+          </div>
+        </section>
+
+        <div class="listing-divider"></div>
+
+        <!-- Organized by Card -->
+        <section id="organizer-card">
+          <h2 class="listing-section-h2">Organized by</h2>
+          <div style="border:1px solid #E6E4EC; border-radius:14px; padding:24px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:20px;">
+            <div style="display:flex; align-items:center; gap:16px;">
+              <div class="org-avatar-badge-wrap">
+                <div class="org-avatar-circle">V</div>
+                <div class="top-org-crown">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5z"/></svg>
+                </div>
+              </div>
+              <div>
+                <span class="top-org-eyebrow">Top Organizer</span>
+                <div style="font-size:18px; font-weight:700; color:#1E0A3C;">The Vermont Hollywood</div>
+                <div style="display:flex; gap:18px; margin-top:8px; font-size:13px; color:#6F7287;">
+                  <div><strong style="color:#1E0A3C; display:block; font-size:15px;">2660</strong>Followers</div>
+                  <div><strong style="color:#1E0A3C; display:block; font-size:15px;">131</strong>Events</div>
+                  <div><strong style="color:#1E0A3C; display:block; font-size:15px;">2 years</strong>Hosting</div>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex; gap:10px;">
+              <button class="btn-follow-outline" onclick="openModal('contactOrgModal')">Contact</button>
+              <button class="btn-follow-outline" style="background:#3659E3; color:#FFF; border-color:#3659E3;" onclick="toggleFollow(this)">Follow</button>
+            </div>
+          </div>
+
+          <div style="margin-top:20px;">
+            <button type="button" onclick="showToast('Event report form opened for moderator review.')" style="display:inline-flex; align-items:center; gap:8px; color:#3659E3; font-size:13.5px; font-weight:600;">
+              <svg width="15" height="15" viewBox="0 0 17 17" fill="#3659E3"><path fill-rule="evenodd" clip-rule="evenodd" d="M15.2248 7.49984L18.3346 13.3332H3.33464V18.3332H1.66797V1.6665H18.3346L15.2248 7.49984ZM3.33464 3.33317H15.5574L13.3361 7.49984L15.5574 11.6665H3.33464V3.33317Z"/></svg>
+              Report this event
+            </button>
+          </div>
+        </section>
+
+        <div class="listing-divider"></div>
+
+        <!-- Event Tags -->
+        <section>
+          <h2 class="listing-section-h2">Still looking for the right event?</h2>
+          <p style="font-size:14px; color:#6F7287;">Explore all events in Los Angeles and filter by date, category, and more to find the perfect fit.</p>
+          <ul class="event-tags-list">
+            <li class="event-tag-pill"><a href="#tag" onclick="showToast('Filtering: United States Events'); return false;">United States Events</a></li>
+            <li class="event-tag-pill"><a href="#tag" onclick="showToast('Filtering: California Events'); return false;">California Events</a></li>
+            <li class="event-tag-pill"><a href="#tag" onclick="showToast('Filtering: Things to do in Los Angeles'); return false;">Things to do in Los Angeles, California</a></li>
+            <li class="event-tag-pill"><a href="#tag" onclick="showToast('Filtering: Los Angeles performances'); return false;">Los Angeles performances</a></li>
+            <li class="event-tag-pill"><a href="#tag" onclick="showToast('Filtering: Los Angeles Music performances'); return false;">Los Angeles Music performances</a></li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Right Sidebar Conversion Bar -->
+      <aside>
+        <div class="sticky-checkout-card">
+          <div>
+            <div class="checkout-status-title">Sold out</div>
+            <div class="checkout-status-sub">Sat, Dec 19 &nbsp;•&nbsp; 12:19 PM</div>
+          </div>
+          <button type="button" class="btn-waitlist" onclick="openModal('waitlistModal')">Join Waitlist</button>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Consumer Footer -->
+    <footer class="consumer-footer">
+      <div class="consumer-footer-inner">
+        <div class="consumer-footer-grid">
+          <div>
+            <h3>Use Eventbrite</h3>
+            <ul>
+              <li><a href="#overview" onclick="switchPage('page-overview'); return false;">How it Works</a></li>
+              <li><a href="#pricing" onclick="switchPage('page-pricing'); return false;">Pricing</a></li>
+              <li><a href="#updates" onclick="switchPage('page-updates'); return false;">Product Updates</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Plan Events</h3>
+            <ul>
+              <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Conference Management Software</a></li>
+              <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Eventbrite + Yoga</a></li>
+              <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Nonprofits &amp; Fundraisers</a></li>
+              <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Sell Tickets</a></li>
+              <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Event Management &amp; Planning</a></li>
+              <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Online Event Registration</a></li>
+              <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Online RSVP</a></li>
+              <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Music Venues &amp; Promoters</a></li>
+              <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Event Equipment &amp; Staffing</a></li>
+              <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Eventbrite Sales Number</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Find Events</h3>
+            <ul>
+              <li><a href="#find" onclick="showToast('Browsing Online Events'); return false;">Browse Online Events</a></li>
+              <li><a href="#app" onclick="showToast('Eventbrite App iOS & Android'); return false;">Get the Eventbrite App</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Connect with Us</h3>
+            <ul>
+              <li><a href="#report" onclick="showToast('Report submitted'); return false;">Report this event</a></li>
+              <li><a href="#help" onclick="showToast('Opening Help Center'); return false;">Help Center</a></li>
+              <li><a href="#terms" onclick="showToast('Eventbrite Terms of Service'); return false;">Terms</a></li>
+              <li><a href="#privacy" onclick="showToast('Eventbrite Privacy Policy'); return false;">Privacy</a></li>
+              <li><a href="#ca" onclick="showToast('CA Privacy Notice'); return false;">CA Privacy Notice</a></li>
+              <li><a href="#a11y" onclick="showToast('Accessibility Statement'); return false;">Accessibility</a></li>
+              <li><a href="#comm" onclick="showToast('Community Guidelines'); return false;">Community Guidelines</a></li>
+            </ul>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; padding-top:24px; flex-wrap:wrap; gap:12px;">
+          <div>© 2026 Eventbrite</div>
+          <div style="display:flex; gap:16px;">
+            <a href="#prefs" onclick="showToast('Cookie & Privacy Preferences'); return false;">Privacy Preferences</a>
+            <a href="#dns" onclick="showToast('Opt-out preference saved'); return false;">Do Not Sell or Share My Personal Information</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+
+  <!-- ========================================================================
+       PAGE 03: ORGANIZER OVERVIEW (03-overview.html / 03-overview.jpg)
+       ======================================================================== -->
+  <div id="page-overview" class="page-view">
+    <!-- Organizer Navbar -->
+    <div id="orgHeaderOverview"></div>
+
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs-bar" aria-label="Breadcrumb">
+      <a href="#home" onclick="switchPage('page-index'); return false;">Home</a>
+      <span>›</span>
+      <span class="breadcrumbs-current">Create Events</span>
+    </nav>
+
+    <!-- Hero CTA Module (Pink-Orange Gradient Container) -->
+    <section class="overview-hero-wrap">
+      <div class="overview-hero-card">
+        <div>
+          <h1 class="hero-display-h1">ONLINE EVENT MANAGEMENT SOFTWARE TO GROW YOUR EVENTS</h1>
+          <p class="hero-subcopy">The all-in-one ticketing and discovery platform trusted by millions of organizers and attendees worldwide</p>
+          <div class="cta-row">
+            <button type="button" class="btn-primary-dark" onclick="openModal('signupModal')">Get started for free</button>
+            <button type="button" class="btn-secondary-pill" onclick="openModal('salesModal')">Contact Sales</button>
+          </div>
+        </div>
+
+        <!-- Rich Visual Composition: Festival Crowd & Live Event Card -->
+        <div style="position:relative; border-radius:18px; overflow:hidden; aspect-ratio:1/1; background:linear-gradient(145deg, #FF9E7D, #FFE3B3); box-shadow:var(--shadow-md);">
+          <svg viewBox="0 0 500 500" width="100%" height="100%">
+            <defs>
+              <radialGradient id="sunBurst" cx="75%" cy="20%" r="65%">
+                <stop offset="0%" stop-color="#FFFBEB" stop-opacity="0.95"/>
+                <stop offset="50%" stop-color="#FDBA74" stop-opacity="0.4"/>
+                <stop offset="100%" stop-color="#FB7185" stop-opacity="0.15"/>
+              </radialGradient>
+            </defs>
+            <rect width="500" height="500" fill="url(#sunBurst)"/>
+            <!-- Stylized Festival Attendees Silhouette / Vector Illustration -->
+            <circle cx="155" cy="215" r="46" fill="#FDE68A"/>
+            <path d="M85 460 C85 330, 225 330, 225 460 Z" fill="#FFFFFF"/>
+            <!-- Heart Sunglasses -->
+            <rect x="128" y="206" width="22" height="14" rx="7" fill="#FF5010"/>
+            <rect x="158" y="206" width="22" height="14" rx="7" fill="#FF5010"/>
+            <line x1="150" y1="212" x2="158" y2="212" stroke="#161719" stroke-width="2.5"/>
+
+            <circle cx="290" cy="230" r="42" fill="#FCD34D"/>
+            <path d="M225 460 C225 340, 355 340, 355 460 Z" fill="#FFE4E6"/>
+
+            <circle cx="400" cy="205" r="48" fill="#FBBF24"/>
+            <path d="M330 460 C330 320, 475 320, 475 460 Z" fill="#161719"/>
+            <rect x="372" y="196" width="22" height="14" rx="7" fill="#161719"/>
+            <rect x="402" y="196" width="22" height="14" rx="7" fill="#161719"/>
+
+            <!-- Floating Live Ticket Sales Pill -->
+            <g transform="translate(28, 28)">
+              <rect width="230" height="68" rx="14" fill="#FFFFFF" fill-opacity="0.95"/>
+              <circle cx="34" cy="34" r="16" fill="#D9F99D"/>
+              <path d="M27 34 L32 39 L42 29" stroke="#006B23" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <text x="62" y="29" font-family="Inter, sans-serif" font-weight="700" font-size="13" fill="#161719">Sold Out · 1,250 Tickets</text>
+              <text x="62" y="48" font-family="Inter, sans-serif" font-weight="500" font-size="12" fill="#585163">$42,890.00 Payout Scheduled</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Event Management Made Easy -->
+    <section class="org-section">
+      <div class="container-1344">
+        <div class="section-header-center">
+          <h2 class="section-h2">Event Management Made Easy</h2>
+          <p class="section-lead">Easily create events for free on a platform that attendees love and trust</p>
+        </div>
+
+        <div class="split-feature-grid">
+          <div class="accordion-feature-list" id="easyManageList">
+            <div class="accordion-feature-item active" onclick="selectPreviewTab('easy', 0, this)">
+              <h3>Customizable Event Pages</h3>
+              <p>Sell more with professional event pages and a seamless checkout experience for attendees on a trusted platform.</p>
+            </div>
+            <div class="accordion-feature-item" onclick="selectPreviewTab('easy', 1, this)">
+              <h3>Reporting &amp; Analytics</h3>
+              <p>Learn more about your buyers and discover where sales are coming from with real-time analytics</p>
+            </div>
+            <div class="accordion-feature-item" onclick="selectPreviewTab('easy', 2, this)">
+              <h3>Organizer App</h3>
+              <p>Check guests in, sell tickets at the door, and track real-time data with our easy-to-use Eventbrite Organizer App for mobile event management.</p>
+            </div>
+          </div>
+
+          <!-- Phone Mockup UI Preview -->
+          <div class="split-media" style="background:linear-gradient(135deg, #FF6B26, #D9F99D); border-radius:20px; padding:36px; display:flex; justify-content:center;">
+            <div style="width:290px; background:#161719; border-radius:38px; padding:12px; box-shadow:var(--shadow-lg);">
+              <div id="easyPhoneScreen" style="background:#FFFFFF; border-radius:28px; overflow:hidden; min-height:430px; display:flex; flex-direction:column;">
+                <div style="height:24px; background:#161719; width:100px; margin:0 auto; border-radius:0 0 14px 14px;"></div>
+                <div style="height:175px; background:linear-gradient(135deg, #312E81, #DB2777); padding:18px; color:#FFFFFF; display:flex; flex-direction:column; justify-content:flex-end;">
+                  <span style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; background:#FF5010; padding:3px 8px; border-radius:4px; width:fit-content; margin-bottom:6px;">Selling Fast</span>
+                  <div style="font-size:17px; font-weight:800; line-height:1.2;">Artisan Neapolitan Pizza Making Class</div>
+                </div>
+                <div style="padding:18px; flex:1; display:flex; flex-direction:column; justify-content:space-between;">
+                  <div>
+                    <div style="font-size:12px; color:#585163; margin-bottom:6px;">📍 Brooklyn Culinary Loft • Sat, 6:00 PM</div>
+                    <div style="font-size:13px; color:#161719; line-height:1.45;">Learn authentic sourdough stretching &amp; wood-fired baking with Chef Elena.</div>
+                  </div>
+                  <div style="border-top:1px solid #E2E0D8; padding-top:12px; display:flex; align-items:center; justify-content:space-between;">
+                    <div>
+                      <div style="font-size:11px; color:#6F7287;">General Admission</div>
+                      <div style="font-size:16px; font-weight:800;">$65.00</div>
+                    </div>
+                    <span style="background:#FF5010; color:#FFF; font-size:12px; font-weight:700; padding:9px 16px; border-radius:8px;">Get tickets</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Reach the right people -->
+    <section class="org-section-raised">
+      <div class="section-header-center">
+        <h2 class="section-h2">Reach the right people</h2>
+        <p class="section-lead">Grow your community on a marketplace where millions of people look for things to do.</p>
+      </div>
+
+      <div class="split-feature-grid">
+        <div class="accordion-feature-list">
+          <div class="accordion-feature-item active" onclick="selectPreviewTab('reach', 0, this)">
+            <h3>Attendee Discovery</h3>
+            <p>Personalized recommendations are tailored to attendees' interests and location, matching them with events they’d be most interested in attending</p>
+          </div>
+          <div class="accordion-feature-item" onclick="selectPreviewTab('reach', 1, this)">
+            <h3>Eventbrite Ads</h3>
+            <p>Promote your event across Eventbrite and get 14x more visibility on our homepage, related events, search results, and more</p>
+          </div>
+          <div class="accordion-feature-item" onclick="selectPreviewTab('reach', 2, this)">
+            <h3>Marketing Tools</h3>
+            <p>Engage attendees and reach new ones with our suite of automated email and social marketing tools</p>
+          </div>
+        </div>
+
+        <div class="split-media" style="background:linear-gradient(135deg, #FCE7F3, #D9F99D); border-radius:20px; padding:36px; display:flex; justify-content:center;">
+          <div style="width:290px; background:#161719; border-radius:38px; padding:12px; box-shadow:var(--shadow-lg);">
+            <div id="reachPhoneScreen" style="background:#18181B; color:#FFFFFF; border-radius:28px; overflow:hidden; min-height:430px; padding:18px; display:flex; flex-direction:column; justify-content:space-between;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:11px; font-weight:700; background:rgba(255,255,255,0.14); padding:4px 10px; border-radius:99px;">✨ Picked For You</span>
+                <span style="font-size:12px; color:#D9F99D; font-weight:700;">14x Visibility</span>
+              </div>
+              <div style="background:linear-gradient(160deg, #F43F5E, #FB923C); border-radius:18px; padding:20px; margin:14px 0; flex:1; display:flex; flex-direction:column; justify-content:flex-end;">
+                <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.08em; opacity:0.9;">Promoted • Nightlife</div>
+                <div style="font-size:20px; font-weight:800; margin:4px 0 8px;">Sunset Rooftop Disco &amp; Vinyl Sessions</div>
+                <div style="font-size:12px; opacity:0.95;">2,410 locals interested this week</div>
+              </div>
+              <div style="background:#27272A; border-radius:12px; padding:12px; display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:12px; font-weight:600;">TikTok &amp; IG Sync Active</span>
+                <span style="background:#D9F99D; color:#161719; font-size:11px; font-weight:800; padding:4px 8px; border-radius:6px;">+312 Clicks</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: All the Organizer Tools You Need -->
+    <section class="org-section" style="background:#FFFFFF; margin-top:40px;">
+      <div class="container-1344">
+        <div class="section-header-center">
+          <h2 class="section-h2">All the Organizer Tools You Need to Manage Your Event</h2>
+          <p class="section-lead">From event ticketing to payment collection, tools to promote, market, and manage your events seamlessly.</p>
+        </div>
+
+        <div class="tools-4-grid">
+          <div class="tool-card">
+            <div>
+              <h3>Flexible Ticket Types</h3>
+              <p>Everything you need to sell tickets and manage sales for in-person or online events.</p>
+            </div>
+            <button type="button" class="btn-secondary-pill" style="width:fit-content;" onclick="openModal('signupModal')">See ticketing tools</button>
+          </div>
+          <div class="tool-card">
+            <div>
+              <h3>Eventbrite Ads</h3>
+              <p>Create no-hassle ads that promote your event on Eventbrite</p>
+            </div>
+            <button type="button" class="btn-secondary-pill" style="width:fit-content;" onclick="openModal('signupModal')">Explore Eventbrite Ads</button>
+          </div>
+          <div class="tool-card">
+            <div>
+              <h3>Marketing Tools</h3>
+              <p>All the event marketing tools you need in one place</p>
+            </div>
+            <button type="button" class="btn-secondary-pill" style="width:fit-content;" onclick="openModal('signupModal')">See marketing tools</button>
+          </div>
+          <div class="tool-card">
+            <div>
+              <h3>Payments</h3>
+              <p>Easily collect and simplify event payments</p>
+            </div>
+            <button type="button" class="btn-secondary-pill" style="width:fit-content;" onclick="openModal('signupModal')">Discover payment tools</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Get paid, earn more -->
+    <section class="org-section-raised">
+      <div class="section-header-center">
+        <h2 class="section-h2">Get paid, earn more</h2>
+        <p class="section-lead">Do what you love and earn more money with low-cost fees and quicker payouts</p>
+      </div>
+
+      <div class="split-feature-grid">
+        <div class="accordion-feature-list">
+          <div class="accordion-feature-item active">
+            <h3>Payment Processing</h3>
+            <p>Easily collect and simplify event payments with built-in, full-service payment processing</p>
+          </div>
+          <div class="accordion-feature-item">
+            <h3>Low-cost fees</h3>
+            <p>Clear value, transparent fees. So you can focus on the important things.</p>
+          </div>
+          <div class="accordion-feature-item">
+            <h3>Scheduled Payouts</h3>
+            <p>Get paid before your event takes place on a customized schedule of your choice</p>
+          </div>
+        </div>
+
+        <div style="background:linear-gradient(135deg, #FF5010, #FDBA74); border-radius:20px; padding:36px;">
+          <div style="background:#FFFFFF; border-radius:16px; padding:24px; box-shadow:var(--shadow-lg);">
+            <div style="font-size:12px; font-weight:700; text-transform:uppercase; color:#6F7287; margin-bottom:6px;">Payout Schedule</div>
+            <div style="font-size:20px; font-weight:800; color:#161719; margin-bottom:18px;">Choose when you get paid</div>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <label style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border:2px solid #FF5010; border-radius:12px; background:#FFF1EB; cursor:pointer;">
+                <span style="font-weight:700; font-size:14px;">Twice a month (Pre-event)</span>
+                <span style="font-size:12px; font-weight:700; color:#FF5010;">Active</span>
+              </label>
+              <label style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border:1px solid #E2E0D8; border-radius:12px; cursor:pointer;">
+                <span style="font-weight:600; font-size:14px;">Weekly every Wednesday</span>
+                <span style="font-size:12px; color:#6F7287;">Select</span>
+              </label>
+              <label style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border:1px solid #E2E0D8; border-radius:12px; cursor:pointer;">
+                <span style="font-weight:600; font-size:14px;">After each event completes</span>
+                <span style="font-size:12px; color:#6F7287;">Select</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Solutions for events of all kinds and sizes -->
+    <section class="org-section-raised">
+      <div class="section-header-center">
+        <span class="section-eyebrow">Explore our offerings</span>
+        <h2 class="section-h2">Solutions for events of all kinds and sizes</h2>
+        <div class="cta-row" style="justify-content:center; margin-top:20px;">
+          <button type="button" class="btn-primary-dark" onclick="openModal('signupModal')">Get started for free</button>
+          <button type="button" class="btn-secondary-pill" onclick="openModal('salesModal')">Contact Sales</button>
+        </div>
+      </div>
+
+      <div class="solutions-2x2">
+        <div class="solution-card">
+          <div style="height:150px; border-radius:12px; background:linear-gradient(135deg, #4F46E5, #EC4899); display:flex; align-items:center; justify-content:center; color:#FFF; font-size:42px;">🎸</div>
+          <div>
+            <h3>Music Events</h3>
+            <p>Eventbrite is the industry-leading ticketing and marketing platform for independent music venues, promoters, and festivals.</p>
+            <a href="#music" class="inline-link-arrow" onclick="openModal('signupModal'); return false;">Explore music events <span>›</span></a>
+          </div>
+        </div>
+        <div class="solution-card">
+          <div style="height:150px; border-radius:12px; background:linear-gradient(135deg, #F59E0B, #EF4444); display:flex; align-items:center; justify-content:center; color:#FFF; font-size:42px;">🎭</div>
+          <div>
+            <h3>Performing Arts Events</h3>
+            <p>From community theater to dance classes, discover all the tools you need to create an unforgettable performance.</p>
+            <a href="#arts" class="inline-link-arrow" onclick="openModal('signupModal'); return false;">Discover performing arts events <span>›</span></a>
+          </div>
+        </div>
+        <div class="solution-card">
+          <div style="height:150px; border-radius:12px; background:linear-gradient(135deg, #0EA5E9, #1E293B); display:flex; align-items:center; justify-content:center; color:#FFF; font-size:42px;">💼</div>
+          <div>
+            <h3>Corporate Events</h3>
+            <p>Discover all the tools you need to accelerate your business growth, amplify your brand, and maximize ROI.</p>
+            <a href="#corp" class="inline-link-arrow" onclick="openModal('signupModal'); return false;">Explore corporate events <span>›</span></a>
+          </div>
+        </div>
+        <div class="solution-card">
+          <div style="height:150px; border-radius:12px; background:linear-gradient(135deg, #10B981, #FBBF24); display:flex; align-items:center; justify-content:center; color:#FFF; font-size:42px;">🍷</div>
+          <div>
+            <h3>Food &amp; Beverage Events</h3>
+            <p>Get your food and drink events discovered on the world’s largest events marketplace.</p>
+            <a href="#food" class="inline-link-arrow" onclick="openModal('signupModal'); return false;">Explore food and drink events <span>›</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Testimonials -->
+    <section class="org-section" style="background:#FFFFFF;">
+      <div class="container-1344">
+        <div class="section-header-center">
+          <h2 class="section-h2">Grow your event organizer business</h2>
+        </div>
+        <div class="testimonials-2-grid">
+          <div class="testimonial-card">
+            <div>
+              <div class="quote-mark">“</div>
+              <p class="quote-body">If you’re using Eventbrite ticketing, Eventbrite Ads is an obvious place for those advertising dollars to go.</p>
+            </div>
+            <div class="quote-author">
+              <div class="quote-avatar">RC</div>
+              <span>The Riot Comedy Club</span>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div>
+              <div class="quote-mark">“</div>
+              <p class="quote-body">Ultimately what I need is for people to land on the event page. The more views I have, the more likely I am to sell out.</p>
+            </div>
+            <div class="quote-author">
+              <div class="quote-avatar" style="background:#FF5010;">DT</div>
+              <span>Drunk Theatre</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Creator Spotlight -->
+    <section class="org-section">
+      <div class="container-1344">
+        <div class="split-feature-grid">
+          <div>
+            <h2 class="section-h2">Creator Spotlight</h2>
+            <p class="section-lead" style="margin-bottom:24px;">Discover how DJ Prashant makes music, community, and connection on the dance floor</p>
+            <div class="cta-row">
+              <button type="button" class="btn-primary-dark" onclick="showToast('Reading Creator Spotlight: DJ Prashant — Bollywood Dreams')">Read DJ Prashant's story</button>
+              <button type="button" class="btn-secondary-pill" onclick="showToast('Viewing all Eventbrite Creator Spotlights')">View other stories</button>
+            </div>
+          </div>
+          <div style="background:linear-gradient(135deg, #FF5010, #FACC15); border-radius:20px; padding:32px; display:flex; align-items:center; justify-content:space-between; color:#FFFFFF;">
+            <div>
+              <span style="background:rgba(22,23,25,0.85); padding:5px 12px; border-radius:99px; font-size:12px; font-weight:700;">Bollywood Dreams</span>
+              <div style="font-size:28px; font-weight:800; margin-top:14px; line-height:1.15;">DJ Prashant</div>
+              <div style="font-size:14px; opacity:0.95; margin-top:6px;">Portland &amp; West Coast Dance Communities</div>
+            </div>
+            <div style="font-size:72px;">🎧</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Blog / Eventbrite All Access -->
+    <section class="org-section-raised">
+      <div class="section-header-center">
+        <span class="section-eyebrow">Eventbrite All Access</span>
+        <h2 class="section-h2">Trends and insights from industry experts</h2>
+      </div>
+      <div class="blog-3-grid">
+        <article class="blog-card">
+          <div style="height:180px; border-radius:14px; background:linear-gradient(135deg, #1E1B4B, #FF5010); display:flex; align-items:center; justify-content:center; color:#FFF; font-size:40px;">🎟️</div>
+          <h3>How to Sell Tickets: A Guidebook for Event Organizers</h3>
+          <p>Eventbrite’s community of event creators sold 284 million tickets in 2022. Want to know how?</p>
+          <a href="#blog1" class="inline-link-arrow" onclick="showToast('Opening Guidebook: How to Sell Tickets'); return false;">Discover how to host a sold-out event <span>›</span></a>
+        </article>
+        <article class="blog-card">
+          <div style="height:180px; border-radius:14px; background:linear-gradient(135deg, #065F46, #34D399); display:flex; align-items:center; justify-content:center; color:#FFF; font-size:40px;">🤝</div>
+          <h3>9 Insider Tips for Building Your Events Community</h3>
+          <p>Event creators who sustain thriving communities often start from scratch. It’s a mixture of strategies, programming, dedication, and guts that make steady growth — and significant impact — possible.</p>
+          <a href="#blog2" class="inline-link-arrow" onclick="showToast('Opening Article: 9 Insider Tips'); return false;">See how to build your community <span>›</span></a>
+        </article>
+        <article class="blog-card">
+          <div style="height:180px; border-radius:14px; background:linear-gradient(135deg, #B45309, #FDE047); display:flex; align-items:center; justify-content:center; color:#161719; font-size:40px;">🥑</div>
+          <h3>104 Event Themes + Real Examples to Inspire Your Next Event</h3>
+          <p>Not feeling creative? Here’s a laundry list of event theme ideas to adopt or alter for your next event.</p>
+          <a href="#blog3" class="inline-link-arrow" onclick="showToast('Opening Article: 104 Event Themes'); return false;">Explore creative event themes <span>›</span></a>
+        </article>
+      </div>
+    </section>
+
+    <!-- Section: Publish your events for free -->
+    <section class="org-section-raised">
+      <div class="split-feature-grid">
+        <div>
+          <h2 class="section-h2">Publish your events for free</h2>
+          <p class="section-lead" style="margin-bottom:24px;">Reach more people on the world's largest and most trusted events marketplace. Everything you need to host standout events and earn more.</p>
+          <div class="cta-row">
+            <button type="button" class="btn-primary-dark" onclick="openModal('signupModal')">Get started for free</button>
+            <button type="button" class="btn-secondary-pill" onclick="openModal('salesModal')">Contact Sales</button>
+          </div>
+        </div>
+        <div>
+          <h3 style="font-size:18px; font-weight:700; margin-bottom:12px;">The all-in-one toolkit to grow your events</h3>
+          <ul class="check-list">
+            <li><span class="check-icon">✓</span> Flexible ticket types for in-person or online events</li>
+            <li><span class="check-icon">✓</span> Integrated email and social media marketing tools</li>
+            <li><span class="check-icon">✓</span> Secure and seamless attendee checkout</li>
+            <li><span class="check-icon">✓</span> Payouts before your event</li>
+            <li><span class="check-icon">✓</span> Detailed analytics and reporting</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Hosting a large or complex event? -->
+    <section class="org-section">
+      <div class="container-1344">
+        <div class="split-feature-grid">
+          <div>
+            <h2 class="section-h2">Hosting a large or complex event?</h2>
+            <p class="section-lead" style="margin-bottom:24px;">We offer tailored plans for event pros with unique needs. Get personalized support, customized pricing, and more by partnering with our sales team.</p>
+            <button type="button" class="btn-secondary-pill" onclick="openModal('salesModal')">Contact Sales</button>
+          </div>
+          <div style="background:linear-gradient(135deg, #1E293B, #475569); border-radius:20px; padding:32px; color:#FFFFFF; display:flex; align-items:center; justify-content:space-between;">
+            <div>
+              <div style="font-size:12px; font-weight:700; text-transform:uppercase; color:#FDBA74;">Enterprise &amp; High-Volume</div>
+              <div style="font-size:24px; font-weight:800; margin:6px 0;">Dedicated Strategic Advising</div>
+              <div style="font-size:14px; color:#CBD5E1;">Custom fee structures, onsite staffing &amp; priority 24/7 support.</div>
+            </div>
+            <div style="font-size:56px;">🏟️</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Support and resources for event organizers -->
+    <section class="org-section">
+      <div class="container-1344">
+        <div class="section-header-center">
+          <h2 class="section-h2">Support and resources for event organizers</h2>
+        </div>
+        <div class="testimonials-2-grid">
+          <div style="background:#FFFFFF; border-radius:16px; padding:32px; border:1px solid var(--eb-border);">
+            <h3 style="font-size:20px; font-weight:700; margin-bottom:10px;">Eventbrite Academy</h3>
+            <p style="font-size:15px; color:var(--eb-fg-secondary); margin-bottom:18px;">Learn the ins &amp; outs of event promotion and management to help you take your events to the next level</p>
+            <a href="#academy" class="inline-link-arrow" onclick="showToast('Launching Eventbrite Academy'); return false;">Event Organizer Training <span>›</span></a>
+          </div>
+          <div style="background:#FFFFFF; border-radius:16px; padding:32px; border:1px solid var(--eb-border);">
+            <h3 style="font-size:20px; font-weight:700; margin-bottom:10px;">Eventbrite Help Center</h3>
+            <p style="font-size:15px; color:var(--eb-fg-secondary); margin-bottom:18px;">Easily access answers, tutorials, guides, and FAQs in Eventbrite's Help Center to effectively navigate and use the platform</p>
+            <a href="#help" class="inline-link-arrow" onclick="showToast('Opening Eventbrite Help Center'); return false;">Get support <span>›</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Grow eventfully -->
+    <section class="org-section">
+      <div class="container-1344">
+        <div class="split-feature-grid">
+          <div>
+            <h2 class="section-h2">Grow eventfully</h2>
+            <p class="section-lead" style="margin-bottom:24px;">Explore all the built-in tools you need to start, run, and grow your business with events.</p>
+            <div class="cta-row">
+              <button type="button" class="btn-primary-dark" onclick="openModal('signupModal')">Get started for free</button>
+              <button type="button" class="btn-secondary-pill" onclick="openModal('salesModal')">Contact Sales</button>
+            </div>
+          </div>
+          <div style="background:linear-gradient(135deg, #FF5010, #EC4899); border-radius:20px; padding:36px; color:#FFFFFF; display:flex; align-items:center; justify-content:space-between;">
+            <div>
+              <div style="font-size:26px; font-weight:800;">Start your next sold-out event today</div>
+              <div style="font-size:14px; opacity:0.92; margin-top:6px;">Free to publish • Instant marketplace reach</div>
+            </div>
+            <div style="font-size:60px;">🚀</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Organizer Marketing Footer -->
+    <div id="orgFooterOverview"></div>
+  </div>
+
+
+  <!-- ========================================================================
+       PAGE 04: PRICING (04-pricing.html / 04-pricing.jpg)
+       ======================================================================== -->
+  <div id="page-pricing" class="page-view">
+    <div id="orgHeaderPricing"></div>
+
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs-bar" aria-label="Breadcrumb">
+      <a href="#home" onclick="switchPage('page-index'); return false;">Home</a>
+      <span>›</span>
+      <a href="#overview" onclick="switchPage('page-overview'); return false;">Create Events</a>
+      <span>›</span>
+      <span class="breadcrumbs-current">Eventbrite Pricing</span>
+    </nav>
+
+    <!-- Hero CTA -->
+    <section class="pricing-hero">
+      <h1 class="hero-display-h1">HOW TO CREATE AN EVENT FOR FREE AND GET DISCOVERED</h1>
+      <p class="hero-subcopy" style="margin:0 auto 28px; max-width:740px;">Yes, you can create an event for free on Eventbrite. Our platform is always free for events with free tickets, with no ticketing platform fees. For paid events, our simple event pricing consists of a small fee per ticket, giving you the flexibility to either cover the cost or pass it on to your attendees.</p>
+      <button type="button" class="btn-primary-dark" onclick="openModal('signupModal')">Get started for free</button>
+    </section>
+
+    <!-- Your #1 partner in event success (3-column cards with checklists) -->
+    <section class="org-section-raised">
+      <div class="section-header-center">
+        <h2 class="section-h2">Your #1 partner in event success</h2>
+        <p class="section-lead" style="margin-bottom:16px;">Our event management software pricing includes powerful promotion tools that run on auto-pilot, so you can focus on creating unforgettable experiences.</p>
+        <a href="#overview" class="inline-link-arrow" onclick="switchPage('page-overview'); return false;">Learn more about our features <span>›</span></a>
+      </div>
+
+      <div class="pricing-3-col">
+        <!-- Column 1 -->
+        <div class="pricing-pillar-card">
+          <div style="height:210px; border-radius:16px; background:linear-gradient(135deg, #312E81, #6366F1); padding:20px; color:#FFF; display:flex; flex-direction:column; justify-content:flex-end;">
+            <span style="font-size:11px; font-weight:700; background:#FF5010; padding:3px 9px; border-radius:99px; width:fit-content; margin-bottom:8px;">Marketplace Discovery</span>
+            <div style="font-size:18px; font-weight:800;">89M+ Monthly Event Seekers</div>
+          </div>
+          <h3>Get discovered</h3>
+          <p>Eventbrite’s powerful discovery marketplace connects local ticket-buyers to your events. And, with our built-in marketing suite powered by exclusive event data, you can effectively promote your events without leaving Eventbrite.</p>
+          <ul class="check-list">
+            <li><span class="check-icon">✓</span> Visibility on Eventbrite’s marketplace</li>
+            <li><span class="check-icon">✓</span> Eventbrite Ads*</li>
+            <li><span class="check-icon">✓</span> Email campaigns</li>
+            <li><span class="check-icon">✓</span> Facebook and Instagram ad tools</li>
+            <li><span class="check-icon">✓</span> Promo codes</li>
+            <li><span class="check-icon">✓</span> Smart audiences</li>
+            <li><span class="check-icon">✓</span> Data insights and reporting</li>
+          </ul>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="pricing-pillar-card">
+          <div style="height:210px; border-radius:16px; background:linear-gradient(135deg, #F59E0B, #FDE68A); padding:20px; color:#161719; display:flex; flex-direction:column; justify-content:flex-end;">
+            <span style="font-size:11px; font-weight:700; background:#161719; color:#FFF; padding:3px 9px; border-radius:99px; width:fit-content; margin-bottom:8px;">Streamlined Checkout</span>
+            <div style="font-size:18px; font-weight:800;">Apple Pay, Cards &amp; Instant Payouts</div>
+          </div>
+          <h3>Fast-track ticket sales</h3>
+          <p>Our best-in-class ticketing tools make it easy to set up your events and get paid fast. With flexible payment options and streamlined checkout, your attendees can buy with confidence.</p>
+          <ul class="check-list">
+            <li><span class="check-icon">✓</span> Custom pages and multiple ticket types</li>
+            <li><span class="check-icon">✓</span> AI event creation</li>
+            <li><span class="check-icon">✓</span> Secure payment processing</li>
+            <li><span class="check-icon">✓</span> Pre-event payouts</li>
+            <li><span class="check-icon">✓</span> Embedded checkout</li>
+            <li><span class="check-icon">✓</span> Custom registration forms</li>
+            <li><span class="check-icon">✓</span> Sell add-ons</li>
+          </ul>
+        </div>
+
+        <!-- Column 3 -->
+        <div class="pricing-pillar-card">
+          <div style="height:210px; border-radius:16px; background:linear-gradient(135deg, #FB7185, #FDBA74); padding:20px; color:#161719; display:flex; flex-direction:column; justify-content:flex-end;">
+            <span style="font-size:11px; font-weight:700; background:#FFFFFF; padding:3px 9px; border-radius:99px; width:fit-content; margin-bottom:8px;">Organizer App</span>
+            <div style="font-size:18px; font-weight:800;">Fast QR Check-In &amp; 24/7 Support</div>
+          </div>
+          <h3>Engage attendees</h3>
+          <p>Make event day and beyond a breeze with on-the-go check-in tools and attendee marketing automations, so your event shines from start to finish, plus event support when you need it.</p>
+          <ul class="check-list">
+            <li><span class="check-icon">✓</span> Automated event reminders</li>
+            <li><span class="check-icon">✓</span> Organizer app</li>
+            <li><span class="check-icon">✓</span> Mobile check-in</li>
+            <li><span class="check-icon">✓</span> Waitlists</li>
+            <li><span class="check-icon">✓</span> Help center</li>
+            <li><span class="check-icon">✓</span> Email support</li>
+            <li><span class="check-icon">✓</span> 24/7 chat support for paid events</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div style="max-width:1344px; margin:0 auto; padding:4px 32px 16px; text-align:center; font-size:13px; color:var(--eb-fg-subtle);">
+      *Eventbrite Ads is only available in select markets. Ad spend for advertising tools not included.
+    </div>
+
+    <!-- Full-Bleed Orange Gradient KPI Banner -->
+    <section class="kpi-gradient-banner">
+      <div style="max-width:760px; margin:0 auto;">
+        <h2 class="section-h2">Meet the rising demand</h2>
+        <p class="section-lead" style="color:#161719;">With improved personalization, it’s now easier than ever for people to find and buy tickets to events they’ll love.</p>
+      </div>
+
+      <div class="kpi-3-grid">
+        <div>
+          <div class="kpi-caption">Eventbrite helped transact</div>
+          <div class="kpi-number">270M</div>
+          <div class="kpi-label">Total tickets</div>
+        </div>
+        <div>
+          <div class="kpi-caption">In a global community of</div>
+          <div class="kpi-number">89M</div>
+          <div class="kpi-label">Monthly users</div>
+        </div>
+        <div>
+          <div class="kpi-caption">To over</div>
+          <div class="kpi-number">4.7M</div>
+          <div class="kpi-label">Events</div>
+        </div>
+      </div>
+
+      <div class="cta-row" style="justify-content:center;">
+        <button type="button" class="btn-primary-dark" onclick="openModal('signupModal')">Launch your next event</button>
+        <button type="button" class="btn-secondary-pill" style="background:rgba(255,255,255,0.45);" onclick="openModal('salesModal')">Contact Sales</button>
+      </div>
+    </section>
+
+    <!-- Simple Event Pricing + Interactive Fee Calculator -->
+    <section class="org-section-raised">
+      <div class="section-header-center">
+        <h2 class="section-h2">Simple Event Pricing: No Cost for Free Events, Low Fees for Paid Tickets</h2>
+        <p class="section-lead" style="margin-bottom:20px;">Our event pricing is simple and flexible. Event ticket fees are paid by your buyers by default, or you can choose to absorb them when you set up your ticket types.</p>
+        <div class="cta-row" style="justify-content:center;">
+          <button type="button" class="btn-primary-dark" onclick="openModal('signupModal')">Get started for free</button>
+          <button type="button" class="btn-secondary-pill" onclick="showToast('Fees: 3.7% + $1.79 service fee + 2.9% processing fee per order.')">Find out more about how fees work</button>
+        </div>
+      </div>
+
+      <div class="split-feature-grid">
+        <!-- Left Interactive Ticket & Fee Calculator Visual -->
+        <div style="background:linear-gradient(135deg, #93C5FD, #D9F99D); border-radius:20px; padding:32px;">
+          <div style="background:#FFFFFF; border-radius:16px; padding:24px; box-shadow:var(--shadow-lg);">
+            <div style="font-size:13px; font-weight:700; text-transform:uppercase; color:#6F7287; margin-bottom:4px;">Interactive Fee Estimator</div>
+            <div style="font-size:19px; font-weight:800; margin-bottom:16px;">Calculate your ticket payout</div>
+
+            <div class="fee-calc-row">
+              <label for="ticketPriceInput"><strong>Ticket Price ($ USD)</strong></label>
+              <input id="ticketPriceInput" type="number" min="0" step="1" value="50" class="fee-calc-input" oninput="updateFeeCalc()" />
+            </div>
+
+            <div class="fee-calc-row">
+              <span><strong>Who pays the fees?</strong></span>
+              <select id="feePayerSelect" class="fee-calc-input" style="width:165px;" onchange="updateFeeCalc()">
+                <option value="buyer" selected>Pass to buyer</option>
+                <option value="organizer">Absorb into price</option>
+              </select>
+            </div>
+
+            <div id="feeCalcResult" style="margin-top:16px; padding:14px; background:#F5F5F0; border-radius:12px; font-size:13.5px; display:flex; flex-direction:column; gap:6px;">
+              <div style="display:flex; justify-content:space-between;"><span>Service Fee (3.7% + $1.79):</span><strong>$3.64</strong></div>
+              <div style="display:flex; justify-content:space-between;"><span>Payment Processing (2.9%):</span><strong>$1.56</strong></div>
+              <div style="display:flex; justify-content:space-between; border-top:1px solid #D2CFD9; padding-top:8px; margin-top:4px; font-size:15px;"><span>Your Net Payout / Ticket:</span><strong style="color:#006B23;">$50.00</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 3 Fee Breakdown Items -->
+        <div class="accordion-feature-list">
+          <div class="accordion-feature-item">
+            <h3>No fees for free events</h3>
+            <p>Publish unlimited free events at no cost.</p>
+          </div>
+          <div class="accordion-feature-item">
+            <h3>3.7% + $1.79 service fee per ticket</h3>
+            <p>Applies to paid tickets only.</p>
+          </div>
+          <div class="accordion-feature-item">
+            <h3>2.9% payment processing fee per order</h3>
+            <p>Secure payment handling for every purchase.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hosting a large event? -->
+    <section class="org-section-raised">
+      <div class="split-feature-grid">
+        <div>
+          <h2 class="section-h2">Hosting a large event?</h2>
+          <p class="section-lead" style="margin-bottom:24px;">Grow your events with our expert team by your side</p>
+          <button type="button" class="btn-secondary-pill" onclick="openModal('salesModal')">Contact Sales</button>
+        </div>
+        <div>
+          <h3 style="font-size:18px; font-weight:700; margin-bottom:12px;">With Eventbrite, you can:</h3>
+          <ul class="check-list">
+            <li><span class="check-icon">✓</span> Unlock winning strategies with a Strategic Advisor</li>
+            <li><span class="check-icon">✓</span> Expand your reach with exclusive Eventbrite-sponsored marketing</li>
+            <li><span class="check-icon">✓</span> Get priority access to phone and 24/7 chat support</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Add what you need -->
+    <section class="org-section">
+      <div class="container-1344">
+        <div class="section-header-center">
+          <h2 class="section-h2">Add what you need</h2>
+        </div>
+
+        <div class="split-feature-grid">
+          <div style="background:linear-gradient(135deg, #FDBA74, #F472B6); border-radius:20px; padding:36px; display:flex; align-items:center; justify-content:center;">
+            <div style="background:#FFFFFF; border-radius:16px; padding:24px; width:100%; max-width:380px; box-shadow:var(--shadow-lg);">
+              <span style="background:#D9F99D; font-size:11px; font-weight:800; padding:4px 10px; border-radius:99px;">EVENTBRITE PRO</span>
+              <div style="font-size:22px; font-weight:800; margin:12px 0 6px;">10,000 Daily Emails</div>
+              <p style="font-size:13.5px; color:#585163; margin-bottom:16px;">Automated reminders, VIP invites, and high-converting templates.</p>
+              <div style="font-size:15px; font-weight:700; color:#FF5010;">Starting at $15/month</div>
+            </div>
+          </div>
+
+          <div class="accordion-feature-list">
+            <div class="accordion-feature-item">
+              <h3>Send more emails</h3>
+              <p style="margin-bottom:12px;">Save on marketing costs with Eventbrite Pro and send up to 10,000 emails daily. Starting at $15/month</p>
+              <a href="#pro" class="inline-link-arrow" onclick="openModal('signupModal'); return false;">Learn more <span>›</span></a>
+            </div>
+            <div class="accordion-feature-item">
+              <h3>Eventbrite Ads</h3>
+              <p style="margin-bottom:12px;">Increase your event's visibility with sponsored placements on top spots across Eventbrite</p>
+              <a href="#ads" class="inline-link-arrow" onclick="openModal('signupModal'); return false;">Get started <span>›</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Choose the plan that grows with your event -->
+    <section class="org-section-raised">
+      <div class="section-header-center">
+        <h2 class="section-h2">Choose the plan that grows with your event</h2>
+        <p class="section-lead" style="margin-bottom:20px;">We offer flexible plans designed to support event organizers at every stage.</p>
+        <button type="button" class="btn-primary-dark" onclick="openModal('signupModal')">Discover our plans</button>
+      </div>
+
+      <div class="pricing-3-col">
+        <div class="pricing-pillar-card">
+          <div style="height:180px; border-radius:16px; background:linear-gradient(135deg, #0284C7, #38BDF8); display:flex; align-items:center; justify-content:center; font-size:52px;">🌎</div>
+          <h3>For organizers worldwide</h3>
+          <p>Our pricing plans are available in the United States, Canada, Australia, New Zealand, the United Kingdom and Ireland.</p>
+        </div>
+        <div class="pricing-pillar-card">
+          <div style="height:180px; border-radius:16px; background:linear-gradient(135deg, #FF5010, #FB923C); display:flex; align-items:center; justify-content:center; font-size:52px;">⚡</div>
+          <h3>Pro plan</h3>
+          <p>Our Pro plan is built to help you reach more people, faster.</p>
+        </div>
+        <div class="pricing-pillar-card">
+          <div style="height:180px; border-radius:16px; background:linear-gradient(135deg, #161719, #4B5563); display:flex; align-items:center; justify-content:center; font-size:52px;">🤝</div>
+          <h3>Sales partnership</h3>
+          <p>Custom solutions for complex or high-volume events.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="org-section-raised">
+      <div class="section-header-center">
+        <h2 class="section-h2">Hear what our organizers are saying</h2>
+      </div>
+      <div class="testimonials-2-grid">
+        <div class="testimonial-card">
+          <div>
+            <div class="quote-mark">“</div>
+            <p class="quote-body">The conversion rate on Eventbrite was 20% better than other ticketing platforms...plus the automated emails generate a lot of new sales each time we post a new event.</p>
+          </div>
+          <div class="quote-author">
+            <div class="quote-avatar">ST</div>
+            <span>Seed Talks</span>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div>
+            <div class="quote-mark">“</div>
+            <p class="quote-body">We rely on Eventbrite for its discoverability and we're gaining followers. I can't think of an event where it wouldn't make sense to be using Eventbrite's marketing tools.</p>
+          </div>
+          <div class="quote-author">
+            <div class="quote-avatar" style="background:#FF5010;">SD</div>
+            <span>Something Dope for the People</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partner with Eventbrite Comparison Table -->
+    <section class="org-section-raised">
+      <div class="section-header-center" style="margin-bottom:20px;">
+        <h2 class="section-h2">Partner with Eventbrite</h2>
+        <div style="margin-top:16px;">
+          <button type="button" class="btn-primary-dark" onclick="openModal('signupModal')">Get started for free</button>
+        </div>
+      </div>
+
+      <div class="comparison-table-wrap">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>
+                <span style="display:inline-flex; align-items:center; gap:6px; font-weight:800; color:#FF5010; font-size:17px;">
+                  <svg width="15" height="18" viewBox="0 0 17 21" fill="none"><path d="M16.5463 16.3681C16.5463 15.2039 16.0111 14.1653 15.1736 13.4838L8.52595 8.3005C8.41581 8.21623 8.52817 8.04547 8.65014 8.11348L11.2462 9.56749C12.423 10.2269 13.9103 9.84543 14.6236 8.70041C15.3747 7.49255 14.9777 5.90179 13.744 5.18994L9.93339 2.98785C9.8129 2.91763 9.90161 2.73431 10.0324 2.78531L11.7829 3.48608C11.7873 3.48755 11.828 3.50234 11.8442 3.50825C12.0305 3.5733 12.2294 3.60878 12.4378 3.60878C13.3877 3.60878 14.1668 2.85775 14.2341 1.9648C14.3213 0.808687 13.4365 0 12.3809 0H4.28885C3.25027 0 2.37727 0.849343 2.39132 1.8857C2.39797 2.43641 2.64486 2.92798 3.03147 3.26505C3.32271 3.5186 4.30363 4.30363 4.77007 4.67619C4.8536 4.74272 4.80629 4.87578 4.69984 4.87578H3.08025C1.37713 4.88612 0 6.26991 0 7.97451C0 8.83642 0.35186 9.61628 0.920306 10.1773L10.2963 19.0884C10.9601 19.7071 11.8501 20.0863 12.8296 20.0863C14.8831 20.0863 16.5463 18.4209 16.5463 16.3681Z" fill="#FF5010"/></svg>
+                  eventbrite
+                </span>
+              </th>
+              <th>eTix</th>
+              <th>See Tickets</th>
+              <th>Dice</th>
+              <th>Universe</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Consumer audience reach<sup>1</sup></td>
+              <td><strong>90M</strong></td>
+              <td>20M</td>
+              <td>15M</td>
+              <td>10M</td>
+              <td>5M</td>
+            </tr>
+            <tr>
+              <td>AI-powered tools</td>
+              <td>✓</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Email and social media ad tools with smart audiences</td>
+              <td>✓</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Advertise to ticket buyers on the platform</td>
+              <td>✓</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Self-service + Create an event in seconds</td>
+              <td>✓</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Frequently Asked Questions (All 6 exact questions & answers) -->
+    <section class="faq-container">
+      <div class="section-header-center">
+        <h2 class="section-h2">Frequently Asked Questions</h2>
+      </div>
+
+      <div class="faq-item">
+        <button type="button" class="faq-trigger" onclick="toggleFaq(this)">
+          <span>What’s included when I use Eventbrite?</span>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#3A3247"><path d="m7 10.224 5 4.936 5-4.936-1.414-1.397L12 12.367l-3.585-3.54z"/></svg>
+        </button>
+        <div class="faq-panel">
+          <p style="margin-bottom:12px;">When you host with Eventbrite, your event is featured on the world's largest and most trusted events marketplace, where millions of global ticket buyers discover things to do.</p>
+          <p>You’ll have access to our complete toolkit, including integrated event ticketing, AI-powered event setup, secure payment processing, and powerful social media and email marketing tools—all designed to help you create a stand-out event. Learn more about our features <a href="#overview" onclick="switchPage('page-overview'); return false;">here.</a></p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button type="button" class="faq-trigger" onclick="toggleFaq(this)">
+          <span>Is it free to use Eventbrite?</span>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#3A3247"><path d="m7 10.224 5 4.936 5-4.936-1.414-1.397L12 12.367l-3.585-3.54z"/></svg>
+        </button>
+        <div class="faq-panel">
+          <p style="margin-bottom:12px;">Yes, publishing your event on Eventbrite is free! Your attendees pay Ticketing Fees including a service fee and payment processing fee where applicable, unless you choose to cover them. If your event is free, no Ticketing Fees apply.</p>
+          <p>There is an additional cost associated with running Eventbrite Ads or launching Instagram and Facebook ads through Eventbrite.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button type="button" class="faq-trigger" onclick="toggleFaq(this)">
+          <span>Do you offer special pricing for nonprofits?</span>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#3A3247"><path d="m7 10.224 5 4.936 5-4.936-1.414-1.397L12 12.367l-3.585-3.54z"/></svg>
+        </button>
+        <div class="faq-panel">
+          <p style="margin-bottom:12px;">Yes, we offer discounted Ticketing Fees on donation tickets, so more funds go directly to your cause. Additionally, qualifying nonprofits get 50% off our Pro plans so you can save on sending more marketing emails with Eventbrite.</p>
+          <p>We’re committed to supporting nonprofits with tailored features to help you and your community thrive.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button type="button" class="faq-trigger" onclick="toggleFaq(this)">
+          <span>What if my event is free?</span>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#3A3247"><path d="m7 10.224 5 4.936 5-4.936-1.414-1.397L12 12.367l-3.585-3.54z"/></svg>
+        </button>
+        <div class="faq-panel">
+          <p>There are no event ticket fees for free events. You can publish an unlimited number of free events on Eventbrite without any cost to you or your attendees. Our platform is completely free to use for events that do not charge for tickets, making it easy to manage registrations and RSVPs.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button type="button" class="faq-trigger" onclick="toggleFaq(this)">
+          <span>What support do I get with Eventbrite?</span>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#3A3247"><path d="m7 10.224 5 4.936 5-4.936-1.414-1.397L12 12.367l-3.585-3.54z"/></svg>
+        </button>
+        <div class="faq-panel">
+          <p style="margin-bottom:10px;">All Eventbrite organizers have access to our comprehensive Help Center and educational resources to help make your event seamless.</p>
+          <p style="margin-bottom:10px;">If you’re hosting a free event, you’ll have access to our email support, and you can subscribe to Pro for 24/7 chat support. For organizers with paid ticket events, we offer both email and 24/7 chat support.</p>
+          <p>Finally, if you’re hosting large events, you can <a href="#sales" onclick="openModal('salesModal'); return false;">contact our sales team</a> for dedicated phone support and strategic advising to help you maximize our platform.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button type="button" class="faq-trigger" onclick="toggleFaq(this)">
+          <span>What is Eventbrite Pro?</span>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#3A3247"><path d="m7 10.224 5 4.936 5-4.936-1.414-1.397L12 12.367l-3.585-3.54z"/></svg>
+        </button>
+        <div class="faq-panel">
+          <p>Eventbrite Pro is a subscription add-on that offers extra daily email sends with our powerful marketing tool.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Where event organizers grow -->
+    <section class="org-section">
+      <div class="container-1344">
+        <div class="split-feature-grid">
+          <div>
+            <h2 class="section-h2">Where event organizers grow</h2>
+            <p class="section-lead" style="margin-bottom:24px;">Discover the all-in-one platform to create an event for free, sell tickets, and grow your audience.</p>
+            <div class="cta-row">
+              <button type="button" class="btn-primary-dark" onclick="openModal('signupModal')">Get started for free</button>
+              <button type="button" class="btn-secondary-pill" onclick="openModal('salesModal')">Contact Sales</button>
+            </div>
+          </div>
+          <div style="background:linear-gradient(135deg, #FF5010, #FACC15); border-radius:20px; padding:36px; color:#FFFFFF; display:flex; align-items:center; justify-content:space-between;">
+            <div>
+              <div style="font-size:26px; font-weight:800;">Create your event in minutes</div>
+              <div style="font-size:14px; opacity:0.95; margin-top:6px;">No upfront cost • Built-in audience growth</div>
+            </div>
+            <div style="font-size:60px;">🎉</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="orgFooterPricing"></div>
+  </div>
+
+
+  <!-- ========================================================================
+       PAGE 02: PRODUCT UPDATES (02-product-updates.html / 02-product-updates.jpg)
+       ======================================================================== -->
+  <div id="page-updates" class="page-view">
+    <div id="orgHeaderUpdates"></div>
+
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs-bar" aria-label="Breadcrumb">
+      <a href="#home" onclick="switchPage('page-index'); return false;">Home</a>
+      <span>›</span>
+      <span class="breadcrumbs-current">Product updates</span>
+    </nav>
+
+    <!-- Hero with Custom Butterfly SVG -->
+    <section class="updates-hero">
+      <span class="section-eyebrow">What's new</span>
+      <div style="position:relative; display:inline-block;">
+        <h1 class="updates-hero-title">EVENTBRITE PRODUCT UPDATES</h1>
+        <!-- Decorative Butterfly SVG matching screenshot -->
+        <svg width="56" height="56" viewBox="0 0 64 64" style="position:absolute; top:-22px; right:-48px; transform:rotate(14deg);" aria-hidden="true">
+          <path d="M32 32 C16 10, 4 18, 12 34 C4 46, 18 54, 32 36 Z" fill="#FF8DA1" stroke="#161719" stroke-width="2"/>
+          <path d="M32 32 C48 10, 60 18, 52 34 C60 46, 46 54, 32 36 Z" fill="#D9F99D" stroke="#161719" stroke-width="2"/>
+          <ellipse cx="32" cy="34" rx="3" ry="14" fill="#161719"/>
+        </svg>
+      </div>
+      <p class="updates-hero-sub">
+        Every month, we ship meaningful improvements to Eventbrite based on your feedback.<br/>
+        Explore every feature we’ve released, check <a href="#roadmap" onclick="showToast('Viewing November 2026 Product Roadmap: Automated waitlists & SMS campaigns'); return false;">our product roadmap</a>, or <a href="#feedback" onclick="openModal('feedbackModal'); return false;">share your feedback</a>
+      </p>
+      <div class="updates-counter-pill">
+        <span>72 new features and improvements</span>
+        <span style="font-weight:500;">since April 2026</span>
+      </div>
+    </section>
+
+    <!-- Interactive Month Selector Chip Bar -->
+    <div class="month-selector-bar" role="tablist" aria-label="Product update months">
+      <button type="button" class="month-chip active" data-month="2026-10" onclick="selectUpdateMonth('2026-10', this)">October 2026</button>
+      <button type="button" class="month-chip" data-month="2026-09" onclick="selectUpdateMonth('2026-09', this)">September 2026</button>
+      <button type="button" class="month-chip" data-month="2026-08" onclick="selectUpdateMonth('2026-08', this)">August 2026</button>
+      <button type="button" class="month-chip" data-month="2026-07" onclick="selectUpdateMonth('2026-07', this)">July 2026</button>
+      <button type="button" class="month-chip" data-month="2026-06" onclick="selectUpdateMonth('2026-06', this)">June 2026</button>
+      <button type="button" class="month-chip" data-month="2026-05" onclick="selectUpdateMonth('2026-05', this)">May 2026</button>
+      <button type="button" class="month-chip" data-month="2026-04" onclick="selectUpdateMonth('2026-04', this)">April 2026</button>
+    </div>
+
+    <!-- Month Group Header & Major Announcements -->
+    <section>
+      <div class="month-header-block">
+        <div id="activeMonthLabel" class="month-label-text">October 2026</div>
+        <span id="activeMonthBadge" class="badge-green-lg">12 LIVE UPGRADES THIS MONTH</span>
+      </div>
+
+      <div id="majorAnnouncementsContainer" class="announcements-list">
+        <!-- Populated dynamically with all 8 October 2026 major items by default & switchable by month -->
+      </div>
+    </section>
+
+    <!-- WHAT ELSE IS ON (Minor Announcements Card with Cowboy Boot Illustration) -->
+    <section class="what-else-wrap">
+      <div class="what-else-card">
+        <div style="text-align:center;">
+          <!-- Custom Cowboy Boot SVG Illustration -->
+          <svg width="88" height="72" viewBox="0 0 96 80" style="margin:0 auto 10px; display:block;" aria-hidden="true">
+            <ellipse cx="48" cy="70" rx="34" ry="7" fill="#161719"/>
+            <path d="M36 12 L58 12 L58 46 L78 54 C84 57, 84 65, 76 66 L32 66 L32 58 L36 58 Z" fill="#FFFFFF" stroke="#161719" stroke-width="2.5"/>
+            <path d="M40 24 L54 24 L50 42 L40 42 Z" fill="#FF5010"/>
+            <path d="M58 46 L76 54 L72 64 L56 64 Z" fill="#D9F99D"/>
+          </svg>
+          <span class="badge-pink-lg">WHAT ELSE IS ON</span>
+        </div>
+
+        <ol id="minorAnnouncementsList" class="minor-list">
+          <li class="minor-item">
+            <div class="announcement-date">Oct 21, 2026</div>
+            <h3>Duplicate add-ons in one click</h3>
+            <p>Copy any add-on, with price, capacity, sale dates and image already filled in.</p>
+          </li>
+          <li class="minor-item">
+            <div class="announcement-date">Oct 13, 2026</div>
+            <h3>Add-ons easier to find in checkout</h3>
+            <p>Buyers who only want add-ons can click Add-ons at the top of checkout, no ticket needed. Recurring events can sell add-ons on their own for the first time.</p>
+          </li>
+          <li class="minor-item">
+            <div class="announcement-date">Oct 12, 2026</div>
+            <h3>Paste formatted text into Email Campaigns</h3>
+            <p>Copy and paste text into your email body without losing formatting, so you can build campaigns faster without having to reformat everything manually.</p>
+          </li>
+          <li class="minor-item">
+            <div class="announcement-date">Oct 5, 2026</div>
+            <h3>Take card payments at the door on Android</h3>
+            <p>Staff using the Organizer app on Android can now enter card details manually for events in CAD, AUD, and GBP, just like on iOS.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <div id="orgFooterUpdates"></div>
+  </div>
+
+
+  <!-- ========================================================================
+       SHARED MODALS (Waitlist, Share, Artist Bio, Contact Organizer, Signup, Sales, Feedback)
+       ======================================================================== -->
+  <div id="waitlistModal" class="modal-backdrop" onclick="if(event.target===this) closeModal('waitlistModal')">
+    <div class="modal-dialog">
+      <button type="button" class="modal-close" onclick="closeModal('waitlistModal')" aria-label="Close">×</button>
+      <h3 style="font-size:20px; font-weight:800; margin-bottom:6px;">Join Waitlist</h3>
+      <p style="font-size:14px; color:#585163; margin-bottom:16px;">NEURO &amp; EVIL: THE LIVE CONCERT • Sat, Dec 19 at 12:19 PM</p>
+      <form onsubmit="event.preventDefault(); closeModal('waitlistModal'); showToast('You have been added to the official waitlist!');">
+        <label style="font-size:13px; font-weight:600;">Full Name</label>
+        <input type="text" required placeholder="Alex Rivera" class="form-input" />
+        <label style="font-size:13px; font-weight:600;">Email Address</label>
+        <input type="email" required placeholder="alex@example.com" class="form-input" />
+        <label style="font-size:13px; font-weight:600;">Ticket Tier Preference</label>
+        <select class="form-input">
+          <option>General Admission ($49.00)</option>
+          <option>VIP Balcony + Merch Bundle ($125.00)</option>
+        </select>
+        <button type="submit" class="btn-waitlist" style="width:100%; margin-top:4px;">Confirm Waitlist Spot</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="shareModal" class="modal-backdrop" onclick="if(event.target===this) closeModal('shareModal')">
+    <div class="modal-dialog">
+      <button type="button" class="modal-close" onclick="closeModal('shareModal')" aria-label="Close">×</button>
+      <h3 style="font-size:20px; font-weight:800; margin-bottom:12px;">Share with friends</h3>
+      <p style="font-size:14px; color:#585163; margin-bottom:14px;">NEURO &amp; EVIL: THE LIVE CONCERT</p>
+      <div style="display:flex; gap:8px;">
+        <input id="shareUrlInput" type="text" readonly value="https://www.eventbrite.com/e/neuro-evil-the-live-concert-tickets-2001278122738" class="form-input" style="margin:0;" />
+        <button type="button" class="btn-primary-dark" onclick="copyShareUrl()">Copy</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="artistModal" class="modal-backdrop" onclick="if(event.target===this) closeModal('artistModal')">
+    <div class="modal-dialog">
+      <button type="button" class="modal-close" onclick="closeModal('artistModal')" aria-label="Close">×</button>
+      <h3 id="artistModalTitle" style="font-size:22px; font-weight:800; margin-bottom:10px;">Neuro-sama</h3>
+      <p id="artistModalBio" style="font-size:14.5px; line-height:1.6; color:#3D3F43; margin-bottom:18px;"></p>
+      <button type="button" class="btn-primary-orange" onclick="closeModal('artistModal'); showToast('Following artist on Eventbrite!');">Follow Artist</button>
+    </div>
+  </div>
+
+  <div id="contactOrgModal" class="modal-backdrop" onclick="if(event.target===this) closeModal('contactOrgModal')">
+    <div class="modal-dialog">
+      <button type="button" class="modal-close" onclick="closeModal('contactOrgModal')" aria-label="Close">×</button>
+      <h3 style="font-size:20px; font-weight:800; margin-bottom:6px;">Contact The Vermont Hollywood</h3>
+      <p style="font-size:13.5px; color:#585163; margin-bottom:14px;">Your message routes directly to the organizer's support team.</p>
+      <form onsubmit="event.preventDefault(); closeModal('contactOrgModal'); showToast('Message sent to The Vermont Hollywood!');">
+        <label style="font-size:13px; font-weight:600;">Your Email</label>
+        <input type="email" required placeholder="you@example.com" class="form-input" />
+        <label style="font-size:13px; font-weight:600;">Question</label>
+        <textarea required rows="3" placeholder="Ask about venue accessibility, doors time, or VIP seating..." class="form-input"></textarea>
+        <button type="submit" class="btn-primary-dark" style="width:100%;">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="signupModal" class="modal-backdrop" onclick="if(event.target===this) closeModal('signupModal')">
+    <div class="modal-dialog">
+      <button type="button" class="modal-close" onclick="closeModal('signupModal')" aria-label="Close">×</button>
+      <h3 style="font-size:22px; font-weight:800; margin-bottom:6px;">Create your event for free</h3>
+      <p style="font-size:14px; color:#585163; margin-bottom:16px;">Publish unlimited free events at $0 cost, or sell tickets with low buyer-paid fees.</p>
+      <form onsubmit="event.preventDefault(); closeModal('signupModal'); showToast('Event draft initialized in Eventbrite Creator Studio!');">
+        <label style="font-size:13px; font-weight:600;">Event Title</label>
+        <input type="text" required placeholder="e.g., Summer Rooftop Indie Showcase" class="form-input" />
+        <label style="font-size:13px; font-weight:600;">Work or Organizer Email</label>
+        <input type="email" required placeholder="organizer@venue.com" class="form-input" />
+        <button type="submit" class="btn-primary-orange" style="width:100%;">Launch Event Builder</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="salesModal" class="modal-backdrop" onclick="if(event.target===this) closeModal('salesModal')">
+    <div class="modal-dialog">
+      <button type="button" class="modal-close" onclick="closeModal('salesModal')" aria-label="Close">×</button>
+      <h3 style="font-size:20px; font-weight:800; margin-bottom:6px;">Contact Eventbrite Sales</h3>
+      <p style="font-size:13.5px; color:#585163; margin-bottom:14px;">Tailored pricing and dedicated strategic advising for high-volume organizers.</p>
+      <form onsubmit="event.preventDefault(); closeModal('salesModal'); showToast('Our Strategic Sales team will reach out within 2 business hours.');">
+        <label style="font-size:13px; font-weight:600;">Name</label>
+        <input type="text" required placeholder="Jordan Taylor" class="form-input" />
+        <label style="font-size:13px; font-weight:600;">Annual Ticket Volume</label>
+        <select class="form-input">
+          <option>5,000 – 25,000 tickets / year</option>
+          <option>25,000 – 100,000 tickets / year</option>
+          <option>100,000+ tickets / year</option>
+        </select>
+        <button type="submit" class="btn-primary-dark" style="width:100%;">Request Custom Proposal</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="feedbackModal" class="modal-backdrop" onclick="if(event.target===this) closeModal('feedbackModal')">
+    <div class="modal-dialog">
+      <button type="button" class="modal-close" onclick="closeModal('feedbackModal')" aria-label="Close">×</button>
+      <h3 style="font-size:20px; font-weight:800; margin-bottom:6px;">Share your product feedback</h3>
+      <p style="font-size:13.5px; color:#585163; margin-bottom:14px;">Many of our 72+ improvements shipped since April came directly from organizer requests.</p>
+      <form onsubmit="event.preventDefault(); closeModal('feedbackModal'); showToast('Thank you! Your feature request has been logged.');">
+        <textarea required rows="4" placeholder="What should Eventbrite build next?" class="form-input"></textarea>
+        <button type="submit" class="btn-primary-dark" style="width:100%;">Submit Feedback</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // SHARED ORGANIZER HEADER & FOOTER TEMPLATES (Exact links & structure)
+    // =========================================================================
+    function renderOrganizerChrome() {
+      const headerHTML = `
+        <header class="org-header" role="banner">
+          <div class="org-header-left">
+            <a href="#overview" class="org-brand" onclick="switchPage('page-overview'); return false;">
+              <svg width="17" height="21" viewBox="0 0 17 21" fill="none">
+                <path d="M16.5463 16.3681C16.5463 15.2039 16.0111 14.1653 15.1736 13.4838L8.52595 8.3005C8.41581 8.21623 8.52817 8.04547 8.65014 8.11348L11.2462 9.56749C12.423 10.2269 13.9103 9.84543 14.6236 8.70041C15.3747 7.49255 14.9777 5.90179 13.744 5.18994L9.93339 2.98785C9.8129 2.91763 9.90161 2.73431 10.0324 2.78531L11.7829 3.48608C11.7873 3.48755 11.828 3.50234 11.8442 3.50825C12.0305 3.5733 12.2294 3.60878 12.4378 3.60878C13.3877 3.60878 14.1668 2.85775 14.2341 1.9648C14.3213 0.808687 13.4365 0 12.3809 0H4.28885C3.25027 0 2.37727 0.849343 2.39132 1.8857C2.39797 2.43641 2.64486 2.92798 3.03147 3.26505C3.32271 3.5186 4.30363 4.30363 4.77007 4.67619C4.8536 4.74272 4.80629 4.87578 4.69984 4.87578H3.08025C1.37713 4.88612 0 6.26991 0 7.97451C0 8.83642 0.35186 9.61628 0.920306 10.1773L10.2963 19.0884C10.9601 19.7071 11.8501 20.0863 12.8296 20.0863C14.8831 20.0863 16.5463 18.4209 16.5463 16.3681Z" fill="#FF5010"/>
+              </svg>
+              <span>Organizer</span>
+            </a>
+
+            <nav aria-label="Main navigation">
+              <ul class="org-nav-list">
+                <li class="org-nav-item">
+                  <button type="button" class="org-nav-btn" onclick="toggleOrgDropdown(this)">Features ▾</button>
+                  <div class="org-dropdown-menu">
+                    <div>
+                      <span class="org-dropdown-col-title">Event Creation</span>
+                      <ul class="org-dropdown-links">
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Event Page Builder</a></li>
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Event Registration</a></li>
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Event Payments</a></li>
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Reserved Seating Ticketing</a></li>
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Timed Entry Ticketing</a></li>
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Sell Tickets Online</a></li>
+                      </ul>
+                    </div>
+                    <div>
+                      <span class="org-dropdown-col-title">Event Promotion</span>
+                      <ul class="org-dropdown-links">
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Eventbrite Ads</a></li>
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Email Marketing Tools</a></li>
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">TikTok Promotion</a></li>
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Promotions</a></li>
+                      </ul>
+                    </div>
+                    <div>
+                      <span class="org-dropdown-col-title">Event Hosting</span>
+                      <ul class="org-dropdown-links">
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Ticket Scanning</a></li>
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Contactless Payments</a></li>
+                        <li><a href="#updates" onclick="switchPage('page-updates'); return false;">Product Updates</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="org-nav-item">
+                  <button type="button" class="org-nav-btn" onclick="toggleOrgDropdown(this)">Event Types ▾</button>
+                  <div class="org-dropdown-menu">
+                    <div>
+                      <span class="org-dropdown-col-title">by Industry</span>
+                      <ul class="org-dropdown-links">
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Music Events</a></li>
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Nightlife Events</a></li>
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Food &amp; Drinks Events</a></li>
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Performing and Visual Arts</a></li>
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Corporate Events</a></li>
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Health and Fitness Events</a></li>
+                      </ul>
+                    </div>
+                    <div>
+                      <span class="org-dropdown-col-title">by Use Case</span>
+                      <ul class="org-dropdown-links">
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Music Concerts</a></li>
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Music Festivals</a></li>
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Nonprofit Events</a></li>
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Parties and Gatherings</a></li>
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Virtual Events</a></li>
+                      </ul>
+                    </div>
+                    <div>
+                      <span class="org-dropdown-col-title">by Seasonal Moments</span>
+                      <ul class="org-dropdown-links">
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Halloween Events</a></li>
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">St. Patrick's Day Events</a></li>
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Christmas Events</a></li>
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Valentine's Day Events</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="org-nav-item">
+                  <button type="button" class="org-nav-btn" onclick="toggleOrgDropdown(this)">Resources ▾</button>
+                  <div class="org-dropdown-menu">
+                    <div>
+                      <span class="org-dropdown-col-title">Learn</span>
+                      <ul class="org-dropdown-links">
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Blog</a></li>
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Organizer Resource Hub</a></li>
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">How to use Eventbrite</a></li>
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">App Marketplace</a></li>
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Eventbrite for Developers</a></li>
+                      </ul>
+                    </div>
+                    <div>
+                      <span class="org-dropdown-col-title">Connect</span>
+                      <ul class="org-dropdown-links">
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Creators Community</a></li>
+                        <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Webinars</a></li>
+                        <li><a href="#updates" onclick="switchPage('page-updates'); return false;">Product Updates</a></li>
+                      </ul>
+                    </div>
+                    <div>
+                      <span class="org-dropdown-col-title">Help &amp; Support</span>
+                      <ul class="org-dropdown-links">
+                        <li><a href="#pricing" onclick="switchPage('page-pricing'); return false;">Help Center</a></li>
+                        <li><a href="#sales" onclick="openModal('salesModal'); return false;">Contact Us</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="org-nav-item">
+                  <a href="#pricing" class="org-nav-btn" onclick="switchPage('page-pricing'); return false;">Pricing</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+          <div class="org-header-actions">
+            <button type="button" class="btn-primary-orange" onclick="openModal('signupModal')">Create Events</button>
+            <button type="button" class="btn-secondary-pill" style="padding:9px 16px;" onclick="openModal('salesModal')">Contact Sales</button>
+            <button type="button" class="btn-primary-dark" style="padding:9px 16px;" onclick="openModal('signupModal')">Get Started</button>
+          </div>
+        </header>
+      `;
+
+      const footerHTML = `
+        <footer class="org-footer">
+          <div class="org-footer-inner">
+            <div class="org-footer-grid">
+              <div>
+                <p class="org-footer-col-title">Event Creation</p>
+                <ul class="org-footer-links">
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Sell Tickets Online</a></li>
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Event Registration Software</a></li>
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Event Payment System</a></li>
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Reserved Seating Ticketing</a></li>
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Timed Entry Ticketing</a></li>
+                </ul>
+                <p class="org-footer-col-title" style="margin-top:20px;">Event Promotion</p>
+                <ul class="org-footer-links">
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Eventbrite Ads</a></li>
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Email Marketing For Events</a></li>
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">TikTok Promotion</a></li>
+                </ul>
+              </div>
+
+              <div>
+                <p class="org-footer-col-title">Event Hosting</p>
+                <ul class="org-footer-links">
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Eventbrite Check-In App</a></li>
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Contactless Payments</a></li>
+                </ul>
+                <p class="org-footer-col-title" style="margin-top:20px;">All Features</p>
+                <ul class="org-footer-links">
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">All Eventbrite Features</a></li>
+                  <li><a href="#updates" onclick="switchPage('page-updates'); return false;">Product Updates</a></li>
+                </ul>
+              </div>
+
+              <div>
+                <p class="org-footer-col-title">By Industry</p>
+                <ul class="org-footer-links">
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Sell Music Tickets</a></li>
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Nightclub Management Software</a></li>
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Food &amp; Drink Event Ticketing</a></li>
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Performing Arts Ticketing Software</a></li>
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Corporate Ticketing</a></li>
+                </ul>
+              </div>
+
+              <div>
+                <p class="org-footer-col-title">By Use Case</p>
+                <ul class="org-footer-links">
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Sell Concert Tickets Online</a></li>
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Sell Music Festival Tickets</a></li>
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Nonprofit Event Registration</a></li>
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Party Ticketing Software</a></li>
+                </ul>
+                <p class="org-footer-col-title" style="margin-top:20px;">By Seasonal Moments</p>
+                <ul class="org-footer-links">
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Halloween Party Planning</a></li>
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">St. Patrick's Day Party Planning</a></li>
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Christmas Party Planning</a></li>
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Valentine's Party Planning</a></li>
+                </ul>
+              </div>
+
+              <div>
+                <p class="org-footer-col-title">Learn</p>
+                <ul class="org-footer-links">
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Blog</a></li>
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Resources for Event Organizers</a></li>
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">How to Use Eventbrite</a></li>
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">App Marketplace</a></li>
+                </ul>
+                <p class="org-footer-col-title" style="margin-top:20px;">Connect &amp; Support</p>
+                <ul class="org-footer-links">
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Community</a></li>
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Webinars</a></li>
+                  <li><a href="#overview" onclick="switchPage('page-overview'); return false;">Developers</a></li>
+                  <li><a href="#pricing" onclick="switchPage('page-pricing'); return false;">Help</a></li>
+                  <li><a href="#sales" onclick="openModal('salesModal'); return false;">Contact Support</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="org-footer-actions-row">
+              <div class="cta-row">
+                <button type="button" class="btn-primary-dark" onclick="openModal('signupModal')">Get Started</button>
+                <button type="button" class="btn-secondary-pill" onclick="openModal('salesModal')">Contact Sales</button>
+              </div>
+              <div class="social-icons-row">
+                <a href="#tiktok" class="social-circle" onclick="showToast('Eventbrite on TikTok'); return false;" aria-label="TikTok">TT</a>
+                <a href="#li" class="social-circle" onclick="showToast('Eventbrite on LinkedIn'); return false;" aria-label="LinkedIn">in</a>
+                <a href="#ig" class="social-circle" onclick="showToast('Eventbrite on Instagram'); return false;" aria-label="Instagram">IG</a>
+                <a href="#x" class="social-circle" onclick="showToast('Eventbrite on X'); return false;" aria-label="X">𝕏</a>
+                <a href="#fb" class="social-circle" onclick="showToast('Eventbrite on Facebook'); return false;" aria-label="Facebook">f</a>
+              </div>
+            </div>
+
+            <div class="org-footer-legal">
+              <div>
+                <ul class="org-footer-legal-links" style="margin-bottom:8px;">
+                  <li><a href="#status" onclick="showToast('All Eventbrite Systems Operational'); return false;">Status</a></li>
+                  <li><a href="#terms" onclick="showToast('Eventbrite Legal Terms'); return false;">Terms</a></li>
+                  <li><a href="#privacy" onclick="showToast('Eventbrite Privacy Policy'); return false;">Privacy</a></li>
+                  <li><a href="#a11y" onclick="showToast('Accessibility Statement'); return false;">Accessibility</a></li>
+                  <li><a href="#cookies" onclick="showToast('Cookie Policy'); return false;">Cookies</a></li>
+                  <li><a href="#prefs" onclick="showToast('Privacy Preferences'); return false;">Privacy Preferences</a></li>
+                  <li><a href="#dns" onclick="showToast('Do Not Sell or Share Preference Saved'); return false;">Do Not Sell or Share My Personal Information</a></li>
+                </ul>
+                <div>© 2026 Eventbrite</div>
+              </div>
+
+              <div style="display:flex; align-items:center; gap:16px;">
+                <span style="font-weight:800; font-size:18px; letter-spacing:-0.03em; color:#161719;">eventbrite</span>
+                <select class="country-select" aria-label="Select country or region" onchange="showToast('Region set to ' + this.value)">
+                  <option>Argentina</option>
+                  <option>Australia</option>
+                  <option>Canada (EN)</option>
+                  <option>Deutschland</option>
+                  <option>España</option>
+                  <option>France</option>
+                  <option>Ireland</option>
+                  <option>Italia</option>
+                  <option>United Kingdom</option>
+                  <option selected>United States</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </footer>
+      `;
+
+      ['orgHeaderOverview', 'orgHeaderPricing', 'orgHeaderUpdates'].forEach(id => {
+        document.getElementById(id).innerHTML = headerHTML;
+      });
+      ['orgFooterOverview', 'orgFooterPricing', 'orgFooterUpdates'].forEach(id => {
+        document.getElementById(id).innerHTML = footerHTML;
+      });
+    }
+
+    // =========================================================================
+    // PRODUCT UPDATES DATA & RENDERER (All 8 October 2026 Major Announcements + Historical Months)
+    // =========================================================================
+    const UPDATES_BY_MONTH = {
+      '2026-10': {
+        label: 'October 2026',
+        count: 12,
+        items: [
+          {
+            date: 'Oct 30, 2026',
+            title: 'Delay QR code release',
+            summary: 'Choose to release QR codes 24 or 48 hours before your event, making it harder to resell tickets in advance.',
+            badge: 'ANTI-SCALPING',
+            uiTitle: 'QR Code Release Schedule',
+            uiDetail: 'Release tickets 24 hours before event start • Active protection enabled'
+          },
+          {
+            date: 'Oct 30, 2026',
+            title: 'What’s next for Eventbrite',
+            summary: 'Explore our November 2026 roadmap: automated waitlists, SMS campaigns (paid, starting in the US), smarter event discovery and more, all coming in the months ahead.',
+            badge: 'NOV 2026 ROADMAP',
+            uiTitle: 'Coming Soon for Creators',
+            uiDetail: 'Automated Waitlists • SMS Campaigns • Smarter AI Discovery'
+          },
+          {
+            date: 'Oct 19, 2026',
+            title: 'Bulk check-in and check-out',
+            summary: 'Check in or out multiple attendees at once, with optional ticket-type filters, to save time before and after your event.',
+            badge: 'ORGANIZER APP',
+            uiTitle: '48 VIP Attendees Selected',
+            uiDetail: 'Filter: VIP Early Entry • One-tap Bulk Check-In Ready'
+          },
+          {
+            date: 'Oct 16, 2026',
+            title: 'Clearer start and end date fields',
+            summary: "Start and end dates now have their own fields when you create an event, so it's clearer how to set overnight and multi-day schedules.",
+            badge: 'EVENT CREATION',
+            uiTitle: 'Start: Dec 19, 10:00 PM → End: Dec 20, 2:00 AM',
+            uiDetail: 'Dedicated Start Date & End Date fields for multi-day schedules'
+          },
+          {
+            date: 'Oct 14, 2026',
+            title: 'Pin a featured event',
+            summary: 'Pin one event to the top of your organizer profile, so your flagship events are highlighted and not buried under smaller ones.',
+            badge: 'ORGANIZER PROFILE',
+            uiTitle: '📌 Pinned Flagship Event',
+            uiDetail: 'Featured at the top of your public creator profile'
+          },
+          {
+            date: 'Oct 11, 2026',
+            title: 'Attendee questions reach the right team',
+            summary: '“Contact the organizer” messages go only to team members with permission for that profile. Admins and Owners can choose in Communication preferences.',
+            badge: 'TEAM PERMISSIONS',
+            uiTitle: 'Profile-Scoped Routing',
+            uiDetail: 'Attendee inquiries routed strictly to assigned profile managers'
+          },
+          {
+            date: 'Oct 6, 2026',
+            title: 'Customizable attendee emails',
+            summary: 'Start with a fresh, modern design, then customize brand colors, light or dark mode, and background visuals. Preview your email on mobile and desktop before sending.',
+            badge: 'EMAIL CAMPAIGNS',
+            uiTitle: 'Brand Theme: Dark Mode + Accent #FF5010',
+            uiDetail: 'Live Desktop & Mobile Preview before sending'
+          },
+          {
+            date: 'Oct 1, 2026',
+            title: 'Reports by organizer profile',
+            summary: 'When creating a report, filter events by one or more Organizer Profiles. Matching events are grouped by profile, so you can easily create targeted reports.',
+            badge: 'ANALYTICS',
+            uiTitle: 'Grouped Sales & Attendance Report',
+            uiDetail: 'Filtered by 2 Organizer Profiles • Export CSV / XLSX'
+          }
+        ]
+      },
+      '2026-09': {
+        label: 'September 2026',
+        count: 11,
+        items: [
+          {
+            date: 'Sep 24, 2026',
+            title: 'Automated dynamic ticket pricing rules',
+            summary: 'Ticket prices can now change automatically. Set rules once by date or after a set number of tickets sell, and Eventbrite switches the tier for you.',
+            badge: 'TICKETING',
+            uiTitle: 'Early Bird → Tier 1 Auto-Switch at 100 Sold',
+            uiDetail: 'Rule Active • 94/100 Early Bird tickets claimed'
+          },
+          {
+            date: 'Sep 12, 2026',
+            title: 'One-click order date transfers',
+            summary: 'Move an entire attendee order to a new date in a single action without manual refunds or re-issuing tickets.',
+            badge: 'ORDER MANAGEMENT',
+            uiTitle: 'Transfer Order #88412 → Saturday Show',
+            uiDetail: 'Zero fee difference • Instant updated QR delivery'
+          }
+        ]
+      },
+      '2026-08': {
+        label: 'August 2026',
+        count: 10,
+        items: [
+          {
+            date: 'Aug 21, 2026',
+            title: 'ChatGPT & conversational AI event discovery',
+            summary: 'Your public events now show up automatically when people search for things to do in a city inside ChatGPT.',
+            badge: 'DISCOVERY',
+            uiTitle: 'Indexed for Conversational AI Search',
+            uiDetail: 'Structured availability, venue & pricing synced'
+          }
+        ]
+      },
+      '2026-07': {
+        label: 'July 2026',
+        count: 10,
+        items: [
+          {
+            date: 'Jul 18, 2026',
+            title: 'Automatic organizer follows at checkout',
+            summary: 'In most countries, ticket buyers now follow your organizer profile automatically so they hear first about your next event.',
+            badge: 'AUDIENCE GROWTH',
+            uiTitle: '+420 New Followers This Week',
+            uiDetail: 'Auto-follow opt-in enabled during checkout'
+          }
+        ]
+      },
+      '2026-06': {
+        label: 'June 2026',
+        count: 10,
+        items: [
+          {
+            date: 'Jun 15, 2026',
+            title: 'High-demand Waiting Rooms with queue position',
+            summary: 'Waiting rooms handle thousands of fans arriving at once during major on-sales, showing buyers their exact place in line.',
+            badge: 'RELIABILITY',
+            uiTitle: 'You are #142 in line • Estimated wait: 1 min',
+            uiDetail: 'Bot-protected fair queue active'
+          }
+        ]
+      },
+      '2026-05': {
+        label: 'May 2026',
+        count: 10,
+        items: [
+          {
+            date: 'May 22, 2026',
+            title: 'Dedicated Add-Ons step in checkout',
+            summary: 'Add-ons now have their own step right after ticket selection, increasing attachment rates for merch, parking, and VIP upgrades.',
+            badge: 'CHECKOUT',
+            uiTitle: 'Step 2 of 3: Enhance Your Experience',
+            uiDetail: 'VIP Merch Bundle (+$35) • Parking Pass (+$20)'
+          }
+        ]
+      },
+      '2026-04': {
+        label: 'April 2026',
+        count: 9,
+        items: [
+          {
+            date: 'Apr 28, 2026',
+            title: '3x faster door check-in barcode loading',
+            summary: 'Rebuilt barcode rendering and offline sync lets staff scan lines 3x faster at busy venue doors.',
+            badge: 'DOOR CHECK-IN',
+            uiTitle: 'Scan Speed: 140ms • Offline Sync Ready',
+            uiDetail: 'Instant green validation chime'
+          }
+        ]
+      }
+    };
+
+    function renderAnnouncements(monthKey) {
+      const group = UPDATES_BY_MONTH[monthKey] || UPDATES_BY_MONTH['2026-10'];
+      document.getElementById('activeMonthLabel').textContent = group.label;
+      document.getElementById('activeMonthBadge').textContent = `${group.count} LIVE UPGRADES THIS MONTH`;
+
+      const container = document.getElementById('majorAnnouncementsContainer');
+      container.innerHTML = group.items.map(item => `
+        <article class="announcement-row">
+          <div>
+            <p class="announcement-date">${item.date}</p>
+            <h3 class="announcement-title">${item.title}</h3>
+            <p class="announcement-summary">${item.summary}</p>
+          </div>
+          <div class="announcement-media-card">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+              <span style="font-size:11px; font-weight:800; letter-spacing:0.06em; background:#F5F5F0; padding:4px 10px; border-radius:99px; color:#161719;">${item.badge}</span>
+              <span style="width:10px; height:10px; border-radius:50%; background:#22C55E;"></span>
+            </div>
+            <div style="background:linear-gradient(135deg, #FAF9F5, #FFF1EB); border:1px solid #E2E0D8; border-radius:12px; padding:20px;">
+              <div style="font-size:16px; font-weight:800; color:#161719; margin-bottom:6px;">${item.uiTitle}</div>
+              <div style="font-size:13.5px; color:#3D3F43;">${item.uiDetail}</div>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function selectUpdateMonth(monthKey, btn) {
+      document.querySelectorAll('.month-chip').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      renderAnnouncements(monthKey);
+    }
+
+    // =========================================================================
+    // INTERACTIVE CONTROLS & PAGE SWITCHING
+    // =========================================================================
+    function switchPage(pageId) {
+      document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+      const target = document.getElementById(pageId);
+      if (target) target.classList.add('active');
+
+      document.querySelectorAll('.proto-tab').forEach(tab => {
+        tab.classList.toggle('active', tab.dataset.page === pageId);
+      });
+
+      // Close open nav dropdowns
+      document.querySelectorAll('.org-nav-item.open').forEach(item => item.classList.remove('open'));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.querySelectorAll('.proto-tab').forEach(tab => {
+      tab.addEventListener('click', () => switchPage(tab.dataset.page));
+    });
+
+    function toggleOrgDropdown(btn) {
+      const parent = btn.parentElement;
+      const wasOpen = parent.classList.contains('open');
+      document.querySelectorAll('.org-nav-item.open').forEach(el => el.classList.remove('open'));
+      if (!wasOpen) parent.classList.add('open');
+    }
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.org-nav-item')) {
+        document.querySelectorAll('.org-nav-item.open').forEach(el => el.classList.remove('open'));
+      }
+    });
+
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      item.classList.toggle('open');
+    }
+
+    function toggleOverview() {
+      const text = document.getElementById('overviewText');
+      const btn = document.getElementById('readMoreBtn');
+      const collapsed = text.classList.toggle('overview-collapsed');
+      btn.textContent = collapsed ? 'Read more' : 'Read less';
+    }
+
+    function toggleFollow(btn) {
+      const isFollowing = btn.classList.toggle('following');
+      btn.textContent = isFollowing ? 'Following ✓' : 'Follow';
+      showToast(isFollowing ? 'You are now following The Vermont Hollywood!' : 'Unfollowed organizer.');
+    }
+
+    function toggleLikeEvent(btn) {
+      const liked = btn.classList.toggle('liked');
+      btn.setAttribute('aria-pressed', liked ? 'true' : 'false');
+      showToast(liked ? 'Event saved to your likes!' : 'Removed from saved events.');
+    }
+
+    function openArtistModal(name) {
+      const bios = {
+        'Neuro-sama': 'Neuro is an artificial intelligence who livestreams herself singing, playing games, and chatting with viewers online. She debuted on Twitch on December 19, 2022, and has since grown rapidly in popularity, amassing more than 3 million followers across platforms.',
+        'Evil Neuro': 'Evil Neuro, often simply called “Evil,” is Neuro-sama’s sister. Originally created in March 2023 as an evil counterpart to Neuro-sama, she gradually developed into a distinct character of her own and has become a fan favorite in her own right.'
+      };
+      document.getElementById('artistModalTitle').textContent = name;
+      document.getElementById('artistModalBio').textContent = bios[name] || '';
+      openModal('artistModal');
+    }
+
+    function selectPreviewTab(group, index, el) {
+      el.parentElement.querySelectorAll('.accordion-feature-item').forEach(i => i.classList.remove('active'));
+      el.classList.add('active');
+
+      if (group === 'easy') {
+        const screen = document.getElementById('easyPhoneScreen');
+        const views = [
+          `<div style="height:24px; background:#161719; width:100px; margin:0 auto; border-radius:0 0 14px 14px;"></div>
+           <div style="height:175px; background:linear-gradient(135deg, #312E81, #DB2777); padding:18px; color:#FFFFFF; display:flex; flex-direction:column; justify-content:flex-end;">
+             <span style="font-size:10px; font-weight:700; text-transform:uppercase; background:#FF5010; padding:3px 8px; border-radius:4px; width:fit-content; margin-bottom:6px;">Selling Fast</span>
+             <div style="font-size:17px; font-weight:800;">Artisan Neapolitan Pizza Making Class</div>
+           </div>
+           <div style="padding:18px; flex:1; display:flex; flex-direction:column; justify-content:space-between;">
+             <div style="font-size:13px; color:#161719;">📍 Brooklyn Culinary Loft • Sat, 6:00 PM</div>
+             <div style="border-top:1px solid #E2E0D8; padding-top:12px; display:flex; justify-content:space-between; align-items:center;">
+               <strong>$65.00</strong><span style="background:#FF5010; color:#FFF; font-size:12px; font-weight:700; padding:8px 14px; border-radius:8px;">Get tickets</span>
+             </div>
+           </div>`,
+          `<div style="padding:22px; flex:1; display:flex; flex-direction:column; justify-content:space-between;">
+             <div>
+               <span style="font-size:11px; font-weight:700; color:#6F7287;">REAL-TIME ANALYTICS</span>
+               <div style="font-size:26px; font-weight:800; margin:4px 0 14px;">$18,450.00</div>
+               <div style="display:flex; align-items:flex-end; gap:8px; height:120px; padding:12px; background:#F5F5F0; border-radius:12px;">
+                 <div style="flex:1; height:40%; background:#FF5010; border-radius:4px;"></div>
+                 <div style="flex:1; height:65%; background:#FF5010; border-radius:4px;"></div>
+                 <div style="flex:1; height:55%; background:#FF5010; border-radius:4px;"></div>
+                 <div style="flex:1; height:90%; background:#FF5010; border-radius:4px;"></div>
+                 <div style="flex:1; height:100%; background:#161719; border-radius:4px;"></div>
+               </div>
+             </div>
+             <div style="font-size:12.5px; color:#3D3F43;">64% of sales driven by Eventbrite Discovery</div>
+           </div>`,
+          `<div style="padding:22px; flex:1; display:flex; flex-direction:column; justify-content:space-between;">
+             <div>
+               <span style="font-size:11px; font-weight:700; color:#006B23; background:#D9F99D; padding:3px 8px; border-radius:6px;">LIVE DOOR CHECK-IN</span>
+               <div style="font-size:24px; font-weight:800; margin:10px 0;">412 / 450 Checked In</div>
+               <div style="height:10px; background:#E2E0D8; border-radius:99px; overflow:hidden;">
+                 <div style="width:91%; height:100%; background:#006B23;"></div>
+               </div>
+             </div>
+             <div style="background:#161719; color:#FFF; padding:14px; border-radius:12px; text-align:center; font-weight:700; font-size:13px;">📷 Scan Attendee QR Code</div>
+           </div>`
+        ];
+        screen.innerHTML = views[index] || views[0];
+      }
+    }
+
+    function updateFeeCalc() {
+      const price = Math.max(0, parseFloat(document.getElementById('ticketPriceInput').value) || 0);
+      const payer = document.getElementById('feePayerSelect').value;
+      const resultEl = document.getElementById('feeCalcResult');
+
+      if (price === 0) {
+        resultEl.innerHTML = `
+          <div style="display:flex; justify-content:space-between;"><span>Service Fee:</span><strong>$0.00 (Free Event)</strong></div>
+          <div style="display:flex; justify-content:space-between;"><span>Payment Processing:</span><strong>$0.00</strong></div>
+          <div style="display:flex; justify-content:space-between; border-top:1px solid #D2CFD9; padding-top:8px; margin-top:4px; font-size:15px;"><span>Your Net Payout / Ticket:</span><strong style="color:#006B23;">$0.00 (Free)</strong></div>
+        `;
+        return;
+      }
+
+      const serviceFee = +(price * 0.037 + 1.79).toFixed(2);
+      const procFee = +((payer === 'buyer' ? price + serviceFee : price) * 0.029).toFixed(2);
+      const payout = payer === 'buyer' ? price : Math.max(0, +(price - serviceFee - procFee).toFixed(2));
+
+      resultEl.innerHTML = `
+        <div style="display:flex; justify-content:space-between;"><span>Service Fee (3.7% + $1.79):</span><strong>$${serviceFee.toFixed(2)}</strong></div>
+        <div style="display:flex; justify-content:space-between;"><span>Payment Processing (2.9%):</span><strong>$${procFee.toFixed(2)}</strong></div>
+        <div style="display:flex; justify-content:space-between; border-top:1px solid #D2CFD9; padding-top:8px; margin-top:4px; font-size:15px;"><span>Your Net Payout / Ticket:</span><strong style="color:#006B23;">$${payout.toFixed(2)}</strong></div>
+      `;
+    }
+
+    function openModal(id) {
+      document.getElementById(id).classList.add('open');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('open');
+    }
+
+    function copyShareUrl() {
+      const input = document.getElementById('shareUrlInput');
+      input.select();
+      document.execCommand('copy');
+      closeModal('shareModal');
+      showToast('Event link copied to clipboard!');
+    }
+
+    let toastTimer;
+    function showToast(msg) {
+      const el = document.getElementById('toastBanner');
+      el.textContent = msg;
+      el.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => el.classList.remove('show'), 3200);
+    }
+
+    // Initialize shared headers/footers & Product Updates feed
+    renderOrganizerChrome();
+    renderAnnouncements('2026-10');
+  </script>
+</body>
+</html>

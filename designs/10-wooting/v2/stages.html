@@ -1,0 +1,224 @@
+<!-- v2/stages.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stages - Festival of Darkness 2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">Festival of Darkness 2</span>
+      </a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html" class="nav-link" data-i18n="nav.overview">Overview</a>
+        <a href="program.html" class="nav-link" data-i18n="nav.schedule">Schedule</a>
+      </nav>
+      <div class="header-actions">
+        <button type="button" class="lang-btn" id="lang-toggle" aria-label="Switch language">
+          <span class="lang-indicator"></span>
+          <span data-i18n="nav.langToggle">CZ</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <div class="page-header-top">
+          <div>
+            <h1 class="page-title">Stages & Acoustic Environments</h1>
+            <p class="page-sub">Engineered for open-air dynamics and 360-degree dome immersion in Kutná Hora.</p>
+          </div>
+          <div class="stage-legend">
+            <span class="legend-item"><span class="dot-solar"></span> Solar Horizon Stage (4,500 cap)</span>
+            <span class="legend-item"><span class="dot-lunar"></span> Lunar Forest Dome (1,800 cap)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="container">
+        <div class="stages-grid" style="grid-template-columns: 1fr; max-width: 860px; margin: 0 auto;">
+          <article class="stage-card" style="padding: 32px; gap: 20px;">
+            <div class="stage-card-top">
+              <span class="stage-badge stage-badge-solar" data-i18n="stages.solarType">Open-air main stage</span>
+              <span class="stage-cap" style="font-size: 0.9375rem; font-weight: 700; color: var(--ink-primary);">4,500 <span data-i18n="stages.capUnit">cap</span></span>
+            </div>
+            <h2 class="stage-name" style="font-size: 1.75rem;">Solar Horizon Stage</h2>
+            <p class="stage-desc" style="font-size: 1.0625rem; line-height: 1.6;" data-i18n="stages.solarDesc">Central open-air amphitheater for major band performances, indie rock, and dance headliners.</p>
+            
+            <div style="margin: 8px 0; display: flex; flex-direction: column; gap: 12px; font-size: 0.9375rem; color: var(--ink-secondary);">
+              <p style="margin: 0;">Designed with high-output line array towers and expansive open-air acoustics, the Solar Horizon Stage delivers massive headroom and crystal-clear dynamics across the entire natural amphitheater bowl. Ideal for sunset performances and peak-time festival energy.</p>
+            </div>
+
+            <div class="stage-specs" style="margin-top: 8px;">
+              <div class="stage-spec-row">
+                <span data-i18n="stages.hoursLabel">Operating window</span>
+                <span>13:00 - 02:00</span>
+              </div>
+              <div class="stage-spec-row">
+                <span data-i18n="stages.focusLabel">Acoustic focus</span>
+                <span data-i18n="stages.solarFocus">Indie Rock, Synthpop, Electronic Live</span>
+              </div>
+            </div>
+
+            <div style="margin-top: 8px; display: flex; gap: 12px;">
+              <a href="program.html" class="btn btn-primary" data-i18n="hero.ctaSchedule">Explore full schedule</a>
+            </div>
+          </article>
+
+          <article class="stage-card" style="padding: 32px; gap: 20px;">
+            <div class="stage-card-top">
+              <span class="stage-badge stage-badge-lunar" data-i18n="stages.lunarType">Covered audiovisual dome</span>
+              <span class="stage-cap" style="font-size: 0.9375rem; font-weight: 700; color: var(--ink-primary);">1,800 <span data-i18n="stages.capUnit">cap</span></span>
+            </div>
+            <h2 class="stage-name" style="font-size: 1.75rem;">Lunar Forest Dome</h2>
+            <p class="stage-desc" style="font-size: 1.0625rem; line-height: 1.6;" data-i18n="stages.lunarDesc">Atmospheric covered indoor stage focusing on techno, ambient, experimental electronics, and 360-degree light projections.</p>
+            
+            <div style="margin: 8px 0; display: flex; flex-direction: column; gap: 12px; font-size: 0.9375rem; color: var(--ink-secondary);">
+              <p style="margin: 0;">A fully enclosed 360-degree projection dome featuring spatial discrete multi-channel surround sound and immersive laser architecture. Built for deep hypnotic sets, raw modular hardware techno, and late-night nocturnal immersion.</p>
+            </div>
+
+            <div class="stage-specs" style="margin-top: 8px;">
+              <div class="stage-spec-row">
+                <span data-i18n="stages.hoursLabel">Operating window</span>
+                <span>14:00 - 04:00</span>
+              </div>
+              <div class="stage-spec-row">
+                <span data-i18n="stages.focusLabel">Acoustic focus</span>
+                <span data-i18n="stages.lunarFocus">Techno, Modular Ambient, IDM</span>
+              </div>
+            </div>
+
+            <div style="margin-top: 8px; display: flex; gap: 12px;">
+              <a href="program.html" class="btn btn-primary" data-i18n="hero.ctaSchedule">Explore full schedule</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    ```html
+<!-- v2/stages.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stages - Festival of Darkness 2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">Festival of Darkness 2</span>
+      </a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html" class="nav-link" data-i18n="nav.overview">Overview</a>
+        <a href="program.html" class="nav-link" data-i18n="nav.schedule">Schedule</a>
+      </nav>
+      <div class="header-actions">
+        <button type="button" class="lang-btn" id="lang-toggle" aria-label="Switch language">
+          <span class="lang-indicator"></span>
+          <span data-i18n="nav.langToggle">CZ</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <div class="page-header-top">
+          <div>
+            <h1 class="page-title">Festival Stages</h1>
+            <p class="page-sub">Solar Horizon Stage and Lunar Forest Dome acoustic specifications.</p>
+          </div>
+          <div class="stage-legend">
+            <span class="legend-item"><span class="dot-solar"></span> Solar Horizon</span>
+            <span class="legend-item"><span class="dot-lunar"></span> Lunar Forest Dome</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="container">
+        <div class="stages-grid">
+          <article class="stage-card">
+            <div class="stage-card-top">
+              <span class="stage-badge stage-badge-solar" data-i18n="stages.solarType">Open-air main stage</span>
+              <span class="stage-cap">4,500 <span data-i18n="stages.capUnit">cap</span></span>
+            </div>
+            <h3 class="stage-name">Solar Horizon Stage</h3>
+            <p class="stage-desc" data-i18n="stages.solarDesc">Central open-air amphitheater for major band performances, indie rock, and dance headliners.</p>
+            <div class="stage-specs">
+              <div class="stage-spec-row">
+                <span data-i18n="stages.hoursLabel">Operating window</span>
+                <span>13:00 - 02:00</span>
+              </div>
+              <div class="stage-spec-row">
+                <span data-i18n="stages.focusLabel">Acoustic focus</span>
+                <span data-i18n="stages.solarFocus">Indie Rock, Synthpop, Electronic Live</span>
+              </div>
+            </div>
+            <div style="margin-top: 16px;">
+              <a href="program.html" class="btn btn-primary" style="width: 100%;">View Schedule</a>
+            </div>
+          </article>
+
+          <article class="stage-card">
+            <div class="stage-card-top">
+              <span class="stage-badge stage-badge-lunar" data-i18n="stages.lunarType">Covered audiovisual dome</span>
+              <span class="stage-cap">1,800 <span data-i18n="stages.capUnit">cap</span></span>
+            </div>
+            <h3 class="stage-name">Lunar Forest Dome</h3>
+            <p class="stage-desc" data-i18n="stages.lunarDesc">Atmospheric covered indoor stage focusing on techno, ambient, experimental electronics, and 360-degree light projections.</p>
+            <div class="stage-specs">
+              <div class="stage-spec-row">
+                <span data-i18n="stages.hoursLabel">Operating window</span>
+                <span>14:00 - 04:00</span>
+              </div>
+              <div class="stage-spec-row">
+                <span data-i18n="stages.focusLabel">Acoustic focus</span>
+                <span data-i18n="stages.lunarFocus">Techno, Modular Ambient, IDM</span>
+              </div>
+            </div>
+            <div style="margin-top: 16px;">
+              <a href="program.html" class="btn btn-secondary" style="width: 100%;">View Schedule</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <strong>Festival of Darkness 2</strong>
+        <span data-i18n="footer.location">Kutná Hora, Czech Republic - 10-12 July 2026</span>
+      </div>
+      <div class="footer-links">
+        <a href="index.html" data-i18n="nav.overview">Overview</a>
+        <a href="program.html" data-i18n="nav.schedule">Schedule</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/lang.js" defer></script>
+</body>
+</html>

@@ -2,7 +2,11 @@
 const FESTIVAL_I18N = {
   en: {
     "nav.home": "Overview",
+    "nav.artists": "Artists",
+    "nav.stages": "Stages",
+    "nav.practical": "Practical",
     "nav.program": "Program",
+    "nav.schedule": "Schedule",
     "hero.dates": "10-12 Jul 2026",
     "hero.location": "Kutná Hora, Czech Republic",
     "hero.edition": "Edition 2026",
@@ -43,11 +47,18 @@ const FESTIVAL_I18N = {
     "program.badge": "2 Stages / 3 Days",
     "program.title": "Program",
     "program.subtitle": "Curated daily timetable across Solar Horizon Stage and Lunar Forest Dome.",
+    "schedule.badge": "Complete Timetable",
+    "schedule.title": "Festival Schedule",
+    "schedule.subtitle": "Full performance lineup sorted by day, stage, and time.",
     "footer.location": "Kutná Hora, Czech Republic - 10-12 July 2026"
   },
   cs: {
     "nav.home": "Přehled",
+    "nav.artists": "Umělci",
+    "nav.stages": "Scény",
+    "nav.practical": "Praktické",
     "nav.program": "Program",
+    "nav.schedule": "Harmonogram",
     "hero.dates": "10.-12. čvc 2026",
     "hero.location": "Kutná Hora, Česká republika",
     "hero.edition": "Ročník 2026",
@@ -88,6 +99,9 @@ const FESTIVAL_I18N = {
     "program.badge": "2 scény / 3 dny",
     "program.title": "Program",
     "program.subtitle": "Výběr denního harmonogramu pro Solar Horizon Stage a Lunar Forest Dome.",
+    "schedule.badge": "Kompletní harmonogram",
+    "schedule.title": "Festivalový harmonogram",
+    "schedule.subtitle": "Přehled všech vystoupení seřazených podle dnů, scén a časů.",
     "footer.location": "Kutná Hora, Česká republika - 10.-12. července 2026"
   }
 };

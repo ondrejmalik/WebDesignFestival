@@ -1,0 +1,152 @@
+<!-- v2/artist-detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starlight Odyssey - Festival of Darkness 2</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/lang.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">Festival of Darkness 2</span>
+      </a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html" class="nav-link" data-i18n="nav_home">Overview</a>
+        <a href="program.html" class="nav-link" data-i18n="nav_program">Program</a>
+        <button type="button" class="lang-btn" id="lang-toggle" onclick="toggleFestivalLang()" aria-label="Switch language">CZ</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="page-head">
+      <p class="hero-meta">Electronic Indie · FR · Headline Set</p>
+      <h1 class="page-title">Starlight Odyssey</h1>
+      <p class="page-lead">Parisian electronic indie duo blending analog modular synthesizers, live percussion, and widescreen cinematic guitar textures for peak-hour open-air amphitheater sets.</p>
+      <div class="hero-actions">
+        <a href="program.html" class="btn-primary" data-i18n="cta_full_schedule">View Full Timetable</a>
+        <a href="artists.html" class="btn-secondary">Back to All Artists</a>
+      </div>
+    </section>
+
+    <section class="stats-strip" aria-label="Performance details">
+      <div class="stat-item">
+        <span class="stat-value">Fri 10 Jul</span>
+        <span class="stat-label">Performance Day</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">23:30–00:45</span>
+        <span class="stat-label">75-Minute Headline Set</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">Solar Horizon</span>
+        <span class="stat-label" data-i18n="stage_solar_type">Open-air main stage</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">France (FR)</span>
+        <span class="stat-label">Artist Origin</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Artist Profile & Set Overview</h2>
+        <p class="section-sub">Friday night open-air headline performance at Solar Horizon Stage (4,500 capacity).</p>
+      </div>
+
+      <div class="card-grid">
+        <article class="card">
+          <div class="card-top">
+            <span class="badge badge-solar" data-i18n="stage_solar_type">Open-air main stage</span>
+            <span class="capacity-tag">ID: perf-09</span>
+          </div>
+          <h3 class="card-title">Biography</h3>
+          <p class="card-body">Formed in Paris in 2019, Starlight Odyssey bridges French electro-pop craftsmanship with driving post-rock dynamics. Their live show centers on hardware sequencers, vocoder harmonies, and custom reactive stage lighting built specifically for open-air night slots.</p>
+          <ul class="checklist">
+            <li class="check-item">Full live hardware and multi-instrumentalist stage setup</li>
+            <li class="check-item">Extended 75-minute festival headline arrangement (23:30–00:45)</li>
+            <li class="check-item">Synchronized open-air light choreography on Solar Horizon Stage</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <span class="day-pill" data-i18n="day1_short">Fri 10 Jul</span>
+            <span class="stage-dot solar-dot">Solar Horizon Stage</span>
+          </div>
+          <h3 class="card-title">Surrounding Stage Flow</h3>
+          <p class="card-body">Starlight Odyssey anchors the late-evening peak of Day 1 between nu-disco funk and electro-rock closers.</p>
+          <ul class="checklist">
+            <li class="check-item">22:00–23:10 · Solar Flare (Nu-Disco / Funk · DE)</li>
+            <li class="check-item">23:30–00:45 · Starlight Odyssey (Electronic Indie · FR)</li>
+            <li class="check-item">01:00–02:00 · Midnight Pulse (Electro Rock · CZ)</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Related Artists on the Lineup</h2>
+        <p class="section-sub">Performers sharing electronic indie, synthpop, and open-air dance aesthetics across the weekend.</p>
+      </div>
+
+      <div class="card-grid three-col">
+        <article class="card">
+          <div class="card-top">
+            <span class="day-pill" data-i18n="day1_short">Fri 10 Jul</span>
+            <span class="stage-dot solar-dot">Solar Horizon</span>
+          </div>
+          <h3 class="card-title">Solar Flare</h3>
+          <p class="card-meta">Nu-Disco / Funk · DE · 22:00–23:10</p>
+          <p class="card-body">Warm analog basslines and live disco-funk grooves leading directly into Starlight Odyssey on Friday night.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <span class="day-pill" data-i18n="day2_short">Sat 11 Jul</span>
+            <span class="stage-dot solar-dot">Solar Horizon</span>
+          </div>
+          <h3 class="card-title">Magnetic River</h3>
+          <p class="card-meta">Indie Dance · FR · 21:40–22:50</p>
+          <p class="card-body">Fellow French electronic-indie outfit bringing rhythmic guitar hooks and club-ready percussion to Saturday evening.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <span class="day-pill" data-i18n="day3_short">Sun 12 Jul</span>
+            <span class="stage-dot solar-dot">Solar Horizon</span>
+          </div>
+          <h3 class="card-title">Starlight Runners</h3>
+          <p class="card-meta">Electropop Headliner · DK · 22:35–23:55</p>
+          <p class="card-body">Danish synth-driven headliners closing Sunday night on the Solar Horizon open-air amphitheater stage.</p>
+        </article>
+      </div>
+
+      <div class="section-footer hero-actions">
+        <a href="artists.html" class="btn-primary">Browse Full Artist Lineup</a>
+        <a href="program.html" class="btn-secondary" data-i18n="cta_program">Explore 3-Day Program</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="brand-name">Festival of Darkness 2</span>
+        <span class="footer-meta" data-i18n="footer_loc">Kutná Hora, Czech Republic · 10-12 Jul 2026</span>
+      </div>
+      <div class="footer-links">
+        <a href="index.html" data-i18n="nav_home">Overview</a>
+        <a href="program.html" data-i18n="nav_program">Program</a>
+        <a href="artists.html">Artists</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

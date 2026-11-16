@@ -1,0 +1,182 @@
+<!-- v2/search.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search — Festival of Darkness 2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/lang.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" data-i18n="brand">Festival of Darkness 2</a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html" class="nav-link" data-i18n="navHome">Overview</a>
+        <a href="program.html" class="nav-link" data-i18n="navProgram">Program & Sets</a>
+        <a href="artists.html" class="nav-link">Artists</a>
+        <a href="stages.html" class="nav-link">Stages</a>
+        <a href="practical-info.html" class="nav-link">Info</a>
+        <a href="my-schedule.html" class="nav-link">My Schedule</a>
+        <a href="search.html" class="nav-link active">Search</a>
+        <button type="button" class="lang-toggle" id="lang-toggle" aria-label="Switch language">CZ</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    <section class="page-head" aria-labelledby="search-title">
+      <h1 id="search-title" class="page-title">Search Festival</h1>
+      <p class="hero-subtitle">
+        Find artists, stage specifications, timetable slots, and visitor guidance across Kutná Hora 2026.
+      </p>
+
+      <div class="panel-card">
+        <form action="search.html" method="get" role="search">
+          <div class="section-header">
+            <label for="festival-search-input" class="panel-title">Query</label>
+            <span id="search-result-count" class="panel-meta">6 sample results</span>
+          </div>
+          <div class="hero-actions">
+            <input
+              type="search"
+              id="festival-search-input"
+              name="q"
+              class="jump-pill"
+              placeholder="Search artists, genres, stages, or info..."
+              aria-label="Search artists, genres, stages, or info"
+            >
+            <button type="submit" class="btn-primary">Search</button>
+          </div>
+          <div class="day-jump" role="group" aria-label="Filter search results by category">
+            <button type="button" class="jump-pill" data-filter="all" aria-pressed="true">All</button>
+            <button type="button" class="jump-pill" data-filter="artists" aria-pressed="false">Artists</button>
+            <button type="button" class="jump-pill" data-filter="stages" aria-pressed="false">Stages</button>
+            <button type="button" class="jump-pill" data-filter="info" aria-pressed="false">Info</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="section-block" aria-labelledby="results-heading">
+      <div class="section-header">
+        <h2 id="results-heading" class="section-title">Results</h2>
+        <a href="program.html" class="inline-link" data-i18n="viewAllLink">Full 3-day timetable →</a>
+      </div>
+
+      <div id="search-results-grid" class="cards-grid">
+        <article class="panel-card" data-category="artists" data-keywords="starlight odyssey electronic indie fr solar horizon stage fri 10 jul">
+          <div class="card-meta">
+            <span class="badge badge-solar">Artist · Fri 10 Jul</span>
+            <span class="time-stamp">23:30 – 00:45</span>
+          </div>
+          <h3 class="card-title"><a href="artist-detail.html" class="inline-link">Starlight Odyssey</a></h3>
+          <p class="card-sub">Electronic Indie · FR · Performing on Solar Horizon Stage. View artist profile and set notes.</p>
+        </article>
+
+        <article class="panel-card" data-category="artists" data-keywords="analog void industrial techno nl lunar forest dome fri 10 jul">
+          <div class="card-meta">
+            <span class="badge badge-lunar">Artist · Fri 10 Jul</span>
+            <span class="time-stamp">00:05 – 01:25</span>
+          </div>
+          <h3 class="card-title"><a href="artist-detail.html" class="inline-link">Analog Void</a></h3>
+          <p class="card-sub">Industrial Techno · NL · Late-night live hardware set in Lunar Forest Dome.</p>
+        </article>
+
+        <article class="panel-card" data-category="artists" data-keywords="starlight runners electropop headliner dk solar horizon stage sun 12 jul">
+          <div class="card-meta">
+            <span class="badge badge-peak">Artist · Sun 12 Jul</span>
+            <span class="time-stamp">22:35 – 23:55</span>
+          </div>
+          <h3 class="card-title"><a href="artist-detail.html" class="inline-link">Starlight Runners</a></h3>
+          <p class="card-sub">Electropop Headliner · DK · Sunday closing headliner on Solar Horizon Stage.</p>
+        </article>
+
+        <article class="panel-card" data-category="stages" data-keywords="solar horizon stage open-air main stage 4500 indie rock synthpop nu-disco electropop">
+          <div class="card-meta">
+            <span class="badge badge-solar">Stage</span>
+            <span class="time-stamp">13:00 – 02:00</span>
+          </div>
+          <h3 class="card-title"><a href="stages.html" class="inline-link" data-i18n="solarName">Solar Horizon Stage</a></h3>
+          <p class="card-sub" data-i18n="solarShort">Open-air amphitheater for indie rock, synthpop, and dance headliners.</p>
+        </article>
+
+        <article class="panel-card" data-category="stages" data-keywords="lunar forest dome covered audiovisual marquee 1800 techno ambient 360">
+          <div class="card-meta">
+            <span class="badge badge-lunar">Stage</span>
+            <span class="time-stamp">14:00 – 04:00</span>
+          </div>
+          <h3 class="card-title"><a href="stages.html" class="inline-link" data-i18n="lunarName">Lunar Forest Dome</a></h3>
+          <p class="card-sub" data-i18n="lunarShort">Covered audiovisual marquee for techno, ambient, and 360-degree light projections.</p>
+        </article>
+
+        <article class="panel-card" data-category="info" data-keywords="timetable schedule kutna hora july 10 12 2026 operating hours sets">
+          <div class="card-meta">
+            <span class="badge badge-peak">Info & Schedule</span>
+            <span class="time-stamp">10–12.7.2026</span>
+          </div>
+          <h3 class="card-title"><a href="program.html" class="inline-link">3-Day Festival Timetable & Stage Hours</a></h3>
+          <p class="card-sub">60 scheduled sets across Friday, Saturday, and Sunday in Kutná Hora, Czech Republic.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span data-i18n="footerLocation">Kutná Hora, Czech Republic · July 10–12, 2026</span>
+      <span id="plural-summary" class="footer-meta">60 sets</span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var input = document.getElementById("festival-search-input");
+      var filterButtons = document.querySelectorAll("[data-filter]");
+      var cards = document.querySelectorAll("#search-results-grid [data-category]");
+      var countEl = document.getElementById("search-result-count");
+      var activeCategory = "all";
+
+      function applyFilter() {
+        var query = input ? input.value.trim().toLowerCase() : "";
+        var visible = 0;
+
+        for (var i = 0; i < cards.length; i++) {
+          var card = cards[i];
+          var category = card.getAttribute("data-category");
+          var text = (card.textContent + " " + (card.getAttribute("data-keywords") || "")).toLowerCase();
+          var matchesCategory = activeCategory === "all" || category === activeCategory;
+          var matchesQuery = !query || text.indexOf(query) !== -1;
+          var show = matchesCategory && matchesQuery;
+          card.hidden = !show;
+          if (show) {
+            visible++;
+          }
+        }
+
+        if (countEl) {
+          countEl.textContent = visible + (visible === 1 ? " result" : " results");
+        }
+      }
+
+      if (input) {
+        input.addEventListener("input", applyFilter);
+      }
+
+      for (var j = 0; j < filterButtons.length; j++) {
+        filterButtons[j].addEventListener("click", function () {
+          activeCategory = this.getAttribute("data-filter") || "all";
+          for (var k = 0; k < filterButtons.length; k++) {
+            filterButtons[k].setAttribute("aria-pressed", filterButtons[k] === this ? "true" : "false");
+          }
+          applyFilter();
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

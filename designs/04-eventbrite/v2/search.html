@@ -1,0 +1,298 @@
+<!-- v2/search.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search | Festival of Darkness 2 — Kutná Hora, 10–12 Jul 2026</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/lang.js" defer></script>
+</head>
+<body>
+  <header class="eb-header">
+    <div class="eb-container eb-header-inner">
+      <a href="index.html" class="eb-logo" aria-label="Festival of Darkness 2 Home">
+        <span class="eb-logo-mark">eb</span>
+        <span class="eb-logo-text" data-i18n="brand.short">Festival of Darkness 2</span>
+      </a>
+      <nav class="eb-nav" aria-label="Primary Navigation">
+        <a href="index.html" class="eb-nav-link" data-i18n="nav.overview">Event Overview</a>
+        <a href="program.html" class="eb-nav-link" data-i18n="nav.program">Lineup & Schedule</a>
+        <a href="artists.html" class="eb-nav-link">Artists</a>
+        <a href="stages.html" class="eb-nav-link">Stages</a>
+        <a href="practical-info.html" class="eb-nav-link">Info</a>
+        <a href="my-schedule.html" class="eb-nav-link">My Schedule</a>
+        <a href="search.html" class="eb-nav-link is-active">Search</a>
+      </nav>
+      <div class="eb-header-actions">
+        <button type="button" id="lang-toggle" class="eb-lang-btn" onclick="toggleFestivalLang()" aria-label="Switch language">
+          CZ / EN
+        </button>
+        <a href="index.html#tickets-rail" class="eb-btn eb-btn-primary eb-btn-sm" data-i18n="nav.tickets">Get Tickets</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="eb-program-hero">
+      <div class="eb-container">
+        <nav class="eb-breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html" data-i18n="nav.overview">Event Overview</a>
+          <span aria-hidden="true">/</span>
+          <span>Search</span>
+        </nav>
+        <h1 class="eb-page-title">Search Festival</h1>
+        <p class="eb-page-subtitle">Find artists, stage details, set times, and Kutná Hora festival info.</p>
+
+        <form class="eb-organizer-bar" role="search" onsubmit="return false;">
+          <label for="festival-search-input" class="eb-org-label">Search</label>
+          <input
+            type="search"
+            id="festival-search-input"
+            name="q"
+            class="eb-btn eb-btn-outline"
+            placeholder="Search artists, stages, genres, or info..."
+            aria-label="Search artists, stages, genres, or info"
+            autocomplete="off"
+          >
+          <button type="button" id="search-clear-btn" class="eb-btn eb-btn-outline eb-btn-sm">Clear</button>
+        </form>
+
+        <div class="eb-jump-bar" role="group" aria-label="Filter results by category">
+          <button type="button" class="eb-jump-pill is-active" data-filter="all" aria-pressed="true">All (8)</button>
+          <button type="button" class="eb-jump-pill" data-filter="artists" aria-pressed="false">Artists (4)</button>
+          <button type="button" class="eb-jump-pill" data-filter="stages" aria-pressed="false">Stages (2)</button>
+          <button type="button" class="eb-jump-pill" data-filter="info" aria-pressed="false">Info (2)</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="eb-program-content" aria-labelledby="search-results-heading">
+      <div class="eb-container">
+        <div class="eb-section-head-row">
+          <h2 id="search-results-heading" class="eb-section-title">Search results</h2>
+          <span class="eb-count-pill" id="search-results-count">8 results</span>
+        </div>
+
+        <div class="eb-schedule-table" id="search-results-list">
+          <article class="eb-schedule-card" data-category="artists" data-search="solar flare nu-disco funk de friday july 10 22:00 23:10 solar horizon stage">
+            <div class="eb-sch-time">
+              <span class="eb-stage-pill eb-tag-solar">Artist</span>
+              <span class="eb-time-range">Fri 10 Jul • 22:00 – 23:10</span>
+            </div>
+            <div>
+              <h3 class="eb-sch-artist">
+                <a href="artist-detail.html?id=perf-08">Solar Flare</a>
+              </h3>
+              <p class="eb-sch-genre">Nu-Disco / Funk (DE) • Solar Horizon Stage</p>
+            </div>
+            <div>
+              <a href="artist-detail.html?id=perf-08" class="eb-btn eb-btn-outline eb-btn-sm">Artist Detail</a>
+            </div>
+          </article>
+
+          <article class="eb-schedule-card" data-category="artists" data-search="modular horizon live hardware techno de friday july 10 22:30 23:50 lunar forest dome">
+            <div class="eb-sch-time">
+              <span class="eb-stage-pill eb-tag-lunar">Artist</span>
+              <span class="eb-time-range">Fri 10 Jul • 22:30 – 23:50</span>
+            </div>
+            <div>
+              <h3 class="eb-sch-artist">
+                <a href="artist-detail.html?id=perf-17">Modular Horizon</a>
+              </h3>
+              <p class="eb-sch-genre">Live Hardware Techno (DE) • Lunar Forest Dome</p>
+            </div>
+            <div>
+              <a href="artist-detail.html?id=perf-17" class="eb-btn eb-btn-outline eb-btn-sm">Artist Detail</a>
+            </div>
+          </article>
+
+          <article class="eb-schedule-card" data-category="artists" data-search="vortex motion nu-electro uk saturday july 11 23:10 00:25 solar horizon stage">
+            <div class="eb-sch-time">
+              <span class="eb-stage-pill eb-tag-solar">Artist</span>
+              <span class="eb-time-range">Sat 11 Jul • 23:10 – 00:25</span>
+            </div>
+            <div>
+              <h3 class="eb-sch-artist">
+                <a href="artist-detail.html?id=perf-29">Vortex Motion</a>
+              </h3>
+              <p class="eb-sch-genre">Nu-Electro (UK) • Solar Horizon Stage</p>
+            </div>
+            <div>
+              <a href="artist-detail.html?id=perf-29" class="eb-btn eb-btn-outline eb-btn-sm">Artist Detail</a>
+            </div>
+          </article>
+
+          <article class="eb-schedule-card" data-category="artists" data-search="starlight runners electropop headliner dk sunday july 12 22:35 23:55 solar horizon stage">
+            <div class="eb-sch-time">
+              <span class="eb-stage-pill eb-tag-solar">Artist</span>
+              <span class="eb-time-range">Sun 12 Jul • 22:35 – 23:55</span>
+            </div>
+            <div>
+              <h3 class="eb-sch-artist">
+                <a href="artist-detail.html?id=perf-49">Starlight Runners</a>
+              </h3>
+              <p class="eb-sch-genre">Electropop Headliner (DK) • Solar Horizon Stage</p>
+            </div>
+            <div>
+              <a href="artist-detail.html?id=perf-49" class="eb-btn eb-btn-outline eb-btn-sm">Artist Detail</a>
+            </div>
+          </article>
+
+          <article class="eb-schedule-card" data-category="stages" data-search="solar horizon stage open-air main stage capacity 4500 amphitheater indie rock dance headliners">
+            <div class="eb-sch-time">
+              <span class="eb-stage-pill eb-tag-solar">Stage</span>
+              <span class="eb-time-range">Capacity: 4,500</span>
+            </div>
+            <div>
+              <h3 class="eb-sch-artist">
+                <a href="stages.html#stage-solar" data-i18n="stages.solar_name">Solar Horizon Stage</a>
+              </h3>
+              <p class="eb-sch-genre" data-i18n="stages.solar_desc">Central open-air amphitheater for major band performances, indie rock, and dance headliners.</p>
+            </div>
+            <div>
+              <a href="stages.html#stage-solar" class="eb-btn eb-btn-outline eb-btn-sm">View Stage</a>
+            </div>
+          </article>
+
+          <article class="eb-schedule-card" data-category="stages" data-search="lunar forest dome covered audiovisual dome capacity 1800 techno ambient experimental electronics 360 light projections">
+            <div class="eb-sch-time">
+              <span class="eb-stage-pill eb-tag-lunar">Stage</span>
+              <span class="eb-time-range">Capacity: 1,800</span>
+            </div>
+            <div>
+              <h3 class="eb-sch-artist">
+                <a href="stages.html#stage-lunar" data-i18n="stages.lunar_name">Lunar Forest Dome</a>
+              </h3>
+              <p class="eb-sch-genre" data-i18n="stages.lunar_desc">Atmospheric covered indoor stage focusing on techno, ambient, experimental electronics, and 360-degree light projections.</p>
+            </div>
+            <div>
+              <a href="stages.html#stage-lunar" class="eb-btn eb-btn-outline eb-btn-sm">View Stage</a>
+            </div>
+          </article>
+
+          <article class="eb-schedule-card" data-category="info" data-search="3-day timetable schedule friday saturday sunday july 10 11 12 60 live acts">
+            <div class="eb-sch-time">
+              <span class="eb-origin-badge">Info</span>
+              <span class="eb-time-range">10–12 July 2026</span>
+            </div>
+            <div>
+              <h3 class="eb-sch-artist">
+                <a href="program.html">Full 3-Day Lineup & Timetable</a>
+              </h3>
+              <p class="eb-sch-genre">Complete set times for all 60 live acts across Friday, Saturday, and Sunday.</p>
+            </div>
+            <div>
+              <a href="program.html" class="eb-btn eb-btn-outline eb-btn-sm">Open Timetable</a>
+            </div>
+          </article>
+
+          <article class="eb-schedule-card" data-category="info" data-search="kutna hora festival grounds doors entry wristband camping tickets practical info">
+            <div class="eb-sch-time">
+              <span class="eb-origin-badge">Info</span>
+              <span class="eb-time-range">Kutná Hora, CZ</span>
+            </div>
+            <div>
+              <h3 class="eb-sch-artist">
+                <a href="practical-info.html">Location, Doors & Camping Guide</a>
+              </h3>
+              <p class="eb-sch-genre">Doors open Fri Jul 10 at 13:00 CEST • Mobile e-ticket & wristband exchange at Kutná Hora Festival Grounds.</p>
+            </div>
+            <div>
+              <a href="practical-info.html" class="eb-btn eb-btn-outline eb-btn-sm">Practical Info</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="eb-organizer-bar" id="search-empty-state" hidden>
+          <div>
+            <p class="eb-org-label"><strong>No matching results found</strong></p>
+            <p class="eb-org-meta">Try another artist name, genre, stage, or switch back to All results.</p>
+          </div>
+          <a href="program.html" class="eb-btn btn-outline eb-btn-outline eb-btn-sm">Browse Full Program</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="eb-footer">
+    <div class="eb-container eb-footer-inner">
+      <div>
+        <p class="eb-footer-brand">Festival of Darkness 2</p>
+        <p class="eb-footer-copy" data-i18n="footer.location">Kutná Hora, Czech Republic • 10–12 July 2026</p>
+      </div>
+      <div class="eb-footer-links">
+        <a href="index.html" data-i18n="nav.overview">Event Overview</a>
+        <a href="program.html" data-i18n="nav.program">Lineup & Schedule</a>
+        <a href="artists.html">Artists</a>
+        <a href="stages.html">Stages</a>
+        <a href="practical-info.html">Info</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const searchInput = document.getElementById("festival-search-input");
+      const clearBtn = document.getElementById("search-clear-btn");
+      const filterChips = Array.from(document.querySelectorAll("[data-filter]"));
+      const resultCards = Array.from(document.querySelectorAll("#search-results-list [data-category]"));
+      const countBadge = document.getElementById("search-results-count");
+      const emptyState = document.getElementById("search-empty-state");
+      let activeCategory = "all";
+
+      function updateResults() {
+        const query = (searchInput.value || "").trim().toLowerCase();
+        let visibleCount = 0;
+
+        resultCards.forEach((card) => {
+          const category = card.getAttribute("data-category");
+          const haystack = (card.getAttribute("data-search") + " " + card.textContent).toLowerCase();
+          const matchesCategory = activeCategory === "all" || category === activeCategory;
+          const matchesQuery = !query || haystack.includes(query);
+          const isVisible = matchesCategory && matchesQuery;
+
+          card.hidden = !isVisible;
+          if (isVisible) visibleCount += 1;
+        });
+
+        countBadge.textContent = visibleCount === 1 ? "1 result" : visibleCount + " results";
+        emptyState.hidden = visibleCount > 0;
+      }
+
+      filterChips.forEach((chip) => {
+        chip.addEventListener("click", () => {
+          activeCategory = chip.getAttribute("data-filter") || "all";
+          filterChips.forEach((btn) => {
+            const isSelected = btn === chip;
+            btn.classList.toggle("is-active", isSelected);
+            btn.setAttribute("aria-pressed", String(isSelected));
+          });
+          updateResults();
+        });
+      });
+
+      searchInput.addEventListener("input", updateResults);
+
+      clearBtn.addEventListener("click", () => {
+        searchInput.value = "";
+        activeCategory = "all";
+        filterChips.forEach((btn) => {
+          const isAll = btn.getAttribute("data-filter") === "all";
+          btn.classList.toggle("is-active", isAll);
+          btn.setAttribute("aria-pressed", String(isAll));
+        });
+        updateResults();
+        searchInput.focus();
+      });
+
+      const params = new URLSearchParams(window.location.search);
+      const initialQuery = params.get("q");
+      if (initialQuery) {
+        searchInput.value = initialQuery;
+      }
+      updateResults();
+    })();
+  </script>
+</body>
+</html>
