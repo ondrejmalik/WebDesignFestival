@@ -107,7 +107,16 @@
       electronic: [
         'electronic', 'electro', 'techno', 'idm', 'glitch', 'microhouse',
         'house', 'dubstep', 'trance', 'synthpop', 'nu-disco', 'bass', 'synth'
-      ]
+      ],
+      ambient: ['ambient', 'drone', 'field recording', 'tape', 'chillout', 'down-tempo'],
+      indie: ['indie'],
+      rock: ['rock', 'shoegaze', 'post-punk'],
+      pop: ['pop', 'synthpop'],
+      dance: ['dance', 'disco', 'funk'],
+      experimental: ['experimental', 'idm', 'glitch', 'drone', 'field recording', 'tape', 'leftfield'],
+      folk: ['folk', 'acoustic'],
+      bass: ['bass', 'dubstep', 'leftfield bass', 'dub'],
+      synth: ['synth', 'synthpop', 'electropop', 'electro']
     },
     COUNTRIES: {
     "CZ": {
@@ -1333,7 +1342,7 @@
         "titleCs": "🚆 Kyvadlová doprava (Shuttle Bus) & Jízdní řád",
         "descEn": "Free festival shuttle buses operate continuously between Kutná Hora hl.n. main train station and the festival venue every 15-20 minutes from 11:30 to 04:30 daily.",
         "descCs": "Bezplatná festivalová kyvadlová doprava jezdí nepřetržitě mezi nádražím Kutná Hora hl.n. a areálem každých 15-20 minut od 11:30 do 04:30.",
-        "link": "practical-info.html#kyvadlova-doprava",
+        "link": "practical-info.html#shuttle-bus",
         "linkTextEn": "[ View Shuttle Timetable → ]",
         "linkTextCs": "[ Jízdní řád kyvadlové dopravy → ]",
         "keywords": "info shuttle bus kyvadlova doprava vlak train stanice nadrazi doprava transit bus kutna hora zastavka transfer informace jizdni rad"
@@ -1355,7 +1364,7 @@
         "titleCs": "⛺ Stanové městečko, sprchy a ubytování",
         "descEn": "Fenced campsite with 24/7 security, hot showers, drinking water, phone charging lockers, and quiet zone. Opens Friday 10:00, closes Monday 12:00.",
         "descCs": "Oplocené stanové městečko s nepřetržitou ostrahou 24/7, teplými sprchami, pitnou vodou, dobíjecími skříňkami a klidovou zónou. Otevírá v pátek v 10:00, končí v pondělí ve 12:00.",
-        "link": "practical-info.html#camping",
+        "link": "practical-info.html#kemp",
         "linkTextEn": "[ Camping Guidelines → ]",
         "linkTextCs": "[ Pravidla kempu → ]",
         "keywords": "info camping kemp stan stanove mestecko sprchy tent ubytovani hygiene sprchy voda informace stanovani"
