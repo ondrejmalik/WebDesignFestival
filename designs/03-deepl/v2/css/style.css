@@ -1085,3 +1085,146 @@ a {
     max-width: 100%;
   }
 }
+
+/* === Program Favorites & Schedule Planner === */
+/* === Program Plan Bar & Schedule Additions (03-deepl) === */
+
+.program-plan-bar {
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--border-light);
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.9375rem;
+}
+
+.plan-bar-copy {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--ink-secondary);
+  margin: 0;
+}
+
+.plan-bar-count {
+  font-weight: 600;
+  color: var(--navy-deep);
+  background-color: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.plan-bar-link {
+  color: var(--blue-accent);
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.plan-bar-link:hover {
+  text-decoration: underline;
+}
+
+/* Schedule Table and Action Column Adjustments */
+.schedule-table th.col-action,
+.schedule-table td.col-action {
+  text-align: right;
+  white-space: nowrap;
+  width: 1%;
+}
+
+@media (min-width: 640px) {
+  .schedule-row {
+    display: table-row;
+    padding: 0;
+  }
+
+  .schedule-row td {
+    padding: 0.85rem 1rem;
+    vertical-align: middle;
+  }
+}
+
+@media (max-width: 639px) {
+  .schedule-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.35rem 0.75rem;
+    padding: 0.95rem 1rem;
+    border-bottom: 1px solid var(--border-light);
+    align-items: center;
+  }
+
+  .schedule-row td.col-action {
+    grid-column: 2;
+    grid-row: 1;
+    text-align: right;
+    padding: 0;
+  }
+
+  .col-origin {
+    text-align: right;
+  }
+}
+
+/* Favorite Toggle Button */
+.fav-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.4rem 0.8rem;
+  min-height: 36px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-mid);
+  background-color: var(--bg-surface);
+  color: var(--navy-deep);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.fav-toggle-btn:hover {
+  background-color: var(--bg-subtle);
+  border-color: var(--ink-muted);
+}
+
+.fav-toggle-btn.is-saved,
+.fav-toggle-btn[aria-pressed="true"] {
+  background-color: var(--blue-accent);
+  border-color: var(--blue-accent);
+  color: #ffffff;
+}
+
+.fav-toggle-btn.is-saved:hover,
+.fav-toggle-btn[aria-pressed="true"]:hover {
+  background-color: var(--blue-accent-hover);
+  border-color: var(--blue-accent-hover);
+}
+
+.fav-toggle-btn:focus-visible {
+  outline: 2px solid var(--blue-accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .fav-toggle-btn {
+    min-height: 44px;
+    padding: 0.5rem 0.95rem;
+  }
+}
+@media (min-width: 640px) {
+  .schedule-row td.col-action {
+    display: table-cell;
+  }
+}

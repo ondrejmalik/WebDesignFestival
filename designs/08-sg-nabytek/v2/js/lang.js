@@ -61,7 +61,12 @@
       'dock_home': 'Home',
       'dock_program': 'Program',
       'dock_plan': 'My Plan',
-      'dock_search': 'Search'
+      'dock_search': 'Search',
+      'prog_plan_label': 'My Schedule:',
+      'prog_open_plan': 'Open My Schedule',
+      'col_plan': 'Plan',
+      'prog_add': '+ Add',
+      'prog_added': '✓ In Plan'
     },
     cs: {
       'header.meta': 'Kutná Hora, Česká republika | 10.-12. července 2026',
@@ -122,7 +127,12 @@
       'dock_home': 'Domů',
       'dock_program': 'Program',
       'dock_plan': 'Můj plán',
-      'dock_search': 'Hledat'
+      'dock_search': 'Hledat',
+      'prog_plan_label': 'Můj plán:',
+      'prog_open_plan': 'Otevřít Můj plán',
+      'col_plan': 'Plán',
+      'prog_add': '+ Přidat',
+      'prog_added': '✓ V plánu'
     }
   };
 

@@ -803,3 +803,146 @@ a {
     max-width: 100%;
   }
 }
+
+/* === Program Favorites & Schedule Planner === */
+/* Program Plan Bar and Schedule Row Adjustments for Add to Schedule Toggle */
+
+.program-plan-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding: 16px 20px;
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.plan-bar-copy {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text-lavender);
+  margin: 0;
+}
+
+.plan-bar-count {
+  font-weight: 700;
+  color: var(--accent-pink);
+}
+
+.plan-bar-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-cream);
+  background-color: var(--surface-glass);
+  border: 1px solid var(--border-strong);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.plan-bar-link:hover,
+.plan-bar-link:focus-visible {
+  border-color: var(--accent-pink);
+  background-color: var(--surface-glass-hover);
+}
+
+@media (max-width: 768px) {
+  .program-plan-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+  }
+  
+  .plan-bar-link {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Schedule Row Layout Update */
+@media (min-width: 769px) {
+  .slot-row {
+    grid-template-columns: 130px 1fr auto auto;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .slot-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .slot-stage {
+    justify-self: start;
+  }
+}
+
+/* Favorite Toggle Button Styling */
+.fav-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  background-color: var(--surface-glass);
+  color: var(--text-lavender);
+  border: 1px solid var(--border-strong);
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.fav-toggle-btn:hover,
+.fav-toggle-btn:focus-visible {
+  background-color: var(--surface-glass-hover);
+  border-color: var(--accent-pink);
+  color: var(--text-cream);
+}
+
+.fav-toggle-btn:active {
+  transform: scale(0.98);
+}
+
+.fav-toggle-btn.is-saved,
+.fav-toggle-btn[aria-pressed="true"] {
+  background-color: var(--accent-coral);
+  color: var(--text-cream);
+  border-color: transparent;
+}
+
+.fav-toggle-btn.is-saved:hover,
+.fav-toggle-btn[aria-pressed="true"]:hover,
+.fav-toggle-btn.is-saved:focus-visible,
+.fav-toggle-btn[aria-pressed="true"]:focus-visible {
+  background-color: var(--accent-crimson);
+}
+
+.fav-toggle-btn:focus-visible {
+  outline: 2px solid var(--accent-pink);
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .fav-toggle-btn {
+    min-height: 44px;
+    width: 100%;
+    justify-content: center;
+    margin-top: 4px;
+  }
+}

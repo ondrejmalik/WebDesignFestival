@@ -836,3 +836,178 @@ a {
     max-width: 100%;
   }
 }
+
+/* === Program Favorites & Schedule Planner === */
+/* === Program Plan Bar & Schedule Row Adjustments (Design: 01-checklist) === */
+
+.program-plan-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 14px 20px;
+  margin-bottom: 24px;
+}
+
+.plan-bar-copy {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  min-width: 0;
+}
+
+.plan-bar-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+  background-color: #f1ecf8;
+  color: var(--accent-purple);
+  font-weight: 600;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.plan-bar-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  background-color: var(--text-primary);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background-color 0.15s ease;
+}
+
+.plan-bar-link:hover {
+  background-color: #000000;
+}
+
+.plan-bar-link:focus-visible {
+  background-color: #000000;
+  outline: 2px solid var(--accent-purple);
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .program-plan-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 14px 16px;
+  }
+
+  .plan-bar-link {
+    width: 100%;
+    min-height: 44px;
+  }
+}
+
+/* Desktop 5-column schedule row layout (Time, Stage, Artist, Genre, Action) */
+@media (min-width: 769px) {
+  .schedule-row {
+    grid-template-columns: 120px 160px minmax(0, 1.2fr) minmax(0, 0.9fr) auto;
+    gap: 12px;
+    align-items: center;
+  }
+}
+
+/* Mobile schedule row adjustments */
+@media (max-width: 768px) {
+  .schedule-row {
+    grid-template-columns: 1fr auto !important;
+    gap: 8px 12px;
+    padding: 12px 14px;
+    position: relative;
+  }
+
+  .slot-time {
+    grid-column: 1;
+  }
+
+  .slot-stage {
+    grid-column: 2;
+    justify-self: end;
+  }
+
+  .slot-artist {
+    grid-column: 1 / -2;
+    margin-top: 2px;
+  }
+
+  .slot-genre {
+    grid-column: 1 / -2;
+    text-align: left;
+  }
+
+  .schedule-row .col-action {
+    grid-column: 1 / -1;
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  .schedule-row .col-action .fav-toggle-btn {
+    width: 100%;
+  }
+}
+
+/* Favorite Toggle Button */
+.fav-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.fav-toggle-btn:hover {
+  border-color: var(--text-primary);
+}
+
+.fav-toggle-btn:focus-visible {
+  outline: 2px solid var(--accent-purple);
+  outline-offset: 2px;
+}
+
+.fav-toggle-btn.is-saved,
+.fav-toggle-btn[aria-pressed="true"] {
+  background-color: var(--accent-purple);
+  border-color: var(--accent-purple);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.fav-toggle-btn.is-saved:hover,
+.fav-toggle-btn[aria-pressed="true"]:hover {
+  background-color: #553d78;
+  border-color: #553d78;
+}
+
+@media (max-width: 768px) {
+  .fav-toggle-btn {
+    min-height: 44px;
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}

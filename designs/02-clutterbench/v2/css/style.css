@@ -752,3 +752,167 @@ body {
     max-width: 100%;
   }
 }
+
+/* === Program Favorites & Schedule Planner === */
+/* Add to My Schedule & Program Summary Styles */
+.program-plan-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background-color: var(--bg-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  margin-bottom: 28px;
+}
+
+.plan-bar-copy {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.plan-bar-count {
+  font-weight: 700;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.plan-bar-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  background-color: var(--text-primary);
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.plan-bar-link:hover {
+  background-color: #1d2939;
+}
+
+.plan-bar-link:focus-visible {
+  outline: 2px solid var(--accent-solar);
+  outline-offset: 2px;
+}
+
+/* Schedule Table Action Column Alignment */
+.data-table .col-action {
+  text-align: right;
+  width: 1%;
+  white-space: nowrap;
+}
+
+@media (min-width: 769px) {
+  .data-table th:last-child,
+  .data-table td:last-child {
+    text-align: right;
+  }
+}
+
+/* Favorite Toggle Button */
+.fav-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  min-height: 36px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  white-space: nowrap;
+  background-color: var(--bg-page);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.fav-toggle-btn:hover {
+  background-color: var(--bg-subtle);
+  border-color: #cbd5e1;
+  color: var(--text-primary);
+}
+
+.fav-toggle-btn.is-saved,
+.fav-toggle-btn[aria-pressed="true"] {
+  background-color: var(--accent-solar);
+  color: #ffffff;
+  border-color: var(--accent-solar);
+}
+
+.fav-toggle-btn.is-saved:hover,
+.fav-toggle-btn[aria-pressed="true"]:hover {
+  background-color: #15589c;
+  border-color: #15589c;
+}
+
+.fav-toggle-btn:focus-visible {
+  outline: 2px solid var(--accent-solar);
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .schedule-table,
+  .schedule-table tbody,
+  .schedule-table tr,
+  .schedule-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .schedule-table thead {
+    display: none;
+  }
+
+  .schedule-table tr {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .schedule-table td {
+    padding: 2px 0;
+  }
+
+  .schedule-table td.col-action {
+    width: 100%;
+    text-align: left;
+    margin-top: 8px;
+    padding: 0;
+  }
+
+  .fav-toggle-btn {
+    min-height: 44px;
+    padding: 8px 14px;
+    font-size: 0.875rem;
+    width: 100%;
+  }
+
+  .program-plan-bar {
+    padding: 14px 16px;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .plan-bar-copy {
+    justify-content: center;
+  }
+
+  .plan-bar-link {
+    width: 100%;
+  }
+}
