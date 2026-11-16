@@ -1,0 +1,631 @@
+<!DOCTYPE html><html lang="en" data-theme="dark"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <base href="/">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#0D1117">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0D1117">
+  <meta name="color-scheme" content="dark">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://zzz.analytics.moe/#website",
+        "url": "https://zzz.analytics.moe/",
+        "name": "ZZZ Analytics",
+        "alternateName": ["ZZZAnalytics", "Zenless Zone Zero Analytics"],
+        "description": "Deadly Assault run database, DPS leaderboard, tier lists, and theorycraft tools for Zenless Zone Zero.",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://zzz.analytics.moe/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://zzz.analytics.moe/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://zzz.analytics.moe/#organization",
+        "name": "ZZZ Analytics",
+        "alternateName": ["ZZZAnalytics", "Zenless Zone Zero Analytics"],
+        "url": "https://zzz.analytics.moe/",
+        "knowsAbout": [
+          "Zenless Zone Zero",
+          "Deadly Assault",
+          "DPS rankings",
+          "team compositions",
+          "tier list",
+          "theorycrafting"
+        ],
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://zzz.analytics.moe/images/normlogo.png",
+          "width": 128,
+          "height": 128
+        },
+        "sameAs": ["https://discord.gg/Tsx2CYGzna"]
+      }
+    ]
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=1">
+  <link rel="icon" type="image/png" href="/assets/normlogo.png?v=222">
+  <link rel="apple-touch-icon" href="/assets/normlogo.png?v=222">
+
+  <!-- Inter and JetBrains Mono are self-hosted (css/fonts.css, assets/fonts/), so
+       visitors' IP addresses are not sent to Google Fonts. -->
+  <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin="">
+  <link rel="preload" href="/assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin="">
+
+  <script defer="" src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js" integrity="sha384-jb8JQMbMoBUzgWatfe6COACi2ljcDdZQ2OxczGA3bGNeWe+6DChMTBJemed7ZnvJ" crossorigin="anonymous"></script>
+
+  <!-- Motion (motion.dev) — vanilla global build. Used for spring-driven
+       micro-interactions (the sliding segmented-control pill); app.js degrades
+       to CSS transitions if this fails to load. -->
+  <script defer="" src="https://cdn.jsdelivr.net/npm/motion@14.0.0/dist/motion.js" integrity="sha384-iRo3gRrhwD2dn+29qj2j9vUQCrD/MuD7J9d9bu+wslL4I2KswbiilPL8WV8Y/N/D" crossorigin="anonymous"></script>
+
+  <script defer="" src="/js/bundle.433fa17c4f.js"></script>
+
+  <link rel="stylesheet" href="/css/bundle.5156d8c71e.css">
+
+  <!-- Analytics is Cloudflare Web Analytics, injected at the edge (automatic setup
+       in the Cloudflare dashboard), so page views never reach Vercel. -->
+
+    <title>Zenless Zone Zero Tier List (November 2026) for Version 3.3 — Best Agents Ranked by Deadly Assault DPS | ZZZ Analytics</title>
+    <meta name="description" content="An automated Zenless Zone Zero tier list ranking the best agents by peak Deadly Assault DPS, computed from real community combat-log runs — best teams, run counts and the highest recorded clears.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://zzz.analytics.moe/tier-list">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="ZZZ Analytics">
+    <meta property="og:title" content="Zenless Zone Zero Tier List (November 2026) for Version 3.3 — Best Agents Ranked by Deadly Assault DPS | ZZZ Analytics">
+    <meta property="og:description" content="An automated Zenless Zone Zero tier list ranking the best agents by peak Deadly Assault DPS, computed from real community combat-log runs — best teams, run counts and the highest recorded clears.">
+    <meta property="og:url" content="https://zzz.analytics.moe/tier-list">
+    <meta property="og:image" content="https://zzz.analytics.moe/images/og-cover.png?v=2">
+    <meta property="og:image:width" content="1260">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Truly neutral zenless data">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Zenless Zone Zero Tier List (November 2026) for Version 3.3 — Best Agents Ranked by Deadly Assault DPS | ZZZ Analytics">
+    <meta name="twitter:description" content="An automated Zenless Zone Zero tier list ranking the best agents by peak Deadly Assault DPS, computed from real community combat-log runs — best teams, run counts and the highest recorded clears.">
+    <meta name="twitter:image" content="https://zzz.analytics.moe/images/og-cover.png?v=2">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Zenless Zone Zero Tier List (November 2026) for Version 3.3 — Best Agents Ranked by Deadly Assault DPS | ZZZ Analytics","description":"An automated Zenless Zone Zero tier list ranking the best agents by peak Deadly Assault DPS, computed from real community combat-log runs — best teams, run counts and the highest recorded clears.","url":"https://zzz.analytics.moe/tier-list","dateModified":"2026-11-15","isPartOf":{"@id":"https://zzz.analytics.moe/#website"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"Zenless Zone Zero Tier List (November 2026) for Version 3.3 — Best Agents Ranked by Deadly Assault DPS | ZZZ Analytics","url":"https://zzz.analytics.moe/tier-list","numberOfItems":31,"itemListElement":[{"@type":"ListItem","position":1,"name":"Phoenix","url":"https://zzz.analytics.moe/wiki/agents/phoenix"},{"@type":"ListItem","position":2,"name":"Kafka","url":"https://zzz.analytics.moe/wiki/agents/kafka"},{"@type":"ListItem","position":3,"name":"Sunbringer","url":"https://zzz.analytics.moe/wiki/agents/sunbringer"},{"@type":"ListItem","position":4,"name":"Aria","url":"https://zzz.analytics.moe/wiki/agents/aria"},{"@type":"ListItem","position":5,"name":"Promeia","url":"https://zzz.analytics.moe/wiki/agents/promeia"},{"@type":"ListItem","position":6,"name":"Burnice","url":"https://zzz.analytics.moe/wiki/agents/burnice"},{"@type":"ListItem","position":7,"name":"Sigrid","url":"https://zzz.analytics.moe/wiki/agents/sigrid"},{"@type":"ListItem","position":8,"name":"Severian","url":"https://zzz.analytics.moe/wiki/agents/severian"},{"@type":"ListItem","position":9,"name":"Alice","url":"https://zzz.analytics.moe/wiki/agents/alice"},{"@type":"ListItem","position":10,"name":"Ye Shunguang","url":"https://zzz.analytics.moe/wiki/agents/ye-shunguang"},{"@type":"ListItem","position":11,"name":"Jane","url":"https://zzz.analytics.moe/wiki/agents/jane"},{"@type":"ListItem","position":12,"name":"Grace","url":"https://zzz.analytics.moe/wiki/agents/grace"},{"@type":"ListItem","position":13,"name":"Piper","url":"https://zzz.analytics.moe/wiki/agents/piper"},{"@type":"ListItem","position":14,"name":"Claret","url":"https://zzz.analytics.moe/wiki/agents/claret"},{"@type":"ListItem","position":15,"name":"Pyrois","url":"https://zzz.analytics.moe/wiki/agents/pyrois"},{"@type":"ListItem","position":16,"name":"Miyabi","url":"https://zzz.analytics.moe/wiki/agents/miyabi"},{"@type":"ListItem","position":17,"name":"Billy SP","url":"https://zzz.analytics.moe/wiki/agents/starlight-billy"},{"@type":"ListItem","position":18,"name":"Yanagi","url":"https://zzz.analytics.moe/wiki/agents/yanagi"},{"@type":"ListItem","position":19,"name":"Yi Xuan","url":"https://zzz.analytics.moe/wiki/agents/yixuan"},{"@type":"ListItem","position":20,"name":"Cissia","url":"https://zzz.analytics.moe/wiki/agents/cissia"},{"@type":"ListItem","position":21,"name":"Yidhari","url":"https://zzz.analytics.moe/wiki/agents/yidhari"},{"@type":"ListItem","position":22,"name":"Soldier 11","url":"https://zzz.analytics.moe/wiki/agents/soldier-11"},{"@type":"ListItem","position":23,"name":"Banyue","url":"https://zzz.analytics.moe/wiki/agents/banyue"},{"@type":"ListItem","position":24,"name":"Orphie & Magus","url":"https://zzz.analytics.moe/wiki/agents/orphie-magus"},{"@type":"ListItem","position":25,"name":"Evelyn","url":"https://zzz.analytics.moe/wiki/agents/evelyn"},{"@type":"ListItem","position":26,"name":"Harumasa","url":"https://zzz.analytics.moe/wiki/agents/harumasa"},{"@type":"ListItem","position":27,"name":"SS - Anby","url":"https://zzz.analytics.moe/wiki/agents/soldier-0-anby"},{"@type":"ListItem","position":28,"name":"Ellen","url":"https://zzz.analytics.moe/wiki/agents/ellen"},{"@type":"ListItem","position":29,"name":"Hugo Vlad","url":"https://zzz.analytics.moe/wiki/agents/hugo"},{"@type":"ListItem","position":30,"name":"Komano Manato","url":"https://zzz.analytics.moe/wiki/agents/manato"},{"@type":"ListItem","position":31,"name":"Corin","url":"https://zzz.analytics.moe/wiki/agents/corin"}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.css" integrity="sha384-nH0MfJ44wi1dd7w6jinlyBgljjS8EJAh2JBoRad8a3VDw2K69vfaaqm4WnR+gXtA" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.js" integrity="sha384-CwjPRVHTvLiMBFjEoij+QZViMV5rhTOIp7CJzl24JEqpRDA1sJFHVXXLURktbYYp" crossorigin="anonymous"></script></head>
+<body>
+
+  <!-- Mobile top bar: menu button, logo and the active page's title. On
+       desktop the left rail is the whole navigation and this bar is hidden. -->
+  <header class="mobile-topbar">
+    <button type="button" class="nav-menu-toggle" id="nav-menu-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="site-rail">
+      <span class="nav-menu-toggle-bars" aria-hidden="true"></span>
+    </button>
+    <a class="brand" href="/" data-nav-tab="leaderboard" title="Click to view Leaderboard">
+      <span class="brand-logo" aria-hidden="true"></span>
+    </a>
+    <span class="nav-page-title" id="nav-page-title">Tier List</span>
+  </header>
+
+  <div class="nav-sidebar-overlay" id="nav-sidebar-overlay" hidden=""></div>
+  <!-- Left rail (css/rail.css): icons only, widening over the page on hover or
+       keyboard focus to show the labels. On phones it is the menu drawer. -->
+  <nav class="site-rail" id="site-rail" aria-label="Site">
+    <div class="rail-group">
+      <a class="rail-brand" href="/" data-nav-tab="leaderboard"><span class="brand-logo" aria-hidden="true"></span><span class="rail-label rail-label--brand">zzz analytics</span></a>
+      <button type="button" class="rail-item rail-item--submit" id="open-upload-btn" aria-description="Submit a run"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 0 1024 1024" fill="currentColor"><path d="M544 864V672h128L512 480 352 672h128v192H320v-1.6c-5.376.32-10.496 1.6-16 1.6A240 240 0 0 1 64 624c0-123.136 93.12-223.488 212.608-237.248A239.808 239.808 0 0 1 512 192a239.872 239.872 0 0 1 235.456 194.752c119.488 13.76 212.48 114.112 212.48 237.248a240 240 0 0 1-240 240c-5.376 0-10.56-1.28-16-1.6v1.6H544z"></path></svg></span><span class="rail-label" data-i18n="Submit Run">Submit Run</span></button>
+      <a class="rail-item nav-tab-btn" data-nav-tab="leaderboard" id="nav-btn-leaderboard" href="/"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 0 1024 1024" fill="currentColor"><path d="M512 128 128 447.936V896h255.936V640H640v256h255.936V447.936z"></path></svg></span><span class="rail-label" data-i18n="Leaderboard">Leaderboard</span></a>
+      <a class="rail-item nav-tab-btn" data-nav-tab="tier-list" id="nav-btn-tier-list" href="/tier-list" aria-description="Automated DPS vs Partner Dependency Tier List" aria-current="page"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 0 1024 1024" fill="currentColor"><path d="M416 896V128h192v768H416zm-288 0V448h192v448H128zm576 0V320h192v576H704z"></path></svg></span><span class="rail-label" data-i18n="Tier List">Tier List</span></a>
+      <a class="rail-item nav-tab-btn" data-nav-tab="agents" id="nav-btn-agents" href="/wiki/agents" aria-description="Per-agent team comps, peak DPS, W-Engines and Drive Disc sets"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 0 1024 1024" fill="currentColor"><path d="M512 64a448 448 0 1 1 0 896.064A448 448 0 0 1 512 64zm67.2 275.072c33.28 0 60.288-23.104 60.288-57.344s-27.072-57.344-60.288-57.344c-33.28 0-60.16 23.104-60.16 57.344s26.88 57.344 60.16 57.344zM590.912 699.2c0-6.848 2.368-24.64 1.024-34.752l-52.608 60.544c-10.88 11.456-24.512 19.392-30.912 17.28a12.992 12.992 0 0 1-8.256-14.72l87.68-276.992c7.168-35.136-12.544-67.2-54.336-71.296-44.096 0-108.992 44.736-148.48 101.504 0 6.784-1.28 23.68.064 33.792l52.544-60.608c10.88-11.328 23.552-19.328 29.952-17.152a12.8 12.8 0 0 1 7.808 16.128L388.48 728.576c-10.048 32.256 8.96 63.872 55.04 71.04 67.84 0 107.904-43.648 147.456-100.416z"></path></svg></span><span class="rail-label" data-i18n="Wiki">Wiki</span></a>
+      <a class="rail-item nav-tab-btn" data-nav-tab="check-stats" id="nav-btn-check-stats" href="/check-stats" aria-description="Quick transient preview run stats before submission"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 652.36216 400 400" fill="currentColor"><path d="m 158.15739,677.69805 c 0,3.83876 -65.259115,225.71976 -65.259115,225.71976 L 193.63449,881.17213 139.73128,1052.3622 307.10172,792.09344 193.47408,811.28729 271.01727,652.36216 Z"></path></svg></span><span class="rail-label" data-i18n="Check Stats">Check Stats</span></a>
+      <a class="rail-item nav-tab-btn" data-nav-tab="tc" id="nav-btn-tc" href="/tc" aria-description="Loadout Lab: re-price a run on other gear, and Create Graphics"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.99998 4.5V10.7382C8.99998 11.1132 8.90628 11.4822 8.72739 11.8117L7.53944 14H16.4605L15.2726 11.8117C15.0937 11.4822 15 11.1132 15 10.7382V4.5H16C16.4142 4.5 16.75 4.16421 16.75 3.75C16.75 3.33579 16.4142 3 16 3H8C7.58579 3 7.25 3.33579 7.25 3.75C7.25 4.16421 7.58579 4.5 8 4.5H8.99998Z"></path><path d="M17.2748 15.5H6.72515L5.14269 18.415C4.50968 19.5811 5.35388 20.9999 6.68068 20.9999H17.3193C18.6461 20.9999 19.4903 19.5811 18.8573 18.415L17.2748 15.5Z"></path></svg></span><span class="rail-label" data-i18n="Loadout Lab">Loadout Lab</span></a>
+      <a class="rail-item" id="nav-btn-optimiser" href="https://compiler.moe/" target="_blank" rel="noopener" aria-description="Optimiser: tune a whole team's builds on compiler.moe"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><mask id="opt-goggles-rail"><rect width="24" height="24" fill="#fff"></rect><g fill="#000"><rect x="3.3" y="9.6" width="6.9" height="6" rx="2.2"></rect><rect x="13.8" y="9.6" width="6.9" height="6" rx="2.2"></rect></g><g fill="#fff"><rect x="3.95" y="10.25" width="5.6" height="4.7" rx="1.6"></rect><rect x="14.45" y="10.25" width="5.6" height="4.7" rx="1.6"></rect></g><g fill="none" stroke="#000" stroke-linecap="round"><path d="M5.2 13.4l2.4-2.1" stroke-width="0.85"></path><path d="M15.7 13.4l2.4-2.1" stroke-width="0.85"></path><path d="M0.5 12.4h1.1M23.5 12.4h-1.1" stroke-width="0.45" stroke-dasharray="0.6 0.5"></path></g></mask><g fill="currentColor" mask="url(#opt-goggles-rail)"><rect x="1.8" y="7.9" width="9.4" height="8.6" rx="3"></rect><rect x="12.8" y="7.9" width="9.4" height="8.6" rx="3"></rect><path d="M10.6 10.4q1.4-1 2.8 0v2.8q-1.4-.8-2.8 0z"></path><path d="M2.2 10.2 0 11v2.8l2.2.8zM21.8 10.2l2.2.8v2.8l-2.2.8z"></path></g></svg></span><span class="rail-label" data-i18n="Optimiser">Optimiser</span></a>
+      <a class="rail-item nav-tab-btn" data-nav-tab="docs" id="nav-btn-docs" href="/docs"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 0 1024 1024" fill="currentColor"><path d="M576 128v288l96-96 96 96V128h128v768H320V128h256zm-448 0h128v768H128V128z"></path></svg></span><span class="rail-label" data-i18n="Documentation">Documentation</span></a>
+    </div>
+    <div class="rail-group rail-group--end">
+      <button type="button" class="rail-item rail-expand" id="rail-expand" aria-expanded="false" aria-controls="site-rail"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m6 6 6 6-6 6M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span><span class="rail-label">Keep open</span></button>
+      <div class="rail-lang" id="rail-lang"><div class="lang-switcher"><button type="button" class="lang-current rail-item" aria-haspopup="true" aria-expanded="false" aria-label="Language"><span class="rail-icon" aria-hidden="true"><img class="lang-flag" alt="" src="/assets/flags/gb.svg?v=2"></span><span class="rail-label lang-current-label">English</span></button><div class="lang-menu" role="menu"><button type="button" class="lang-item is-active" role="menuitemradio" data-locale="en" aria-checked="true"><img class="lang-flag" alt="" src="/assets/flags/gb.svg?v=2"><span>English</span></button><button type="button" class="lang-item" role="menuitemradio" data-locale="ja" aria-checked="false"><img class="lang-flag" alt="" src="/assets/flags/jp.svg?v=2"><span>日本語</span></button><button type="button" class="lang-item" role="menuitemradio" data-locale="ko" aria-checked="false"><img class="lang-flag" alt="" src="/assets/flags/kr.svg?v=2"><span>한국어</span></button><button type="button" class="lang-item" role="menuitemradio" data-locale="ru" aria-checked="false"><img class="lang-flag" alt="" src="/assets/flags/ru.svg?v=2"><span>Русский</span></button><button type="button" class="lang-item" role="menuitemradio" data-locale="zh-Hans" aria-checked="false"><img class="lang-flag" alt="" src="/assets/flags/cn.svg?v=2"><span>简体中文</span></button><button type="button" class="lang-item" role="menuitemradio" data-locale="vi" aria-checked="false"><img class="lang-flag" alt="" src="/assets/flags/vn.svg?v=2"><span>Tiếng Việt</span></button><button type="button" class="lang-item" role="menuitemradio" data-locale="es" aria-checked="false"><img class="lang-flag" alt="" src="/assets/flags/es.svg?v=2"><span>Español</span></button><button type="button" class="lang-item" role="menuitemradio" data-locale="pt" aria-checked="false"><img class="lang-flag" alt="" src="/assets/flags/pt.svg?v=2"><span>Português</span></button></div></div></div>
+      <button type="button" class="rail-item" id="theme-toggle" aria-label="Switch to light mode"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"></circle><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg></span><span class="rail-label" id="theme-toggle-label">Light mode</span></button>
+      <button type="button" class="rail-item" id="report-bug-btn" aria-description="Report a bug or a translation"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 652.36216 400 400" fill="currentColor"><path d="m 185.80859,653.12187 c -33.22164,0 -60.35742,27.1357 -60.35742,60.3574 0,33.2216 27.13578,60.3555 60.35742,60.3555 l 28.57226,0 c 33.22165,0 60.35744,-27.1339 60.35744,-60.3555 0,-33.2217 -27.13579,-60.3574 -60.35744,-60.3574 l -28.57226,0 z m 0,25 28.57226,0 c 19.80408,0 35.35744,15.5533 35.35744,35.3574 0,19.8041 -15.55336,35.3555 -35.35744,35.3555 l -28.57226,0 c -19.80407,0 -35.35742,-15.5514 -35.35742,-35.3555 0,-19.8041 15.55335,-35.3574 35.35742,-35.3574 z m -108.701172,85.8008 -17.677734,17.6777 41.347656,41.3496 c -7.866968,11.60108 -12.46875,25.58268 -12.46875,40.61128 l 0,33.1309 -51.253906,0 0,25 51.253906,0 0,33.1309 c 0,14.2903 4.17728,27.6224 11.349612,38.873 l -40.228518,40.22865 17.677734,17.6777 39.414062,-39.4141 c 12.28246,9.5255 27.67602,15.2187 44.37109,15.2187 l 78.40431,0 c 18.31125,0 35.05802,-6.8461 47.84766,-18.0918 l 42.2871,42.2872 17.67774,-17.6777 -44.20313,-44.20325 c 5.71407,-10.3649 8.97461,-22.2598 8.97461,-34.8984 l 0,-33.1309 51.06446,0 0,-25 -51.06446,0 0,-33.1309 c 0,-13.3843 -3.66395,-25.9292 -10.01953,-36.7109 l 45.24805,-45.24998 -17.67774,-17.6777 -43.8164,43.8183 c -12.58127,-10.4603 -28.7328,-16.7636 -46.31836,-16.7636 l -78.40431,0 c -15.96497,0 -30.74102,5.2044 -42.74414,13.9882 l -41.041012,-41.0429 z m 83.785152,52.0547 26.70117,0 0,186.42973 -26.70117,0 c -26.57722,0 -47.58398,-21.00675 -47.58398,-47.58405 l 0,-91.2618 c 0,-26.5772 21.00676,-47.58388 47.58398,-47.58388 z m 51.70117,0 26.70314,0 c 26.57722,0 47.58398,21.00668 47.58398,47.58388 l 0,91.2618 c 0,26.5773 -21.00676,47.58405 -47.58398,47.58405 l -26.70314,0 0,-186.42973 z"></path></svg></span><span class="rail-label" data-i18n="Report bug">Report bug</span></button>
+      <a class="rail-item rail-item--discord" href="https://discord.gg/Tsx2CYGzna" target="_blank" rel="noopener noreferrer" aria-description="Join our Discord server"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 0 127.14 96.36" fill="currentColor"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"></path></svg></span><span class="rail-label" data-i18n="Discord">Discord</span></a>
+    </div>
+  </nav>
+
+  <!-- Visually hidden page heading. The navbar shows the active page as a
+       label, so this carries the single <h1> for search engines and screen
+       readers without changing the visible layout. -->
+  <h1 class="sr-only" id="seo-h1">Zenless Zone Zero tier list — Version 3.3</h1>
+
+  <main class="site-container" id="app-content">
+    <div class="tier-list-page" style="display:flex; flex-direction:column; gap:1.5rem; margin-bottom:2rem;">
+
+      
+    <section class="filter-panel" aria-label="Filters">
+      <div class="filter-head">
+        <button class="filter-toggle" type="button" aria-expanded="false" aria-controls="lb-filter-rows" onclick="toggleLeaderboardFilterTray(this)">
+          <span class="t">Filters</span>
+          <span class="c">0 active <span class="filter-toggle-arrow" aria-hidden="true">▾</span></span>
+        </button>
+        <span class="title">Filters</span>
+        <button class="clear" type="button" onclick="clearAllFilters()">Clear all</button>
+      </div>
+
+      <div class="filter-rows is-collapsed" id="lb-filter-rows">
+        <div class="filter-row preset-filter-row">
+          <span class="rlabel">Bangboo</span>
+          <div class="filter-controls preset-row">
+            <span class="filter-cluster">
+              <span class="seg-label cluster-label">Bangboo</span>
+              <span class="seg-sm" role="group" data-seg="bangboo" aria-label="Bangboo skill level">
+                <button type="button" aria-pressed="false" onclick="updateBangbooSkillFilter('lv1')">Lv1</button>
+                <button type="button" aria-pressed="false" onclick="updateBangbooSkillFilter('all')">All</button>
+                <button type="button" aria-pressed="true" onclick="updateBangbooSkillFilter('lv10')">Lv10</button>
+              </span>
+              <span class="help"><button class="help-dot" type="button" aria-label="What changed?" onclick="event.stopPropagation()">?</button><span class="tip" role="tooltip"><span class="h">What changed?</span><span class="tip-line">Older runs used bugged Lv1 Bangboo skills.</span><span class="tip-line">We remedied this at the cost of invalidating older runs, due to Daze and Damage differences.</span><span class="tip-line">They are preserved here while the new database is built up.</span><span class="tip-line">Most runs gain between 50–150 score, but routing changes can make this larger with certain Boos.</span></span></span>
+            </span>
+            <span class="preset-gap" aria-hidden="true"></span>
+            <span class="fdivider" aria-hidden="true"></span>
+            <span class="preset-gap" aria-hidden="true"></span>
+            <span class="filter-cluster preset-beta">
+              <span class="seg-label">Beta</span>
+              <span class="seg-sm" role="group" data-seg="beta" aria-label="Beta archive version">
+                <button type="button" aria-pressed="true" onclick="setBetaArchiveMode('current')" title="Latest beta: 3.4.4">Latest</button>
+                <button type="button" aria-pressed="false" onclick="setBetaArchiveMode('all')">All</button>
+                <button type="button" aria-pressed="false" onclick="setBetaArchiveMode('none')">None</button>
+              </span>
+            </span>
+            <span class="preset-gap" aria-hidden="true"></span>
+            <span class="fdivider" aria-hidden="true"></span>
+            <span class="preset-gap" aria-hidden="true"></span>
+            <span class="filter-cluster">
+              <span class="seg-label">Cost</span>
+              <span class="preset-wrap">
+                <span class="seg-sm preset-seg" role="group" data-seg="preset" aria-label="Investment preset">
+                  <button type="button" data-preset="m0r0" aria-pressed="false" onclick="setInvestmentPreset('m0r0')">M0R0 only</button>
+                  <button type="button" data-preset="norm" aria-pressed="true" onclick="setInvestmentPreset('norm')">Normalised</button>
+                  <button type="button" data-preset="m1norm" aria-pressed="false" onclick="setInvestmentPreset('m1norm')">M1 Normalised</button>
+                  <button type="button" data-preset="off" aria-pressed="false" onclick="setInvestmentPreset('off')">Uncapped</button>
+                </span>
+                <span class="tip preset-tip" data-tip="m0r0" role="tooltip">
+                  <span class="h">M0R0 only</span>
+                  <span class="tip-line">S-Rank Limited Agents at M0</span>
+                  <span class="tip-line">S-Rank Standard Agents at M0</span>
+                  <span class="tip-line">A-Rank Agents (and Pyrois) at M6</span>
+                  <span class="tip-line" style="margin-top:0.4rem;">No Limited W-Engines</span>
+                  <span class="tip-line">S-Rank Standard W-Engines at R1</span>
+                  <span class="tip-line">A-Rank W-Engines (and Sol Exuvia) at R5</span>
+                  <span class="tip-line note">Limited agents must run without their signature W-Engine.</span>
+                </span>
+                <span class="tip preset-tip" data-tip="norm" role="tooltip">
+                  <span class="h">Normalisation</span>
+                  <span class="tip-line">S-Rank Limited Agents at M0</span>
+                  <span class="tip-line">S-Rank Standard Agents at M2</span>
+                  <span class="tip-line">A-Rank Agents (and Pyrois) at M6</span>
+                  <span class="tip-line" style="margin-top:0.4rem;">S-Rank Limited W-Engines at R1</span>
+                  <span class="tip-line">S-Rank Standard W-Engines at R1</span>
+                  <span class="tip-line">A-Rank W-Engines (and Sol Exuvia) at R5</span>
+                  <span class="tip-line note">These are the mindscapes used in Hoyo's testing teams in most cases.</span>
+                </span>
+                <span class="tip preset-tip" data-tip="m1norm" role="tooltip">
+                  <span class="h">M1 Normalisation</span>
+                  <span class="tip-line">S-Rank Limited Agents at M0</span>
+                  <span class="tip-line">S-Rank Standard Agents at M2</span>
+                  <span class="tip-line">A-Rank Agents (and Pyrois) at M6</span>
+                  <span class="tip-line" style="margin-top:0.4rem;">S-Rank Limited W-Engines at R1</span>
+                  <span class="tip-line">S-Rank Standard W-Engines at R1</span>
+                  <span class="tip-line">A-Rank W-Engines (and Sol Exuvia) at R5</span>
+                  <span class="tip-line note">M0R1 = M1R0: Limited M1 is allowed when paired with an A-Rank W-Engine.</span>
+                </span>
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <div class="filter-row">
+          <span class="rlabel">Agents</span>
+          <div class="agents-grid">
+            <span class="ctl">
+              <span>Include</span>
+              <select class="ctl-select" onchange="addIncludeAgent(this.value); this.value='';">
+                <option value="">Select agent…</option><option value="Alice">Alice</option><option value="Anby">Anby</option><option value="Anton">Anton</option><option value="Aria">Aria</option><option value="Astra Yao">Astra Yao</option><option value="Banyue">Banyue</option><option value="Ben">Ben</option><option value="Billy">Billy</option><option value="Billy SP">Starlight - Billy</option><option value="Burnice">Burnice</option><option value="Caesar">Caesar</option><option value="Cissia">Cissia</option><option value="Claret">Claret</option><option value="Corin">Corin</option><option value="Dialyn">Dialyn</option><option value="Ellen">Ellen</option><option value="Evelyn">Evelyn</option><option value="Grace">Grace</option><option value="Harumasa">Harumasa</option><option value="Hugo Vlad">Hugo</option><option value="Jane">Jane</option><option value="Ju Fufu">Ju Fufu</option><option value="Kafka">Kafka</option><option value="Koleda">Koleda</option><option value="Komano Manato">Manato</option><option value="Lighter">Lighter</option><option value="Lucia">Lucia</option><option value="Lucy">Lucy</option><option value="Lycaon">Lycaon</option><option value="Miyabi">Miyabi</option><option value="Nangong Yu">Nangong Yu</option><option value="Nekomata">Nekomata</option><option value="Nicole">Nicole</option><option value="Norma">Norma</option><option value="Orphie &amp; Magus">Orphie &amp; Magus</option><option value="Pan Yinhu">Pan Yinhu</option><option value="Piper">Piper</option><option value="Phoenix">Phoenix</option><option value="Promeia">Promeia</option><option value="Pulchra">Pulchra</option><option value="Pyrois">Pyrois</option><option value="Qingyi">Qingyi</option><option value="Remielle">Remielle</option><option value="Rina">Rina</option><option value="Robin">Robin</option><option value="Roxy">Roxy</option><option value="SS - Anby">Soldier 0 - Anby</option><option value="Seed">Seed</option><option value="Seth">Seth</option><option value="Severian">Severian</option><option value="Sigrid">Sigrid</option><option value="Soldier 11">Soldier 11</option><option value="Soukaku">Soukaku</option><option value="Sunbringer">Sunbringer</option><option value="Sunna">Sunna</option><option value="Trigger">Trigger</option><option value="Velina">Velina</option><option value="Vivian">Vivian</option><option value="Yanagi">Yanagi</option><option value="Ye Shunguang">Ye Shunguang</option><option value="Yi Xuan">Yixuan</option><option value="Yidhari">Yidhari</option><option value="Yuzuha">Yuzuha</option><option value="Zhao">Zhao</option><option value="Zhu Yuan">Zhu Yuan</option>
+              </select>
+              <select class="ctl-select logic" onchange="updateIncludeLogic(this.value)">
+                <option value="AND" selected="">Match all</option>
+                <option value="OR">Match any</option>
+              </select>
+            </span>
+            <span class="ctl">
+              <span>Exclude</span>
+              <select class="ctl-select" onchange="addExcludeAgent(this.value); this.value='';">
+                <option value="">Select agent…</option><option value="Alice">Alice</option><option value="Anby">Anby</option><option value="Anton">Anton</option><option value="Aria">Aria</option><option value="Astra Yao">Astra Yao</option><option value="Banyue">Banyue</option><option value="Ben">Ben</option><option value="Billy">Billy</option><option value="Billy SP">Starlight - Billy</option><option value="Burnice">Burnice</option><option value="Caesar">Caesar</option><option value="Cissia">Cissia</option><option value="Claret">Claret</option><option value="Corin">Corin</option><option value="Dialyn">Dialyn</option><option value="Ellen">Ellen</option><option value="Evelyn">Evelyn</option><option value="Grace">Grace</option><option value="Harumasa">Harumasa</option><option value="Hugo Vlad">Hugo</option><option value="Jane">Jane</option><option value="Ju Fufu">Ju Fufu</option><option value="Kafka">Kafka</option><option value="Koleda">Koleda</option><option value="Komano Manato">Manato</option><option value="Lighter">Lighter</option><option value="Lucia">Lucia</option><option value="Lucy">Lucy</option><option value="Lycaon">Lycaon</option><option value="Miyabi">Miyabi</option><option value="Nangong Yu">Nangong Yu</option><option value="Nekomata">Nekomata</option><option value="Nicole">Nicole</option><option value="Norma">Norma</option><option value="Orphie &amp; Magus">Orphie &amp; Magus</option><option value="Pan Yinhu">Pan Yinhu</option><option value="Piper">Piper</option><option value="Phoenix">Phoenix</option><option value="Promeia">Promeia</option><option value="Pulchra">Pulchra</option><option value="Pyrois">Pyrois</option><option value="Qingyi">Qingyi</option><option value="Remielle">Remielle</option><option value="Rina">Rina</option><option value="Robin">Robin</option><option value="Roxy">Roxy</option><option value="SS - Anby">Soldier 0 - Anby</option><option value="Seed">Seed</option><option value="Seth">Seth</option><option value="Severian">Severian</option><option value="Sigrid">Sigrid</option><option value="Soldier 11">Soldier 11</option><option value="Soukaku">Soukaku</option><option value="Sunbringer">Sunbringer</option><option value="Sunna">Sunna</option><option value="Trigger">Trigger</option><option value="Velina">Velina</option><option value="Vivian">Vivian</option><option value="Yanagi">Yanagi</option><option value="Ye Shunguang">Ye Shunguang</option><option value="Yi Xuan">Yixuan</option><option value="Yidhari">Yidhari</option><option value="Yuzuha">Yuzuha</option><option value="Zhao">Zhao</option><option value="Zhu Yuan">Zhu Yuan</option>
+              </select>
+            </span>
+          </div>
+        </div>
+
+        <div class="filter-row">
+          <span class="rlabel">Investment</span>
+          <div class="invest-grid">
+            <label class="mini">
+              <span class="ml"><span>Max limited cost</span><b id="val-lim-cost">6</b></span>
+              <input type="range" min="0" max="36" step="1" value="6" oninput="updateCostFilters(this.value, null, null, null, null, null)" style="">
+            </label>
+            <label class="mini">
+              <span class="ml"><span>Max standard mindscape</span><b id="val-std-mindscape">M2</b></span>
+              <input type="range" min="-1" max="6" step="1" value="2" oninput="updateCostFilters(null, this.value, null, null, null, null)" style="">
+            </label>
+            <label class="mini">
+              <span class="ml"><span>Max standard W-Engine</span><b id="val-std-wengine">R1</b></span>
+              <input type="range" min="0" max="5" step="1" value="1" oninput="updateCostFilters(null, null, this.value, null, null, null)" style="">
+            </label>
+          </div>
+        </div>
+
+        
+      </div>
+    </section>
+  
+
+      <div class="site-chart-card tier-intro">
+        <h2 style="font-size:1.5rem; color:var(--text-main); font-weight:800; margin-bottom:0.5rem;">Drivers</h2>
+        <div class="tier-meta-row" style="display:flex; gap:1.5rem; flex-wrap:wrap; font-size:0.8rem; color:var(--text-muted);">
+          <span><strong style="color:#fff;">31</strong> drivers</span>
+          <span style="color:var(--c-orange);"><strong>3</strong> single-team entries hidden</span>
+          <span style="color:var(--c-orange);"><strong>5</strong> with a partner comparison missing (dashed ring)</span>
+          <span>X: <strong style="color:var(--c-orange);">Partner reliance</strong></span>
+          <span>Y: <strong style="color:var(--c-cyan);">Peak DPS</strong></span>
+        </div>
+        <details class="tier-method" style="margin-top:0.7rem;">
+          <summary>How reliance is scored</summary>
+          
+    <div class="tier-method-body">
+      <div class="tier-formula" data-tex="c_p=100\cdot\dfrac{\rho_p}{\rho_p+K},\qquad \rho_p=\dfrac{\max(0,\,P-W_p)}{P},\qquad K=0.25"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>c</mi><mi>p</mi></msub><mo>=</mo><mn>100</mn><mo>⋅</mo><mstyle scriptlevel="0" displaystyle="true"><mfrac><msub><mi>ρ</mi><mi>p</mi></msub><mrow><msub><mi>ρ</mi><mi>p</mi></msub><mo>+</mo><mi>K</mi></mrow></mfrac></mstyle><mo separator="true">,</mo><mspace width="2em"></mspace><msub><mi>ρ</mi><mi>p</mi></msub><mo>=</mo><mstyle scriptlevel="0" displaystyle="true"><mfrac><mrow><mi>max</mi><mo>⁡</mo><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo> <mi>P</mi><mo>−</mo><msub><mi>W</mi><mi>p</mi></msub><mo stretchy="false">)</mo></mrow><mi>P</mi></mfrac></mstyle><mo separator="true">,</mo><mspace width="2em"></mspace><mi>K</mi><mo>=</mo><mn>0.25</mn></mrow><annotation encoding="application/x-tex">c_p=100\cdot\dfrac{\rho_p}{\rho_p+K},\qquad \rho_p=\dfrac{\max(0,\,P-W_p)}{P},\qquad K=0.25</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.7167em; vertical-align: -0.2861em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.1514em;"><span class="" style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.2861em;"><span class=""></span></span></span></span></span></span><span class="mspace" style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut" style="height: 0.6444em;"></span><span class="mord">100</span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut" style="height: 2.0797em; vertical-align: -0.9721em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 1.1076em;"><span class="" style="top: -2.314em;"><span class="pstrut" style="height: 3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">ρ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.1514em;"><span class="" style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.2861em;"><span class=""></span></span></span></span></span></span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mord mathnormal" style="margin-right: 0.0715em;">K</span></span></span><span class="" style="top: -3.23em;"><span class="pstrut" style="height: 3em;"></span><span class="frac-line" style="border-bottom-width: 0.04em;"></span></span><span class="" style="top: -3.677em;"><span class="pstrut" style="height: 3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">ρ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.1514em;"><span class="" style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.2861em;"><span class=""></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.9721em;"><span class=""></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right: 2em;"></span><span class="mspace" style="margin-right: 0.1667em;"></span><span class="mord"><span class="mord mathnormal">ρ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.1514em;"><span class="" style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.2861em;"><span class=""></span></span></span></span></span></span><span class="mspace" style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut" style="height: 2.113em; vertical-align: -0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 1.427em;"><span class="" style="top: -2.314em;"><span class="pstrut" style="height: 3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right: 0.1389em;">P</span></span></span><span class="" style="top: -3.23em;"><span class="pstrut" style="height: 3em;"></span><span class="frac-line" style="border-bottom-width: 0.04em;"></span></span><span class="" style="top: -3.677em;"><span class="pstrut" style="height: 3em;"></span><span class="mord"><span class="mop">max</span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right: 0.1667em;"></span><span class="mspace" style="margin-right: 0.1667em;"></span><span class="mord mathnormal" style="margin-right: 0.1389em;">P</span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right: 0.1389em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.1514em;"><span class="" style="top: -2.55em; margin-left: -0.1389em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.2861em;"><span class=""></span></span></span></span></span></span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.686em;"><span class=""></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right: 2em;"></span><span class="mspace" style="margin-right: 0.1667em;"></span><span class="mord mathnormal" style="margin-right: 0.0715em;">K</span><span class="mspace" style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut" style="height: 0.6444em;"></span><span class="mord">0.25</span></span></span></span></span></div>
+      <p><strong>P</strong> = the driver's peak DPS; <strong>W<sub>p</sub></strong> = best DPS without that partner.</p>
+    </div>
+        </details>
+      </div>
+
+      <div class="site-chart-card tier-chart-card" style="padding:1.5rem;">
+        <div class="tier-chart-wrap" style="position:relative; width:100%; height:650px;">
+          <canvas id="tier-list-chart" style="display: block; box-sizing: border-box; height: 650px; width: 1253px;" width="2506" height="1300"></canvas>
+        </div>
+      </div>
+
+      <div class="site-chart-card" style="padding:1rem;">
+        <div id="tier-list-legend" class="tier-legend" style="display:flex; gap:0.75rem; flex-wrap:wrap; justify-content:center;">
+          
+      <button type="button" class="tier-legend-item" onclick="toggleTierListClass(&quot;Attack&quot;)" title="Click to hide Attack" style="display:flex; align-items:center; gap:0.4rem; background:transparent; border:1px solid #38BDF8; border-radius:999px; padding:0.35rem 0.75rem; cursor:pointer; opacity:1; color:var(--text-main); font-size:0.85rem; font-weight:700;">
+        <span style="width:12px; height:12px; border-radius:50%; background:#38BDF8; display:inline-block; box-shadow:0 0 0 2px #38BDF855;"></span>
+        <span>Attack</span>
+      </button>
+    
+      <button type="button" class="tier-legend-item" onclick="toggleTierListClass(&quot;Anomaly&quot;)" title="Click to hide Anomaly" style="display:flex; align-items:center; gap:0.4rem; background:transparent; border:1px solid #F97316; border-radius:999px; padding:0.35rem 0.75rem; cursor:pointer; opacity:1; color:var(--text-main); font-size:0.85rem; font-weight:700;">
+        <span style="width:12px; height:12px; border-radius:50%; background:#F97316; display:inline-block; box-shadow:0 0 0 2px #F9731655;"></span>
+        <span>Anomaly</span>
+      </button>
+    
+      <button type="button" class="tier-legend-item" onclick="toggleTierListClass(&quot;Armorer&quot;)" title="Click to hide Armorer" style="display:flex; align-items:center; gap:0.4rem; background:transparent; border:1px solid #A78BFA; border-radius:999px; padding:0.35rem 0.75rem; cursor:pointer; opacity:1; color:var(--text-main); font-size:0.85rem; font-weight:700;">
+        <span style="width:12px; height:12px; border-radius:50%; background:#A78BFA; display:inline-block; box-shadow:0 0 0 2px #A78BFA55;"></span>
+        <span>Armorer</span>
+      </button>
+    
+      <button type="button" class="tier-legend-item" onclick="toggleTierListClass(&quot;Rupture&quot;)" title="Click to hide Rupture" style="display:flex; align-items:center; gap:0.4rem; background:transparent; border:1px solid #F43F5E; border-radius:999px; padding:0.35rem 0.75rem; cursor:pointer; opacity:1; color:var(--text-main); font-size:0.85rem; font-weight:700;">
+        <span style="width:12px; height:12px; border-radius:50%; background:#F43F5E; display:inline-block; box-shadow:0 0 0 2px #F43F5E55;"></span>
+        <span>Rupture</span>
+      </button>
+    
+      <button type="button" class="tier-legend-item" onclick="toggleTierListClass(&quot;Defense&quot;)" title="Defense: no agents in current filtered data" style="display:flex; align-items:center; gap:0.4rem; background:transparent; border:1px solid var(--border-main); border-radius:999px; padding:0.35rem 0.75rem; cursor:default; opacity:0.25; color:var(--text-main); font-size:0.85rem; font-weight:700;">
+        <span style="width:12px; height:12px; border-radius:50%; background:#22C55E; display:inline-block; box-shadow:0 0 0 2px #22C55E55;"></span>
+        <span>Defense</span>
+      </button>
+    
+        </div>
+      </div>
+
+      <div class="site-chart-card tier-intro">
+        <h2 style="font-size:1.5rem; color:#fff; font-weight:800; margin-bottom:0.5rem;">Support Duos</h2>
+        <div class="tier-meta-row" style="display:flex; gap:1.5rem; flex-wrap:wrap; font-size:0.8rem; color:var(--text-muted);">
+          <span><strong style="color:#fff;">23</strong> duos</span>
+          <span style="color:var(--c-orange);"><strong>31</strong> single-team entries hidden</span>
+          
+          <span>X: <strong style="color:var(--c-orange);">Driver reliance</strong></span>
+          <span>Y: <strong style="color:var(--c-cyan);">Peak team DPS</strong></span>
+        </div>
+        <details class="tier-method" style="margin-top:0.7rem;">
+          <summary>How reliance is scored</summary>
+          
+    <div class="tier-method-body">
+      <div class="tier-formula" data-tex="c_p=100\cdot\dfrac{\rho_p}{\rho_p+K},\qquad \rho_p=\dfrac{\max(0,\,P-W_p)}{P},\qquad K=0.25"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>c</mi><mi>p</mi></msub><mo>=</mo><mn>100</mn><mo>⋅</mo><mstyle scriptlevel="0" displaystyle="true"><mfrac><msub><mi>ρ</mi><mi>p</mi></msub><mrow><msub><mi>ρ</mi><mi>p</mi></msub><mo>+</mo><mi>K</mi></mrow></mfrac></mstyle><mo separator="true">,</mo><mspace width="2em"></mspace><msub><mi>ρ</mi><mi>p</mi></msub><mo>=</mo><mstyle scriptlevel="0" displaystyle="true"><mfrac><mrow><mi>max</mi><mo>⁡</mo><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo> <mi>P</mi><mo>−</mo><msub><mi>W</mi><mi>p</mi></msub><mo stretchy="false">)</mo></mrow><mi>P</mi></mfrac></mstyle><mo separator="true">,</mo><mspace width="2em"></mspace><mi>K</mi><mo>=</mo><mn>0.25</mn></mrow><annotation encoding="application/x-tex">c_p=100\cdot\dfrac{\rho_p}{\rho_p+K},\qquad \rho_p=\dfrac{\max(0,\,P-W_p)}{P},\qquad K=0.25</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.7167em; vertical-align: -0.2861em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.1514em;"><span class="" style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.2861em;"><span class=""></span></span></span></span></span></span><span class="mspace" style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut" style="height: 0.6444em;"></span><span class="mord">100</span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut" style="height: 2.0797em; vertical-align: -0.9721em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 1.1076em;"><span class="" style="top: -2.314em;"><span class="pstrut" style="height: 3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">ρ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.1514em;"><span class="" style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.2861em;"><span class=""></span></span></span></span></span></span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mord mathnormal" style="margin-right: 0.0715em;">K</span></span></span><span class="" style="top: -3.23em;"><span class="pstrut" style="height: 3em;"></span><span class="frac-line" style="border-bottom-width: 0.04em;"></span></span><span class="" style="top: -3.677em;"><span class="pstrut" style="height: 3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">ρ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.1514em;"><span class="" style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.2861em;"><span class=""></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.9721em;"><span class=""></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right: 2em;"></span><span class="mspace" style="margin-right: 0.1667em;"></span><span class="mord"><span class="mord mathnormal">ρ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.1514em;"><span class="" style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.2861em;"><span class=""></span></span></span></span></span></span><span class="mspace" style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut" style="height: 2.113em; vertical-align: -0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 1.427em;"><span class="" style="top: -2.314em;"><span class="pstrut" style="height: 3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right: 0.1389em;">P</span></span></span><span class="" style="top: -3.23em;"><span class="pstrut" style="height: 3em;"></span><span class="frac-line" style="border-bottom-width: 0.04em;"></span></span><span class="" style="top: -3.677em;"><span class="pstrut" style="height: 3em;"></span><span class="mord"><span class="mop">max</span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right: 0.1667em;"></span><span class="mspace" style="margin-right: 0.1667em;"></span><span class="mord mathnormal" style="margin-right: 0.1389em;">P</span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right: 0.1389em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.1514em;"><span class="" style="top: -2.55em; margin-left: -0.1389em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.2861em;"><span class=""></span></span></span></span></span></span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.686em;"><span class=""></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right: 2em;"></span><span class="mspace" style="margin-right: 0.1667em;"></span><span class="mord mathnormal" style="margin-right: 0.0715em;">K</span><span class="mspace" style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut" style="height: 0.6444em;"></span><span class="mord">0.25</span></span></span></span></span></div>
+      <p><strong>P</strong> = the duo's peak team DPS; <strong>W<sub>p</sub></strong> = best DPS without that driver.</p>
+    </div>
+        </details>
+      </div>
+
+      <div class="site-chart-card tier-chart-card" style="padding:1.5rem;">
+        <div class="tier-chart-wrap support" style="position:relative; width:100%; height:780px;">
+          <canvas id="support-pair-chart" style="display: block; box-sizing: border-box; height: 780px; width: 1253px;" width="2506" height="1560"></canvas>
+        </div>
+      </div>
+
+      <div class="site-chart-card" style="padding:1rem;">
+        <div id="support-pair-legend" class="tier-legend" style="display:flex; gap:0.75rem; flex-wrap:wrap; justify-content:center;">
+          
+      <button type="button" class="tier-legend-item" onclick="toggleSupportPairCombo(&quot;Anomaly + Anomaly&quot;)" title="Click to hide Anomaly + Anomaly duos" style="display:flex; align-items:center; gap:0.4rem; background:transparent; border:1px solid #C084FC; border-radius:999px; padding:0.35rem 0.75rem; cursor:pointer; opacity:1; color:var(--text-main); font-size:0.85rem; font-weight:700;">
+        <span style="width:12px; height:12px; border-radius:50%; background:#C084FC; display:inline-block; box-shadow:0 0 0 2px #C084FC55;"></span>
+        <span>Anomaly + Anomaly</span>
+      </button>
+    
+      <button type="button" class="tier-legend-item" onclick="toggleSupportPairCombo(&quot;Anomaly + Stun&quot;)" title="Click to hide Anomaly + Stun duos" style="display:flex; align-items:center; gap:0.4rem; background:transparent; border:1px solid #818CF8; border-radius:999px; padding:0.35rem 0.75rem; cursor:pointer; opacity:1; color:var(--text-main); font-size:0.85rem; font-weight:700;">
+        <span style="width:12px; height:12px; border-radius:50%; background:#818CF8; display:inline-block; box-shadow:0 0 0 2px #818CF855;"></span>
+        <span>Anomaly + Stun</span>
+      </button>
+    
+      <button type="button" class="tier-legend-item" onclick="toggleSupportPairCombo(&quot;Anomaly + Support&quot;)" title="Click to hide Anomaly + Support duos" style="display:flex; align-items:center; gap:0.4rem; background:transparent; border:1px solid #2DD4BF; border-radius:999px; padding:0.35rem 0.75rem; cursor:pointer; opacity:1; color:var(--text-main); font-size:0.85rem; font-weight:700;">
+        <span style="width:12px; height:12px; border-radius:50%; background:#2DD4BF; display:inline-block; box-shadow:0 0 0 2px #2DD4BF55;"></span>
+        <span>Anomaly + Support</span>
+      </button>
+    
+      <button type="button" class="tier-legend-item" onclick="toggleSupportPairCombo(&quot;Attack + Stun&quot;)" title="Click to hide Attack + Stun duos" style="display:flex; align-items:center; gap:0.4rem; background:transparent; border:1px solid #FB923C; border-radius:999px; padding:0.35rem 0.75rem; cursor:pointer; opacity:1; color:var(--text-main); font-size:0.85rem; font-weight:700;">
+        <span style="width:12px; height:12px; border-radius:50%; background:#FB923C; display:inline-block; box-shadow:0 0 0 2px #FB923C55;"></span>
+        <span>Attack + Stun</span>
+      </button>
+    
+      <button type="button" class="tier-legend-item" onclick="toggleSupportPairCombo(&quot;Attack + Support&quot;)" title="Click to hide Attack + Support duos" style="display:flex; align-items:center; gap:0.4rem; background:transparent; border:1px solid #F472B6; border-radius:999px; padding:0.35rem 0.75rem; cursor:pointer; opacity:1; color:var(--text-main); font-size:0.85rem; font-weight:700;">
+        <span style="width:12px; height:12px; border-radius:50%; background:#F472B6; display:inline-block; box-shadow:0 0 0 2px #F472B655;"></span>
+        <span>Attack + Support</span>
+      </button>
+    
+      <button type="button" class="tier-legend-item" onclick="toggleSupportPairCombo(&quot;Defense + Stun&quot;)" title="Click to hide Defense + Stun duos" style="display:flex; align-items:center; gap:0.4rem; background:transparent; border:1px solid #F97316; border-radius:999px; padding:0.35rem 0.75rem; cursor:pointer; opacity:1; color:var(--text-main); font-size:0.85rem; font-weight:700;">
+        <span style="width:12px; height:12px; border-radius:50%; background:#F97316; display:inline-block; box-shadow:0 0 0 2px #F9731655;"></span>
+        <span>Defense + Stun</span>
+      </button>
+    
+      <button type="button" class="tier-legend-item" onclick="toggleSupportPairCombo(&quot;Stun + Stun&quot;)" title="Click to hide Stun + Stun duos" style="display:flex; align-items:center; gap:0.4rem; background:transparent; border:1px solid #F43F5E; border-radius:999px; padding:0.35rem 0.75rem; cursor:pointer; opacity:1; color:var(--text-main); font-size:0.85rem; font-weight:700;">
+        <span style="width:12px; height:12px; border-radius:50%; background:#F43F5E; display:inline-block; box-shadow:0 0 0 2px #F43F5E55;"></span>
+        <span>Stun + Stun</span>
+      </button>
+    
+      <button type="button" class="tier-legend-item" onclick="toggleSupportPairCombo(&quot;Stun + Support&quot;)" title="Click to hide Stun + Support duos" style="display:flex; align-items:center; gap:0.4rem; background:transparent; border:1px solid #38BDF8; border-radius:999px; padding:0.35rem 0.75rem; cursor:pointer; opacity:1; color:var(--text-main); font-size:0.85rem; font-weight:700;">
+        <span style="width:12px; height:12px; border-radius:50%; background:#38BDF8; display:inline-block; box-shadow:0 0 0 2px #38BDF855;"></span>
+        <span>Stun + Support</span>
+      </button>
+    
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-row">
+      <span class="site-footer-brand">ZZZ Analytics</span>
+      <span class="site-footer-sep" aria-hidden="true">·</span>
+      <a class="site-footer-link" href="https://zzz.analytics.moe/">analytics.moe</a>
+      <span class="site-footer-sep" aria-hidden="true">·</span>
+      <span class="site-footer-tagline">Zenless Zone Zero Deadly Assault stats, tier list &amp; theorycraft</span>
+    </div>
+    <nav class="site-footer-row" aria-label="Site">
+      <a class="site-footer-link" href="/" data-nav-tab="leaderboard" data-i18n="Leaderboard">Leaderboard</a>
+      <span class="site-footer-sep" aria-hidden="true">·</span>
+      <a class="site-footer-link" href="/tier-list" data-nav-tab="tier-list" data-i18n="Tier List">Tier List</a>
+      <span class="site-footer-sep" aria-hidden="true">·</span>
+      <a class="site-footer-link" href="/wiki/agents" data-nav-tab="agents" data-i18n="Agents">Agents</a>
+      <span class="site-footer-sep" aria-hidden="true">·</span>
+      <a class="site-footer-link" href="/wiki/w-engines" data-i18n="W-Engines">W-Engines</a>
+      <span class="site-footer-sep" aria-hidden="true">·</span>
+      <a class="site-footer-link" href="/wiki/bangboos" data-i18n="Bangboos">Bangboos</a>
+      <span class="site-footer-sep" aria-hidden="true">·</span>
+      <a class="site-footer-link" href="/wiki/drive-discs" data-i18n="Drive Discs">Drive Discs</a>
+      <span class="site-footer-sep" aria-hidden="true">·</span>
+      <a class="site-footer-link" href="/tc" data-nav-tab="tc" data-i18n="Loadout Lab">Loadout Lab</a>
+      <span class="site-footer-sep" aria-hidden="true">·</span>
+      <a class="site-footer-link" href="https://compiler.moe/" target="_blank" rel="noopener" data-i18n="Optimiser">Optimiser</a>
+    </nav>
+    <nav class="site-footer-row" aria-label="Legal">
+      <a class="site-footer-link" href="/privacy" data-nav-tab="privacy">Privacy</a>
+      <span class="site-footer-sep" aria-hidden="true">·</span>
+      <a class="site-footer-link" href="/terms" data-nav-tab="terms">Terms</a>
+      <span class="site-footer-sep" aria-hidden="true">·</span>
+      <a class="site-footer-link" href="mailto:hello@analytics.moe">hello@analytics.moe</a>
+    </nav>
+    <p class="site-footer-disclaimer">
+      © 2026 ZZZ Analytics. A fan-made site, not affiliated with or endorsed by HoYoverse.
+      Zenless Zone Zero and its characters, names and artwork are trademarks and copyright of COGNOSPHERE PTE. LTD.
+    </p>
+  </footer>
+
+  <dialog class="modal-card" id="upload-modal" aria-labelledby="upload-modal-title" style="width:95vw; max-width:1200px; max-height:88vh; overflow-y:auto;" closedby="any">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1.25rem;">
+        <h3 style="font-size:1.3rem; color:#fff; font-weight:800;" id="upload-modal-title">SUBMIT BATTLE RUN</h3>
+        <button type="button" id="close-upload-btn" aria-label="Close" style="background:none; border:none; color:#A0AEC0; font-size:1.5rem; cursor:pointer;">✕</button>
+      </div>
+
+      <div class="dropzone" id="modal-dropzone">
+        <div style="font-weight:700; font-size:1.05rem; color:var(--text-main); margin-bottom:0.25rem;">Drag &amp; drop the battle folder</div>
+        <label class="dropzone-browse" for="upload-file-input">or choose files from your computer</label>
+        <input type="file" id="upload-file-input" accept=".pb,.json" multiple="" hidden="" style="">
+        <div id="upload-status" style="margin-top:0.75rem; font-size:0.85rem;"></div>
+      </div>
+
+      <div id="upload-interactive-form">
+
+      </div>
+    </dialog>
+
+  <dialog class="modal-card" id="admin-modal" aria-labelledby="admin-modal-title" style="width:95vw; max-width:1600px; height:92vh; flex-direction:column; padding:1.5rem; overflow:hidden;" closedby="any">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1rem; flex-shrink:0;">
+        <h3 style="font-size:1.3rem; color:var(--c-yellow); font-weight:800;" id="admin-modal-title">ADMIN MANAGEMENT PORTAL</h3>
+        <button type="button" onclick="closeAdminModal()" aria-label="Close" style="background:none; border:none; color:#A0AEC0; font-size:1.5rem; cursor:pointer;">✕</button>
+      </div>
+
+      <!-- The login form is mounted on demand by openAdminModal(). Keeping the
+           password field out of the static HTML stops Chrome treating every
+           page (wiki, leaderboard) as a login form and autofilling its search
+           inputs; the panel is torn down again when the modal closes. -->
+      <div id="admin-auth-section" style="flex-shrink:0;"></div>
+
+      <div id="admin-queue-section" style="display:none; flex:1; flex-direction:column; overflow:hidden; min-height:0;">
+
+        <div style="margin-bottom:1rem; flex-shrink:0;">
+          <input type="text" class="form-control" id="admin-search-input" name="q" autocomplete="off" placeholder="Search runs by agent name (e.g. Grace, Velina, Miyabi, Sigrid)..." oninput="onAdminSearchInputDebounced()" maxlength="200" style="background: var(--bg-card); color: rgb(255, 255, 255); border: 1px solid var(--border-main); padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.95rem; width: 100%;">
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:1.25rem; margin-bottom:1.25rem; border-bottom:1px solid var(--border-main); padding-bottom:0.75rem; flex-shrink:0;">
+          <button class="site-btn" id="admin-tab-pending" onclick="switchAdminSubTab('pending')" style="color:var(--c-cyan); font-weight:800;">
+            Pending Submissions (<span id="pending-count">0</span>)
+          </button>
+          <button class="site-btn" id="admin-tab-published" onclick="switchAdminSubTab('published')" style="color:var(--text-muted);">
+            Manage Published Runs (<span id="published-count">0</span>)
+          </button>
+          <button class="site-btn" id="admin-tab-beta" onclick="switchAdminSubTab('beta')" style="color:var(--text-muted);">
+            Beta Archived Runs (<span id="beta-count">0</span>)
+          </button>
+          <button class="site-btn" id="admin-tab-reports" onclick="switchAdminSubTab('reports')" style="color:var(--text-muted);">
+            Reports (<span id="report-count">0</span>)
+          </button>
+          <button class="site-btn" id="admin-tab-guides" onclick="switchAdminSubTab('guides')" style="color:var(--text-muted);">
+            Guides (<span id="guide-count">0</span>)
+          </button>
+          <button class="site-btn" type="button" onclick="republishPublicSnapshot(this)" style="color:var(--text-muted);" title="Re-upload runs/current.json from the database if a publish failed">
+            Rebuild public snapshot
+          </button>
+          <span id="admin-publish-status" class="admin-publish-status" data-state="idle" role="status" aria-live="polite" hidden=""></span>
+          <a class="site-btn" href="/wiki/guides/new" style="margin-left:auto; color:var(--c-cyan); font-weight:800; text-decoration:none;">Write a guide</a>
+        </div>
+
+        <div style="flex:1; overflow-y:auto; padding-right:0.5rem; min-height:0;">
+
+          <div id="admin-pending-container">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+              <h4 style="color:#fff;">Pending Review Queue</h4>
+              <button class="site-btn" onclick="fetchPendingQueue()" style="font-size:0.8rem;">Refresh Queue</button>
+            </div>
+            <div id="pending-queue-list"></div>
+          </div>
+
+          <div id="admin-published-container" style="display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+              <h4 style="color:#fff;">Active Leaderboard Runs</h4>
+              <button class="site-btn" onclick="fetchPublishedQueue()" style="font-size:0.8rem;">Refresh Published</button>
+            </div>
+            <div id="published-queue-list"></div>
+          </div>
+
+          <div id="admin-beta-container" style="display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; gap:1rem; flex-wrap:wrap;">
+              <h4 style="color:#fff; margin:0;">Beta Archived Runs</h4>
+              <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+                <label style="display:flex; align-items:center; gap:0.45rem; font-size:0.82rem; color:var(--c-yellow); font-weight:700;">
+                  <span>Latest beta</span>
+                  <input type="text" id="admin-latest-beta-input" class="form-control" maxlength="11" placeholder="3.4.3H1" title="X.X.X, optionally with a hotfix: 3.4.3H1" style="width: 5.5rem; padding: 0.35rem 0.5rem; font-size: 0.82rem; font-weight: 800; background: var(--bg-main); color: rgb(255, 255, 255); border: 1px solid rgba(234, 179, 8, 0.45); border-radius: 6px;">
+                </label>
+                <button class="site-btn" onclick="saveLatestBetaFromAdmin()" style="color:var(--c-yellow); border-color:var(--c-yellow); font-size:0.8rem; font-weight:800;">Save Latest Beta</button>
+                <button class="site-btn" onclick="fetchBetaQueue()" style="font-size:0.8rem;">Refresh Beta Archive</button>
+              </div>
+            </div>
+            <p style="color:var(--text-muted); font-size:0.8rem; margin:-0.35rem 0 1rem;">Leaderboard “Latest beta only” uses this version when Beta Archives are enabled. It is also the default when archiving or moving runs. With a hotfix (3.4.3H1), “Latest” shows H1 runs and 3.4.3 runs with no hotfix; other hotfixes (H0) move to the archive.</p>
+            <div id="beta-queue-list"></div>
+          </div>
+
+          <div id="admin-reports-container" style="display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; gap:1rem; flex-wrap:wrap;">
+              <h4 style="color:#fff; margin:0;">Bug &amp; translation reports</h4>
+              <div style="display:flex; align-items:center; gap:0.5rem;">
+                <select id="admin-reports-status" onchange="window.AdminReports &amp;&amp; AdminReports.load()" style="background:var(--bg-main); color:#fff; border:1px solid var(--border-main); border-radius:6px; padding:0.35rem 0.5rem; font-size:0.82rem;">
+                  <option value="open">Open</option>
+                  <option value="accepted">Accepted</option>
+                  <option value="rejected">Rejected</option>
+                  <option value="applied">Applied</option>
+                  <option value="all">All</option>
+                </select>
+                <button class="site-btn" onclick="window.AdminReports &amp;&amp; AdminReports.load()" style="font-size:0.8rem;">Refresh</button>
+              </div>
+            </div>
+            <div id="admin-reports-list"></div>
+          </div>
+
+          <div id="admin-guides-container" style="display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; gap:1rem; flex-wrap:wrap;">
+              <h4 style="color:#fff; margin:0;">Guides</h4>
+              <div style="display:flex; align-items:center; gap:0.5rem;">
+                <button class="site-btn" onclick="window.AdminGuides &amp;&amp; AdminGuides.load()" style="font-size:0.8rem;">Refresh</button>
+                <button class="site-btn" onclick="window.AdminGuides &amp;&amp; AdminGuides.rebuild()" style="font-size:0.8rem;">Rebuild snapshot</button>
+                <a class="site-btn" href="/wiki/guides/new" style="font-size:0.8rem; color:var(--c-cyan); border-color:var(--c-cyan); text-decoration:none;">New guide</a>
+              </div>
+            </div>
+            <p style="color:var(--text-muted); font-size:0.8rem; margin:-0.35rem 0 1rem;">Drafts are private, WIP guides are unlisted but readable by link, and published guides appear on the hub. Deleting a guide leaves its uploaded media in storage so a re-created or imported guide can still use it.</p>
+            <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap; margin-bottom:1rem; padding:0.65rem 0.75rem; border:1px dashed var(--border-main); border-radius:8px;">
+              <label for="admin-guide-remove-slug" style="color:var(--text-muted); font-size:0.78rem;">Orphaned guide cleanup</label>
+              <input id="admin-guide-remove-slug" class="form-control" type="text" maxlength="80" placeholder="slug, e.g. nisici" style="max-width: 240px; padding: 0.35rem 0.5rem; font-size: 0.8rem; background: var(--bg-main); color: rgb(255, 255, 255); border: 1px solid var(--border-main); border-radius: 6px;">
+              <button class="site-btn" onclick="window.AdminGuides &amp;&amp; AdminGuides.purgeBySlug()" style="font-size:0.78rem; color:#fca5a5; border-color:rgba(239,68,68,.55);">Remove from public site</button>
+            </div>
+            <div id="admin-guides-list"></div>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+  <dialog class="modal-card" id="admin-edit-modal" aria-labelledby="admin-edit-modal-title" style="max-width:800px; max-height:85vh; overflow-y:auto;" closedby="any">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1.25rem;">
+        <h3 style="font-size:1.3rem; color:var(--c-cyan); font-weight:800;" id="admin-edit-modal-title">EDIT RUN DETAILS</h3>
+        <button type="button" onclick="closeAdminEditModal()" aria-label="Close" style="background:none; border:none; color:#A0AEC0; font-size:1.5rem; cursor:pointer;">✕</button>
+      </div>
+
+      <div id="admin-edit-form-content">
+
+      </div>
+    </dialog>
+
+  <!-- Floating search (bottom) -->
+  <div class="floating-search is-route-hidden" role="search" id="floating-search">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"></circle><path d="m16.5 16.5 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
+    <input type="text" id="run-search-input" name="q" placeholder="Search — try “Grace M6”, velina OR miyabi, -miyabi, miyab*…" aria-label="Search runs" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search" style="">
+    <kbd>/</kbd>
+    <button class="fs-help" type="button" id="shortcuts-help-btn" aria-label="Keyboard shortcuts" title="Keyboard shortcuts">?</button>
+    <span class="fs-count" id="run-search-count"></span>
+  </div>
+
+  <!-- Keyboard shortcuts overlay -->
+  <div class="overlay" id="shortcuts-overlay" onclick="if (event.target === this) window.toggleShortcuts(false)">
+    <div class="sc-panel" role="dialog" aria-modal="true" aria-label="Keyboard shortcuts and search syntax">
+      <div class="sc-head">Shortcuts &amp; search <button type="button" aria-label="Close" onclick="window.toggleShortcuts(false)">✕</button></div>
+      <div class="sc-row"><span>Search runs</span><span><kbd>/</kbd> <kbd>Space</kbd></span></div>
+      <div class="sc-row"><span>Exit search / close panel</span><kbd>Esc</kbd></div>
+      <div class="sc-row"><span>Clear search</span><span><kbd>Esc</kbd> <kbd>Esc</kbd></span></div>
+      <div class="sc-row"><span>Clear all filters</span><span><kbd>Esc</kbd> <kbd>Esc</kbd> <kbd>Esc</kbd></span></div>
+      <div class="sc-row"><span>Expand focused run</span><kbd>Enter</kbd></div>
+      <div class="sc-row"><span>Open this panel</span><kbd>?</kbd></div>
+
+      <div class="sc-subhead">Search syntax</div>
+      <div class="sc-row sc-row--syntax"><span>Exact phrase</span><kbd>"grace m6"</kbd></div>
+      <div class="sc-row sc-row--syntax"><span>Either term</span><kbd>velina OR miyabi</kbd></div>
+      <div class="sc-row sc-row--syntax"><span>Both terms</span><kbd>velina AND miyabi</kbd></div>
+      <div class="sc-row sc-row--syntax"><span>Exclude</span><kbd>-miyabi</kbd></div>
+      <div class="sc-row sc-row--syntax"><span>Wildcard</span><kbd>miyab*</kbd></div>
+      <div class="sc-row sc-row--syntax"><span>Group</span><kbd>(velina OR miyabi) remielle</kbd></div>
+      <div class="sc-row sc-row--syntax"><span>Agent + mindscape</span><kbd>Grace M6, Velina M2</kbd></div>
+    </div>
+  </div>
+
+  <!-- Action feedback toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    <span id="toast-text">Link copied to clipboard</span>
+  </div>
+
+  <!-- Dev-only: load the fixture harness when ?fixtures is present. -->
+  <script>
+    if (new URLSearchParams(location.search).has('fixtures')) {
+      var s = document.createElement('script');
+      s.src = '/js/dev-fixtures.js?v=2';
+      document.body.appendChild(s);
+    }
+  </script>
+
+
+<dialog class="modal-card report-card" id="report-modal" aria-labelledby="report-title" closedby="any"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;"><h3 id="report-title" style="font-size:1.3rem;color:var(--c-cyan);font-weight:800;margin:0;">REPORT</h3><button type="button" class="report-close" aria-label="Close">✕</button></div><div class="report-tabs"><button type="button" class="site-btn is-active" data-tab="bug">Something's broken</button><button type="button" class="site-btn" data-tab="translation">Fix a translation</button></div><div data-panel="bug"><div class="form-group"><label for="report-bug-text">What happened?</label><textarea id="report-bug-text" class="form-control" autofocus="" rows="3" maxlength="2000" placeholder="e.g. The tier list stays on the loading screen" style=""></textarea></div><div class="form-group"><label for="report-bug-steps">How can we make it happen? <span class="report-optional">(steps, optional)</span></label><textarea id="report-bug-steps" class="form-control" rows="3" maxlength="2000" placeholder="1. Open the Tier List
+2. Filter to M0 only
+3. Click Ellen" style=""></textarea></div><div class="form-group"><label for="report-bug-expected">What did you expect? <span class="report-optional">(optional)</span></label><input type="text" id="report-bug-expected" class="form-control" maxlength="1000" placeholder="e.g. Ellen's teams to show" style=""></div><div class="form-group"><label for="report-bug-file">Add a screenshot <span class="report-optional">(optional)</span></label><input type="file" id="report-bug-file" class="form-control" accept="image/*" style=""></div><div id="report-bug-thumb" class="report-thumb" style="display:none;margin-bottom:1rem;"></div><details class="report-diag"><summary>Technical details sent with this report</summary><p class="report-hint">Your device, browser, this page and the pages and errors from this visit, so the bug can be reproduced. No account or personal data.</p><pre id="report-diag"></pre></details></div><div data-panel="translation" hidden=""><div class="form-group"><label>Which text?</label><div class="report-pick-row"><button type="button" class="site-btn" id="report-pick">Pick the text</button><span class="report-hint">Click a label on the page to capture it.</span></div></div><div class="form-group"><label for="report-en">English term</label><input type="text" id="report-en" class="form-control" maxlength="300" placeholder="e.g. Share" style=""></div><div class="form-group"><label>Currently shown</label><div id="report-cur" class="form-control is-empty" style="min-height:2.5rem;">—</div></div><div class="form-group"><label for="report-sug">Your correction</label><textarea id="report-sug" class="form-control" rows="2" maxlength="500" placeholder="What should it say instead?" style=""></textarea></div><div class="form-group"><label for="report-note">Notes (optional)</label><input type="text" id="report-note" class="form-control" maxlength="500" style=""></div></div><input type="text" id="report-hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0;"><div id="report-turnstile" style="margin:0.85rem 0;"></div><div class="report-hint" id="report-ctx"></div><button type="button" class="btn-primary" id="report-submit" style="margin-top:0.85rem;">Send report</button><p class="legal-form-note">Reports and screenshots are kept for 90 days. See the <a href="/privacy" target="_blank" rel="noopener">privacy notice</a>.</p><div class="report-status" id="report-status"></div></dialog></body></html>

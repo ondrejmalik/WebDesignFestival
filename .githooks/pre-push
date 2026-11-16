@@ -1,0 +1,3 @@
+#!/bin/sh
+# Blocks pushes of designs that fail smoke/language tests
+node tests/guard.js --changed origin/main || { echo 'Push blocked: fix failing tests.'; exit 1; }

@@ -1,0 +1,305 @@
+<!-- v2/search.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search | Festival of Darkness 2 (10-12 Jul 2026)</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content" data-i18n="nav.skip">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="Festival of Darkness 2">
+        <span class="brand-mark" aria-hidden="true">FD</span>
+        <span class="brand-name">Festival of Darkness <span class="brand-edition">2</span></span>
+      </a>
+
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <a class="nav-link" href="index.html" data-i18n="nav.home">Overview</a>
+        <a class="nav-link" href="program.html" data-i18n="nav.program">Program</a>
+        <a href="artists.html" class="nav-link">Artists</a>
+        <a href="stages.html" class="nav-link">Stages</a>
+        <a href="practical-info.html" class="nav-link">Info</a>
+        <a href="my-schedule.html" class="nav-link">My Schedule</a>
+        <a href="search.html" class="nav-link">Search</a>
+        <a class="nav-link is-active" href="search.html" aria-current="page">Search</a>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" class="lang-switch" id="lang-toggle" aria-label="Switch language">
+          <span class="lang-pill" data-lang-opt="en">EN</span>
+          <span class="lang-sep" aria-hidden="true">/</span>
+          <span class="lang-pill" data-lang-opt="cs">CS</span>
+        </button>
+        <a class="btn btn-primary btn-sm" href="program.html" data-i18n="nav.cta">Full schedule</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="page-header-band">
+      <div class="container">
+        <p class="hero-meta" data-i18n="program.meta">Kutná Hora, 10-12 July 2026</p>
+        <h1 class="page-title">Search Festival Index</h1>
+        <p class="page-lead">Find performers, acoustic stages, and schedule details across all three days in Kutná Hora.</p>
+      </div>
+    </section>
+
+    <section class="controls-bar" aria-label="Search and category filters">
+      <div class="container">
+        <form class="workbench-card" action="search.html" method="get" role="search">
+          <div class="workbench-header">
+            <div class="workbench-tabs">
+              <label class="workbench-tab is-active" for="festival-search-input">Query</label>
+            </div>
+            <span class="workbench-badge">60 sets · 2 stages</span>
+          </div>
+          <div class="workbench-pane">
+            <div class="hero-cta-row">
+              <input
+                type="search"
+                id="festival-search-input"
+                name="q"
+                class="btn btn-secondary"
+                placeholder="Search artists, genres, stages, or schedule info..."
+                aria-label="Search artists, genres, stages, or schedule info"
+              >
+              <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+          </div>
+          <div class="workbench-footer">
+            <div class="filter-group" role="group" aria-label="Result categories">
+              <button type="button" class="filter-btn is-active" data-search-cat="all" aria-pressed="true">All</button>
+              <button type="button" class="filter-btn" data-search-cat="artists" aria-pressed="false">Artists</button>
+              <button type="button" class="filter-btn" data-search-cat="stages" aria-pressed="false">Stages</button>
+              <button type="button" class="filter-btn" data-search-cat="info" aria-pressed="false">Info</button>
+            </div>
+            <span class="filter-count" id="search-result-count">8 results</span>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Indexed Matches</h2>
+          <p class="section-sub">Direct links to performer profiles, stage specifications, and verified CEST timetables.</p>
+        </div>
+
+        <div class="stages-grid" id="search-results-grid">
+          <article class="stage-card stage-card-solar" data-result-category="artists" data-search-text="Mirage Horizon Alternative Rock UK Friday 10 July 20:40 Solar Horizon Stage">
+            <div class="stage-top">
+              <span class="stage-pill stage-pill-solar">Artist</span>
+              <span class="stage-cap">Origin: UK · Friday 20:40</span>
+            </div>
+            <h3 class="stage-name">Mirage Horizon</h3>
+            <p class="stage-desc">Alternative Rock headline performance on Solar Horizon Stage (20:40 - 21:40 CEST).</p>
+            <div class="stage-meta-row">
+              <span>Solar Horizon Stage</span>
+              <a class="text-link" href="artist-detail.html">Open artist profile</a>
+            </div>
+          </article>
+
+          <article class="stage-card stage-card-lunar" data-result-category="artists" data-search-text="Modular Horizon Live Hardware Techno DE Friday 10 July 22:30 Lunar Forest Dome">
+            <div class="stage-top">
+              <span class="stage-pill stage-pill-lunar">Artist</span>
+              <span class="stage-cap">Origin: DE · Friday 22:30</span>
+            </div>
+            <h3 class="stage-name">Modular Horizon</h3>
+            <p class="stage-desc">Live Hardware Techno set inside Lunar Forest Dome with 360-degree visual projections (22:30 - 23:50 CEST).</p>
+            <div class="stage-meta-row">
+              <span>Lunar Forest Dome</span>
+              <a class="text-link" href="artist-detail.html">Open artist profile</a>
+            </div>
+          </article>
+
+          <article class="stage-card stage-card-solar" data-result-category="artists" data-search-text="Starlight Runners Electropop Headliner DK Sunday 12 July 22:35 Solar Horizon Stage">
+            <div class="stage-top">
+              <span class="stage-pill stage-pill-solar">Artist</span>
+              <span class="stage-cap">Origin: DK · Sunday 22:35</span>
+            </div>
+            <h3 class="stage-name">Starlight Runners</h3>
+            <p class="stage-desc">Electropop Headliner closing Sunday evening on Solar Horizon Stage (22:35 - 23:55 CEST).</p>
+            <div class="stage-meta-row">
+              <span>Solar Horizon Stage</span>
+              <a class="text-link" href="artist-detail.html">Open artist profile</a>
+            </div>
+          </article>
+
+          <article class="stage-card stage-card-lunar" data-result-category="artists" data-search-text="Galactic Orbit Melodic Techno IT Sunday 12 July 21:30 Lunar Forest Dome">
+            <div class="stage-top">
+              <span class="stage-pill stage-pill-lunar">Artist</span>
+              <span class="stage-cap">Origin: IT · Sunday 21:30</span>
+            </div>
+            <h3 class="stage-name">Galactic Orbit</h3>
+            <p class="stage-desc">Melodic Techno dome performance on closing night in Lunar Forest Dome (21:30 - 22:45 CEST).</p>
+            <div class="stage-meta-row">
+              <span>Lunar Forest Dome</span>
+              <a class="text-link" href="artist-detail.html">Open artist profile</a>
+            </div>
+          </article>
+
+          <article class="stage-card stage-card-solar" data-result-category="stages" data-search-text="Solar Horizon Stage Open-air main stage Capacity 4500 amphitheater indie rock synthpop">
+            <div class="stage-top">
+              <span class="stage-pill stage-pill-solar">Stage</span>
+              <span class="stage-cap" data-i18n="stages.solarCap">Capacity: 4,500</span>
+            </div>
+            <h3 class="stage-name">Solar Horizon Stage</h3>
+            <p class="stage-desc" data-i18n="stages.solarDesc">Central open-air amphitheater for major band performances, indie rock, synthpop, and dance headliners.</p>
+            <div class="stage-meta-row">
+              <span data-i18n="stages.solarHours">Daily 13:00 - 02:00</span>
+              <a class="text-link" href="stages.html">Inspect stage specs</a>
+            </div>
+          </article>
+
+          <article class="stage-card stage-card-lunar" data-result-category="stages" data-search-text="Lunar Forest Dome Covered audiovisual dome Capacity 1800 techno ambient 360 light projections">
+            <div class="stage-top">
+              <span class="stage-pill stage-pill-lunar">Stage</span>
+              <span class="stage-cap" data-i18n="stages.lunarCap">Capacity: 1,800</span>
+            </div>
+            <h3 class="stage-name">Lunar Forest Dome</h3>
+            <p class="stage-desc" data-i18n="stages.lunarDesc">Atmospheric covered indoor stage focusing on techno, ambient, experimental electronics, and 360-degree light projections.</p>
+            <div class="stage-meta-row">
+              <span data-i18n="stages.lunarHours">Daily 14:00 - 04:00</span>
+              <a class="text-link" href="stages.html">Inspect stage specs</a>
+            </div>
+          </article>
+
+          <article class="stage-card" data-result-category="info" data-search-text="3-Day Timetable Schedule Friday 10 July Saturday 11 July Sunday 12 July CEST 60 sets">
+            <div class="stage-top">
+              <span class="stage-pill stage-pill-solar">Info</span>
+              <span class="stage-cap">10 - 12 July 2026</span>
+            </div>
+            <h3 class="stage-name">Complete 3-Day Timetable</h3>
+            <p class="stage-desc">Full chronological schedule for all 60 live and DJ sets across Friday, Saturday, and Sunday in CEST.</p>
+            <div class="stage-meta-row">
+              <span>All stage times verified</span>
+              <a class="text-link" href="program.html" data-i18n="brief.openGrid">Open timetable</a>
+            </div>
+          </article>
+
+          <article class="stage-card" data-result-category="info" data-search-text="Kutna Hora Venue Capacity 6300 Czech Republic Edition 2026">
+            <div class="stage-top">
+              <span class="stage-pill stage-pill-lunar">Info</span>
+              <span class="stage-cap">Kutná Hora, CZ</span>
+            </div>
+            <h3 class="stage-name">Venue & Stage Layout</h3>
+            <p class="stage-desc">Acoustic separation details, 6,300 combined visitor capacity, and walking intervals between both stages.</p>
+            <div class="stage-meta-row">
+              <span>2 distinct stages</span>
+              <a class="text-link" href="stages.html">Compare stages</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong class="footer-brand">Festival of Darkness 2</strong>
+        <p class="footer-copy" data-i18n="footer.location">Kutná Hora, Czech Republic (10-12 July 2026)</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="index.html" data-i18n="nav.home">Overview</a>
+        <a href="program.html" data-i18n="nav.program">Program</a>
+        <a href="artists.html">Artists</a>
+        <a href="stages.html">Stages</a>
+        <a href="practical-info.html">Info</a>
+        <a href="my-schedule.html">My Schedule</a>
+        <a href="search.html">Search</a>
+        <a href="stages.html">Stages</a>
+        <a href="search.html">Search</a>
+      </nav>
+    </div>
+  </footer>
+  <nav class="bottom-nav-dock" aria-label="Mobile navigation">
+    <a class="bottom-dock-item" href="artists.html" data-page="artists.html">
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg></span>
+      <span class="dock-label" data-i18n="dock_artists">Artists</span>
+    </a>
+    <a class="bottom-dock-item" href="stages.html" data-page="stages.html">
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 20h20"></path><path d="M5 20v-8a7 7 0 0 1 14 0v8"></path></svg></span>
+      <span class="dock-label" data-i18n="dock_stages">Stages</span>
+    </a>
+    <a class="bottom-dock-item" href="practical-info.html" data-page="practical-info.html">
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></span>
+      <span class="dock-label" data-i18n="dock_info">Info</span>
+    </a>
+    <a class="bottom-dock-item bottom-dock-home" href="index.html" data-page="index.html">
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></span>
+      <span class="dock-label" data-i18n="dock_home">Home</span>
+    </a>
+    <a class="bottom-dock-item" href="program.html" data-page="program.html">
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></span>
+      <span class="dock-label" data-i18n="dock_program">Program</span>
+    </a>
+    <a class="bottom-dock-item" href="my-schedule.html" data-page="my-schedule.html">
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></span>
+      <span class="dock-label" data-i18n="dock_plan">My Plan</span>
+    </a>
+    <a class="bottom-dock-item active is-active" href="search.html" data-page="search.html" aria-current="page">
+      <span class="dock-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
+      <span class="dock-label" data-i18n="dock_search">Search</span>
+    </a>
+  </nav>
+<script src="js/lang.js"></script>
+  <script>
+    (function () {
+      var input = document.getElementById("festival-search-input");
+      var chips = document.querySelectorAll("[data-search-cat]");
+      var cards = document.querySelectorAll("[data-result-category]");
+      var countEl = document.getElementById("search-result-count");
+      var activeCat = "all";
+
+      function filterSearchResults() {
+        var term = (input && input.value ? input.value : "").trim().toLowerCase();
+        var visible = 0;
+
+        for (var i = 0; i < cards.length; i++) {
+          var card = cards[i];
+          var cat = card.getAttribute("data-result-category");
+          var text = (card.getAttribute("data-search-text") || card.textContent || "").toLowerCase();
+          var catOk = activeCat === "all" || cat === activeCat;
+          var termOk = !term || text.indexOf(term) !== -1;
+          var show = catOk && termOk;
+          card.hidden = !show;
+          if (show) visible++;
+        }
+
+        if (countEl) {
+          countEl.textContent = visible === 1 ? "1 result" : visible + " results";
+        }
+      }
+
+      for (var j = 0; j < chips.length; j++) {
+        chips[j].addEventListener("click", function () {
+          activeCat = this.getAttribute("data-search-cat");
+          for (var k = 0; k < chips.length; k++) {
+            var isSelected = chips[k] === this;
+            chips[k].classList.toggle("is-active", isSelected);
+            chips[k].setAttribute("aria-pressed", isSelected ? "true" : "false");
+          }
+          filterSearchResults();
+        });
+      }
+
+      if (input) {
+        input.addEventListener("input", filterSearchResults);
+        var params = new URLSearchParams(window.location.search);
+        var initialQ = params.get("q");
+        if (initialQ) {
+          input.value = initialQ;
+        }
+      }
+
+      filterSearchResults();
+    })();
+  </script>
+</body>
+</html>

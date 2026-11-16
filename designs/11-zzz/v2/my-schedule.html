@@ -1,0 +1,309 @@
+<!-- v2/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Schedule - Festival of Darkness 2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="side-rail" aria-label="Primary navigation">
+      <a href="index.html" class="rail-brand" aria-label="Festival of Darkness 2">
+        <span class="brand-glyph">FD2</span>
+      </a>
+      <nav class="rail-nav">
+        <a href="index.html" class="rail-link is-active" aria-current="page">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-9.5z"/>
+          </svg>
+          <span data-i18n="nav_home">Home</span>
+        </a>
+        <a href="program.html" class="rail-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="17" rx="2"/>
+            <path d="M8 2v4M16 2v4M3 10h18"/>
+          </svg>
+          <span data-i18n="nav_program">Program</span>
+        </a>
+        <a href="artists.html" class="rail-link">Artists</a>
+        <a href="stages.html" class="rail-link">Stages</a>
+        <a href="practical-info.html" class="rail-link">Info</a>
+        <a href="my-schedule.html" class="rail-link">My Schedule</a>
+        <a href="search.html" class="rail-link">Search</a>
+      </nav>
+      <div class="rail-footer">
+        <button type="button" class="lang-btn" id="lang-toggle" onclick="toggleFestivalLang()" aria-label="Switch language">
+          <span data-i18n="lang_code">CZ</span>
+        </button>
+      </div>
+    </aside>
+
+    <div class="workspace">
+      <header class="topbar">
+        <div class="topbar-context">
+          <span class="status-badge">
+            <span class="status-dot"></span>
+            <span data-i18n="hero_dates">10-12 Jul 2026</span>
+          </span>
+          <span class="topbar-location" data-i18n="hero_location">Kutná Hora, Czech Republic</span>
+        </div>
+        <div class="topbar-actions">
+          <a href="program.html" class="btn-outline-cyan" data-i18n="topbar_timetable">Timetable</a>
+          <button type="button" class="lang-btn mobile-lang-btn" onclick="toggleFestivalLang()" aria-label="Switch language">
+            <span data-i18n="lang_code">CZ</span>
+          </button>
+        </div>
+      </header>
+
+      <main class="main-content">
+    <section class="section-block">
+      <div class="container">
+        <h1 class="page-title">My Schedule</h1>
+        <p class="section-subtitle" id="plan-intro">Saved performances from <code>festival_favorites</code> with automatic overlap detection.</p>
+        <div class="program-plan-bar" id="my-plan-summary" aria-live="polite">
+          <p class="plan-bar-copy"><span id="plan-summary-text">0 sets saved</span></p>
+          <button type="button" class="fav-toggle-btn" id="clear-schedule-btn">Clear Schedule</button>
+        </div>
+        <div id="schedule-content"></div>
+      </div>
+    </section>
+  </main>
+
+      <footer class="site-footer">
+        <div class="footer-left">
+          <span class="footer-brand">Festival of Darkness 2</span>
+          <span class="footer-meta" data-i18n="footer_info">10-12 Jul 2026 / Kutná Hora, Czech Republic</span>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="index.html" data-i18n="nav_home">Home</a>
+          <a href="program.html" data-i18n="nav_program">Program</a>
+        <a href="artists.html">Artists</a>
+        <a href="stages.html">Stages</a>
+        <a href="practical-info.html">Info</a>
+        <a href="my-schedule.html">My Schedule</a>
+        <a href="search.html">Search</a>
+        </nav>
+      </footer>
+    </div>
+  </div>
+  <nav class="bottom-nav-dock" aria-label="Mobile navigation">
+    <a href="artists.html" data-page="artists.html" class="bottom-dock-item">
+      <span class="dock-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+      </span>
+      <span class="dock-label" data-i18n="dock_artists">Artists</span>
+    </a>
+    <a href="stages.html" data-page="stages.html" class="bottom-dock-item">
+      <span class="dock-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M2 12h20M2 6h20M2 18h20"></path>
+        </svg>
+      </span>
+      <span class="dock-label" data-i18n="dock_stages">Stages</span>
+    </a>
+    <a href="practical-info.html" data-page="practical-info.html" class="bottom-dock-item">
+      <span class="dock-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+      </span>
+      <span class="dock-label" data-i18n="dock_info">Info</span>
+    </a>
+    <a href="index.html" data-page="index.html" class="bottom-dock-item bottom-dock-home">
+      <span class="dock-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-9.5z"/>
+        </svg>
+      </span>
+      <span class="dock-label" data-i18n="dock_home">Home</span>
+    </a>
+    <a href="program.html" data-page="program.html" class="bottom-dock-item">
+      <span class="dock-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="17" rx="2"/>
+          <path d="M8 2v4M16 2v4M3 10h18"/>
+        </svg>
+      </span>
+      <span class="dock-label" data-i18n="dock_program">Program</span>
+    </a>
+    <a href="my-schedule.html" data-page="my-schedule.html" class="bottom-dock-item active is-active" aria-current="page">
+      <span class="dock-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+        </svg>
+      </span>
+      <span class="dock-label" data-i18n="dock_plan">My Plan</span>
+    </a>
+    <a href="search.html" data-page="search.html" class="bottom-dock-item">
+      <span class="dock-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </span>
+      <span class="dock-label" data-i18n="dock_search">Search</span>
+    </a>
+  </nav>
+<script src="js/lang.js"></script>
+<script>
+  (function () {
+    var FAV_KEY = "festival_favorites";
+    var CATALOG = [{"id": "perf-01", "day": "day1", "start": "14:00", "end": "14:45", "artist": "Echoes of Light", "genre": "Post-Rock / Ambient", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "CZ"}, {"id": "perf-02", "day": "day1", "start": "15:00", "end": "15:45", "artist": "Velvet Morning", "genre": "Dream Pop", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "SK"}, {"id": "perf-03", "day": "day1", "start": "16:00", "end": "16:50", "artist": "Nordic Wave", "genre": "Indie Rock", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "SE"}, {"id": "perf-04", "day": "day1", "start": "17:05", "end": "17:55", "artist": "The Daylight Project", "genre": "Indie Pop", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "CZ"}, {"id": "perf-05", "day": "day1", "start": "18:15", "end": "19:05", "artist": "Prague Synth Collective", "genre": "Synthpop", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "CZ"}, {"id": "perf-06", "day": "day1", "start": "19:25", "end": "20:20", "artist": "Electric Meadow", "genre": "Electro-Folk", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "AT"}, {"id": "perf-07", "day": "day1", "start": "20:40", "end": "21:40", "artist": "Mirage Horizon", "genre": "Alternative Rock", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "UK"}, {"id": "perf-08", "day": "day1", "start": "22:00", "end": "23:10", "artist": "Solar Flare", "genre": "Nu-Disco / Funk", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "DE"}, {"id": "perf-09", "day": "day1", "start": "23:30", "end": "00:45", "artist": "Starlight Odyssey", "genre": "Electronic Indie", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "FR"}, {"id": "perf-10", "day": "day1", "start": "01:00", "end": "02:00", "artist": "Midnight Pulse", "genre": "Electro Rock", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "CZ"}, {"id": "perf-11", "day": "day1", "start": "15:00", "end": "15:50", "artist": "Subtle Resonances", "genre": "Modular Ambient", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "CZ"}, {"id": "perf-12", "day": "day1", "start": "16:05", "end": "17:00", "artist": "Binary Fields", "genre": "IDM / Glitch", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "PL"}, {"id": "perf-13", "day": "day1", "start": "17:15", "end": "18:15", "artist": "Deep Texture", "genre": "Dub Techno", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "DE"}, {"id": "perf-14", "day": "day1", "start": "18:30", "end": "19:30", "artist": "Oscillator Shift", "genre": "Minimal Techno", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "CZ"}, {"id": "perf-15", "day": "day1", "start": "19:45", "end": "20:45", "artist": "Echo Chamber", "genre": "Dark Ambient", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "SK"}, {"id": "perf-16", "day": "day1", "start": "21:00", "end": "22:15", "artist": "Krypton DJ", "genre": "Hypnotic Techno", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "HU"}, {"id": "perf-17", "day": "day1", "start": "22:30", "end": "23:50", "artist": "Modular Horizon", "genre": "Live Hardware Techno", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "DE"}, {"id": "perf-18", "day": "day1", "start": "00:05", "end": "01:25", "artist": "Analog Void", "genre": "Industrial Techno", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "NL"}, {"id": "perf-19", "day": "day1", "start": "01:40", "end": "03:00", "artist": "Frequency 404", "genre": "Raw Acid Techno", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "UK"}, {"id": "perf-20", "day": "day1", "start": "03:10", "end": "04:00", "artist": "Dawn Ritual", "genre": "Atmospheric Ambient", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "CZ"}, {"id": "perf-21", "day": "day2", "start": "13:30", "end": "14:15", "artist": "Sunburst Trio", "genre": "Acoustic Indie", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "CZ"}, {"id": "perf-22", "day": "day2", "start": "14:30", "end": "15:15", "artist": "Coastline Drift", "genre": "Surf Rock", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "ES"}, {"id": "perf-23", "day": "day2", "start": "15:30", "end": "16:20", "artist": "The Urban Poets", "genre": "Indie Soul", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "UK"}, {"id": "perf-24", "day": "day2", "start": "16:35", "end": "17:25", "artist": "Neon Youth", "genre": "Indie Pop", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "SK"}, {"id": "perf-25", "day": "day2", "start": "17:45", "end": "18:40", "artist": "Silver Tides", "genre": "Shoegaze", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "CZ"}, {"id": "perf-26", "day": "day2", "start": "19:00", "end": "20:00", "artist": "Horizon Glow", "genre": "Electronic Pop", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "SE"}, {"id": "perf-27", "day": "day2", "start": "20:20", "end": "21:20", "artist": "Wild Horizon", "genre": "Post-Punk Revival", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "DE"}, {"id": "perf-28", "day": "day2", "start": "21:40", "end": "22:50", "artist": "Magnetic River", "genre": "Indie Dance", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "FR"}, {"id": "perf-29", "day": "day2", "start": "23:10", "end": "00:25", "artist": "Vortex Motion", "genre": "Nu-Electro", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "UK"}, {"id": "perf-30", "day": "day2", "start": "00:45", "end": "02:00", "artist": "Aura Soundsystem", "genre": "Progressive Dance", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "CZ"}, {"id": "perf-31", "day": "day2", "start": "14:30", "end": "15:20", "artist": "Dronescape", "genre": "Drone Music", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "CZ"}, {"id": "perf-32", "day": "day2", "start": "15:35", "end": "16:30", "artist": "Glitch Garden", "genre": "Microhouse", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "AT"}, {"id": "perf-33", "day": "day2", "start": "16:45", "end": "17:45", "artist": "Forest Whispers", "genre": "Organic House", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "SK"}, {"id": "perf-34", "day": "day2", "start": "18:00", "end": "19:00", "artist": "Low Frequency Unit", "genre": "Deep Dubstep", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "UK"}, {"id": "perf-35", "day": "day2", "start": "19:15", "end": "20:15", "artist": "Monolith Audio", "genre": "Peak Time Techno", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "DE"}, {"id": "perf-36", "day": "day2", "start": "20:30", "end": "21:45", "artist": "Sine Wave Syndicate", "genre": "Electro Techno", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "FR"}, {"id": "perf-37", "day": "day2", "start": "22:00", "end": "23:20", "artist": "Shadowplay DJ", "genre": "Dark Wave Techno", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "CZ"}, {"id": "perf-38", "day": "day2", "start": "23:35", "end": "00:55", "artist": "Circuit Overload", "genre": "Hard Techno", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "PL"}, {"id": "perf-39", "day": "day2", "start": "01:10", "end": "02:30", "artist": "Neural Network Live", "genre": "Acid Techno", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "BE"}, {"id": "perf-40", "day": "day2", "start": "02:40", "end": "04:00", "artist": "Solar Wind", "genre": "Chillout Ambient", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "CZ"}, {"id": "perf-41", "day": "day3", "start": "13:00", "end": "13:45", "artist": "Morning Breeze", "genre": "Folk Indie", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "CZ"}, {"id": "perf-42", "day": "day3", "start": "14:00", "end": "14:45", "artist": "Silent Pines", "genre": "Chamber Pop", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "SK"}, {"id": "perf-43", "day": "day3", "start": "15:00", "end": "15:50", "artist": "Sunken Ship", "genre": "Psych Rock", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "UK"}, {"id": "perf-44", "day": "day3", "start": "16:05", "end": "16:55", "artist": "Amber Boulevard", "genre": "Dream Indie", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "DE"}, {"id": "perf-45", "day": "day3", "start": "17:15", "end": "18:10", "artist": "Urban Echo", "genre": "Art Pop", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "CZ"}, {"id": "perf-46", "day": "day3", "start": "18:30", "end": "19:30", "artist": "Luminous Band", "genre": "Indie Funk", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "IT"}, {"id": "perf-47", "day": "day3", "start": "19:50", "end": "20:50", "artist": "The Velvet Trails", "genre": "Space Rock", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "SE"}, {"id": "perf-48", "day": "day3", "start": "21:10", "end": "22:15", "artist": "Prismatics", "genre": "Dance Punk", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "UK"}, {"id": "perf-49", "day": "day3", "start": "22:35", "end": "23:55", "artist": "Starlight Runners", "genre": "Electropop Headliner", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "DK"}, {"id": "perf-50", "day": "day3", "start": "00:10", "end": "01:15", "artist": "Final Cascade", "genre": "Orchestral Electronic", "stage": "Solar Horizon Stage", "stageType": "solar", "origin": "CZ"}, {"id": "perf-51", "day": "day3", "start": "14:00", "end": "14:50", "artist": "Static Drift", "genre": "Field Recording / Ambient", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "CZ"}, {"id": "perf-52", "day": "day3", "start": "15:05", "end": "16:00", "artist": "Resonance Space", "genre": "Deep Ambient", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "AT"}, {"id": "perf-53", "day": "day3", "start": "16:15", "end": "17:15", "artist": "Tape Loop Experiment", "genre": "Tape Ambient", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "PL"}, {"id": "perf-54", "day": "day3", "start": "17:30", "end": "18:30", "artist": "Minimal Horizon", "genre": "Micro Techno", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "DE"}, {"id": "perf-55", "day": "day3", "start": "18:45", "end": "19:45", "artist": "Dark Matter", "genre": "Deep Progressive", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "CZ"}, {"id": "perf-56", "day": "day3", "start": "20:00", "end": "21:15", "artist": "Hyperspace DJ", "genre": "Psy Techno", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "IL"}, {"id": "perf-57", "day": "day3", "start": "21:30", "end": "22:45", "artist": "Galactic Orbit", "genre": "Melodic Techno", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "IT"}, {"id": "perf-58", "day": "day3", "start": "23:00", "end": "00:15", "artist": "Bass Distortion", "genre": "Leftfield Bass", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "UK"}, {"id": "perf-59", "day": "day3", "start": "00:30", "end": "01:45", "artist": "Cosmic Pulse", "genre": "Uplifting Trance Techno", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "NL"}, {"id": "perf-60", "day": "day3", "start": "02:00", "end": "03:00", "artist": "Equinox Farewell", "genre": "Down-tempo Ambient", "stage": "Lunar Forest Dome", "stageType": "lunar", "origin": "CZ"}];
+    var DAYS = {
+      en: [
+        { key: "day1", label: "Day 1 - Friday, 10 July 2026" },
+        { key: "day2", label: "Day 2 - Saturday, 11 July 2026" },
+        { key: "day3", label: "Day 3 - Sunday, 12 July 2026" }
+      ],
+      cs: [
+        { key: "day1", label: "Den 1 - Pátek 10. července 2026" },
+        { key: "day2", label: "Den 2 - Sobota 11. července 2026" },
+        { key: "day3", label: "Den 3 - Neděle 12. července 2026" }
+      ]
+    };
+
+    function getLang() {
+      if (typeof window.getFestivalLang === "function") return window.getFestivalLang();
+      return document.documentElement.lang === "cs" ? "cs" : "en";
+    }
+
+    function toMinutes(hhmm) {
+      var p = hhmm.split(":");
+      var h = parseInt(p[0], 10);
+      var m = parseInt(p[1], 10);
+      if (h < 8) h += 24;
+      return h * 60 + m;
+    }
+
+    function readFavorites() {
+      try {
+        var raw = window.localStorage.getItem(FAV_KEY);
+        if (!raw) return [];
+        var arr = JSON.parse(raw);
+        if (Array.isArray(arr)) {
+          return arr.map(function (x) { return typeof x === "string" ? x : (x && x.id ? String(x.id) : ""); }).filter(Boolean);
+        }
+      } catch (e) {}
+      return [];
+    }
+
+    function writeFavorites(ids) {
+      var uniq = Array.from(new Set(ids));
+      try { window.localStorage.setItem(FAV_KEY, JSON.stringify(uniq)); } catch (e) {}
+      render();
+    }
+
+    function findConflicts(items) {
+      var bad = {};
+      for (var i = 0; i < items.length; i++) {
+        var aS = toMinutes(items[i].start), aE = toMinutes(items[i].end);
+        for (var j = i + 1; j < items.length; j++) {
+          var bS = toMinutes(items[j].start), bE = toMinutes(items[j].end);
+          if (aS < bE && bS < aE) {
+            bad[items[i].id] = true;
+            bad[items[j].id] = true;
+          }
+        }
+      }
+      return bad;
+    }
+
+    function esc(s) {
+      return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+
+    function render() {
+      var container = document.getElementById("schedule-content");
+      var summary = document.getElementById("plan-summary-text");
+      var clearBtn = document.getElementById("clear-schedule-btn");
+      if (!container) return;
+
+      var lang = getLang();
+      var isCs = lang === "cs";
+      var ids = readFavorites();
+      var saved = CATALOG.filter(function (item) { return ids.indexOf(item.id) !== -1; });
+
+      if (clearBtn) {
+        clearBtn.textContent = isCs ? "Vymazat plán" : "Clear Schedule";
+        clearBtn.disabled = saved.length === 0;
+      }
+
+      var conflictCount = 0;
+      var html = "";
+      var days = DAYS[lang] || DAYS.en;
+
+      if (saved.length === 0) {
+        if (summary) summary.textContent = isCs ? "0 uložených vystoupení" : "0 sets saved";
+        html = '<div class="empty-plan-box">' +
+          '<p>' + (isCs ? "Váš osobní rozvrh je zatím prázdný. Přidejte si sety přímo z programu festivalu." : "Your personal schedule is empty. Add sets directly from the festival program.") + '</p>' +
+          '<a href="program.html" class="plan-bar-link">' + (isCs ? "Prohlédnout program" : "Browse 3-Day Program") + '</a>' +
+          '</div>';
+      } else {
+        days.forEach(function (d) {
+          var dayItems = saved.filter(function (s) { return s.day === d.key; })
+            .sort(function (a, b) { return toMinutes(a.start) - toMinutes(b.start); });
+          if (!dayItems.length) return;
+          var bad = findConflicts(dayItems);
+          conflictCount += Object.keys(bad).length;
+          html += '<h2 class="day-title">' + esc(d.label) + '</h2><div class="my-schedule-grid">';
+          dayItems.forEach(function (item) {
+            html += '<article class="schedule-item-card" data-perf-id="' + esc(item.id) + '">' +
+              (bad[item.id] ? '<span class="conflict-badge">' + (isCs ? "Časová kolize" : "Time conflict") + '</span>' : '') +
+              '<div><strong>' + esc(item.start + " - " + item.end) + '</strong> · <span>' + esc(item.stage) + '</span></div>' +
+              '<h3>' + esc(item.artist) + '</h3>' +
+              '<p>' + esc(item.genre + " (" + item.origin + ")") + '</p>' +
+              '<button type="button" class="fav-toggle-btn is-saved" data-remove-id="' + esc(item.id) + '">' + (isCs ? "Odebrat z plánu" : "Remove") + '</button>' +
+              '</article>';
+          });
+          html += '</div>';
+        });
+
+        if (summary) {
+          if (isCs) {
+            var label = typeof window.formatCzPlural === "function"
+              ? window.formatCzPlural(saved.length, "uložené vystoupení", "uložená vystoupení", "uložených vystoupení")
+              : saved.length + " vystoupení";
+            summary.textContent = label + (conflictCount ? " · " + conflictCount + " v kolizi" : " · Bez kolizí");
+          } else {
+            summary.textContent = saved.length + (saved.length === 1 ? " set saved" : " sets saved") + (conflictCount ? " · " + conflictCount + " overlapping" : " · No conflicts");
+          }
+        }
+      }
+      container.innerHTML = html;
+    }
+
+    document.addEventListener("click", function (ev) {
+      var btn = ev.target && ev.target.closest ? ev.target.closest("[data-remove-id]") : null;
+      if (btn) {
+        var rid = btn.getAttribute("data-remove-id");
+        writeFavorites(readFavorites().filter(function (id) { return id !== rid; }));
+      }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      var clearBtn = document.getElementById("clear-schedule-btn");
+      if (clearBtn) {
+        clearBtn.addEventListener("click", function () { writeFavorites([]); });
+      }
+      render();
+    });
+
+    window.addEventListener("storage", function (ev) { if (!ev || ev.key === FAV_KEY) render(); });
+    if (typeof MutationObserver === "function") {
+      new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
+    }
+  })();
+</script>
+</body>

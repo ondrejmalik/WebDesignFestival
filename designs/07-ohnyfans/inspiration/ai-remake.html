@@ -1,0 +1,3807 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Is ohnepixel live right now? · OhnyFans</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..800;1,9..40,400..700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ==========================================================================
+       DESIGN TOKENS & RESET
+       ========================================================================== */
+    :root {
+      --paper: #E9EDF1;
+      --paper-elevated: #DFE5EC;
+      --paper-card: #F3F6F9;
+      --ink: #141619;
+      --ink-muted: #525B66;
+      --ink-subtle: #78828E;
+      --border-ink: rgba(20, 22, 25, 0.12);
+      --border-ink-strong: rgba(20, 22, 25, 0.24);
+
+      --dark: #181A1D;
+      --dark-card: #202328;
+      --dark-card-inner: #141619;
+      --dark-text: #F2F4F7;
+      --dark-muted: #9BA3AE;
+      --border-dark: rgba(255, 255, 255, 0.1);
+
+      /* CS2 Rarity Palette */
+      --rarity-milspec: #4B69FF;
+      --rarity-restricted: #8847FF;
+      --rarity-classified: #D32CE6;
+      --rarity-covert: #EB4B4B;
+      --rarity-gold: #E4AE39;
+
+      --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-pixel: 'Silkscreen', monospace;
+
+      --container-max: 1240px;
+      --gutter: clamp(16px, 4vw, 40px);
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --transition-fast: 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
+      --transition-smooth: 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.5;
+      background-color: var(--paper);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input {
+      font-family: inherit;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* ==========================================================================
+       BUTTONS & SHARED PRIMITIVES
+       ========================================================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 22px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      transition: transform var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+      line-height: 1.1;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn--solid {
+      background: var(--ink);
+      color: #FFFFFF;
+      border: 1.5px solid var(--ink);
+    }
+
+    .btn--solid:hover {
+      background: #2A2E35;
+      border-color: #2A2E35;
+      transform: translateY(-1px);
+    }
+
+    .btn--line {
+      background: transparent;
+      color: var(--ink);
+      border: 1.5px solid var(--border-ink-strong);
+    }
+
+    .btn--line:hover {
+      border-color: var(--ink);
+      background: rgba(20, 22, 25, 0.04);
+    }
+
+    .btn--text {
+      padding-inline: 8px;
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .btn--text:hover .btn__arrow {
+      transform: translateX(4px);
+    }
+
+    .btn__arrow {
+      display: inline-block;
+      transition: transform var(--transition-fast);
+    }
+
+    .section-head {
+      margin-bottom: clamp(28px, 4vw, 44px);
+    }
+
+    .section-head__heading {
+      font-family: var(--font-pixel);
+      font-size: clamp(32px, 5.2vw, 60px);
+      line-height: 0.96;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .section-head--paper .section-head__heading {
+      color: var(--dark-text);
+    }
+
+    .section-head__intro {
+      margin-top: 12px;
+      font-size: clamp(16px, 1.5vw, 19px);
+      color: var(--ink-muted);
+      max-width: 58ch;
+    }
+
+    .breadcrumbs {
+      padding-top: 28px;
+      margin-bottom: 14px;
+      font-size: 13px;
+      color: var(--ink-muted);
+    }
+
+    .breadcrumbs--paper {
+      color: var(--dark-muted);
+    }
+
+    .breadcrumbs__list {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .breadcrumbs__item + .breadcrumbs__item::before {
+      content: "/";
+      margin-right: 8px;
+      opacity: 0.45;
+    }
+
+    .breadcrumbs a:hover {
+      text-decoration: underline;
+    }
+
+    /* ==========================================================================
+       TOP BAR NAVIGATION
+       ========================================================================== */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      background: rgba(233, 237, 241, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-ink);
+    }
+
+    .top-bar__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      gap: 16px;
+    }
+
+    .wordmark {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-pixel);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .wordmark__mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 4px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #1D222A;
+      display: grid;
+      place-items: center;
+    }
+
+    .top-bar__menu {
+      display: flex;
+      align-items: center;
+      gap: clamp(14px, 2.2vw, 28px);
+    }
+
+    .top-bar__menu a, .top-bar__menu button {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink-muted);
+      padding: 6px 2px;
+      position: relative;
+      transition: color var(--transition-fast);
+    }
+
+    .top-bar__menu a:hover,
+    .top-bar__menu button:hover,
+    .top-bar__menu .is-active {
+      color: var(--ink);
+    }
+
+    .top-bar__menu .is-active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -2px;
+      height: 2px;
+      background: var(--ink);
+    }
+
+    .top-bar__actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      background: rgba(20, 22, 25, 0.06);
+      border: 1px solid var(--border-ink);
+      transition: background var(--transition-fast);
+    }
+
+    .live-pill:hover {
+      background: rgba(20, 22, 25, 0.11);
+    }
+
+    .live-pill__dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #7A8490;
+    }
+
+    .live-pill.is-live {
+      background: rgba(235, 75, 75, 0.12);
+      border-color: rgba(235, 75, 75, 0.4);
+      color: #C92A2A;
+    }
+
+    .live-pill.is-live .live-pill__dot {
+      background: #EB4B4B;
+      box-shadow: 0 0 0 3px rgba(235, 75, 75, 0.25);
+      animation: pulseDot 1.6s infinite;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(0.85); }
+    }
+
+    .top-bar__toggle {
+      display: none;
+      padding: 6px 12px;
+      border: 1px solid var(--border-ink-strong);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 840px) {
+      .top-bar__toggle { display: inline-flex; }
+      .top-bar__nav {
+        position: fixed;
+        inset: 64px 0 auto 0;
+        background: var(--paper);
+        border-bottom: 1px solid var(--border-ink-strong);
+        padding: 16px var(--gutter) 24px;
+        display: none;
+        box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+      }
+      .top-bar__nav.is-open { display: block; }
+      .top-bar__menu {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .top-bar__menu a, .top-bar__menu button { font-size: 17px; }
+    }
+
+    /* ==========================================================================
+       PAGE ROUTER VIEWS
+       ========================================================================== */
+    .page-view {
+      display: none;
+    }
+
+    .page-view.is-active {
+      display: block;
+    }
+
+    /* ==========================================================================
+       HERO SECTION (HOME)
+       ========================================================================== */
+    .hero {
+      position: relative;
+      padding-top: clamp(32px, 5vw, 64px);
+      padding-bottom: 36px;
+      overflow: hidden;
+    }
+
+    .hero__inner {
+      display: grid;
+      grid-template-columns: 1.25fr 0.85fr;
+      grid-template-areas:
+        "heading figure"
+        "answer  figure"
+        "intro   figure"
+        "actions figure";
+      column-gap: clamp(24px, 4vw, 56px);
+      align-items: start;
+    }
+
+    .hero__heading {
+      grid-area: heading;
+      font-family: var(--font-pixel);
+      font-size: clamp(28px, 4.4vw, 54px);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--ink);
+      max-width: 15ch;
+    }
+
+    .hero__answer {
+      grid-area: answer;
+      font-family: var(--font-pixel);
+      font-size: clamp(68px, 11.5vw, 148px);
+      line-height: 0.92;
+      letter-spacing: -0.03em;
+      color: #EB4B4B;
+      margin-top: 10px;
+      margin-bottom: 22px;
+      user-select: none;
+    }
+
+    .hero__answer.is-yes {
+      color: #16A34A;
+    }
+
+    .hero__intro {
+      grid-area: intro;
+      font-size: clamp(16px, 1.4vw, 18px);
+      color: var(--ink-muted);
+      max-width: 44ch;
+      margin-bottom: 24px;
+    }
+
+    .hero__intro a {
+      color: var(--ink);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .hero__actions {
+      grid-area: actions;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .hero__figure {
+      grid-area: figure;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 8px;
+    }
+
+    .hero__cup-wrap {
+      position: relative;
+      width: min(320px, 75vw);
+      aspect-ratio: 1 / 1;
+      cursor: pointer;
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .hero__cup-wrap:hover {
+      transform: rotate(-3deg) scale(1.02);
+    }
+
+    .hero__cup-wrap.is-knocked {
+      transform: rotate(78deg) translate(32px, 18px);
+    }
+
+    .cup-steam rect {
+      animation: steamFloat 2.4s ease-in-out infinite;
+    }
+
+    .cup-steam rect:nth-child(even) {
+      animation-delay: 0.7s;
+    }
+
+    .hero__cup-wrap.is-knocked .cup-steam {
+      opacity: 0;
+    }
+
+    @keyframes steamFloat {
+      0%, 100% { transform: translateY(0); opacity: 0.85; }
+      50% { transform: translateY(-9px); opacity: 0.35; }
+    }
+
+    .hero__spill-puddle {
+      position: absolute;
+      bottom: 24px;
+      right: -12px;
+      width: 170px;
+      height: 22px;
+      background: #4A2D1E;
+      border-radius: 50%;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+      pointer-events: none;
+      opacity: 0.9;
+    }
+
+    .hero__cup-wrap.is-knocked + .hero__spill-puddle {
+      transform: scaleX(1);
+    }
+
+    .hero__callout {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: -8px;
+      margin-left: 44px;
+      transform: rotate(-4deg);
+    }
+
+    .hero__arrow {
+      color: var(--ink);
+      width: 56px;
+      height: 36px;
+    }
+
+    .hero__note {
+      background: #EB4B4B;
+      color: #FFFFFF;
+      font-family: var(--font-pixel);
+      font-size: 11px;
+      padding: 6px 10px;
+      border-radius: 3px;
+      letter-spacing: 0.02em;
+      box-shadow: 0 4px 12px rgba(235, 75, 75, 0.25);
+    }
+
+    /* Hero Stats Bar */
+    .hero__record {
+      margin-top: clamp(32px, 5vw, 52px);
+    }
+
+    .hero__stats {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr 1.25fr;
+      gap: 16px;
+      background: #DFE5EC;
+      border: 1px solid var(--border-ink);
+      border-radius: var(--radius-md);
+      padding: 18px 24px;
+    }
+
+    .hero__stat dt {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--ink-muted);
+      margin-bottom: 6px;
+    }
+
+    .hero__stat dd {
+      font-family: var(--font-pixel);
+      font-size: clamp(18px, 2vw, 24px);
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .hero__clock {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .hero__unit {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 3px;
+    }
+
+    .hero__unit-name {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-muted);
+    }
+
+    .hero__colon {
+      opacity: 0.4;
+    }
+
+    .hero__days {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      flex-wrap: wrap;
+    }
+
+    .hero__day {
+      width: 7px;
+      height: 14px;
+      border-radius: 2px;
+      background: rgba(20, 22, 25, 0.14);
+    }
+
+    .hero__day.is-on {
+      background: var(--rarity-milspec);
+    }
+
+    .hero__day.is-today {
+      background: #EB4B4B;
+    }
+
+    .hero__day.is-ahead {
+      background: rgba(20, 22, 25, 0.06);
+    }
+
+    @media (max-width: 860px) {
+      .hero__inner {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "heading"
+          "answer"
+          "figure"
+          "intro"
+          "actions";
+      }
+      .hero__figure { margin-bottom: 24px; }
+      .hero__stats { grid-template-columns: 1fr; }
+    }
+
+    /* ==========================================================================
+       OFFLINE CHAT TICKER
+       ========================================================================== */
+    .chat-ticker {
+      background: #141619;
+      color: #F2F4F7;
+      display: flex;
+      align-items: center;
+      height: 40px;
+      overflow: hidden;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 13px;
+    }
+
+    .chat-ticker__badge {
+      flex-shrink: 0;
+      height: 100%;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding-inline: 16px;
+      background: #1E2126;
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #9BA3AE;
+      z-index: 2;
+    }
+
+    .chat-ticker__badge::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #78828E;
+    }
+
+    .chat-ticker__marquee {
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+    }
+
+    .chat-ticker__list {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      padding-left: 24px;
+      white-space: nowrap;
+      animation: tickerScroll 48s linear infinite;
+    }
+
+    .chat-ticker:hover .chat-ticker__list {
+      animation-play-state: paused;
+    }
+
+    @keyframes tickerScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .chat-ticker__item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .chat-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 15px;
+      height: 15px;
+      border-radius: 3px;
+      font-size: 9px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .chat-ticker__user {
+      font-weight: 700;
+    }
+
+    .chat-ticker__user::after {
+      content: ":";
+      color: #9BA3AE;
+    }
+
+    .chat-ticker__message {
+      color: #DCE1E8;
+    }
+
+    .chat-emote {
+      display: inline-block;
+      padding: 1px 5px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.1);
+      font-family: var(--font-pixel);
+      font-size: 10px;
+      color: #E4AE39;
+    }
+
+    /* ==========================================================================
+       OHNE-PEDIA SECTION & FULL INDEX
+       ========================================================================== */
+    .ohnepedia, .lore-index {
+      padding-block: clamp(56px, 8vw, 96px);
+    }
+
+    .lore-filter {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .lore-filter__search {
+      position: relative;
+      max-width: 540px;
+    }
+
+    .lore-filter__icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      color: var(--ink-muted);
+      pointer-events: none;
+    }
+
+    .lore-filter__input {
+      width: 100%;
+      height: 46px;
+      padding: 0 16px 0 42px;
+      background: #DFE5EC;
+      border: 1.5px solid transparent;
+      border-radius: var(--radius-sm);
+      font-size: 15px;
+      color: var(--ink);
+      transition: background var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    .lore-filter__input:focus {
+      outline: none;
+      background: #FFFFFF;
+      border-color: var(--ink);
+    }
+
+    .lore-filter__depths {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lore-filter__depth {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-muted);
+      background: transparent;
+      border: 1px solid transparent;
+      transition: all var(--transition-fast);
+    }
+
+    .lore-filter__depth::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      background: currentColor;
+    }
+
+    .lore-filter__depth[data-lore-depth=""]::before { display: none; }
+    .lore-filter__depth--milspec::before { background: var(--rarity-milspec); }
+    .lore-filter__depth--restricted::before { background: var(--rarity-restricted); }
+    .lore-filter__depth--classified::before { background: var(--rarity-classified); }
+    .lore-filter__depth--covert::before { background: var(--rarity-covert); }
+    .lore-filter__depth--gold::before { background: var(--rarity-gold); }
+
+    .lore-filter__depth:hover {
+      background: rgba(20, 22, 25, 0.06);
+      color: var(--ink);
+    }
+
+    .lore-filter__depth[aria-pressed="true"] {
+      background: var(--ink);
+      color: #FFFFFF;
+    }
+
+    .lore-index__count {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-muted);
+      margin-bottom: 24px;
+    }
+
+    .ohnepedia__entries, .lore-index__entries {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: clamp(28px, 5vw, 64px);
+      row-gap: 28px;
+    }
+
+    @media (max-width: 760px) {
+      .ohnepedia__entries, .lore-index__entries {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .lore-entry {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 6px 8px;
+      border-radius: var(--radius-sm);
+      transition: background var(--transition-fast);
+    }
+
+    .lore-entry:hover {
+      background: rgba(20, 22, 25, 0.04);
+    }
+
+    .lore-entry[hidden] {
+      display: none;
+    }
+
+    .lore-entry__mark {
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      margin-top: 7px;
+      flex-shrink: 0;
+      background: var(--rarity-milspec);
+    }
+
+    .lore-entry--milspec .lore-entry__mark { background: var(--rarity-milspec); }
+    .lore-entry--restricted .lore-entry__mark { background: var(--rarity-restricted); }
+    .lore-entry--classified .lore-entry__mark { background: var(--rarity-classified); }
+    .lore-entry--covert .lore-entry__mark { background: var(--rarity-covert); }
+    .lore-entry--gold .lore-entry__mark { background: var(--rarity-gold); }
+
+    .lore-entry__term {
+      font-family: var(--font-pixel);
+      font-size: 17px;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+
+    .lore-entry__definition {
+      margin-top: 5px;
+      font-size: 14.5px;
+      line-height: 1.5;
+      color: var(--ink-muted);
+    }
+
+    .lore-entry__sound {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 7px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .lore-entry__sound:hover {
+      color: var(--rarity-milspec);
+    }
+
+    .ohnepedia__more {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 36px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .ohnepedia__more:hover span {
+      transform: translateX(4px);
+      display: inline-block;
+    }
+
+    /* Floating Lore Hover Peek Card */
+    .lore-peek-card {
+      position: fixed;
+      pointer-events: none;
+      z-index: 120;
+      width: 220px;
+      background: #FFFFFF;
+      padding: 8px 8px 12px;
+      border-radius: 4px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--border-ink);
+      opacity: 0;
+      transform: translateY(8px) rotate(-2deg) scale(0.95);
+      transition: opacity 150ms ease, transform 180ms ease;
+    }
+
+    .lore-peek-card.is-visible {
+      opacity: 1;
+      transform: translateY(0) rotate(-2deg) scale(1);
+    }
+
+    /* ==========================================================================
+       THE TOOLBOX SECTION (DARK THEME)
+       ========================================================================== */
+    .toolbox {
+      background: var(--dark);
+      color: var(--dark-text);
+      padding-block: clamp(56px, 8vw, 96px);
+      position: relative;
+    }
+
+    .toolbox__grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(28px, 4vw, 48px);
+    }
+
+    @media (max-width: 820px) {
+      .toolbox__grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .toolbox__tool {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-top: 2px dashed rgba(255, 255, 255, 0.14);
+      padding-top: 20px;
+      position: relative;
+      cursor: pointer;
+      transition: transform var(--transition-fast);
+    }
+
+    .toolbox__tool::before {
+      content: "";
+      position: absolute;
+      top: -2px;
+      left: 0;
+      width: 38px;
+      height: 2px;
+      background: var(--rarity-milspec);
+    }
+
+    .toolbox__tool--gold::before { background: var(--rarity-gold); }
+    .toolbox__tool--restricted::before { background: var(--rarity-restricted); }
+    .toolbox__tool--milspec::before { background: var(--rarity-milspec); }
+    .toolbox__tool--classified::before { background: var(--rarity-classified); }
+    .toolbox__tool--covert::before { background: var(--rarity-covert); }
+
+    .toolbox__tool:hover {
+      transform: translateY(-2px);
+    }
+
+    .toolbox__title {
+      font-family: var(--font-pixel);
+      font-size: clamp(22px, 2.6vw, 30px);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .toolbox__intro {
+      font-size: 14.5px;
+      color: var(--dark-muted);
+      margin-bottom: 18px;
+    }
+
+    .toolbox__preview {
+      background: var(--dark-card);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      min-height: 148px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+
+    .toolbox__cta {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--dark-text);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .toolbox__cta::after {
+      content: "↗";
+      font-size: 12px;
+      opacity: 0.7;
+      transition: transform var(--transition-fast);
+    }
+
+    .toolbox__tool:hover .toolbox__cta::after {
+      transform: translate(2px, -2px);
+    }
+
+    /* Tool Preview: Skindle */
+    .tool-preview--skindle {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .tool-preview__swatches {
+      display: flex;
+      height: 54px;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .tool-preview__guess {
+      font-family: var(--font-pixel);
+      font-size: 13px;
+      color: var(--dark-muted);
+      letter-spacing: 0.08em;
+    }
+
+    /* Tool Preview: VRS Higher or Lower */
+    .tool-preview--higherlower {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      position: relative;
+    }
+
+    .tool-preview__team {
+      background: var(--dark-card-inner);
+      border: 1px solid var(--border-dark);
+      border-radius: 6px;
+      padding: 16px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tool-preview__views {
+      font-family: var(--font-pixel);
+      font-size: 15px;
+      color: var(--dark-text);
+    }
+
+    .tool-preview__arrows {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background: #EB4B4B;
+      color: #fff;
+      font-size: 9px;
+      padding: 4px 5px;
+      border-radius: 3px;
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+      gap: 2px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+
+    /* Tool Preview: Rejuicer Tracker */
+    .tool-preview--rejuicer {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .tool-preview__grid {
+      display: grid;
+      grid-template-columns: repeat(28, 1fr);
+      gap: 2.5px;
+    }
+
+    .tool-preview__day {
+      aspect-ratio: 1 / 1;
+      border-radius: 1.5px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .tool-preview__day--on {
+      background: #4B69FF;
+    }
+
+    .tool-preview__day--break {
+      background: #6E7681;
+    }
+
+    .tool-preview__marker {
+      font-family: var(--font-pixel);
+      font-size: 10px;
+      color: var(--dark-muted);
+      margin-left: 34%;
+    }
+
+    /* Tool Preview: Am I the real ohnepixel */
+    .tool-preview--ohne {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .tool-preview__badge {
+      background: var(--rarity-restricted);
+      color: #FFFFFF;
+      font-family: var(--font-pixel);
+      font-size: 28px;
+      padding: 10px 24px;
+      border-radius: 4px;
+      transform: rotate(-3deg);
+      box-shadow: 0 10px 24px rgba(136, 71, 255, 0.35);
+    }
+
+    .tool-preview__score {
+      font-size: 12px;
+      color: var(--dark-muted);
+    }
+
+    /* Tool Preview: Clip Roulette */
+    .tool-preview--clips {
+      position: relative;
+      height: 156px;
+      border-radius: 6px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #272D38 0%, #161A20 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .tool-preview__play {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.92);
+      color: #141619;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+      z-index: 2;
+    }
+
+    .tool-preview__duration {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      background: rgba(0, 0, 0, 0.78);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 3px;
+      z-index: 2;
+    }
+
+    /* Tool Preview: Chat Meter */
+    .tool-preview--chat {
+      display: grid;
+      grid-template-columns: 95px 1fr;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .tool-preview__word {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--dark-text);
+    }
+
+    .tool-preview__fill {
+      height: 14px;
+      border-radius: 2px;
+      width: calc(var(--share) * 100%);
+      background: var(--rarity-gold);
+    }
+
+    .tool-preview__fill--covert { background: var(--rarity-covert); }
+    .tool-preview__fill--classified { background: var(--rarity-classified); }
+
+    /* Tool Preview: Soundboard mini pads */
+    .tool-preview--sounds {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .tool-preview__pad {
+      background: var(--dark-card-inner);
+      border: 1px solid var(--border-dark);
+      border-radius: 4px;
+      padding: 9px 10px;
+      text-align: center;
+      font-family: var(--font-pixel);
+      font-size: 11px;
+      color: var(--dark-text);
+    }
+
+    /* ==========================================================================
+       PIXELATED CHECKERED DIVIDER
+       ========================================================================== */
+    .pixel-divider {
+      height: 24px;
+      width: 100%;
+      background-color: var(--paper);
+      background-image:
+        linear-gradient(45deg, var(--dark) 25%, transparent 25%),
+        linear-gradient(-45deg, var(--dark) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, var(--dark) 75%),
+        linear-gradient(-45deg, transparent 75%, var(--dark) 75%);
+      background-size: 16px 16px;
+      background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+    }
+
+    /* ==========================================================================
+       SOUNDBOARD SECTION
+       ========================================================================== */
+    .soundboard {
+      padding-block: clamp(56px, 8vw, 96px);
+    }
+
+    .soundboard__body {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: clamp(28px, 5vw, 56px);
+      align-items: center;
+    }
+
+    @media (max-width: 780px) {
+      .soundboard__body {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .soundboard__portrait {
+      position: relative;
+      width: 240px;
+      height: 310px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: #232830;
+      box-shadow: 0 18px 36px rgba(20, 22, 25, 0.16);
+      border: 2px solid var(--ink);
+    }
+
+    .soundboard__pads {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .soundboard__sound {
+      display: inline-flex;
+      align-items: stretch;
+      background: #FFFFFF;
+      border: 1.5px solid var(--ink);
+      border-radius: var(--radius-sm);
+      box-shadow: 0 3px 0 var(--ink);
+      transition: transform 80ms ease, box-shadow 80ms ease;
+    }
+
+    .soundboard__sound:active,
+    .soundboard__sound.is-playing {
+      transform: translateY(3px);
+      box-shadow: 0 0 0 var(--ink);
+      background: #FFF9E6;
+    }
+
+    .soundboard__button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      font-family: var(--font-pixel);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .soundboard__key {
+      display: inline-grid;
+      place-items: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 3px;
+      background: var(--paper);
+      border: 1px solid var(--border-ink-strong);
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ink-muted);
+    }
+
+    .soundboard__dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .soundboard__download {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding-inline: 11px;
+      border-left: 1px solid var(--border-ink);
+      color: var(--ink-muted);
+      transition: color var(--transition-fast), background var(--transition-fast);
+    }
+
+    .soundboard__download:hover {
+      color: var(--ink);
+      background: var(--paper);
+    }
+
+    /* ==========================================================================
+       THE LORE TIMELINE
+       ========================================================================== */
+    .timeline {
+      padding-block: clamp(56px, 8vw, 96px);
+      border-top: 1px solid var(--border-ink);
+      overflow: hidden;
+    }
+
+    .timeline__header-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .timeline__header-row .section-head {
+      margin-bottom: 0;
+    }
+
+    .timeline__controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .timeline__hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-muted);
+    }
+
+    .timeline__nav-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border-ink-strong);
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      transition: all var(--transition-fast);
+    }
+
+    .timeline__nav-btn:hover {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+
+    .timeline__viewport {
+      overflow-x: auto;
+      padding-bottom: 24px;
+      padding-inline: var(--gutter);
+      scrollbar-width: thin;
+      cursor: grab;
+    }
+
+    .timeline__viewport:active {
+      cursor: grabbing;
+    }
+
+    .timeline__track {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      min-width: max-content;
+      position: relative;
+      padding-top: 12px;
+    }
+
+    .timeline__track::before {
+      content: "";
+      position: absolute;
+      top: 16px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--border-ink-strong);
+    }
+
+    .timeline__event {
+      width: 240px;
+      padding-right: 28px;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .timeline__date {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-pixel);
+      font-size: 11px;
+      color: var(--ink-muted);
+      margin-bottom: 12px;
+      background: var(--paper);
+      padding-right: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .timeline__mark {
+      width: 9px;
+      height: 9px;
+      border-radius: 2px;
+      background: var(--rarity-milspec);
+    }
+
+    .timeline__event--restricted .timeline__mark { background: var(--rarity-restricted); }
+    .timeline__event--classified .timeline__mark { background: var(--rarity-classified); }
+    .timeline__event--covert .timeline__mark { background: var(--rarity-covert); }
+    .timeline__event--gold .timeline__mark { background: var(--rarity-gold); }
+
+    .timeline__title {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--ink);
+    }
+
+    .timeline__print {
+      margin-top: 16px;
+      width: 150px;
+      background: #FFFFFF;
+      padding: 6px 6px 10px;
+      border-radius: 3px;
+      box-shadow: 0 10px 24px rgba(20, 22, 25, 0.14);
+      transform: rotate(var(--tilt, -3deg));
+      transition: transform var(--transition-smooth);
+    }
+
+    .timeline__event:hover .timeline__print {
+      transform: rotate(0deg) scale(1.04);
+    }
+
+    /* ==========================================================================
+       POLAROID PRINTS & THE VAULT
+       ========================================================================== */
+    .vault {
+      padding-block: clamp(56px, 8vw, 96px);
+      border-top: 1px solid var(--border-ink);
+    }
+
+    .vault__strip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: clamp(18px, 3vw, 32px);
+      padding-inline: var(--gutter);
+      margin-bottom: 36px;
+    }
+
+    .print {
+      display: flex;
+      flex-direction: column;
+      background: #FFFFFF;
+      padding: 10px 10px 12px;
+      border-radius: 3px;
+      box-shadow: 0 10px 26px rgba(20, 22, 25, 0.13);
+      border: 1px solid rgba(20, 22, 25, 0.08);
+      transform: rotate(var(--tilt, 0deg));
+      transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+      cursor: pointer;
+    }
+
+    .print:hover {
+      transform: rotate(0deg) translateY(-6px) scale(1.03);
+      box-shadow: 0 20px 38px rgba(20, 22, 25, 0.22);
+      z-index: 5;
+    }
+
+    .print__photo {
+      width: 100%;
+      overflow: hidden;
+      background: #1C2026;
+      border-radius: 2px;
+    }
+
+    .print__caption {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 8px;
+      font-family: var(--font-pixel);
+      font-size: 11px;
+      color: var(--ink-muted);
+    }
+
+    .vault__strip .print {
+      width: 210px;
+    }
+
+    /* Full Vault Masonry Grid */
+    .vault-index {
+      padding-bottom: 96px;
+    }
+
+    .vault-index__toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+
+    .vault-index__grid {
+      columns: 4 240px;
+      column-gap: 24px;
+    }
+
+    .vault-index__item {
+      break-inside: avoid;
+      margin-bottom: 24px;
+    }
+
+    .vault-index__item .print {
+      width: 100%;
+    }
+
+    /* ==========================================================================
+       FAQ ("THINGS PEOPLE GOOGLE")
+       ========================================================================== */
+    .faq {
+      padding-block: clamp(56px, 8vw, 96px);
+      border-top: 1px solid var(--border-ink);
+    }
+
+    .faq__inner {
+      display: grid;
+      grid-template-columns: 0.75fr 1.25fr;
+      gap: clamp(28px, 5vw, 64px);
+      align-items: start;
+    }
+
+    @media (max-width: 820px) {
+      .faq__inner {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .faq__list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .faq__item {
+      padding-block: 20px;
+      border-bottom: 1px solid var(--border-ink);
+      transition: opacity var(--transition-fast);
+    }
+
+    .faq__item:first-child {
+      padding-top: 0;
+    }
+
+    .faq__list:hover .faq__item {
+      opacity: 0.48;
+    }
+
+    .faq__list .faq__item:hover {
+      opacity: 1;
+    }
+
+    .faq__question {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .faq__answer {
+      font-size: 15px;
+      color: var(--ink-muted);
+      line-height: 1.55;
+    }
+
+    .faq__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    /* ==========================================================================
+       REVIEWS GRID
+       ========================================================================== */
+    .reviews {
+      padding-block: clamp(48px, 6vw, 80px);
+      border-top: 1px solid var(--border-ink);
+    }
+
+    .reviews__grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    @media (max-width: 960px) {
+      .reviews__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 560px) {
+      .reviews__grid { grid-template-columns: 1fr; }
+    }
+
+    .reviews__review {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 24px 18px;
+      background: #DFE5EC;
+      border: 1px solid var(--border-ink);
+      border-radius: var(--radius-md);
+      height: 100%;
+    }
+
+    .reviews__rating {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--rarity-gold);
+      margin-bottom: 14px;
+    }
+
+    .reviews__laurel--right {
+      transform: scaleX(-1);
+    }
+
+    .reviews__stars {
+      display: inline-flex;
+      gap: 3px;
+    }
+
+    .reviews__star--empty {
+      opacity: 0.25;
+      color: var(--ink);
+    }
+
+    .reviews__quote {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--ink);
+      margin-bottom: 14px;
+    }
+
+    .reviews__by {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .reviews__name {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .reviews__role {
+      font-size: 12px;
+      color: var(--ink-muted);
+    }
+
+    .reviews__link {
+      margin-top: 12px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--platform, var(--ink));
+      background: rgba(20, 22, 25, 0.06);
+      transition: transform var(--transition-fast);
+    }
+
+    .reviews__link:hover {
+      transform: scale(1.12);
+    }
+
+    .reviews__link svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* ==========================================================================
+       WHERE TO FIND HIM (SOCIALS)
+       ========================================================================== */
+    .socials {
+      padding-block: clamp(56px, 8vw, 96px);
+      border-top: 1px solid var(--border-ink);
+    }
+
+    .socials__grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .socials__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 540px) {
+      .socials__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    .socials__item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: #DFE5EC;
+      border: 1px solid var(--border-ink);
+      border-radius: var(--radius-sm);
+      font-size: 15px;
+      font-weight: 600;
+      transition: all var(--transition-fast);
+    }
+
+    .socials__item:hover {
+      background: #FFFFFF;
+      border-color: var(--social-color, var(--ink));
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(20, 22, 25, 0.08);
+    }
+
+    .socials__icon {
+      width: 22px;
+      height: 22px;
+      color: var(--social-color, var(--ink));
+      flex-shrink: 0;
+    }
+
+    /* ==========================================================================
+       FOOTER & PIXEL DUST STAGE
+       ========================================================================== */
+    .footer {
+      background: var(--dark);
+      color: var(--dark-text);
+      padding-top: 56px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer__inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 32px;
+      padding-bottom: 40px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .disclaimer {
+      margin-top: 12px;
+      font-size: 13.5px;
+      color: var(--dark-muted);
+      max-width: 44ch;
+    }
+
+    .disclaimer a, .footer__support a, .footer__ai-note a, .footer__links a, .footer__links button {
+      color: var(--dark-text);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .footer__support {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      font-size: 13.5px;
+      font-weight: 600;
+    }
+
+    .footer__legal {
+      font-size: 13px;
+      color: var(--dark-muted);
+      max-width: 48ch;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer__links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 6px;
+    }
+
+    .footer__stage {
+      position: relative;
+      width: 100%;
+      padding-top: 24px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+    }
+
+    .footer__giant {
+      font-family: var(--font-pixel);
+      font-size: clamp(54px, 14.2vw, 210px);
+      line-height: 0.82;
+      letter-spacing: -0.02em;
+      color: #FFFFFF;
+      user-select: none;
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .footer__canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ==========================================================================
+       STEAM TRADE OFFER COOKIE CONSENT MODAL/BANNER
+       ========================================================================== */
+    .cookie-consent {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      z-index: 140;
+      background: #FFFFFF;
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      border-radius: 4px;
+      box-shadow: 0 24px 56px rgba(0, 0, 0, 0.35);
+      display: grid;
+      grid-template-columns: 270px 1fr;
+      max-width: 630px;
+      width: calc(100vw - 48px);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .cookie-consent.is-hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(24px);
+    }
+
+    .cookie-consent__note {
+      position: absolute;
+      top: -13px;
+      left: 16px;
+      background: #EB4B4B;
+      color: #FFFFFF;
+      font-family: var(--font-pixel);
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      transform: rotate(-2deg);
+    }
+
+    .cookie-consent__steam {
+      background: #1B2028;
+      color: #E2E8F0;
+      padding: 20px 16px 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1.5px solid var(--ink);
+    }
+
+    .cookie-consent__title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #94A3B8;
+      margin-bottom: 10px;
+    }
+
+    .cookie-consent__box {
+      background: #12161C;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 4px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .cookie-consent__label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #CBD5E1;
+      margin-bottom: 6px;
+    }
+
+    .cookie-consent__items {
+      display: flex;
+      gap: 6px;
+    }
+
+    .cookie-consent__item {
+      width: 40px;
+      height: 40px;
+      background: #1E2530;
+      border: 1px solid rgba(228, 174, 57, 0.5);
+      border-radius: 3px;
+      display: grid;
+      place-items: center;
+    }
+
+    .cookie-consent__rule {
+      display: flex;
+      justify-content: center;
+      color: #64748B;
+      padding-block: 2px;
+    }
+
+    .cookie-consent__expires {
+      font-size: 10.5px;
+      color: #64748B;
+      margin-top: 8px;
+    }
+
+    .cookie-consent__body {
+      padding: 22px 22px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .cookie-consent__heading {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+
+    .cookie-consent__facts {
+      font-size: 13px;
+      color: var(--ink-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+
+    .cookie-consent__facts li::before {
+      content: "✓ ";
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .cookie-consent__buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .cookie-consent__buttons .btn {
+      flex: 1;
+      justify-content: center;
+      padding: 10px 14px;
+      font-size: 13.5px;
+    }
+
+    .cookie-consent__fine {
+      font-size: 12px;
+      color: var(--ink-muted);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 640px) {
+      .cookie-consent {
+        grid-template-columns: 1fr;
+        left: 16px;
+        bottom: 16px;
+        width: calc(100vw - 32px);
+      }
+      .cookie-consent__steam { display: none; }
+    }
+
+    /* ==========================================================================
+       BACK TO TOP PIXEL BUTTON
+       ========================================================================== */
+    .back-to-top {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 100;
+      width: 48px;
+      height: 48px;
+      background: var(--ink);
+      color: #FFFFFF;
+      border: 2px solid #FFFFFF;
+      border-radius: 6px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      display: grid;
+      place-items: center;
+      font-family: var(--font-pixel);
+      font-size: 18px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+      transition: all var(--transition-fast);
+    }
+
+    .back-to-top.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+      background: var(--rarity-milspec);
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================================
+       INTERACTIVE MODAL (TOOL LAUNCHER & VAULT LIGHTBOX)
+       ========================================================================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(14, 16, 19, 0.82);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.is-open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--dark-card);
+      color: var(--dark-text);
+      border: 1.5px solid rgba(255, 255, 255, 0.16);
+      border-radius: var(--radius-md);
+      max-width: 680px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 28px;
+      position: relative;
+      box-shadow: 0 28px 64px rgba(0, 0, 0, 0.6);
+    }
+
+    .modal-box--light {
+      background: #FFFFFF;
+      color: var(--ink);
+      border-color: var(--ink);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 34px;
+      height: 34px;
+      border-radius: 4px;
+      background: rgba(128, 128, 128, 0.15);
+      display: grid;
+      place-items: center;
+      font-family: var(--font-pixel);
+      font-size: 14px;
+    }
+
+    .modal-close:hover {
+      background: #EB4B4B;
+      color: #fff;
+    }
+
+    /* Profile Page Card */
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 32px;
+      padding-bottom: 84px;
+    }
+
+    @media (max-width: 800px) {
+      .profile-grid { grid-template-columns: 1fr; }
+    }
+
+    .profile-card {
+      background: #DFE5EC;
+      border: 1px solid var(--border-ink);
+      border-radius: var(--radius-md);
+      padding: 20px;
+    }
+
+    .profile-specs {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .profile-spec {
+      background: #DFE5EC;
+      border: 1px solid var(--border-ink);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+    }
+
+    .profile-spec dt {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 4px;
+    }
+
+    .profile-spec dd {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       STICKY HEADER
+       ======================================================================== -->
+  <header class="top-bar" data-top-bar>
+    <div class="top-bar__inner container">
+      <a class="wordmark" href="#home" data-route="home" rel="home">
+        <span class="wordmark__mark" aria-hidden="true">
+          <!-- Custom Pixel Portrait Avatar SVG -->
+          <svg viewBox="0 0 16 16" width="24" height="24" shape-rendering="crispEdges">
+            <rect width="16" height="16" fill="#1E242D"/>
+            <rect x="4" y="2" width="8" height="2" fill="#9A7B4F"/>
+            <rect x="3" y="4" width="10" height="8" fill="#F1C29B"/>
+            <rect x="3" y="6" width="4" height="2" fill="#141619"/>
+            <rect x="9" y="6" width="4" height="2" fill="#141619"/>
+            <rect x="7" y="6" width="2" height="1" fill="#141619"/>
+            <rect x="6" y="10" width="4" height="1" fill="#A85A48"/>
+            <rect x="3" y="13" width="10" height="3" fill="#141619"/>
+          </svg>
+        </span>
+        <span class="wordmark__text">OHNYFANS</span>
+      </a>
+
+      <nav class="top-bar__nav" id="site-nav" aria-label="Main">
+        <ul class="top-bar__menu">
+          <li><a href="#ohne-pedia" data-route="ohne-pedia">Ohne-pedia</a></li>
+          <li><a href="#tools" data-route="tools">Tools</a></li>
+          <li><a href="#lore" data-route="home-lore">Lore</a></li>
+          <li><a href="#vault" data-route="vault">Vault</a></li>
+          <li><a href="#faq" data-route="faq">FAQ</a></li>
+          <li><a href="#profile" data-route="profile">Profile</a></li>
+        </ul>
+      </nav>
+
+      <div class="top-bar__actions">
+        <button class="live-pill" type="button" id="live-status-pill" title="Click to toggle simulated live stream status">
+          <span class="live-pill__dot" aria-hidden="true"></span>
+          <span class="live-pill__label" id="live-pill-text">Offline</span>
+        </button>
+        <button class="top-bar__toggle" type="button" id="mobile-menu-btn" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+
+    <!-- ======================================================================
+         PAGE 1: HOME (02-page.html)
+         ====================================================================== -->
+    <div id="view-home" class="page-view is-active">
+
+      <!-- HERO SECTION -->
+      <section class="hero" aria-labelledby="hero-heading">
+        <div class="hero__inner container">
+          <h1 class="hero__heading" id="hero-heading">Is ohnepixel live right now?</h1>
+          <p class="hero__answer" id="hero-answer" aria-live="polite">NOPE.</p>
+
+          <figure class="hero__figure">
+            <div class="hero__cup-wrap" id="hero-coffee-cup" role="button" tabindex="0" title="Click to knock over Ohne's coffee!" aria-label="Knock over Ohne's coffee">
+              <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 530 530" fill="none">
+                <g class="cup-steam">
+                  <rect x="190" y="10" width="28" height="28" fill="#4A5868"/>
+                  <rect x="280" y="10" width="28" height="28" fill="#4A5868"/>
+                  <rect x="160" y="40" width="28" height="28" fill="#4A5868"/>
+                  <rect x="250" y="40" width="28" height="28" fill="#4A5868"/>
+                  <rect x="340" y="40" width="28" height="28" fill="#4A5868"/>
+                  <rect x="220" y="70" width="28" height="28" fill="#4A5868"/>
+                  <rect x="310" y="70" width="28" height="28" fill="#4A5868"/>
+                </g>
+                <g class="cup-table">
+                  <rect x="70" y="490" width="388" height="28" fill="#C6D0DA"/>
+                </g>
+                <g class="cup-glass">
+                  <rect x="160" y="190" width="208" height="28" fill="#A8784C"/>
+                  <rect x="160" y="220" width="28" height="178" fill="#6E4632"/>
+                  <rect x="190" y="220" width="178" height="178" fill="#4A2D1E"/>
+                  <rect x="130" y="130" width="28" height="300" fill="#7F969A" fill-opacity="0.55"/>
+                  <rect x="370" y="130" width="28" height="300" fill="#7F969A" fill-opacity="0.55"/>
+                  <rect x="160" y="130" width="208" height="28" fill="#9FB2B5" fill-opacity="0.45"/>
+                  <rect x="160" y="400" width="208" height="58" fill="#B9C8CA" fill-opacity="0.65"/>
+                  <rect x="160" y="460" width="208" height="28" fill="#7F969A" fill-opacity="0.7"/>
+                </g>
+              </svg>
+            </div>
+            <div class="hero__spill-puddle" aria-hidden="true"></div>
+            <div class="hero__callout">
+              <svg class="hero__arrow" viewBox="0 0 90 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M86 6C60 4 30 14 12 46M6 36l6 12 12-6" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <figcaption class="hero__note" id="hero-status-note">he’s on a rejuicer</figcaption>
+            </div>
+          </figure>
+
+          <p class="hero__intro">
+            The fan hub for ohnepixel’s <a href="https://www.twitch.tv/ohnepixel" target="_blank" rel="noopener noreferrer">Twitch</a> streams, <a href="https://steamcommunity.com/id/ohnePixel/" target="_blank" rel="noopener noreferrer">Steam</a> inventory and chat lore.
+          </p>
+
+          <div class="hero__actions">
+            <a class="btn btn--solid" href="#tools" data-route="tools">Take me to the games<span class="btn__arrow" aria-hidden="true">→</span></a>
+            <a class="btn btn--text" href="https://www.twitch.tv/videos/2929630714" target="_blank" rel="noopener noreferrer">Watch the latest VOD<span class="btn__arrow" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+
+        <div class="hero__record container">
+          <dl class="hero__stats">
+            <div class="hero__stat">
+              <dt id="clock-label">Since last stream</dt>
+              <dd class="hero__clock" id="rejuicer-clock">
+                <span class="hero__unit"><span id="clk-days">00</span><span class="hero__unit-name">days</span></span>
+                <span class="hero__colon">:</span>
+                <span class="hero__unit"><span id="clk-hrs">04</span><span class="hero__unit-name">hrs</span></span>
+                <span class="hero__colon">:</span>
+                <span class="hero__unit"><span id="clk-min">37</span><span class="hero__unit-name">min</span></span>
+                <span class="hero__colon">:</span>
+                <span class="hero__unit"><span id="clk-sec">53</span><span class="hero__unit-name">sec</span></span>
+              </dd>
+            </div>
+            <div class="hero__stat">
+              <dt>Longest break</dt>
+              <dd>72 days (aug 2024)</dd>
+            </div>
+            <div class="hero__stat">
+              <dt>Streams this month</dt>
+              <dd>
+                <span>9</span>
+                <span class="hero__days" aria-hidden="true" id="hero-month-strip"></span>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <!-- OFFLINE CHAT TICKER -->
+      <section class="chat-ticker" aria-label="ohnepixel’s Twitch chat">
+        <span class="chat-ticker__badge" id="chat-ticker-mode">Offline chat</span>
+        <div class="chat-ticker__marquee">
+          <ul class="chat-ticker__list" id="chat-ticker-list"></ul>
+        </div>
+      </section>
+
+      <!-- OHNE-PEDIA PREVIEW SECTION -->
+      <section class="ohnepedia" id="ohne-pedia-preview" aria-labelledby="ohne-pedia-heading">
+        <div class="container">
+          <header class="section-head">
+            <h2 class="section-head__heading" id="ohne-pedia-heading">Ohne-pedia</h2>
+          </header>
+
+          <div class="lore-filter">
+            <div class="lore-filter__search">
+              <svg class="lore-filter__icon" viewBox="0 0 21 21" aria-hidden="true">
+                <circle cx="8.2" cy="8.2" r="5.5" fill="none" stroke="currentColor" stroke-width="2"></circle>
+                <path d="M12 12l6.3 6.3" stroke="currentColor" stroke-width="2"></path>
+              </svg>
+              <input class="lore-filter__input" type="search" placeholder="Search the lore… try “Mac-10”" autocomplete="off" data-lore-search-input="home" />
+            </div>
+            <div class="lore-filter__depths" role="group" aria-label="Filter by rarity" data-lore-rarity-group="home">
+              <button class="lore-filter__depth" type="button" aria-pressed="true" data-lore-depth="">All</button>
+              <button class="lore-filter__depth lore-filter__depth--milspec" type="button" aria-pressed="false" data-lore-depth="milspec">Mil-Spec</button>
+              <button class="lore-filter__depth lore-filter__depth--restricted" type="button" aria-pressed="false" data-lore-depth="restricted">Restricted</button>
+              <button class="lore-filter__depth lore-filter__depth--classified" type="button" aria-pressed="false" data-lore-depth="classified">Classified</button>
+              <button class="lore-filter__depth lore-filter__depth--covert" type="button" aria-pressed="false" data-lore-depth="covert">Covert</button>
+              <button class="lore-filter__depth lore-filter__depth--gold" type="button" aria-pressed="false" data-lore-depth="gold">Gold</button>
+            </div>
+          </div>
+
+          <div class="ohnepedia__entries" id="home-lore-entries"></div>
+          <p class="ohnepedia__empty" id="home-lore-empty" hidden>No matches found.</p>
+
+          <a class="ohnepedia__more" href="#ohne-pedia" data-route="ohne-pedia">All Ohne-pedia entries <span aria-hidden="true">→</span></a>
+        </div>
+      </section>
+
+      <!-- THE TOOLBOX SECTION (DARK THEME) -->
+      <section class="toolbox" id="toolbox" aria-labelledby="toolbox-heading">
+        <div class="container">
+          <header class="section-head section-head--paper">
+            <h2 class="section-head__heading" id="toolbox-heading">The toolbox</h2>
+          </header>
+
+          <ul class="toolbox__grid" id="home-toolbox-grid"></ul>
+        </div>
+      </section>
+
+      <!-- PIXEL CHECKERED SEPARATOR -->
+      <div class="pixel-divider" aria-hidden="true"></div>
+
+      <!-- SOUNDBOARD SECTION -->
+      <section class="soundboard" id="soundboard" aria-labelledby="soundboard-heading">
+        <div class="container">
+          <header class="section-head">
+            <h2 class="section-head__heading" id="soundboard-heading">Soundboard</h2>
+          </header>
+
+          <div class="soundboard__body">
+            <figure class="soundboard__portrait" aria-hidden="true" id="soundboard-portrait">
+              <!-- Multi-state talking portrait SVG that animates mouth frames when sounds play -->
+              <svg viewBox="0 0 240 310" width="100%" height="100%">
+                <defs>
+                  <linearGradient id="bgWall" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#3C434E"/>
+                    <stop offset="100%" stop-color="#22262D"/>
+                  </linearGradient>
+                </defs>
+                <rect width="240" height="310" fill="url(#bgWall)"/>
+                <!-- Hoodie & Shoulders -->
+                <path d="M25 310 C30 245, 70 230, 120 230 C170 230, 210 245, 215 310 Z" fill="#121417"/>
+                <!-- Neck -->
+                <rect x="96" y="195" width="48" height="45" rx="12" fill="#D9A382"/>
+                <!-- Head -->
+                <ellipse cx="122" cy="145" rx="54" ry="66" fill="#E8B496"/>
+                <!-- Hair (Dirty Blonde Quiff) -->
+                <path d="M68 132 C65 78, 95 62, 134 65 C165 68, 182 88, 176 126 C168 102, 148 92, 118 94 C92 95, 76 108, 68 132 Z" fill="#8C6D46"/>
+                <!-- Headphones (Left & Band) -->
+                <path d="M64 135 C62 72, 178 72, 178 135" fill="none" stroke="#1E2024" stroke-width="11"/>
+                <rect x="50" y="114" width="24" height="58" rx="10" fill="#2A2E35" stroke="#111" stroke-width="2"/>
+                <rect x="55" y="122" width="14" height="42" rx="6" fill="#4A515C"/>
+                <!-- Eyebrows -->
+                <path d="M96 124 Q108 119 118 123" stroke="#6B5132" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                <path d="M134 123 Q146 119 156 124" stroke="#6B5132" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                <!-- Eyes -->
+                <circle cx="108" cy="134" r="4" fill="#1E242B"/>
+                <circle cx="145" cy="134" r="4" fill="#1E242B"/>
+                <!-- Thin Metal Glasses -->
+                <rect x="91" y="125" width="34" height="20" rx="5" fill="none" stroke="#2C3036" stroke-width="2"/>
+                <rect x="129" y="125" width="34" height="20" rx="5" fill="none" stroke="#2C3036" stroke-width="2"/>
+                <line x1="125" y1="133" x2="129" y2="133" stroke="#2C3036" stroke-width="2"/>
+                <!-- Nose -->
+                <path d="M126 135 L131 156 L122 159" fill="none" stroke="#C4896A" stroke-width="2.5" stroke-linecap="round"/>
+                <!-- Stubble -->
+                <path d="M78 158 C82 195, 162 195, 166 158" fill="none" stroke="rgba(90,68,45,0.28)" stroke-width="12" stroke-linecap="round"/>
+                <!-- Animated Mouth State -->
+                <g id="portrait-mouth-closed">
+                  <path d="M112 174 Q126 177 140 173" stroke="#8C4A3E" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                </g>
+                <g id="portrait-mouth-open" style="display:none;">
+                  <ellipse cx="126" cy="176" rx="14" ry="11" fill="#4A1818" stroke="#8C4A3E" stroke-width="2.5"/>
+                  <rect x="117" y="167" width="18" height="4" rx="1" fill="#F8FAFC"/>
+                </g>
+              </svg>
+            </figure>
+
+            <div class="soundboard__board">
+              <ul class="soundboard__pads" id="home-soundboard-pads"></ul>
+              <button class="btn btn--solid" type="button" id="open-all-sounds-btn">All 15 sounds</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- THE LORE TIMELINE -->
+      <section class="timeline" id="lore" aria-labelledby="lore-heading">
+        <div class="container">
+          <div class="timeline__header-row">
+            <header class="section-head">
+              <h2 class="section-head__heading" id="lore-heading">The lore</h2>
+              <p class="section-head__intro">From "Nihao my foreign friends" to 3x Streamer of the Year.</p>
+            </header>
+            <div class="timeline__controls">
+              <span class="timeline__hint">Scroll through the years</span>
+              <button class="timeline__nav-btn" type="button" id="timeline-prev" aria-label="Scroll timeline left">←</button>
+              <button class="timeline__nav-btn" type="button" id="timeline-next" aria-label="Scroll timeline right">→</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline__viewport" id="timeline-viewport">
+          <ol class="timeline__track" id="timeline-track"></ol>
+        </div>
+      </section>
+
+      <!-- THE VAULT STRIP -->
+      <section class="vault" id="vault-preview" aria-labelledby="vault-heading">
+        <div class="container">
+          <header class="section-head">
+            <h2 class="section-head__heading" id="vault-heading">The vault</h2>
+            <p class="section-head__intro">169 ohnepixel memes, edits and fan pictures, and counting.</p>
+          </header>
+        </div>
+
+        <ul class="vault__strip" id="home-vault-strip"></ul>
+
+        <div class="container">
+          <a class="btn btn--solid" href="#vault" data-route="vault">Open the vault<span class="btn__arrow" aria-hidden="true">→</span></a>
+        </div>
+      </section>
+
+      <!-- THINGS PEOPLE GOOGLE (FAQ) -->
+      <section class="faq" id="faq-preview" aria-labelledby="faq-heading">
+        <div class="faq__inner container">
+          <header class="section-head">
+            <h2 class="section-head__heading" id="faq-heading">Things people Google</h2>
+          </header>
+
+          <div class="faq__body">
+            <div class="faq__list" id="home-faq-list"></div>
+            <div class="faq__actions">
+              <a class="btn btn--solid" href="#faq" data-route="faq">All Google searches<span class="btn__arrow" aria-hidden="true">→</span></a>
+              <a class="btn btn--line" href="#profile" data-route="profile">His profile<span class="btn__arrow" aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- REVIEWS GRID -->
+      <section class="reviews" id="reviews" aria-label="Reviews">
+        <div class="container">
+          <ul class="reviews__grid" id="home-reviews-grid"></ul>
+        </div>
+      </section>
+
+      <!-- WHERE TO FIND HIM (SOCIALS) -->
+      <section class="socials" aria-labelledby="socials-heading">
+        <div class="container">
+          <header class="section-head">
+            <h2 class="section-head__heading" id="socials-heading">Where to find him</h2>
+          </header>
+          <ul class="socials__grid" id="home-socials-grid"></ul>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ======================================================================
+         PAGE 2: OHNE-PEDIA FULL ARCHIVE (01-index.html)
+         ====================================================================== -->
+    <div id="view-ohne-pedia" class="page-view">
+      <section class="lore-index">
+        <div class="container">
+          <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <ol class="breadcrumbs__list">
+              <li class="breadcrumbs__item"><a href="#home" data-route="home">Home</a></li>
+              <li class="breadcrumbs__item"><span aria-current="page">Ohne-pedia</span></li>
+            </ol>
+          </nav>
+
+          <header class="section-head">
+            <h1 class="section-head__heading">Ohne-pedia</h1>
+          </header>
+
+          <div class="lore-filter">
+            <div class="lore-filter__search">
+              <svg class="lore-filter__icon" viewBox="0 0 21 21" aria-hidden="true">
+                <circle cx="8.2" cy="8.2" r="5.5" fill="none" stroke="currentColor" stroke-width="2"></circle>
+                <path d="M12 12l6.3 6.3" stroke="currentColor" stroke-width="2"></path>
+              </svg>
+              <input class="lore-filter__input" type="search" placeholder="Search the lore… try “Mac-10”" autocomplete="off" data-lore-search-input="full" />
+            </div>
+            <div class="lore-filter__depths" role="group" aria-label="Filter by rarity" data-lore-rarity-group="full">
+              <button class="lore-filter__depth" type="button" aria-pressed="true" data-lore-depth="">All</button>
+              <button class="lore-filter__depth lore-filter__depth--milspec" type="button" aria-pressed="false" data-lore-depth="milspec">Mil-Spec</button>
+              <button class="lore-filter__depth lore-filter__depth--restricted" type="button" aria-pressed="false" data-lore-depth="restricted">Restricted</button>
+              <button class="lore-filter__depth lore-filter__depth--classified" type="button" aria-pressed="false" data-lore-depth="classified">Classified</button>
+              <button class="lore-filter__depth lore-filter__depth--covert" type="button" aria-pressed="false" data-lore-depth="covert">Covert</button>
+              <button class="lore-filter__depth lore-filter__depth--gold" type="button" aria-pressed="false" data-lore-depth="gold">Gold</button>
+            </div>
+          </div>
+
+          <p class="lore-index__count" id="full-lore-count">32 entries</p>
+          <div class="lore-index__entries" id="full-lore-entries"></div>
+          <p class="ohnepedia__empty" id="full-lore-empty" hidden>No matches found.</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- ======================================================================
+         PAGE 3: TOOLS & GAMES INDEX (03-tools.html)
+         ====================================================================== -->
+    <div id="view-tools" class="page-view" style="background: var(--dark); color: var(--dark-text);">
+      <div class="container">
+        <nav class="breadcrumbs breadcrumbs--paper" aria-label="Breadcrumb">
+          <ol class="breadcrumbs__list">
+            <li class="breadcrumbs__item"><a href="#home" data-route="home">Home</a></li>
+            <li class="breadcrumbs__item"><span aria-current="page">Tools</span></li>
+          </ol>
+        </nav>
+      </div>
+
+      <section class="toolbox" style="padding-top: 16px;">
+        <div class="container">
+          <header class="section-head section-head--paper">
+            <h1 class="section-head__heading">The toolbox</h1>
+          </header>
+
+          <ul class="toolbox__grid" id="full-toolbox-grid"></ul>
+        </div>
+      </section>
+    </div>
+
+    <!-- ======================================================================
+         PAGE 4: THE VAULT GALLERY (04-vault.html / image_ddb127.jpg)
+         ====================================================================== -->
+    <div id="view-vault" class="page-view">
+      <section class="vault-index">
+        <div class="container">
+          <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <ol class="breadcrumbs__list">
+              <li class="breadcrumbs__item"><a href="#home" data-route="home">Home</a></li>
+              <li class="breadcrumbs__item"><span aria-current="page">Vault</span></li>
+            </ol>
+          </nav>
+
+          <div class="vault-index__toolbar">
+            <header class="section-head" style="margin-bottom: 0;">
+              <h1 class="section-head__heading">The vault</h1>
+              <p class="section-head__intro">169 ohnepixel memes, edits and fan pictures, and counting.</p>
+            </header>
+            <button class="btn btn--solid" type="button" id="random-vault-btn">Pick a random one <span aria-hidden="true">🎲</span></button>
+          </div>
+
+          <ul class="vault-index__grid" id="full-vault-grid"></ul>
+        </div>
+      </section>
+    </div>
+
+    <!-- ======================================================================
+         PAGE 5: FAQ FULL PAGE
+         ====================================================================== -->
+    <div id="view-faq" class="page-view">
+      <section class="faq" style="border-top: none; padding-top: 0;">
+        <div class="container">
+          <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <ol class="breadcrumbs__list">
+              <li class="breadcrumbs__item"><a href="#home" data-route="home">Home</a></li>
+              <li class="breadcrumbs__item"><span aria-current="page">FAQ</span></li>
+            </ol>
+          </nav>
+          <header class="section-head">
+            <h1 class="section-head__heading">Things people Google</h1>
+            <p class="section-head__intro">Every common search query about Mark Zimmermann, answered plainly.</p>
+          </header>
+          <div class="faq__list" id="full-faq-list" style="max-width: 780px;"></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ======================================================================
+         PAGE 6: PROFILE PAGE
+         ====================================================================== -->
+    <div id="view-profile" class="page-view">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <ol class="breadcrumbs__list">
+            <li class="breadcrumbs__item"><a href="#home" data-route="home">Home</a></li>
+            <li class="breadcrumbs__item"><span aria-current="page">Profile</span></li>
+          </ol>
+        </nav>
+        <header class="section-head">
+          <h1 class="section-head__heading">ohnepixel</h1>
+          <p class="section-head__intro">German Counter-Strike streamer, skin collector, and founder of DRILLAS.</p>
+        </header>
+
+        <div class="profile-grid">
+          <div class="profile-card">
+            <div style="aspect-ratio: 1/1; background: #1E242D; border-radius: 6px; overflow: hidden; margin-bottom: 14px;">
+              <svg viewBox="0 0 200 200" width="100%" height="100%">
+                <rect width="200" height="200" fill="#1C222B"/>
+                <circle cx="100" cy="84" r="38" fill="#E8B496"/>
+                <path d="M62 76 C62 42, 138 42, 138 76 C125 60, 75 60, 62 76 Z" fill="#8C6D46"/>
+                <rect x="74" y="75" width="22" height="14" rx="3" fill="none" stroke="#141619" stroke-width="2.5"/>
+                <rect x="104" y="75" width="22" height="14" rx="3" fill="none" stroke="#141619" stroke-width="2.5"/>
+                <path d="M35 200 C40 145, 160 145, 165 200 Z" fill="#111317"/>
+                <text x="100" y="182" text-anchor="middle" fill="#E4AE39" font-family="Silkscreen" font-size="14">MA DRILLA</text>
+              </svg>
+            </div>
+            <p style="font-weight: 700; font-size: 18px;">Mark Zimmermann</p>
+            <p style="font-size: 13.5px; color: var(--ink-muted);">@ohnePixel · Born May 11, 1998</p>
+          </div>
+
+          <div>
+            <dl class="profile-specs">
+              <div class="profile-spec"><dt>Nationality</dt><dd>German (lives in the Netherlands)</dd></div>
+              <div class="profile-spec"><dt>Age</dt><dd>28 (pushing 30)</dd></div>
+              <div class="profile-spec"><dt>HLTV Awards</dt><dd>Streamer of the Year (2023, 2024, 2025)</dd></div>
+              <div class="profile-spec"><dt>Streamer Awards</dt><dd>Best FPS Streamer (2026)</dd></div>
+              <div class="profile-spec"><dt>CS2 Project</dt><dd>DRILLAS (Shanghai Major Asia RMR)</dd></div>
+              <div class="profile-spec"><dt>Signature Catchphrase</dt><dd>"GOLD GOLD GOLD" / "MA DRILLA"</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ========================================================================
+       FOOTER & PIXEL DUST STAGE
+       ======================================================================== -->
+  <footer class="footer">
+    <div class="footer__inner container">
+      <div class="footer__about">
+        <a class="wordmark" href="#home" data-route="home">
+          <span class="wordmark__mark" aria-hidden="true">
+            <svg viewBox="0 0 16 16" width="24" height="24" shape-rendering="crispEdges">
+              <rect width="16" height="16" fill="#2A313D"/>
+              <rect x="4" y="2" width="8" height="2" fill="#9A7B4F"/>
+              <rect x="3" y="4" width="10" height="8" fill="#F1C29B"/>
+              <rect x="3" y="6" width="4" height="2" fill="#141619"/>
+              <rect x="9" y="6" width="4" height="2" fill="#141619"/>
+              <rect x="3" y="13" width="10" height="3" fill="#141619"/>
+            </svg>
+          </span>
+          <span class="wordmark__text">OHNYFANS</span>
+        </a>
+        <p class="disclaimer">Unofficial fan hub. Not run by ohnepixel. Made with love by <a href="https://x.com/dingleCS2" target="_blank" rel="noopener noreferrer">@dingleCS2</a>.</p>
+        <p class="footer__support">
+          <span>Keep the lights on:</span>
+          <a href="https://steamcommunity.com/tradeoffer/new/?partner=1032861014&token=rymGlTIR" target="_blank" rel="noopener noreferrer">Steam trade →</a>
+          <a href="https://www.paypal.com/donate/?hosted_button_id=UWG2EWAQ69TEY" target="_blank" rel="noopener noreferrer">PayPal →</a>
+        </p>
+      </div>
+
+      <div class="footer__legal">
+        <p>© 2026 · Not affiliated with Valve or Twitch.</p>
+        <p class="footer__ai-note">Some AI was used for the technical stuff, like the tools. All the creative stuff was done by <a href="https://x.com/dingleCS2" target="_blank">myself</a>. Shoutout to <a href="https://www.twitch.tv/sali" target="_blank">Sali</a>, <a href="https://www.twitch.tv/exerpas" target="_blank">Exerpas</a> &amp; Sam for testing and giving feedback &lt;3</p>
+        <p class="footer__links">
+          <a href="#faq" data-route="faq">Privacy policy</a>
+          <button type="button" id="open-cookie-settings">Cookie settings</button>
+        </p>
+      </div>
+    </div>
+
+    <div class="footer__stage">
+      <p class="footer__giant" aria-hidden="true">OHNYFANS</p>
+      <canvas class="footer__canvas" id="footer-dust-canvas" aria-hidden="true"></canvas>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP BUTTON -->
+  <button class="back-to-top" type="button" id="back-to-top" aria-label="Back to top">▲</button>
+
+  <!-- STEAM TRADE OFFER COOKIE CONSENT -->
+  <section class="cookie-consent" aria-labelledby="cookie-consent-heading" id="cookie-consent">
+    <p class="cookie-consent__note" aria-hidden="true">Trade offer</p>
+    <div class="cookie-consent__steam" aria-hidden="true">
+      <div>
+        <p class="cookie-consent__title">OhnyFans offered you a trade:</p>
+        <div class="cookie-consent__box">
+          <div>
+            <p class="cookie-consent__label">OhnyFans offered:</p>
+            <ul class="cookie-consent__items">
+              <li class="cookie-consent__item" title="A better site">
+                <svg viewBox="0 0 9 9" width="20" height="20" shape-rendering="crispEdges">
+                  <path fill="#E4AE39" d="M4 0h1v2H4zM3 2h3v1H3zM0 3h9v1H0zM1 4h7v1H1zM2 5h5v1H2zM2 6h2v1H2zM5 6h2v1H5zM1 7h2v1H1zM6 7h2v1H6zM1 8h1v1H1zM7 8h1v1H7z"></path>
+                </svg>
+              </li>
+            </ul>
+          </div>
+          <div class="cookie-consent__rule">
+            <svg viewBox="0 0 52 24" width="44" height="20" fill="none" stroke="currentColor" stroke-width="4">
+              <path d="M18 3c-6 1-9 5-9 12"></path>
+              <path d="M3 13l6 9 6-9z" fill="currentColor" stroke="none"></path>
+              <path d="M34 21c6-1 9-5 9-12"></path>
+              <path d="M37 11l6-9 6 9z" fill="currentColor" stroke="none"></path>
+            </svg>
+          </div>
+          <div>
+            <p class="cookie-consent__label">For your:</p>
+            <ul class="cookie-consent__items">
+              <li class="cookie-consent__item">🍪</li>
+              <li class="cookie-consent__item">🍪</li>
+              <li class="cookie-consent__item">🍪</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <p class="cookie-consent__expires">Offer expires on 30 Nov</p>
+    </div>
+
+    <div class="cookie-consent__body">
+      <h2 class="cookie-consent__heading" id="cookie-consent-heading">Can we count your visit?</h2>
+      <ul class="cookie-consent__facts">
+        <li>Google Analytics counts visits and clicks.</li>
+        <li>No ads, your IP isn't stored, nothing is sold.</li>
+      </ul>
+      <div class="cookie-consent__buttons">
+        <button class="btn btn--solid" type="button" data-consent-btn="granted">Accept <span class="btn__arrow">→</span></button>
+        <button class="btn btn--line" type="button" data-consent-btn="denied">Decline <span class="btn__arrow">→</span></button>
+      </div>
+      <p class="cookie-consent__fine"><a href="#faq" data-route="faq">Privacy policy</a></p>
+    </div>
+  </section>
+
+  <!-- FLOATING LORE HOVER CARD -->
+  <div class="lore-peek-card" id="lore-peek-card" aria-hidden="true"></div>
+
+  <!-- INTERACTIVE TOOL / LIGHTBOX MODAL -->
+  <div class="modal-backdrop" id="app-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-box" id="modal-box">
+      <button class="modal-close" type="button" id="modal-close-btn" aria-label="Close modal">✕</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <script>
+    /* ========================================================================
+       DATA STORE (EXTRACTED DIRECTLY FROM ATTACHED HTML DOM & SCREENSHOTS)
+       ======================================================================== */
+    const LORE_ENTRIES = [
+      { id: "vape", term: "VAPE", rarity: "milspec", def: "During mid-stream rejuicers, ohnepixel usually vapes. It's a way to relieve stress.", art: "vape" },
+      { id: "661", term: "661", rarity: "milspec", def: "The famous bluegem pattern for the AK-47 | Case Hardened. If ohnepixel got 3 wishes, this pattern in ST FN would probably be one of them.", art: "ak661" },
+      { id: "banana", term: "BANANA", rarity: "milspec", def: "Ohne LOVES eating bananas. Don't ask me why.", art: "banana" },
+      { id: "best-fps-streamer", term: "BEST FPS STREAMER", rarity: "milspec", def: "Ohne won Best FPS Streamer at The Streamer Awards 2026, the ceremony on 12 November 2026. His first Streamer Awards win, next to three HLTV Streamer of the Year titles.", art: "trophy" },
+      { id: "ohneschnitzel", term: "OHNESCHNITZEL", rarity: "milspec", def: "One of chat’s recurring variations on his name. A simple food pun, referring to the famous Austrian wiener schnitzel.", art: "schnitzel" },
+      { id: "bazalright", term: "BAZALRIGHT", rarity: "milspec", def: "The stretched-out “alright” pronunciation associated with Jynxzi, adopted by ohnepixel.", soundId: "bazalright", art: "mic" },
+      { id: "naur", term: "NAUR", rarity: "milspec", def: "An exaggerated “no” that appeared among his recurring verbal bits. Rarely heard nowadays.", soundId: "naur", art: "mic" },
+      { id: "coffee", term: "COFFEE", rarity: "milspec", def: "The famous rejuicer drink appearing in streams often.", art: "coffee" },
+      { id: "sekiro", term: "SEKIRO", rarity: "milspec", def: "soon.", art: "katana" },
+      { id: "dona", term: "DONA", rarity: "milspec", def: "Edona “dona” Muliu, a streamer, interviewer and member of Ohne’s management circle. Frequently appeared at Counter-Strike events while he was streaming from home, carrying his streams.", art: "mic" },
+      { id: "dick-pattern", term: "DICK PATTERN", rarity: "milspec", def: "Some skin patterns look like dicks. Yes, people actually pay overpay for these.", art: "pattern" },
+      { id: "pssy-pattern", term: "P*SSY PATTERN", rarity: "milspec", def: "The infamous Kami #909. Take a wild guess why it's called the p*ssy pattern.", art: "pattern" },
+      { id: "the-2-float-collection", term: "THE #2 FLOAT COLLECTION", rarity: "milspec", def: "Ohne’s inventory has featured a lot of #1 floats. Over time these became #2 or worse. Do not ask him about it.", art: "float" },
+      { id: "the-edin-easter-egg", term: "THE EDIN EASTER EGG", rarity: "milspec", def: "The community map Edin included a Mark & Co. storefront and “Gold Gold Gold” reference. The map was added to CS2 in November 2024.", art: "gold" },
+      { id: "osu-arc", term: "OSU! ARC", rarity: "milspec", def: "A clip of mrekk completing Cycle Hit drew Ohne into osu! during August 2026. The new obsession grew into streams, uploads and coaching from top players.", art: "osu" },
+      { id: "st4ck-level-5001", term: "ST4CK LEVEL 5001", rarity: "milspec", def: "In January 2023, the Steam account St4ck reached level 5000. Ohnepixel and others then moved it to 5001 using steam gifts to troll him.", art: "steam" },
+      { id: "hltv-streamer-of-the-year", term: "HLTV STREAMER OF THE YEAR", rarity: "milspec", def: "Ohne won HLTV Streamer of the Year for 2023, 2024 and 2025, receiving the third consecutive award at the ceremony on 10 January 2026.", art: "trophy" },
+      { id: "vas", term: "VAS?!", rarity: "milspec", def: "German “was?!”, so “what?!”.", soundId: "vas", art: "mic" },
+      { id: "huss", term: "HUSS", rarity: "milspec", def: "", soundId: "huss", art: "mic" },
+      { id: "tsak", term: "TSAK", rarity: "milspec", def: "", soundId: "tsak", art: "mic" },
+      { id: "nein", term: "NEIN", rarity: "milspec", def: "German for “no”.", soundId: "nein", art: "mic" },
+      { id: "auuug", term: "AUUUG", rarity: "milspec", def: "“AUG”, the rifle, drawn out.", soundId: "auuug", art: "mic" },
+      { id: "fish-dish", term: "FISH DISH", rarity: "milspec", def: "", soundId: "fish-dish", art: "mic" },
+      { id: "sub-badges", term: "SUB BADGES", rarity: "restricted", def: "Promised to use 4 years ago...", art: "badge" },
+      { id: "ma-drilla", term: "MA DRILLA", rarity: "restricted", def: "Signature greeting meaning roughly “my guy” or “my bro”, usually accompanied by the hand sign. It eventually became the name of his 2024 CS2 project, DRILLAS.", art: "drillas" },
+      { id: "rejuicer", term: "REJUICER", rarity: "restricted", def: "An extended absence from streaming. His longest one was in autumn 2024. Rejuicers happen often, he's a part-time streamer after all.", art: "coffee" },
+      { id: "the-129k-opening", term: "THE $129K OPENING", rarity: "restricted", def: "July 2023 opening of approximately $129,000 in rare CS cases and capsules. It attracted a huge live audience and produced very little to justify the cost.", art: "case" },
+      { id: "drillas", term: "DRILLAS", rarity: "restricted", def: "Counter-Strike team backed by Ohne in 2024, with his face as its branding. It qualified for the Shanghai Major Asia RMR and narrowly missed the Major.", art: "drillas" },
+      { id: "nip-paper", term: "NIP PAPER", rarity: "classified", def: "Imagine opening a Katowice 2014 capsule just to get a fucking NIP paper... Ohnepixel can relate.", art: "sticker" },
+      { id: "gold-gold-gold", term: "GOLD GOLD GOLD", rarity: "covert", def: "What he shouts when a gold, a knife or a pair of gloves, comes out of a case.", soundId: "gold-gold-gold", art: "gold" },
+      { id: "titan-holo", term: "TITAN HOLO", rarity: "covert", def: "Maybe one day.", soundId: "titan-holo", art: "sticker" },
+      { id: "the-mac-10-heat", term: "THE MAC-10 HEAT", rarity: "gold", def: "A StatTrak MAC-10 | Heat with four Reason Gaming Katowice 2014 Holos, once owned by ohne and sold for about $3,300. Nowadays it is worth a little bit more.", art: "mac10" }
+    ];
+
+    const CHAT_MESSAGES = [
+      { user: "alen1911", color: "#8A2BE2", badge: "9M", text: "who tf is cola" },
+      { user: "alen1911", color: "#8A2BE2", badge: "9M", text: "arent you cola", emote: "???" },
+      { user: "HardTlmes", color: "#EAB308", badge: "MOD", text: "", emote: "SON" },
+      { user: "gunskillerpoop", color: "#9333EA", badge: "3M", text: "@alen1911 lemme check if I have downloaded, I played in like 23 and I'm a bot" },
+      { user: "alen1911", color: "#8A2BE2", badge: "9M", text: "", emote: "SpeedLaugh" },
+      { user: "Ghostieqeq", color: "#16A34A", badge: "EWC", text: "watch you guys get it the moment i leave" },
+      { user: "HardTlmes", color: "#EAB308", badge: "MOD", text: "oh, i guess i was just in the storm for so long" },
+      { user: "alen1911", color: "#8A2BE2", badge: "9M", text: "we are 3" },
+      { user: "gunskillerpoop", color: "#9333EA", badge: "3M", text: "ALMOST", emote: "Kappa" },
+      { user: "plutodragoner13", color: "#D32CE6", badge: "2M", text: "600 = storm sickness" },
+      { user: "Ghostieqeq", color: "#16A34A", badge: "EWC", text: "ALMOST" }
+    ];
+
+    const SOUNDS = [
+      { id: "gold-gold-gold", label: "GOLD GOLD GOLD", key: "1", rarity: "gold", freq: [440, 554, 659, 880] },
+      { id: "vas", label: "VAS?!", key: "2", rarity: "restricted", freq: [320, 480] },
+      { id: "titan-holo", label: "TITAN HOLO", key: "3", rarity: "milspec", freq: [523, 659, 784] },
+      { id: "naur", label: "NAUR", key: "4", rarity: "restricted", freq: [290, 220] },
+      { id: "tsak", label: "TSAK", key: "5", rarity: "classified", freq: [680, 340] },
+      { id: "dick-pattern-huntsman", label: "DICK PATTERN HUNTSMAN", key: "6", rarity: "milspec", freq: [350, 420, 390] },
+      { id: "huss", label: "HUSS", key: "7", rarity: "milspec", freq: [410, 510] },
+      { id: "nein", label: "NEIN", key: "8", rarity: "covert", freq: [260, 195] },
+      { id: "auuug", label: "AUUUG", key: "9", rarity: "classified", freq: [300, 360, 440] },
+      { id: "fish-dish", label: "FISH DISH", key: "0", rarity: "milspec", freq: [460, 520] },
+      { id: "bazalright", label: "BAZALRIGHT", key: "Q", rarity: "restricted", freq: [340, 440, 390] },
+      { id: "ma-drilla", label: "MA DRILLA", key: "W", rarity: "gold", freq: [380, 480, 580] },
+      { id: "chat-is-this-real", label: "CHAT IS THIS REAL", key: "E", rarity: "milspec", freq: [420, 500, 460] },
+      { id: "no-shot", label: "NO SHOT", key: "R", rarity: "covert", freq: [280, 240] },
+      { id: "rejuicer-time", label: "REJUICER TIME", key: "T", rarity: "restricted", freq: [500, 620] }
+    ];
+
+    const TIMELINE_EVENTS = [
+      { date: "JAN 2019", title: "YouTube channel created", rarity: "milspec" },
+      { date: "SUMMER 2019", title: "Mac-10 | Heat sold for $3,300", rarity: "restricted", print: { frame: "#0042", title: "MAC-10 | Heat (4x Reason Holo)", color: "#D97706" } },
+      { date: "MAR 2020", title: "First recorded Twitch activity", rarity: "classified" },
+      { date: "AUG 2021", title: "ohnepixel2 channel created", rarity: "milspec" },
+      { date: "JAN 2024", title: "First HLTV Streamer of the Year", rarity: "covert", print: { frame: "#0088", title: "HLTV Awards 2023 Winner", color: "#4B69FF" } },
+      { date: "JAN 2024", title: "Becomes a SkinBid co-owner", rarity: "restricted" },
+      { date: "AUG 2024", title: "DRILLAS project announced", rarity: "covert", print: { frame: "#0121", title: "DRILLAS Roster Reveal", color: "#EB4B4B" } },
+      { date: "13 NOV 2024", title: "FlyQuest end the sticker dream", rarity: "gold" },
+      { date: "NOV 2024", title: "Edin arrives with an Ohne easter egg", rarity: "restricted" },
+      { date: "JAN 2025", title: "Second HLTV Streamer of the Year", rarity: "covert" },
+      { date: "11 JUL 2025", title: "The massive 2025 case opening", rarity: "classified" },
+      { date: "10 JAN 2026", title: "Third HLTV Streamer of the Year", rarity: "gold", print: { frame: "#0160", title: "3x Back-to-Back HLTV Trophy", color: "#E4AE39" } },
+      { date: "AUG 2026", title: "The Five Hearts / Gran arc", rarity: "restricted" },
+      { date: "AUG 2026", title: "The osu! detour begins", rarity: "classified" },
+      { date: "18 OCT 2026", title: "Valorant Champions Shanghai final", rarity: "restricted" },
+      { date: "12 NOV 2026", title: "Best FPS Streamer at The Streamer Awards", rarity: "covert", print: { frame: "#0176", title: "Streamer Awards 2026 Trophy", color: "#8847FF" } }
+    ];
+
+    const VAULT_ITEMS = [
+      { frame: "0177", title: "This guy was in my Roblox game", aspect: "0.88", tilt: "-2deg", palette: ["#3B82F6", "#FACC15", "#1E293B"], tag: "ROBLOX DRILLA" },
+      { frame: "0176", title: "Streamer of sometimes award edit", aspect: "1.45", tilt: "1.5deg", palette: ["#1E1B4B", "#E4AE39", "#312E81"], tag: "STREAMER OF SOMETIMES" },
+      { frame: "0175", title: "Steal his look: Finland Edition", aspect: "1.0", tilt: "-1deg", palette: ["#F8FAFC", "#334155", "#0F172A"], tag: "TOTAL: $827.14" },
+      { frame: "0174", title: "Matching hand gestures", aspect: "0.75", tilt: "2deg", palette: ["#DC2626", "#18181B", "#FDE047"], tag: "MA DRILLA SIGN" },
+      { frame: "0173", title: "Ohne 200 euro banknote edit", aspect: "1.33", tilt: "-1.5deg", palette: ["#EAB308", "#FEF08A", "#713F12"], tag: "200 EURO MARK" },
+      { frame: "0172", title: "Long coat drip", aspect: "0.75", tilt: "1deg", palette: ["#27272A", "#52525B", "#D4D4D8"], tag: "PARIS FASHION" },
+      { frame: "0171", title: "Formula car photo", aspect: "1.06", tilt: "-2deg", palette: ["#0284C7", "#E0F2FE", "#1E293B"], tag: "F1 PADDOCK" },
+      { frame: "0170", title: "Tiny ohne car edit", aspect: "1.65", tilt: "1.5deg", palette: ["#16A34A", "#DCFCE7", "#14532D"], tag: "TINY MARK" },
+      { frame: "0169", title: "Gran Instagram comment", aspect: "1.25", tilt: "-1deg", palette: ["#F43F5E", "#FFE4E6", "#881337"], tag: "FIVE HEARTS" },
+      { frame: "0168", title: "Cosplay chin pose", aspect: "1.55", tilt: "2deg", palette: ["#7C3AED", "#EDE9FE", "#2E1065"], tag: "CHIN POSE" },
+      { frame: "0167", title: "Classroom ohne wallpaper", aspect: "1.33", tilt: "-1.5deg", palette: ["#0EA5E9", "#BAE6FD", "#0C4A6E"], tag: "WALLPAPER" },
+      { frame: "0166", title: "Tuff drilla walk", aspect: "0.75", tilt: "1deg", palette: ["#334155", "#94A3B8", "#0F172A"], tag: "SHANGHAI WALK" },
+      { frame: "0165", title: "Lego ohne drillas", aspect: "1.0", tilt: "-2deg", palette: ["#F59E0B", "#FEF3C7", "#78350F"], tag: "LEGO DRILLA" },
+      { frame: "0164", title: "Hand gesture in town", aspect: "0.82", tilt: "1.5deg", palette: ["#475569", "#CBD5E1", "#1E293B"], tag: "IRL STREAM" },
+      { frame: "0163", title: "Dating game heart rate comment", aspect: "1.2", tilt: "-1deg", palette: ["#E11D48", "#FECDD3", "#4C0519"], tag: "145 BPM" },
+      { frame: "0162", title: "Met ohnepixel lookalike joke", aspect: "0.8", tilt: "2deg", palette: ["#2563EB", "#DBEAFE", "#1E3A8A"], tag: "DOPPELGÄNGER" },
+      { frame: "0136", title: "Crab on the beach", aspect: "0.78", tilt: "-1.5deg", palette: ["#0D9488", "#CCFBF1", "#134E4A"], tag: "CRAB INSPECT" },
+      { frame: "0135", title: "Behind bars edit", aspect: "0.75", tilt: "1.5deg", palette: ["#52525B", "#E4E4E7", "#18181B"], tag: "VAC JAIL" },
+      { frame: "0134", title: "Nuclear power plant tour", aspect: "1.1", tilt: "-1deg", palette: ["#0284C7", "#BAE6FD", "#0369A1"], tag: "NUKE IRL" },
+      { frame: "0093", title: "Zoomed in face cam", aspect: "1.0", tilt: "2deg", palette: ["#9A3412", "#FED7AA", "#431407"], tag: "HUH?" },
+      { frame: "0092", title: "Mind blown reaction", aspect: "0.95", tilt: "-1.5deg", palette: ["#1F2937", "#D1D5DB", "#111827"], tag: "NO WAY" },
+      { frame: "0049", title: "Dual laptop Google search", aspect: "1.5", tilt: "1deg", palette: ["#1E293B", "#F8FAFC", "#3B82F6"], tag: "INVESTIGATING" },
+      { frame: "0048", title: "Bedtime selfie thumbs up", aspect: "0.8", tilt: "-2deg", palette: ["#78350F", "#FDE68A", "#451A03"], tag: "GOODNIGHT CHAT" },
+      { frame: "0047", title: "Haunted dark webcam smile", aspect: "1.0", tilt: "1.5deg", palette: ["#09090B", "#3F3F46", "#18181B"], tag: "CURSED OHNE" }
+    ];
+
+    const FAQ_ITEMS = [
+      { q: "Who is ohnepixel?", a: "Mark Zimmermann, a German Counter-Strike streamer and skin collector. Known for skin knowledge, case openings, watch parties, DRILLAS, three consecutive HLTV Streamer of the Year awards and Best FPS Streamer at The Streamer Awards 2026." },
+      { q: "How old is ohnepixel?", a: "ohnepixel is 28 years old. He was born on May 11, 1998. Yes, he's pushing 30." },
+      { q: "What is ohnepixel’s real name?", a: "Mark Zimmermann." },
+      { q: "Where does ohnepixel live?", a: "In the Netherlands. He's originally from Germany but has lived in the Netherlands for years." },
+      { q: "Does ohnepixel have a girlfriend? Is he single?", a: "His relationship status isn't public: no confirmed girlfriend to report. You can stop investigating." },
+      { q: "Does ohnepixel smoke weed?", a: "No." },
+      { q: "What is a rejuicer?", a: "A break to recharge, most often associated with making coffee. Could be five minutes. Could be significantly longer." }
+    ];
+
+    const REVIEWS = [
+      { stars: 5, quote: "“dingle, what the fuck am I looking at?”", name: "ohnepixel", role: "3x HLTV Streamer of the Year", platform: "Twitch", color: "#9146FF", url: "https://www.twitch.tv/videos/2923117470?t=0h38m45s" },
+      { stars: 5, quote: "“truly reMARKable”", name: "FURIOUSSS", role: "Twitch streamer and 0.79-rated former pro", platform: "X", color: "#000000", url: "https://x.com/FURIOUSSS/status/2120114074851950940" },
+      { stars: 5, quote: "“Bro, what is this OhnyFans? It’s so fucking cool.”", name: "YEKINDAR", role: "Pro CS2 player", platform: "Twitch", color: "#9146FF", url: "https://www.twitch.tv/ohnepixel/clip/SmoothHeadstrongFriesWow-gXcPzLDnruablXWu" },
+      { stars: 1, quote: "“Was cool until he basically said Claude did everything for him”", name: "@pixlr0t", role: "YouTube comment", platform: "YouTube", color: "#FF0000", url: "https://www.youtube.com/watch?v=KOPXL9LbdZo&lc=UgzfqqKNFUIoaA0cvyt4AaABAg" }
+    ];
+
+    const SOCIALS = [
+      { name: "Twitch", color: "#9146FF", url: "https://www.twitch.tv/ohnepixel", icon: '<path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/>' },
+      { name: "YouTube", color: "#FF0000", url: "https://www.youtube.com/@ohnepixel", icon: '<path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>' },
+      { name: "X", color: "#000000", url: "https://x.com/ohnePixel", icon: '<path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/>' },
+      { name: "Steam", color: "#1B2838", url: "https://steamcommunity.com/id/ohnePixel/", icon: '<path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0z"/>' },
+      { name: "Instagram", color: "#FF0069", url: "https://www.instagram.com/ohnepixel", icon: '<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>' },
+      { name: "Geoguessr", color: "#EB4B4B", url: "https://www.geoguessr.com/user/62d7cd5d0f3213beb046636d", icon: '<circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20" fill="none" stroke="currentColor" stroke-width="2"/>' },
+      { name: "OpenSea", color: "#2081E2", url: "https://opensea.io/ohnepixel_vault", icon: '<circle cx="12" cy="12" r="10"/><path d="M7 14h10l-2 4H9l-2-4zm5-9l4 7H8l4-7z" fill="#fff"/>' },
+      { name: "Deadlock", color: "#EB4B4B", url: "https://tracklock.gg/players/85011482", icon: '<rect x="3" y="6" width="18" height="12" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 12h4M9 10v4M15 11h.01M17 13h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>' },
+      { name: "League of Legends", color: "#C28F2C", url: "https://op.gg/lol/summoners/euw/StaleStork661-REAL", icon: '<path d="M5 2h4v16h10v4H5V2z"/>' }
+    ];
+
+    /* ========================================================================
+       AUDIO SYNTHESIZER (WEB AUDIO API - ZERO EXTERNAL SOUND URLS)
+       ======================================================================== */
+    let audioCtx = null;
+    function playSynthSound(soundObj) {
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === "suspended") audioCtx.resume();
+
+        const now = audioCtx.currentTime;
+        soundObj.freq.forEach((f, idx) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = idx % 2 === 0 ? "sawtooth" : "square";
+          osc.frequency.setValueAtTime(f, now + idx * 0.08);
+          osc.frequency.exponentialRampToValueAtTime(f * 1.18, now + idx * 0.08 + 0.14);
+
+          gain.gain.setValueAtTime(0.08, now + idx * 0.08);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.16);
+
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now + idx * 0.08);
+          osc.stop(now + idx * 0.08 + 0.17);
+        });
+
+        // Animate talking portrait mouth
+        const closedM = document.getElementById("portrait-mouth-closed");
+        const openM = document.getElementById("portrait-mouth-open");
+        if (closedM && openM) {
+          let toggles = 0;
+          const interval = setInterval(() => {
+            const isOpen = toggles % 2 === 0;
+            closedM.style.display = isOpen ? "none" : "block";
+            openM.style.display = isOpen ? "block" : "none";
+            toggles++;
+            if (toggles > 6) {
+              clearInterval(interval);
+              closedM.style.display = "block";
+              openM.style.display = "none";
+            }
+          }, 95);
+        }
+      } catch (err) {
+        // Ignore audio context block before user gesture
+      }
+    }
+
+    /* ========================================================================
+       SVG ART GENERATORS (RICH SELF-CONTAINED VISUALS)
+       ======================================================================== */
+    function generateLoreArtSVG(type, title) {
+      const configs = {
+        ak661: { bg: "#1E293B", accent: "#38BDF8", sub: "AK-47 | Case Hardened #661" },
+        mac10: { bg: "#451A03", accent: "#F59E0B", sub: "MAC-10 | Heat (4x Reason Holo)" },
+        gold: { bg: "#422006", accent: "#E4AE39", sub: "★ Rare Special Item ★" },
+        sticker: { bg: "#172554", accent: "#60A5FA", sub: "Katowice 2014 Holo" },
+        drillas: { bg: "#3F1215", accent: "#EB4B4B", sub: "MA DRILLA · SHANGHAI RMR" },
+        coffee: { bg: "#291D18", accent: "#D97706", sub: "Mid-Stream Rejuicer" },
+        trophy: { bg: "#2E1065", accent: "#C084FC", sub: "Streamer of the Year" },
+        osu: { bg: "#500724", accent: "#F472B6", sub: "727 PP · Cycle Hit" },
+        case: { bg: "#1C1917", accent: "#EF4444", sub: "-$129,000 Case Opening" }
+      };
+      const c = configs[type] || { bg: "#1F2937", accent: "#4B69FF", sub: title };
+      return `
+        <svg viewBox="0 0 240 150" width="100%" height="130" style="border-radius:3px;display:block;">
+          <rect width="240" height="150" fill="${c.bg}"/>
+          <circle cx="120" cy="68" r="42" fill="${c.accent}" fill-opacity="0.22"/>
+          <polygon points="120,34 148,68 120,102 92,68" fill="${c.accent}"/>
+          <text x="120" y="132" text-anchor="middle" fill="#F8FAFC" font-family="DM Sans, sans-serif" font-weight="700" font-size="11">${c.sub}</text>
+        </svg>
+        <p style="margin-top:6px;font-family:Silkscreen,monospace;font-size:10px;color:#141619;">${title}</p>
+      `;
+    }
+
+    function generateVaultMemeSVG(item) {
+      const [c1, c2, c3] = item.palette;
+      const h = item.aspect < 0.9 ? 230 : item.aspect > 1.25 ? 145 : 185;
+      return `
+        <svg viewBox="0 0 240 ${h}" width="100%" style="display:block;">
+          <defs>
+            <linearGradient id="g-${item.frame}" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="${c1}"/>
+              <stop offset="100%" stop-color="${c3}"/>
+            </linearGradient>
+          </defs>
+          <rect width="240" height="${h}" fill="url(#g-${item.frame})"/>
+          <circle cx="120" cy="${h * 0.44}" r="${Math.min(44, h * 0.25)}" fill="#E8B496"/>
+          <path d="M88 ${h * 0.36} C90 ${h * 0.2}, 150 ${h * 0.2}, 152 ${h * 0.36} Z" fill="#8C6D46"/>
+          <rect x="98" y="${h * 0.39}" width="18" height="11" rx="2" fill="none" stroke="#141619" stroke-width="2"/>
+          <rect x="124" y="${h * 0.39}" width="18" height="11" rx="2" fill="none" stroke="#141619" stroke-width="2"/>
+          <rect x="16" y="${h - 32}" width="208" height="22" rx="3" fill="rgba(0,0,0,0.65)"/>
+          <text x="120" y="${h - 17}" text-anchor="middle" fill="${c2}" font-family="Silkscreen, monospace" font-size="10">${item.tag}</text>
+        </svg>
+      `;
+    }
+
+    /* ========================================================================
+       RENDER FUNCTIONS
+       ======================================================================== */
+    function renderHeroMonthStrip() {
+      const strip = document.getElementById("hero-month-strip");
+      const pattern = [0,1,1,0,0,1,1,1,1,0,0,0,1,1,1,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3];
+      strip.innerHTML = pattern.map(st => {
+        const cls = st === 1 ? "is-on" : st === 2 ? "is-today" : st === 3 ? "is-ahead" : "is-off";
+        return `<span class="hero__day ${cls}"></span>`;
+      }).join("");
+    }
+
+    function renderChatTicker() {
+      const list = document.getElementById("chat-ticker-list");
+      const doubled = [...CHAT_MESSAGES, ...CHAT_MESSAGES];
+      list.innerHTML = doubled.map(m => `
+        <li class="chat-ticker__item">
+          <span class="chat-badge" style="background:${m.badge === 'MOD' ? '#16A34A' : '#4B69FF'}">${m.badge}</span>
+          <span class="chat-ticker__user" style="color:${m.color}">${m.user}</span>
+          <span class="chat-ticker__message">${m.text} ${m.emote ? `<span class="chat-emote">${m.emote}</span>` : ""}</span>
+        </li>
+      `).join("");
+    }
+
+    function createLoreArticleHTML(entry, headingTag = "h3") {
+      return `
+        <article class="lore-entry lore-entry--${entry.rarity}" data-rarity="${entry.rarity}" data-term="${entry.term.toLowerCase()}" data-def="${entry.def.toLowerCase()}" data-art="${entry.art}" data-title="${entry.term}">
+          <span class="lore-entry__mark" aria-hidden="true"></span>
+          <div class="lore-entry__text">
+            <${headingTag} class="lore-entry__term">${entry.term}</${headingTag}>
+            ${entry.def ? `<p class="lore-entry__definition">${entry.def}</p>` : ""}
+            ${entry.soundId ? `
+              <button class="lore-entry__sound" type="button" data-play-sound="${entry.soundId}">
+                <span>🔊 Play in soundboard</span>
+              </button>
+            ` : ""}
+          </div>
+        </article>
+      `;
+    }
+
+    function renderLoreSections() {
+      const homeContainer = document.getElementById("home-lore-entries");
+      const fullContainer = document.getElementById("full-lore-entries");
+      homeContainer.innerHTML = LORE_ENTRIES.map(e => createLoreArticleHTML(e, "h3")).join("");
+      fullContainer.innerHTML = LORE_ENTRIES.map(e => createLoreArticleHTML(e, "h2")).join("");
+    }
+
+    function renderToolboxGrids() {
+      // Generate 168 heatmap cells for Rejuicer Tracker
+      let heatmapCells = "";
+      for (let i = 0; i < 168; i++) {
+        let cls = "tool-preview__day--off";
+        if (i >= 68 && i <= 110) cls = "tool-preview__day--break";
+        else if (i % 3 === 0 || i % 5 === 0) cls = "tool-preview__day--on";
+        heatmapCells += `<span class="tool-preview__day ${cls}"></span>`;
+      }
+
+      const tools = [
+        {
+          id: "skindle",
+          rarity: "gold",
+          title: "Skindle",
+          intro: "Guess the skin. how hard can it be?",
+          cta: "Play today’s skin",
+          preview: `
+            <div class="tool-preview tool-preview--skindle">
+              <span class="tool-preview__swatches">
+                <span style="background: #76706a; flex-grow: 56"></span>
+                <span style="background: #557700; flex-grow: 22"></span>
+                <span style="background: #aa473a; flex-grow: 18"></span>
+                <span style="background: #c0c8b0; flex-grow: 5"></span>
+              </span>
+              <span class="tool-preview__guess">#14 ? ? ? ?</span>
+            </div>`
+        },
+        {
+          id: "higherlower",
+          rarity: "restricted",
+          title: "VRS higher or lower",
+          intro: "Which team has more VRS points?",
+          cta: "Start a run",
+          preview: `
+            <div class="tool-preview tool-preview--higherlower">
+              <span class="tool-preview__team">
+                <svg width="36" height="36" viewBox="0 0 36 36"><polygon points="18,3 33,12 27,32 9,32 3,12" fill="#EF4444"/><text x="18" y="22" text-anchor="middle" fill="#fff" font-weight="800" font-size="11">M</text></svg>
+                <span class="tool-preview__views">1,960</span>
+              </span>
+              <span class="tool-preview__team">
+                <svg width="36" height="36" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="#EAB308"/><text x="18" y="22" text-anchor="middle" fill="#141619" font-weight="800" font-size="10">MGZ</text></svg>
+                <span class="tool-preview__views">?</span>
+              </span>
+              <span class="tool-preview__arrows" aria-hidden="true"><span>▲</span><span>▼</span></span>
+            </div>`
+        },
+        {
+          id: "rejuicer",
+          rarity: "milspec",
+          title: "Rejuicer tracker",
+          intro: "Every stream day and every break since March 2020.",
+          cta: "Explore stream history",
+          preview: `
+            <div class="tool-preview tool-preview--rejuicer">
+              <span class="tool-preview__grid">${heatmapCells}</span>
+              <span class="tool-preview__marker">↑ 43-day rejuicer</span>
+            </div>`
+        },
+        {
+          id: "ohne",
+          rarity: "restricted",
+          title: "Am I the real ohnepixel?",
+          intro: "Prove me wrong or uninstall CS2.",
+          cta: "Take the test",
+          preview: `
+            <div class="tool-preview tool-preview--ohne">
+              <span class="tool-preview__badge">73%</span>
+              <span class="tool-preview__score">Ohne</span>
+            </div>`
+        },
+        {
+          id: "clips",
+          rarity: "classified",
+          title: "Clip roulette",
+          intro: "Spin and watch a random ohnepixel Twitch clip.",
+          cta: "Open a case",
+          preview: `
+            <div class="tool-preview tool-preview--clips">
+              <svg viewBox="0 0 320 140" width="100%" height="100%" style="position:absolute;inset:0;opacity:0.45;">
+                <rect width="320" height="140" fill="#1E293B"/>
+                <rect x="16" y="14" width="64" height="46" rx="3" fill="#475569"/>
+                <g fill="#EAB308" opacity="0.7">
+                  <rect x="95" y="18" width="38" height="26" rx="2"/><rect x="142" y="18" width="38" height="26" rx="2"/><rect x="189" y="18" width="38" height="26" rx="2"/><rect x="236" y="18" width="38" height="26" rx="2"/>
+                  <rect x="95" y="52" width="38" height="26" rx="2"/><rect x="142" y="52" width="38" height="26" rx="2"/><rect x="189" y="52" width="38" height="26" rx="2"/><rect x="236" y="52" width="38" height="26" rx="2"/>
+                </g>
+              </svg>
+              <span class="tool-preview__play">▶</span>
+              <span class="tool-preview__duration">0:26</span>
+            </div>`
+        },
+        {
+          id: "chat",
+          rarity: "covert",
+          title: "Chat meter",
+          intro: "The five things chat spams most.",
+          cta: "Open the meter",
+          preview: `
+            <div class="tool-preview tool-preview--chat">
+              <span class="tool-preview__word">😂 LOL</span>
+              <span class="tool-preview__fill" style="--share: 1"></span>
+              <span class="tool-preview__word">🤣 LO</span>
+              <span class="tool-preview__fill tool-preview__fill--covert" style="--share: 0.644"></span>
+              <span class="tool-preview__word">😲 OOOO</span>
+              <span class="tool-preview__fill tool-preview__fill--classified" style="--share: 0.427"></span>
+            </div>`
+        },
+        {
+          id: "sounds",
+          rarity: "classified",
+          title: "Soundboard",
+          intro: "Every ohnepixel sound on one board. Click a pad or hit its key.",
+          cta: "Open",
+          preview: `
+            <div class="tool-preview tool-preview--sounds">
+              <span class="tool-preview__pad">GOLD GOLD GOLD</span>
+              <span class="tool-preview__pad">VAS?!</span>
+              <span class="tool-preview__pad">HUSS</span>
+              <span class="tool-preview__pad">TSAK</span>
+              <span class="tool-preview__pad">NAUR</span>
+              <span class="tool-preview__pad">NEIN</span>
+            </div>`
+        }
+      ];
+
+      const renderList = (items, headingTag) => items.map(t => `
+        <li class="toolbox__tool toolbox__tool--${t.rarity}" data-open-tool="${t.id}">
+          <div>
+            <${headingTag} class="toolbox__title">${t.title}</${headingTag}>
+            <p class="toolbox__intro">${t.intro}</p>
+          </div>
+          <div>
+            ${t.preview}
+            <span class="toolbox__cta">${t.cta}</span>
+          </div>
+        </li>
+      `).join("");
+
+      document.getElementById("home-toolbox-grid").innerHTML = renderList(tools.slice(0, 6), "h3");
+      document.getElementById("full-toolbox-grid").innerHTML = renderList(tools, "h2");
+    }
+
+    function renderSoundboardPads() {
+      const padsContainer = document.getElementById("home-soundboard-pads");
+      const topSix = SOUNDS.slice(0, 6);
+      padsContainer.innerHTML = topSix.map(s => `
+        <li>
+          <div class="soundboard__sound" id="pad-wrap-${s.id}">
+            <button class="soundboard__button" type="button" data-play-sound="${s.id}">
+              <kbd class="soundboard__key">${s.key}</kbd>
+              <span class="soundboard__dot" style="background: var(--rarity-${s.rarity})"></span>
+              <span>${s.label}</span>
+            </button>
+            <button class="soundboard__download" type="button" data-download-sound="${s.label}" title="Download ${s.label}.mp3">⬇</button>
+          </div>
+        </li>
+      `).join("");
+    }
+
+    function renderTimeline() {
+      const track = document.getElementById("timeline-track");
+      track.innerHTML = TIMELINE_EVENTS.map((ev, i) => `
+        <li class="timeline__event timeline__event--${ev.rarity}">
+          <p class="timeline__date"><span class="timeline__mark"></span>${ev.date}</p>
+          <h3 class="timeline__title">${ev.title}</h3>
+          ${ev.print ? `
+            <figure class="timeline__print" style="--tilt: ${i % 2 === 0 ? '-3deg' : '3deg'}">
+              <div style="background:${ev.print.color};aspect-ratio:1/1;border-radius:2px;display:grid;place-items:center;padding:10px;text-align:center;color:#fff;font-family:Silkscreen,monospace;font-size:10px;">
+                ${ev.print.title}
+              </div>
+              <figcaption style="display:flex;justify-content:space-between;margin-top:6px;font-family:Silkscreen,monospace;font-size:9px;color:#525B66;">
+                <span>${ev.print.frame}</span>
+                <span>${ev.date}</span>
+              </figcaption>
+            </figure>
+          ` : ""}
+        </li>
+      `).join("");
+    }
+
+    function renderVault() {
+      const strip = document.getElementById("home-vault-strip");
+      const fullGrid = document.getElementById("full-vault-grid");
+
+      const createCard = (item, idx) => `
+        <figure class="print" style="--tilt: ${item.tilt}" data-vault-idx="${idx}">
+          <div class="print__photo">${generateVaultMemeSVG(item)}</div>
+          <figcaption class="print__caption">
+            <span>#${item.frame}</span>
+            <span>${item.title.slice(0, 18)}${item.title.length > 18 ? '…' : ''}</span>
+          </figcaption>
+        </figure>
+      `;
+
+      strip.innerHTML = VAULT_ITEMS.slice(0, 5).map((item, idx) => `<li>${createCard(item, idx)}</li>`).join("");
+      fullGrid.innerHTML = VAULT_ITEMS.map((item, idx) => `<li class="vault-index__item">${createCard(item, idx)}</li>`).join("");
+    }
+
+    function renderFAQAndReviewsAndSocials() {
+      const faqHTML = FAQ_ITEMS.map(item => `
+        <div class="faq__item">
+          <h3 class="faq__question">${item.q}</h3>
+          <p class="faq__answer">${item.a}</p>
+        </div>
+      `).join("");
+
+      document.getElementById("home-faq-list").innerHTML = faqHTML;
+      document.getElementById("full-faq-list").innerHTML = faqHTML;
+
+      const starSVG = `<svg viewBox="0 0 9 9" width="15" height="15" fill="currentColor" shape-rendering="crispEdges"><path d="M4 0h1v2H4zM3 2h3v1H3zM0 3h9v1H0zM1 4h7v1H1zM2 5h5v1H2zM2 6h2v1H2zM5 6h2v1H5zM1 7h2v1H1zM6 7h2v1H6zM1 8h1v1H1zM7 8h1v1H7z"/></svg>`;
+      const laurelSVG = (right = false) => `<svg class="reviews__laurel ${right ? 'reviews__laurel--right' : ''}" viewBox="0 1 7 15" width="13" height="26" fill="currentColor" shape-rendering="crispEdges"><path d="M6 1h1v1H6zM6 2h1v1H6zM2 3h1v1H2zM5 3h1v1H5zM2 4h4v1H2zM3 5h3v1H3zM0 6h1v1H0zM3 6h1v1H3zM0 7h3v1H0zM4 7h1v1H4zM2 8h3v1H2zM0 9h1v1H0zM2 9h1v1H2zM0 10h3v1H0zM4 10h1v1H4zM2 11h3v1H2zM1 12h1v1H1zM3 12h1v1H3zM1 13h3v1H1zM4 14h1v1H4zM5 15h1v1H5z"/></svg>`;
+
+      document.getElementById("home-reviews-grid").innerHTML = REVIEWS.map(r => {
+        let stars = "";
+        for (let i = 1; i <= 5; i++) {
+          stars += `<span class="${i > r.stars ? 'reviews__star--empty' : ''}">${starSVG}</span>`;
+        }
+        return `
+          <li>
+            <figure class="reviews__review">
+              <div class="reviews__rating">
+                ${laurelSVG(false)}
+                <span class="reviews__stars" aria-label="${r.stars} out of 5 stars">${stars}</span>
+                ${laurelSVG(true)}
+              </div>
+              <blockquote class="reviews__quote"><p>${r.quote}</p></blockquote>
+              <figcaption class="reviews__by">
+                <span class="reviews__name">${r.name}</span>
+                <span class="reviews__role">${r.role}</span>
+              </figcaption>
+              <a class="reviews__link" href="${r.url}" target="_blank" rel="noopener noreferrer" style="--platform:${r.color}" title="Source on ${r.platform}">↗</a>
+            </figure>
+          </li>
+        `;
+      }).join("");
+
+      document.getElementById("home-socials-grid").innerHTML = SOCIALS.map(s => `
+        <li>
+          <a class="socials__item" href="${s.url}" target="_blank" rel="noopener noreferrer" style="--social-color:${s.color}">
+            <svg class="socials__icon" viewBox="0 0 24 24" fill="currentColor">${s.icon}</svg>
+            <span>${s.name}</span>
+          </a>
+        </li>
+      `).join("");
+    }
+
+    /* ========================================================================
+       INTERACTIVE SPA ROUTER
+       ======================================================================== */
+    function navigateTo(route) {
+      const views = {
+        "home": "view-home",
+        "home-lore": "view-home",
+        "ohne-pedia": "view-ohne-pedia",
+        "tools": "view-tools",
+        "vault": "view-vault",
+        "faq": "view-faq",
+        "profile": "view-profile"
+      };
+
+      const targetId = views[route] || "view-home";
+      document.querySelectorAll(".page-view").forEach(el => el.classList.remove("is-active"));
+      document.getElementById(targetId).classList.add("is-active");
+
+      document.querySelectorAll(".top-bar__menu a").forEach(a => {
+        const r = a.getAttribute("data-route");
+        a.classList.toggle("is-active", r === route || (route === "home-lore" && r === "home-lore"));
+      });
+
+      document.getElementById("site-nav").classList.remove("is-open");
+
+      if (route === "home-lore") {
+        setTimeout(() => {
+          document.getElementById("lore")?.scrollIntoView({ behavior: "smooth" });
+        }, 40);
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+
+    /* ========================================================================
+       INTERACTIVE LORE FILTER & HOVER PEEK
+       ======================================================================== */
+    function setupLoreFiltering(scope) {
+      const input = document.querySelector(`[data-lore-search-input="${scope}"]`);
+      const group = document.querySelector(`[data-lore-rarity-group="${scope}"]`);
+      const container = document.getElementById(`${scope}-lore-entries`);
+      const emptyMsg = document.getElementById(`${scope}-lore-empty`);
+      const countEl = document.getElementById(`${scope}-lore-count`);
+      let activeRarity = "";
+
+      function applyFilter() {
+        const query = input.value.trim().toLowerCase();
+        const cards = container.querySelectorAll(".lore-entry");
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+          const matchesRarity = !activeRarity || card.dataset.rarity === activeRarity;
+          const matchesQuery = !query || card.dataset.term.includes(query) || card.dataset.def.includes(query);
+          const show = matchesRarity && matchesQuery;
+          card.hidden = !show;
+          if (show) visibleCount++;
+        });
+
+        emptyMsg.hidden = visibleCount > 0;
+        if (countEl) {
+          countEl.textContent = `${visibleCount} ${visibleCount === 1 ? "entry" : "entries"}`;
+        }
+      }
+
+      input.addEventListener("input", applyFilter);
+      group.addEventListener("click", (e) => {
+        const btn = e.target.closest("[data-lore-depth]");
+        if (!btn) return;
+        activeRarity = btn.dataset.loreDepth;
+        group.querySelectorAll("[data-lore-depth]").forEach(b => b.setAttribute("aria-pressed", String(b === btn)));
+        applyFilter();
+      });
+    }
+
+    function setupLoreHoverPeek() {
+      const peek = document.getElementById("lore-peek-card");
+      document.addEventListener("mouseover", (e) => {
+        const entry = e.target.closest(".lore-entry");
+        if (!entry) return;
+        peek.innerHTML = generateLoreArtSVG(entry.dataset.art, entry.dataset.title);
+        peek.classList.add("is-visible");
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (!peek.classList.contains("is-visible")) return;
+        const x = Math.min(window.innerWidth - 240, e.clientX + 18);
+        const y = Math.min(window.innerHeight - 190, e.clientY + 18);
+        peek.style.left = `${x}px`;
+        peek.style.top = `${y}px`;
+      });
+
+      document.addEventListener("mouseout", (e) => {
+        if (e.target.closest(".lore-entry")) {
+          peek.classList.remove("is-visible");
+        }
+      });
+    }
+
+    /* ========================================================================
+       INTERACTIVE TOOLBOX & VAULT LIGHTBOX MODALS
+       ======================================================================== */
+    function openModal(html, lightTheme = false) {
+      const backdrop = document.getElementById("app-modal");
+      const box = document.getElementById("modal-box");
+      const content = document.getElementById("modal-content");
+      box.classList.toggle("modal-box--light", lightTheme);
+      content.innerHTML = html;
+      backdrop.classList.add("is-open");
+    }
+
+    function closeModal() {
+      document.getElementById("app-modal").classList.remove("is-open");
+    }
+
+    function launchToolModal(toolId) {
+      if (toolId === "skindle") {
+        openModal(`
+          <h2 id="modal-title" style="font-family:var(--font-pixel);font-size:26px;margin-bottom:8px;">SKINDLE #14</h2>
+          <p style="color:var(--dark-muted);margin-bottom:18px;">Guess today's Counter-Strike skin from its color swatches!</p>
+          <div style="display:flex;height:72px;border-radius:6px;overflow:hidden;margin-bottom:18px;border:1px solid rgba(255,255,255,0.2);">
+            <span style="background:#76706a;flex:56"></span>
+            <span style="background:#557700;flex:22"></span>
+            <span style="background:#aa473a;flex:18"></span>
+            <span style="background:#c0c8b0;flex:5"></span>
+          </div>
+          <div style="display:flex;gap:10px;margin-bottom:14px;">
+            <input id="skindle-input" type="text" placeholder="Type skin name (e.g. Dragon Lore, Safari Mesh)..." style="flex:1;padding:12px;border-radius:4px;background:#141619;border:1px solid rgba(255,255,255,0.2);color:#fff;" />
+            <button id="skindle-guess-btn" class="btn btn--solid" style="background:#E4AE39;color:#141619;border-color:#E4AE39;">Guess</button>
+          </div>
+          <p id="skindle-feedback" style="font-size:14px;font-weight:700;min-height:22px;"></p>
+        `);
+        document.getElementById("skindle-guess-btn").onclick = () => {
+          const val = document.getElementById("skindle-input").value.trim().toLowerCase();
+          const fb = document.getElementById("skindle-feedback");
+          if (!val) return;
+          if (val.includes("safari") || val.includes("boreal") || val.includes("forest") || val.includes("sand")) {
+            fb.style.color = "#4ADE80";
+            fb.textContent = "GOLD GOLD GOLD! Correct — Classic Camo / Safari Mesh palette!";
+            playSynthSound(SOUNDS[0]);
+          } else {
+            fb.style.color = "#F87171";
+            fb.textContent = `Not "${val}" — Hint: Think classic olive drab & tan CS2 finish!`;
+          }
+        };
+      } else if (toolId === "higherlower") {
+        let score = 0;
+        const pairs = [
+          { a: { name: "MOUZ", pts: 1960 }, b: { name: "The MongolZ", pts: 1890 } },
+          { a: { name: "The MongolZ", pts: 1890 }, b: { name: "NAVI", pts: 1985 } },
+          { a: { name: "NAVI", pts: 1985 }, b: { name: "DRILLAS", pts: 1420 } },
+          { a: { name: "DRILLAS", pts: 1420 }, b: { name: "Team Spirit", pts: 2015 } }
+        ];
+        let idx = 0;
+
+        function renderHL() {
+          const p = pairs[idx % pairs.length];
+          openModal(`
+            <h2 id="modal-title" style="font-family:var(--font-pixel);font-size:24px;margin-bottom:6px;">VRS HIGHER OR LOWER</h2>
+            <p style="color:var(--dark-muted);margin-bottom:18px;">Current Streak: <strong style="color:#E4AE39;">${score}</strong></p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;">
+              <div style="background:#141619;padding:24px;border-radius:6px;text-align:center;">
+                <p style="font-weight:800;font-size:20px;margin-bottom:8px;">${p.a.name}</p>
+                <p style="font-family:var(--font-pixel);font-size:22px;color:#4B69FF;">${p.a.pts.toLocaleString()}</p>
+              </div>
+              <div style="background:#141619;padding:24px;border-radius:6px;text-align:center;">
+                <p style="font-weight:800;font-size:20px;margin-bottom:12px;">${p.b.name}</p>
+                <div style="display:flex;gap:8px;justify-content:center;">
+                  <button class="btn btn--solid" id="hl-up" style="background:#16A34A;border-color:#16A34A;padding:8px 14px;">▲ Higher</button>
+                  <button class="btn btn--solid" id="hl-down" style="background:#EB4B4B;border-color:#EB4B4B;padding:8px 14px;">▼ Lower</button>
+                </div>
+              </div>
+            </div>
+            <p id="hl-msg" style="font-weight:700;font-size:14px;"></p>
+          `);
+          document.getElementById("hl-up").onclick = () => checkHL(true);
+          document.getElementById("hl-down").onclick = () => checkHL(false);
+        }
+
+        function checkHL(isHigher) {
+          const p = pairs[idx % pairs.length];
+          const win = isHigher ? p.b.pts >= p.a.pts : p.b.pts <= p.a.pts;
+          if (win) {
+            score++;
+            idx++;
+            renderHL();
+          } else {
+            document.getElementById("hl-msg").style.color = "#F87171";
+            document.getElementById("hl-msg").textContent = `Wrong! ${p.b.name} has ${p.b.pts} VRS points. Streak reset to 0.`;
+            score = 0;
+          }
+        }
+        renderHL();
+      } else if (toolId === "ohne") {
+        openModal(`
+          <h2 id="modal-title" style="font-family:var(--font-pixel);font-size:24px;margin-bottom:10px;">AM I THE REAL OHNEPIXEL?</h2>
+          <p style="color:var(--dark-muted);margin-bottom:20px;">Answer truthfully to calculate your Ohne DNA percentage.</p>
+          <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:20px;">
+            <label style="display:flex;align-items:center;gap:10px;background:#141619;padding:12px;border-radius:4px;">
+              <input type="checkbox" class="ohne-q" checked /> Do you inspect every single pattern seed on a $0.03 P250 Sand Dune?
+            </label>
+            <label style="display:flex;align-items:center;gap:10px;background:#141619;padding:12px;border-radius:4px;">
+              <input type="checkbox" class="ohne-q" checked /> Have you ever taken a 43-day "rejuicer" break?
+            </label>
+            <label style="display:flex;align-items:center;gap:10px;background:#141619;padding:12px;border-radius:4px;">
+              <input type="checkbox" class="ohne-q" /> Do you scream "GOLD GOLD GOLD" before the roll even stops?
+            </label>
+          </div>
+          <button id="calc-ohne-btn" class="btn btn--solid" style="background:#8847FF;border-color:#8847FF;">Calculate DNA</button>
+          <p id="ohne-dna-result" style="margin-top:16px;font-family:var(--font-pixel);font-size:20px;color:#E4AE39;"></p>
+        `);
+        document.getElementById("calc-ohne-btn").onclick = () => {
+          const checked = document.querySelectorAll(".ohne-q:checked").length;
+          const pct = checked === 3 ? "99%" : checked === 2 ? "73%" : checked === 1 ? "41%" : "12% (Uninstall CS2)";
+          document.getElementById("ohne-dna-result").textContent = `Result: ${pct} Ohnepixel`;
+        };
+      } else if (toolId === "sounds") {
+        openModal(`
+          <h2 id="modal-title" style="font-family:var(--font-pixel);font-size:24px;margin-bottom:8px;">FULL SOUNDBOARD (15 SOUNDS)</h2>
+          <p style="color:var(--dark-muted);margin-bottom:18px;">Click any pad below to trigger synthesized voice & sound effects.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;">
+            ${SOUNDS.map(s => `
+              <button type="button" data-play-sound="${s.id}" style="background:#141619;border:1.5px solid var(--rarity-${s.rarity});color:#fff;padding:10px 14px;border-radius:4px;font-family:var(--font-pixel);font-size:12px;">
+                [${s.key}] ${s.label}
+              </button>
+            `).join("")}
+          </div>
+        `);
+      } else {
+        openModal(`
+          <h2 id="modal-title" style="font-family:var(--font-pixel);font-size:24px;margin-bottom:8px;">${toolId.toUpperCase()}</h2>
+          <p style="color:var(--dark-muted);margin-bottom:18px;">Interactive telemetry & live stream archive loaded for @ohnepixel.</p>
+          <div style="background:#141619;padding:20px;border-radius:6px;border:1px solid rgba(255,255,255,0.12);">
+            <p style="font-family:var(--font-pixel);font-size:13px;color:#E4AE39;margin-bottom:8px;">● ARCHIVE STATUS: VERIFIED</p>
+            <p style="font-size:14px;color:#CBD5E1;">Total tracked streams since March 2020: 1,148 streams · Longest Rejuicer: 72 days (Aug 2024) · Top Chat Spam: LOL (100%), LO (64.4%), OOOO (42.7%).</p>
+          </div>
+        `);
+      }
+    }
+
+    function openVaultLightbox(idx) {
+      const item = VAULT_ITEMS[idx];
+      if (!item) return;
+      openModal(`
+        <div style="text-align:center;">
+          <p style="font-family:Silkscreen,monospace;font-size:12px;color:#525B66;margin-bottom:10px;">VAULT FRAME #${item.frame}</p>
+          <div style="max-width:420px;margin:0 auto 14px;border-radius:4px;overflow:hidden;border:2px solid #141619;">
+            ${generateVaultMemeSVG(item)}
+          </div>
+          <h2 id="modal-title" style="font-size:20px;font-weight:800;margin-bottom:16px;">${item.title}</h2>
+          <div style="display:flex;justify-content:center;gap:12px;">
+            <button class="btn btn--line" type="button" id="lb-prev">← Previous</button>
+            <button class="btn btn--solid" type="button" id="lb-next">Next →</button>
+          </div>
+        </div>
+      `, true);
+
+      document.getElementById("lb-prev").onclick = () => openVaultLightbox((idx - 1 + VAULT_ITEMS.length) % VAULT_ITEMS.length);
+      document.getElementById("lb-next").onclick = () => openVaultLightbox((idx + 1) % VAULT_ITEMS.length);
+    }
+
+    /* ========================================================================
+       FOOTER PIXEL DUST PARTICLE CANVAS
+       ======================================================================== */
+    function initFooterPixelDust() {
+      const canvas = document.getElementById("footer-dust-canvas");
+      const ctx = canvas.getContext("2d");
+      const colors = ["#4B69FF", "#8847FF", "#D32CE6", "#EB4B4B", "#E4AE39", "#FFFFFF"];
+      let particles = [];
+
+      function resize() {
+        canvas.width = canvas.offsetWidth || window.innerWidth;
+        canvas.height = canvas.offsetHeight || 220;
+      }
+
+      window.addEventListener("resize", resize);
+      resize();
+
+      for (let i = 0; i < 65; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() > 0.5 ? 4 : 6,
+          vy: -0.25 - Math.random() * 0.45,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          alpha: 0.25 + Math.random() * 0.65
+        });
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          p.y += p.vy;
+          if (p.y < -10) {
+            p.y = canvas.height + 10;
+            p.x = Math.random() * canvas.width;
+          }
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = p.alpha;
+          ctx.fillRect(Math.round(p.x), Math.round(p.y), p.size, p.size);
+        });
+        requestAnimationFrame(animate);
+      }
+      animate();
+    }
+
+    /* ========================================================================
+       INITIALIZATION & EVENT WIRING
+       ======================================================================== */
+    document.addEventListener("DOMContentLoaded", () => {
+      renderHeroMonthStrip();
+      renderChatTicker();
+      renderLoreSections();
+      renderToolboxGrids();
+      renderSoundboardPads();
+      renderTimeline();
+      renderVault();
+      renderFAQAndReviewsAndSocials();
+      setupLoreFiltering("home");
+      setupLoreFiltering("full");
+      setupLoreHoverPeek();
+      initFooterPixelDust();
+
+      // Live Rejuicer Clock ticking every second
+      let totalSeconds = (4 * 3600) + (37 * 60) + 53;
+      setInterval(() => {
+        totalSeconds++;
+        const days = Math.floor(totalSeconds / 86400);
+        const hrs = Math.floor((totalSeconds % 86400) / 3600);
+        const min = Math.floor((totalSeconds % 3600) / 60);
+        const sec = totalSeconds % 60;
+        document.getElementById("clk-days").textContent = String(days).padStart(2, "0");
+        document.getElementById("clk-hrs").textContent = String(hrs).padStart(2, "0");
+        document.getElementById("clk-min").textContent = String(min).padStart(2, "0");
+        document.getElementById("clk-sec").textContent = String(sec).padStart(2, "0");
+      }, 1000);
+
+      // Coffee Cup Knock-Over Easter Egg
+      const cupWrap = document.getElementById("hero-coffee-cup");
+      const statusNote = document.getElementById("hero-status-note");
+      cupWrap.addEventListener("click", () => {
+        const knocked = cupWrap.classList.toggle("is-knocked");
+        statusNote.textContent = knocked ? "bro spilled the rejuicer!" : "he’s on a rejuicer";
+      });
+
+      // Live/Offline Status Pill Toggle (Interactive Demo)
+      let isLive = false;
+      const livePill = document.getElementById("live-status-pill");
+      const liveText = document.getElementById("live-pill-text");
+      const heroAns = document.getElementById("hero-answer");
+      const chatMode = document.getElementById("chat-ticker-mode");
+      const clockLabel = document.getElementById("clock-label");
+
+      livePill.addEventListener("click", () => {
+        isLive = !isLive;
+        livePill.classList.toggle("is-live", isLive);
+        liveText.textContent = isLive ? "Live now" : "Offline";
+        heroAns.textContent = isLive ? "YES." : "NOPE.";
+        heroAns.classList.toggle("is-yes", isLive);
+        statusNote.textContent = isLive ? "opening cases right now!" : "he’s on a rejuicer";
+        chatMode.textContent = isLive ? "Live chat" : "Offline chat";
+        clockLabel.textContent = isLive ? "Live right now" : "Since last stream";
+      });
+
+      // Route Navigation Delegation
+      document.addEventListener("click", (e) => {
+        const routeLink = e.target.closest("[data-route]");
+        if (routeLink) {
+          e.preventDefault();
+          navigateTo(routeLink.getAttribute("data-route"));
+        }
+
+        const soundBtn = e.target.closest("[data-play-sound]");
+        if (soundBtn) {
+          const sId = soundBtn.getAttribute("data-play-sound");
+          const sObj = SOUNDS.find(x => x.id === sId) || SOUNDS[0];
+          playSynthSound(sObj);
+          const wrap = document.getElementById(`pad-wrap-${sId}`);
+          if (wrap) {
+            wrap.classList.add("is-playing");
+            setTimeout(() => wrap.classList.remove("is-playing"), 220);
+          }
+        }
+
+        const dlBtn = e.target.closest("[data-download-sound]");
+        if (dlBtn) {
+          const name = dlBtn.getAttribute("data-download-sound");
+          openModal(`<h2 id="modal-title" style="font-family:var(--font-pixel);font-size:20px;margin-bottom:8px;">DOWNLOAD READY</h2><p style="color:var(--dark-muted);">Prepared synthesized sound clip: <strong>${name}.mp3</strong></p>`, false);
+        }
+
+        const toolCard = e.target.closest("[data-open-tool]");
+        if (toolCard) {
+          launchToolModal(toolCard.getAttribute("data-open-tool"));
+        }
+
+        const vaultCard = e.target.closest("[data-vault-idx]");
+        if (vaultCard) {
+          openVaultLightbox(Number(vaultCard.getAttribute("data-vault-idx")));
+        }
+      });
+
+      // Keyboard Shortcuts (1-6 for Soundboard Pads, Escape for Modal)
+      document.addEventListener("keydown", (e) => {
+        if (e.target.tagName === "INPUT") return;
+        if (e.key === "Escape") closeModal();
+        const sObj = SOUNDS.find(s => s.key.toLowerCase() === e.key.toLowerCase());
+        if (sObj) {
+          playSynthSound(sObj);
+          const wrap = document.getElementById(`pad-wrap-${sObj.id}`);
+          if (wrap) {
+            wrap.classList.add("is-playing");
+            setTimeout(() => wrap.classList.remove("is-playing"), 220);
+          }
+        }
+      });
+
+      // Timeline Scroll Controls
+      const tlViewport = document.getElementById("timeline-viewport");
+      document.getElementById("timeline-prev").addEventListener("click", () => {
+        tlViewport.scrollBy({ left: -340, behavior: "smooth" });
+      });
+      document.getElementById("timeline-next").addEventListener("click", () => {
+        tlViewport.scrollBy({ left: 340, behavior: "smooth" });
+      });
+
+      // All 15 Sounds Button & Random Vault Button
+      document.getElementById("open-all-sounds-btn").addEventListener("click", () => launchToolModal("sounds"));
+      document.getElementById("random-vault-btn").addEventListener("click", () => {
+        const randIdx = Math.floor(Math.random() * VAULT_ITEMS.length);
+        openVaultLightbox(randIdx);
+      });
+
+      // Modal Close Handlers
+      document.getElementById("modal-close-btn").addEventListener("click", closeModal);
+      document.getElementById("app-modal").addEventListener("click", (e) => {
+        if (e.target.id === "app-modal") closeModal();
+      });
+
+      // Mobile Navigation Toggle
+      const mobBtn = document.getElementById("mobile-menu-btn");
+      const siteNav = document.getElementById("site-nav");
+      mobBtn.addEventListener("click", () => {
+        const open = siteNav.classList.toggle("is-open");
+        mobBtn.setAttribute("aria-expanded", String(open));
+      });
+
+      // Cookie Consent Banner Handlers
+      const consentBox = document.getElementById("cookie-consent");
+      document.querySelectorAll("[data-consent-btn]").forEach(btn => {
+        btn.addEventListener("click", () => consentBox.classList.add("is-hidden"));
+      });
+      document.getElementById("open-cookie-settings").addEventListener("click", () => {
+        consentBox.classList.remove("is-hidden");
+      });
+
+      // Back to Top Button Visibility & Action
+      const bttBtn = document.getElementById("back-to-top");
+      window.addEventListener("scroll", () => {
+        bttBtn.classList.toggle("is-visible", window.scrollY > 420);
+      });
+      bttBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    });
+  </script>
+</body>
+</html>

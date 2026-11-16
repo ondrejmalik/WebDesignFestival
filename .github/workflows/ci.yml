@@ -1,0 +1,35 @@
+name: Design Guard
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: guard-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  guard:
+    name: Smoke + language tests (changed designs)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Guard changed designs (PR) / all designs (manual)
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            node tests/guard.js --changed origin/${{ github.base_ref }}
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            node tests/guard.js --all
+          else
+            node tests/guard.js --changed HEAD~1
+          fi
