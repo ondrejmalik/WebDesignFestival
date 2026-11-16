@@ -965,3 +965,140 @@ a {
     max-width: 100%;
   }
 }
+
+/* === Program Favorites & Schedule Planner === */
+/* 09-wand v2 program schedule & my schedule additions */
+
+.program-plan-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding: 14px 20px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.plan-bar-copy {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.plan-bar-count {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.plan-bar-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-volt);
+}
+
+.plan-bar-link:hover {
+  text-decoration: underline;
+}
+
+.slot-row {
+  display: grid;
+  grid-template-columns: 140px 1fr auto auto;
+  gap: 16px;
+  padding: 16px 22px;
+  align-items: center;
+}
+
+.fav-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-glass);
+  border: 1px solid var(--border-strong);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  min-height: 36px;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.fav-toggle-btn:hover {
+  background: var(--bg-glass-hover);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.fav-toggle-btn.is-saved,
+.fav-toggle-btn[aria-pressed="true"] {
+  background: var(--accent-volt);
+  border-color: var(--accent-volt);
+  color: #000000;
+}
+
+.fav-toggle-btn:focus-visible {
+  outline: 2px solid var(--accent-volt);
+  outline-offset: 2px;
+}
+
+.my-schedule-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.schedule-item-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.conflict-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 75, 75, 0.12);
+  border: 1px solid rgba(255, 75, 75, 0.35);
+  color: #ff6b6b;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.empty-plan-box {
+  text-align: center;
+  padding: 48px 24px;
+  background: var(--bg-surface);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-lg);
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+@media (max-width: 768px) {
+  .slot-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .fav-toggle-btn {
+    min-height: 44px;
+    width: 100%;
+    justify-content: center;
+  }
+}

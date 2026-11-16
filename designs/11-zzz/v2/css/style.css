@@ -1005,3 +1005,168 @@ button {
     max-width: 100%;
   }
 }
+
+/* === Program Favorites & Schedule Planner === */
+/* === Add to My Schedule & Program Plan Bar Styles (11-zzz) === */
+
+/* 1. Program Plan Bar (.program-plan-bar) */
+.program-plan-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 14px 20px;
+  margin-bottom: 24px;
+}
+
+.plan-bar-copy {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.plan-bar-count {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--accent-cyan);
+}
+
+.plan-bar-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  background-color: var(--accent-cyan-tint);
+  border: 1px solid var(--accent-cyan-border);
+  color: var(--accent-cyan);
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.plan-bar-link:hover {
+  background-color: rgba(56, 189, 248, 0.2);
+}
+
+/* 2. Schedule Row & Table Adjustments for Action Slot (.fav-toggle-btn) */
+.set-row {
+  display: grid;
+  grid-template-columns: 140px 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.schedule-table .col-action,
+.schedule-table td.col-action {
+  text-align: right;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .set-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 14px;
+  }
+}
+
+/* 3. Add to My Schedule Toggle Button (.fav-toggle-btn) */
+.fav-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.fav-toggle-btn:hover {
+  border-color: var(--text-muted);
+  color: var(--text-primary);
+}
+
+.fav-toggle-btn:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+}
+
+.fav-toggle-btn.is-saved,
+.fav-toggle-btn[aria-pressed="true"] {
+  background-color: var(--accent-cyan);
+  border-color: var(--accent-cyan);
+  color: var(--bg-deep);
+}
+
+.fav-toggle-btn.is-saved:hover,
+.fav-toggle-btn[aria-pressed="true"]:hover {
+  background-color: #7dd3fc;
+  border-color: #7dd3fc;
+}
+
+@media (max-width: 768px) {
+  .fav-toggle-btn {
+    min-height: 44px;
+    width: 100%;
+  }
+}
+
+/* 4. My Schedule & Utility Classes */
+.my-schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.schedule-item-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.conflict-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background-color: var(--accent-amber-tint);
+  border: 1px solid var(--accent-amber-border);
+  color: var(--accent-amber);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.empty-plan-box {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 40px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}

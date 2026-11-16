@@ -57,6 +57,13 @@
       </div>
     </section>
 
+    <div class="program-plan-bar" aria-live="polite">
+      <p class="plan-bar-copy">
+        <span data-i18n="prog_plan_label">My Schedule:</span>
+        <span class="plan-bar-count" id="plan-bar-count">0</span>
+      </p>
+      <a href="my-schedule.html" class="plan-bar-link" data-i18n="prog_open_plan">Open My Schedule</a>
+    </div>
     <section id="day-1" class="section-block">
       <div class="container">
         <div class="day-header">
@@ -75,44 +82,57 @@
                 <th scope="col" data-i18n="table.artist">Artist</th>
                 <th scope="col" data-i18n="table.genre">Genre</th>
                 <th scope="col" data-i18n="table.stage">Stage</th>
+                <th scope="col" class="col-action" data-i18n="col_plan">Plan</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr data-perf-id="perf-06">
                 <td class="col-time">19:25-20:20</td>
                 <td class="col-artist"><strong>Electric Meadow</strong> <span class="origin-tag">AT</span></td>
                 <td>Electro-Folk</td>
                 <td><span class="stage-pill stage-solar">Solar Horizon Stage</span></td>
+              
+                <td class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-06" aria-pressed="false" data-i18n="prog_add">+ Add</button></td>
               </tr>
-              <tr>
+              <tr data-perf-id="perf-07">
                 <td class="col-time">20:40-21:40</td>
                 <td class="col-artist"><strong>Mirage Horizon</strong> <span class="origin-tag">UK</span></td>
                 <td>Alternative Rock</td>
                 <td><span class="stage-pill stage-solar">Solar Horizon Stage</span></td>
+              
+                <td class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-07" aria-pressed="false" data-i18n="prog_add">+ Add</button></td>
               </tr>
-              <tr>
+              <tr data-perf-id="perf-16">
                 <td class="col-time">21:00-22:15</td>
                 <td class="col-artist"><strong>Krypton DJ</strong> <span class="origin-tag">HU</span></td>
                 <td>Hypnotic Techno</td>
                 <td><span class="stage-pill stage-lunar">Lunar Forest Dome</span></td>
+              
+                <td class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-16" aria-pressed="false" data-i18n="prog_add">+ Add</button></td>
               </tr>
-              <tr>
+              <tr data-perf-id="perf-08">
                 <td class="col-time">22:00-23:10</td>
                 <td class="col-artist"><strong>Solar Flare</strong> <span class="origin-tag">DE</span></td>
                 <td>Nu-Disco / Funk</td>
                 <td><span class="stage-pill stage-solar">Solar Horizon Stage</span></td>
+              
+                <td class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-08" aria-pressed="false" data-i18n="prog_add">+ Add</button></td>
               </tr>
-              <tr>
+              <tr data-perf-id="perf-17">
                 <td class="col-time">22:30-23:50</td>
                 <td class="col-artist"><strong>Modular Horizon</strong> <span class="origin-tag">DE</span></td>
                 <td>Live Hardware Techno</td>
                 <td><span class="stage-pill stage-lunar">Lunar Forest Dome</span></td>
+              
+                <td class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-17" aria-pressed="false" data-i18n="prog_add">+ Add</button></td>
               </tr>
-              <tr>
+              <tr data-perf-id="perf-09">
                 <td class="col-time">23:30-00:45</td>
                 <td class="col-artist"><strong>Starlight Odyssey</strong> <span class="origin-tag">FR</span></td>
                 <td>Electronic Indie</td>
                 <td><span class="stage-pill stage-solar">Solar Horizon Stage</span></td>
+              
+                <td class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-09" aria-pressed="false" data-i18n="prog_add">+ Add</button></td>
               </tr>
             </tbody>
           </table>
@@ -138,44 +158,57 @@
                 <th scope="col" data-i18n="table.artist">Artist</th>
                 <th scope="col" data-i18n="table.genre">Genre</th>
                 <th scope="col" data-i18n="table.stage">Stage</th>
+                <th scope="col" class="col-action" data-i18n="col_plan">Plan</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr data-perf-id="perf-25">
                 <td class="col-time">17:45-18:40</td>
                 <td class="col-artist"><strong>Silver Tides</strong> <span class="origin-tag">CZ</span></td>
                 <td>Shoegaze</td>
                 <td><span class="stage-pill stage-solar">Solar Horizon Stage</span></td>
+              
+                <td class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-25" aria-pressed="false" data-i18n="prog_add">+ Add</button></td>
               </tr>
-              <tr>
+              <tr data-perf-id="perf-35">
                 <td class="col-time">19:15-20:15</td>
                 <td class="col-artist"><strong>Monolith Audio</strong> <span class="origin-tag">DE</span></td>
                 <td>Peak Time Techno</td>
                 <td><span class="stage-pill stage-lunar">Lunar Forest Dome</span></td>
+              
+                <td class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-35" aria-pressed="false" data-i18n="prog_add">+ Add</button></td>
               </tr>
-              <tr>
+              <tr data-perf-id="perf-27">
                 <td class="col-time">20:20-21:20</td>
                 <td class="col-artist"><strong>Wild Horizon</strong> <span class="origin-tag">DE</span></td>
                 <td>Post-Punk Revival</td>
                 <td><span class="stage-pill stage-solar">Solar Horizon Stage</span></td>
+              
+                <td class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-27" aria-pressed="false" data-i18n="prog_add">+ Add</button></td>
               </tr>
-              <tr>
+              <tr data-perf-id="perf-28">
                 <td class="col-time">21:40-22:50</td>
                 <td class="col-artist"><strong>Magnetic River</strong> <span class="origin-tag">FR</span></td>
                 <td>Indie Dance</td>
                 <td><span class="stage-pill stage-solar">Solar Horizon Stage</span></td>
+              
+                <td class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-28" aria-pressed="false" data-i18n="prog_add">+ Add</button></td>
               </tr>
-              <tr>
+              <tr data-perf-id="perf-37">
                 <td class="col-time">22:00-23:20</td>
                 <td class="col-artist"><strong>Shadowplay DJ</strong> <span class="origin-tag">CZ</span></td>
                 <td>Dark Wave Techno</td>
                 <td><span class="stage-pill stage-lunar">Lunar Forest Dome</span></td>
+              
+                <td class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-37" aria-pressed="false" data-i18n="prog_add">+ Add</button></td>
               </tr>
-              <tr>
+              <tr data-perf-id="perf-29">
                 <td class="col-time">23:10-00:25</td>
                 <td class="col-artist"><strong>Vortex Motion</strong> <span class="origin-tag">UK</span></td>
                 <td>Nu-Electro</td>
                 <td><span class="stage-pill stage-solar">Solar Horizon Stage</span></td>
+              
+                <td class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-29" aria-pressed="false" data-i18n="prog_add">+ Add</button></td>
               </tr>
             </tbody>
           </table>
@@ -201,44 +234,57 @@
                 <th scope="col" data-i18n="table.artist">Artist</th>
                 <th scope="col" data-i18n="table.genre">Genre</th>
                 <th scope="col" data-i18n="table.stage">Stage</th>
+                <th scope="col" class="col-action" data-i18n="col_plan">Plan</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr data-perf-id="perf-46">
                 <td class="col-time">18:30-19:30</td>
                 <td class="col-artist"><strong>Luminous Band</strong> <span class="origin-tag">IT</span></td>
                 <td>Indie Funk</td>
                 <td><span class="stage-pill stage-solar">Solar Horizon Stage</span></td>
+              
+                <td class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-46" aria-pressed="false" data-i18n="prog_add">+ Add</button></td>
               </tr>
-              <tr>
+              <tr data-perf-id="perf-47">
                 <td class="col-time">19:50-20:50</td>
                 <td class="col-artist"><strong>The Velvet Trails</strong> <span class="origin-tag">SE</span></td>
                 <td>Space Rock</td>
                 <td><span class="stage-pill stage-solar">Solar Horizon Stage</span></td>
+              
+                <td class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-47" aria-pressed="false" data-i18n="prog_add">+ Add</button></td>
               </tr>
-              <tr>
+              <tr data-perf-id="perf-48">
                 <td class="col-time">21:10-22:15</td>
                 <td class="col-artist"><strong>Prismatics</strong> <span class="origin-tag">UK</span></td>
                 <td>Dance Punk</td>
                 <td><span class="stage-pill stage-solar">Solar Horizon Stage</span></td>
+              
+                <td class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-48" aria-pressed="false" data-i18n="prog_add">+ Add</button></td>
               </tr>
-              <tr>
+              <tr data-perf-id="perf-57">
                 <td class="col-time">21:30-22:45</td>
                 <td class="col-artist"><strong>Galactic Orbit</strong> <span class="origin-tag">IT</span></td>
                 <td>Melodic Techno</td>
                 <td><span class="stage-pill stage-lunar">Lunar Forest Dome</span></td>
+              
+                <td class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-57" aria-pressed="false" data-i18n="prog_add">+ Add</button></td>
               </tr>
-              <tr>
+              <tr data-perf-id="perf-49">
                 <td class="col-time">22:35-23:55</td>
                 <td class="col-artist"><strong>Starlight Runners</strong> <span class="origin-tag">DK</span></td>
                 <td>Electropop Headliner</td>
                 <td><span class="stage-pill stage-solar">Solar Horizon Stage</span></td>
+              
+                <td class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-49" aria-pressed="false" data-i18n="prog_add">+ Add</button></td>
               </tr>
-              <tr>
+              <tr data-perf-id="perf-50">
                 <td class="col-time">00:10-01:15</td>
                 <td class="col-artist"><strong>Final Cascade</strong> <span class="origin-tag">CZ</span></td>
                 <td>Orchestral Electronic</td>
                 <td><span class="stage-pill stage-solar">Solar Horizon Stage</span></td>
+              
+                <td class="col-action"><button type="button" class="fav-toggle-btn" data-perf-id="perf-50" aria-pressed="false" data-i18n="prog_add">+ Add</button></td>
               </tr>
             </tbody>
           </table>
@@ -290,5 +336,112 @@
     </a>
   </nav>
 <script src="js/lang.js"></script>
+<script>
+  (function () {
+    var FAV_KEY = "festival_favorites";
+    var LABELS = {
+      en: { add: "+ Add", added: "✓ In Plan", countOne: "1 set", countMany: " sets" },
+      cs: { add: "+ Přidat", added: "✓ V plánu", countOne: "1 vystoupení", countFew: " vystoupení", countMany: " vystoupení" }
+    };
+
+    function getLang() {
+      if (typeof window.getFestivalLang === "function") return window.getFestivalLang();
+      return document.documentElement.lang === "cs" ? "cs" : "en";
+    }
+
+    function readFavorites() {
+      try {
+        var raw = window.localStorage.getItem(FAV_KEY);
+        if (!raw) return [];
+        var parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) {
+          return parsed.map(function (x) {
+            return typeof x === "string" ? x : (x && x.id ? String(x.id) : "");
+          }).filter(Boolean);
+        }
+      } catch (e) {}
+      return [];
+    }
+
+    function writeFavorites(ids) {
+      var seen = {};
+      var clean = [];
+      ids.forEach(function (id) {
+        if (id && !seen[id]) {
+          seen[id] = true;
+          clean.push(id);
+        }
+      });
+      try {
+        window.localStorage.setItem(FAV_KEY, JSON.stringify(clean));
+      } catch (e) {}
+      try {
+        window.dispatchEvent(new Event("favoritesUpdated"));
+      } catch (e) {}
+      syncUI();
+    }
+
+    function formatCount(n, lang) {
+      if (lang === "cs" && typeof window.formatCzPlural === "function") {
+        return window.formatCzPlural(n, "uložené vystoupení", "uložená vystoupení", "uložených vystoupení");
+      }
+      if (lang === "cs") {
+        if (n === 1) return "1 vystoupení";
+        return n + " vystoupení";
+      }
+      return n === 1 ? "1 set" : n + " sets";
+    }
+
+    function syncUI() {
+      var favs = readFavorites();
+      var lang = getLang();
+      var dict = LABELS[lang] || LABELS.en;
+
+      var countEl = document.getElementById("plan-bar-count");
+      if (countEl) countEl.textContent = formatCount(favs.length, lang);
+
+      var btns = document.querySelectorAll(".fav-toggle-btn[data-perf-id]");
+      for (var i = 0; i < btns.length; i++) {
+        var btn = btns[i];
+        var id = btn.getAttribute("data-perf-id");
+        var saved = favs.indexOf(id) !== -1;
+        btn.setAttribute("aria-pressed", saved ? "true" : "false");
+        btn.setAttribute("data-i18n", saved ? "prog_added" : "prog_add");
+        btn.classList.toggle("is-saved", saved);
+        btn.textContent = saved ? dict.added : dict.add;
+      }
+    }
+
+    document.addEventListener("click", function (ev) {
+      var btn = ev.target && ev.target.closest ? ev.target.closest(".fav-toggle-btn[data-perf-id]") : null;
+      if (!btn) return;
+      var id = btn.getAttribute("data-perf-id");
+      if (!id) return;
+      var favs = readFavorites();
+      var idx = favs.indexOf(id);
+      if (idx === -1) favs.push(id);
+      else favs.splice(idx, 1);
+      writeFavorites(favs);
+    });
+
+    window.addEventListener("storage", function (ev) {
+      if (!ev || ev.key === FAV_KEY) syncUI();
+    });
+    window.addEventListener("languageChanged", syncUI);
+
+    if (typeof MutationObserver === "function") {
+      new MutationObserver(syncUI).observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["lang"]
+      });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", syncUI);
+    } else {
+      syncUI();
+    }
+  })();
+</script>
 </body>
 </html>

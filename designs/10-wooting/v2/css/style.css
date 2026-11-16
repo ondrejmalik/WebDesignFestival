@@ -993,3 +993,206 @@ a {
     max-width: 100%;
   }
 }
+
+/* === Program Favorites & Schedule Planner === */
+/* ==========================================================================
+   Schedule Planning & Schedule UI Additions for 10-wooting v2
+   ========================================================================== */
+
+/* 1. Program Plan Summary Bar */
+.program-plan-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 20px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  margin-bottom: 24px;
+}
+
+@media (min-width: 640px) {
+  .program-plan-bar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.plan-bar-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.plan-bar-count {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink-primary);
+}
+
+.plan-bar-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--ink-secondary);
+  transition: color 0.15s ease;
+}
+
+.plan-bar-link:hover {
+  color: var(--ink-primary);
+}
+
+
+/* 2. Schedule Row & Table Adjustments (5-column desktop + mobile stack) */
+.schedule-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-subtle);
+  align-items: flex-start;
+}
+
+@media (min-width: 820px) {
+  .schedule-row {
+    grid-template-columns: 120px 150px 1.3fr 1fr 140px;
+    align-items: center;
+    gap: 16px;
+  }
+}
+
+/* Fallback/standard schedule tables */
+.schedule-table .col-action,
+.schedule-row .col-action {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 4px;
+}
+
+@media (min-width: 820px) {
+  .schedule-table .col-action,
+  .schedule-row .col-action {
+    margin-top: 0;
+    justify-content: flex-end;
+  }
+}
+
+
+/* 3. Favorite Toggle Button Styles */
+.fav-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  min-height: 36px;
+  background-color: var(--bg-page);
+  color: var(--ink-primary);
+  border: 1px solid var(--border-strong);
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+@media (max-width: 768px) {
+  .fav-toggle-btn {
+    min-height: 44px;
+    width: 100%;
+  }
+}
+
+.fav-toggle-btn:hover {
+  background-color: var(--bg-muted);
+  border-color: var(--border-strong);
+}
+
+.fav-toggle-btn:focus-visible {
+  outline: 2px solid var(--accent-amber);
+  outline-offset: 2px;
+}
+
+/* Saved State */
+.fav-toggle-btn.is-saved,
+.fav-toggle-btn[aria-pressed="true"] {
+  background-color: var(--accent-amber);
+  color: var(--accent-amber-ink);
+  border-color: var(--accent-amber);
+}
+
+.fav-toggle-btn.is-saved:hover,
+.fav-toggle-btn[aria-pressed="true"]:hover {
+  background-color: var(--accent-amber-hover);
+  border-color: var(--accent-amber-hover);
+}
+
+
+/* 4. My Schedule, Cards, Conflict Badges & Empty State Utilities */
+.my-schedule-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .my-schedule-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .my-schedule-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.schedule-item-card {
+  background-color: var(--bg-page);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+}
+
+.conflict-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  background-color: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+  font-size: 0.75rem;
+  font-weight: 700;
+  width: fit-content;
+}
+
+.empty-plan-box {
+  background-color: var(--bg-surface);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: 48px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.empty-plan-box p {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--ink-secondary);
+  max-width: 40ch;
+}
