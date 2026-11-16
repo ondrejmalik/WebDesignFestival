@@ -1,0 +1,923 @@
+<!DOCTYPE html><html lang="en" data-theme="dark"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <base href="/">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#0D1117">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0D1117">
+  <meta name="color-scheme" content="dark">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://zzz.analytics.moe/#website",
+        "url": "https://zzz.analytics.moe/",
+        "name": "ZZZ Analytics",
+        "alternateName": ["ZZZAnalytics", "Zenless Zone Zero Analytics"],
+        "description": "Deadly Assault run database, DPS leaderboard, tier lists, and theorycraft tools for Zenless Zone Zero.",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://zzz.analytics.moe/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://zzz.analytics.moe/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://zzz.analytics.moe/#organization",
+        "name": "ZZZ Analytics",
+        "alternateName": ["ZZZAnalytics", "Zenless Zone Zero Analytics"],
+        "url": "https://zzz.analytics.moe/",
+        "knowsAbout": [
+          "Zenless Zone Zero",
+          "Deadly Assault",
+          "DPS rankings",
+          "team compositions",
+          "tier list",
+          "theorycrafting"
+        ],
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://zzz.analytics.moe/images/normlogo.png",
+          "width": 128,
+          "height": 128
+        },
+        "sameAs": ["https://discord.gg/Tsx2CYGzna"]
+      }
+    ]
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg?v=1">
+  <link rel="icon" type="image/png" href="/assets/normlogo.png?v=222">
+  <link rel="apple-touch-icon" href="/assets/normlogo.png?v=222">
+
+  <!-- Inter and JetBrains Mono are self-hosted (css/fonts.css, assets/fonts/), so
+       visitors' IP addresses are not sent to Google Fonts. -->
+  <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin="">
+  <link rel="preload" href="/assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin="">
+
+  <script defer="" src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js" integrity="sha384-jb8JQMbMoBUzgWatfe6COACi2ljcDdZQ2OxczGA3bGNeWe+6DChMTBJemed7ZnvJ" crossorigin="anonymous"></script>
+
+  <!-- Motion (motion.dev) — vanilla global build. Used for spring-driven
+       micro-interactions (the sliding segmented-control pill); app.js degrades
+       to CSS transitions if this fails to load. -->
+  <script defer="" src="https://cdn.jsdelivr.net/npm/motion@14.0.0/dist/motion.js" integrity="sha384-iRo3gRrhwD2dn+29qj2j9vUQCrD/MuD7J9d9bu+wslL4I2KswbiilPL8WV8Y/N/D" crossorigin="anonymous"></script>
+
+  <script defer="" src="/js/bundle.433fa17c4f.js"></script>
+
+  <link rel="stylesheet" href="/css/bundle.5156d8c71e.css">
+
+  <!-- Analytics is Cloudflare Web Analytics, injected at the edge (automatic setup
+       in the Cloudflare dashboard), so page views never reach Vercel. -->
+
+    <title>ZZZ Analytics — Zenless Zone Zero agents</title>
+    <meta name="description" content="Zenless Zone Zero agent hubs: best teams, peak DPS, W-Engines and Drive Disc sets for every agent, from community Deadly Assault runs.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://zzz.analytics.moe/wiki/agents">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="ZZZ Analytics">
+    <meta property="og:title" content="ZZZ Analytics — Zenless Zone Zero agents">
+    <meta property="og:description" content="Zenless Zone Zero agent hubs: best teams, peak DPS, W-Engines and Drive Disc sets for every agent, from community Deadly Assault runs.">
+    <meta property="og:url" content="https://zzz.analytics.moe/wiki/agents">
+    <meta property="og:image" content="https://zzz.analytics.moe/images/og-cover.png?v=2">
+    <meta property="og:image:width" content="1260">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Truly neutral zenless data">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ZZZ Analytics — Zenless Zone Zero agents">
+    <meta name="twitter:description" content="Zenless Zone Zero agent hubs: best teams, peak DPS, W-Engines and Drive Disc sets for every agent, from community Deadly Assault runs.">
+    <meta name="twitter:image" content="https://zzz.analytics.moe/images/og-cover.png?v=2">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"ZZZ Analytics — Zenless Zone Zero agents","description":"Zenless Zone Zero agent hubs: best teams, peak DPS, W-Engines and Drive Disc sets for every agent, from community Deadly Assault runs.","url":"https://zzz.analytics.moe/wiki/agents","isPartOf":{"@id":"https://zzz.analytics.moe/#website"}}</script>
+</head>
+<body>
+
+  <!-- Mobile top bar: menu button, logo and the active page's title. On
+       desktop the left rail is the whole navigation and this bar is hidden. -->
+  <header class="mobile-topbar">
+    <button type="button" class="nav-menu-toggle" id="nav-menu-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="site-rail">
+      <span class="nav-menu-toggle-bars" aria-hidden="true"></span>
+    </button>
+    <a class="brand" href="/" data-nav-tab="leaderboard" title="Click to view Leaderboard">
+      <span class="brand-logo" aria-hidden="true"></span>
+    </a>
+    <span class="nav-page-title" id="nav-page-title">Wiki</span>
+  </header>
+
+  <div class="nav-sidebar-overlay" id="nav-sidebar-overlay" hidden=""></div>
+  <!-- Left rail (css/rail.css): icons only, widening over the page on hover or
+       keyboard focus to show the labels. On phones it is the menu drawer. -->
+  <nav class="site-rail" id="site-rail" aria-label="Site">
+    <div class="rail-group">
+      <a class="rail-brand" href="/" data-nav-tab="leaderboard"><span class="brand-logo" aria-hidden="true"></span><span class="rail-label rail-label--brand">zzz analytics</span></a>
+      <button type="button" class="rail-item rail-item--submit" id="open-upload-btn" aria-description="Submit a run"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 0 1024 1024" fill="currentColor"><path d="M544 864V672h128L512 480 352 672h128v192H320v-1.6c-5.376.32-10.496 1.6-16 1.6A240 240 0 0 1 64 624c0-123.136 93.12-223.488 212.608-237.248A239.808 239.808 0 0 1 512 192a239.872 239.872 0 0 1 235.456 194.752c119.488 13.76 212.48 114.112 212.48 237.248a240 240 0 0 1-240 240c-5.376 0-10.56-1.28-16-1.6v1.6H544z"></path></svg></span><span class="rail-label" data-i18n="Submit Run">Submit Run</span></button>
+      <a class="rail-item nav-tab-btn" data-nav-tab="leaderboard" id="nav-btn-leaderboard" href="/"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 0 1024 1024" fill="currentColor"><path d="M512 128 128 447.936V896h255.936V640H640v256h255.936V447.936z"></path></svg></span><span class="rail-label" data-i18n="Leaderboard">Leaderboard</span></a>
+      <a class="rail-item nav-tab-btn" data-nav-tab="tier-list" id="nav-btn-tier-list" href="/tier-list" aria-description="Automated DPS vs Partner Dependency Tier List"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 0 1024 1024" fill="currentColor"><path d="M416 896V128h192v768H416zm-288 0V448h192v448H128zm576 0V320h192v576H704z"></path></svg></span><span class="rail-label" data-i18n="Tier List">Tier List</span></a>
+      <a class="rail-item nav-tab-btn" data-nav-tab="agents" id="nav-btn-agents" href="/wiki/agents" aria-description="Per-agent team comps, peak DPS, W-Engines and Drive Disc sets" aria-current="page"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 0 1024 1024" fill="currentColor"><path d="M512 64a448 448 0 1 1 0 896.064A448 448 0 0 1 512 64zm67.2 275.072c33.28 0 60.288-23.104 60.288-57.344s-27.072-57.344-60.288-57.344c-33.28 0-60.16 23.104-60.16 57.344s26.88 57.344 60.16 57.344zM590.912 699.2c0-6.848 2.368-24.64 1.024-34.752l-52.608 60.544c-10.88 11.456-24.512 19.392-30.912 17.28a12.992 12.992 0 0 1-8.256-14.72l87.68-276.992c7.168-35.136-12.544-67.2-54.336-71.296-44.096 0-108.992 44.736-148.48 101.504 0 6.784-1.28 23.68.064 33.792l52.544-60.608c10.88-11.328 23.552-19.328 29.952-17.152a12.8 12.8 0 0 1 7.808 16.128L388.48 728.576c-10.048 32.256 8.96 63.872 55.04 71.04 67.84 0 107.904-43.648 147.456-100.416z"></path></svg></span><span class="rail-label" data-i18n="Wiki">Wiki</span></a>
+      <a class="rail-item nav-tab-btn" data-nav-tab="check-stats" id="nav-btn-check-stats" href="/check-stats" aria-description="Quick transient preview run stats before submission"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 652.36216 400 400" fill="currentColor"><path d="m 158.15739,677.69805 c 0,3.83876 -65.259115,225.71976 -65.259115,225.71976 L 193.63449,881.17213 139.73128,1052.3622 307.10172,792.09344 193.47408,811.28729 271.01727,652.36216 Z"></path></svg></span><span class="rail-label" data-i18n="Check Stats">Check Stats</span></a>
+      <a class="rail-item nav-tab-btn" data-nav-tab="tc" id="nav-btn-tc" href="/tc" aria-description="Loadout Lab: re-price a run on other gear, and Create Graphics"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.99998 4.5V10.7382C8.99998 11.1132 8.90628 11.4822 8.72739 11.8117L7.53944 14H16.4605L15.2726 11.8117C15.0937 11.4822 15 11.1132 15 10.7382V4.5H16C16.4142 4.5 16.75 4.16421 16.75 3.75C16.75 3.33579 16.4142 3 16 3H8C7.58579 3 7.25 3.33579 7.25 3.75C7.25 4.16421 7.58579 4.5 8 4.5H8.99998Z"></path><path d="M17.2748 15.5H6.72515L5.14269 18.415C4.50968 19.5811 5.35388 20.9999 6.68068 20.9999H17.3193C18.6461 20.9999 19.4903 19.5811 18.8573 18.415L17.2748 15.5Z"></path></svg></span><span class="rail-label" data-i18n="Loadout Lab">Loadout Lab</span></a>
+      <a class="rail-item" id="nav-btn-optimiser" href="https://compiler.moe/" target="_blank" rel="noopener" aria-description="Optimiser: tune a whole team's builds on compiler.moe"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><mask id="opt-goggles-rail"><rect width="24" height="24" fill="#fff"></rect><g fill="#000"><rect x="3.3" y="9.6" width="6.9" height="6" rx="2.2"></rect><rect x="13.8" y="9.6" width="6.9" height="6" rx="2.2"></rect></g><g fill="#fff"><rect x="3.95" y="10.25" width="5.6" height="4.7" rx="1.6"></rect><rect x="14.45" y="10.25" width="5.6" height="4.7" rx="1.6"></rect></g><g fill="none" stroke="#000" stroke-linecap="round"><path d="M5.2 13.4l2.4-2.1" stroke-width="0.85"></path><path d="M15.7 13.4l2.4-2.1" stroke-width="0.85"></path><path d="M0.5 12.4h1.1M23.5 12.4h-1.1" stroke-width="0.45" stroke-dasharray="0.6 0.5"></path></g></mask><g fill="currentColor" mask="url(#opt-goggles-rail)"><rect x="1.8" y="7.9" width="9.4" height="8.6" rx="3"></rect><rect x="12.8" y="7.9" width="9.4" height="8.6" rx="3"></rect><path d="M10.6 10.4q1.4-1 2.8 0v2.8q-1.4-.8-2.8 0z"></path><path d="M2.2 10.2 0 11v2.8l2.2.8zM21.8 10.2l2.2.8v2.8l-2.2.8z"></path></g></svg></span><span class="rail-label" data-i18n="Optimiser">Optimiser</span></a>
+      <a class="rail-item nav-tab-btn" data-nav-tab="docs" id="nav-btn-docs" href="/docs"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 0 1024 1024" fill="currentColor"><path d="M576 128v288l96-96 96 96V128h128v768H320V128h256zm-448 0h128v768H128V128z"></path></svg></span><span class="rail-label" data-i18n="Documentation">Documentation</span></a>
+    </div>
+    <div class="rail-group rail-group--end">
+      <button type="button" class="rail-item rail-expand" id="rail-expand" aria-expanded="false" aria-controls="site-rail"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m6 6 6 6-6 6M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span><span class="rail-label">Keep open</span></button>
+      <div class="rail-lang" id="rail-lang"><div class="lang-switcher"><button type="button" class="lang-current rail-item" aria-haspopup="true" aria-expanded="false" aria-label="Language"><span class="rail-icon" aria-hidden="true"><img class="lang-flag" alt="" src="/assets/flags/gb.svg?v=2"></span><span class="rail-label lang-current-label">English</span></button><div class="lang-menu" role="menu"><button type="button" class="lang-item is-active" role="menuitemradio" data-locale="en" aria-checked="true"><img class="lang-flag" alt="" src="/assets/flags/gb.svg?v=2"><span>English</span></button><button type="button" class="lang-item" role="menuitemradio" data-locale="ja" aria-checked="false"><img class="lang-flag" alt="" src="/assets/flags/jp.svg?v=2"><span>日本語</span></button><button type="button" class="lang-item" role="menuitemradio" data-locale="ko" aria-checked="false"><img class="lang-flag" alt="" src="/assets/flags/kr.svg?v=2"><span>한국어</span></button><button type="button" class="lang-item" role="menuitemradio" data-locale="ru" aria-checked="false"><img class="lang-flag" alt="" src="/assets/flags/ru.svg?v=2"><span>Русский</span></button><button type="button" class="lang-item" role="menuitemradio" data-locale="zh-Hans" aria-checked="false"><img class="lang-flag" alt="" src="/assets/flags/cn.svg?v=2"><span>简体中文</span></button><button type="button" class="lang-item" role="menuitemradio" data-locale="vi" aria-checked="false"><img class="lang-flag" alt="" src="/assets/flags/vn.svg?v=2"><span>Tiếng Việt</span></button><button type="button" class="lang-item" role="menuitemradio" data-locale="es" aria-checked="false"><img class="lang-flag" alt="" src="/assets/flags/es.svg?v=2"><span>Español</span></button><button type="button" class="lang-item" role="menuitemradio" data-locale="pt" aria-checked="false"><img class="lang-flag" alt="" src="/assets/flags/pt.svg?v=2"><span>Português</span></button></div></div></div>
+      <button type="button" class="rail-item" id="theme-toggle" aria-label="Switch to light mode"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"></circle><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg></span><span class="rail-label" id="theme-toggle-label">Light mode</span></button>
+      <button type="button" class="rail-item" id="report-bug-btn" aria-description="Report a bug or a translation"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 652.36216 400 400" fill="currentColor"><path d="m 185.80859,653.12187 c -33.22164,0 -60.35742,27.1357 -60.35742,60.3574 0,33.2216 27.13578,60.3555 60.35742,60.3555 l 28.57226,0 c 33.22165,0 60.35744,-27.1339 60.35744,-60.3555 0,-33.2217 -27.13579,-60.3574 -60.35744,-60.3574 l -28.57226,0 z m 0,25 28.57226,0 c 19.80408,0 35.35744,15.5533 35.35744,35.3574 0,19.8041 -15.55336,35.3555 -35.35744,35.3555 l -28.57226,0 c -19.80407,0 -35.35742,-15.5514 -35.35742,-35.3555 0,-19.8041 15.55335,-35.3574 35.35742,-35.3574 z m -108.701172,85.8008 -17.677734,17.6777 41.347656,41.3496 c -7.866968,11.60108 -12.46875,25.58268 -12.46875,40.61128 l 0,33.1309 -51.253906,0 0,25 51.253906,0 0,33.1309 c 0,14.2903 4.17728,27.6224 11.349612,38.873 l -40.228518,40.22865 17.677734,17.6777 39.414062,-39.4141 c 12.28246,9.5255 27.67602,15.2187 44.37109,15.2187 l 78.40431,0 c 18.31125,0 35.05802,-6.8461 47.84766,-18.0918 l 42.2871,42.2872 17.67774,-17.6777 -44.20313,-44.20325 c 5.71407,-10.3649 8.97461,-22.2598 8.97461,-34.8984 l 0,-33.1309 51.06446,0 0,-25 -51.06446,0 0,-33.1309 c 0,-13.3843 -3.66395,-25.9292 -10.01953,-36.7109 l 45.24805,-45.24998 -17.67774,-17.6777 -43.8164,43.8183 c -12.58127,-10.4603 -28.7328,-16.7636 -46.31836,-16.7636 l -78.40431,0 c -15.96497,0 -30.74102,5.2044 -42.74414,13.9882 l -41.041012,-41.0429 z m 83.785152,52.0547 26.70117,0 0,186.42973 -26.70117,0 c -26.57722,0 -47.58398,-21.00675 -47.58398,-47.58405 l 0,-91.2618 c 0,-26.5772 21.00676,-47.58388 47.58398,-47.58388 z m 51.70117,0 26.70314,0 c 26.57722,0 47.58398,21.00668 47.58398,47.58388 l 0,91.2618 c 0,26.5773 -21.00676,47.58405 -47.58398,47.58405 l -26.70314,0 0,-186.42973 z"></path></svg></span><span class="rail-label" data-i18n="Report bug">Report bug</span></button>
+      <a class="rail-item rail-item--discord" href="https://discord.gg/Tsx2CYGzna" target="_blank" rel="noopener noreferrer" aria-description="Join our Discord server"><span class="rail-icon" aria-hidden="true"><svg viewBox="0 0 127.14 96.36" fill="currentColor"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"></path></svg></span><span class="rail-label" data-i18n="Discord">Discord</span></a>
+    </div>
+  </nav>
+
+  <!-- Visually hidden page heading. The navbar shows the active page as a
+       label, so this carries the single <h1> for search engines and screen
+       readers without changing the visible layout. -->
+  <h1 class="sr-only" id="seo-h1">Zenless Zone Zero agents</h1>
+
+  <main class="site-container" id="app-content">
+    <div class="wiki-page">
+      <div class="sr-only">
+        <h2>Zenless Zone Zero agents</h2>
+        <p>Best teams, peak DPS, W-Engines and Drive Disc sets for each agent, aggregated from community Deadly Assault runs.</p>
+      </div>
+      <div class="wiki-head">
+        <nav class="wiki-cats" aria-label="Wiki"><a class="wiki-cat is-active" href="/wiki/agents" aria-current="page" data-nav-kind="agents">Agents</a><a class="wiki-cat" href="/wiki/w-engines" data-nav-kind="w-engines">W-Engines</a><a class="wiki-cat" href="/wiki/bangboos" data-nav-kind="bangboos">Bangboos</a><a class="wiki-cat" href="/wiki/drive-discs" data-nav-kind="drive-discs">Drive Discs</a><a class="wiki-cat" href="/wiki/guides" data-nav-kind="guides" hidden="">Guides</a></nav>
+        <p class="wiki-count"><strong id="wiki-shown-count">65</strong> Agents</p>
+      </div>
+      <div class="wiki-toolbar">
+        <label class="wiki-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+          <input id="wiki-search-input" type="search" name="q" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search" placeholder="Search agents..." aria-label="Search agents" oninput="wikiSetSearch(this.value)" value="" style="">
+        </label>
+        <div class="wiki-filters">
+          <div class="wiki-fgroup" role="group" aria-label="Filter by element"><button type="button" class="wiki-fbtn" data-group="element" data-value="physical" aria-pressed="false" aria-label="Filter by element: Physical" title="Filter by element: Physical" style="--wiki-accent:#FFD65A;" onclick="wikiToggleFilter('element','physical')"><img src="https://assets.analytics.moe/icons/ele_physical.svg?v=3" alt=""></button><button type="button" class="wiki-fbtn" data-group="element" data-value="fire" aria-pressed="false" aria-label="Filter by element: Fire" title="Filter by element: Fire" style="--wiki-accent:#E05D5D;" onclick="wikiToggleFilter('element','fire')"><img src="https://assets.analytics.moe/icons/ele_fire.svg?v=3" alt=""></button><button type="button" class="wiki-fbtn" data-group="element" data-value="ice" aria-pressed="false" aria-label="Filter by element: Ice" title="Filter by element: Ice" style="--wiki-accent:#3C81BC;" onclick="wikiToggleFilter('element','ice')"><img src="https://assets.analytics.moe/icons/ele_ice.svg?v=3" alt=""></button><button type="button" class="wiki-fbtn" data-group="element" data-value="electric" aria-pressed="false" aria-label="Filter by element: Electric" title="Filter by element: Electric" style="--wiki-accent:#637DEB;" onclick="wikiToggleFilter('element','electric')"><img src="https://assets.analytics.moe/icons/ele_electric.svg?v=3" alt=""></button><button type="button" class="wiki-fbtn" data-group="element" data-value="ether" aria-pressed="false" aria-label="Filter by element: Ether" title="Filter by element: Ether" style="--wiki-accent:#D852E6;" onclick="wikiToggleFilter('element','ether')"><img src="https://assets.analytics.moe/icons/ele_ether.svg?v=3" alt=""></button><button type="button" class="wiki-fbtn" data-group="element" data-value="wind" aria-pressed="false" aria-label="Filter by element: Wind" title="Filter by element: Wind" style="--wiki-accent:#7EDFD2;" onclick="wikiToggleFilter('element','wind')"><img src="https://assets.analytics.moe/icons/ele_wind.svg?v=3" alt=""></button><button type="button" class="wiki-fbtn" data-group="element" data-value="lumiflux" aria-pressed="false" aria-label="Filter by element: Lumiflux" title="Filter by element: Lumiflux" style="--wiki-accent:#FDB2E4;" onclick="wikiToggleFilter('element','lumiflux')"><img src="https://assets.analytics.moe/icons/ele_lumiflux.svg?v=3" alt=""></button></div>
+          <div class="wiki-fgroup" role="group" aria-label="Filter by specialty"><button type="button" class="wiki-fbtn" data-group="specialty" data-value="attack" aria-pressed="false" aria-label="Filter by specialty: Attack" title="Filter by specialty: Attack" onclick="wikiToggleFilter('specialty','attack')"><img src="https://assets.analytics.moe/icons/style_attack.webp?v=3" alt=""></button><button type="button" class="wiki-fbtn" data-group="specialty" data-value="stun" aria-pressed="false" aria-label="Filter by specialty: Stun" title="Filter by specialty: Stun" onclick="wikiToggleFilter('specialty','stun')"><img src="https://assets.analytics.moe/icons/style_stun.webp?v=3" alt=""></button><button type="button" class="wiki-fbtn" data-group="specialty" data-value="anomaly" aria-pressed="false" aria-label="Filter by specialty: Anomaly" title="Filter by specialty: Anomaly" onclick="wikiToggleFilter('specialty','anomaly')"><img src="https://assets.analytics.moe/icons/style_anomaly.webp?v=3" alt=""></button><button type="button" class="wiki-fbtn" data-group="specialty" data-value="support" aria-pressed="false" aria-label="Filter by specialty: Support" title="Filter by specialty: Support" onclick="wikiToggleFilter('specialty','support')"><img src="https://assets.analytics.moe/icons/style_support.webp?v=3" alt=""></button><button type="button" class="wiki-fbtn" data-group="specialty" data-value="defense" aria-pressed="false" aria-label="Filter by specialty: Defense" title="Filter by specialty: Defense" onclick="wikiToggleFilter('specialty','defense')"><img src="https://assets.analytics.moe/icons/style_defence.webp?v=3" alt=""></button><button type="button" class="wiki-fbtn" data-group="specialty" data-value="rupture" aria-pressed="false" aria-label="Filter by specialty: Rupture" title="Filter by specialty: Rupture" onclick="wikiToggleFilter('specialty','rupture')"><img src="https://assets.analytics.moe/icons/style_rupture.webp?v=3" alt=""></button><button type="button" class="wiki-fbtn" data-group="specialty" data-value="armorer" aria-pressed="false" aria-label="Filter by specialty: Armorer" title="Filter by specialty: Armorer" onclick="wikiToggleFilter('specialty','armorer')"><img src="https://assets.analytics.moe/icons/style_armorer.webp?v=3" alt=""></button></div>
+        </div>
+        <button type="button" class="wiki-switch is-on" id="wiki-art-toggle" role="switch" aria-checked="true" onclick="wikiToggleAgentArt()">
+      <span class="wiki-switch-text">Show M6 banner art?</span>
+      <span class="wiki-switch-track" aria-hidden="true"><span class="wiki-switch-knob"></span></span>
+    </button>
+        <button type="button" id="wiki-clear" class="site-btn wiki-clear" hidden="" onclick="wikiClearFilters()">Clear filters</button>
+      </div>
+      <div class="wiki-grid" id="wiki-grid">
+      <a class="wiki-card is-holo-card" href="/wiki/agents/robin" data-name="robin 知更鸟 ロビン 로빈 robin robin robin" data-element="ether" data-specialty="defense" aria-label="Robin · Ether" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#D852E6; --wiki-dmg-a:#D852E6;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1661.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Defense"><img src="https://assets.analytics.moe/icons/style_defence.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Robin</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/kafka" data-name="kafka 卡芙卡 カフカ 카프카 kafka kafka kafka" data-element="electric" data-specialty="anomaly" aria-label="Kafka · Electric" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#637DEB; --wiki-dmg-a:#637DEB;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1651.webp?v=3" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Anomaly"><img src="https://assets.analytics.moe/icons/style_anomaly.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Kafka</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/phoenix" data-name="phoenix 菲欧妮 フィオニー 피닉스 phoenix phoenix phoenix" data-element="fire" data-specialty="anomaly" aria-label="Phoenix · Fire" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#E05D5D; --wiki-dmg-a:#E05D5D;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1641.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Anomaly"><img src="https://assets.analytics.moe/icons/style_anomaly.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Phoenix</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/severian" data-name="severian 赛维里安 セヴェリアン 세베리안 severian severian severian" data-element="wind" data-specialty="attack" aria-label="Severian · Wind" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#7EDFD2; --wiki-dmg-a:#7EDFD2;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1631.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Attack"><img src="https://assets.analytics.moe/icons/style_attack.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Severian</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/roxy" data-name="roxy 洛克茜 ロクシー 록시 roxy roxy roxy" data-element="wind" data-specialty="stun" aria-label="Roxy · Wind" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#7EDFD2; --wiki-dmg-a:#7EDFD2;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1621.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Stun"><img src="https://assets.analytics.moe/icons/style_stun.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Roxy</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/claret" data-name="claret 克拉蕾 クラレッタ 클라렛 claret claret claret" data-element="electric" data-specialty="armorer" aria-label="Claret · Electric" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#637DEB; --wiki-dmg-a:#637DEB;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1611.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Armorer"><img src="https://assets.analytics.moe/icons/style_armorer.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Claret</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/sunbringer" data-name="sunbringer 挽昼 サンブリンガー_jp3a 태양을 가져온 자 sunbringer sunbringer sunbringer" data-element="fire" data-specialty="armorer" aria-label="Sunbringer · Genesis Flare" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#5669EA; --wiki-dmg-a:#5669EA;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1603.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Armorer"><img src="https://assets.analytics.moe/icons/style_armorer.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Sunbringer</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/sigrid" data-name="sigrid 希格莉德 シグリッド 시그리드 sigrid sigrid sigrid" data-element="ice" data-specialty="attack" aria-label="Sigrid · Ice" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#3C81BC; --wiki-dmg-a:#3C81BC;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1591.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Attack"><img src="https://assets.analytics.moe/icons/style_attack.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Sigrid</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/remielle" data-name="remielle 蕾米埃尔 レミエール 레미엘 remielle remielle remielle" data-element="lumiflux" data-specialty="anomaly" aria-label="Remielle · Lumiflux" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#FDB2E4; --wiki-dmg-a:#FDB2E4;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1581.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Anomaly"><img src="https://assets.analytics.moe/icons/style_anomaly.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Remielle</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/norma" data-name="norma 诺姆 ノルムー 노르마 norma norma norma" data-element="fire" data-specialty="stun" data-holo-card="norma" aria-label="Norma · Fire" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#E05D5D; --wiki-dmg-a:#E05D5D;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1571.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Stun"><img src="https://assets.analytics.moe/icons/style_stun.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Norma</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/velina" data-name="velina 维琳娜 ヴェリナ 벨리나 velina velina velina" data-element="wind" data-specialty="anomaly" aria-label="Velina · Wind" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#7EDFD2; --wiki-dmg-a:#7EDFD2;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1561.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Anomaly"><img src="https://assets.analytics.moe/icons/style_anomaly.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Velina</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/pyrois" data-name="pyrois 佩洛伊斯 ピュロイス 피로이스 pyrois pyrois pyrois" data-element="ether" data-specialty="attack" aria-label="Pyrois · Ether" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#D852E6; --wiki-dmg-a:#D852E6;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1551.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Attack"><img src="https://assets.analytics.moe/icons/style_attack.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Pyrois</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/promeia" data-name="promeia 普罗米娅 プロメイア 프로미아 promeia promeia promeia" data-element="ice" data-specialty="anomaly" aria-label="Promeia · Ice" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#3C81BC; --wiki-dmg-a:#3C81BC;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1541.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Anomaly"><img src="https://assets.analytics.moe/icons/style_anomaly.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Promeia</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/starlight-billy" data-name="starlight - billy 星徽·比利 スターライト･ビリー 스타라이트·빌리 starlight - billy starlight - billy starlight-billy billy sp sp billy" data-element="physical" data-specialty="rupture" aria-label="Starlight - Billy · Physical" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#FFD65A; --wiki-dmg-a:#FFD65A;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1531.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Rupture"><img src="https://assets.analytics.moe/icons/style_rupture.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Starlight - Billy</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/cissia" data-name="cissia 希希芙 シーシィア 시시아 cissia cissia cissia" data-element="electric" data-specialty="attack" aria-label="Cissia · Electric" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#637DEB; --wiki-dmg-a:#637DEB;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1521.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Attack"><img src="https://assets.analytics.moe/icons/style_attack.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Cissia</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/nangong-yu" data-name="nangong yu 南宫羽 南宮羽 남궁우 nangong yu nangong yu nangong-yu yu nangong" data-element="ether" data-specialty="stun" aria-label="Nangong Yu · Ether" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#D852E6; --wiki-dmg-a:#D852E6;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1511.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Stun"><img src="https://assets.analytics.moe/icons/style_stun.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Nangong Yu</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/aria" data-name="aria 爱芮 アリア 아리아 aria aria aria" data-element="ether" data-specialty="anomaly" aria-label="Aria · Ether" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#D852E6; --wiki-dmg-a:#D852E6;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1501.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Anomaly"><img src="https://assets.analytics.moe/icons/style_anomaly.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Aria</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/sunna" data-name="sunna 千夏 千夏 수나 sunna sunna sunna" data-element="physical" data-specialty="support" aria-label="Sunna · Physical" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#FFD65A; --wiki-dmg-a:#FFD65A;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1491.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Support"><img src="https://assets.analytics.moe/icons/style_support.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Sunna</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/dialyn" data-name="dialyn 琉音 ダイアリン 다이아린 dialyn dialyn dialyn" data-element="physical" data-specialty="stun" aria-label="Dialyn · Physical" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#FFD65A; --wiki-dmg-a:#FFD65A;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1481.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Stun"><img src="https://assets.analytics.moe/icons/style_stun.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Dialyn</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/banyue" data-name="banyue 般岳 盤岳 반악 banyue banyue banyue" data-element="fire" data-specialty="rupture" aria-label="Banyue · Fire" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#E05D5D; --wiki-dmg-a:#E05D5D;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1471.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Rupture"><img src="https://assets.analytics.moe/icons/style_rupture.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Banyue</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/seed" data-name="seed 「席德」 「シード」 「시드」 seed seed seed" data-element="electric" data-specialty="attack" aria-label="Seed · Electric" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#637DEB; --wiki-dmg-a:#637DEB;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1461.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Attack"><img src="https://assets.analytics.moe/icons/style_attack.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Seed</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/lucia" data-name="lucia 卢西娅 リュシア 루시아 lucia lucia lucia" data-element="ether" data-specialty="support" aria-label="Lucia · Ether" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#D852E6; --wiki-dmg-a:#D852E6;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1451.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Support"><img src="https://assets.analytics.moe/icons/style_support.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Lucia</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/manato" data-name="manato 真斗 狛野真斗 마나토 manato manato manato komano manato manato komano" data-element="fire" data-specialty="rupture" aria-label="Manato · Fire" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#E05D5D; --wiki-dmg-a:#E05D5D;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1441.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Rupture"><img src="https://assets.analytics.moe/icons/style_rupture.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Manato</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/ye-shunguang" data-name="ye shunguang 叶瞬光 葉瞬光 엽빛나 ye shunguang ye shunguang ye-shunguang shunguang ye" data-element="physical" data-specialty="attack" aria-label="Ye Shunguang · Honed Edge" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#797CFF; --wiki-dmg-a:#797CFF;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1431.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Attack"><img src="https://assets.analytics.moe/icons/style_attack.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Ye Shunguang</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/pan-yinhu" data-name="pan yinhu 潘引壶 潘引壺 반인호 pan yinhu pan yinhu pan-yinhu yinhu pan" data-element="physical" data-specialty="defense" aria-label="Pan Yinhu · Physical" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#FFD65A; --wiki-dmg-a:#FFD65A;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1421.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Defense"><img src="https://assets.analytics.moe/icons/style_defence.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Pan Yinhu</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/yuzuha" data-name="yuzuha 柚叶 浮波柚葉 유즈하 yuzuha yuzuha yuzuha" data-element="physical" data-specialty="support" aria-label="Yuzuha · Physical" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#FFD65A; --wiki-dmg-a:#FFD65A;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1411.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Support"><img src="https://assets.analytics.moe/icons/style_support.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Yuzuha</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/alice" data-name="alice 爱丽丝 アリス 앨리스 alice alice alice" data-element="physical" data-specialty="anomaly" aria-label="Alice · Physical" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#FFD65A; --wiki-dmg-a:#FFD65A;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1401.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Anomaly"><img src="https://assets.analytics.moe/icons/style_anomaly.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Alice</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/ju-fufu" data-name="ju fufu 橘福福 橘福福 귤복복 ju fufu ju fufu ju-fufu fufu ju" data-element="fire" data-specialty="stun" aria-label="Ju Fufu · Fire" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#E05D5D; --wiki-dmg-a:#E05D5D;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1391.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Stun"><img src="https://assets.analytics.moe/icons/style_stun.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Ju Fufu</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/soldier-0-anby" data-name="soldier 0 - anby 零号·安比 0号・アンビー 0호·엔비 soldier 0 - anby soldier 0 - anby soldier-0-anby ss - anby" data-element="electric" data-specialty="attack" aria-label="Soldier 0 - Anby · Electric" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#637DEB; --wiki-dmg-a:#637DEB;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1381.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Attack"><img src="https://assets.analytics.moe/icons/style_attack.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Soldier 0 - Anby</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/yixuan" data-name="yixuan 仪玄 儀玄 의현 yixuan yixuan yixuan yi xuan xuan yi" data-element="ether" data-specialty="rupture" aria-label="Yixuan · Auric Ink" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#C9971C; --wiki-dmg-a:#C9971C;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1371.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Rupture"><img src="https://assets.analytics.moe/icons/style_rupture.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Yixuan</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/trigger" data-name="trigger 「扳机」 「トリガー」 「트리거」 trigger trigger trigger" data-element="electric" data-specialty="stun" aria-label="Trigger · Electric" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#637DEB; --wiki-dmg-a:#637DEB;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1361.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Stun"><img src="https://assets.analytics.moe/icons/style_stun.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Trigger</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/pulchra" data-name="pulchra 波可娜 プルクラ 펄크라 pulchra pulchra pulchra" data-element="physical" data-specialty="stun" aria-label="Pulchra · Physical" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#FFD65A; --wiki-dmg-a:#FFD65A;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1351.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Stun"><img src="https://assets.analytics.moe/icons/style_stun.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Pulchra</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/zhao" data-name="zhao 照 照 자오 zhao zhao zhao" data-element="ice" data-specialty="defense" aria-label="Zhao · Ice" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#3C81BC; --wiki-dmg-a:#3C81BC;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1341.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Defense"><img src="https://assets.analytics.moe/icons/style_defence.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Zhao</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/vivian" data-name="vivian 薇薇安 ビビアン 비비안 vivian vivian vivian" data-element="ether" data-specialty="anomaly" aria-label="Vivian · Ether" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#D852E6; --wiki-dmg-a:#D852E6;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1331.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Anomaly"><img src="https://assets.analytics.moe/icons/style_anomaly.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Vivian</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/evelyn" data-name="evelyn 伊芙琳 イヴリン 이블린 evelyn evelyn evelyn" data-element="fire" data-specialty="attack" aria-label="Evelyn · Fire" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#E05D5D; --wiki-dmg-a:#E05D5D;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1321.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Attack"><img src="https://assets.analytics.moe/icons/style_attack.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Evelyn</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/astra-yao" data-name="astra yao 耀嘉音 アストラ 아스트라 astra yao astra yao astra-yao yao astra" data-element="ether" data-specialty="support" aria-label="Astra Yao · Ether" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#D852E6; --wiki-dmg-a:#D852E6;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1311.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Support"><img src="https://assets.analytics.moe/icons/style_support.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Astra Yao</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/orphie-magus" data-name="orphie &amp; magus 奥菲丝&amp;「鬼火」 オルペウス&amp;「鬼火」 오피&amp;「도깨비불」 orphie &amp; magus orphie &amp; magus orphie-magus" data-element="fire" data-specialty="attack" aria-label="Orphie &amp; Magus · Fire" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#E05D5D; --wiki-dmg-a:#E05D5D;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1301.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Attack"><img src="https://assets.analytics.moe/icons/style_attack.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Orphie &amp; Magus</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/hugo" data-name="hugo 雨果 ヒューゴ 휴고 hugo hugo hugo hugo vlad vlad hugo" data-element="ice" data-specialty="attack" aria-label="Hugo · Ice" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#3C81BC; --wiki-dmg-a:#3C81BC;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1291.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Attack"><img src="https://assets.analytics.moe/icons/style_attack.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Hugo</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/piper" data-name="piper 派派 パイパー 파이퍼 piper piper piper" data-element="physical" data-specialty="anomaly" aria-label="Piper · Physical" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#FFD65A; --wiki-dmg-a:#FFD65A;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1281.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Anomaly"><img src="https://assets.analytics.moe/icons/style_anomaly.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Piper</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/seth" data-name="seth 赛斯 セス 세스 seth seth seth" data-element="electric" data-specialty="defense" aria-label="Seth · Electric" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#637DEB; --wiki-dmg-a:#637DEB;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1271.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Defense"><img src="https://assets.analytics.moe/icons/style_defence.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Seth</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/jane" data-name="jane 简 ジェーン 제인 jane jane jane" data-element="physical" data-specialty="anomaly" aria-label="Jane · Physical" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#FFD65A; --wiki-dmg-a:#FFD65A;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1261.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Anomaly"><img src="https://assets.analytics.moe/icons/style_anomaly.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Jane</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/qingyi" data-name="qingyi 青衣 青衣 청의 qingyi qingyi qingyi" data-element="electric" data-specialty="stun" aria-label="Qingyi · Electric" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#637DEB; --wiki-dmg-a:#637DEB;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1251.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Stun"><img src="https://assets.analytics.moe/icons/style_stun.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Qingyi</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/zhu-yuan" data-name="zhu yuan 朱鸢 朱鳶 주연 zhu yuan zhu yuan zhu-yuan yuan zhu" data-element="ether" data-specialty="attack" aria-label="Zhu Yuan · Ether" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#D852E6; --wiki-dmg-a:#D852E6;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1241.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Attack"><img src="https://assets.analytics.moe/icons/style_attack.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Zhu Yuan</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/yanagi" data-name="yanagi 柳 月城柳 야나기 yanagi yanagi yanagi" data-element="electric" data-specialty="anomaly" aria-label="Yanagi · Electric" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#637DEB; --wiki-dmg-a:#637DEB;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1221.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Anomaly"><img src="https://assets.analytics.moe/icons/style_anomaly.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Yanagi</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/rina" data-name="rina 丽娜 リナ 리나 rina rina rina" data-element="electric" data-specialty="support" aria-label="Rina · Electric" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#637DEB; --wiki-dmg-a:#637DEB;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1211.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Support"><img src="https://assets.analytics.moe/icons/style_support.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Rina</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/harumasa" data-name="harumasa 悠真 浅羽悠真 하루마사 harumasa harumasa harumasa" data-element="electric" data-specialty="attack" aria-label="Harumasa · Electric" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#637DEB; --wiki-dmg-a:#637DEB;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1201.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Attack"><img src="https://assets.analytics.moe/icons/style_attack.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Harumasa</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/ellen" data-name="ellen 艾莲 エレン 엘렌 ellen ellen ellen" data-element="ice" data-specialty="attack" aria-label="Ellen · Ice" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#3C81BC; --wiki-dmg-a:#3C81BC;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1191.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Attack"><img src="https://assets.analytics.moe/icons/style_attack.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Ellen</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/grace" data-name="grace 格莉丝 グレース 그레이스 grace grace grace" data-element="electric" data-specialty="anomaly" aria-label="Grace · Electric" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#637DEB; --wiki-dmg-a:#637DEB;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1181.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Anomaly"><img src="https://assets.analytics.moe/icons/style_anomaly.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Grace</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/burnice" data-name="burnice 柏妮思 バーニス 버니스 burnice burnice burnice" data-element="fire" data-specialty="anomaly" aria-label="Burnice · Fire" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#E05D5D; --wiki-dmg-a:#E05D5D;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1171.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Anomaly"><img src="https://assets.analytics.moe/icons/style_anomaly.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Burnice</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/lighter" data-name="lighter 莱特 ライト 라이터 lighter lighter lighter" data-element="fire" data-specialty="stun" aria-label="Lighter · Fire" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#E05D5D; --wiki-dmg-a:#E05D5D;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1161.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Stun"><img src="https://assets.analytics.moe/icons/style_stun.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Lighter</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/lucy" data-name="lucy 露西 ルーシー 루시 lucy lucy lucy" data-element="fire" data-specialty="support" aria-label="Lucy · Fire" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#E05D5D; --wiki-dmg-a:#E05D5D;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1151.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Support"><img src="https://assets.analytics.moe/icons/style_support.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Lucy</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/lycaon" data-name="lycaon 莱卡恩 ライカン 리카온 lycaon lycaon lycaon" data-element="ice" data-specialty="stun" aria-label="Lycaon · Ice" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#3C81BC; --wiki-dmg-a:#3C81BC;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1141.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Stun"><img src="https://assets.analytics.moe/icons/style_stun.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Lycaon</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/soukaku" data-name="soukaku 苍角 蒼角 소우카쿠 soukaku soukaku soukaku" data-element="ice" data-specialty="support" aria-label="Soukaku · Ice" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#3C81BC; --wiki-dmg-a:#3C81BC;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1131.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Support"><img src="https://assets.analytics.moe/icons/style_support.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Soukaku</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/ben" data-name="ben 本 ベン 벤 ben ben ben" data-element="fire" data-specialty="defense" aria-label="Ben · Fire" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#E05D5D; --wiki-dmg-a:#E05D5D;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1121.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Defense"><img src="https://assets.analytics.moe/icons/style_defence.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Ben</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/anton" data-name="anton 安东 アンドー 앤톤 anton anton anton" data-element="electric" data-specialty="attack" aria-label="Anton · Electric" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#637DEB; --wiki-dmg-a:#637DEB;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1111.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Attack"><img src="https://assets.analytics.moe/icons/style_attack.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Anton</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/koleda" data-name="koleda 珂蕾妲 クレタ 콜레다 koleda koleda koleda" data-element="fire" data-specialty="stun" aria-label="Koleda · Fire" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#E05D5D; --wiki-dmg-a:#E05D5D;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1101.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Stun"><img src="https://assets.analytics.moe/icons/style_stun.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Koleda</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/miyabi" data-name="miyabi 雅 星見雅 미야비 miyabi miyabi miyabi" data-element="ice" data-specialty="anomaly" aria-label="Miyabi · Frost" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#82B6D1; --wiki-dmg-a:#82B6D1;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1091.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Anomaly"><img src="https://assets.analytics.moe/icons/style_anomaly.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Miyabi</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/billy" data-name="billy 比利 ビリー 빌리 billy billy billy" data-element="physical" data-specialty="attack" aria-label="Billy · Physical" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#FFD65A; --wiki-dmg-a:#FFD65A;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1081.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Attack"><img src="https://assets.analytics.moe/icons/style_attack.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Billy</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/caesar" data-name="caesar 凯撒 シーザー 카이사르 caesar caesar caesar" data-element="physical" data-specialty="defense" aria-label="Caesar · Physical" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#FFD65A; --wiki-dmg-a:#FFD65A;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1071.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Defense"><img src="https://assets.analytics.moe/icons/style_defence.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Caesar</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/corin" data-name="corin 可琳 カリン 코린 corin corin corin" data-element="physical" data-specialty="attack" aria-label="Corin · Physical" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#FFD65A; --wiki-dmg-a:#FFD65A;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1061.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Attack"><img src="https://assets.analytics.moe/icons/style_attack.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Corin</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/yidhari" data-name="yidhari 伊德海莉 イドリー 이드하리 yidhari yidhari yidhari" data-element="ice" data-specialty="rupture" aria-label="Yidhari · Ice" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#3C81BC; --wiki-dmg-a:#3C81BC;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1051.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Rupture"><img src="https://assets.analytics.moe/icons/style_rupture.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Yidhari</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/soldier-11" data-name="soldier 11 「11号」 「11号」 「11호」 soldier 11 soldier 11 soldier-11 11 soldier" data-element="fire" data-specialty="attack" aria-label="Soldier 11 · Fire" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#E05D5D; --wiki-dmg-a:#E05D5D;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1041.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Attack"><img src="https://assets.analytics.moe/icons/style_attack.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Soldier 11</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/nicole" data-name="nicole 妮可 ニコ 니콜 nicole nicole nicole" data-element="ether" data-specialty="support" aria-label="Nicole · Ether" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#D852E6; --wiki-dmg-a:#D852E6;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1031.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Support"><img src="https://assets.analytics.moe/icons/style_support.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Nicole</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/nekomata" data-name="nekomata 猫又 猫又 네코마타 nekomata nekomata nekomata" data-element="physical" data-specialty="attack" aria-label="Nekomata · Physical" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#FFD65A; --wiki-dmg-a:#FFD65A;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1021.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Attack"><img src="https://assets.analytics.moe/icons/style_attack.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Nekomata</p>
+      </a>
+      <a class="wiki-card is-holo-card" href="/wiki/agents/anby" data-name="anby 安比 アンビー 엔비 anby anby anby" data-element="electric" data-specialty="stun" aria-label="Anby · Electric" data-holo-ready="1">
+        <div class="wiki-tile has-dmg-bg" style="--wiki-accent:#637DEB; --wiki-dmg-a:#637DEB;">
+          <img class="wiki-tile-portrait" src="https://assets.analytics.moe/agents/1011.webp?v=2" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
+          <span class="wiki-tile-chip is-spec" role="img" aria-label="Stun"><img src="https://assets.analytics.moe/icons/style_stun.webp?v=3" alt=""></span>
+          <span class="wiki-tile-holo" aria-hidden="true"></span>
+        </div>
+        <p class="wiki-name">Anby</p>
+      </a></div>
+      <div class="wiki-empty" id="wiki-empty">
+        <p>No agents match your filters.</p>
+        <button type="button" class="site-btn" onclick="wikiClearFilters()">Clear filters</button>
+      </div>
+    </div></main>
+
+  <footer class="site-footer">
+    <div class="site-footer-row">
+      <span class="site-footer-brand">ZZZ Analytics</span>
+      <span class="site-footer-sep" aria-hidden="true">·</span>
+      <a class="site-footer-link" href="https://zzz.analytics.moe/">analytics.moe</a>
+      <span class="site-footer-sep" aria-hidden="true">·</span>
+      <span class="site-footer-tagline">Zenless Zone Zero Deadly Assault stats, tier list &amp; theorycraft</span>
+    </div>
+    <nav class="site-footer-row" aria-label="Site">
+      <a class="site-footer-link" href="/" data-nav-tab="leaderboard" data-i18n="Leaderboard">Leaderboard</a>
+      <span class="site-footer-sep" aria-hidden="true">·</span>
+      <a class="site-footer-link" href="/tier-list" data-nav-tab="tier-list" data-i18n="Tier List">Tier List</a>
+      <span class="site-footer-sep" aria-hidden="true">·</span>
+      <a class="site-footer-link" href="/wiki/agents" data-nav-tab="agents" data-i18n="Agents">Agents</a>
+      <span class="site-footer-sep" aria-hidden="true">·</span>
+      <a class="site-footer-link" href="/wiki/w-engines" data-i18n="W-Engines">W-Engines</a>
+      <span class="site-footer-sep" aria-hidden="true">·</span>
+      <a class="site-footer-link" href="/wiki/bangboos" data-i18n="Bangboos">Bangboos</a>
+      <span class="site-footer-sep" aria-hidden="true">·</span>
+      <a class="site-footer-link" href="/wiki/drive-discs" data-i18n="Drive Discs">Drive Discs</a>
+      <span class="site-footer-sep" aria-hidden="true">·</span>
+      <a class="site-footer-link" href="/tc" data-nav-tab="tc" data-i18n="Loadout Lab">Loadout Lab</a>
+      <span class="site-footer-sep" aria-hidden="true">·</span>
+      <a class="site-footer-link" href="https://compiler.moe/" target="_blank" rel="noopener" data-i18n="Optimiser">Optimiser</a>
+    </nav>
+    <nav class="site-footer-row" aria-label="Legal">
+      <a class="site-footer-link" href="/privacy" data-nav-tab="privacy">Privacy</a>
+      <span class="site-footer-sep" aria-hidden="true">·</span>
+      <a class="site-footer-link" href="/terms" data-nav-tab="terms">Terms</a>
+      <span class="site-footer-sep" aria-hidden="true">·</span>
+      <a class="site-footer-link" href="mailto:hello@analytics.moe">hello@analytics.moe</a>
+    </nav>
+    <p class="site-footer-disclaimer">
+      © 2026 ZZZ Analytics. A fan-made site, not affiliated with or endorsed by HoYoverse.
+      Zenless Zone Zero and its characters, names and artwork are trademarks and copyright of COGNOSPHERE PTE. LTD.
+    </p>
+  </footer>
+
+  <dialog class="modal-card" id="upload-modal" aria-labelledby="upload-modal-title" style="width:95vw; max-width:1200px; max-height:88vh; overflow-y:auto;" closedby="any">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1.25rem;">
+        <h3 style="font-size:1.3rem; color:#fff; font-weight:800;" id="upload-modal-title">SUBMIT BATTLE RUN</h3>
+        <button type="button" id="close-upload-btn" aria-label="Close" style="background:none; border:none; color:#A0AEC0; font-size:1.5rem; cursor:pointer;">✕</button>
+      </div>
+
+      <div class="dropzone" id="modal-dropzone">
+        <div style="font-weight:700; font-size:1.05rem; color:var(--text-main); margin-bottom:0.25rem;">Drag &amp; drop the battle folder</div>
+        <label class="dropzone-browse" for="upload-file-input">or choose files from your computer</label>
+        <input type="file" id="upload-file-input" accept=".pb,.json" multiple="" hidden="" style="">
+        <div id="upload-status" style="margin-top:0.75rem; font-size:0.85rem;"></div>
+      </div>
+
+      <div id="upload-interactive-form">
+
+      </div>
+    </dialog>
+
+  <dialog class="modal-card" id="admin-modal" aria-labelledby="admin-modal-title" style="width:95vw; max-width:1600px; height:92vh; flex-direction:column; padding:1.5rem; overflow:hidden;" closedby="any">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1rem; flex-shrink:0;">
+        <h3 style="font-size:1.3rem; color:var(--c-yellow); font-weight:800;" id="admin-modal-title">ADMIN MANAGEMENT PORTAL</h3>
+        <button type="button" onclick="closeAdminModal()" aria-label="Close" style="background:none; border:none; color:#A0AEC0; font-size:1.5rem; cursor:pointer;">✕</button>
+      </div>
+
+      <!-- The login form is mounted on demand by openAdminModal(). Keeping the
+           password field out of the static HTML stops Chrome treating every
+           page (wiki, leaderboard) as a login form and autofilling its search
+           inputs; the panel is torn down again when the modal closes. -->
+      <div id="admin-auth-section" style="flex-shrink:0;"></div>
+
+      <div id="admin-queue-section" style="display:none; flex:1; flex-direction:column; overflow:hidden; min-height:0;">
+
+        <div style="margin-bottom:1rem; flex-shrink:0;">
+          <input type="text" class="form-control" id="admin-search-input" name="q" autocomplete="off" placeholder="Search runs by agent name (e.g. Grace, Velina, Miyabi, Sigrid)..." oninput="onAdminSearchInputDebounced()" maxlength="200" style="background: var(--bg-card); color: rgb(255, 255, 255); border: 1px solid var(--border-main); padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.95rem; width: 100%;">
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:1.25rem; margin-bottom:1.25rem; border-bottom:1px solid var(--border-main); padding-bottom:0.75rem; flex-shrink:0;">
+          <button class="site-btn" id="admin-tab-pending" onclick="switchAdminSubTab('pending')" style="color:var(--c-cyan); font-weight:800;">
+            Pending Submissions (<span id="pending-count">0</span>)
+          </button>
+          <button class="site-btn" id="admin-tab-published" onclick="switchAdminSubTab('published')" style="color:var(--text-muted);">
+            Manage Published Runs (<span id="published-count">0</span>)
+          </button>
+          <button class="site-btn" id="admin-tab-beta" onclick="switchAdminSubTab('beta')" style="color:var(--text-muted);">
+            Beta Archived Runs (<span id="beta-count">0</span>)
+          </button>
+          <button class="site-btn" id="admin-tab-reports" onclick="switchAdminSubTab('reports')" style="color:var(--text-muted);">
+            Reports (<span id="report-count">0</span>)
+          </button>
+          <button class="site-btn" id="admin-tab-guides" onclick="switchAdminSubTab('guides')" style="color:var(--text-muted);">
+            Guides (<span id="guide-count">0</span>)
+          </button>
+          <button class="site-btn" type="button" onclick="republishPublicSnapshot(this)" style="color:var(--text-muted);" title="Re-upload runs/current.json from the database if a publish failed">
+            Rebuild public snapshot
+          </button>
+          <span id="admin-publish-status" class="admin-publish-status" data-state="idle" role="status" aria-live="polite" hidden=""></span>
+          <a class="site-btn" href="/wiki/guides/new" style="margin-left:auto; color:var(--c-cyan); font-weight:800; text-decoration:none;">Write a guide</a>
+        </div>
+
+        <div style="flex:1; overflow-y:auto; padding-right:0.5rem; min-height:0;">
+
+          <div id="admin-pending-container">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+              <h4 style="color:#fff;">Pending Review Queue</h4>
+              <button class="site-btn" onclick="fetchPendingQueue()" style="font-size:0.8rem;">Refresh Queue</button>
+            </div>
+            <div id="pending-queue-list"></div>
+          </div>
+
+          <div id="admin-published-container" style="display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+              <h4 style="color:#fff;">Active Leaderboard Runs</h4>
+              <button class="site-btn" onclick="fetchPublishedQueue()" style="font-size:0.8rem;">Refresh Published</button>
+            </div>
+            <div id="published-queue-list"></div>
+          </div>
+
+          <div id="admin-beta-container" style="display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; gap:1rem; flex-wrap:wrap;">
+              <h4 style="color:#fff; margin:0;">Beta Archived Runs</h4>
+              <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+                <label style="display:flex; align-items:center; gap:0.45rem; font-size:0.82rem; color:var(--c-yellow); font-weight:700;">
+                  <span>Latest beta</span>
+                  <input type="text" id="admin-latest-beta-input" class="form-control" maxlength="11" placeholder="3.4.3H1" title="X.X.X, optionally with a hotfix: 3.4.3H1" style="width: 5.5rem; padding: 0.35rem 0.5rem; font-size: 0.82rem; font-weight: 800; background: var(--bg-main); color: rgb(255, 255, 255); border: 1px solid rgba(234, 179, 8, 0.45); border-radius: 6px;">
+                </label>
+                <button class="site-btn" onclick="saveLatestBetaFromAdmin()" style="color:var(--c-yellow); border-color:var(--c-yellow); font-size:0.8rem; font-weight:800;">Save Latest Beta</button>
+                <button class="site-btn" onclick="fetchBetaQueue()" style="font-size:0.8rem;">Refresh Beta Archive</button>
+              </div>
+            </div>
+            <p style="color:var(--text-muted); font-size:0.8rem; margin:-0.35rem 0 1rem;">Leaderboard “Latest beta only” uses this version when Beta Archives are enabled. It is also the default when archiving or moving runs. With a hotfix (3.4.3H1), “Latest” shows H1 runs and 3.4.3 runs with no hotfix; other hotfixes (H0) move to the archive.</p>
+            <div id="beta-queue-list"></div>
+          </div>
+
+          <div id="admin-reports-container" style="display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; gap:1rem; flex-wrap:wrap;">
+              <h4 style="color:#fff; margin:0;">Bug &amp; translation reports</h4>
+              <div style="display:flex; align-items:center; gap:0.5rem;">
+                <select id="admin-reports-status" onchange="window.AdminReports &amp;&amp; AdminReports.load()" style="background:var(--bg-main); color:#fff; border:1px solid var(--border-main); border-radius:6px; padding:0.35rem 0.5rem; font-size:0.82rem;">
+                  <option value="open">Open</option>
+                  <option value="accepted">Accepted</option>
+                  <option value="rejected">Rejected</option>
+                  <option value="applied">Applied</option>
+                  <option value="all">All</option>
+                </select>
+                <button class="site-btn" onclick="window.AdminReports &amp;&amp; AdminReports.load()" style="font-size:0.8rem;">Refresh</button>
+              </div>
+            </div>
+            <div id="admin-reports-list"></div>
+          </div>
+
+          <div id="admin-guides-container" style="display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; gap:1rem; flex-wrap:wrap;">
+              <h4 style="color:#fff; margin:0;">Guides</h4>
+              <div style="display:flex; align-items:center; gap:0.5rem;">
+                <button class="site-btn" onclick="window.AdminGuides &amp;&amp; AdminGuides.load()" style="font-size:0.8rem;">Refresh</button>
+                <button class="site-btn" onclick="window.AdminGuides &amp;&amp; AdminGuides.rebuild()" style="font-size:0.8rem;">Rebuild snapshot</button>
+                <a class="site-btn" href="/wiki/guides/new" style="font-size:0.8rem; color:var(--c-cyan); border-color:var(--c-cyan); text-decoration:none;">New guide</a>
+              </div>
+            </div>
+            <p style="color:var(--text-muted); font-size:0.8rem; margin:-0.35rem 0 1rem;">Drafts are private, WIP guides are unlisted but readable by link, and published guides appear on the hub. Deleting a guide leaves its uploaded media in storage so a re-created or imported guide can still use it.</p>
+            <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap; margin-bottom:1rem; padding:0.65rem 0.75rem; border:1px dashed var(--border-main); border-radius:8px;">
+              <label for="admin-guide-remove-slug" style="color:var(--text-muted); font-size:0.78rem;">Orphaned guide cleanup</label>
+              <input id="admin-guide-remove-slug" class="form-control" type="text" maxlength="80" placeholder="slug, e.g. nisici" style="max-width: 240px; padding: 0.35rem 0.5rem; font-size: 0.8rem; background: var(--bg-main); color: rgb(255, 255, 255); border: 1px solid var(--border-main); border-radius: 6px;">
+              <button class="site-btn" onclick="window.AdminGuides &amp;&amp; AdminGuides.purgeBySlug()" style="font-size:0.78rem; color:#fca5a5; border-color:rgba(239,68,68,.55);">Remove from public site</button>
+            </div>
+            <div id="admin-guides-list"></div>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+  <dialog class="modal-card" id="admin-edit-modal" aria-labelledby="admin-edit-modal-title" style="max-width:800px; max-height:85vh; overflow-y:auto;" closedby="any">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1.25rem;">
+        <h3 style="font-size:1.3rem; color:var(--c-cyan); font-weight:800;" id="admin-edit-modal-title">EDIT RUN DETAILS</h3>
+        <button type="button" onclick="closeAdminEditModal()" aria-label="Close" style="background:none; border:none; color:#A0AEC0; font-size:1.5rem; cursor:pointer;">✕</button>
+      </div>
+
+      <div id="admin-edit-form-content">
+
+      </div>
+    </dialog>
+
+  <!-- Floating search (bottom) -->
+  <div class="floating-search is-route-hidden" role="search" id="floating-search">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"></circle><path d="m16.5 16.5 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
+    <input type="text" id="run-search-input" name="q" placeholder="Search — try “Grace M6”, velina OR miyabi, -miyabi, miyab*…" aria-label="Search runs" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search" style="">
+    <kbd>/</kbd>
+    <button class="fs-help" type="button" id="shortcuts-help-btn" aria-label="Keyboard shortcuts" title="Keyboard shortcuts">?</button>
+    <span class="fs-count" id="run-search-count"></span>
+  </div>
+
+  <!-- Keyboard shortcuts overlay -->
+  <div class="overlay" id="shortcuts-overlay" onclick="if (event.target === this) window.toggleShortcuts(false)">
+    <div class="sc-panel" role="dialog" aria-modal="true" aria-label="Keyboard shortcuts and search syntax">
+      <div class="sc-head">Shortcuts &amp; search <button type="button" aria-label="Close" onclick="window.toggleShortcuts(false)">✕</button></div>
+      <div class="sc-row"><span>Search runs</span><span><kbd>/</kbd> <kbd>Space</kbd></span></div>
+      <div class="sc-row"><span>Exit search / close panel</span><kbd>Esc</kbd></div>
+      <div class="sc-row"><span>Clear search</span><span><kbd>Esc</kbd> <kbd>Esc</kbd></span></div>
+      <div class="sc-row"><span>Clear all filters</span><span><kbd>Esc</kbd> <kbd>Esc</kbd> <kbd>Esc</kbd></span></div>
+      <div class="sc-row"><span>Expand focused run</span><kbd>Enter</kbd></div>
+      <div class="sc-row"><span>Open this panel</span><kbd>?</kbd></div>
+
+      <div class="sc-subhead">Search syntax</div>
+      <div class="sc-row sc-row--syntax"><span>Exact phrase</span><kbd>"grace m6"</kbd></div>
+      <div class="sc-row sc-row--syntax"><span>Either term</span><kbd>velina OR miyabi</kbd></div>
+      <div class="sc-row sc-row--syntax"><span>Both terms</span><kbd>velina AND miyabi</kbd></div>
+      <div class="sc-row sc-row--syntax"><span>Exclude</span><kbd>-miyabi</kbd></div>
+      <div class="sc-row sc-row--syntax"><span>Wildcard</span><kbd>miyab*</kbd></div>
+      <div class="sc-row sc-row--syntax"><span>Group</span><kbd>(velina OR miyabi) remielle</kbd></div>
+      <div class="sc-row sc-row--syntax"><span>Agent + mindscape</span><kbd>Grace M6, Velina M2</kbd></div>
+    </div>
+  </div>
+
+  <!-- Action feedback toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    <span id="toast-text">Link copied to clipboard</span>
+  </div>
+
+  <!-- Dev-only: load the fixture harness when ?fixtures is present. -->
+  <script>
+    if (new URLSearchParams(location.search).has('fixtures')) {
+      var s = document.createElement('script');
+      s.src = '/js/dev-fixtures.js?v=2';
+      document.body.appendChild(s);
+    }
+  </script>
+
+
+<dialog class="modal-card report-card" id="report-modal" aria-labelledby="report-title" closedby="any"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;"><h3 id="report-title" style="font-size:1.3rem;color:var(--c-cyan);font-weight:800;margin:0;">REPORT</h3><button type="button" class="report-close" aria-label="Close">✕</button></div><div class="report-tabs"><button type="button" class="site-btn is-active" data-tab="bug">Something's broken</button><button type="button" class="site-btn" data-tab="translation">Fix a translation</button></div><div data-panel="bug"><div class="form-group"><label for="report-bug-text">What happened?</label><textarea id="report-bug-text" class="form-control" autofocus="" rows="3" maxlength="2000" placeholder="e.g. The tier list stays on the loading screen" style=""></textarea></div><div class="form-group"><label for="report-bug-steps">How can we make it happen? <span class="report-optional">(steps, optional)</span></label><textarea id="report-bug-steps" class="form-control" rows="3" maxlength="2000" placeholder="1. Open the Tier List
+2. Filter to M0 only
+3. Click Ellen" style=""></textarea></div><div class="form-group"><label for="report-bug-expected">What did you expect? <span class="report-optional">(optional)</span></label><input type="text" id="report-bug-expected" class="form-control" maxlength="1000" placeholder="e.g. Ellen's teams to show" style=""></div><div class="form-group"><label for="report-bug-file">Add a screenshot <span class="report-optional">(optional)</span></label><input type="file" id="report-bug-file" class="form-control" accept="image/*" style=""></div><div id="report-bug-thumb" class="report-thumb" style="display:none;margin-bottom:1rem;"></div><details class="report-diag"><summary>Technical details sent with this report</summary><p class="report-hint">Your device, browser, this page and the pages and errors from this visit, so the bug can be reproduced. No account or personal data.</p><pre id="report-diag"></pre></details></div><div data-panel="translation" hidden=""><div class="form-group"><label>Which text?</label><div class="report-pick-row"><button type="button" class="site-btn" id="report-pick">Pick the text</button><span class="report-hint">Click a label on the page to capture it.</span></div></div><div class="form-group"><label for="report-en">English term</label><input type="text" id="report-en" class="form-control" maxlength="300" placeholder="e.g. Share" style=""></div><div class="form-group"><label>Currently shown</label><div id="report-cur" class="form-control is-empty" style="min-height:2.5rem;">—</div></div><div class="form-group"><label for="report-sug">Your correction</label><textarea id="report-sug" class="form-control" rows="2" maxlength="500" placeholder="What should it say instead?" style=""></textarea></div><div class="form-group"><label for="report-note">Notes (optional)</label><input type="text" id="report-note" class="form-control" maxlength="500" style=""></div></div><input type="text" id="report-hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0;"><div id="report-turnstile" style="margin:0.85rem 0;"></div><div class="report-hint" id="report-ctx"></div><button type="button" class="btn-primary" id="report-submit" style="margin-top:0.85rem;">Send report</button><p class="legal-form-note">Reports and screenshots are kept for 90 days. See the <a href="/privacy" target="_blank" rel="noopener">privacy notice</a>.</p><div class="report-status" id="report-status"></div></dialog></body></html>

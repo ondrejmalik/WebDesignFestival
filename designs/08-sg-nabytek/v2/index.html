@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Festival of Darkness 2 | Kutná Hora 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-top">
+      <div class="container header-top-inner">
+        <span class="top-meta" data-i18n="header.meta">Kutná Hora, Czech Republic | 10-12 July 2026</span>
+        <div class="top-actions">
+          <button type="button" id="lang-toggle" class="lang-btn" onclick="toggleFestivalLang()" aria-label="Switch language">CZ</button>
+        </div>
+      </div>
+    </div>
+    <div class="header-main">
+      <div class="container header-main-inner">
+        <a href="index.html" class="brand">
+          <span class="brand-mark" aria-hidden="true">FD2</span>
+          <span class="brand-text">
+            <strong class="brand-title">Festival of Darkness 2</strong>
+            <span class="brand-sub" data-i18n="brand.sub">Open-Air & Audiovisual Music</span>
+          </span>
+        </a>
+        <nav class="main-nav" aria-label="Primary">
+          <a href="index.html" class="nav-link active" data-i18n="nav.home">Overview</a>
+          <a href="program.html" class="nav-link" data-i18n="nav.program">Schedule</a>
+          <a href="#stages" class="nav-link" data-i18n="nav.stages">Stages</a>
+          <a href="#highlights" class="nav-link" data-i18n="nav.highlights">Highlights</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-section">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow" data-i18n="hero.eyebrow">Edition 2026 | Kutná Hora</p>
+          <h1 data-i18n="hero.title">Festival of Darkness 2</h1>
+          <p class="hero-lead" data-i18n="hero.desc">Three days of electronic, alternative, and audiovisual music across two distinct stages in historic Kutná Hora.</p>
+          <div class="hero-actions">
+            <a href="program.html" class="btn btn-primary" data-i18n="hero.ctaPrimary">Explore Full Schedule</a>
+            <a href="#stages" class="btn btn-secondary" data-i18n="hero.ctaSecondary">View Stage Specs</a>
+          </div>
+        </div>
+        <aside class="hero-summary-card" aria-label="Festival facts">
+          <h2 class="card-heading" data-i18n="facts.heading">Edition Specifications</h2>
+          <dl class="facts-list">
+            <div class="fact-row">
+              <dt data-i18n="facts.datesLabel">Dates</dt>
+              <dd data-i18n="facts.datesValue">10-12 July 2026 (Fri-Sun)</dd>
+            </div>
+            <div class="fact-row">
+              <dt data-i18n="facts.locationLabel">Venue</dt>
+              <dd data-i18n="facts.locationValue">Kutná Hora, Czech Republic</dd>
+            </div>
+            <div class="fact-row">
+              <dt data-i18n="facts.stagesLabel">Stages</dt>
+              <dd data-i18n="facts.stagesValue">2 (6,300 combined capacity)</dd>
+            </div>
+            <div class="fact-row">
+              <dt data-i18n="facts.lineupLabel">Lineup</dt>
+              <dd data-i18n="facts.lineupValue">60 live acts and DJ sets</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <section id="stages" class="section-block section-alt">
+      <div class="container">
+        <div class="section-header">
+          <h2 data-i18n="stages.title">Two Distinct Performance Environments</h2>
+          <p data-i18n="stages.subtitle">Engineered for contrasting acoustic experiences from afternoon indie sets to late-night audiovisual sessions.</p>
+        </div>
+        <div class="stages-grid">
+          <article class="stage-card">
+            <div class="stage-badge" data-i18n="stages.solar.type">Open-air main stage</div>
+            <h3>Solar Horizon Stage</h3>
+            <p data-i18n="stages.solar.desc">Central open-air amphitheater for major band performances, indie rock, and dance headliners.</p>
+            <div class="stage-meta">
+              <span class="meta-pill"><strong data-i18n="stages.capacityLabel">Capacity:</strong> 4,500</span>
+              <span class="meta-pill"><strong data-i18n="stages.hoursLabel">Hours:</strong> 13:00-02:00</span>
+            </div>
+          </article>
+          <article class="stage-card">
+            <div class="stage-badge badge-accent" data-i18n="stages.lunar.type">Covered audiovisual dome</div>
+            <h3>Lunar Forest Dome</h3>
+            <p data-i18n="stages.lunar.desc">Atmospheric covered indoor stage focusing on techno, ambient, experimental electronics, and 360-degree light projections.</p>
+            <div class="stage-meta">
+              <span class="meta-pill"><strong data-i18n="stages.capacityLabel">Capacity:</strong> 1,800</span>
+              <span class="meta-pill"><strong data-i18n="stages.hoursLabel">Hours:</strong> 14:00-04:00</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="highlights" class="section-block">
+      <div class="container">
+        <div class="section-header">
+          <h2 data-i18n="highlights.title">Evening Headliners by Day</h2>
+          <p data-i18n="highlights.subtitle">Selected prime-time performances from the 2026 timetable.</p>
+        </div>
+        <div class="highlights-grid">
+          <article class="highlight-card">
+            <span class="day-tag" data-i18n="days.day1Short">Friday, 10 Jul</span>
+            <h3>Starlight Odyssey</h3>
+            <p class="artist-genre">Electronic Indie (FR)</p>
+            <p class="slot-detail">23:30-00:45 | Solar Horizon Stage</p>
+          </article>
+          <article class="highlight-card">
+            <span class="day-tag" data-i18n="days.day2Short">Saturday, 11 Jul</span>
+            <h3>Vortex Motion</h3>
+            <p class="artist-genre">Nu-Electro (UK)</p>
+            <p class="slot-detail">23:10-00:25 | Solar Horizon Stage</p>
+          </article>
+          <article class="highlight-card">
+            <span class="day-tag" data-i18n="days.day3Short">Sunday, 12 Jul</span>
+            <h3>Starlight Runners</h3>
+            <p class="artist-genre">Electropop Headliner (DK)</p>
+            <p class="slot-detail">22:35-23:55 | Solar Horizon Stage</p>
+          </article>
+        </div>
+        <div class="section-footer-cta">
+          <a href="program.html" class="btn btn-primary" data-i18n="highlights.viewAll">View Complete Daily Timetable</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <strong>Festival of Darkness 2</strong>
+        <span data-i18n="footer.location">Kutná Hora, Czech Republic | 10-12 July 2026</span>
+      </div>
+      <div class="footer-links">
+        <a href="index.html" data-i18n="nav.home">Overview</a>
+        <a href="program.html" data-i18n="nav.program">Schedule</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/lang.js"></script>
+</body>
+</html>

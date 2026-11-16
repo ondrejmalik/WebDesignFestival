@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ZZZ Analytics — Zenless Zone Zero DPS & Best Teams</title>
+  <meta name="description" content="Truly neutral Zenless Zone Zero data: Deadly Assault leaderboards, DPS rankings and best teams from real combat runs.">
+  
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Chart.js for Tier Lists / Scatter plots -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            bgMain: '#0A0D14',
+            bgCard: '#111622',
+            bgSubcard: '#161D2E',
+            borderMain: '#222D44',
+            cCyan: '#38BDF8',
+            cPurple: '#C084FC',
+            cOrange: '#FB923C',
+            cYellow: '#FACC15',
+            cGreen: '#4ADE80',
+            cRed: '#F43F5E'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg-main: #0A0D14;
+      --bg-card: #111622;
+      --bg-subcard: #161D2E;
+      --border-main: #222D44;
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --c-cyan: #38BDF8;
+      --c-purple: #C084FC;
+      --c-orange: #FB923C;
+      --c-yellow: #FACC15;
+    }
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-main); }
+    ::-webkit-scrollbar-thumb { background: var(--border-main); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #334155; }
+
+    /* Left Navigation Rail */
+    .site-rail {
+      position: fixed; top: 0; left: 0; bottom: 0; width: 68px;
+      background: var(--bg-card); border-right: 1px solid var(--border-main);
+      display: flex; flex-direction: column; justify-content: space-between;
+      z-index: 50; transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow-x: hidden;
+    }
+    .site-rail:hover, .site-rail.is-expanded { width: 220px; }
+    .rail-item {
+      display: flex; align-items: center; height: 50px; padding: 0 18px;
+      color: var(--text-muted); cursor: pointer; text-decoration: none;
+      transition: color 0.15s, background 0.15s; white-space: nowrap; gap: 14px;
+      font-weight: 600; font-size: 0.9rem; border: none; background: transparent; width: 100%; text-align: left;
+    }
+    .rail-item:hover, .rail-item.is-active { color: var(--text-main); background: rgba(255,255,255,0.04); }
+    .rail-item.is-active { border-left: 3px solid var(--c-cyan); color: var(--c-cyan); }
+    .rail-icon { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .rail-label { opacity: 0; transition: opacity 0.2s ease; }
+    .site-rail:hover .rail-label, .site-rail.is-expanded .rail-label { opacity: 1; }
+
+    /* Main Container Layout */
+    .site-container {
+      margin-left: 68px; padding: 2rem; max-width: 1400px; min-height: 100vh;
+      display: flex; flex-direction: column; gap: 1.5rem; transition: margin-left 0.25s;
+    }
+    @media (max-width: 768px) {
+      .site-container { margin-left: 0; padding: 1rem; padding-top: 5rem; }
+      .site-rail { transform: translateX(-100%); }
+      .site-rail.is-open { transform: translateX(0); width: 220px; }
+    }
+
+    /* Glass Panels & Cards */
+    .glass-card {
+      background: var(--bg-card); border: 1px solid var(--border-main);
+      border-radius: 12px; padding: 1.25rem; transition: border-color 0.2s ease;
+    }
+    .glass-card:hover { border-color: #334155; }
+
+    /* Segmented controls & pills */
+    .seg-pill-group {
+      display: inline-flex; background: var(--bg-main); border: 1px solid var(--border-main);
+      border-radius: 999px; padding: 3px; gap: 2px;
+    }
+    .seg-btn {
+      padding: 0.35rem 0.85rem; border-radius: 999px; font-size: 0.8rem; font-weight: 700;
+      color: var(--text-muted); cursor: pointer; border: none; background: transparent; transition: all 0.2s;
+    }
+    .seg-btn.is-active { background: var(--bg-subcard); color: var(--text-main); box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+
+    /* Mobile Topbar */
+    .mobile-topbar {
+      display: none; position: fixed; top: 0; left: 0; right: 0; height: 56px;
+      background: var(--bg-card); border-bottom: 1px solid var(--border-main);
+      align-items: center; padding: 0 1rem; z-index: 40; justify-content: space-between;
+    }
+    @media (max-width: 768px) { .mobile-topbar { display: flex; } }
+  </style>
+</head>
+<body class="bg-bgMain text-textMain">
+
+  <!-- Mobile Top Bar -->
+  <header class="mobile-topbar">
+    <button type="button" onclick="toggleMobileNav()" class="p-2 text-textMuted hover:text-white" aria-label="Toggle Menu">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <div class="font-extrabold text-sm tracking-wide uppercase text-cCyan">ZZZ Analytics</div>
+    <div id="mobile-page-title" class="text-xs font-bold px-2 py-1 bg-bgSubcard rounded border border-borderMain">Leaderboard</div>
+  </header>
+
+  <!-- Left Navigation Rail -->
+  <nav class="site-rail" id="site-rail" aria-label="Site Navigation">
+    <div class="flex flex-col">
+      <div class="rail-item font-extrabold text-cCyan" style="height:64px;">
+        <span class="rail-icon">⚡</span>
+        <span class="rail-label uppercase tracking-wider text-xs">zzz analytics</span>
+      </div>
+      <button onclick="switchTab('leaderboard')" class="rail-item nav-btn is-active" data-tab="leaderboard">
+        <span class="rail-icon">🏆</span>
+        <span class="rail-label">Leaderboard</span>
+      </button>
+      <button onclick="switchTab('tier-list')" class="rail-item nav-btn" data-tab="tier-list">
+        <span class="rail-icon">📊</span>
+        <span class="rail-label">Tier List</span>
+      </button>
+      <button onclick="switchTab('agents')" class="rail-item nav-btn" data-tab="agents">
+        <span class="rail-icon">👥</span>
+        <span class="rail-label">Agents Wiki</span>
+      </button>
+      <button onclick="switchTab('docs')" class="rail-item nav-btn" data-tab="docs">
+        <span class="rail-icon">📖</span>
+        <span class="rail-label">Documentation</span>
+      </button>
+    </div>
+    <div class="p-3 border-t border-borderMain text-xs text-muted flex items-center justify-between">
+      <span class="rail-label text-[10px]">v3.4.4 live</span>
+      <span class="w-2 h-2 rounded-full bg-cGreen"></span>
+    </div>
+  </nav>
+
+  <!-- Main Content Container -->
+  <main class="site-container" id="main-content-area">
+
+    <!-- ==================== VIEW 1: LEADERBOARD ==================== -->
+    <section id="view-leaderboard" class="space-y-4">
+      <div class="glass-card flex flex-col md:flex-row items-center justify-between gap-4">
+        <div>
+          <h1 class="text-xl font-extrabold tracking-tight">Deadly Assault Leaderboard</h1>
+          <p class="text-xs text-textMuted">Verified community combat runs sorted by highest clear scores and speed.</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="seg-pill-group">
+            <button class="seg-btn is-active" onclick="setSortMode('score', this)">Score</button>
+            <button class="seg-btn" onclick="setSortMode('newest', this)">Newest</button>
+          </div>
+          <button onclick="openShareModal()" class="px-4 py-2 bg-bgSubcard border border-borderMain rounded-lg text-xs font-bold hover:bg-borderMain transition">Share View</button>
+        </div>
+      </div>
+
+      <!-- Filters Panel -->
+      <div class="glass-card space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold uppercase tracking-wider text-textMuted">Combat Filters</span>
+          <button onclick="resetFilters()" class="text-xs text-cCyan hover:underline">Clear all</button>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div>
+            <label class="text-[11px] font-bold text-textMuted mb-1 block">Include Agent</label>
+            <select id="filter-agent" onchange="filterLeaderboard()" class="w-full bg-bgMain border border-borderMain rounded-lg px-3 py-2 text-xs font-medium focus:outline-none focus:border-cCyan">
+              <option value="">All Agents</option>
+              <option value="Phoenix">Phoenix</option>
+              <option value="Kafka">Kafka</option>
+              <option value="Sunbringer">Sunbringer</option>
+              <option value="Aria">Aria</option>
+              <option value="Promeia">Promeia</option>
+              <option value="Sigrid">Sigrid</option>
+              <option value="Severian">Severian</option>
+              <option value="Alice">Alice</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-[11px] font-bold text-textMuted mb-1 block">Max Limited Cost</label>
+            <input type="range" id="filter-cost" min="0" max="12" value="6" oninput="document.getElementById('cost-val').innerText = this.value; filterLeaderboard();" class="w-full accent-cCyan">
+            <div class="text-[10px] text-right text-textMuted mt-1">Cost limit: <span id="cost-val" class="text-white font-bold">6</span></div>
+          </div>
+          <div>
+            <label class="text-[11px] font-bold text-textMuted mb-1 block">Search Query</label>
+            <input type="text" id="filter-search" oninput="filterLeaderboard()" placeholder="Search team or w-engine..." class="w-full bg-bgMain border border-borderMain rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cCyan">
+          </div>
+        </div>
+      </div>
+
+      <!-- Leaderboard Run Cards List -->
+      <div id="leaderboard-cards-list" class="space-y-4">
+        <!-- Rendered dynamically by JS -->
+      </div>
+    </section>
+
+
+    <!-- ==================== VIEW 2: TIER LIST ==================== -->
+    <section id="view-tier-list" class="space-y-6 hidden">
+      <div class="glass-card flex flex-col gap-2">
+        <h1 class="text-xl font-extrabold tracking-tight">Automated DPS vs Partner Dependency Tier List</h1>
+        <p class="text-xs text-textMuted">Calculated from 276 verified Deadly Assault combat runs. X-axis represents Partner Reliance index, Y-axis represents Peak DPS recorded.</p>
+      </div>
+
+      <div class="glass-card p-6">
+        <h2 class="text-sm font-bold uppercase tracking-wider text-cCyan mb-4">Drivers Performance Matrix</h2>
+        <div class="relative w-full h-[500px]">
+          <canvas id="tierScatterChart"></canvas>
+        </div>
+      </div>
+
+      <div class="glass-card p-6">
+        <h2 class="text-sm font-bold uppercase tracking-wider text-cPurple mb-4">Support Duos Synergy Matrix</h2>
+        <div class="relative w-full h-[500px]">
+          <canvas id="supportPairChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==================== VIEW 3: AGENTS WIKI ==================== -->
+    <section id="view-agents" class="space-y-6 hidden">
+      <div class="glass-card flex flex-col md:flex-row items-center justify-between gap-4">
+        <div>
+          <h1 class="text-xl font-extrabold tracking-tight">Agent Database & Hubs</h1>
+          <p class="text-xs text-textMuted">Explore per-agent peak team comps, W-Engines, and optimal Drive Disc setups.</p>
+        </div>
+        <div class="w-full md:w-72">
+          <input type="text" id="agent-search" oninput="filterAgentsWiki(this.value)" placeholder="Search 65 agents..." class="w-full bg-bgMain border border-borderMain rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cCyan">
+        </div>
+      </div>
+
+      <div id="agents-grid-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+
+    <!-- ==================== VIEW 4: DOCUMENTATION ==================== -->
+    <section id="view-docs" class="space-y-6 hidden max-w-4xl mx-auto">
+      <div class="glass-card space-y-4">
+        <h1 class="text-2xl font-extrabold tracking-tight text-cYellow">ZZZ Analytics Standards & Methodology</h1>
+        <p class="text-sm text-textMuted leading-relaxed">
+          Our scoring pipeline ensures total neutrality by evaluating combat logs against standardized enemy statistics and rigorous substat distribution rules.
+        </p>
+      </div>
+
+      <div class="glass-card space-y-4">
+        <h2 class="text-lg font-bold text-white">What is "Free Training Mode"?</h2>
+        <p class="text-sm text-textMuted leading-relaxed">
+          <strong>"Free Training Mode"</strong> is a specific Deadly Assault stage available in beta releases, used as a neutral testing ground for Agents. The enemy utilized is a modified version of <strong>Dead End Butcher</strong>, featuring an increased HP pool of 3,347,325,000, zero Resistances or Weaknesses, and no Stage Buffs.
+        </p>
+      </div>
+
+      <div class="glass-card space-y-4">
+        <h2 class="text-lg font-bold text-white">Interactive Substat Calculator</h2>
+        <p class="text-xs text-textMuted">Test out stat limits and roll distributions based on active theorycrafting guidelines.</p>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 bg-bgMain p-4 rounded-lg border border-borderMain">
+          <div>
+            <label class="text-xs font-bold text-textMuted block mb-1">Effective Substats</label>
+            <select id="calc-substat-tier" onchange="runSubstatCalc()" class="w-full bg-bgSubcard border border-borderMain rounded p-2 text-xs text-white">
+              <option value="3">3+ Substat Agents</option>
+              <option value="2">2 Substat Agents</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-xs font-bold text-textMuted block mb-1">Slot 4 Mainstat</label>
+            <select id="calc-slot4" onchange="runSubstatCalc()" class="w-full bg-bgSubcard border border-borderMain rounded p-2 text-xs text-white">
+              <option value="CRIT DMG">CRIT DMG</option>
+              <option value="ATK%">ATK%</option>
+              <option value="Anomaly Proficiency">Anomaly Proficiency</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-xs font-bold text-textMuted block mb-1">Slot 5 Mainstat</label>
+            <select id="calc-slot5" onchange="runSubstatCalc()" class="w-full bg-bgSubcard border border-borderMain rounded p-2 text-xs text-white">
+              <option value="PEN Ratio">PEN Ratio</option>
+              <option value="Elemental DMG">Elemental DMG</option>
+              <option value="ATK%">ATK%</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="calc-result-box" class="p-4 bg-bgSubcard border border-cCyan/30 rounded-lg text-xs font-mono text-cCyan">
+          Total In-Game Rolls Sum: 28 / 28 Added (48 Total) — Status: Valid
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Share Modal Dialog -->
+  <dialog id="share-modal" class="glass-card text-white p-6 rounded-xl max-w-md w-full backdrop-blur-md bg-bgCard/95 border border-borderMain shadow-2xl">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-base font-extrabold text-cCyan">Share Filtered View</h3>
+      <button onclick="document.getElementById('share-modal').close()" class="text-textMuted hover:text-white font-bold">✕</button>
+    </div>
+    <p class="text-xs text-textMuted mb-4">Copy the direct link to this exact filtered leaderboard view with active team constraints.</p>
+    <input type="text" id="share-link-input" readonly class="w-full bg-bgMain border border-borderMain rounded-lg p-2.5 text-xs text-white font-mono mb-4 select-all" value="https://zzz.analytics.moe/?filter=active">
+    <div class="flex justify-end gap-2">
+      <button onclick="copyShareLink()" class="px-4 py-2 bg-cCyan text-bgMain rounded-lg text-xs font-extrabold hover:bg-sky-400 transition">Copy Link</button>
+    </div>
+  </dialog>
+
+  <!-- JavaScript Application Logic -->
+  <script>
+    // --- Mock Database: Leaderboard Runs ---
+    const MOCK_RUNS = [
+      {
+        id: "run_1793142927925",
+        score: 4019,
+        dps: 830500,
+        costLimited: 6,
+        costStandard: 0,
+        chars: [
+          { name: "Phoenix", element: "Fire", role: "Anomaly", dmg: "9.0%", dps: 74809, avatar: "https://assets.analytics.moe/thumbs/agents/1641.webp?v=2", wengine: "Plume of Rebirth R1", disc1: "Freedom Blues", disc2: "Phaethon's Melody", stats: "AP / DMG% / AM" },
+          { name: "Velina", element: "Wind", role: "Anomaly", dmg: "53.6%", dps: 444998, avatar: "https://assets.analytics.moe/thumbs/agents/1561.webp?v=2", wengine: "Joyau Dore R1", disc1: "Wuthering Salon", disc2: "Swing Jazz", stats: "AP / PEN Ratio / ER" },
+          { name: "Remielle", element: "Lumiflux", role: "Anomaly", dmg: "36.7%", dps: 305140, avatar: "https://assets.analytics.moe/thumbs/agents/1581.webp?v=2", wengine: "Ode of Resurrected Wings R1", disc1: "Feathered Fate", disc2: "Freedom Blues", stats: "AP / ATK% / ATK%" }
+        ],
+        youtube: "https://youtu.be/hNW_ggSAdLk"
+      },
+      {
+        id: "run_1794698211459",
+        score: 3396,
+        dps: 701622,
+        costLimited: 6,
+        costStandard: 0,
+        chars: [
+          { name: "Kafka", element: "Electric", role: "Anomaly", dmg: "44.2%", dps: 309777, avatar: "https://assets.analytics.moe/thumbs/agents/1651.webp?v=3", wengine: "Elegy of the Molted Spider R1", disc1: "Freedom Blues", disc2: "Swing Jazz", stats: "AP / PEN Ratio / ER" },
+          { name: "Vivian", element: "Ether", role: "Anomaly", dmg: "24.8%", dps: 173871, avatar: "https://assets.analytics.moe/thumbs/agents/1331.webp?v=2", wengine: "Flight of Fancy R1", disc1: "Phaethon's Melody", disc2: "Freedom Blues", stats: "AP / DMG% / AM" },
+          { name: "Remielle", element: "Lumiflux", role: "Anomaly", dmg: "30.5%", dps: 213930, avatar: "https://assets.analytics.moe/thumbs/agents/1581.webp?v=2", wengine: "Ode of Resurrected Wings R1", disc1: "Feathered Fate", disc2: "Freedom Blues", stats: "AP / ATK% / ATK%" }
+        ],
+        youtube: "https://youtu.be/sn4R7cifpMk"
+      },
+      {
+        id: "run_1794720668649",
+        score: 3271,
+        dps: 675969,
+        costLimited: 6,
+        costStandard: 0,
+        chars: [
+          { name: "Sunbringer", element: "Fire", role: "Armorer", dmg: "87.8%", dps: 593260, avatar: "https://assets.analytics.moe/thumbs/agents/1603.webp?v=2", wengine: "Dragonfire Mirage R1", disc1: "Rank Stele", disc2: "Woodpecker Electro", stats: "CRIT Rate / DMG% / DEF%" },
+          { name: "Roxy", element: "Wind", role: "Stun", dmg: "11.0%", dps: 74053, avatar: "https://assets.analytics.moe/thumbs/agents/1621.webp?v=2", wengine: "Crimson Moon Casket R1", disc1: "Crimson Wing", disc2: "Moonlight", stats: "CRIT Rate / PEN / ER" },
+          { name: "Robin", element: "Ether", role: "Defense", dmg: "0.8%", dps: 5136, avatar: "https://assets.analytics.moe/thumbs/agents/1661.webp?v=2", wengine: "Starlit Chroma R1", disc1: "Bunny", disc2: "Yunkui", stats: "HP% / HP% / Impact" }
+        ],
+        youtube: "https://youtu.be/MBn_clekg3c"
+      }
+    ];
+
+    // --- Mock Agents Wiki List ---
+    const MOCK_AGENTS = [
+      { name: "Robin", element: "ether", role: "defense", avatar: "https://assets.analytics.moe/agents/1661.webp?v=2" },
+      { name: "Kafka", element: "electric", role: "anomaly", avatar: "https://assets.analytics.moe/agents/1651.webp?v=3" },
+      { name: "Phoenix", element: "fire", role: "anomaly", avatar: "https://assets.analytics.moe/agents/1641.webp?v=2" },
+      { name: "Severian", element: "wind", role: "attack", avatar: "https://assets.analytics.moe/agents/1631.webp?v=2" },
+      { name: "Roxy", element: "wind", role: "stun", avatar: "https://assets.analytics.moe/agents/1621.webp?v=2" },
+      { name: "Sigrid", element: "ice", role: "attack", avatar: "https://assets.analytics.moe/agents/1591.webp?v=2" },
+      { name: "Remielle", element: "lumiflux", role: "anomaly", avatar: "https://assets.analytics.moe/agents/1581.webp?v=2" },
+      { name: "Velina", element: "wind", role: "anomaly", avatar: "https://assets.analytics.moe/agents/1561.webp?v=2" },
+      { name: "Promeia", element: "ice", role: "anomaly", avatar: "https://assets.analytics.moe/agents/1541.webp?v=2" },
+      { name: "Aria", element: "ether", role: "anomaly", avatar: "https://assets.analytics.moe/agents/1501.webp?v=2" },
+      { name: "Sunna", element: "physical", role: "support", avatar: "https://assets.analytics.moe/agents/1491.webp?v=2" },
+      { name: "Jane", element: "physical", role: "anomaly", avatar: "https://assets.analytics.moe/agents/1261.webp?v=2" }
+    ];
+
+    // --- Navigation Routing ---
+    function switchTab(tabId) {
+      document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
+      document.getElementById(`view-${tabId}`).classList.remove('hidden');
+      
+      document.querySelectorAll('.rail-item.nav-btn').forEach(btn => btn.classList.remove('is-active'));
+      const activeBtn = document.querySelector(`.rail-item[data-tab="${tabId}"]`);
+      if (activeBtn) activeBtn.classList.add('is-active');
+
+      document.getElementById('mobile-page-title').innerText = tabId.charAt(0).toUpperCase() + tabId.slice(1).replace('-', ' ');
+
+      if (tabId === 'tier-list' && !window.chartsInitialized) {
+        initTierCharts();
+        window.chartsInitialized = true;
+      }
+    }
+
+    function toggleMobileNav() {
+      document.getElementById('site-rail').classList.toggle('is-open');
+    }
+
+    // --- Leaderboard Rendering & Filtering ---
+    let currentSort = 'score';
+
+    function renderLeaderboard(runs) {
+      const container = document.getElementById('leaderboard-cards-list');
+      container.innerHTML = '';
+      
+      runs.forEach(run => {
+        let charsHtml = run.chars.map(c => `
+          <div class="bg-bgSubcard border border-borderMain rounded-lg p-3 flex flex-col gap-2">
+            <div class="flex items-center gap-3">
+              <img src="${c.avatar}" alt="${c.name}" class="w-12 h-12 rounded-lg object-cover bg-bgMain" onerror="this.src='https://placehold.co/48x48/111622/38BDF8?text=${c.name[0]}'">
+              <div>
+                <div class="text-xs font-bold text-white">M0 ${c.name}</div>
+                <div class="text-[10px] text-textMuted">${c.role} • ${c.element}</div>
+                <div class="text-[10px] text-cCyan font-bold">${c.dmg} DMG (${c.dps.toLocaleString()} DPS)</div>
+              </div>
+            </div>
+            <div class="text-[10px] bg-bgMain p-2 rounded border border-borderMain/50 text-textMuted">
+              <div><strong class="text-white">W-Engine:</strong> ${c.wengine}</div>
+              <div><strong class="text-white">Discs:</strong> ${c.disc1} / ${c.disc2}</div>
+              <div><strong class="text-white">Mainstats:</strong> ${c.stats}</div>
+            </div>
+          </div>
+        `).join('');
+
+        let cardHtml = `
+          <div class="glass-card space-y-4 hover:border-cCyan/40 transition">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              ${charsHtml}
+            </div>
+            <div class="flex flex-wrap items-center justify-between pt-2 border-t border-borderMain gap-3 text-xs">
+              <div class="flex items-center gap-3">
+                <a href="${run.youtube}" target="_blank" rel="noopener" class="px-3 py-1 bg-red-600/20 text-red-400 border border-red-500/30 rounded font-bold hover:bg-red-600/30 transition">Watch Run</a>
+                <span class="text-textMuted">Cost: <strong class="text-cOrange">${run.costLimited}</strong> / <strong class="text-cPurple">${run.costStandard}</strong></span>
+              </div>
+              <div class="flex items-center gap-4">
+                <span class="text-textMuted">DPS: <strong class="text-white">${run.dps.toLocaleString()}</strong></span>
+                <span class="font-mono font-extrabold text-sm text-cCyan">${run.score} SCORE</span>
+              </div>
+            </div>
+          </div>
+        `;
+        container.insertAdjacentHTML('beforeend', cardHtml);
+      });
+    }
+
+    function setSortMode(mode, btn) {
+      currentSort = mode;
+      document.querySelectorAll('.seg-btn').forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      filterLeaderboard();
+    }
+
+    function filterLeaderboard() {
+      const agentFilter = document.getElementById('filter-agent').value;
+      const costLimit = parseInt(document.getElementById('filter-cost').value);
+      const query = document.getElementById('filter-search').value.toLowerCase();
+
+      let filtered = MOCK_RUNS.filter(r => {
+        if (r.costLimited > costLimit) return false;
+        if (agentFilter && !r.chars.some(c => c.name.toLowerCase() === agentFilter.toLowerCase())) return false;
+        if (query && !r.chars.some(c => c.name.toLowerCase().includes(query) || c.wengine.toLowerCase().includes(query))) return false;
+        return true;
+      });
+
+      if (currentSort === 'score') {
+        filtered.sort((a, b) => b.score - a.score);
+      } else {
+        filtered.sort((a, b) => b.id.localeCompare(a.id));
+      }
+
+      renderLeaderboard(filtered);
+    }
+
+    function resetFilters() {
+      document.getElementById('filter-agent').value = '';
+      document.getElementById('filter-cost').value = 12;
+      document.getElementById('cost-val').innerText = '12';
+      document.getElementById('filter-search').value = '';
+      filterLeaderboard();
+    }
+
+    // --- Agents Wiki Rendering ---
+    function renderAgentsWiki(agents) {
+      const grid = document.getElementById('agents-grid-container');
+      grid.innerHTML = '';
+      agents.forEach(agent => {
+        let card = `
+          <div class="bg-bgCard border border-borderMain rounded-xl p-3 flex flex-col items-center gap-2 hover:border-cCyan transition cursor-pointer">
+            <img src="${agent.avatar}" alt="${agent.name}" class="w-16 h-16 rounded-xl object-cover bg-bgMain border border-borderMain" onerror="this.src='https://placehold.co/64x64/111622/38BDF8?text=${agent.name[0]}'">
+            <span class="text-xs font-bold text-center text-white">${agent.name}</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-bgSubcard text-textMuted uppercase">${agent.element}</span>
+          </div>
+        `;
+        grid.insertAdjacentHTML('beforeend', card);
+      });
+    }
+
+    function filterAgentsWiki(query) {
+      const q = query.toLowerCase();
+      const filtered = MOCK_AGENTS.filter(a => a.name.toLowerCase().includes(q) || a.element.includes(q) || a.role.includes(q));
+      renderAgentsWiki(filtered);
+    }
+
+    // --- Chart.js Initializations for Tier Lists ---
+    function initTierCharts() {
+      // Scatter Tier Chart
+      const scatterCtx = document.getElementById('tierScatterChart').getContext('2d');
+      new Chart(scatterCtx, {
+        type: 'scatter',
+        data: {
+          datasets: [{
+            label: 'Drivers Peak DPS vs Reliance',
+            data: [
+              {x: 45, y: 830500, name: 'Phoenix'},
+              {x: 60, y: 701622, name: 'Kafka'},
+              {x: 75, y: 675969, name: 'Sunbringer'},
+              {x: 40, y: 672515, name: 'Aria'},
+              {x: 50, y: 649022, name: 'Promeia'},
+              {x: 85, y: 623254, name: 'Sigrid'}
+            ],
+            backgroundColor: '#38BDF8',
+            pointRadius: 8,
+            pointHoverRadius: 12
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return `${context.raw.name}: X=${context.raw.x}, DPS=${context.raw.y.toLocaleString()}`;
+                }
+              }
+            }
+          },
+          scales: {
+            x: { grid: { color: '#222D44' }, ticks: { color: '#94A3B8' }, title: { display: true, text: 'Partner Reliance', color: '#94A3B8' } },
+            y: { grid: { color: '#222D44' }, ticks: { color: '#94A3B8' }, title: { display: true, text: 'Peak DPS Recorded', color: '#94A3B8' } }
+          }
+        }
+      });
+
+      // Support Pairs Duo Chart
+      const duoCtx = document.getElementById('supportPairChart').getContext('2d');
+      new Chart(duoCtx, {
+        type: 'scatter',
+        data: {
+          datasets: [{
+            label: 'Support Duos',
+            data: [
+              {x: 30, y: 810000, name: 'Sunbringer + Roxy'},
+              {x: 55, y: 740000, name: 'Kafka + Remielle'},
+              {x: 40, y: 680000, name: 'Phoenix + Velina'},
+              {x: 65, y: 630000, name: 'Sigrid + Roxy'}
+            ],
+            backgroundColor: '#C084FC',
+            pointRadius: 8,
+            pointHoverRadius: 12
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return `${context.raw.name}: DPS=${context.raw.y.toLocaleString()}`;
+                }
+              }
+            }
+          },
+          scales: {
+            x: { grid: { color: '#222D44' }, ticks: { color: '#94A3B8' }, title: { display: true, text: 'Driver Reliance', color: '#94A3B8' } },
+            y: { grid: { color: '#222D44' }, ticks: { color: '#94A3B8' }, title: { display: true, text: 'Peak Team DPS', color: '#94A3B8' } }
+          }
+        }
+      });
+    }
+
+    // --- Interactive Substat Calculator ---
+    function runSubstatCalc() {
+      const tier = document.getElementById('calc-substat-tier').value;
+      const slot4 = document.getElementById('calc-slot4').value;
+      const slot5 = document.getElementById('calc-slot5').value;
+      
+      const box = document.getElementById('calc-result-box');
+      if (tier === '3') {
+        box.innerText = `Total In-Game Rolls Sum: 28 / 28 Added (48 Total) — Status: Valid (Mainstats: ${slot4}, ${slot5})`;
+      } else {
+        box.innerText = `Total In-Game Rolls Sum: 24 / 24 Added (42 Total) — Status: Valid [2-Substat Exemption Active]`;
+      }
+    }
+
+    // --- Share Modal Actions ---
+    function openShareModal() {
+      document.getElementById('share-link-input').value = window.location.href;
+      document.getElementById('share-modal').showModal();
+    }
+
+    function copyShareLink() {
+      const input = document.getElementById('share-link-input');
+      input.select();
+      document.execCommand('copy');
+      alert('Link copied to clipboard!');
+      document.getElementById('share-modal').close();
+    }
+
+    // Initialize App on Load
+    window.onload = function() {
+      renderLeaderboard(MOCK_RUNS);
+      renderAgentsWiki(MOCK_AGENTS);
+    };
+  </script>
+</body>
+</html>

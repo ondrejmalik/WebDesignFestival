@@ -1,0 +1,283 @@
+<!-- v2/program.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Program - Festival of Darkness 2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/lang.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="Festival of Darkness 2">
+        <span class="brand-mark"></span>
+        <span class="brand-name">Festival of Darkness 2</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html" class="nav-link" data-i18n="nav.home">Overview</a>
+        <a href="program.html" class="nav-link active" data-i18n="nav.program">Program</a>
+        <button type="button" class="lang-toggle" id="lang-toggle" onclick="toggleFestivalLang()" aria-label="Switch language">CZ</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <div class="hero-meta">
+          <span class="meta-pill" data-i18n="hero.dates">10-12 Jul 2026</span>
+          <span class="meta-pill" data-i18n="program.badge">2 Stages / 3 Days</span>
+        </div>
+        <h1 class="pixel-h1" data-i18n="program.title">Program</h1>
+        <p class="hero-lead" data-i18n="program.subtitle">Curated daily timetable across Solar Horizon Stage and Lunar Forest Dome.</p>
+        <div class="day-jump-bar" role="navigation" aria-label="Jump to day">
+          <a href="#day-1" class="jump-pill" data-i18n="days.day1Nav">Day 1 - Fri 10 Jul</a>
+          <a href="#day-2" class="jump-pill" data-i18n="days.day2Nav">Day 2 - Sat 11 Jul</a>
+          <a href="#day-3" class="jump-pill" data-i18n="days.day3Nav">Day 3 - Sun 12 Jul</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="schedule-section">
+      <div class="container">
+        <!-- DAY 1 -->
+        <article id="day-1" class="day-block">
+          <div class="day-header">
+            <div>
+              <h2 class="day-title" data-i18n="days.day1Title">Day 1 - Friday, 10 July 2026</h2>
+              <p class="day-sub" data-i18n="days.day1Sub">Opening afternoon post-rock, synthpop, and late-night live hardware techno.</p>
+            </div>
+            <span class="set-count" data-set-count="6">6 sets</span>
+          </div>
+
+          <div class="schedule-list">
+            <div class="schedule-row">
+              <div class="row-time">14:00 - 14:45</div>
+              <div class="row-artist">
+                <span class="artist-name">Echoes of Light</span>
+                <span class="artist-origin">CZ</span>
+              </div>
+              <div class="row-genre">Post-Rock / Ambient</div>
+              <div class="row-stage"><span class="stage-pill pill-solar">Solar Horizon Stage</span></div>
+            </div>
+
+            <div class="schedule-row">
+              <div class="row-time">17:15 - 18:15</div>
+              <div class="row-artist">
+                <span class="artist-name">Deep Texture</span>
+                <span class="artist-origin">DE</span>
+              </div>
+              <div class="row-genre">Dub Techno</div>
+              <div class="row-stage"><span class="stage-pill pill-lunar">Lunar Forest Dome</span></div>
+            </div>
+
+            <div class="schedule-row">
+              <div class="row-time">18:15 - 19:05</div>
+              <div class="row-artist">
+                <span class="artist-name">Prague Synth Collective</span>
+                <span class="artist-origin">CZ</span>
+              </div>
+              <div class="row-genre">Synthpop</div>
+              <div class="row-stage"><span class="stage-pill pill-solar">Solar Horizon Stage</span></div>
+            </div>
+
+            <div class="schedule-row">
+              <div class="row-time">20:40 - 21:40</div>
+              <div class="row-artist">
+                <span class="artist-name">Mirage Horizon</span>
+                <span class="artist-origin">UK</span>
+              </div>
+              <div class="row-genre">Alternative Rock</div>
+              <div class="row-stage"><span class="stage-pill pill-solar">Solar Horizon Stage</span></div>
+            </div>
+
+            <div class="schedule-row">
+              <div class="row-time">22:30 - 23:50</div>
+              <div class="row-artist">
+                <span class="artist-name">Modular Horizon</span>
+                <span class="artist-origin">DE</span>
+              </div>
+              <div class="row-genre">Live Hardware Techno</div>
+              <div class="row-stage"><span class="stage-pill pill-lunar">Lunar Forest Dome</span></div>
+            </div>
+
+            <div class="schedule-row">
+              <div class="row-time">23:30 - 00:45</div>
+              <div class="row-artist">
+                <span class="artist-name">Starlight Odyssey</span>
+                <span class="artist-origin">FR</span>
+              </div>
+              <div class="row-genre">Electronic Indie</div>
+              <div class="row-stage"><span class="stage-pill pill-solar">Solar Horizon Stage</span></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- DAY 2 -->
+        <article id="day-2" class="day-block">
+          <div class="day-header">
+            <div>
+              <h2 class="day-title" data-i18n="days.day2Title">Day 2 - Saturday, 11 July 2026</h2>
+              <p class="day-sub" data-i18n="days.day2Sub">Shoegaze, post-punk revival, and peak-time dark wave techno.</p>
+            </div>
+            <span class="set-count" data-set-count="6">6 sets</span>
+          </div>
+
+          <div class="schedule-list">
+            <div class="schedule-row">
+              <div class="row-time">15:30 - 16:20</div>
+              <div class="row-artist">
+                <span class="artist-name">The Urban Poets</span>
+                <span class="artist-origin">UK</span>
+              </div>
+              <div class="row-genre">Indie Soul</div>
+              <div class="row-stage"><span class="stage-pill pill-solar">Solar Horizon Stage</span></div>
+            </div>
+
+            <div class="schedule-row">
+              <div class="row-time">17:45 - 18:40</div>
+              <div class="row-artist">
+                <span class="artist-name">Silver Tides</span>
+                <span class="artist-origin">CZ</span>
+              </div>
+              <div class="row-genre">Shoegaze</div>
+              <div class="row-stage"><span class="stage-pill pill-solar">Solar Horizon Stage</span></div>
+            </div>
+
+            <div class="schedule-row">
+              <div class="row-time">19:15 - 20:15</div>
+              <div class="row-artist">
+                <span class="artist-name">Monolith Audio</span>
+                <span class="artist-origin">DE</span>
+              </div>
+              <div class="row-genre">Peak Time Techno</div>
+              <div class="row-stage"><span class="stage-pill pill-lunar">Lunar Forest Dome</span></div>
+            </div>
+
+            <div class="schedule-row">
+              <div class="row-time">20:20 - 21:20</div>
+              <div class="row-artist">
+                <span class="artist-name">Wild Horizon</span>
+                <span class="artist-origin">DE</span>
+              </div>
+              <div class="row-genre">Post-Punk Revival</div>
+              <div class="row-stage"><span class="stage-pill pill-solar">Solar Horizon Stage</span></div>
+            </div>
+
+            <div class="schedule-row">
+              <div class="row-time">23:10 - 00:25</div>
+              <div class="row-artist">
+                <span class="artist-name">Vortex Motion</span>
+                <span class="artist-origin">UK</span>
+              </div>
+              <div class="row-genre">Nu-Electro</div>
+              <div class="row-stage"><span class="stage-pill pill-solar">Solar Horizon Stage</span></div>
+            </div>
+
+            <div class="schedule-row">
+              <div class="row-time">23:35 - 00:55</div>
+              <div class="row-artist">
+                <span class="artist-name">Circuit Overload</span>
+                <span class="artist-origin">PL</span>
+              </div>
+              <div class="row-genre">Hard Techno</div>
+              <div class="row-stage"><span class="stage-pill pill-lunar">Lunar Forest Dome</span></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- DAY 3 -->
+        <article id="day-3" class="day-block">
+          <div class="day-header">
+            <div>
+              <h2 class="day-title" data-i18n="days.day3Title">Day 3 - Sunday, 12 July 2026</h2>
+              <p class="day-sub" data-i18n="days.day3Sub">Chamber pop, melodic techno, and the closing orchestral electronic finale.</p>
+            </div>
+            <span class="set-count" data-set-count="6">6 sets</span>
+          </div>
+
+          <div class="schedule-list">
+            <div class="schedule-row">
+              <div class="row-time">15:00 - 15:50</div>
+              <div class="row-artist">
+                <span class="artist-name">Sunken Ship</span>
+                <span class="artist-origin">UK</span>
+              </div>
+              <div class="row-genre">Psych Rock</div>
+              <div class="row-stage"><span class="stage-pill pill-solar">Solar Horizon Stage</span></div>
+            </div>
+
+            <div class="schedule-row">
+              <div class="row-time">17:15 - 18:10</div>
+              <div class="row-artist">
+                <span class="artist-name">Urban Echo</span>
+                <span class="artist-origin">CZ</span>
+              </div>
+              <div class="row-genre">Art Pop</div>
+              <div class="row-stage"><span class="stage-pill pill-solar">Solar Horizon Stage</span></div>
+            </div>
+
+            <div class="schedule-row">
+              <div class="row-time">21:30 - 22:45</div>
+              <div class="row-artist">
+                <span class="artist-name">Galactic Orbit</span>
+                <span class="artist-origin">IT</span>
+              </div>
+              <div class="row-genre">Melodic Techno</div>
+              <div class="row-stage"><span class="stage-pill pill-lunar">Lunar Forest Dome</span></div>
+            </div>
+
+            <div class="schedule-row">
+              <div class="row-time">22:35 - 23:55</div>
+              <div class="row-artist">
+                <span class="artist-name">Starlight Runners</span>
+                <span class="artist-origin">DK</span>
+              </div>
+              <div class="row-genre">Electropop Headliner</div>
+              <div class="row-stage"><span class="stage-pill pill-solar">Solar Horizon Stage</span></div>
+            </div>
+
+            <div class="schedule-row">
+              <div class="row-time">00:10 - 01:15</div>
+              <div class="row-artist">
+                <span class="artist-name">Final Cascade</span>
+                <span class="artist-origin">CZ</span>
+              </div>
+              <div class="row-genre">Orchestral Electronic</div>
+              <div class="row-stage"><span class="stage-pill pill-solar">Solar Horizon Stage</span></div>
+            </div>
+
+            <div class="schedule-row">
+              <div class="row-time">02:00 - 03:00</div>
+              <div class="row-artist">
+                <span class="artist-name">Equinox Farewell</span>
+                <span class="artist-origin">CZ</span>
+              </div>
+              <div class="row-genre">Down-tempo Ambient</div>
+              <div class="row-stage"><span class="stage-pill pill-lunar">Lunar Forest Dome</span></div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <span class="footer-brand">Festival of Darkness 2</span>
+        <p class="footer-copy" data-i18n="footer.location">Kutna Hora, Czech Republic - 10-12 July 2026</p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html" data-i18n="nav.home">Overview</a>
+        <a href="program.html" data-i18n="nav.program">Program</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

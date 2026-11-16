@@ -1,0 +1,2527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#17141b" />
+  <meta
+    name="description"
+    content="Celebrate Neuro-sama's fourth birthday with Neuro & Evil's first extended-reality live concert, featuring a live band. The Vermont Hollywood, Los Angeles. December 19, 2026 at 12:19pm PST."
+  />
+  <title>Neuro &amp; Evil - Live Concert</title>
+
+  <!-- Google Fonts matching DM Sans + rounded geometric display typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Fredoka:wght@600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* ==========================================================================
+       DESIGN TOKENS & CUSTOM PROPERTIES
+       ========================================================================== */
+    :root {
+      --bg-base: #17141b;
+      --bg-elevated: #1f1a26;
+      --bg-surface: rgba(29, 23, 37, 0.72);
+      --bg-surface-strong: rgba(23, 20, 27, 0.88);
+      --banner-bg: #f8b8c2;
+      --banner-ink: #17141b;
+      --ink-primary: #ffffff;
+      --ink-secondary: rgba(255, 255, 255, 0.74);
+      --ink-muted: rgba(255, 255, 255, 0.52);
+      --accent-rose: #df3b5c;
+      --accent-rose-hover: #f0486a;
+      --accent-pink: #f8b8c2;
+      --accent-peach: #fad6c3;
+      --accent-violet: #8b5cf6;
+      --count-days: #eb5e78;
+      --count-hours: #f5aebc;
+      --count-minutes: #fbe2db;
+      --count-seconds: #ffffff;
+      --border-hairline: rgba(255, 255, 255, 0.14);
+      --border-strong: rgba(255, 255, 255, 0.24);
+      --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-display: "Plus Jakarta Sans", "DM Sans", sans-serif;
+      --font-logo: "Fredoka", "Plus Jakarta Sans", sans-serif;
+      --banner-height: 36px;
+      --container-max: 1320px;
+      --radius-pill: 9999px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+    }
+
+    /* ==========================================================================
+       RESET & BASE STYLES
+       ========================================================================== */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      background-color: var(--bg-base);
+      color: var(--ink-primary);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: var(--bg-base);
+      color: var(--ink-primary);
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font: inherit;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: -100px;
+      left: 16px;
+      z-index: 200;
+      background: var(--accent-pink);
+      color: var(--banner-ink);
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: var(--radius-pill);
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus {
+      top: 12px;
+      outline: 2px solid #fff;
+      outline-offset: 2px;
+    }
+
+    /* ==========================================================================
+       SOLD-OUT MARQUEE BANNER
+       ========================================================================== */
+    .sold-out-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 90;
+      height: var(--banner-height);
+      background-color: var(--banner-bg);
+      color: var(--banner-ink);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      font-size: 0.78rem;
+      letter-spacing: 0.01em;
+      border-bottom: 1px solid rgba(23, 20, 27, 0.12);
+      transition: background-color 0.2s ease;
+    }
+
+    .sold-out-banner:hover {
+      background-color: #ffc6cf;
+    }
+
+    .sold-out-banner:focus-visible {
+      outline: 2px solid #ffffff;
+      outline-offset: -2px;
+    }
+
+    .sold-out-track {
+      display: flex;
+      width: max-content;
+      will-change: transform;
+      animation: marqueeScroll 32s linear infinite;
+    }
+
+    .sold-out-banner:hover .sold-out-track,
+    .sold-out-banner:focus-visible .sold-out-track {
+      animation-play-state: paused;
+    }
+
+    .sold-out-group {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .sold-out-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding-right: 28px;
+      white-space: nowrap;
+    }
+
+    .sold-out-item strong {
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-size: 0.75rem;
+    }
+
+    .sold-out-thanks {
+      font-weight: 500;
+      opacity: 0.9;
+    }
+
+    .sold-out-cta {
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .sold-out-divider {
+      margin-left: 20px;
+      font-size: 0.72rem;
+      opacity: 0.75;
+    }
+
+    @keyframes marqueeScroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* ==========================================================================
+       HERO / SHOW ART STAGE SECTION
+       ========================================================================== */
+    main {
+      padding-top: var(--banner-height);
+    }
+
+    .show-art {
+      position: relative;
+      width: 100%;
+      min-height: calc(100svh - var(--banner-height));
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 75% 58% at 50% 18%, rgba(143, 82, 224, 0.36) 0%, rgba(72, 34, 122, 0.16) 52%, transparent 80%),
+        radial-gradient(ellipse 55% 45% at 24% 48%, rgba(114, 152, 235, 0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 55% 45% at 76% 48%, rgba(223, 59, 92, 0.2) 0%, transparent 70%),
+        linear-gradient(180deg, #1b1326 0%, #241834 38%, #18131e 78%, #17141b 100%);
+    }
+
+    /* Stage Key-Art Layer */
+    .stage-canvas-wrap {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .stage-key-art {
+      width: 100%;
+      height: 100%;
+      min-width: 1120px;
+      object-fit: cover;
+      object-position: center top;
+      user-select: none;
+    }
+
+    /* Bottom gradient vignette ensuring crisp legibility over artwork */
+    .show-art::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        180deg,
+        rgba(23, 20, 27, 0.04) 0%,
+        rgba(23, 20, 27, 0.08) 42%,
+        rgba(23, 20, 27, 0.62) 66%,
+        rgba(23, 20, 27, 0.92) 84%,
+        #17141b 100%
+      );
+      z-index: 2;
+    }
+
+    /* Floating Stage Confetti */
+    .confetti-field {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 14px;
+      height: 7px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 0 12px rgba(255, 220, 245, 0.65);
+      animation: confettiDrift 7s ease-in-out infinite alternate;
+    }
+
+    .confetti-piece.pink {
+      background: rgba(248, 184, 194, 0.88);
+    }
+
+    .confetti-piece.lavender {
+      background: rgba(212, 184, 255, 0.82);
+    }
+
+    @keyframes confettiDrift {
+      0% {
+        transform: translate3d(0, -6px, 0) rotate(var(--rot, 18deg));
+      }
+      100% {
+        transform: translate3d(8px, 10px, 0) rotate(calc(var(--rot, 18deg) + 22deg));
+      }
+    }
+
+    /* Subtle Presenter Pill at Top Left (from DOM header) */
+    .hero-presenters-pill {
+      position: absolute;
+      top: 16px;
+      left: 24px;
+      z-index: 10;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 13px;
+      border-radius: var(--radius-pill);
+      background: rgba(23, 20, 27, 0.56);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.86);
+      letter-spacing: 0.02em;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .hero-presenters-pill:hover {
+      background: rgba(23, 20, 27, 0.78);
+      border-color: rgba(255, 255, 255, 0.28);
+    }
+
+    .presenter-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .presenter-link:hover {
+      color: var(--accent-pink);
+    }
+
+    .presenter-muted {
+      color: var(--ink-muted);
+      font-weight: 500;
+    }
+
+    /* Bottom-right Art Credit matching screenshot */
+    .art-credit {
+      position: absolute;
+      right: 24px;
+      bottom: 14px;
+      z-index: 12;
+      font-size: 0.68rem;
+      color: rgba(255, 255, 255, 0.5);
+      letter-spacing: 0.01em;
+    }
+
+    .art-credit span {
+      color: rgba(255, 255, 255, 0.88);
+      font-weight: 700;
+    }
+
+    /* ==========================================================================
+       3-COLUMN HERO EVENT INFO GRID (EXACT SCREENSHOT LAYOUT)
+       ========================================================================== */
+    .event-info-wrapper {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: clamp(230px, 34vh, 360px) clamp(20px, 3.5vw, 44px) 38px;
+    }
+
+    .event-info {
+      display: grid;
+      grid-template-columns: 1.12fr 0.94fr 1.04fr;
+      align-items: start;
+      gap: 0;
+    }
+
+    /* Column 1: Venue, Ticket CTA & Countdown */
+    .event-details {
+      padding-right: clamp(20px, 3vw, 40px);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .venue-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 2.3vw, 2.05rem);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+      color: #ffffff;
+      text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55);
+    }
+
+    .event-caption {
+      margin-top: 6px;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--ink-secondary);
+    }
+
+    /* Primary Crimson-Rose Pill CTA */
+    .ticket-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      padding: 13px 26px;
+      border-radius: var(--radius-pill);
+      background-color: var(--accent-rose);
+      color: #ffffff;
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      box-shadow:
+        0 8px 24px rgba(223, 59, 92, 0.36),
+        inset 0 1px 0 rgba(255, 255, 255, 0.22);
+      transition:
+        transform 0.18s cubic-bezier(0.22, 1, 0.36, 1),
+        background-color 0.18s ease,
+        box-shadow 0.18s ease;
+    }
+
+    .ticket-button:hover {
+      background-color: var(--accent-rose-hover);
+      transform: translateY(-2px);
+      box-shadow:
+        0 12px 28px rgba(223, 59, 92, 0.48),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    .ticket-button:active {
+      transform: translateY(0);
+    }
+
+    .ticket-button:focus-visible {
+      outline: 2px solid #ffffff;
+      outline-offset: 3px;
+    }
+
+    .ticket-button .arrow {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.18s ease;
+    }
+
+    .ticket-button:hover .arrow {
+      transform: translateX(3px);
+    }
+
+    /* Live 4-Unit Countdown */
+    .art-countdown {
+      margin-top: 26px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .countdown-values {
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(16px, 2.2vw, 24px);
+    }
+
+    .countdown-unit {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      min-width: 44px;
+    }
+
+    .countdown-unit.is-hidden {
+      display: none;
+    }
+
+    .countdown-unit dt {
+      margin-top: 4px;
+      font-size: 0.62rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+    }
+
+    .countdown-unit dd {
+      font-family: var(--font-display);
+      font-size: clamp(1.55rem, 2.15vw, 1.95rem);
+      font-weight: 800;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.03em;
+    }
+
+    .countdown-unit:nth-child(1) dd {
+      color: var(--count-days);
+    }
+
+    .countdown-unit:nth-child(2) dd {
+      color: var(--count-hours);
+    }
+
+    .countdown-unit:nth-child(3) dd {
+      color: var(--count-minutes);
+    }
+
+    .countdown-unit:nth-child(4) dd {
+      color: var(--count-seconds);
+    }
+
+    .countdown-toggle {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.38);
+      padding: 2px 0;
+      transition: color 0.18s ease;
+    }
+
+    .countdown-toggle:hover,
+    .countdown-toggle:focus-visible {
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* Column 2: Concert Date & Venue Start Time */
+    .event-schedule {
+      padding: 2px clamp(20px, 3vw, 40px);
+      border-left: 1px solid var(--border-hairline);
+      min-height: 224px;
+    }
+
+    .detail-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+    }
+
+    .event-date {
+      margin-top: 8px;
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 1.8vw, 1.55rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+    }
+
+    .event-start {
+      margin-top: 16px;
+      font-family: var(--font-display);
+      font-size: clamp(1.25rem, 1.75vw, 1.5rem);
+      font-weight: 800;
+      line-height: 1.2;
+      color: #ffffff;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .event-start span {
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+    }
+
+    /* Column 3: Local Featured Time + World Timezone List */
+    .event-times {
+      padding-left: clamp(20px, 3vw, 40px);
+      border-left: 1px solid var(--border-hairline);
+    }
+
+    .featured-time {
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border-hairline);
+    }
+
+    .featured-time-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .featured-location {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--ink-secondary);
+    }
+
+    .local-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 9px;
+      border-radius: var(--radius-pill);
+      background-color: var(--accent-pink);
+      color: var(--banner-ink);
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+
+    .featured-time-heading > span {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--ink-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .featured-clock {
+      margin-top: 4px;
+      font-family: var(--font-display);
+      font-size: clamp(1.65rem, 2.35vw, 2.1rem);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+      color: #ffffff;
+    }
+
+    .featured-date {
+      margin-top: 4px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink-muted);
+    }
+
+    .timezone-list {
+      list-style: none;
+    }
+
+    .timezone {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 6px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.16s ease;
+    }
+
+    .timezone:last-child {
+      border-bottom: none;
+    }
+
+    .timezone:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .timezone.is-selected {
+      background-color: rgba(248, 184, 194, 0.1);
+    }
+
+    .timezone h3 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.88);
+      line-height: 1.25;
+    }
+
+    .timezone-date {
+      font-size: 0.68rem;
+      color: var(--ink-muted);
+      margin-top: 1px;
+    }
+
+    .timezone-clock {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .timezone-clock time {
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.25;
+    }
+
+    .zone-label {
+      font-size: 0.64rem;
+      font-weight: 600;
+      color: var(--ink-muted);
+      letter-spacing: 0.04em;
+      margin-top: 1px;
+    }
+
+    /* ==========================================================================
+       BELOW-THE-FOLD SECTIONS (FROM 01-INDEX.HTML DOM)
+       ========================================================================== */
+    .below-fold {
+      position: relative;
+      z-index: 10;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 28px clamp(20px, 3.5vw, 44px) 0;
+    }
+
+    /* Concert Story / About Section */
+    .concert-story {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: clamp(24px, 4vw, 56px);
+      align-items: center;
+      padding: 52px 0;
+      border-top: 1px solid var(--border-hairline);
+    }
+
+    .story-copy h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 2.4vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+    }
+
+    .story-lead {
+      margin-top: 14px;
+      font-size: clamp(1.02rem, 1.3vw, 1.16rem);
+      line-height: 1.65;
+      color: var(--ink-secondary);
+      max-width: 58ch;
+    }
+
+    .story-highlights {
+      margin-top: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .highlight-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 14px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-hairline);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.86);
+    }
+
+    .highlight-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-pink);
+    }
+
+    .artist-quote {
+      position: relative;
+      padding: 28px 30px;
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(circle at top right, rgba(223, 59, 92, 0.16), transparent 60%),
+        radial-gradient(circle at bottom left, rgba(139, 92, 246, 0.16), transparent 60%),
+        rgba(255, 255, 255, 0.035);
+      border: 1px solid var(--border-hairline);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .artist-quote blockquote p {
+      font-family: var(--font-display);
+      font-size: clamp(1.12rem, 1.5vw, 1.32rem);
+      font-weight: 700;
+      line-height: 1.45;
+      color: #ffffff;
+    }
+
+    .artist-quote figcaption {
+      margin-top: 14px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--accent-pink);
+    }
+
+    /* Ticket / Waitlist Callout Section */
+    .ticket-callout {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 32px clamp(24px, 3.5vw, 40px);
+      margin: 12px 0 56px;
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(135deg, rgba(248, 184, 194, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%),
+        rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-strong);
+    }
+
+    .ticket-callout h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 2vw, 1.65rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+    }
+
+    .ticket-callout p {
+      margin-top: 6px;
+      font-size: 0.92rem;
+      color: var(--ink-secondary);
+    }
+
+    .ticket-callout .closing-ticket {
+      margin-top: 0;
+      flex-shrink: 0;
+    }
+
+    /* Footer */
+    .site-footer {
+      border-top: 1px solid var(--border-hairline);
+      padding: 30px 0 46px;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .production {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .production-partner {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.92rem;
+      color: rgba(255, 255, 255, 0.85);
+      transition: color 0.18s ease, opacity 0.18s ease;
+    }
+
+    .production-partner:hover {
+      color: #ffffff;
+    }
+
+    .rust-credit {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: lowercase;
+      color: var(--ink-muted);
+      padding: 3px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border-hairline);
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .footer-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--ink-secondary);
+      transition: color 0.18s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-pink);
+    }
+
+    .footer-links svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* ==========================================================================
+       WAITLIST & TICKET MODALS
+       ========================================================================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 150;
+      background: rgba(11, 9, 15, 0.78);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .modal-backdrop.is-open {
+      display: flex;
+      opacity: 1;
+    }
+
+    .ticket-dialog {
+      position: relative;
+      width: 100%;
+      max-width: 470px;
+      max-height: calc(100vh - 40px);
+      overflow-y: auto;
+      padding: 32px;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at top right, rgba(223, 59, 92, 0.18), transparent 55%),
+        #1c1724;
+      border: 1px solid var(--border-strong);
+      color: #ffffff;
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.65);
+    }
+
+    .waitlist-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      font-size: 1.35rem;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.18s ease;
+    }
+
+    .waitlist-close:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .waitlist-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-pink);
+    }
+
+    .ticket-dialog h2 {
+      margin-top: 8px;
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .ticket-dialog > p {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      line-height: 1.55;
+      color: var(--ink-secondary);
+    }
+
+    #waitlist-form {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    #waitlist-form label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 6px;
+    }
+
+    #waitlist-form label span {
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+
+    #waitlist-form input[type="email"],
+    #waitlist-form input[type="text"],
+    #waitlist-form input[type="number"] {
+      width: 100%;
+      padding: 11px 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-strong);
+      color: #ffffff;
+      font-size: 0.92rem;
+      transition: border-color 0.18s ease, background-color 0.18s ease;
+    }
+
+    #waitlist-form input:focus {
+      outline: none;
+      border-color: var(--accent-pink);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .waitlist-fields {
+      display: grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      gap: 12px;
+    }
+
+    .waitlist-hint {
+      font-size: 0.76rem;
+      color: var(--ink-muted);
+      margin-top: -6px;
+    }
+
+    .waitlist-trap {
+      position: absolute;
+      left: -9999px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #waitlist-form .waitlist-consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      line-height: 1.45;
+      color: var(--ink-secondary);
+      cursor: pointer;
+      margin-bottom: 2px;
+    }
+
+    .waitlist-consent input[type="checkbox"] {
+      margin-top: 3px;
+      width: 16px;
+      height: 16px;
+      accent-color: var(--accent-rose);
+      flex-shrink: 0;
+    }
+
+    #waitlist-form .ticket-button {
+      width: 100%;
+      margin-top: 4px;
+    }
+
+    .waitlist-status {
+      margin-top: 12px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--accent-pink);
+      min-height: 1.2em;
+    }
+
+    /* Ticket Info Modal Tier Cards */
+    .tier-list {
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .tier-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid var(--border-hairline);
+    }
+
+    .tier-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .tier-desc {
+      font-size: 0.76rem;
+      color: var(--ink-muted);
+      margin-top: 2px;
+    }
+
+    .tier-badge {
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(248, 184, 194, 0.16);
+      color: var(--accent-pink);
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+    }
+
+    .modal-actions {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .modal-actions .ticket-button {
+      width: 100%;
+      margin-top: 0;
+    }
+
+    .secondary-modal-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--ink-secondary);
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-hairline);
+      transition: border-color 0.18s ease, color 0.18s ease;
+    }
+
+    .secondary-modal-link:hover {
+      color: #ffffff;
+      border-color: var(--border-strong);
+    }
+
+    /* ==========================================================================
+       RESPONSIVE BREAKPOINTS
+       ========================================================================== */
+    @media (max-width: 960px) {
+      .event-info-wrapper {
+        padding-top: clamp(260px, 42vw, 340px);
+      }
+
+      .event-info {
+        grid-template-columns: 1fr 1fr;
+        gap: 28px 0;
+      }
+
+      .event-details {
+        grid-column: 1 / -1;
+        padding-right: 0;
+        padding-bottom: 24px;
+        border-bottom: 1px solid var(--border-hairline);
+      }
+
+      .event-schedule {
+        padding-left: 0;
+        border-left: none;
+        min-height: auto;
+      }
+
+      .concert-story {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-presenters-pill {
+        top: 10px;
+        left: 12px;
+        font-size: 0.68rem;
+        padding: 5px 10px;
+      }
+
+      .event-info-wrapper {
+        padding-top: 250px;
+      }
+
+      .event-info {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .event-schedule {
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--border-hairline);
+      }
+
+      .event-times {
+        padding-left: 0;
+        border-left: none;
+      }
+
+      .ticket-callout {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .ticket-callout .closing-ticket {
+        width: 100%;
+      }
+
+      .waitlist-fields {
+        grid-template-columns: 1fr;
+      }
+
+      .art-credit {
+        position: static;
+        text-align: right;
+        padding: 0 20px 18px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .sold-out-track,
+      .confetti-piece {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#event-info">Skip to concert details</a>
+
+  <!-- Top Sold-Out Marquee Banner -->
+  <a
+    class="sold-out-banner"
+    href="#waitlist"
+    data-open-waitlist
+    aria-label="Sold out! Thank you for the love. Join the waitlist"
+    aria-haspopup="dialog"
+  >
+    <span class="sold-out-track" aria-hidden="true">
+      <span class="sold-out-group">
+        <span class="sold-out-item">
+          <strong>Sold out!</strong>
+          <span class="sold-out-thanks">Thank you for the love.</span>
+          <span class="sold-out-cta">Join the waitlist →</span>
+          <span class="sold-out-divider">✦</span>
+        </span>
+        <span class="sold-out-item">
+          <strong>Sold out!</strong>
+          <span class="sold-out-thanks">Thank you for the love.</span>
+          <span class="sold-out-cta">Join the waitlist →</span>
+          <span class="sold-out-divider">✦</span>
+        </span>
+        <span class="sold-out-item">
+          <strong>Sold out!</strong>
+          <span class="sold-out-thanks">Thank you for the love.</span>
+          <span class="sold-out-cta">Join the waitlist →</span>
+          <span class="sold-out-divider">✦</span>
+        </span>
+        <span class="sold-out-item">
+          <strong>Sold out!</strong>
+          <span class="sold-out-thanks">Thank you for the love.</span>
+          <span class="sold-out-cta">Join the waitlist →</span>
+          <span class="sold-out-divider">✦</span>
+        </span>
+      </span>
+      <span class="sold-out-group">
+        <span class="sold-out-item">
+          <strong>Sold out!</strong>
+          <span class="sold-out-thanks">Thank you for the love.</span>
+          <span class="sold-out-cta">Join the waitlist →</span>
+          <span class="sold-out-divider">✦</span>
+        </span>
+        <span class="sold-out-item">
+          <strong>Sold out!</strong>
+          <span class="sold-out-thanks">Thank you for the love.</span>
+          <span class="sold-out-cta">Join the waitlist →</span>
+          <span class="sold-out-divider">✦</span>
+        </span>
+        <span class="sold-out-item">
+          <strong>Sold out!</strong>
+          <span class="sold-out-thanks">Thank you for the love.</span>
+          <span class="sold-out-cta">Join the waitlist →</span>
+          <span class="sold-out-divider">✦</span>
+        </span>
+        <span class="sold-out-item">
+          <strong>Sold out!</strong>
+          <span class="sold-out-thanks">Thank you for the love.</span>
+          <span class="sold-out-cta">Join the waitlist →</span>
+          <span class="sold-out-divider">✦</span>
+        </span>
+      </span>
+    </span>
+  </a>
+
+  <main>
+    <!-- Hero Key Art & Concert Details Overlay -->
+    <section class="show-art" id="show-art" aria-labelledby="concert-title">
+      <h1 class="sr-only" id="concert-title">Neuro &amp; Evil - Live Concert</h1>
+
+      <!-- Subtle Presenter Attribution Pill -->
+      <div class="hero-presenters-pill" role="group" aria-label="Vedal AI & ETC present">
+        <a class="presenter-link" href="https://vedal.ai/" target="_blank" rel="noopener noreferrer">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="16" rx="5" fill="#4ade80" fill-opacity="0.22" stroke="#4ade80" stroke-width="2" />
+            <circle cx="9" cy="12" r="1.6" fill="#ffffff" />
+            <circle cx="15" cy="12" r="1.6" fill="#ffffff" />
+          </svg>
+          <span>Vedal AI</span>
+        </a>
+        <span class="presenter-muted">&amp;</span>
+        <a class="presenter-link" href="https://www.etc.website/" target="_blank" rel="noopener noreferrer">
+          <span>ETC</span>
+        </a>
+        <span class="presenter-muted">present</span>
+      </div>
+
+      <!-- Animated Confetti Strips -->
+      <div class="confetti-field" aria-hidden="true">
+        <span class="confetti-piece" style="top: 13%; left: 19%; --rot: -24deg; animation-delay: -1.1s;"></span>
+        <span class="confetti-piece pink" style="top: 8%; left: 34%; --rot: 35deg; animation-delay: -2.4s;"></span>
+        <span class="confetti-piece" style="top: 6%; left: 61%; --rot: -18deg; animation-delay: -0.7s;"></span>
+        <span class="confetti-piece lavender" style="top: 16%; left: 77%; --rot: 42deg; animation-delay: -3.2s;"></span>
+        <span class="confetti-piece" style="top: 39%; left: 14%; width: 18px; height: 9px; --rot: -32deg; animation-delay: -1.9s;"></span>
+        <span class="confetti-piece pink" style="top: 44%; left: 8%; width: 16px; height: 8px; --rot: 22deg; animation-delay: -4.1s;"></span>
+        <span class="confetti-piece" style="top: 37%; left: 84%; width: 18px; height: 9px; --rot: 28deg; animation-delay: -2.8s;"></span>
+        <span class="confetti-piece lavender" style="top: 45%; left: 91%; width: 16px; height: 8px; --rot: -40deg; animation-delay: -1.5s;"></span>
+      </div>
+
+      <!-- Multi-Layered Stage, LED Screens, Typography & Neuro + Evil Key Art Illustration -->
+      <div class="stage-canvas-wrap" aria-hidden="true">
+        <svg
+          class="stage-key-art"
+          viewBox="0 0 1600 940"
+          preserveAspectRatio="xMidYMin slice"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <!-- Stage Background & Lighting Gradients -->
+            <radialGradient id="stageGlowCenter" cx="50%" cy="28%" r="55%">
+              <stop offset="0%" stop-color="#9d5cf6" stop-opacity="0.62" />
+              <stop offset="45%" stop-color="#53258c" stop-opacity="0.38" />
+              <stop offset="100%" stop-color="#17141b" stop-opacity="0" />
+            </radialGradient>
+
+            <linearGradient id="beamLeft" x1="25%" y1="0%" x2="48%" y2="100%">
+              <stop offset="0%" stop-color="#a5b4fc" stop-opacity="0.32" />
+              <stop offset="100%" stop-color="#6366f1" stop-opacity="0" />
+            </linearGradient>
+
+            <linearGradient id="beamRight" x1="75%" y1="0%" x2="52%" y2="100%">
+              <stop offset="0%" stop-color="#f472b6" stop-opacity="0.32" />
+              <stop offset="100%" stop-color="#e11d48" stop-opacity="0" />
+            </linearGradient>
+
+            <radialGradient id="stageDeckGrad" cx="50%" cy="18%" r="72%">
+              <stop offset="0%" stop-color="#7c4dff" stop-opacity="0.52" />
+              <stop offset="48%" stop-color="#3a2159" stop-opacity="0.78" />
+              <stop offset="100%" stop-color="#17141b" stop-opacity="0.98" />
+            </radialGradient>
+
+            <linearGradient id="screenNeuroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.55" />
+              <stop offset="55%" stop-color="#c084fc" stop-opacity="0.35" />
+              <stop offset="100%" stop-color="#3b1d66" stop-opacity="0.85" />
+            </linearGradient>
+
+            <linearGradient id="screenEvilGrad" x1="100%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#ec4899" stop-opacity="0.5" />
+              <stop offset="55%" stop-color="#9333ea" stop-opacity="0.38" />
+              <stop offset="100%" stop-color="#2e1437" stop-opacity="0.88" />
+            </linearGradient>
+
+            <!-- LED Dot Matrix Pattern -->
+            <pattern id="ledDots" width="6" height="6" patternUnits="userSpaceOnUse">
+              <circle cx="2" cy="2" r="1.15" fill="#ffffff" fill-opacity="0.14" />
+            </pattern>
+
+            <!-- Hair & Outfit Gradients for Neuro & Evil -->
+            <linearGradient id="neuroHair" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#e2b49a" />
+              <stop offset="45%" stop-color="#c8927a" />
+              <stop offset="100%" stop-color="#946256" />
+            </linearGradient>
+
+            <linearGradient id="evilHair" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#b57b84" />
+              <stop offset="45%" stop-color="#7c4958" />
+              <stop offset="100%" stop-color="#442534" />
+            </linearGradient>
+
+            <linearGradient id="neuroDress" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#f8fafc" />
+              <stop offset="60%" stop-color="#cbd5e1" />
+              <stop offset="100%" stop-color="#64748b" />
+            </linearGradient>
+
+            <linearGradient id="evilDress" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#312438" />
+              <stop offset="55%" stop-color="#1e1624" />
+              <stop offset="100%" stop-color="#120d16" />
+            </linearGradient>
+
+            <filter id="logoShadow" x="-15%" y="-15%" width="130%" height="140%">
+              <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#160c24" flood-opacity="0.82" />
+            </filter>
+
+            <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="8" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+
+            <clipPath id="leftScreenClip">
+              <polygon points="0,0 350,0 395,295 0,360" />
+            </clipPath>
+
+            <clipPath id="rightScreenClip">
+              <polygon points="1250,0 1600,0 1600,360 1205,295" />
+            </clipPath>
+          </defs>
+
+          <!-- Ambient Stage Backdrop -->
+          <rect width="1600" height="940" fill="url(#stageGlowCenter)" />
+          <polygon points="220,0 520,0 760,680 120,680" fill="url(#beamLeft)" />
+          <polygon points="1080,0 1380,0 1480,680 840,680" fill="url(#beamRight)" />
+
+          <!-- Horizontal Stage Light Bars in Center Back -->
+          <g opacity="0.28" fill="#e9d5ff">
+            <rect x="615" y="135" width="75" height="6" rx="3" />
+            <rect x="705" y="135" width="75" height="6" rx="3" />
+            <rect x="795" y="135" width="75" height="6" rx="3" />
+            <rect x="885" y="135" width="75" height="6" rx="3" />
+            <rect x="630" y="156" width="68" height="5" rx="2.5" />
+            <rect x="715" y="156" width="68" height="5" rx="2.5" />
+            <rect x="800" y="156" width="68" height="5" rx="2.5" />
+            <rect x="885" y="156" width="68" height="5" rx="2.5" />
+          </g>
+
+          <!-- Left Tilted LED Jumbo Screen (Neuro Portrait) -->
+          <g clip-path="url(#leftScreenClip)">
+            <polygon points="0,0 350,0 395,295 0,360" fill="url(#screenNeuroGrad)" />
+            <!-- Stylized Neuro Portrait inside Left Screen -->
+            <g transform="translate(155, 165) rotate(-6)" opacity="0.82">
+              <ellipse cx="0" cy="18" rx="96" ry="112" fill="#b78374" />
+              <ellipse cx="0" cy="24" rx="72" ry="80" fill="#fde6dc" />
+              <!-- Hair bangs -->
+              <path d="M-74,-8 Q-35,-72 0,-68 Q35,-72 74,-8 Q45,-28 24,-10 Q0,-34 -22,-10 Q-45,-28 -74,-8 Z" fill="#a87366" />
+              <!-- Eyes -->
+              <ellipse cx="-27" cy="26" rx="13" ry="15" fill="#3b6cb7" />
+              <ellipse cx="27" cy="26" rx="13" ry="15" fill="#3b6cb7" />
+              <circle cx="-30" cy="21" r="4" fill="#ffffff" />
+              <circle cx="24" cy="21" r="4" fill="#ffffff" />
+              <!-- Smile -->
+              <path d="M-10,54 Q0,63 10,54" stroke="#b96b70" stroke-width="3" fill="none" stroke-linecap="round" />
+              <!-- Heart Clip -->
+              <path d="M46,-16 c-4,-6 -12,-3 -12,4 c0,6 12,13 12,13 c0,0 12,-7 12,-13 c0,-7 -8,-10 -12,-4 z" fill="#23192d" stroke="#f472b6" stroke-width="2" />
+              <!-- Teal Bow -->
+              <path d="M-32,108 L0,120 L-26,138 Z M32,108 L0,120 L26,138 Z" fill="#93c5fd" />
+              <circle cx="0" cy="120" r="8" fill="#60a5fa" />
+            </g>
+            <polygon points="0,0 350,0 395,295 0,360" fill="url(#ledDots)" />
+            <polyline points="0,360 395,295 350,0" fill="none" stroke="#e9d5ff" stroke-width="5" stroke-opacity="0.55" />
+          </g>
+
+          <!-- Right Tilted LED Jumbo Screen (Evil Portrait) -->
+          <g clip-path="url(#rightScreenClip)">
+            <polygon points="1250,0 1600,0 1600,360 1205,295" fill="url(#screenEvilGrad)" />
+            <!-- Stylized Evil Portrait inside Right Screen -->
+            <g transform="translate(1445, 165) rotate(6)" opacity="0.82">
+              <ellipse cx="0" cy="18" rx="96" ry="112" fill="#6e3e4d" />
+              <ellipse cx="0" cy="24" rx="72" ry="80" fill="#f9ded9" />
+              <!-- Hair bangs -->
+              <path d="M-74,-8 Q-35,-72 0,-68 Q35,-72 74,-8 Q45,-28 24,-10 Q0,-34 -22,-10 Q-45,-28 -74,-8 Z" fill="#5b303f" />
+              <!-- Crimson Eyes -->
+              <ellipse cx="-27" cy="26" rx="13" ry="14" fill="#be123c" />
+              <ellipse cx="27" cy="26" rx="13" ry="14" fill="#be123c" />
+              <circle cx="-30" cy="21" r="4" fill="#ffffff" />
+              <circle cx="24" cy="21" r="4" fill="#ffffff" />
+              <!-- Confident Smirk -->
+              <path d="M-9,55 Q2,61 12,52" stroke="#9f1239" stroke-width="3" fill="none" stroke-linecap="round" />
+              <!-- Red Bow -->
+              <path d="M-32,108 L0,120 L-26,138 Z M32,108 L0,120 L26,138 Z" fill="#e11d48" />
+              <circle cx="0" cy="120" r="8" fill="#be123c" />
+            </g>
+            <polygon points="1250,0 1600,0 1600,360 1205,295" fill="url(#ledDots)" />
+            <polyline points="1250,0 1205,295 1600,360" fill="none" stroke="#fbcfe8" stroke-width="5" stroke-opacity="0.55" />
+          </g>
+
+          <!-- Vertical Black Concert Truss Towers Framing Center Stage -->
+          <g stroke="#0e0b14" stroke-width="9" fill="none" opacity="0.92">
+            <!-- Left Truss -->
+            <line x1="365" y1="0" x2="435" y2="470" />
+            <line x1="408" y1="0" x2="476" y2="470" />
+            <path d="M368,25 L412,65 L376,110 L422,155 L386,205 L432,255 L396,305 L444,355 L410,410 L465,455" stroke-width="5" />
+            <!-- Right Truss -->
+            <line x1="1235" y1="0" x2="1165" y2="470" />
+            <line x1="1192" y1="0" x2="1124" y2="470" />
+            <path d="M1232,25 L1188,65 L1224,110 L1178,155 L1214,205 L1168,255 L1204,305 L1156,355 L1190,410 L1135,455" stroke-width="5" />
+          </g>
+
+          <!-- Curved Illuminated Concert Stage Deck -->
+          <ellipse cx="800" cy="690" rx="860" ry="265" fill="url(#stageDeckGrad)" />
+          <path
+            d="M -40 560 Q 800 365 1640 560"
+            fill="none"
+            stroke="#e9d5ff"
+            stroke-width="6"
+            stroke-opacity="0.45"
+            filter="url(#softGlow)"
+          />
+
+          <!-- ================================================================
+               TOP CENTER DISPLAY LOGO LOCKUP:
+               @ LOS ANGELES / NEURO & EVIL / • THE LIVE CONCERT
+               ================================================================ -->
+          <g transform="translate(800, 32)" filter="url(#logoShadow)">
+            <!-- @ LOS ANGELES -->
+            <text
+              x="0"
+              y="0"
+              text-anchor="middle"
+              fill="#ffffff"
+              font-family="Fredoka, Plus Jakarta Sans, sans-serif"
+              font-weight="700"
+              font-size="18"
+              letter-spacing="2.2"
+              transform="rotate(-2)"
+            >
+              @ LOS ANGELES
+            </text>
+
+            <!-- NEURO (Bubbly Peach-Cream Display Letters) -->
+            <text
+              x="-4"
+              y="78"
+              text-anchor="middle"
+              fill="#fad6c3"
+              stroke="#271738"
+              stroke-width="7"
+              paint-order="stroke"
+              font-family="Fredoka, Plus Jakarta Sans, sans-serif"
+              font-weight="700"
+              font-size="86"
+              letter-spacing="1"
+              transform="rotate(-1.5)"
+            >
+              NEURO
+            </text>
+
+            <!-- & (Warm Gold-Cream) -->
+            <text
+              x="-138"
+              y="156"
+              text-anchor="middle"
+              fill="#f6c7a8"
+              stroke="#271738"
+              stroke-width="7"
+              paint-order="stroke"
+              font-family="Fredoka, Plus Jakarta Sans, sans-serif"
+              font-weight="700"
+              font-size="82"
+              transform="rotate(-5 -138 135)"
+            >
+              &amp;
+            </text>
+
+            <!-- EVIL (Vibrant Coral-Rose Display Letters) -->
+            <text
+              x="44"
+              y="156"
+              text-anchor="middle"
+              fill="#eb5e78"
+              stroke="#271738"
+              stroke-width="7"
+              paint-order="stroke"
+              font-family="Fredoka, Plus Jakarta Sans, sans-serif"
+              font-weight="700"
+              font-size="84"
+              letter-spacing="2"
+              transform="rotate(-1 44 135)"
+            >
+              EVIL
+            </text>
+
+            <!-- Cute Sparkle Accents around Logo -->
+            <path d="M128,16 L131,24 L139,27 L131,30 L128,38 L125,30 L117,27 L125,24 Z" fill="#ffffff" />
+            <path d="M-92,102 L-90,108 L-84,110 L-90,112 L-92,118 L-94,112 L-100,110 L-94,108 Z" fill="#ffffff" />
+            <circle cx="-48" cy="184" r="5" fill="#eb5e78" />
+
+            <!-- THE LIVE CONCERT -->
+            <text
+              x="48"
+              y="189"
+              text-anchor="middle"
+              fill="#ffffff"
+              font-family="Fredoka, Plus Jakarta Sans, sans-serif"
+              font-weight="700"
+              font-size="18.5"
+              letter-spacing="2.2"
+              transform="rotate(-1 48 189)"
+            >
+              THE LIVE CONCERT
+            </text>
+          </g>
+
+          <!-- ================================================================
+               CENTER FOREGROUND CHARACTER ARTWORK: NEURO & EVIL
+               ================================================================ -->
+          <!-- LEFT CHARACTER: NEURO-SAMA -->
+          <g transform="translate(565, 385)">
+            <!-- Flowing Back Hair & Twin Pigtail Loops -->
+            <path
+              d="M-125,35 C-195,55 -235,125 -210,185 C-175,155 -140,130 -105,120 Z"
+              fill="url(#neuroHair)"
+              stroke="#5c3a38"
+              stroke-width="2.5"
+            />
+            <path
+              d="M115,20 C175,40 215,105 190,165 C155,140 125,115 95,105 Z"
+              fill="url(#neuroHair)"
+              stroke="#5c3a38"
+              stroke-width="2.5"
+            />
+            <!-- Ahoge Strand -->
+            <path d="M-25,-98 C-45,-145 15,-165 45,-140 C15,-142 -5,-122 5,-96 Z" fill="url(#neuroHair)" />
+
+            <!-- Main Head Hair Volume -->
+            <ellipse cx="0" cy="-10" rx="112" ry="104" fill="url(#neuroHair)" stroke="#5c3a38" stroke-width="2.5" />
+
+            <!-- Twin Hair Buns -->
+            <circle cx="-106" cy="-42" r="24" fill="#c9957f" stroke="#5c3a38" stroke-width="2.5" />
+            <circle cx="104" cy="-56" r="22" fill="#c9957f" stroke="#5c3a38" stroke-width="2.5" />
+
+            <!-- Face Contour -->
+            <path
+              d="M-84,-18 C-86,48 -46,92 4,94 C54,92 88,46 84,-20 C76,-68 -76,-68 -84,-18 Z"
+              fill="#ffece3"
+              stroke="#8c5a52"
+              stroke-width="2"
+            />
+
+            <!-- Soft Blush -->
+            <ellipse cx="-46" cy="36" rx="15" ry="8" fill="#f8a5b5" opacity="0.55" />
+            <ellipse cx="48" cy="34" rx="15" ry="8" fill="#f8a5b5" opacity="0.55" />
+
+            <!-- Large Expressive Sapphire-Blue Anime Eyes -->
+            <!-- Left Eye -->
+            <g transform="translate(-34, 14) rotate(-4)">
+              <ellipse cx="0" cy="0" rx="20" ry="23" fill="#2c4a8a" />
+              <ellipse cx="0" cy="3" rx="16" ry="18" fill="#5b8def" />
+              <ellipse cx="0" cy="6" rx="10" ry="11" fill="#1e2f5c" />
+              <circle cx="-6" cy="-7" r="6" fill="#ffffff" />
+              <circle cx="7" cy="7" r="3.2" fill="#dbeafe" />
+              <path d="M-22,-14 Q0,-28 22,-14" stroke="#4a2e2b" stroke-width="4.5" fill="none" stroke-linecap="round" />
+            </g>
+
+            <!-- Right Eye -->
+            <g transform="translate(36, 10) rotate(-4)">
+              <ellipse cx="0" cy="0" rx="20" ry="23" fill="#2c4a8a" />
+              <ellipse cx="0" cy="3" rx="16" ry="18" fill="#5b8def" />
+              <ellipse cx="0" cy="6" rx="10" ry="11" fill="#1e2f5c" />
+              <circle cx="-6" cy="-7" r="6" fill="#ffffff" />
+              <circle cx="7" cy="7" r="3.2" fill="#dbeafe" />
+              <path d="M-22,-14 Q0,-28 22,-14" stroke="#4a2e2b" stroke-width="4.5" fill="none" stroke-linecap="round" />
+            </g>
+
+            <!-- Joyful Idol Open-Mouth Smile -->
+            <path d="M-12,50 Q2,46 15,49 Q12,72 1,72 Q-11,72 -12,50 Z" fill="#e06d7d" stroke="#7a3b42" stroke-width="2" />
+            <path d="M-8,64 Q1,58 10,64 Q5,71 1,71 Q-4,71 -8,64 Z" fill="#fca5a5" />
+
+            <!-- Layered Front Bangs & Hair Highlight Halo -->
+            <path
+              d="M-92,-24 C-75,-85 68,-92 92,-26 C66,-54 44,-32 30,-10 C18,-42 -2,-42 -14,-8 C-28,-38 -52,-46 -92,-24 Z"
+              fill="url(#neuroHair)"
+              stroke="#5c3a38"
+              stroke-width="2"
+            />
+            <path d="M-54,-48 Q0,-64 54,-50" stroke="#fff3eb" stroke-width="4.5" stroke-linecap="round" fill="none" opacity="0.72" />
+
+            <!-- Signature Heart Pulse Hairclip -->
+            <g transform="translate(56, -54) rotate(14)">
+              <path
+                d="M0,-8 C-7,-17 -20,-11 -20,0 C-20,10 0,21 0,21 C0,21 20,10 20,0 C20,-11 7,-17 0,-8 Z"
+                fill="#1e1826"
+                stroke="#f472b6"
+                stroke-width="2.5"
+              />
+              <polyline points="-12,0 -5,0 -2,-6 2,6 5,0 12,0" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" />
+            </g>
+
+            <!-- White & Teal Frilly Idol Dress -->
+            <path d="M-64,108 L68,104 L94,255 L-84,262 Z" fill="url(#neuroDress)" stroke="#475569" stroke-width="2.5" />
+            <!-- Heart Cutout Chest & Teal Ribbon Bow -->
+            <path d="M-36,122 L2,136 L-28,162 Z M40,118 L2,136 L34,158 Z" fill="#6499a8" stroke="#334155" stroke-width="2" />
+            <circle cx="2" cy="136" r="10" fill="#89bcc9" stroke="#334155" stroke-width="2" />
+
+            <!-- Outstretched Left Hand Toward Viewer -->
+            <g transform="translate(-145, 195) rotate(-14)">
+              <path
+                d="M40,-20 C10,-32 -35,-42 -58,-28 C-68,-22 -60,-10 -40,-10 L-72,-2 C-82,2 -78,14 -60,12 L-66,24 C-74,30 -64,40 -48,32 L-38,44 C-42,52 -28,56 -16,44 L36,24 Z"
+                fill="#ffece3"
+                stroke="#8c5a52"
+                stroke-width="2.2"
+              />
+            </g>
+
+            <!-- Microphone Held in Right Hand -->
+            <g transform="translate(96, 128) rotate(-32)">
+              <rect x="-9" y="18" width="18" height="66" rx="7" fill="#cbd5e1" stroke="#475569" stroke-width="2" />
+              <circle cx="0" cy="4" r="22" fill="#94a3b8" stroke="#475569" stroke-width="2.2" />
+              <line x1="-21" y1="4" x2="21" y2="4" stroke="#475569" stroke-width="2.5" />
+              <!-- Teal Ribbon on Mic -->
+              <path d="M-16,32 L0,38 L-14,50 Z M16,32 L0,38 L14,50 Z" fill="#7dd3fc" stroke="#334155" stroke-width="1.5" />
+            </g>
+          </g>
+
+          <!-- RIGHT CHARACTER: EVIL NEURO -->
+          <g transform="translate(1015, 405)">
+            <!-- Flowing Back Hair & Twin Tails -->
+            <path
+              d="M-112,24 C-175,45 -205,112 -180,170 C-145,142 -118,118 -92,108 Z"
+              fill="url(#evilHair)"
+              stroke="#331824"
+              stroke-width="2.5"
+            />
+            <path
+              d="M118,32 C192,52 232,124 206,184 C170,152 135,126 102,116 Z"
+              fill="url(#evilHair)"
+              stroke="#331824"
+              stroke-width="2.5"
+            />
+            <!-- Ahoge Strand -->
+            <path d="M12,-102 C35,-152 -22,-170 -48,-144 C-18,-146 2,-124 -8,-100 Z" fill="url(#evilHair)" />
+
+            <!-- Main Head Hair Volume -->
+            <ellipse cx="0" cy="-10" rx="110" ry="102" fill="url(#evilHair)" stroke="#331824" stroke-width="2.5" />
+
+            <!-- Twin Hair Buns -->
+            <circle cx="-102" cy="-54" r="22" fill="#824c5c" stroke="#331824" stroke-width="2.5" />
+            <circle cx="106" cy="-42" r="24" fill="#824c5c" stroke="#331824" stroke-width="2.5" />
+
+            <!-- Face Contour -->
+            <path
+              d="M-82,-20 C-84,46 -44,90 2,92 C50,90 84,46 82,-20 C74,-66 -74,-66 -82,-20 Z"
+              fill="#fce7e2"
+              stroke="#78464d"
+              stroke-width="2"
+            />
+
+            <!-- Soft Rose Blush -->
+            <ellipse cx="-44" cy="34" rx="14" ry="7" fill="#fb7185" opacity="0.45" />
+            <ellipse cx="44" cy="36" rx="14" ry="7" fill="#fb7185" opacity="0.45" />
+
+            <!-- Sharp Ruby-Crimson Anime Eyes -->
+            <!-- Left Eye -->
+            <g transform="translate(-34, 12) rotate(4)">
+              <ellipse cx="0" cy="0" rx="19" ry="21" fill="#881337" />
+              <ellipse cx="0" cy="3" rx="15" ry="16" fill="#e11d48" />
+              <ellipse cx="0" cy="5" rx="9" ry="10" fill="#4c0519" />
+              <circle cx="-5" cy="-6" r="5.5" fill="#ffffff" />
+              <circle cx="6" cy="6" r="3" fill="#ffe4e6" />
+              <path d="M-21,-13 Q0,-25 21,-13" stroke="#2d141e" stroke-width="4.5" fill="none" stroke-linecap="round" />
+            </g>
+
+            <!-- Right Eye -->
+            <g transform="translate(34, 16) rotate(4)">
+              <ellipse cx="0" cy="0" rx="19" ry="21" fill="#881337" />
+              <ellipse cx="0" cy="3" rx="15" ry="16" fill="#e11d48" />
+              <ellipse cx="0" cy="5" rx="9" ry="10" fill="#4c0519" />
+              <circle cx="-5" cy="-6" r="5.5" fill="#ffffff" />
+              <circle cx="6" cy="6" r="3" fill="#ffe4e6" />
+              <path d="M-21,-13 Q0,-25 21,-13" stroke="#2d141e" stroke-width="4.5" fill="none" stroke-linecap="round" />
+            </g>
+
+            <!-- Playful Confident Idol Smirk -->
+            <path d="M-12,54 Q1,62 15,50" stroke="#881337" stroke-width="2.8" fill="none" stroke-linecap="round" />
+
+            <!-- Layered Front Bangs & Dark Headband -->
+            <path
+              d="M-90,-24 C-66,-88 74,-84 90,-24 C56,-46 36,-36 18,-10 C4,-40 -14,-40 -28,-10 C-42,-34 -64,-52 -90,-24 Z"
+              fill="url(#evilHair)"
+              stroke="#331824"
+              stroke-width="2"
+            />
+            <path d="M-64,-54 Q0,-76 66,-44" stroke="#1f1422" stroke-width="7" stroke-linecap="round" fill="none" />
+
+            <!-- Signature Heart Pulse Hairclip -->
+            <g transform="translate(68, 22) rotate(12)">
+              <path
+                d="M0,-8 C-7,-17 -20,-11 -20,0 C-20,10 0,21 0,21 C0,21 20,10 20,0 C20,-11 7,-17 0,-8 Z"
+                fill="#19121f"
+                stroke="#f43f5e"
+                stroke-width="2.5"
+              />
+              <polyline points="-12,0 -5,0 -2,-6 2,6 5,0 12,0" fill="none" stroke="#fb7185" stroke-width="2" stroke-linecap="round" />
+            </g>
+
+            <!-- Gothic Black & Crimson Idol Outfit -->
+            <path d="M-66,104 L66,106 L92,255 L-88,255 Z" fill="url(#evilDress)" stroke="#0f0a14" stroke-width="2.5" />
+            <!-- Crimson Ribbon Bow -->
+            <path d="M-38,116 L0,132 L-30,156 Z M38,116 L0,132 L30,156 Z" fill="#be123c" stroke="#4c0519" stroke-width="2" />
+            <circle cx="0" cy="132" r="10" fill="#e11d48" stroke="#4c0519" stroke-width="2" />
+            <!-- Heart Cutout Detail -->
+            <path
+              d="M0,168 C-10,155 -28,162 -28,176 C-28,190 0,205 0,205 C0,205 28,190 28,176 C28,162 10,155 0,168 Z"
+              fill="#fce7e2"
+              stroke="#be123c"
+              stroke-width="2"
+            />
+
+            <!-- V-Sign / Peace Hand Gesture on Right -->
+            <g transform="translate(105, 165) rotate(10)">
+              <rect x="-12" y="-44" width="10" height="44" rx="5" transform="rotate(-14 -7 -22)" fill="#fce7e2" stroke="#78464d" stroke-width="2" />
+              <rect x="4" y="-44" width="10" height="44" rx="5" transform="rotate(14 9 -22)" fill="#fce7e2" stroke="#78464d" stroke-width="2" />
+              <rect x="-16" y="-8" width="34" height="32" rx="12" fill="#fce7e2" stroke="#78464d" stroke-width="2" />
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <!-- 3-Column Event Details Overlay -->
+      <div class="event-info-wrapper">
+        <div class="event-info" id="event-info" aria-label="Concert details">
+          <!-- Column 1: Venue, Ticket CTA & Countdown -->
+          <section class="event-details" aria-labelledby="venue-title">
+            <div class="venue-copy">
+              <h2 class="venue-title" id="venue-title">The Vermont Hollywood</h2>
+              <p class="event-caption">Los Angeles, California</p>
+            </div>
+
+            <a
+              class="ticket-button details-ticket"
+              href="#tickets"
+              data-open-tickets
+              aria-haspopup="dialog"
+            >
+              <span>View tickets</span>
+              <svg
+                class="arrow"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M4 12h16m-7-7 7 7-7 7"></path>
+              </svg>
+            </a>
+
+            <div class="art-countdown">
+              <div
+                class="countdown"
+                id="countdown"
+                role="timer"
+                aria-label="Time until the concert"
+                aria-live="off"
+              >
+                <dl class="countdown-values">
+                  <div class="countdown-unit">
+                    <dt>Days</dt>
+                    <dd data-countdown="days">33</dd>
+                  </div>
+                  <div class="countdown-unit">
+                    <dt>Hours</dt>
+                    <dd data-countdown="hours">06</dd>
+                  </div>
+                  <div class="countdown-unit">
+                    <dt>Minutes</dt>
+                    <dd data-countdown="minutes">01</dd>
+                  </div>
+                  <div class="countdown-unit" id="countdown-seconds">
+                    <dt>Seconds</dt>
+                    <dd data-countdown="seconds">46</dd>
+                  </div>
+                </dl>
+              </div>
+              <button
+                class="countdown-toggle"
+                id="countdown-toggle"
+                type="button"
+                aria-controls="countdown-seconds"
+                aria-expanded="true"
+              >
+                Hide seconds
+              </button>
+            </div>
+          </section>
+
+          <!-- Column 2: Concert Date & Venue Time -->
+          <section class="event-schedule" aria-label="Concert date and time">
+            <p class="detail-label" data-event-weekday>Saturday</p>
+            <p class="event-date">
+              <time data-event-date="long" datetime="2026-12-19T20:19:00.000Z">December 19, 2026</time>
+            </p>
+            <p class="event-start">
+              <time data-event-time datetime="2026-12-19T20:19:00.000Z">12:19 PM</time>
+              <span data-venue-zone>PST</span>
+            </p>
+          </section>
+
+          <!-- Column 3: Local Featured Time + World Timezones -->
+          <section class="event-times" aria-label="Concert start times" data-local-time-panel>
+            <h2 class="sr-only">Start time</h2>
+
+            <div class="featured-time is-local" id="featured-time-card">
+              <div class="featured-time-heading">
+                <p class="featured-location">
+                  <span id="featured-city">Prague</span>
+                  <span class="local-badge" id="featured-badge">Your time</span>
+                </p>
+                <span id="featured-abbr">GMT+1</span>
+              </div>
+              <p class="featured-clock">
+                <time id="featured-clock-time" datetime="2026-12-19T20:19:00.000Z">9:19 PM</time>
+              </p>
+              <p class="featured-date" id="featured-date">DEC 19</p>
+            </div>
+
+            <ul class="timezone-list" aria-label="Concert start times around the world">
+              <li
+                class="timezone"
+                tabindex="0"
+                role="button"
+                data-city="Los Angeles"
+                data-time="12:19 PM"
+                data-date="Dec 19"
+                data-abbr="PST"
+              >
+                <div>
+                  <h3>Los Angeles</h3>
+                  <p class="timezone-date">Dec 19</p>
+                </div>
+                <p class="timezone-clock">
+                  <time datetime="2026-12-19T20:19:00.000Z">12:19 PM</time>
+                  <span class="zone-label">PST</span>
+                </p>
+              </li>
+
+              <li
+                class="timezone"
+                tabindex="0"
+                role="button"
+                data-city="New York"
+                data-time="3:19 PM"
+                data-date="Dec 19"
+                data-abbr="EST"
+              >
+                <div>
+                  <h3>New York</h3>
+                  <p class="timezone-date">Dec 19</p>
+                </div>
+                <p class="timezone-clock">
+                  <time datetime="2026-12-19T20:19:00.000Z">3:19 PM</time>
+                  <span class="zone-label">EST</span>
+                </p>
+              </li>
+
+              <li
+                class="timezone"
+                tabindex="0"
+                role="button"
+                data-city="London"
+                data-time="8:19 PM"
+                data-date="Dec 19"
+                data-abbr="GMT"
+              >
+                <div>
+                  <h3>London</h3>
+                  <p class="timezone-date">Dec 19</p>
+                </div>
+                <p class="timezone-clock">
+                  <time datetime="2026-12-19T20:19:00.000Z">8:19 PM</time>
+                  <span class="zone-label">GMT</span>
+                </p>
+              </li>
+
+              <li
+                class="timezone"
+                tabindex="0"
+                role="button"
+                data-city="Tokyo"
+                data-time="5:19 AM"
+                data-date="Dec 20"
+                data-abbr="JST"
+              >
+                <div>
+                  <h3>Tokyo</h3>
+                  <p class="timezone-date">Dec 20</p>
+                </div>
+                <p class="timezone-clock">
+                  <time datetime="2026-12-19T20:19:00.000Z">5:19 AM</time>
+                  <span class="zone-label">JST</span>
+                </p>
+              </li>
+            </ul>
+          </section>
+        </div>
+      </div>
+
+      <p class="art-credit">Art by <span>kasoke308</span></p>
+    </section>
+
+    <!-- Below-the-Fold Editorial & Footer Sections -->
+    <div class="below-fold">
+      <!-- About the Show & Quote -->
+      <section class="concert-story" aria-labelledby="about-title">
+        <div class="story-copy">
+          <h2 id="about-title">About the show</h2>
+          <p class="story-lead">
+            Join Neuro-sama and Evil Neuro for their first extended-reality live concert, featuring a live band. It’s Neuro’s fourth birthday, and you’re invited to celebrate at The Vermont Hollywood.
+          </p>
+          <div class="story-highlights" aria-label="Concert highlights">
+            <span class="highlight-chip"><span class="highlight-dot"></span>Extended-Reality Stage</span>
+            <span class="highlight-chip"><span class="highlight-dot"></span>Full Live Band</span>
+            <span class="highlight-chip"><span class="highlight-dot"></span>Neuro’s 4th Birthday</span>
+          </div>
+        </div>
+
+        <figure class="artist-quote">
+          <blockquote>
+            <p>“The stars will shine forever, but none will shine brighter than me.”</p>
+          </blockquote>
+          <figcaption>Neuro-sama, when asked about her concert</figcaption>
+        </figure>
+      </section>
+
+      <!-- Sold Out Waitlist Callout -->
+      <section class="ticket-callout" aria-labelledby="tickets-heading">
+        <div>
+          <h2 id="tickets-heading">Sold out. Stay in the loop.</h2>
+          <p>
+            The Vermont Hollywood <span aria-hidden="true">·</span>
+            <time data-event-date="long" datetime="2026-12-19T20:19:00.000Z">December 19, 2026</time>
+          </p>
+        </div>
+
+        <a
+          class="ticket-button closing-ticket"
+          href="#waitlist"
+          data-open-waitlist
+          aria-haspopup="dialog"
+        >
+          <span>Join the waitlist</span>
+          <svg
+            class="arrow"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M4 12h16m-7-7 7 7-7 7"></path>
+          </svg>
+        </a>
+      </section>
+
+      <!-- Site Footer -->
+      <footer class="site-footer">
+        <div class="footer-inner">
+          <div class="production" role="group" aria-label="Concert credits">
+            <a
+              class="production-partner production-partner--vedal"
+              href="https://vedal.ai/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Vedal AI website"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="2" y="3" width="20" height="18" rx="6" fill="#4ade80" fill-opacity="0.2" stroke="#4ade80" stroke-width="2" />
+                <circle cx="9" cy="12" r="1.8" fill="#ffffff" />
+                <circle cx="15" cy="12" r="1.8" fill="#ffffff" />
+              </svg>
+              <span>Vedal AI</span>
+            </a>
+
+            <a
+              class="production-partner production-partner--etc"
+              href="https://www.etc.website/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="ETC website"
+            >
+              <svg width="42" height="20" viewBox="0 0 64 28" fill="none" aria-hidden="true">
+                <rect x="1" y="1" width="62" height="26" rx="6" stroke="currentColor" stroke-opacity="0.35" stroke-width="1.5" />
+                <text x="32" y="19" text-anchor="middle" fill="currentColor" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="13" letter-spacing="1.5">ETC</text>
+              </svg>
+            </a>
+
+            <span class="rust-credit">rust</span>
+          </div>
+
+          <nav class="footer-links" aria-label="Official artist links">
+            <a
+              href="https://open.spotify.com/artist/7qFU02MvlE8O38L6ykvG3e"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Neuro on Spotify"
+            >
+              Neuro
+            </a>
+            <a
+              href="https://open.spotify.com/artist/3SixZhoZPawYUPyqZSdyrh"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Evil on Spotify"
+            >
+              Evil
+            </a>
+            <a href="https://vedal.ai/#links" target="_blank" rel="noopener noreferrer">
+              All links
+              <svg
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M4 12 12 4M4 4h8v8"></path>
+              </svg>
+            </a>
+          </nav>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       WAITLIST MODAL DIALOG (MATCHING #waitlist IN 01-INDEX.HTML)
+       ======================================================================== -->
+  <div class="modal-backdrop" id="waitlist-backdrop" role="presentation">
+    <div
+      class="ticket-dialog waitlist-dialog"
+      id="waitlist"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="waitlist-title"
+      aria-describedby="waitlist-description"
+    >
+      <button class="waitlist-close" type="button" aria-label="Close waitlist" data-close-modal>
+        ×
+      </button>
+      <p class="waitlist-eyebrow">Neuro &amp; Evil live</p>
+      <h2 id="waitlist-title">Missed out?<br />Stay in the loop.</h2>
+      <p id="waitlist-description">
+        This show is sold out. Join the waitlist for ticket availability and future event news. Signing up does not reserve a ticket.
+      </p>
+
+      <form id="waitlist-form" novalidate>
+        <div>
+          <label for="waitlist-email">Email address</label>
+          <input
+            id="waitlist-email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            maxlength="254"
+            placeholder="you@example.com"
+            required
+          />
+        </div>
+
+        <div class="waitlist-fields">
+          <div>
+            <label for="waitlist-location">Location <span>(optional)</span></label>
+            <input
+              id="waitlist-location"
+              name="location"
+              type="text"
+              autocomplete="address-level2"
+              maxlength="120"
+              placeholder="City, country"
+            />
+          </div>
+          <div>
+            <label for="waitlist-age">Age <span>(optional)</span></label>
+            <input
+              id="waitlist-age"
+              name="age"
+              type="number"
+              inputmode="numeric"
+              min="1"
+              max="120"
+              step="1"
+              placeholder="Your age"
+            />
+          </div>
+        </div>
+
+        <p class="waitlist-hint">Your location and age help us plan future events.</p>
+
+        <div class="waitlist-trap" aria-hidden="true">
+          <label for="waitlist-website">Leave this blank</label>
+          <input id="waitlist-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <label class="waitlist-consent">
+          <input name="consent" id="waitlist-consent" type="checkbox" required />
+          <span>
+            I'd like emails from Vedal AI about ticket availability and future Neuro &amp; Evil events.
+          </span>
+        </label>
+
+        <button class="ticket-button" type="submit">
+          <span>Join the waitlist</span>
+          <span aria-hidden="true">→</span>
+        </button>
+      </form>
+
+      <p id="waitlist-status" class="waitlist-status" role="status" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       TICKET DETAILS MODAL DIALOG (FOR "VIEW TICKETS" CTA)
+       ======================================================================== -->
+  <div class="modal-backdrop" id="tickets-backdrop" role="presentation">
+    <div
+      class="ticket-dialog"
+      id="tickets-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="tickets-modal-title"
+      aria-describedby="tickets-modal-desc"
+    >
+      <button class="waitlist-close" type="button" aria-label="Close ticket details" data-close-modal>
+        ×
+      </button>
+      <p class="waitlist-eyebrow">The Vermont Hollywood · Los Angeles</p>
+      <h2 id="tickets-modal-title">Event Tickets</h2>
+      <p id="tickets-modal-desc">
+        All ticket allocations for Neuro &amp; Evil — The Live Concert on December 19, 2026 (12:19 PM PST) are currently sold out.
+      </p>
+
+      <div class="tier-list">
+        <div class="tier-card">
+          <div>
+            <p class="tier-name">General Admission</p>
+            <p class="tier-desc">Standing floor &amp; mezzanine access · All ages</p>
+          </div>
+          <span class="tier-badge">Sold out</span>
+        </div>
+
+        <div class="tier-card">
+          <div>
+            <p class="tier-name">VIP Birthday Experience</p>
+            <p class="tier-desc">Priority entry, commemorative badge &amp; exclusive merch</p>
+          </div>
+          <span class="tier-badge">Sold out</span>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="ticket-button" type="button" id="switch-to-waitlist">
+          <span>Join the waitlist</span>
+          <span aria-hidden="true">→</span>
+        </button>
+        <a
+          class="secondary-modal-link"
+          href="https://neuroevil.eventbrite.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>Open Eventbrite listing</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      /* ======================================================================
+         1. LIVE COUNTDOWN TIMER TO DECEMBER 19, 2026 AT 12:19 PM PST (20:19 UTC)
+         ====================================================================== */
+      const EVENT_TIMESTAMP = Date.parse("2026-12-19T20:19:00.000Z");
+      const daysEl = document.querySelector('[data-countdown="days"]');
+      const hoursEl = document.querySelector('[data-countdown="hours"]');
+      const minutesEl = document.querySelector('[data-countdown="minutes"]');
+      const secondsEl = document.querySelector('[data-countdown="seconds"]');
+      const secondsUnit = document.getElementById("countdown-seconds");
+      const toggleSecondsBtn = document.getElementById("countdown-toggle");
+
+      function pad2(num) {
+        return String(Math.max(0, Math.floor(num))).padStart(2, "0");
+      }
+
+      function updateCountdown() {
+        const now = Date.now();
+        const diff = Math.max(0, EVENT_TIMESTAMP - now);
+
+        const totalSeconds = Math.floor(diff / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor((totalSeconds % 86400) / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        if (daysEl) daysEl.textContent = String(days);
+        if (hoursEl) hoursEl.textContent = pad2(hours);
+        if (minutesEl) minutesEl.textContent = pad2(minutes);
+        if (secondsEl) secondsEl.textContent = pad2(seconds);
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+
+      if (toggleSecondsBtn && secondsUnit) {
+        toggleSecondsBtn.addEventListener("click", () => {
+          const isHidden = secondsUnit.classList.toggle("is-hidden");
+          toggleSecondsBtn.textContent = isHidden ? "Show seconds" : "Hide seconds";
+          toggleSecondsBtn.setAttribute("aria-expanded", String(!isHidden));
+        });
+      }
+
+      /* ======================================================================
+         2. INTERACTIVE TIMEZONE PREVIEWER (DEFAULTING TO PRAGUE / YOUR TIME)
+         ====================================================================== */
+      const featuredCity = document.getElementById("featured-city");
+      const featuredBadge = document.getElementById("featured-badge");
+      const featuredAbbr = document.getElementById("featured-abbr");
+      const featuredClockTime = document.getElementById("featured-clock-time");
+      const featuredDate = document.getElementById("featured-date");
+      const timezoneItems = document.querySelectorAll(".timezone");
+
+      const DEFAULT_ZONE = {
+        city: "Prague",
+        badge: "Your time",
+        abbr: "GMT+1",
+        time: "9:19 PM",
+        date: "DEC 19",
+      };
+
+      function applyFeaturedZone(zone, isDefault) {
+        if (!featuredCity) return;
+        featuredCity.textContent = zone.city;
+        featuredAbbr.textContent = zone.abbr;
+        featuredClockTime.textContent = zone.time;
+        featuredDate.textContent = zone.date.toUpperCase();
+        featuredBadge.textContent = isDefault ? "Your time" : "Selected";
+      }
+
+      timezoneItems.forEach((item) => {
+        function handleSelect() {
+          const alreadySelected = item.classList.contains("is-selected");
+          timezoneItems.forEach((el) => el.classList.remove("is-selected"));
+
+          if (alreadySelected) {
+            applyFeaturedZone(DEFAULT_ZONE, true);
+          } else {
+            item.classList.add("is-selected");
+            applyFeaturedZone(
+              {
+                city: item.dataset.city || DEFAULT_ZONE.city,
+                abbr: item.dataset.abbr || DEFAULT_ZONE.abbr,
+                time: item.dataset.time || DEFAULT_ZONE.time,
+                date: item.dataset.date || DEFAULT_ZONE.date,
+              },
+              false
+            );
+          }
+        }
+
+        item.addEventListener("click", handleSelect);
+        item.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            handleSelect();
+          }
+        });
+      });
+
+      /* ======================================================================
+         3. ACCESSIBLE MODALS (WAITLIST & TICKET DETAILS)
+         ====================================================================== */
+      const waitlistBackdrop = document.getElementById("waitlist-backdrop");
+      const ticketsBackdrop = document.getElementById("tickets-backdrop");
+      const waitlistForm = document.getElementById("waitlist-form");
+      const waitlistStatus = document.getElementById("waitlist-status");
+      const switchToWaitlistBtn = document.getElementById("switch-to-waitlist");
+      let lastFocusedElement = null;
+
+      function openModal(backdrop) {
+        if (!backdrop) return;
+        lastFocusedElement = document.activeElement;
+        closeAllModals(false);
+        backdrop.classList.add("is-open");
+        document.body.style.overflow = "hidden";
+        const firstInput = backdrop.querySelector("input, button");
+        if (firstInput) {
+          setTimeout(() => firstInput.focus(), 30);
+        }
+      }
+
+      function closeAllModals(restoreFocus = true) {
+        [waitlistBackdrop, ticketsBackdrop].forEach((bd) => {
+          if (bd) bd.classList.remove("is-open");
+        });
+        document.body.style.overflow = "";
+        if (restoreFocus && lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+          lastFocusedElement.focus();
+        }
+      }
+
+      document.querySelectorAll("[data-open-waitlist]").forEach((trigger) => {
+        trigger.addEventListener("click", (e) => {
+          e.preventDefault();
+          openModal(waitlistBackdrop);
+        });
+      });
+
+      document.querySelectorAll("[data-open-tickets]").forEach((trigger) => {
+        trigger.addEventListener("click", (e) => {
+          e.preventDefault();
+          openModal(ticketsBackdrop);
+        });
+      });
+
+      if (switchToWaitlistBtn) {
+        switchToWaitlistBtn.addEventListener("click", () => {
+          openModal(waitlistBackdrop);
+        });
+      }
+
+      document.querySelectorAll("[data-close-modal]").forEach((btn) => {
+        btn.addEventListener("click", () => closeAllModals(true));
+      });
+
+      [waitlistBackdrop, ticketsBackdrop].forEach((backdrop) => {
+        if (!backdrop) return;
+        backdrop.addEventListener("click", (e) => {
+          if (e.target === backdrop) {
+            closeAllModals(true);
+          }
+        });
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          closeAllModals(true);
+        }
+      });
+
+      /* ======================================================================
+         4. WAITLIST FORM VALIDATION & SUBMISSION FEEDBACK
+         ====================================================================== */
+      if (waitlistForm && waitlistStatus) {
+        waitlistForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          const emailInput = document.getElementById("waitlist-email");
+          const consentInput = document.getElementById("waitlist-consent");
+          const trapInput = document.getElementById("waitlist-website");
+
+          if (trapInput && trapInput.value.trim() !== "") {
+            return;
+          }
+
+          const emailVal = emailInput ? emailInput.value.trim() : "";
+          const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
+
+          if (!emailValid) {
+            waitlistStatus.style.color = "#fda4af";
+            waitlistStatus.textContent = "Please enter a valid email address.";
+            if (emailInput) emailInput.focus();
+            return;
+          }
+
+          if (consentInput && !consentInput.checked) {
+            waitlistStatus.style.color = "#fda4af";
+            waitlistStatus.textContent = "Please check the consent box to join the waitlist.";
+            consentInput.focus();
+            return;
+          }
+
+          waitlistStatus.style.color = "#86efac";
+          waitlistStatus.textContent =
+            "You’re on the waitlist! We’ll notify " +
+            emailVal +
+            " if tickets open up or new shows are announced.";
+          waitlistForm.reset();
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

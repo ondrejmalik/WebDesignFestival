@@ -1,0 +1,3239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClutterBench: how much of the graphic is clutter?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f8f9fb;
+    --surface-2: #f1f3f6;
+    --border: #e5e7eb;
+    --border-strong: #d1d5db;
+    --text: #111827;
+    --muted: #6b7280;
+    --muted-2: #9ca3af;
+    --blue: #2563eb;
+    --blue-bg: rgba(37, 99, 235, 0.12);
+    --orange: #f59e0b;
+    --orange-bg: rgba(245, 158, 11, 0.16);
+    --red: #ef4444;
+    --red-bg: rgba(239, 68, 68, 0.14);
+    --radius: 10px;
+    --radius-sm: 6px;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 8px 24px rgba(17, 24, 39, 0.08);
+    --shadow-lg: 0 20px 48px rgba(17, 24, 39, 0.16);
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-display: 'Outfit', 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.5;
+  }
+
+  button, select, input {
+    font: inherit;
+    color: inherit;
+  }
+
+  button {
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  /* Header */
+  header.top {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .mark {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    color: var(--text);
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .mark span {
+    color: var(--blue);
+  }
+
+  .nav-tabs {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--surface-2);
+    padding: 3px;
+    border-radius: 8px;
+  }
+
+  .nav-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 5px 11px;
+    border-radius: 6px;
+    color: var(--muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+  }
+
+  .nav-tab:hover {
+    color: var(--text);
+  }
+
+  .nav-tab.active {
+    background: var(--bg);
+    color: var(--text);
+    box-shadow: var(--shadow-sm);
+    font-weight: 600;
+  }
+
+  .beta {
+    font-style: normal;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: var(--blue-bg);
+    color: var(--blue);
+  }
+
+  .repo-link {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .repo-link:hover {
+    color: var(--text);
+  }
+
+  .legend {
+    margin-left: auto;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .legend li {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .legend i {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+  }
+
+  .legend i.blue { background: var(--blue); }
+  .legend i.orange { background: var(--orange); }
+  .legend i.red { background: var(--red); }
+
+  /* Main Container */
+  main {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 32px 24px 72px;
+  }
+
+  section {
+    margin-bottom: 64px;
+  }
+
+  /* Hero */
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(290px, 380px) 1fr;
+    gap: 36px;
+    align-items: start;
+  }
+
+  @media (max-width: 920px) {
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+
+  .intro h1 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.6vw, 40px);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+  }
+
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+
+  .pills button {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    transition: all 0.15s ease;
+  }
+
+  .pills button:hover {
+    border-color: var(--border-strong);
+    background: var(--surface-2);
+  }
+
+  .pills button.on {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+
+  .chips button {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 9px;
+    border-radius: 6px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.15s ease;
+  }
+
+  .chips button small {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .chips button.on {
+    background: var(--text);
+    border-color: var(--text);
+    color: #ffffff;
+  }
+
+  .chips button.on small {
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .pick {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .pick:hover, .pick:focus {
+    border-color: var(--blue);
+  }
+
+  /* Compare Stage */
+  .compare {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    max-height: 620px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: #fcfcfd;
+    overflow: hidden;
+    user-select: none;
+    box-shadow: var(--shadow-md);
+  }
+
+  body.anim-mode .frame {
+    aspect-ratio: 16 / 9;
+    max-height: 480px;
+  }
+
+  .pane {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #ffffff;
+  }
+
+  .pane.left {
+    clip-path: inset(0 50% 0 0);
+    z-index: 2;
+  }
+
+  .pane-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  /* Bounding Box Clutter Marks */
+  .marks-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: auto;
+    transition: opacity 0.18s ease;
+  }
+
+  .frame.hide-marks .marks-layer,
+  .th.hide-marks .m {
+    opacity: 0 !important;
+    pointer-events: none;
+  }
+
+  .m {
+    position: absolute;
+    background: rgba(239, 68, 68, 0.18);
+    border: 1.5px solid var(--red);
+    border-radius: 3px;
+    cursor: help;
+    transition: transform 0.1s ease, background 0.1s ease;
+  }
+
+  .m.orange {
+    background: rgba(245, 158, 11, 0.22);
+    border-color: var(--orange);
+  }
+
+  .m:hover {
+    background: rgba(239, 68, 68, 0.32);
+    z-index: 5;
+  }
+
+  .m.orange:hover {
+    background: rgba(245, 158, 11, 0.36);
+  }
+
+  /* Split Slider Handle */
+  .split-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: var(--blue);
+    z-index: 10;
+    pointer-events: none;
+    box-shadow: 0 0 8px rgba(37, 99, 235, 0.35);
+  }
+
+  .handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 11;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid var(--blue);
+    color: var(--blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    cursor: ew-resize;
+    transition: transform 0.12s ease;
+  }
+
+  .handle:hover, .handle:active {
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+
+  .expand, .play-btn {
+    position: absolute;
+    top: 12px;
+    z-index: 12;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(6px);
+    border: 1px solid var(--border);
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.15s ease;
+  }
+
+  .expand { right: 12px; }
+  .play-btn { left: 12px; }
+
+  .expand:hover, .play-btn:hover {
+    background: #ffffff;
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+
+  .prog {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: var(--blue);
+    z-index: 12;
+    transition: width 0.08s linear;
+  }
+
+  .captions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--muted);
+    padding: 6px 4px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .captions b {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .plink {
+    color: var(--blue);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(37, 99, 235, 0.35);
+  }
+
+  .plink:hover {
+    text-decoration-color: var(--blue);
+  }
+
+  .check {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .check input {
+    accent-color: var(--blue);
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+  }
+
+  .more-banner {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    align-self: flex-start;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    transition: all 0.15s;
+  }
+
+  .more-banner:hover {
+    color: var(--text);
+    border-color: var(--border-strong);
+  }
+
+  /* Section Headings */
+  .boardhead {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .boardhead h2 {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .boardhead h3 {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .boardhead p {
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .seg {
+    margin-left: auto;
+    display: inline-flex;
+    background: var(--surface-2);
+    padding: 3px;
+    border-radius: 8px;
+    gap: 2px;
+  }
+
+  .seg button {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 6px;
+    color: var(--muted);
+    transition: all 0.15s ease;
+  }
+
+  .seg button:hover {
+    color: var(--text);
+  }
+
+  .seg button.on {
+    background: var(--bg);
+    color: var(--text);
+    font-weight: 600;
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* Leaderboard Table Grid */
+  .rows {
+    display: grid;
+    grid-template-columns: minmax(175px, 230px) 1fr 1fr;
+    gap: 10px 24px;
+    align-items: center;
+  }
+
+  @media (max-width: 820px) {
+    .rows {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .rows .h:not(:first-child) {
+      display: none;
+    }
+  }
+
+  .rows .h {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .rows .h small {
+    font-weight: 400;
+    color: var(--muted-2);
+  }
+
+  .name {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 6px 0;
+  }
+
+  .name i {
+    font-style: normal;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted-2);
+    width: 18px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .name > span {
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .name small {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--muted);
+  }
+
+  .fx {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: var(--muted);
+    padding: 1px 0;
+    transition: color 0.15s;
+  }
+
+  .fx:hover {
+    color: var(--blue);
+  }
+
+  .fx svg {
+    transition: transform 0.2s ease;
+  }
+
+  .fx[aria-expanded="true"] svg {
+    transform: rotate(180deg);
+  }
+
+  .sub-effort-row {
+    background: var(--surface);
+    border-radius: 8px;
+    padding: 4px 8px;
+  }
+
+  .cellb {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 4px 0;
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .stack {
+    flex: 1;
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    background: var(--surface-2);
+  }
+
+  .stack span {
+    height: 100%;
+    transition: flex 0.3s ease;
+  }
+
+  .stack span.blue { background: var(--blue); }
+  .stack span.orange { background: var(--orange); }
+  .stack span.red { background: var(--red); }
+
+  .bar b {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    width: 34px;
+    text-align: right;
+  }
+
+  .spread.tiles {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 4px;
+  }
+
+  .sl {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    font-weight: 500;
+    padding: 2px 0;
+    border-radius: 4px;
+    text-align: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    transition: all 0.12s ease;
+  }
+
+  .sl:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+    transform: translateY(-1px);
+  }
+
+  .sl.hi {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.35);
+    color: #b91c1c;
+    font-weight: 600;
+  }
+
+  .sl.zero {
+    background: rgba(37, 99, 235, 0.06);
+    border-color: rgba(37, 99, 235, 0.2);
+    color: var(--blue);
+  }
+
+  .axis {
+    font-size: 11px;
+    color: var(--muted-2);
+    margin-top: 2px;
+  }
+
+  /* Cost and Time Charts */
+  .charts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  @media (max-width: 840px) {
+    .charts {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  figure {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+  }
+
+  figure h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .plot svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    overflow: visible;
+  }
+
+  .plot .g {
+    stroke: var(--border);
+    stroke-width: 1;
+  }
+
+  .plot .t {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    fill: var(--muted);
+  }
+
+  .plot .t.ax {
+    font-family: var(--font-sans);
+    font-size: 10.5px;
+    fill: var(--muted-2);
+  }
+
+  .plot .ml {
+    fill: none;
+    stroke: rgba(107, 114, 128, 0.28);
+    stroke-width: 1.25;
+  }
+
+  .plot .fr {
+    fill: none;
+    stroke: var(--blue);
+    stroke-width: 2;
+    stroke-dasharray: 4 3;
+  }
+
+  .plot .pf {
+    fill: var(--blue);
+    stroke: #ffffff;
+    stroke-width: 1.5;
+  }
+
+  .plot .po {
+    fill: #9ca3af;
+    stroke: #ffffff;
+    stroke-width: 1;
+  }
+
+  .plot .nm {
+    font-size: 10.5px;
+    fill: var(--muted);
+    font-weight: 500;
+  }
+
+  .plot .nm.f {
+    fill: var(--blue);
+    font-weight: 600;
+  }
+
+  .plot .hit {
+    fill: transparent;
+    cursor: pointer;
+  }
+
+  figcaption {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 10px;
+    line-height: 1.45;
+  }
+
+  .key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    font-size: 12px;
+    color: var(--muted);
+    margin: 14px 0 28px;
+  }
+
+  .key span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .kline {
+    display: inline-block;
+    width: 18px;
+    height: 2px;
+    border-top: 2px dashed var(--blue);
+  }
+
+  .kml {
+    display: inline-block;
+    width: 18px;
+    height: 2px;
+    background: rgba(107, 114, 128, 0.4);
+  }
+
+  .kdot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #9ca3af;
+  }
+
+  .kdot.f {
+    background: var(--blue);
+  }
+
+  /* Horizontal Bars */
+  .hb {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .hbr {
+    display: grid;
+    grid-template-columns: 155px 1fr;
+    gap: 10px;
+    align-items: center;
+    font-size: 12px;
+  }
+
+  .hl {
+    font-weight: 500;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 6px;
+  }
+
+  .hl small {
+    font-size: 10.5px;
+    color: var(--muted-2);
+  }
+
+  .tr {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tr i {
+    display: block;
+    height: 8px;
+    border-radius: 4px;
+    background: var(--blue);
+    width: calc(max(2%, var(--r) * 100%));
+    transition: width 0.3s ease;
+  }
+
+  .tr b {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .fine {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 14px;
+    line-height: 1.55;
+  }
+
+  /* Explore Wall */
+  .wallhead {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+
+  .wallhead h2 {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .wallhead p {
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .xbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .xbar .seg {
+    margin-left: 0;
+  }
+
+  .xbar .pick {
+    width: auto;
+    min-width: 185px;
+    padding: 5px 10px;
+  }
+
+  .gal {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-top: 20px;
+  }
+
+  .xg {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .xgh {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .xgh h3 {
+    font-size: 16px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .xgh h3 small {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    background: var(--surface-2);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .xgh span {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .xgrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+    gap: 12px;
+  }
+
+  .gal[data-size="s"] .xgrid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 8px;
+  }
+
+  .gal[data-size="l"] .xgrid {
+    grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
+    gap: 16px;
+  }
+
+  body.anim-mode .xgrid {
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  }
+
+  body.anim-mode .gal[data-size="s"] .xgrid {
+    grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+  }
+
+  body.anim-mode .gal[data-size="l"] .xgrid {
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: left;
+    transition: transform 0.14s ease, box-shadow 0.14s ease, border-color 0.14s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--blue);
+  }
+
+  .th {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: #fafafa;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  body.anim-mode .th {
+    aspect-ratio: 16 / 9;
+  }
+
+  .cap {
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+  }
+
+  .who {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .who b {
+    font-size: 12.5px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .who small {
+    font-size: 10.5px;
+    color: var(--muted);
+  }
+
+  .cap em {
+    font-style: normal;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 5px;
+    background: var(--surface);
+    color: var(--text);
+  }
+
+  .cap em.hi {
+    background: rgba(239, 68, 68, 0.12);
+    color: #b91c1c;
+  }
+
+  .cap em.zero {
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--blue);
+  }
+
+  /* Methodology & Footer */
+  .method {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+  }
+
+  .method h2 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+
+  .cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  @media (max-width: 760px) {
+    .cols {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .cols h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .cols p {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .repo.foot {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--blue);
+    text-decoration: none;
+  }
+
+  .repo.foot:hover {
+    text-decoration: underline;
+  }
+
+  /* Join Signup (Animations View) */
+  .join {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 28px;
+    align-items: center;
+  }
+
+  @media (max-width: 800px) {
+    .join {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .join h2 {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .join p {
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+
+  .join form {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .join label {
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .field {
+    display: flex;
+    gap: 8px;
+  }
+
+  .field input[type="email"] {
+    flex: 1;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    font-size: 13px;
+  }
+
+  .field input[type="email"]:focus {
+    outline: none;
+    border-color: var(--blue);
+  }
+
+  .field input[name="website"] {
+    display: none;
+  }
+
+  .field button {
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: var(--blue);
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    transition: opacity 0.15s;
+  }
+
+  .field button:hover {
+    opacity: 0.92;
+  }
+
+  .note {
+    font-size: 11.5px;
+    color: var(--muted);
+  }
+
+  footer.by {
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  footer.by a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  footer.by a:hover {
+    color: var(--blue);
+  }
+
+  /* Floating Tooltip */
+  .floating-tip {
+    position: fixed;
+    z-index: 100;
+    background: rgba(17, 24, 39, 0.95);
+    color: #ffffff;
+    font-size: 12px;
+    line-height: 1.4;
+    padding: 7px 11px;
+    border-radius: 7px;
+    pointer-events: none;
+    max-width: 280px;
+    box-shadow: var(--shadow-md);
+    transform: translate(-50%, -100%);
+    margin-top: -10px;
+  }
+
+  /* Modals */
+  dialog {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    box-shadow: var(--shadow-lg);
+    max-width: 92vw;
+    margin: auto;
+  }
+
+  dialog::backdrop {
+    background: rgba(17, 24, 39, 0.55);
+    backdrop-filter: blur(4px);
+  }
+
+  .modal {
+    width: 620px;
+    padding: 22px;
+  }
+
+  .mhead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+
+  .mhead h2 {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .mhead button, .vclose {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: var(--surface-2);
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal pre {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    white-space: pre-wrap;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .modal h3 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  /* Detail Viewer Modal */
+  .viewer {
+    width: 1040px;
+  }
+
+  .vbody {
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .vhead {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .vhead h2 {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .vpost {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .vstage {
+    display: grid;
+    grid-template-columns: 38px 1fr 38px;
+    gap: 12px;
+    align-items: center;
+  }
+
+  @media (max-width: 680px) {
+    .vstage {
+      grid-template-columns: 1fr;
+    }
+    .vstage > .vnav {
+      display: none;
+    }
+  }
+
+  .vnav {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+  }
+
+  .vnav:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+
+  .vframe .frame {
+    max-height: 560px;
+    margin: 0 auto;
+  }
+
+  .vside {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+
+  .vinfo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+
+  .vinfo b {
+    color: var(--text);
+  }
+
+  .vfoot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .vkeys {
+    margin-left: auto;
+    color: var(--muted-2);
+  }
+
+  /* Synthetic Graphic Artwork Styles (Rich Multi-Layered Vector/DOM Charts) */
+  .art-canvas {
+    width: 100%;
+    height: 100%;
+    padding: 6.5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #ffffff;
+    color: #111827;
+    font-family: var(--font-sans);
+    position: relative;
+  }
+
+  .art-canvas.dark {
+    background: #0f172a;
+    color: #f8fafc;
+  }
+
+  .art-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .art-badge {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: #eff6ff;
+    color: #1d4ed8;
+  }
+
+  .art-canvas.dark .art-badge {
+    background: rgba(59, 130, 246, 0.2);
+    color: #93c5fd;
+  }
+
+  .art-title {
+    font-size: clamp(11px, 1.5vw, 17px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-top: 4px;
+  }
+
+  .art-sub {
+    font-size: clamp(8.5px, 1vw, 11.5px);
+    color: #6b7280;
+    margin-top: 3px;
+    line-height: 1.35;
+  }
+
+  .art-canvas.dark .art-sub {
+    color: #94a3b8;
+  }
+
+  .art-kpis {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin: 6px 0;
+  }
+
+  .art-kpi {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 5px 7px;
+  }
+
+  .art-canvas.dark .art-kpi {
+    background: #1e293b;
+    border-color: #334155;
+  }
+
+  .art-kpi strong {
+    display: block;
+    font-size: clamp(10px, 1.2vw, 14px);
+    font-family: var(--font-mono);
+  }
+
+  .art-kpi span {
+    font-size: 8px;
+    color: #64748b;
+  }
+
+  .art-chart {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+    padding: 4px 0;
+  }
+
+  .art-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 8.5px;
+    color: #9ca3af;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 5px;
+  }
+
+  .art-canvas.dark .art-footer {
+    border-color: #1e293b;
+    color: #64748b;
+  }
+
+  /* Thumb scaling inside small cards */
+  .th .art-canvas {
+    padding: 6%;
+  }
+  .th .art-title {
+    font-size: 8.5px;
+  }
+  .th .art-sub, .th .art-kpi span, .th .art-footer, .th .art-badge {
+    font-size: 6px;
+  }
+  .th .art-kpi {
+    padding: 2px 4px;
+  }
+  .th .art-kpi strong {
+    font-size: 7.5px;
+  }
+
+  @keyframes pulseBar {
+    0%, 100% { transform: scaleX(1); }
+    50% { transform: scaleX(0.92); }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="mark" href="#top"><span>Clutter</span>Bench</a>
+  <nav class="nav-tabs" aria-label="Benchmark mode">
+    <button class="nav-tab active" data-mode="still">Still graphics</button>
+    <button class="nav-tab" data-mode="anim">Animations <i class="beta">Beta</i></button>
+  </nav>
+  <a class="repo-link" href="https://github.com/adamholter/clutterbench" target="_blank" rel="noopener">GitHub</a>
+  <ul class="legend" aria-label="Label colours">
+    <li><i class="blue"></i>Keep</li>
+    <li><i class="orange"></i>Shrink</li>
+    <li><i class="red"></i>Remove</li>
+  </ul>
+</header>
+
+<main id="top">
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="intro">
+      <h1 id="heroHeading">How much of the graphic is clutter?</h1>
+      <div class="pills" id="models" role="tablist" aria-label="Model"></div>
+      <div class="chips" id="effort" role="group" aria-label="Reasoning effort"></div>
+      <select id="task" class="pick" aria-label="Blog post"></select>
+    </div>
+
+    <div class="compare">
+      <div id="heroCompare">
+        <div class="frame" id="heroFrame">
+          <div class="pane" id="heroSimplePane"></div>
+          <div class="pane left" id="heroRawPane"></div>
+          <div class="split-line" id="heroSplitLine"></div>
+          <button class="handle" id="heroHandle" role="slider" aria-label="Compare raw and simple prompt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </button>
+          <button class="play-btn" id="heroPlayBtn" aria-label="Pause" hidden>
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path id="playIconPath" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"></path></svg>
+          </button>
+          <button class="expand" id="heroExpandBtn" aria-label="Open the detail view" title="Open the detail view">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </button>
+          <i class="prog" id="heroProg" style="width: 0%;" hidden></i>
+        </div>
+        <div class="captions">
+          <div id="heroRawCap"></div>
+          <label class="check"><input type="checkbox" id="heroMarksToggle" checked> Marks</label>
+          <div id="heroSimpleCap"></div>
+        </div>
+      </div>
+      <button class="more-banner" id="switchModeBanner"></button>
+    </div>
+  </section>
+
+  <!-- LEADERBOARD SECTION -->
+  <section class="board" id="leaderboard">
+    <div class="boardhead">
+      <h2>Leaderboard</h2>
+      <p id="boardDesc">How much of each model's graphics the grader would cut. Lower is better.</p>
+      <div class="efforts seg" id="boardEffortsSeg" role="group" aria-label="Reasoning efforts shown">
+        <button data-all="false" class="on">Best effort</button>
+        <button data-all="true">All efforts</button>
+      </div>
+    </div>
+    <div class="rows" id="board"></div>
+  </section>
+
+  <!-- COST AND TIME SECTION -->
+  <section class="cost" id="cost">
+    <div class="boardhead">
+      <h2>Cost and time</h2>
+      <p id="costDesc">What a graphic costs and how long it takes, against how much of it is clutter. Down and to the left is better.</p>
+      <div class="seg" id="costVariant" role="group" aria-label="Prompt">
+        <button data-v="raw" class="on">Raw prompt</button>
+        <button data-v="simple">Simple prompt</button>
+      </div>
+    </div>
+    <div class="charts">
+      <figure>
+        <h3>Clutter against cost</h3>
+        <div class="plot" id="pCost"></div>
+        <figcaption id="pCostCap"></figcaption>
+      </figure>
+      <figure>
+        <h3>Clutter against time</h3>
+        <div class="plot" id="pTime"></div>
+        <figcaption id="pTimeCap"></figcaption>
+      </figure>
+    </div>
+    <p class="key">
+      <span><i class="kline"></i>Pareto frontier: nothing is both cheaper and cleaner</span>
+      <span><i class="kdot f"></i>on the frontier</span>
+      <span><i class="kdot"></i>beaten</span>
+      <span><i class="kml"></i>one model across its reasoning efforts</span>
+    </p>
+    <div class="boardhead sub" id="costEffortHead">
+      <h3 id="perUnitHeading">Per graphic</h3>
+      <div class="efforts seg" id="costEffort" role="group" aria-label="Reasoning efforts shown">
+        <button data-all="false" class="on">Best effort</button>
+        <button data-all="true">All efforts</button>
+      </div>
+    </div>
+    <div class="charts">
+      <figure>
+        <h3>Average cost</h3>
+        <div class="hb" id="bCost"></div>
+      </figure>
+      <figure>
+        <h3>Average time</h3>
+        <div class="hb" id="bTime"></div>
+      </figure>
+    </div>
+    <p class="fine" id="costFine"></p>
+  </section>
+
+  <!-- EVERY GRAPHIC / ANIMATION GALLERY SECTION -->
+  <section class="wall" id="explore">
+    <div class="wallhead">
+      <h2 id="wallHeading">Every graphic</h2>
+      <p id="xcount"></p>
+    </div>
+    <div class="xbar" id="xbar">
+      <div class="seg" id="xPromptSeg" role="group" aria-label="Prompt">
+        <button data-val="raw" class="on">Raw prompt</button>
+        <button data-val="simple">Simple prompt</button>
+      </div>
+      <div class="seg" id="xGroupSeg" role="group" aria-label="Group by">
+        <button data-val="post" class="on">By post</button>
+        <button data-val="model">By model</button>
+        <button data-val="rank">Ranked</button>
+      </div>
+      <div class="seg" id="xEffortSeg" role="group" aria-label="Reasoning efforts shown">
+        <button data-all="false" class="on">Best effort</button>
+        <button data-all="true">All efforts</button>
+      </div>
+      <select class="pick" id="xPostPick" aria-label="Blog post"></select>
+      <div class="seg sz" id="xSizeSeg" role="group" aria-label="Size">
+        <button data-val="s" title="Small" aria-label="Small">S</button>
+        <button data-val="m" title="Medium" aria-label="Medium" class="on">M</button>
+        <button data-val="l" title="Large" aria-label="Large">L</button>
+      </div>
+      <label class="check" id="xMarksCheckWrap"><input type="checkbox" id="xMarksToggle" checked> Marks</label>
+    </div>
+    <div class="chips xfams" id="xfams" role="group" aria-label="Models shown"></div>
+    <div class="gal" id="grid" data-size="m"></div>
+  </section>
+
+  <!-- HOW IT WORKS SECTION -->
+  <section class="method">
+    <h2>How it works</h2>
+    <div class="cols" id="methodCols"></div>
+    <p class="fine" id="fine"></p>
+    <a class="repo foot" href="https://github.com/adamholter/clutterbench" target="_blank" rel="noopener">Code and data on GitHub</a>
+  </section>
+
+  <!-- EMAIL SIGNUP SECTION (ANIMATIONS VIEW) -->
+  <section class="join" id="join" hidden>
+    <div>
+      <h2>Help rank the next benchmarks</h2>
+      <p>Clutter is what should not be there. The next benchmarks are about what should, and that takes people picking the better of two graphics. Leave your email and we will write when there is something to rank.</p>
+    </div>
+    <form id="signup" novalidate>
+      <label for="email">Email</label>
+      <div class="field">
+        <input type="email" id="email" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required>
+        <input type="text" name="website" id="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button type="submit">Sign up</button>
+      </div>
+      <p class="note" id="note" role="status">Used only for this. No newsletter.</p>
+    </form>
+  </section>
+
+  <footer class="by">
+    <span>Made by Adam Holter</span>
+    <a href="https://x.com/AdamHoltererer" target="_blank" rel="noopener">@AdamHoltererer on X</a>
+    <a href="https://buymeacoffee.com/adamholter" target="_blank" rel="noopener">Buy me a coffee</a>
+  </footer>
+</main>
+
+<!-- PROMPT MODAL -->
+<dialog class="modal" id="modal" aria-labelledby="modalTitle">
+  <div class="mhead">
+    <h2 id="modalTitle"></h2>
+    <button id="modalClose" aria-label="Close">×</button>
+  </div>
+  <pre id="modalMain"></pre>
+  <h3>The rest of the prompt, the same for both</h3>
+  <pre id="modalShared" class="shared"></pre>
+</dialog>
+
+<!-- DETAIL VIEWER MODAL -->
+<dialog class="viewer" id="viewer" aria-labelledby="viewerTitle" tabindex="-1">
+  <div class="vbody">
+    <div class="vhead">
+      <div>
+        <h2 id="viewerTitle"></h2>
+        <p class="vpost"></p>
+      </div>
+      <button class="vclose" id="viewerClose" aria-label="Close">×</button>
+    </div>
+    <div class="vstage">
+      <button class="vnav prev" id="vPrev" aria-label="Previous">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </button>
+      <div class="vframe">
+        <div class="frame" id="vFrame">
+          <div class="pane" id="vSimplePane"></div>
+          <div class="pane left" id="vRawPane"></div>
+          <div class="split-line" id="vSplitLine"></div>
+          <button class="handle" id="vHandle" role="slider" aria-label="Compare raw and simple prompt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </button>
+          <button class="play-btn" id="vPlayBtn" aria-label="Pause" hidden>
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path id="vPlayIconPath" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"></path></svg>
+          </button>
+          <i class="prog" id="vProg" style="width: 0%;" hidden></i>
+        </div>
+        <div class="captions">
+          <div id="vRawCap"></div>
+          <label class="check"><input type="checkbox" id="vMarksToggle" checked> Marks</label>
+          <div id="vSimpleCap"></div>
+        </div>
+      </div>
+      <button class="vnav next" id="vNext" aria-label="Next">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </button>
+    </div>
+    <div class="vside">
+      <div class="chips veff" id="vEfforts" role="group" aria-label="Reasoning effort"></div>
+      <div class="vinfo" id="vInfo"></div>
+    </div>
+    <div class="vfoot">
+      <button class="vnav prev" id="vPrevFoot" aria-label="Previous">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </button>
+      <span class="vcount" id="vCount"></span>
+      <button class="vnav next" id="vNextFoot" aria-label="Next">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </button>
+      <span class="vkeys">← → to move, Esc to close</span>
+    </div>
+  </div>
+</dialog>
+
+<div class="floating-tip" id="floatingTip" hidden></div>
+
+<script>
+// ============================================================================
+// CLUTTERBENCH COMPLETE DATASET & STATE ENGINE
+// ============================================================================
+
+const POSTS = [
+  { id: 'clutterbench-v1-results', title: 'ClutterBench results', short: 'ClutterBench', scored: false, domain: 'clutterbench.org', accent: '#2563eb' },
+  { id: 'improving-qwen38-27b-on-deepswe', title: 'DeepSWE', short: 'DeepSWE', scored: true, domain: 'together.ai', accent: '#059669' },
+  { id: 'improving-qwen35-9b-on-t3-banking', title: 'τ³-Banking', short: 'τ³-Banking', scored: true, domain: 'sierra.ai', accent: '#7c3aed' },
+  { id: 'how-we-improved-terminal-bench-2-with-tinker-and-harbor', title: 'Terminal-Bench 2.0', short: 'Terminal-Bench 2.0', scored: true, domain: 'tbench.ai', accent: '#d97706' },
+  { id: 'how-afterquery-helped-nvidia-hill-climb-gdpval', title: 'GDPval with NVIDIA', short: 'GDPval NVIDIA', scored: true, domain: 'afterquery.com', accent: '#16a34a' },
+  { id: 'on-policy-distillation-gdpval', title: 'On-policy distillation', short: 'On-policy distil.', scored: true, domain: 'thinkingmachines.ai', accent: '#0284c7' },
+  { id: 'building-a-frontier-legal-evaluation-in-partnership-with-legora', title: 'Legora legal eval', short: 'Legora legal', scored: true, domain: 'legora.com', accent: '#be123c' }
+];
+
+const STILL_MODELS = [
+  {
+    id: 'sonnet', name: 'Sonnet 5.5', full: 'Claude Sonnet 5.5', bestEffort: 'low',
+    efforts: [
+      { id: 'low', label: 'Low', raw: 29, simple: 0, keep: 59.9, shrink: 22.6, remove: 17.5, cost: 0.033, time: 32, frontierCost: true, frontierTime: true },
+      { id: 'medium', label: 'Medium', raw: 35, simple: 0, keep: 55.2, shrink: 19.4, remove: 25.4, cost: 0.048, time: 44 },
+      { id: 'high', label: 'High', raw: 37, simple: 0, keep: 53.0, shrink: 20.1, remove: 26.9, cost: 0.089, time: 79 },
+      { id: 'xhigh', label: 'XHigh', raw: 40, simple: 1, keep: 50.8, shrink: 18.2, remove: 31.0, cost: 0.195, time: 174 }
+    ],
+    tilesRaw: [14.2, 25.4, 1.0, 60.6, 18.4, 53.3],
+    tilesSimple: [0, 0, 0, 0, 0, 0],
+    heroClutter: 32.3, heroWordsRaw: 84, heroWordsSimple: 28
+  },
+  {
+    id: 'opus', name: 'Opus 5.5', full: 'Claude Opus 5.5', bestEffort: 'low',
+    efforts: [
+      { id: 'low', label: 'Low', raw: 31, simple: 1, keep: 56.8, shrink: 24.0, remove: 19.3, cost: 0.068, time: 36 },
+      { id: 'medium', label: 'Medium', raw: 48, simple: 0, keep: 43.1, shrink: 17.8, remove: 39.1, cost: 0.192, time: 118 },
+      { id: 'high', label: 'High', raw: 49, simple: 1, keep: 42.0, shrink: 18.0, remove: 40.0, cost: 0.275, time: 162 },
+      { id: 'xhigh', label: 'XHigh', raw: 42, simple: 0, keep: 49.5, shrink: 17.0, remove: 33.5, cost: 0.490, time: 288 }
+    ],
+    tilesRaw: [21.5, 17.6, 30.1, 47.5, 18.5, 52.4],
+    tilesSimple: [0, 0, 0, 0, 8.1, 0],
+    heroClutter: 0, heroWordsRaw: 42, heroWordsSimple: 24
+  },
+  {
+    id: 'fable', name: 'Fable 5.2', full: 'Claude Fable 5.2', bestEffort: 'low',
+    efforts: [
+      { id: 'low', label: 'Low', raw: 32, simple: 2, keep: 58.0, shrink: 20.9, remove: 21.1, cost: 0.024, time: 123 }
+    ],
+    tilesRaw: [54.0, 41.3, 29.4, 10.7, 32.5, 21.4],
+    tilesSimple: [1.3, 0, 0, 9.1, 0, 2.1],
+    heroClutter: 0, heroWordsRaw: 38, heroWordsSimple: 22
+  },
+  {
+    id: 'astra', name: 'Astra', full: 'GPT-6 Astra', bestEffort: 'xhigh',
+    efforts: [
+      { id: 'low', label: 'Low', raw: 46, simple: 0, keep: 49.0, shrink: 10.0, remove: 41.0, cost: 0.175, time: 89 },
+      { id: 'medium', label: 'Medium', raw: 48, simple: 0, keep: 47.5, shrink: 9.0, remove: 43.5, cost: 0.172, time: 103 },
+      { id: 'high', label: 'High', raw: 43, simple: 0, keep: 52.0, shrink: 10.0, remove: 38.0, cost: 0.228, time: 132 },
+      { id: 'xhigh', label: 'XHigh', raw: 33, simple: 0, keep: 63.2, shrink: 7.1, remove: 29.7, cost: 0.349, time: 157 }
+    ],
+    tilesRaw: [44.8, 30.6, 16.8, 12.5, 56.1, 38.7],
+    tilesSimple: [0, 0, 0, 0, 0, 0],
+    heroClutter: 0, heroWordsRaw: 45, heroWordsSimple: 26
+  },
+  {
+    id: 'grok', name: 'Grok 4.7', full: 'Grok 4.7', bestEffort: 'high',
+    efforts: [
+      { id: 'low', label: 'Low', raw: 43, simple: 0, keep: 53.5, shrink: 7.0, remove: 39.5, cost: 0.052, time: 162 },
+      { id: 'medium', label: 'Medium', raw: 54, simple: 1, keep: 43.0, shrink: 6.0, remove: 51.0, cost: 0.210, time: 455 },
+      { id: 'high', label: 'High', raw: 34, simple: 0, keep: 64.4, shrink: 3.6, remove: 32.0, cost: 0.291, time: 818 },
+      { id: 'xhigh', label: 'XHigh', raw: 46, simple: 0, keep: 51.0, shrink: 6.0, remove: 43.0, cost: 0.320, time: 980 }
+    ],
+    tilesRaw: [34.9, 38.7, 45.8, 18.2, 22.8, 42.4],
+    tilesSimple: [0, 0, 0, 0, 0, 0],
+    heroClutter: 12.5, heroWordsRaw: 58, heroWordsSimple: 30
+  },
+  {
+    id: 'haiku', name: 'Haiku 5.5', full: 'Claude Haiku 5.5', bestEffort: 'xhigh',
+    efforts: [
+      { id: 'low', label: 'Low', raw: 42, simple: 0, keep: 55.0, shrink: 6.0, remove: 39.0, cost: 0.0052, time: 67, frontierCost: true },
+      { id: 'medium', label: 'Medium', raw: 47, simple: 0, keep: 50.5, shrink: 5.0, remove: 44.5, cost: 0.0078, time: 118 },
+      { id: 'high', label: 'High', raw: 49, simple: 1, keep: 48.0, shrink: 6.0, remove: 46.0, cost: 0.0102, time: 256 },
+      { id: 'xhigh', label: 'XHigh', raw: 38, simple: 0, keep: 62.1, shrink: 0.3, remove: 37.6, cost: 0.016, time: 322, frontierCost: true }
+    ],
+    tilesRaw: [46.4, 34.1, 40.1, 38.7, 35.4, 31.8],
+    tilesSimple: [0, 0, 0, 0, 0, 0],
+    heroClutter: 49.4, heroWordsRaw: 92, heroWordsSimple: 31
+  },
+  {
+    id: 'terra', name: 'Terra', full: 'GPT-6.1 Terra', bestEffort: 'none',
+    efforts: [
+      { id: 'none', label: 'None', raw: 38, simple: 0, keep: 61.8, shrink: 0.0, remove: 38.2, cost: 0.045, time: 356 },
+      { id: 'low', label: 'Low', raw: 44, simple: 0, keep: 54.0, shrink: 4.0, remove: 42.0, cost: 0.062, time: 61 },
+      { id: 'medium', label: 'Medium', raw: 46, simple: 0, keep: 52.0, shrink: 4.0, remove: 44.0, cost: 0.088, time: 194 },
+      { id: 'high', label: 'High', raw: 39, simple: 0, keep: 59.0, shrink: 4.0, remove: 37.0, cost: 0.125, time: 175 },
+      { id: 'xhigh', label: 'XHigh', raw: 45, simple: 0, keep: 53.0, shrink: 4.0, remove: 43.0, cost: 0.180, time: 266 },
+      { id: 'max', label: 'Max', raw: 41, simple: 0, keep: 57.0, shrink: 4.0, remove: 39.0, cost: 0.240, time: 342 }
+    ],
+    tilesRaw: [16.5, 23.2, 54.4, 40.9, 54.9, 39.1],
+    tilesSimple: [0, 0, 0, 0, 0, 0],
+    heroClutter: 0, heroWordsRaw: 39, heroWordsSimple: 25
+  },
+  {
+    id: 'deepseek', name: 'DeepSeek V4.1 Flash', full: 'DeepSeek V4.1 Flash', bestEffort: 'xhigh',
+    efforts: [
+      { id: 'low', label: 'Low', raw: 43, simple: 0, keep: 51.0, shrink: 12.0, remove: 37.0, cost: 0.0115, time: 146 },
+      { id: 'medium', label: 'Medium', raw: 47, simple: 0, keep: 47.0, shrink: 12.0, remove: 41.0, cost: 0.0089, time: 89 },
+      { id: 'high', label: 'High', raw: 46, simple: 0, keep: 48.0, shrink: 12.0, remove: 40.0, cost: 0.0132, time: 132 },
+      { id: 'xhigh', label: 'XHigh', raw: 41, simple: 0, keep: 53.3, shrink: 11.9, remove: 34.9, cost: 0.011, time: 91, frontierCost: true },
+      { id: 'max', label: 'Max', raw: 47, simple: 0, keep: 47.5, shrink: 11.0, remove: 41.5, cost: 0.034, time: 332 }
+    ],
+    tilesRaw: [42.9, 46.7, 35.5, 11.3, 49.3, 59.0],
+    tilesSimple: [0, 0, 0, 0, 0, 0],
+    heroClutter: 51.1, heroWordsRaw: 96, heroWordsSimple: 32
+  },
+  {
+    id: 'sol', name: 'Sol', full: 'GPT-6.1 Sol', bestEffort: 'medium',
+    efforts: [
+      { id: 'low', label: 'Low', raw: 46, simple: 0, keep: 52.0, shrink: 4.0, remove: 44.0, cost: 0.032, time: 102 },
+      { id: 'medium', label: 'Medium', raw: 43, simple: 0, keep: 56.9, shrink: 0.7, remove: 42.3, cost: 0.040, time: 111 },
+      { id: 'high', label: 'High', raw: 46, simple: 0, keep: 52.5, shrink: 3.0, remove: 44.5, cost: 0.049, time: 158 },
+      { id: 'xhigh', label: 'XHigh', raw: 52, simple: 0, keep: 46.0, shrink: 4.0, remove: 50.0, cost: 0.072, time: 230 }
+    ],
+    tilesRaw: [24.4, 28.1, 38.3, 17.3, 68.2, 80.0],
+    tilesSimple: [0, 0, 0, 0, 0, 0],
+    heroClutter: 0, heroWordsRaw: 41, heroWordsSimple: 24
+  },
+  {
+    id: 'luna', name: 'Luna', full: 'GPT-6 Luna', bestEffort: 'high',
+    efforts: [
+      { id: 'low', label: 'Low', raw: 62, simple: 0, keep: 36.0, shrink: 4.0, remove: 60.0, cost: 0.0017, time: 74 },
+      { id: 'medium', label: 'Medium', raw: 56, simple: 0, keep: 42.0, shrink: 4.0, remove: 54.0, cost: 0.0016, time: 62, frontierCost: true },
+      { id: 'high', label: 'High', raw: 54, simple: 0, keep: 45.2, shrink: 2.8, remove: 52.1, cost: 0.0037, time: 75, frontierCost: true },
+      { id: 'xhigh', label: 'XHigh', raw: 64, simple: 0, keep: 34.0, shrink: 4.0, remove: 62.0, cost: 0.0080, time: 168 }
+    ],
+    tilesRaw: [56.5, 39.4, 25.8, 66.0, 64.3, 68.8],
+    tilesSimple: [0, 0, 0, 0, 0, 0],
+    heroClutter: 44.0, heroWordsRaw: 88, heroWordsSimple: 30
+  },
+  {
+    id: 'hydrogen', name: 'Hydrogen', full: 'Gemini 4 Hydrogen', bestEffort: 'low',
+    efforts: [
+      { id: 'low', label: 'Low', raw: 59, simple: 0, keep: 36.6, shrink: 9.3, remove: 54.1, cost: 0.075, time: 185 }
+    ],
+    tilesRaw: [49.1, 71.5, 60.1, 48.1, 56.4, 67.3],
+    tilesSimple: [0, 0, 0, 0, 0, 0],
+    heroClutter: 27.4, heroWordsRaw: 69, heroWordsSimple: 29
+  },
+  {
+    id: 'gemini-flash', name: 'Flash 3.8', full: 'Gemini 3.8 Flash', bestEffort: 'low',
+    efforts: [
+      { id: 'low', label: 'Low', raw: 61, simple: 0, keep: 34.8, shrink: 8.5, remove: 56.7, cost: 0.097, time: 237 },
+      { id: 'medium', label: 'Medium', raw: 70, simple: 1, keep: 26.0, shrink: 8.0, remove: 66.0, cost: 0.215, time: 448 },
+      { id: 'high', label: 'High', raw: 74, simple: 0, keep: 22.0, shrink: 8.0, remove: 70.0, cost: 0.310, time: 620 }
+    ],
+    tilesRaw: [48.3, 60.5, 70.0, 50.9, 57.5, 78.4],
+    tilesSimple: [0, 0.6, 0, 0, 0, 0],
+    heroClutter: 5.9, heroWordsRaw: 48, heroWordsSimple: 27
+  },
+  {
+    id: 'wonder', name: 'Wonder', full: 'Muse Wonder', bestEffort: 'low',
+    efforts: [
+      { id: 'low', label: 'Low', raw: 62, simple: 1, keep: 34.7, shrink: 6.5, remove: 58.8, cost: 0.176, time: 106 }
+    ],
+    tilesRaw: [53.3, 54.9, 76.3, 48.8, 77.0, 62.2],
+    tilesSimple: [0, 0, 0, 0, 6.8, 0],
+    heroClutter: 37.2, heroWordsRaw: 79, heroWordsSimple: 29
+  },
+  {
+    id: 'carbon', name: 'Carbon', full: 'Gemini 4 Carbon', bestEffort: 'high',
+    efforts: [
+      { id: 'high', label: 'High', raw: 71, simple: 10, keep: 25.2, shrink: 7.4, remove: 67.4, cost: 0.340, time: 1201 }
+    ],
+    tilesRaw: [51.9, 84.2, 72.5, 63.5, 70.0, 84.6],
+    tilesSimple: [0, 7.8, 0, 0, 0, 51.7],
+    heroClutter: 0, heroWordsRaw: 44, heroWordsSimple: 26
+  },
+  {
+    id: 'argon', name: 'Argon', full: 'Gemini 4 Argon', bestEffort: 'low',
+    efforts: [
+      { id: 'low', label: 'Low', raw: 73, simple: 26, keep: 24.5, shrink: 5.8, remove: 69.7, cost: 0.391, time: 576 },
+      { id: 'medium', label: 'Medium', raw: 77, simple: 22, keep: 20.0, shrink: 6.0, remove: 74.0, cost: 0.620, time: 1090 },
+      { id: 'high', label: 'High', raw: 80, simple: 19, keep: 17.5, shrink: 5.0, remove: 77.5, cost: 0.740, time: 1230 }
+    ],
+    tilesRaw: [71.0, 80.8, 83.5, 59.8, 78.9, 61.7],
+    tilesSimple: [0, 74.3, 0, 0, 0, 80.6],
+    heroClutter: 0, heroWordsRaw: 43, heroWordsSimple: 25
+  }
+];
+
+const ANIM_MODELS = [
+  {
+    id: 'sonnet', name: 'Sonnet 5.5', full: 'Claude Sonnet 5.5', bestEffort: 'low',
+    efforts: [
+      { id: 'low', label: 'Low', raw: 14, simple: 0, keep: 79.7, shrink: 12.5, remove: 7.2, cost: 0.036, time: 27, frontierCost: true, frontierTime: true },
+      { id: 'medium', label: 'Medium', raw: 23, simple: 0, keep: 71.0, shrink: 12.0, remove: 17.0, cost: 0.046, time: 40 },
+      { id: 'high', label: 'High', raw: 41, simple: 0, keep: 53.0, shrink: 12.0, remove: 35.0, cost: 0.112, time: 106 },
+      { id: 'xhigh', label: 'XHigh', raw: 43, simple: 0, keep: 51.0, shrink: 12.0, remove: 37.0, cost: 0.228, time: 452 }
+    ],
+    tilesRaw: [3.6, 1.9, 2.8, 25.9, 15.9, 30.7],
+    tilesSimple: [0, 0, 0, 0, 0, 0],
+    heroClutter: 0, heroWordsRaw: 44, heroWordsSimple: 22
+  },
+  {
+    id: 'haiku', name: 'Haiku 5.5', full: 'Claude Haiku 5.5', bestEffort: 'high',
+    efforts: [
+      { id: 'low', label: 'Low', raw: 32, simple: 0, keep: 66.0, shrink: 4.0, remove: 30.0, cost: 0.0059, time: 87, frontierCost: true },
+      { id: 'medium', label: 'Medium', raw: 33, simple: 0, keep: 65.0, shrink: 4.0, remove: 31.0, cost: 0.0071, time: 454 },
+      { id: 'high', label: 'High', raw: 24, simple: 0, keep: 75.6, shrink: 0.5, remove: 23.8, cost: 0.014, time: 283, frontierCost: true },
+      { id: 'xhigh', label: 'XHigh', raw: 35, simple: 0, keep: 63.0, shrink: 4.0, remove: 33.0, cost: 0.026, time: 382 }
+    ],
+    tilesRaw: [60.6, 8.3, 2.6, 1.1, 8.4, 63.5],
+    tilesSimple: [0, 0, 0, 0, 0, 0],
+    heroClutter: 2.4, heroWordsRaw: 48, heroWordsSimple: 24
+  },
+  {
+    id: 'fable', name: 'Fable 5.2', full: 'Claude Fable 5.2', bestEffort: 'low',
+    efforts: [
+      { id: 'low', label: 'Low', raw: 26, simple: 0, keep: 67.9, shrink: 12.8, remove: 19.2, cost: 0.029, time: 148 }
+    ],
+    tilesRaw: [65.4, 12.4, 24.8, 21.2, 16.2, 13.7],
+    tilesSimple: [0, 0, 0, 0, 0, 0],
+    heroClutter: 19.8, heroWordsRaw: 55, heroWordsSimple: 25
+  },
+  {
+    id: 'opus', name: 'Opus 5.5', full: 'Claude Opus 5.5', bestEffort: 'xhigh',
+    efforts: [
+      { id: 'low', label: 'Low', raw: 29, simple: 0, keep: 68.0, shrink: 6.0, remove: 26.0, cost: 0.068, time: 34 },
+      { id: 'medium', label: 'Medium', raw: 57, simple: 0, keep: 40.0, shrink: 6.0, remove: 54.0, cost: 0.195, time: 118 },
+      { id: 'high', label: 'High', raw: 49, simple: 0, keep: 48.0, shrink: 6.0, remove: 46.0, cost: 0.258, time: 142 },
+      { id: 'xhigh', label: 'XHigh', raw: 28, simple: 0, keep: 69.0, shrink: 6.1, remove: 24.7, cost: 0.416, time: 848 }
+    ],
+    tilesRaw: [4.4, 46.0, 21.2, 28.6, 29.4, 37.0],
+    tilesSimple: [0, 0, 0, 0, 0, 0],
+    heroClutter: 18.3, heroWordsRaw: 52, heroWordsSimple: 23
+  },
+  {
+    id: 'terra', name: 'Terra', full: 'GPT-6.1 Terra', bestEffort: 'none',
+    efforts: [
+      { id: 'none', label: 'None', raw: 49, simple: 1, keep: 49.7, shrink: 2.2, remove: 48.2, cost: 0.052, time: 212 },
+      { id: 'low', label: 'Low', raw: 65, simple: 0, keep: 33.0, shrink: 4.0, remove: 63.0, cost: 0.075, time: 192 },
+      { id: 'medium', label: 'Medium', raw: 57, simple: 0, keep: 41.0, shrink: 4.0, remove: 55.0, cost: 0.098, time: 168 },
+      { id: 'high', label: 'High', raw: 55, simple: 0, keep: 43.0, shrink: 4.0, remove: 53.0, cost: 0.134, time: 138 },
+      { id: 'xhigh', label: 'XHigh', raw: 63, simple: 0, keep: 35.0, shrink: 4.0, remove: 61.0, cost: 0.188, time: 152 },
+      { id: 'max', label: 'Max', raw: 67, simple: 0, keep: 31.0, shrink: 4.0, remove: 65.0, cost: 0.260, time: 318 }
+    ],
+    tilesRaw: [43.6, 59.0, 48.1, 49.2, 79.6, 15.9],
+    tilesSimple: [0, 0, 0, 0, 2.8, 0],
+    heroClutter: 31.7, heroWordsRaw: 65, heroWordsSimple: 27
+  },
+  {
+    id: 'wonder', name: 'Wonder', full: 'Muse Wonder', bestEffort: 'low',
+    efforts: [
+      { id: 'low', label: 'Low', raw: 50, simple: 0, keep: 45.8, shrink: 7.6, remove: 46.5, cost: 0.173, time: 102 }
+    ],
+    tilesRaw: [63.5, 68.1, 55.1, 8.3, 65.3, 41.4],
+    tilesSimple: [0, 0, 0, 0, 0, 0],
+    heroClutter: 3.2, heroWordsRaw: 46, heroWordsSimple: 24
+  },
+  {
+    id: 'astra', name: 'Astra', full: 'GPT-6 Astra', bestEffort: 'low',
+    efforts: [
+      { id: 'low', label: 'Low', raw: 64, simple: 0, keep: 36.3, shrink: 0.0, remove: 63.7, cost: 0.181, time: 117 }
+    ],
+    tilesRaw: [68.4, 61.6, 54.7, 66.9, 65.5, 65.0],
+    tilesSimple: [0, 0, 0, 0, 0, 0],
+    heroClutter: 22.6, heroWordsRaw: 58, heroWordsSimple: 26
+  },
+  {
+    id: 'luna', name: 'Luna', full: 'GPT-6 Luna', bestEffort: 'low',
+    efforts: [
+      { id: 'low', label: 'Low', raw: 66, simple: 0, keep: 33.9, shrink: 0.2, remove: 65.9, cost: 0.0021, time: 48, frontierCost: true }
+    ],
+    tilesRaw: [57.8, 68.1, 93.9, 17.0, 67.3, 92.0],
+    tilesSimple: [0, 0, 0, 0, 0, 0],
+    heroClutter: 16.5, heroWordsRaw: 51, heroWordsSimple: 25
+  },
+  {
+    id: 'sol', name: 'Sol', full: 'GPT-6.1 Sol', bestEffort: 'low',
+    efforts: [
+      { id: 'low', label: 'Low', raw: 67, simple: 0, keep: 32.5, shrink: 1.4, remove: 66.1, cost: 0.037, time: 107 }
+    ],
+    tilesRaw: [75.5, 54.8, 57.1, 70.9, 62.4, 79.9],
+    tilesSimple: [0, 0, 0, 0, 0, 0],
+    heroClutter: 16.1, heroWordsRaw: 54, heroWordsSimple: 24
+  },
+  {
+    id: 'argon', name: 'Argon', full: 'Gemini 4 Argon', bestEffort: 'low',
+    efforts: [
+      { id: 'low', label: 'Low', raw: 71, simple: 15, keep: 24.6, shrink: 8.3, remove: 66.6, cost: 0.500, time: 510 }
+    ],
+    tilesRaw: [67.2, 75.3, 78.6, 57.5, 72.6, 73.5],
+    tilesSimple: [0, 0, 0, 0, 2.4, 84.3],
+    heroClutter: 3.4, heroWordsRaw: 49, heroWordsSimple: 26
+  }
+];
+
+const PROMPTS = {
+  still: {
+    raw: 'Make a tasteful graphic to go with this blog post.',
+    simple: 'Make a tasteful graphic to go with this blog post.\n\nKeep it simple: show one clear idea, once, with nothing extra — no decorative badges, no repeated KPIs, no unnecessary legends or filler text.',
+    shared: 'Output a single self-contained HTML document rendered at 1200 × 1200 px.\nYou may browse the publisher’s website to match typography, brand palette, and logo.\nDo not reproduce figures directly from the blog post.'
+  },
+  anim: {
+    raw: 'Make a tasteful animated graphic to go with this blog post.',
+    simple: 'Make a tasteful animated graphic to go with this blog post.\n\nKeep it simple: show one clear idea, once, with nothing extra — no intro title cards, no decorative looping motion, and no end summary cards.',
+    shared: 'Output a single self-contained 8-second HTML animation rendered at 1280 × 720 px.\nYou may browse the publisher’s website and post for fonts, colours, and logo.\nCreate an original visual grounded in the post’s findings.'
+  }
+};
+
+// Application State
+const state = {
+  mode: 'still',          // 'still' | 'anim'
+  modelId: 'deepseek',    // active model in hero
+  effortId: 'xhigh',      // active effort in hero
+  postId: 'clutterbench-v1-results',
+  splitPct: 50,
+  heroMarks: true,
+  playing: true,
+  animProgress: 0,
+  boardAllEfforts: false,
+  costVariant: 'raw',     // 'raw' | 'simple'
+  costAllEfforts: false,
+  xVariant: 'raw',        // 'raw' | 'simple'
+  xGroup: 'post',         // 'post' | 'model' | 'rank'
+  xAllEfforts: false,
+  xPost: 'all',
+  xSize: 'm',             // 's' | 'm' | 'l'
+  xMarks: true,
+  xFamily: 'all',
+  viewerItems: [],
+  viewerIndex: 0,
+  viewerEffortId: null,
+  viewerSplit: 50,
+  viewerMarks: true
+};
+
+// Helpers
+function getModels() {
+  return state.mode === 'still' ? STILL_MODELS : ANIM_MODELS;
+}
+
+function getModel(id) {
+  return getModels().find(m => m.id === id) || getModels()[0];
+}
+
+function getPost(id) {
+  return POSTS.find(p => p.id === id) || POSTS[0];
+}
+
+function formatDuration(sec) {
+  if (sec < 120) return `${sec}s`;
+  const m = Math.floor(sec / 60);
+  const s = sec % 60;
+  return `${m}m ${String(s).padStart(2, '0')}s`;
+}
+
+function formatCost(c) {
+  return c < 0.01 ? `$${c.toFixed(4)}` : `$${c.toFixed(3)}`;
+}
+
+// Deterministic Hash for Reproducible Visuals & Clutter Marks
+function hashStr(str) {
+  let h = 2166136261;
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return (h >>> 0);
+}
+
+// Get exact clutter % for a specific (mode, model, effort, post, variant)
+function getCellClutter(model, effortId, postId, variant) {
+  const eff = model.efforts.find(e => e.id === effortId) || model.efforts[0];
+  const postIdx = POSTS.findIndex(p => p.id === postId);
+
+  if (postIdx === 0) {
+    // Unscored ClutterBench results post
+    if (variant === 'simple') return 0;
+    const base = model.heroClutter;
+    if (effortId === model.bestEffort) return base;
+    const delta = eff.raw - (model.efforts.find(e => e.id === model.bestEffort)?.raw || eff.raw);
+    return Math.max(0, Math.min(88, Math.round((base + delta * 0.7) * 10) / 10));
+  }
+
+  const scoredIdx = postIdx - 1;
+  const bestTile = variant === 'raw' ? model.tilesRaw[scoredIdx] : model.tilesSimple[scoredIdx];
+  if (effortId === model.bestEffort) return bestTile;
+
+  const bestObj = model.efforts.find(e => e.id === model.bestEffort) || model.efforts[0];
+  const diff = (variant === 'raw' ? eff.raw - bestObj.raw : eff.simple - bestObj.simple);
+  return Math.max(0, Math.min(95, Math.round((bestTile + diff) * 10) / 10));
+}
+
+// ============================================================================
+// SYNTHETIC GRAPHIC ARTWORK & BOUNDING-BOX CLUTTER MARKS GENERATOR
+// ============================================================================
+function renderGraphicArtwork(model, effortId, post, variant, clutterPct, isThumb = false, isAnim = false) {
+  const seed = hashStr(`${model.id}-${effortId}-${post.id}-${variant}-${isAnim}`);
+  const isDark = variant === 'raw' && (seed % 5 === 0) && clutterPct > 35;
+  const isRaw = variant === 'raw';
+
+  // Generate realistic bounding-box clutter marks proportional to clutterPct
+  const marks = [];
+  if (clutterPct > 0) {
+    // Top right publisher badge mark
+    marks.push({ x: 70, y: 5.2, w: 23, h: 2.2, type: 'red', label: 'Remove: decorative publisher badge & date pill' });
+
+    if (clutterPct >= 10) {
+      // Subtitle / verbose deck mark
+      marks.push({ x: 6.5, y: 14.5, w: 62, h: 4.5, type: clutterPct > 40 ? 'red' : 'orange', label: clutterPct > 40 ? 'Remove: redundant paragraph restating headline' : 'Shrink: verbose subtitle text' });
+    }
+    if (clutterPct >= 22) {
+      // Extra KPI cards mark
+      marks.push({ x: 6.5, y: 22, w: 27, h: 11, type: 'red', label: 'Remove: duplicated KPI callout card' });
+      marks.push({ x: 36.5, y: 22, w: 27, h: 11, type: 'red', label: 'Remove: duplicated KPI callout card' });
+      marks.push({ x: 66.5, y: 22, w: 27, h: 11, type: 'orange', label: 'Shrink: secondary metric summary box' });
+    }
+    if (clutterPct >= 45) {
+      // Side callout / legend / footer clutter
+      marks.push({ x: 66, y: 42, w: 27, h: 32, type: 'red', label: 'Remove: unrequested sidebar takeaway list' });
+    }
+    if (clutterPct >= 58) {
+      // Bottom takeaway banner
+      marks.push({ x: 6.5, y: 80, w: 87, h: 8, type: 'red', label: 'Remove: end-card summary restating chart' });
+    }
+    // Footer watermark
+    marks.push({ x: 6.5, y: 91.5, w: 34, h: 2.2, type: 'red', label: 'Remove: source watermark & methodology footnote' });
+  }
+
+  // Generate SVG data chart inside artwork
+  const barColors = isRaw ? ['#2563eb', '#f59e0b', '#10b981', '#8b5cf6', '#ef4444'] : ['#2563eb', '#93c5fd', '#cbd5e1'];
+  const vals = [
+    28 + (seed % 25),
+    42 + ((seed >> 3) % 28),
+    55 + ((seed >> 6) % 30),
+    71 + ((seed >> 9) % 22)
+  ];
+
+  const chartSvg = (seed % 2 === 0)
+    ? `<svg viewBox="0 0 260 115" width="100%" height="100%" style="max-height:100%">
+        <line x1="28" y1="95" x2="248" y2="95" stroke="${isDark ? '#334155' : '#e2e8f0'}" stroke-width="1"/>
+        <line x1="28" y1="55" x2="248" y2="55" stroke="${isDark ? '#1e293b' : '#f1f5f9'}" stroke-width="1"/>
+        <line x1="28" y1="18" x2="248" y2="18" stroke="${isDark ? '#1e293b' : '#f1f5f9'}" stroke-width="1"/>
+        ${vals.map((v, idx) => {
+          const h = (v / 100) * 74;
+          const x = 44 + idx * 50;
+          const y = 95 - h;
+          const fill = isRaw ? barColors[idx % barColors.length] : (idx === 3 ? '#2563eb' : '#cbd5e1');
+          return `<rect x="${x}" y="${y}" width="30" height="${h}" rx="4" fill="${fill}" style="${isAnim ? `animation: pulseBar 2.6s ease-in-out ${idx * 0.25}s infinite; transform-origin: ${x}px 95px;` : ''}"/>
+                  <text x="${x + 15}" y="${y - 4}" text-anchor="middle" font-size="8" font-weight="600" fill="${isDark ? '#e2e8f0' : '#334155'}">${v}%</text>
+                  <text x="${x + 15}" y="106" text-anchor="middle" font-size="7.5" fill="#64748b">v${idx + 1}.0</text>`;
+        }).join('')}
+      </svg>`
+    : `<svg viewBox="0 0 260 115" width="100%" height="100%" style="max-height:100%">
+        <line x1="24" y1="95" x2="248" y2="95" stroke="${isDark ? '#334155' : '#e2e8f0'}" stroke-width="1"/>
+        <line x1="24" y1="20" x2="248" y2="20" stroke="${isDark ? '#1e293b' : '#f1f5f9'}" stroke-width="1"/>
+        <polyline fill="none" stroke="${isRaw ? '#94a3b8' : '#cbd5e1'}" stroke-width="2" stroke-dasharray="3 2"
+          points="32,82 98,74 168,66 238,59" />
+        <polyline fill="none" stroke="#2563eb" stroke-width="2.6"
+          points="32,${95 - vals[0]*0.7} 98,${95 - vals[1]*0.7} 168,${95 - vals[2]*0.7} 238,${95 - vals[3]*0.7}" />
+        ${vals.map((v, idx) => {
+          const cx = 32 + idx * 68.6;
+          const cy = 95 - v * 0.7;
+          return `<circle cx="${cx}" cy="${cy}" r="3.8" fill="#2563eb" stroke="#ffffff" stroke-width="1.2"/>
+                  <text x="${cx}" y="${cy - 6}" text-anchor="middle" font-size="8" font-weight="600" fill="${isDark ? '#f8fafc' : '#111827'}">${v}%</text>`;
+        }).join('')}
+      </svg>`;
+
+  const marksHtml = marks.map((m, idx) =>
+    `<div class="m ${m.type === 'orange' ? 'orange' : ''}" data-i="${idx}" data-tip="${m.label}" style="left:${m.x}%; top:${m.y}%; width:${m.w}%; height:${m.h}%;"></div>`
+  ).join('');
+
+  return `
+    <div class="pane-inner">
+      <div class="art-canvas ${isDark ? 'dark' : ''}">
+        <div class="art-header">
+          <div>
+            ${isRaw ? `<span class="art-badge">${post.short} · BENCHMARK REPORT</span>` : ''}
+            <div class="art-title">${post.title}: ${isRaw ? 'Comprehensive Multi-Stage Evaluation & Scaling Analysis' : 'Core Benchmark Pass Rate'}</div>
+            ${isRaw && clutterPct >= 10 ? `<div class="art-sub">Comparing reasoning budgets, token overhead, and task completion across frontier evaluations.</div>` : ''}
+          </div>
+          ${isRaw ? `<span style="font-size:8px;font-family:var(--font-mono);color:#64748b;border:1px solid #cbd5e1;padding:2px 5px;border-radius:4px;">${post.domain}</span>` : ''}
+        </div>
+
+        ${isRaw && clutterPct >= 22 ? `
+          <div class="art-kpis">
+            <div class="art-kpi"><strong>+${vals[3] - vals[0]}%</strong><span>Net Gain</span></div>
+            <div class="art-kpi"><strong>${vals[3]}%</strong><span>Peak Score</span></div>
+            <div class="art-kpi"><strong>1.8×</strong><span>Efficiency</span></div>
+          </div>
+        ` : ''}
+
+        <div class="art-chart">
+          ${chartSvg}
+        </div>
+
+        ${isRaw ? `
+          <div class="art-footer">
+            <span>Source: ${post.domain} · Rendered by ${model.name}</span>
+            <span>${isAnim ? '00:08.0 · 60fps' : '1200 × 1200'}</span>
+          </div>
+        ` : ''}
+      </div>
+      <div class="marks-layer">${marksHtml}</div>
+    </div>
+  `;
+}
+
+// ============================================================================
+// RENDER HERO SECTION
+// ============================================================================
+function renderHero() {
+  const models = getModels();
+  if (!models.some(m => m.id === state.modelId)) {
+    state.modelId = models[0].id;
+  }
+  const activeModel = getModel(state.modelId);
+  if (!activeModel.efforts.some(e => e.id === state.effortId)) {
+    state.effortId = activeModel.bestEffort;
+  }
+
+  // Heading & Mode Switch Banner
+  document.getElementById('heroHeading').textContent = state.mode === 'still'
+    ? 'How much of the graphic is clutter?'
+    : 'How much of the animation is clutter?';
+
+  const banner = document.getElementById('switchModeBanner');
+  banner.innerHTML = state.mode === 'still'
+    ? `Animations <i class="beta">Beta</i>`
+    : `Still graphics`;
+
+  // Model Pills
+  const pillsEl = document.getElementById('models');
+  pillsEl.innerHTML = models.map(m => `
+    <button data-f="${m.id}" title="${m.full}" role="tab" class="${m.id === activeModel.id ? 'on' : ''}" aria-selected="${m.id === activeModel.id}">
+      ${m.name}
+    </button>
+  `).join('');
+
+  pillsEl.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.modelId = btn.dataset.f;
+      const m = getModel(state.modelId);
+      state.effortId = m.bestEffort;
+      renderHero();
+    });
+  });
+
+  // Effort Chips
+  const effortEl = document.getElementById('effort');
+  effortEl.innerHTML = activeModel.efforts.map(e => `
+    <button class="${e.id === state.effortId ? 'on' : ''}" data-e="${e.id}" aria-pressed="${e.id === state.effortId}" title="${e.id} reasoning effort, ${e.raw}% clutter on the raw prompt">
+      ${e.label}<small>${e.raw}%</small>
+    </button>
+  `).join('');
+
+  effortEl.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.effortId = btn.dataset.e;
+      renderHero();
+    });
+  });
+
+  // Blog Post Selector
+  const taskEl = document.getElementById('task');
+  if (!taskEl.options.length) {
+    taskEl.innerHTML = POSTS.map(p => `<option value="${p.id}">${p.title}</option>`).join('');
+    taskEl.addEventListener('change', () => {
+      state.postId = taskEl.value;
+      renderHero();
+    });
+  }
+  taskEl.value = state.postId;
+
+  // Render Panes
+  const post = getPost(state.postId);
+  const rawClutter = Math.round(getCellClutter(activeModel, state.effortId, state.postId, 'raw'));
+  const simpleClutter = Math.round(getCellClutter(activeModel, state.effortId, state.postId, 'simple'));
+  const isAnim = state.mode === 'anim';
+
+  document.getElementById('heroRawPane').innerHTML = renderGraphicArtwork(activeModel, state.effortId, post, 'raw', rawClutter, false, isAnim);
+  document.getElementById('heroSimplePane').innerHTML = renderGraphicArtwork(activeModel, state.effortId, post, 'simple', simpleClutter, false, isAnim);
+
+  const frame = document.getElementById('heroFrame');
+  frame.classList.toggle('hide-marks', !state.heroMarks);
+
+  // Animation Controls Visibility
+  const playBtn = document.getElementById('heroPlayBtn');
+  const progEl = document.getElementById('heroProg');
+  playBtn.hidden = !isAnim;
+  progEl.hidden = !isAnim;
+
+  // Captions
+  const wordsRaw = activeModel.heroWordsRaw + (rawClutter > 30 ? 12 : 0);
+  const wordsSimple = activeModel.heroWordsSimple;
+  document.getElementById('heroRawCap').innerHTML = `
+    <button class="plink" data-prompt="raw" title="See the prompt">Raw<span class="w"> prompt</span></button> · <b>${rawClutter}% clutter</b><span class="w"> · ${wordsRaw} words</span>
+  `;
+  document.getElementById('heroSimpleCap').innerHTML = `
+    <button class="plink" data-prompt="simple" title="See the prompt">Simple<span class="w"> prompt</span></button> · <b>${simpleClutter}% clutter</b><span class="w"> · ${wordsSimple} words</span>
+  `;
+
+  document.querySelectorAll('#heroCompare .plink').forEach(btn => {
+    btn.addEventListener('click', () => openPromptModal(btn.dataset.prompt));
+  });
+
+  updateSplitSlider('hero', state.splitPct);
+}
+
+// Split Slider Controller
+function updateSplitSlider(prefix, pct) {
+  const clamped = Math.max(0, Math.min(100, pct));
+  const leftPane = document.getElementById(`${prefix}RawPane`);
+  const line = document.getElementById(`${prefix}SplitLine`);
+  const handle = document.getElementById(`${prefix}Handle`);
+  if (!leftPane || !line || !handle) return;
+
+  leftPane.style.clipPath = `inset(0 ${100 - clamped}% 0 0)`;
+  line.style.left = `${clamped}%`;
+  handle.style.left = `${clamped}%`;
+  handle.setAttribute('aria-valuenow', Math.round(clamped));
+}
+
+function bindSplitSlider(frameId, prefix, getVal, setVal) {
+  const frame = document.getElementById(frameId);
+  const handle = document.getElementById(`${prefix}Handle`);
+  let dragging = false;
+
+  const move = (clientX) => {
+    const rect = frame.getBoundingClientRect();
+    const pct = ((clientX - rect.left) / rect.width) * 100;
+    setVal(Math.max(0, Math.min(100, pct)));
+    updateSplitSlider(prefix, getVal());
+  };
+
+  handle.addEventListener('mousedown', (e) => { dragging = true; e.preventDefault(); });
+  handle.addEventListener('touchstart', (e) => { dragging = true; }, { passive: true });
+
+  window.addEventListener('mousemove', (e) => { if (dragging) move(e.clientX); });
+  window.addEventListener('touchmove', (e) => { if (dragging && e.touches[0]) move(e.touches[0].clientX); }, { passive: true });
+  window.addEventListener('mouseup', () => { dragging = false; });
+  window.addEventListener('touchend', () => { dragging = false; });
+
+  frame.addEventListener('click', (e) => {
+    if (e.target.closest('button') || e.target.closest('.m')) return;
+    move(e.clientX);
+  });
+}
+
+// ============================================================================
+// RENDER LEADERBOARD SECTION
+// ============================================================================
+const expandedLeaderboardModels = new Set();
+
+function renderLeaderboard() {
+  const models = getModels();
+  const scoredPosts = POSTS.filter(p => p.scored);
+  const isAnim = state.mode === 'anim';
+
+  document.getElementById('boardDesc').textContent = isAnim
+    ? "How much of each model's animations the grader would cut, averaged over the run. Lower is better."
+    : "How much of each model's graphics the grader would cut. Lower is better.";
+
+  const board = document.getElementById('board');
+  let html = `
+    <div class="h">Model</div>
+    <div class="h"><button class="plink" data-p="raw" title="See the prompt">Raw prompt</button><small>${isAnim ? '"make a tasteful animated graphic"' : '"make a tasteful graphic"'}</small></div>
+    <div class="h"><button class="plink" data-p="simple" title="See the prompt">Simple prompt</button><small>plus "keep it simple"</small></div>
+  `;
+
+  models.forEach((m, idx) => {
+    const bestEff = m.efforts.find(e => e.id === m.bestEffort) || m.efforts[0];
+    const hasMultiple = m.efforts.length > 1;
+    const isExpanded = state.boardAllEfforts || expandedLeaderboardModels.has(m.id);
+
+    const subLabel = hasMultiple
+      ? `<button class="fx" data-m="${m.id}" aria-expanded="${isExpanded}" title="Show all ${m.efforts.length} reasoning efforts">${m.bestEffort} effort · best of ${m.efforts.length}<svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>`
+      : `${m.bestEffort} effort`;
+
+    const buildStack = (eff, variant) => {
+      if (variant === 'raw') {
+        return `
+          <span class="blue" data-tip="Keep: ${eff.keep}%" style="flex: ${eff.keep} 1 0px;"></span>
+          ${eff.shrink > 0 ? `<span class="orange" data-tip="Shrink: ${eff.shrink}%" style="flex: ${eff.shrink} 1 0px;"></span>` : ''}
+          ${eff.remove > 0 ? `<span class="red" data-tip="Remove: ${eff.remove}%" style="flex: ${eff.remove} 1 0px;"></span>` : ''}
+        `;
+      } else {
+        const sClutter = eff.simple;
+        const keep = Math.max(0, 100 - sClutter);
+        return `
+          <span class="blue" data-tip="Keep: ${keep}%" style="flex: ${keep} 1 0px;"></span>
+          ${sClutter > 0 ? `<span class="red" data-tip="Remove: ${sClutter}%" style="flex: ${sClutter} 1 0px;"></span>` : ''}
+        `;
+      }
+    };
+
+    const buildTiles = (effId, variant, isLastModel) => {
+      const tiles = scoredPosts.map(p => {
+        const val = getCellClutter(m, effId, p.id, variant);
+        const r = Math.round(val);
+        const cls = r >= 55 ? 'sl hi' : (r === 0 ? 'sl zero' : 'sl');
+        return `<button class="${cls}" data-m="${m.id}" data-e="${effId}" data-p="${p.id}" data-tip="${p.title}: ${r}% clutter. Open in comparison.">${r}</button>`;
+      }).join('');
+      const axis = isLastModel ? `<div class="axis"><span>one tile per post, in the same order: % clutter</span></div>` : '';
+      return `<div class="spread tiles">${tiles}</div>${axis}`;
+    };
+
+    const isLast = idx === models.length - 1 && !isExpanded;
+
+    html += `
+      <div class="name"><i>${idx + 1}</i><span>${m.name}<small>${subLabel}</small></span></div>
+      <div class="cellb" data-v="Raw">
+        <div class="bar"><div class="stack">${buildStack(bestEff, 'raw')}</div><b>${bestEff.raw}%</b></div>
+        ${buildTiles(bestEff.id, 'raw', isLast)}
+      </div>
+      <div class="cellb" data-v="Simple">
+        <div class="bar"><div class="stack">${buildStack(bestEff, 'simple')}</div><b>${bestEff.simple}%</b></div>
+        ${buildTiles(bestEff.id, 'simple', isLast)}
+      </div>
+    `;
+
+    // Render additional reasoning efforts when expanded
+    if (isExpanded && hasMultiple) {
+      m.efforts.filter(e => e.id !== m.bestEffort).forEach((eff, eIdx, arr) => {
+        const isLastSub = idx === models.length - 1 && eIdx === arr.length - 1;
+        html += `
+          <div class="name sub-effort-row"><i></i><span><small>${eff.id} effort</small></span></div>
+          <div class="cellb sub-effort-row" data-v="Raw">
+            <div class="bar"><div class="stack">${buildStack(eff, 'raw')}</div><b>${eff.raw}%</b></div>
+            ${buildTiles(eff.id, 'raw', isLastSub)}
+          </div>
+          <div class="cellb sub-effort-row" data-v="Simple">
+            <div class="bar"><div class="stack">${buildStack(eff, 'simple')}</div><b>${eff.simple}%</b></div>
+            ${buildTiles(eff.id, 'simple', isLastSub)}
+          </div>
+        `;
+      });
+    }
+  });
+
+  board.innerHTML = html;
+
+  // Bind Prompt buttons
+  board.querySelectorAll('.plink').forEach(btn => {
+    btn.addEventListener('click', () => openPromptModal(btn.dataset.p));
+  });
+
+  // Bind Expand effort buttons
+  board.querySelectorAll('.fx').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const mId = btn.dataset.m;
+      if (expandedLeaderboardModels.has(mId)) expandedLeaderboardModels.delete(mId);
+      else expandedLeaderboardModels.add(mId);
+      renderLeaderboard();
+    });
+  });
+
+  // Bind Tile clicks -> jump to hero comparison
+  board.querySelectorAll('.sl').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.modelId = btn.dataset.m;
+      state.effortId = btn.dataset.e;
+      state.postId = btn.dataset.p;
+      renderHero();
+      document.getElementById('top').scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+}
+
+// ============================================================================
+// RENDER COST AND TIME CHARTS
+// ============================================================================
+function renderCostAndTime() {
+  const models = getModels();
+  const isAnim = state.mode === 'anim';
+  const isRaw = state.costVariant === 'raw';
+
+  document.getElementById('costDesc').textContent = isAnim
+    ? 'What an animation costs and how long it takes, against how much of it is clutter. Down and to the left is better.'
+    : 'What a graphic costs and how long it takes, against how much of it is clutter. Down and to the left is better.';
+
+  document.getElementById('perUnitHeading').textContent = isAnim ? 'Per animation' : 'Per graphic';
+
+  document.getElementById('costFine').textContent = `Cost is what one request per ${isAnim ? 'animation' : 'graphic'} would cost at API list prices on Oct 19, 2026: the task prompt and the post in, counted with each model's own tokenizer, and everything the model wrote out, thinking included. It leaves out the agent reading its own earlier steps back in, and cached prices, and every run here actually used a subscription. Time is the whole run on the wall clock, browsing included, so it also reflects how busy the provider was at the time. Each point is the average of the posts above, one attempt each.`;
+
+  // Gather all points
+  const points = [];
+  models.forEach(m => {
+    m.efforts.forEach(e => {
+      const clutter = isRaw ? e.raw : e.simple;
+      points.push({
+        modelId: m.id,
+        modelName: m.name,
+        effortId: e.id,
+        label: `${m.name} ${e.id}`,
+        clutter,
+        cost: e.cost,
+        time: e.time,
+        isBest: e.id === m.bestEffort
+      });
+    });
+  });
+
+  // Build SVG Scatter Plot
+  function buildScatter(containerId, capId, metricKey, xTicks, xFormat, xLabel) {
+    const W = 568, H = 409;
+    const padL = 44, padR = 554, padT = 16, padB = 365;
+    const minVal = Math.min(...points.map(p => p[metricKey])) * 0.85;
+    const maxVal = Math.max(...points.map(p => p[metricKey])) * 1.18;
+    const logMin = Math.log10(minVal);
+    const logMax = Math.log10(maxVal);
+
+    const xScale = v => padL + ((Math.log10(v) - logMin) / (logMax - logMin)) * (padR - padL);
+    const yScale = c => padB - (Math.min(82, Math.max(0, c)) / 82) * (padB - padT);
+
+    // Compute Pareto Frontier (lower metricKey AND lower clutter)
+    const sorted = [...points].sort((a, b) => a[metricKey] - b[metricKey]);
+    const frontier = [];
+    let bestC = Infinity;
+    sorted.forEach(p => {
+      if (p.clutter < bestC) {
+        bestC = p.clutter;
+        frontier.push(p);
+      }
+    });
+    const frontierSet = new Set(frontier.map(f => f.label));
+
+    // Gridlines
+    let svg = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img">`;
+    [0, 20, 40, 60, 80].forEach(c => {
+      const y = yScale(c);
+      svg += `<line class="g" x1="${padL}" x2="${padR}" y1="${y}" y2="${y}"></line>`;
+      svg += `<text class="t" x="${padL - 7}" y="${y + 4}" text-anchor="end">${c}%</text>`;
+    });
+
+    xTicks.forEach(tk => {
+      if (tk >= minVal && tk <= maxVal) {
+        const x = xScale(tk);
+        svg += `<line class="g" x1="${x}" x2="${x}" y1="${padT}" y2="${padB}"></line>`;
+        svg += `<text class="t" x="${x}" y="${padB + 16}" text-anchor="middle">${xFormat(tk)}</text>`;
+      }
+    });
+
+    svg += `<text class="t ax" x="${padR}" y="${H - 4}" text-anchor="end">${xLabel}</text>`;
+    svg += `<text class="t ax" x="${padL + 6}" y="${H - 4}" text-anchor="start">lower is better</text>`;
+
+    // Connect same model efforts
+    models.forEach(m => {
+      if (m.efforts.length > 1) {
+        const pts = m.efforts.map(e => `${xScale(e[metricKey]).toFixed(1)},${yScale(isRaw ? e.raw : e.simple).toFixed(1)}`).join(' ');
+        svg += `<polyline class="ml" points="${pts}"></polyline>`;
+      }
+    });
+
+    // Stepped Pareto Frontier Path
+    if (frontier.length > 0) {
+      let d = `M${xScale(frontier[0][metricKey]).toFixed(1)},${yScale(frontier[0].clutter).toFixed(1)}`;
+      for (let i = 1; i < frontier.length; i++) {
+        const x = xScale(frontier[i][metricKey]).toFixed(1);
+        const y = yScale(frontier[i].clutter).toFixed(1);
+        d += ` H${x} V${y}`;
+      }
+      d += ` H${padR}`;
+      svg += `<path class="fr" d="${d}"></path>`;
+    }
+
+    // Points & Labels
+    points.forEach(p => {
+      const cx = xScale(p[metricKey]);
+      const cy = yScale(p.clutter);
+      const onF = frontierSet.has(p.label);
+      const tipText = `${p.label}: ${p.clutter}% clutter · ${metricKey === 'cost' ? formatCost(p.cost) : formatDuration(p.time)}`;
+      svg += `<circle class="${onF ? 'pf' : 'po'}" cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${onF ? 5.5 : 4}"></circle>`;
+      if (onF || p.isBest) {
+        const anchor = cx > padR - 70 ? 'end' : 'start';
+        const dx = anchor === 'end' ? -8 : 8;
+        svg += `<text class="nm ${onF ? 'f' : ''}" x="${(cx + dx).toFixed(1)}" y="${(cy + 3.5).toFixed(1)}" text-anchor="${anchor}">${onF ? p.label : p.modelName}</text>`;
+      }
+      svg += `<circle class="hit" cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="11" data-tip="${tipText}"></circle>`;
+    });
+
+    svg += `</svg>`;
+    document.getElementById(containerId).innerHTML = svg;
+    document.getElementById(capId).textContent = `On the frontier: ${frontier.map(f => f.label).join(', ')}.`;
+  }
+
+  buildScatter(
+    'pCost', 'pCostCap', 'cost',
+    [0.002, 0.003, 0.01, 0.03, 0.1, 0.3, 1.0],
+    v => v >= 0.01 ? `$${v}` : `$${v}`,
+    `cost per ${isAnim ? 'animation' : 'graphic'}, log scale`
+  );
+
+  buildScatter(
+    'pTime', 'pTimeCap', 'time',
+    [30, 60, 120, 300, 600, 1200],
+    v => v < 60 ? `${v}s` : `${v / 60}m`,
+    `time per ${isAnim ? 'animation' : 'graphic'}, log scale`
+  );
+
+  // Horizontal Bar Charts
+  const barRows = state.costAllEfforts
+    ? points
+    : points.filter(p => p.isBest);
+
+  const byCost = [...barRows].sort((a, b) => a.cost - b.cost);
+  const maxCost = Math.max(...byCost.map(r => r.cost));
+  document.getElementById('bCost').innerHTML = byCost.map(r => `
+    <div class="hbr">
+      <span class="hl">${r.modelName}<small>${r.effortId}</small></span>
+      <span class="tr"><i style="--r:${(r.cost / maxCost).toFixed(4)}"></i><b>${formatCost(r.cost)}</b></span>
+    </div>
+  `).join('');
+
+  const byTime = [...barRows].sort((a, b) => a.time - b.time);
+  const maxTime = Math.max(...byTime.map(r => r.time));
+  document.getElementById('bTime').innerHTML = byTime.map(r => `
+    <div class="hbr">
+      <span class="hl">${r.modelName}<small>${r.effortId}</small></span>
+      <span class="tr"><i style="--r:${(r.time / maxTime).toFixed(4)}"></i><b>${formatDuration(r.time)}</b></span>
+    </div>
+  `).join('');
+}
+
+// ============================================================================
+// RENDER EXPLORE WALL ("EVERY GRAPHIC" / "EVERY ANIMATION")
+// ============================================================================
+function renderExplore() {
+  const models = getModels();
+  const isAnim = state.mode === 'anim';
+
+  document.getElementById('wallHeading').textContent = isAnim ? 'Every animation' : 'Every graphic';
+  document.getElementById('xMarksCheckWrap').style.display = isAnim ? 'none' : 'inline-flex';
+
+  // Post Dropdown
+  const postPick = document.getElementById('xPostPick');
+  if (!postPick.options.length) {
+    postPick.innerHTML = `<option value="all">All posts</option>` +
+      POSTS.map(p => `<option value="${p.id}">${p.title}</option>`).join('');
+    postPick.addEventListener('change', () => {
+      state.xPost = postPick.value;
+      renderExplore();
+    });
+  }
+  postPick.value = state.xPost;
+
+  // Family Filter Chips
+  const famEl = document.getElementById('xfams');
+  if (!models.some(m => m.id === state.xFamily)) state.xFamily = 'all';
+  famEl.innerHTML = `<button class="${state.xFamily === 'all' ? 'on' : ''}" data-f="all">All models</button>` +
+    models.map(m => `<button class="${state.xFamily === m.id ? 'on' : ''}" data-f="${m.id}">${m.name}</button>`).join('');
+
+  famEl.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.xFamily = btn.dataset.f;
+      renderExplore();
+    });
+  });
+
+  // Collect matching items
+  const items = [];
+  POSTS.forEach(p => {
+    if (state.xPost !== 'all' && state.xPost !== p.id) return;
+    models.forEach(m => {
+      if (state.xFamily !== 'all' && state.xFamily !== m.id) return;
+      const effs = state.xAllEfforts ? m.efforts : [m.efforts.find(e => e.id === m.bestEffort) || m.efforts[0]];
+      effs.forEach(e => {
+        const clutter = getCellClutter(m, e.id, p.id, state.xVariant);
+        items.push({
+          model: m,
+          effort: e,
+          post: p,
+          clutter,
+          rounded: Math.round(clutter)
+        });
+      });
+    });
+  });
+
+  state.viewerItems = items;
+
+  const unitWord = isAnim ? 'animations' : 'graphics';
+  document.getElementById('xcount').textContent =
+    `${items.length} ${unitWord} on the ${state.xVariant} prompt, ${state.xAllEfforts ? 'all reasoning efforts' : 'each model at its best effort'}. Open one for the detail.`;
+
+  const gridEl = document.getElementById('grid');
+  gridEl.dataset.size = state.xSize;
+
+  const renderCard = (item, globalIdx) => {
+    const cls = item.rounded >= 55 ? 'hi' : (item.rounded === 0 ? 'zero' : '');
+    const hideMarksCls = (!state.xMarks || isAnim) ? 'hide-marks' : '';
+    return `
+      <button class="card" data-idx="${globalIdx}" aria-label="${item.model.full} (${item.effort.id}), ${item.post.title}, ${item.rounded}% clutter. Open details.">
+        <span class="th ${hideMarksCls}">
+          ${renderGraphicArtwork(item.model, item.effort.id, item.post, state.xVariant, item.clutter, true, isAnim)}
+        </span>
+        <span class="cap">
+          <span class="who"><b>${item.model.name}</b><small>${item.effort.id} effort</small></span>
+          <em class="${cls}">${item.rounded}%</em>
+        </span>
+      </button>
+    `;
+  };
+
+  let groupsHtml = '';
+  if (state.xGroup === 'post') {
+    const postsToShow = state.xPost === 'all' ? POSTS : POSTS.filter(p => p.id === state.xPost);
+    postsToShow.forEach(p => {
+      const groupItems = items.map((it, idx) => ({ it, idx })).filter(x => x.it.post.id === p.id);
+      if (!groupItems.length) return;
+      const avg = Math.round(groupItems.reduce((s, x) => s + x.it.clutter, 0) / groupItems.length);
+      groupsHtml += `
+        <section class="xg">
+          <header class="xgh">
+            <h3>${p.title}${!p.scored ? '<small>shown, not scored</small>' : ''}</h3>
+            <span>${groupItems.length} ${unitWord} · ${avg}% average clutter</span>
+          </header>
+          <div class="xgrid">${groupItems.map(x => renderCard(x.it, x.idx)).join('')}</div>
+        </section>
+      `;
+    });
+  } else if (state.xGroup === 'model') {
+    const modelsToShow = state.xFamily === 'all' ? models : models.filter(m => m.id === state.xFamily);
+    modelsToShow.forEach(m => {
+      const groupItems = items.map((it, idx) => ({ it, idx })).filter(x => x.it.model.id === m.id);
+      if (!groupItems.length) return;
+      const avg = Math.round(groupItems.reduce((s, x) => s + x.it.clutter, 0) / groupItems.length);
+      groupsHtml += `
+        <section class="xg">
+          <header class="xgh">
+            <h3>${m.full}</h3>
+            <span>${groupItems.length} ${unitWord} · ${avg}% average clutter</span>
+          </header>
+          <div class="xgrid">${groupItems.map(x => renderCard(x.it, x.idx)).join('')}</div>
+        </section>
+      `;
+    });
+  } else {
+    // Ranked lowest clutter first
+    const ranked = items.map((it, idx) => ({ it, idx })).sort((a, b) => a.it.clutter - b.it.clutter);
+    groupsHtml = `
+      <section class="xg">
+        <header class="xgh">
+          <h3>Ranked cleanest to most cluttered</h3>
+          <span>${ranked.length} ${unitWord}</span>
+        </header>
+        <div class="xgrid">${ranked.map(x => renderCard(x.it, x.idx)).join('')}</div>
+      </section>
+    `;
+  }
+
+  gridEl.innerHTML = groupsHtml;
+
+  gridEl.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', () => {
+      openViewer(Number(card.dataset.idx));
+    });
+  });
+}
+
+// ============================================================================
+// RENDER METHODOLOGY & MODE SWITCHING
+// ============================================================================
+function renderMethodAndFooter() {
+  const isAnim = state.mode === 'anim';
+  const cols = document.getElementById('methodCols');
+  const joinSection = document.getElementById('join');
+
+  if (!isAnim) {
+    joinSection.hidden = true;
+    cols.innerHTML = `
+      <div>
+        <h3>The task</h3>
+        <p>Each model, running as an agent, reads a blog post and builds one 1200 by 1200 graphic in HTML. It browses the publisher's site for fonts, colours and logo, and may not look at the post's own figures.</p>
+      </div>
+      <div>
+        <h3>Two prompts</h3>
+        <p><b>Raw</b> says only "make a tasteful graphic to go with the post". <b>Simple</b> adds plain instructions to show one idea, once, with nothing extra. The gap between them is how much a model needs to be told.</p>
+      </div>
+      <div>
+        <h3>The grader</h3>
+        <p>Claude Haiku 5.5 labels every element twice. Where the two passes differ, Claude Sonnet 5.5 breaks the tie. The rules were written from one person's hand labels on 24 graphics.</p>
+      </div>
+    `;
+    document.getElementById('fine').textContent =
+      "Leaderboard: 588 graphics from 15 models at 49 model and reasoning effort combinations, 6 posts and 2 prompts, one attempt per cell. Each model is shown at its best reasoning effort, the one with the lowest clutter on the raw prompt in this same data, which flatters models that were run at more efforts. Clutter is the share of drawn area marked remove, plus half the area marked shrink. With one attempt per cell, gaps of a few points between models are not meaningful. The ClutterBench results post is shown but not scored, because it tells the model what clutter is. Updated Nov 12, 2026.";
+  } else {
+    joinSection.hidden = false;
+    cols.innerHTML = `
+      <div>
+        <h3>The task</h3>
+        <p>Each model, running as an agent, reads a blog post and builds one 8 second, 1280 by 720 animation in HTML. It may browse the publisher's site, the post included, for fonts, colours and logo, but the visual has to be its own.</p>
+      </div>
+      <div>
+        <h3>Clutter over time</h3>
+        <p>Every element is tracked through the animation. A mark sits on its element in each frame, so it moves and fades with it. The score is the clutter in each frame, averaged over the run.</p>
+      </div>
+      <div>
+        <h3>The grader</h3>
+        <p>The same two passes of Claude Haiku 5.5 as the still graphics, with Claude Sonnet 5.5 breaking ties. Its rules add motion: title cards, decorative movement and end cards that restate the chart are marked remove.</p>
+      </div>
+    `;
+    document.getElementById('fine').textContent =
+      "Leaderboard: 288 animations from 10 models at 24 model and reasoning effort combinations, 6 posts and 2 prompts, one attempt per cell. Each model is shown at its best reasoning effort, the one with the lowest clutter on the raw prompt in this same data, which flatters models that were run at more efforts. Clutter is the share of drawn area marked remove, plus half the area marked shrink, averaged over the 8 seconds. With one attempt per cell, gaps of a few points between models are not meaningful. The ClutterBench results post is shown but not scored, because it tells the model what clutter is. Beta: the animation grader has not been checked against hand labels yet, so read the numbers as rough. Updated Nov 10, 2026.";
+  }
+}
+
+function setMode(newMode) {
+  state.mode = newMode;
+  document.body.classList.toggle('anim-mode', newMode === 'anim');
+  document.querySelectorAll('.nav-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.mode === newMode);
+  });
+
+  if (newMode === 'still') {
+    state.modelId = 'deepseek';
+    state.effortId = 'xhigh';
+  } else {
+    state.modelId = 'terra';
+    state.effortId = 'none';
+  }
+  state.postId = 'clutterbench-v1-results';
+
+  renderHero();
+  renderLeaderboard();
+  renderCostAndTime();
+  renderExplore();
+  renderMethodAndFooter();
+}
+
+// ============================================================================
+// MODALS (PROMPT MODAL & DETAIL VIEWER MODAL)
+// ============================================================================
+function openPromptModal(type) {
+  const modal = document.getElementById('modal');
+  const pSet = PROMPTS[state.mode];
+  document.getElementById('modalTitle').textContent = type === 'raw' ? 'Raw prompt' : 'Simple prompt';
+  document.getElementById('modalMain').textContent = type === 'raw' ? pSet.raw : pSet.simple;
+  document.getElementById('modalShared').textContent = pSet.shared;
+  modal.showModal();
+}
+
+function openViewer(idx) {
+  if (!state.viewerItems.length) return;
+  state.viewerIndex = (idx + state.viewerItems.length) % state.viewerItems.length;
+  const item = state.viewerItems[state.viewerIndex];
+  state.viewerEffortId = item.effort.id;
+  renderViewerContent();
+  const viewer = document.getElementById('viewer');
+  if (!viewer.open) viewer.showModal();
+}
+
+function renderViewerContent() {
+  const item = state.viewerItems[state.viewerIndex];
+  if (!item) return;
+
+  const isAnim = state.mode === 'anim';
+  const m = item.model;
+  const p = item.post;
+  const eff = m.efforts.find(e => e.id === state.viewerEffortId) || item.effort;
+
+  document.getElementById('viewerTitle').textContent = `${m.full} (${eff.id})`;
+  document.querySelector('.vpost').textContent = `${p.title} · ${p.domain}`;
+
+  const rawClutter = Math.round(getCellClutter(m, eff.id, p.id, 'raw'));
+  const simpleClutter = Math.round(getCellClutter(m, eff.id, p.id, 'simple'));
+
+  document.getElementById('vRawPane').innerHTML = renderGraphicArtwork(m, eff.id, p, 'raw', rawClutter, false, isAnim);
+  document.getElementById('vSimplePane').innerHTML = renderGraphicArtwork(m, eff.id, p, 'simple', simpleClutter, false, isAnim);
+
+  const vFrame = document.getElementById('vFrame');
+  vFrame.classList.toggle('hide-marks', !state.viewerMarks);
+  document.getElementById('vPlayBtn').hidden = !isAnim;
+  document.getElementById('vProg').hidden = !isAnim;
+
+  document.getElementById('vRawCap').innerHTML = `Raw prompt · <b>${rawClutter}% clutter</b>`;
+  document.getElementById('vSimpleCap').innerHTML = `Simple prompt · <b>${simpleClutter}% clutter</b>`;
+
+  // Effort Switcher inside Viewer
+  const vEfforts = document.getElementById('vEfforts');
+  vEfforts.innerHTML = m.efforts.map(e => `
+    <button class="${e.id === eff.id ? 'on' : ''}" data-e="${e.id}">${e.label}<small>${e.raw}%</small></button>
+  `).join('');
+
+  vEfforts.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.viewerEffortId = btn.dataset.e;
+      renderViewerContent();
+    });
+  });
+
+  document.getElementById('vInfo').innerHTML = `
+    <span>Avg cost: <b>${formatCost(eff.cost)}</b></span>
+    <span>Avg time: <b>${formatDuration(eff.time)}</b></span>
+    <span>Gap: <b>${rawClutter - simpleClutter} pts</b></span>
+  `;
+
+  document.getElementById('vCount').textContent = `${state.viewerIndex + 1} of ${state.viewerItems.length}`;
+  updateSplitSlider('v', state.viewerSplit);
+}
+
+// ============================================================================
+// INITIALIZATION & EVENT LISTENERS
+// ============================================================================
+document.addEventListener('DOMContentLoaded', () => {
+  // Top nav mode tabs
+  document.querySelectorAll('.nav-tab').forEach(tab => {
+    tab.addEventListener('click', () => setMode(tab.dataset.mode));
+  });
+
+  document.getElementById('switchModeBanner').addEventListener('click', () => {
+    setMode(state.mode === 'still' ? 'anim' : 'still');
+  });
+
+  // Hero Marks toggle & Expand
+  document.getElementById('heroMarksToggle').addEventListener('change', (e) => {
+    state.heroMarks = e.target.checked;
+    document.getElementById('heroFrame').classList.toggle('hide-marks', !state.heroMarks);
+  });
+
+  document.getElementById('heroExpandBtn').addEventListener('click', () => {
+    const idx = state.viewerItems.findIndex(it => it.model.id === state.modelId && it.post.id === state.postId);
+    openViewer(idx >= 0 ? idx : 0);
+  });
+
+  // Animation Play/Pause ticker
+  const togglePlay = () => {
+    state.playing = !state.playing;
+    const d = state.playing
+      ? 'M7 5h3.5v14H7zM13.5 5H17v14h-3.5z'
+      : 'M8 5l11 7-11 7z';
+    document.getElementById('playIconPath').setAttribute('d', d);
+    document.getElementById('vPlayIconPath').setAttribute('d', d);
+  };
+  document.getElementById('heroPlayBtn').addEventListener('click', togglePlay);
+  document.getElementById('vPlayBtn').addEventListener('click', togglePlay);
+
+  setInterval(() => {
+    if (state.mode === 'anim' && state.playing) {
+      state.animProgress = (state.animProgress + 1.25) % 100;
+      document.getElementById('heroProg').style.width = `${state.animProgress}%`;
+      document.getElementById('vProg').style.width = `${state.animProgress}%`;
+    }
+  }, 100);
+
+  // Split Sliders
+  bindSplitSlider('heroFrame', 'hero', () => state.splitPct, v => state.splitPct = v);
+  bindSplitSlider('vFrame', 'v', () => state.viewerSplit, v => state.viewerSplit = v);
+
+  // Leaderboard All/Best Efforts Toggle
+  document.querySelectorAll('#boardEffortsSeg button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.boardAllEfforts = btn.dataset.all === 'true';
+      document.querySelectorAll('#boardEffortsSeg button').forEach(b => b.classList.toggle('on', b === btn));
+      renderLeaderboard();
+    });
+  });
+
+  // Cost & Time Controls
+  document.querySelectorAll('#costVariant button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.costVariant = btn.dataset.v;
+      document.querySelectorAll('#costVariant button').forEach(b => b.classList.toggle('on', b === btn));
+      renderCostAndTime();
+    });
+  });
+
+  document.querySelectorAll('#costEffort button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.costAllEfforts = btn.dataset.all === 'true';
+      document.querySelectorAll('#costEffort button').forEach(b => b.classList.toggle('on', b === btn));
+      renderCostAndTime();
+    });
+  });
+
+  // Explore Bar Controls
+  document.querySelectorAll('#xPromptSeg button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.xVariant = btn.dataset.val;
+      document.querySelectorAll('#xPromptSeg button').forEach(b => b.classList.toggle('on', b === btn));
+      renderExplore();
+    });
+  });
+
+  document.querySelectorAll('#xGroupSeg button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.xGroup = btn.dataset.val;
+      document.querySelectorAll('#xGroupSeg button').forEach(b => b.classList.toggle('on', b === btn));
+      renderExplore();
+    });
+  });
+
+  document.querySelectorAll('#xEffortSeg button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.xAllEfforts = btn.dataset.all === 'true';
+      document.querySelectorAll('#xEffortSeg button').forEach(b => b.classList.toggle('on', b === btn));
+      renderExplore();
+    });
+  });
+
+  document.querySelectorAll('#xSizeSeg button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.xSize = btn.dataset.val;
+      document.querySelectorAll('#xSizeSeg button').forEach(b => b.classList.toggle('on', b === btn));
+      renderExplore();
+    });
+  });
+
+  document.getElementById('xMarksToggle').addEventListener('change', (e) => {
+    state.xMarks = e.target.checked;
+    document.querySelectorAll('#grid .th').forEach(th => th.classList.toggle('hide-marks', !state.xMarks));
+  });
+
+  // Modals & Keyboard Nav
+  document.getElementById('modalClose').addEventListener('click', () => document.getElementById('modal').close());
+  document.getElementById('viewerClose').addEventListener('click', () => document.getElementById('viewer').close());
+
+  document.getElementById('vMarksToggle').addEventListener('change', (e) => {
+    state.viewerMarks = e.target.checked;
+    document.getElementById('vFrame').classList.toggle('hide-marks', !state.viewerMarks);
+  });
+
+  const prevViewer = () => openViewer(state.viewerIndex - 1);
+  const nextViewer = () => openViewer(state.viewerIndex + 1);
+  document.getElementById('vPrev').addEventListener('click', prevViewer);
+  document.getElementById('vNext').addEventListener('click', nextViewer);
+  document.getElementById('vPrevFoot').addEventListener('click', prevViewer);
+  document.getElementById('vNextFoot').addEventListener('click', nextViewer);
+
+  document.addEventListener('keydown', (e) => {
+    const viewer = document.getElementById('viewer');
+    if (viewer.open) {
+      if (e.key === 'ArrowLeft') prevViewer();
+      if (e.key === 'ArrowRight') nextViewer();
+    }
+  });
+
+  // Email Signup Form (Animations Beta view)
+  document.getElementById('signup').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const emailInput = document.getElementById('email');
+    const noteEl = document.getElementById('note');
+    if (!emailInput.value || !emailInput.value.includes('@')) {
+      noteEl.textContent = 'Please enter a valid email address.';
+      noteEl.style.color = 'var(--red)';
+      return;
+    }
+    noteEl.textContent = `Thanks! ${emailInput.value} is on the list for ranking upcoming benchmarks.`;
+    noteEl.style.color = 'var(--blue)';
+    emailInput.value = '';
+  });
+
+  // Global Floating Tooltip for [data-tip]
+  const tipEl = document.getElementById('floatingTip');
+  document.addEventListener('mouseover', (e) => {
+    const target = e.target.closest('[data-tip]');
+    if (!target || !target.dataset.tip) {
+      tipEl.hidden = true;
+      return;
+    }
+    tipEl.textContent = target.dataset.tip;
+    tipEl.hidden = false;
+    const rect = target.getBoundingClientRect();
+    tipEl.style.left = `${rect.left + rect.width / 2}px`;
+    tipEl.style.top = `${rect.top}px`;
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    if (e.target.closest('[data-tip]')) tipEl.hidden = true;
+  });
+
+  // Initial Render
+  setMode('still');
+});
+</script>
+</body>
+</html>
