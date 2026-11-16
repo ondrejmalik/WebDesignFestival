@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   guard:
-    name: Smoke + language tests (changed designs)
+    name: Smoke + language + Playwright E2E tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -24,12 +24,31 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Guard changed designs (PR) / all designs (manual)
+          cache: 'npm'
+      - name: Install test dependencies
+        run: npm ci
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Guard designs & run Playwright E2E
         run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            node tests/guard.js --changed origin/${{ github.base_ref }}
-          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            node tests/e2e/run-e2e.js --root --fast
             node tests/guard.js --all
           else
-            node tests/guard.js --changed HEAD~1
+            if [ "${{ github.event_name }}" = "pull_request" ]; then
+              BASE_REF="origin/${{ github.base_ref }}"
+              CHANGED=$(git diff --name-only "$BASE_REF...HEAD")
+            else
+              BASE_REF="HEAD~1"
+              CHANGED=$(git diff --name-only HEAD~1..HEAD)
+            fi
+            if echo "$CHANGED" | grep -qE '^shared/'; then
+              node tests/e2e/run-e2e.js --root --fast
+              node tests/guard.js --all
+            else
+              if echo "$CHANGED" | grep -qE '^(index\.html|tests/|package(-lock)?\.json|\.github/workflows/ci\.yml)'; then
+                node tests/e2e/run-e2e.js --root --fast
+              fi
+              node tests/guard.js --changed "$BASE_REF"
+            fi
           fi
