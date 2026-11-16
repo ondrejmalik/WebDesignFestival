@@ -113,15 +113,14 @@
 
   function formatCzPlural(n, one, few, many) {
   const abs = Math.abs(Number(n)) || 0;
+  if (Array.isArray(one)) {
+    const word = abs === 1 ? one[0] : (abs >= 2 && abs <= 4 ? one[1] : one[2]);
+    return abs + " " + word;
+  }
   if (abs === 1) return one;
   if (abs >= 2 && abs <= 4) return few;
   return many;
 }
-    if (n >= 2 && n <= 4) {
-      return n + " " + tuple[1];
-    }
-    return n + " " + tuple[2];
-  }
 
   function formatSetCount(count, lang) {
     if (lang === "cs") {
