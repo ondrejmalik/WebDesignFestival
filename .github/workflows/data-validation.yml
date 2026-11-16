@@ -1,0 +1,41 @@
+name: Validate Data
+
+on:
+  pull_request:
+    paths:
+      - 'data/**'
+      - '.github/workflows/data-validation.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'data/**'
+      - '.github/workflows/data-validation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate JSON & XML data
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate data/artists.json
+        run: |
+          if [ -f data/artists.json ]; then
+            node -e "JSON.parse(require('fs').readFileSync('data/artists.json', 'utf8'))"
+            echo "data/artists.json is valid JSON"
+          else
+            echo "data/artists.json not found, skipping"
+          fi
+
+      - name: Validate data/festival.xml
+        run: |
+          if [ -f data/festival.xml ]; then
+            python3 -c "import xml.etree.ElementTree as ET; ET.parse('data/festival.xml')"
+            echo "data/festival.xml is well-formed XML"
+          else
+            echo "data/festival.xml not found, skipping"
+          fi
