@@ -1,0 +1,113 @@
+<!-- v2/search.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search - Festival of Darkness 2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/lang.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="Festival of Darkness 2">
+        <span class="brand-mark"></span>
+        <span class="brand-name">Festival of Darkness 2</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html" class="nav-link" data-i18n="nav.home">Overview</a>
+        <a href="program.html" class="nav-link" data-i18n="nav.program">Program</a>
+        <button type="button" class="lang-toggle" id="lang-toggle" onclick="toggleFestivalLang()" aria-label="Switch language">CZ</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <h1 class="pixel-h1">Search Festival</h1>
+        <p class="hero-lead">Search across artists, stages, timetable slots, and practical information.</p>
+        
+        <div style="margin-top: 24px; max-width: 600px;">
+          <input type="search" placeholder="Type artist name, genre, or stage..." style="width: 100%; padding: 12px 16px; font-size: 16px; font-family: var(--font-sans); background-color: var(--bg-card); border: 1px solid var(--border-strong); border-radius: var(--radius-sm); color: var(--ink-primary); outline: none;" />
+        </div>
+
+        <div class="day-jump-bar" style="margin-top: 16px;">
+          <button type="button" class="jump-pill" style="cursor: pointer; background-color: var(--ink-primary); color: var(--bg-canvas); border-color: var(--ink-primary);">All</button>
+          <button type="button" class="jump-pill" style="cursor: pointer;">Artists</button>
+          <button type="button" class="jump-pill" style="cursor: pointer;">Stages</button>
+          <button type="button" class="jump-pill" style="cursor: pointer;">Info</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Search Results</h2>
+          <p class="section-desc">Showing sample static matches for the festival program.</p>
+        </div>
+
+        <div class="highlights-grid">
+          <article class="vault-card highlight-card">
+            <div class="highlight-meta">
+              <span class="day-badge" data-i18n="days.friShort">Fri 10 Jul</span>
+              <span class="time-stamp">23:30 - 00:45</span>
+            </div>
+            <h3 class="card-title">
+              <a href="artist-detail.html?id=perf-09" class="text-link">Starlight Odyssey</a>
+            </h3>
+            <p class="genre-line">Electronic Indie (FR)</p>
+            <p class="stage-line"><a href="stages.html#solar" class="text-link">Solar Horizon Stage</a></p>
+          </article>
+
+          <article class="vault-card highlight-card">
+            <div class="highlight-meta">
+              <span class="day-badge" data-i18n="days.friShort">Fri 10 Jul</span>
+              <span class="time-stamp">22:30 - 23:50</span>
+            </div>
+            <h3 class="card-title">
+              <a href="artist-detail.html?id=perf-17" class="text-link">Modular Horizon</a>
+            </h3>
+            <p class="genre-line">Live Hardware Techno (DE)</p>
+            <p class="stage-line"><a href="stages.html#lunar" class="text-link">Lunar Forest Dome</a></p>
+          </article>
+
+          <article class="vault-card highlight-card">
+            <div class="highlight-meta">
+              <span class="day-badge" data-i18n="days.satShort">Sat 11 Jul</span>
+              <span class="time-stamp">23:10 - 00:25</span>
+            </div>
+            <h3 class="card-title">
+              <a href="artist-detail.html?id=perf-29" class="text-link">Vortex Motion</a>
+            </h3>
+            <p class="genre-line">Nu-Electro (UK)</p>
+            <p class="stage-line"><a href="stages.html#solar" class="text-link">Solar Horizon Stage</a></p>
+          </article>
+        </div>
+
+        <div class="section-cta-row">
+          <a href="program.html" class="btn-primary" data-i18n="highlights.allSets">Browse Complete 3-Day Program</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <span class="footer-brand">Festival of Darkness 2</span>
+        <p class="footer-copy" data-i18n="footer.location">Kutna Hora, Czech Republic - 10-12 July 2026</p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html" data-i18n="nav.home">Overview</a>
+        <a href="program.html" data-i18n="nav.program">Program</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

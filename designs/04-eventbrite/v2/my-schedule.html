@@ -1,0 +1,592 @@
+<!-- v2/my-schedule.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Schedule | Festival of Darkness 2 — Kutná Hora, 10–12 Jul 2026</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/lang.js" defer></script>
+</head>
+<body>
+  <header class="eb-header">
+    <div class="eb-container eb-header-inner">
+      <a href="index.html" class="eb-logo" aria-label="Festival of Darkness 2 Home">
+        <span class="eb-logo-mark">eb</span>
+        <span class="eb-logo-text" data-i18n="brand.short">Festival of Darkness 2</span>
+      </a>
+      <nav class="eb-nav" aria-label="Primary Navigation">
+        <a href="index.html" class="eb-nav-link" data-i18n="nav.overview">Event Overview</a>
+        <a href="program.html" class="eb-nav-link" data-i18n="nav.program">Lineup & Schedule</a>
+        <a href="artists.html" class="eb-nav-link">Artists</a>
+        <a href="stages.html" class="eb-nav-link">Stages</a>
+        <a href="my-schedule.html" class="eb-nav-link is-active">My Schedule</a>
+        <a href="practical-info.html" class="eb-nav-link">Practical Info</a>
+        <a href="search.html" class="eb-nav-link">Search</a>
+      </nav>
+      <div class="eb-header-actions">
+        <button type="button" id="lang-toggle" class="eb-lang-btn" onclick="toggleFestivalLang()" aria-label="Switch language">
+          CZ / EN
+        </button>
+        <a href="index.html#tickets-rail" class="eb-btn eb-btn-primary eb-btn-sm" data-i18n="nav.tickets">Get Tickets</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="eb-program-hero">
+      <div class="eb-container">
+        <nav class="eb-breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html" data-i18n="nav.overview">Event Overview</a>
+          <span aria-hidden="true">/</span>
+          <span>My Schedule</span>
+        </nav>
+        <h1 class="eb-page-title">My Personal Schedule</h1>
+        <p class="eb-page-subtitle">
+          Saved sets synced with your browser • Automatic stage overlap & collision check across Kutná Hora
+        </p>
+        <div class="eb-jump-bar" aria-label="Jump to festival day">
+          <a href="#my-day-1" class="eb-jump-pill" data-i18n="program.jump_day1">Friday, 10 Jul</a>
+          <a href="#my-day-2" class="eb-jump-pill" data-i18n="program.jump_day2">Saturday, 11 Jul</a>
+          <a href="#my-day-3" class="eb-jump-pill" data-i18n="program.jump_day3">Sunday, 12 Jul</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="eb-main-layout">
+      <div class="eb-container eb-two-col">
+        <div class="eb-content-col">
+          <div class="eb-organizer-bar">
+            <div class="eb-organizer-id">
+              <div class="eb-org-avatar" aria-hidden="true">★</div>
+              <div>
+                <p class="eb-org-label">
+                  <strong id="saved-count-heading">6 Saved Sets Selected</strong>
+                </p>
+                <p class="eb-org-meta" id="saved-mode-note">
+                  Showing curated preview • Add or remove sets below to customize your itinerary
+                </p>
+              </div>
+            </div>
+            <div class="eb-header-actions">
+              <button type="button" id="btn-load-sample" class="eb-btn eb-btn-outline eb-btn-sm">Load Sample Plan</button>
+              <button type="button" id="btn-clear-saved" class="eb-btn eb-btn-outline eb-btn-sm">Clear All</button>
+            </div>
+          </div>
+
+          <div class="eb-highlights-strip" id="conflict-banner" role="status" aria-live="polite">
+            <div class="eb-highlight-chip">
+              <span class="eb-chip-icon" aria-hidden="true">✓</span>
+              <span id="conflict-status-text">Collision-free timetable: 0 overlapping sets detected</span>
+            </div>
+            <div class="eb-highlight-chip">
+              <span class="eb-chip-icon" aria-hidden="true">🚶</span>
+              <span>4 min walk between Solar Horizon Stage & Lunar Forest Dome</span>
+            </div>
+          </div>
+
+          <div id="empty-schedule-box" class="eb-stage-card" hidden>
+            <h2 class="eb-stage-name">Your personal schedule is empty</h2>
+            <p class="eb-stage-desc">
+              No sets are currently saved in your browser. Browse the 3-day timetable or artists directory to star sets, or load a sample collision-free weekend route.
+            </p>
+            <div class="eb-highlights-strip">
+              <a href="program.html" class="eb-btn eb-btn-primary eb-btn-sm" data-i18n="org.view_schedule">Full Timetable</a>
+              <a href="artists.html" class="eb-btn eb-btn-outline eb-btn-sm">Browse All 60 Artists</a>
+            </div>
+          </div>
+
+          <section id="my-day-1" class="eb-day-block" aria-labelledby="my-day1-heading">
+            <div class="eb-day-header">
+              <div>
+                <span class="eb-day-eyebrow" data-i18n="program.day1_tag">Day 1</span>
+                <h2 id="my-day1-heading" class="eb-day-heading" data-i18n="program.day1_heading">Friday, July 10, 2026</h2>
+              </div>
+              <span class="eb-count-pill" id="day1-count-pill">2 sets</span>
+            </div>
+            <div class="eb-schedule-table" id="day1-list">
+              <article class="eb-schedule-card" data-perf-id="perf-05">
+                <div class="eb-sch-time">
+                  <span class="eb-time-range">18:15 – 19:05</span>
+                  <span class="eb-stage-pill eb-tag-solar" data-i18n="stages.solar_name">Solar Horizon Stage</span>
+                </div>
+                <div>
+                  <h3 class="eb-sch-artist"><a href="artist-detail.html?id=perf-05">Prague Synth Collective</a></h3>
+                  <p class="eb-sch-genre">Synthpop • No stage conflict</p>
+                </div>
+                <div class="eb-header-actions">
+                  <span class="eb-origin-badge">CZ</span>
+                  <button type="button" class="eb-btn eb-btn-outline eb-btn-sm js-toggle-fav" data-id="perf-05" aria-pressed="true">Remove</button>
+                </div>
+              </article>
+
+              <article class="eb-schedule-card" data-perf-id="perf-08">
+                <div class="eb-sch-time">
+                  <span class="eb-time-range">22:00 – 23:10</span>
+                  <span class="eb-stage-pill eb-tag-solar" data-i18n="stages.solar_name">Solar Horizon Stage</span>
+                </div>
+                <div>
+                  <h3 class="eb-sch-artist"><a href="artist-detail.html?id=perf-08">Solar Flare</a></h3>
+                  <p class="eb-sch-genre">Nu-Disco / Funk • No stage conflict</p>
+                </div>
+                <div class="eb-header-actions">
+                  <span class="eb-origin-badge">DE</span>
+                  <button type="button" class="eb-btn eb-btn-outline eb-btn-sm js-toggle-fav" data-id="perf-08" aria-pressed="true">Remove</button>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section id="my-day-2" class="eb-day-block" aria-labelledby="my-day2-heading">
+            <div class="eb-day-header">
+              <div>
+                <span class="eb-day-eyebrow" data-i18n="program.day2_tag">Day 2</span>
+                <h2 id="my-day2-heading" class="eb-day-heading" data-i18n="program.day2_heading">Saturday, July 11, 2026</h2>
+              </div>
+              <span class="eb-count-pill" id="day2-count-pill">2 sets</span>
+            </div>
+            <div class="eb-schedule-table" id="day2-list">
+              <article class="eb-schedule-card" data-perf-id="perf-35">
+                <div class="eb-sch-time">
+                  <span class="eb-time-range">19:15 – 20:15</span>
+                  <span class="eb-stage-pill eb-tag-lunar" data-i18n="stages.lunar_name">Lunar Forest Dome</span>
+                </div>
+                <div>
+                  <h3 class="eb-sch-artist"><a href="artist-detail.html?id=perf-35">Monolith Audio</a></h3>
+                  <p class="eb-sch-genre">Peak Time Techno • No stage conflict</p>
+                </div>
+                <div class="eb-header-actions">
+                  <span class="eb-origin-badge">DE</span>
+                  <button type="button" class="eb-btn eb-btn-outline eb-btn-sm js-toggle-fav" data-id="perf-35" aria-pressed="true">Remove</button>
+                </div>
+              </article>
+
+              <article class="eb-schedule-card" data-perf-id="perf-29">
+                <div class="eb-sch-time">
+                  <span class="eb-time-range">23:10 – 00:25</span>
+                  <span class="eb-stage-pill eb-tag-solar" data-i18n="stages.solar_name">Solar Horizon Stage</span>
+                </div>
+                <div>
+                  <h3 class="eb-sch-artist"><a href="artist-detail.html?id=perf-29">Vortex Motion</a></h3>
+                  <p class="eb-sch-genre">Nu-Electro • No stage conflict</p>
+                </div>
+                <div class="eb-header-actions">
+                  <span class="eb-origin-badge">UK</span>
+                  <button type="button" class="eb-btn eb-btn-outline eb-btn-sm js-toggle-fav" data-id="perf-29" aria-pressed="true">Remove</button>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section id="my-day-3" class="eb-day-block" aria-labelledby="my-day3-heading">
+            <div class="eb-day-header">
+              <div>
+                <span class="eb-day-eyebrow" data-i18n="program.day3_tag">Day 3</span>
+                <h2 id="my-day3-heading" class="eb-day-heading" data-i18n="program.day3_heading">Sunday, July 12, 2026</h2>
+              </div>
+              <span class="eb-count-pill" id="day3-count-pill">2 sets</span>
+            </div>
+            <div class="eb-schedule-table" id="day3-list">
+              <article class="eb-schedule-card" data-perf-id="perf-56">
+                <div class="eb-sch-time">
+                  <span class="eb-time-range">20:00 – 21:15</span>
+                  <span class="eb-stage-pill eb-tag-lunar" data-i18n="stages.lunar_name">Lunar Forest Dome</span>
+                </div>
+                <div>
+                  <h3 class="eb-sch-artist"><a href="artist-detail.html?id=perf-56">Hyperspace DJ</a></h3>
+                  <p class="eb-sch-genre">Psy Techno • No stage conflict</p>
+                </div>
+                <div class="eb-header-actions">
+                  <span class="eb-origin-badge">IL</span>
+                  <button type="button" class="eb-btn eb-btn-outline eb-btn-sm js-toggle-fav" data-id="perf-56" aria-pressed="true">Remove</button>
+                </div>
+              </article>
+
+              <article class="eb-schedule-card" data-perf-id="perf-49">
+                <div class="eb-sch-time">
+                  <span class="eb-time-range">22:35 – 23:55</span>
+                  <span class="eb-stage-pill eb-tag-solar" data-i18n="stages.solar_name">Solar Horizon Stage</span>
+                </div>
+                <div>
+                  <h3 class="eb-sch-artist"><a href="artist-detail.html?id=perf-49">Starlight Runners</a></h3>
+                  <p class="eb-sch-genre">Electropop Headliner • No stage conflict</p>
+                </div>
+                <div class="eb-header-actions">
+                  <span class="eb-origin-badge">DK</span>
+                  <button type="button" class="eb-btn eb-btn-outline eb-btn-sm js-toggle-fav" data-id="perf-49" aria-pressed="true">Remove</button>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section class="eb-section-block" aria-labelledby="quick-add-heading">
+            <div class="eb-section-head-row">
+              <h2 id="quick-add-heading" class="eb-section-title">Quick-Add Recommended Sets</h2>
+              <a href="program.html" class="eb-text-link" data-i18n="featured.see_all">See full 3-day schedule</a>
+            </div>
+            <div class="eb-featured-list" id="quick-add-list">
+              <div class="eb-slot-row">
+                <div class="eb-slot-time">
+                  <span class="eb-slot-day" data-i18n="day.fri_short">Fri 10 Jul</span>
+                  <strong>22:30 – 23:50</strong>
+                </div>
+                <div class="eb-slot-info">
+                  <h3 class="eb-slot-artist"><a href="artist-detail.html?id=perf-17">Modular Horizon</a></h3>
+                  <p class="eb-slot-meta">Live Hardware Techno (DE) • <span data-i18n="stages.lunar_name">Lunar Forest Dome</span></p>
+                </div>
+                <button type="button" class="eb-btn eb-btn-outline eb-btn-sm js-toggle-fav" data-id="perf-17" aria-pressed="false">+ Save</button>
+              </div>
+
+              <div class="eb-slot-row">
+                <div class="eb-slot-time">
+                  <span class="eb-slot-day" data-i18n="day.sat_short">Sat 11 Jul</span>
+                  <strong>22:00 – 23:20</strong>
+                </div>
+                <div class="eb-slot-info">
+                  <h3 class="eb-slot-artist"><a href="artist-detail.html?id=perf-37">Shadowplay DJ</a></h3>
+                  <p class="eb-slot-meta">Dark Wave Techno (CZ) • <span data-i18n="stages.lunar_name">Lunar Forest Dome</span></p>
+                </div>
+                <button type="button" class="eb-btn eb-btn-outline eb-btn-sm js-toggle-fav" data-id="perf-37" aria-pressed="false">+ Save</button>
+              </div>
+
+              <div class="eb-slot-row">
+                <div class="eb-slot-time">
+                  <span class="eb-slot-day" data-i18n="day.sun_short">Sun 12 Jul</span>
+                  <strong>00:10 – 01:15</strong>
+                </div>
+                <div class="eb-slot-info">
+                  <h3 class="eb-slot-artist"><a href="artist-detail.html?id=perf-50">Final Cascade</a></h3>
+                  <p class="eb-slot-meta">Orchestral Electronic (CZ) • <span data-i18n="stages.solar_name">Solar Horizon Stage</span></p>
+                </div>
+                <button type="button" class="eb-btn eb-btn-outline eb-btn-sm js-toggle-fav" data-id="perf-50" aria-pressed="false">+ Save</button>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <aside class="eb-sidebar-col" aria-label="Schedule Summary & Export">
+          <div class="eb-ticket-box">
+            <div class="eb-ticket-box-header">
+              <span class="eb-ticket-status" id="sidebar-status-badge">✓ Collision-Free Route</span>
+              <p class="eb-ticket-price-range" id="sidebar-summary-title">6 Sets Across 3 Days</p>
+            </div>
+
+            <div class="eb-ticket-tiers">
+              <div class="eb-tier-item">
+                <div>
+                  <p class="eb-tier-name" data-i18n="stages.solar_name">Solar Horizon Stage</p>
+                  <p class="eb-tier-sub" data-i18n="stages.solar_type">Open-air main stage</p>
+                </div>
+                <span class="eb-tier-price" id="solar-stat-count">4 sets</span>
+              </div>
+              <div class="eb-tier-item">
+                <div>
+                  <p class="eb-tier-name" data-i18n="stages.lunar_name">Lunar Forest Dome</p>
+                  <p class="eb-tier-sub" data-i18n="stages.lunar_type">Covered audiovisual dome</p>
+                </div>
+                <span class="eb-tier-price" id="lunar-stat-count">2 sets</span>
+              </div>
+              <div class="eb-tier-item">
+                <div>
+                  <p class="eb-tier-name">Time Overlaps</p>
+                  <p class="eb-tier-sub">Simultaneous sets on two stages</p>
+                </div>
+                <span class="eb-tier-price" id="overlap-stat-count">0 conflicts</span>
+              </div>
+            </div>
+
+            <a href="program.html" class="eb-btn eb-btn-primary eb-btn-block" data-i18n="org.view_schedule">Full Timetable</a>
+            <p class="eb-ticket-footnote">Saved automatically in browser storage (festival_favorites)</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="eb-footer">
+    <div class="eb-container eb-footer-inner">
+      <div>
+        <p class="eb-footer-brand">Festival of Darkness 2</p>
+        <p class="eb-footer-copy" data-i18n="footer.location">Kutná Hora, Czech Republic • 10–12 July 2026</p>
+      </div>
+      <div class="eb-footer-links">
+        <a href="index.html" data-i18n="nav.overview">Event Overview</a>
+        <a href="program.html" data-i18n="nav.program">Lineup & Schedule</a>
+        <a href="artists.html">Artists</a>
+        <a href="stages.html">Stages</a>
+        <a href="practical-info.html">Practical Info</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const STORAGE_KEY = "festival_favorites";
+      const DEFAULT_PREVIEW_IDS = ["perf-05", "perf-08", "perf-35", "perf-29", "perf-56", "perf-49"];
+
+      const SETS_DATA = [
+        { id: "perf-01", name: "Echoes of Light", genre: "Post-Rock / Ambient", origin: "CZ", day: 1, start: "14:00", end: "14:45", stage: "solar" },
+        { id: "perf-02", name: "Velvet Morning", genre: "Dream Pop", origin: "SK", day: 1, start: "15:00", end: "15:45", stage: "solar" },
+        { id: "perf-03", name: "Nordic Wave", genre: "Indie Rock", origin: "SE", day: 1, start: "16:00", end: "16:50", stage: "solar" },
+        { id: "perf-04", name: "The Daylight Project", genre: "Indie Pop", origin: "CZ", day: 1, start: "17:05", end: "17:55", stage: "solar" },
+        { id: "perf-05", name: "Prague Synth Collective", genre: "Synthpop", origin: "CZ", day: 1, start: "18:15", end: "19:05", stage: "solar" },
+        { id: "perf-06", name: "Electric Meadow", genre: "Electro-Folk", origin: "AT", day: 1, start: "19:25", end: "20:20", stage: "solar" },
+        { id: "perf-07", name: "Mirage Horizon", genre: "Alternative Rock", origin: "UK", day: 1, start: "20:40", end: "21:40", stage: "solar" },
+        { id: "perf-08", name: "Solar Flare", genre: "Nu-Disco / Funk", origin: "DE", day: 1, start: "22:00", end: "23:10", stage: "solar" },
+        { id: "perf-09", name: "Starlight Odyssey", genre: "Electronic Indie", origin: "FR", day: 1, start: "23:30", end: "00:45", stage: "solar" },
+        { id: "perf-10", name: "Midnight Pulse", genre: "Electro Rock", origin: "CZ", day: 1, start: "01:00", end: "02:00", stage: "solar" },
+        { id: "perf-11", name: "Subtle Resonances", genre: "Modular Ambient", origin: "CZ", day: 1, start: "15:00", end: "15:50", stage: "lunar" },
+        { id: "perf-12", name: "Binary Fields", genre: "IDM / Glitch", origin: "PL", day: 1, start: "16:05", end: "17:00", stage: "lunar" },
+        { id: "perf-13", name: "Deep Texture", genre: "Dub Techno", origin: "DE", day: 1, start: "17:15", end: "18:15", stage: "lunar" },
+        { id: "perf-14", name: "Oscillator Shift", genre: "Minimal Techno", origin: "CZ", day: 1, start: "18:30", end: "19:30", stage: "lunar" },
+        { id: "perf-15", name: "Echo Chamber", genre: "Dark Ambient", origin: "SK", day: 1, start: "19:45", end: "20:45", stage: "lunar" },
+        { id: "perf-16", name: "Krypton DJ", genre: "Hypnotic Techno", origin: "HU", day: 1, start: "21:00", end: "22:15", stage: "lunar" },
+        { id: "perf-17", name: "Modular Horizon", genre: "Live Hardware Techno", origin: "DE", day: 1, start: "22:30", end: "23:50", stage: "lunar" },
+        { id: "perf-18", name: "Analog Void", genre: "Industrial Techno", origin: "NL", day: 1, start: "00:05", end: "01:25", stage: "lunar" },
+        { id: "perf-19", name: "Frequency 404", genre: "Raw Acid Techno", origin: "UK", day: 1, start: "01:40", end: "03:00", stage: "lunar" },
+        { id: "perf-20", name: "Dawn Ritual", genre: "Atmospheric Ambient", origin: "CZ", day: 1, start: "03:10", end: "04:00", stage: "lunar" },
+        { id: "perf-21", name: "Sunburst Trio", genre: "Acoustic Indie", origin: "CZ", day: 2, start: "13:30", end: "14:15", stage: "solar" },
+        { id: "perf-22", name: "Coastline Drift", genre: "Surf Rock", origin: "ES", day: 2, start: "14:30", end: "15:15", stage: "solar" },
+        { id: "perf-23", name: "The Urban Poets", genre: "Indie Soul", origin: "UK", day: 2, start: "15:30", end: "16:20", stage: "solar" },
+        { id: "perf-24", name: "Neon Youth", genre: "Indie Pop", origin: "SK", day: 2, start: "16:35", end: "17:25", stage: "solar" },
+        { id: "perf-25", name: "Silver Tides", genre: "Shoegaze", origin: "CZ", day: 2, start: "17:45", end: "18:40", stage: "solar" },
+        { id: "perf-26", name: "Horizon Glow", genre: "Electronic Pop", origin: "SE", day: 2, start: "19:00", end: "20:00", stage: "solar" },
+        { id: "perf-27", name: "Wild Horizon", genre: "Post-Punk Revival", origin: "DE", day: 2, start: "20:20", end: "21:20", stage: "solar" },
+        { id: "perf-28", name: "Magnetic River", genre: "Indie Dance", origin: "FR", day: 2, start: "21:40", end: "22:50", stage: "solar" },
+        { id: "perf-29", name: "Vortex Motion", genre: "Nu-Electro", origin: "UK", day: 2, start: "23:10", end: "00:25", stage: "solar" },
+        { id: "perf-30", name: "Aura Soundsystem", genre: "Progressive Dance", origin: "CZ", day: 2, start: "00:45", end: "02:00", stage: "solar" },
+        { id: "perf-31", name: "Dronescape", genre: "Drone Music", origin: "CZ", day: 2, start: "14:30", end: "15:20", stage: "lunar" },
+        { id: "perf-32", name: "Glitch Garden", genre: "Microhouse", origin: "AT", day: 2, start: "15:35", end: "16:30", stage: "lunar" },
+        { id: "perf-33", name: "Forest Whispers", genre: "Organic House", origin: "SK", day: 2, start: "16:45", end: "17:45", stage: "lunar" },
+        { id: "perf-34", name: "Low Frequency Unit", genre: "Deep Dubstep", origin: "UK", day: 2, start: "18:00", end: "19:00", stage: "lunar" },
+        { id: "perf-35", name: "Monolith Audio", genre: "Peak Time Techno", origin: "DE", day: 2, start: "19:15", end: "20:15", stage: "lunar" },
+        { id: "perf-36", name: "Sine Wave Syndicate", genre: "Electro Techno", origin: "FR", day: 2, start: "20:30", end: "21:45", stage: "lunar" },
+        { id: "perf-37", name: "Shadowplay DJ", genre: "Dark Wave Techno", origin: "CZ", day: 2, start: "22:00", end: "23:20", stage: "lunar" },
+        { id: "perf-38", name: "Circuit Overload", genre: "Hard Techno", origin: "PL", day: 2, start: "23:35", end: "00:55", stage: "lunar" },
+        { id: "perf-39", name: "Neural Network Live", genre: "Acid Techno", origin: "BE", day: 2, start: "01:10", end: "02:30", stage: "lunar" },
+        { id: "perf-40", name: "Solar Wind", genre: "Chillout Ambient", origin: "CZ", day: 2, start: "02:40", end: "04:00", stage: "lunar" },
+        { id: "perf-41", name: "Morning Breeze", genre: "Folk Indie", origin: "CZ", day: 3, start: "13:00", end: "13:45", stage: "solar" },
+        { id: "perf-42", name: "Silent Pines", genre: "Chamber Pop", origin: "SK", day: 3, start: "14:00", end: "14:45", stage: "solar" },
+        { id: "perf-43", name: "Sunken Ship", genre: "Psych Rock", origin: "UK", day: 3, start: "15:00", end: "15:50", stage: "solar" },
+        { id: "perf-44", name: "Amber Boulevard", genre: "Dream Indie", origin: "DE", day: 3, start: "16:05", end: "16:55", stage: "solar" },
+        { id: "perf-45", name: "Urban Echo", genre: "Art Pop", origin: "CZ", day: 3, start: "17:15", end: "18:10", stage: "solar" },
+        { id: "perf-46", name: "Luminous Band", genre: "Indie Funk", origin: "IT", day: 3, start: "18:30", end: "19:30", stage: "solar" },
+        { id: "perf-47", name: "The Velvet Trails", genre: "Space Rock", origin: "SE", day: 3, start: "19:50", end: "20:50", stage: "solar" },
+        { id: "perf-48", name: "Prismatics", genre: "Dance Punk", origin: "UK", day: 3, start: "21:10", end: "22:15", stage: "solar" },
+        { id: "perf-49", name: "Starlight Runners", genre: "Electropop Headliner", origin: "DK", day: 3, start: "22:35", end: "23:55", stage: "solar" },
+        { id: "perf-50", name: "Final Cascade", genre: "Orchestral Electronic", origin: "CZ", day: 3, start: "00:10", end: "01:15", stage: "solar" },
+        { id: "perf-51", name: "Static Drift", genre: "Field Recording / Ambient", origin: "CZ", day: 3, start: "14:00", end: "14:50", stage: "lunar" },
+        { id: "perf-52", name: "Resonance Space", genre: "Deep Ambient", origin: "AT", day: 3, start: "15:05", end: "16:00", stage: "lunar" },
+        { id: "perf-53", name: "Tape Loop Experiment", genre: "Tape Ambient", origin: "PL", day: 3, start: "16:15", end: "17:15", stage: "lunar" },
+        { id: "perf-54", name: "Minimal Horizon", genre: "Micro Techno", origin: "DE", day: 3, start: "17:30", end: "18:30", stage: "lunar" },
+        { id: "perf-55", name: "Dark Matter", genre: "Deep Progressive", origin: "CZ", day: 3, start: "18:45", end: "19:45", stage: "lunar" },
+        { id: "perf-56", name: "Hyperspace DJ", genre: "Psy Techno", origin: "IL", day: 3, start: "20:00", end: "21:15", stage: "lunar" },
+        { id: "perf-57", name: "Galactic Orbit", genre: "Melodic Techno", origin: "IT", day: 3, start: "21:30", end: "22:45", stage: "lunar" },
+        { id: "perf-58", name: "Bass Distortion", genre: "Leftfield Bass", origin: "UK", day: 3, start: "23:00", end: "00:15", stage: "lunar" },
+        { id: "perf-59", name: "Cosmic Pulse", genre: "Uplifting Trance Techno", origin: "NL", day: 3, start: "00:30", end: "01:45", stage: "lunar" },
+        { id: "perf-60", name: "Equinox Farewell", genre: "Down-tempo Ambient", origin: "CZ", day: 3, start: "02:00", end: "03:00", stage: "lunar" }
+      ];
+
+      const SET_MAP = new Map(SETS_DATA.map((item) => [item.id, item]));
+
+      function toFestivalMinutes(timeStr) {
+        const parts = timeStr.split(":");
+        let mins = Number(parts[0]) * 60 + Number(parts[1]);
+        if (Number(parts[0]) < 8) {
+          mins += 24 * 60;
+        }
+        return mins;
+      }
+
+      function readStoredFavorites() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (raw === null) {
+            return { ids: DEFAULT_PREVIEW_IDS.slice(), isPreview: true };
+          }
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) {
+            const validIds = parsed.filter((id) => SET_MAP.has(id));
+            return { ids: Array.from(new Set(validIds)), isPreview: false };
+          }
+        } catch (err) {
+          // Ignore storage read errors
+        }
+        return { ids: DEFAULT_PREVIEW_IDS.slice(), isPreview: true };
+      }
+
+      function writeStoredFavorites(ids) {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(ids));
+        } catch (err) {
+          // Ignore storage write errors
+        }
+      }
+
+      function computeConflicts(sets) {
+        const conflictIds = new Set();
+        let pairs = 0;
+        for (let i = 0; i < sets.length; i += 1) {
+          for (let j = i + 1; j < sets.length; j += 1) {
+            if (sets[i].day !== sets[j].day) continue;
+            const s1 = toFestivalMinutes(sets[i].start);
+            const e1 = toFestivalMinutes(sets[i].end);
+            const s2 = toFestivalMinutes(sets[j].start);
+            const e2 = toFestivalMinutes(sets[j].end);
+            if (s1 < e2 && s2 < e1) {
+              conflictIds.add(sets[i].id);
+              conflictIds.add(sets[j].id);
+              pairs += 1;
+            }
+          }
+        }
+        return { conflictIds, pairs };
+      }
+
+      function escapeHtml(value) {
+        return String(value)
+          .replace(/&/g, "&")
+          .replace(/</g, "<")
+          .replace(/>/g, ">")
+          .replace(/"/g, """);
+      }
+
+      function renderSchedule() {
+        const state = readStoredFavorites();
+        const selectedSets = state.ids
+          .map((id) => SET_MAP.get(id))
+          .filter(Boolean)
+          .sort((a, b) => (a.day - b.day) || (toFestivalMinutes(a.start) - toFestivalMinutes(b.start)));
+
+        const { conflictIds, pairs } = computeConflicts(selectedSets);
+
+        const countHeading = document.getElementById("saved-count-heading");
+        const modeNote = document.getElementById("saved-mode-note");
+        const conflictText = document.getElementById("conflict-status-text");
+        const emptyBox = document.getElementById("empty-schedule-box");
+        const sidebarBadge = document.getElementById("sidebar-status-badge");
+        const sidebarTitle = document.getElementById("sidebar-summary-title");
+        const solarStat = document.getElementById("solar-stat-count");
+        const lunarStat = document.getElementById("lunar-stat-count");
+        const overlapStat = document.getElementById("overlap-stat-count");
+
+        const total = selectedSets.length;
+        const solarCount = selectedSets.filter((s) => s.stage === "solar").length;
+        const lunarCount = selectedSets.filter((s) => s.stage === "lunar").length;
+
+        if (countHeading) {
+          countHeading.textContent = total === 1 ? "1 Saved Set Selected" : `${total} Saved Sets Selected`;
+        }
+        if (modeNote) {
+          modeNote.textContent = state.isPreview
+            ? "Showing sample collision-free weekend preview • Click Save or Remove to personalize"
+            : "Synced with your browser storage • Add or remove sets anytime";
+        }
+        if (conflictText) {
+          conflictText.textContent = pairs === 0
+            ? "Collision-free timetable: 0 overlapping sets detected"
+            : `Schedule alert: ${pairs} time overlap${pairs === 1 ? "" : "s"} detected across stages`;
+        }
+        if (sidebarBadge) {
+          sidebarBadge.textContent = pairs === 0 ? "✓ Collision-Free Route" : `⚠ ${pairs} Time Overlap${pairs === 1 ? "" : "s"}`;
+        }
+        if (sidebarTitle) {
+          sidebarTitle.textContent = total === 1 ? "1 Set Planned" : `${total} Sets Planned`;
+        }
+        if (solarStat) solarStat.textContent = `${solarCount} ${solarCount === 1 ? "set" : "sets"}`;
+        if (lunarStat) lunarStat.textContent = `${lunarCount} ${lunarCount === 1 ? "set" : "sets"}`;
+        if (overlapStat) overlapStat.textContent = `${pairs} ${pairs === 1 ? "conflict" : "conflicts"}`;
+
+        if (emptyBox) {
+          emptyBox.hidden = total > 0;
+        }
+
+        [1, 2, 3].forEach((dayNum) => {
+          const daySection = document.getElementById(`my-day-${dayNum}`);
+          const listEl = document.getElementById(`day${dayNum}-list`);
+          const pillEl = document.getElementById(`day${dayNum}-count-pill`);
+          const daySets = selectedSets.filter((s) => s.day === dayNum);
+
+          if (daySection) {
+            daySection.hidden = daySets.length === 0;
+          }
+          if (pillEl) {
+            pillEl.textContent = `${daySets.length} ${daySets.length === 1 ? "set" : "sets"}`;
+          }
+          if (listEl) {
+            listEl.innerHTML = daySets.map((set) => {
+              const isSolar = set.stage === "solar";
+              const stageTagClass = isSolar ? "eb-tag-solar" : "eb-tag-lunar";
+              const stageName = isSolar ? "Solar Horizon Stage" : "Lunar Forest Dome";
+              const hasConflict = conflictIds.has(set.id);
+              const statusLine = hasConflict
+                ? `${escapeHtml(set.genre)} • Time overlap with another saved set`
+                : `${escapeHtml(set.genre)} • No stage conflict`;
+
+              return `
+                <article class="eb-schedule-card" data-perf-id="${escapeHtml(set.id)}">
+                  <div class="eb-sch-time">
+                    <span class="eb-time-range">${escapeHtml(set.start)} – ${escapeHtml(set.end)}</span>
+                    <span class="eb-stage-pill ${stageTagClass}">${stageName}</span>
+                  </div>
+                  <div>
+                    <h3 class="eb-sch-artist"><a href="artist-detail.html?id=${escapeHtml(set.id)}">${escapeHtml(set.name)}</a></h3>
+                    <p class="eb-sch-genre">${statusLine}</p>
+                  </div>
+                  <div class="eb-header-actions">
+                    <span class="eb-origin-badge">${escapeHtml(set.origin)}</span>
+                    <button type="button" class="eb-btn eb-btn-outline eb-btn-sm js-toggle-fav" data-id="${escapeHtml(set.id)}" aria-pressed="true">Remove</button>
+                  </div>
+                </article>
+              `;
+            }).join("");
+          }
+        });
+
+        const selectedSetIds = new Set(state.ids);
+        document.querySelectorAll("#quick-add-list .js-toggle-fav").forEach((btn) => {
+          const id = btn.getAttribute("data-id");
+          const saved = selectedSetIds.has(id);
+          btn.setAttribute("aria-pressed", saved ? "true" : "false");
+          btn.textContent = saved ? "Saved ✓" : "+ Save";
+        });
+      }
+
+      function toggleFavorite(perfId) {
+        if (!SET_MAP.has(perfId)) return;
+        const state = readStoredFavorites();
+        const nextIds = new Set(state.ids);
+        if (nextIds.has(perfId)) {
+          nextIds.delete(perfId);
+        } else {
+          nextIds.add(perfId);
+        }
+        writeStoredFavorites(Array.from(nextIds));
+        renderSchedule();
+      }
+
+      document.addEventListener("click", (event) => {
+        const toggleBtn = event.target.closest(".js-toggle-fav");
+        if (toggleBtn) {
+          const id = toggleBtn.getAttribute("data-id");
+          if (id) toggleFavorite(id);
+          return;
+        }
+
+        if (event.target.id === "btn-clear-saved") {
+          writeStoredFavorites([]);
+          renderSchedule();
+          return;
+        }
+
+        if (event.target.id === "btn-load-sample") {
+          writeStoredFavorites(DEFAULT_PREVIEW_IDS.slice());
+          renderSchedule();
+        }
+      });
+
+      document.addEventListener("DOMContentLoaded", renderSchedule);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!-- v2/artist-detail.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starlight Runners — Festival of Darkness 2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/lang.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" data-i18n="brand">Festival of Darkness 2</a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html" class="nav-link" data-i18n="navHome">Overview</a>
+        <a href="program.html" class="nav-link" data-i18n="navProgram">Program & Sets</a>
+        <a href="artists.html" class="nav-link active">Artists</a>
+        <button type="button" class="lang-toggle" id="lang-toggle" aria-label="Switch language">CZ</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    <nav class="day-jump page-head" aria-label="Breadcrumb navigation">
+      <a href="artists.html" class="jump-pill">← All Artists</a>
+      <a href="program.html" class="jump-pill" data-i18n="navProgram">Program & Sets</a>
+    </nav>
+
+    <section class="hero-grid" aria-labelledby="artist-title">
+      <div class="hero-copy">
+        <div class="card-meta">
+          <span class="badge badge-peak">Sunday Closing Headliner</span>
+          <span class="stage-tag stage-solar" data-i18n="solarName">Solar Horizon Stage</span>
+        </div>
+        <h1 id="artist-title" class="page-title">Starlight Runners</h1>
+        <p class="hero-subtitle">
+          Copenhagen-based electropop collective headlining the final night on the open-air Solar Horizon amphitheater. Known for analog synthesizer arrangements, multi-layered vocal harmonies, and high-tempo live percussion tailored for large outdoor festival crowds.
+        </p>
+        <div class="hero-actions">
+          <a href="program.html#day-3" class="btn-primary">View in Day 3 Timetable</a>
+          <a href="my-schedule.html" class="btn-secondary">Open My Schedule</a>
+        </div>
+        <div class="stat-strip">
+          <div class="stat-item">
+            <span class="stat-value">22:35</span>
+            <span class="stat-label" data-i18n="day3Short">Sun 12 Jul</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">80 min</span>
+            <span class="stat-label">22:35 – 23:55</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">DK</span>
+            <span class="stat-label">Copenhagen</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="panel-card breakdown-panel" aria-label="Performance specifications">
+        <div class="panel-header">
+          <h2 class="panel-title">Performance Profile</h2>
+          <span class="panel-meta">ID · perf-49 / sch-49</span>
+        </div>
+
+        <div class="metric-row">
+          <div class="metric-head">
+            <span class="metric-name">
+              <span class="dot dot-solar" aria-hidden="true"></span>
+              <span data-i18n="solarName">Solar Horizon Stage</span>
+            </span>
+            <span class="metric-num">4,500 cap</span>
+          </div>
+          <div class="bar-track" role="img" aria-label="Solar Horizon Stage capacity share">
+            <div class="bar-fill bar-solar"></div>
+          </div>
+          <p class="metric-desc" data-i18n="solarShort">Open-air amphitheater for indie rock, synthpop, and dance headliners.</p>
+        </div>
+
+        <div class="metric-row">
+          <div class="metric-head">
+            <span class="metric-name">
+              <span class="dot dot-peak" aria-hidden="true"></span>
+              <span>Prime Headline Slot</span>
+            </span>
+            <span class="metric-num">22:35 – 23:55</span>
+          </div>
+          <p class="metric-desc">Penultimate set closing the outdoor main stage before Final Cascade (00:10 – 01:15).</p>
+        </div>
+
+        <div class="panel-footer">
+          <span class="legend-item"><span class="dot dot-solar"></span> <span data-i18n="legendSolar">Open-Air Main</span></span>
+          <span class="legend-item"><span class="dot dot-peak"></span> <span data-i18n="legendPeak">Late-Night Peak</span></span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section-block" aria-labelledby="bio-heading">
+      <div class="section-header">
+        <h2 id="bio-heading" class="section-title">Artist Biography & Live Set</h2>
+        <p class="section-lead">Full live band configuration appearing on Sunday, July 12, 2026 in Kutná Hora.</p>
+      </div>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th scope="col" data-i18n="colArtist">Performer</th>
+              <th scope="col" data-i18n="colGenre">Genre</th>
+              <th scope="col" data-i18n="colOrigin">Origin</th>
+              <th scope="col" data-i18n="colStage">Stage</th>
+              <th scope="col" data-i18n="colTime">Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="artist-cell">Starlight Runners</td>
+              <td>Electropop Headliner</td>
+              <td class="origin-cell">DK</td>
+              <td>
+                <div class="cell-primary">
+                  <span class="dot dot-solar" aria-hidden="true"></span>
+                  <span data-i18n="solarName">Solar Horizon Stage</span>
+                </div>
+              </td>
+              <td class="num-cell">Sun 12 Jul · 22:35 – 23:55</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section-block" aria-labelledby="related-heading">
+      <div class="section-header">
+        <h2 id="related-heading" class="section-title">Related Artists & Adjacent Sets</h2>
+        <a href="artists.html" class="inline-link">Browse all 60 performers →</a>
+      </div>
+
+      <div class="cards-grid">
+        <article class="panel-card">
+          <div class="card-meta">
+            <span class="badge badge-solar" data-i18n="day1Short">Fri 10 Jul</span>
+            <span class="time-stamp">23:30 – 00:45</span>
+          </div>
+          <h3 class="card-title"><a href="artist-detail.html" class="inline-link">Starlight Odyssey</a></h3>
+          <p class="card-sub">Electronic Indie · FR · Solar Horizon Stage</p>
+        </article>
+
+        <article class="panel-card">
+          <div class="card-meta">
+            <span class="badge badge-solar" data-i18n="day2Short">Sat 11 Jul</span>
+            <span class="time-stamp">23:10 – 00:25</span>
+          </div>
+          <h3 class="card-title"><a href="artist-detail.html" class="inline-link">Vortex Motion</a></h3>
+          <p class="card-sub">Nu-Electro · UK · Solar Horizon Stage</p>
+        </article>
+
+        <article class="panel-card">
+          <div class="card-meta">
+            <span class="badge badge-solar" data-i18n="day3Short">Sun 12 Jul</span>
+            <span class="time-stamp">21:10 – 22:15</span>
+          </div>
+          <h3 class="card-title"><a href="artist-detail.html" class="inline-link">Prismatics</a></h3>
+          <p class="card-sub">Dance Punk · UK · Solar Horizon Stage (Direct support)</p>
+        </article>
+
+        <article class="panel-card">
+          <div class="card-meta">
+            <span class="badge badge-solar" data-i18n="day3Short">Sun 12 Jul</span>
+            <span class="time-stamp">00:10 – 01:15</span>
+          </div>
+          <h3 class="card-title"><a href="artist-detail.html" class="inline-link">Final Cascade</a></h3>
+          <p class="card-sub">Orchestral Electronic · CZ · Solar Horizon Stage (Closing set)</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span data-i18n="footerLocation">Kutná Hora, Czech Republic · July 10–12, 2026</span>
+      <span id="plural-summary" class="footer-meta">60 sets</span>
+    </div>
+  </footer>
+</body>
+</html>

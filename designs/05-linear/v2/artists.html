@@ -1,0 +1,555 @@
+<!-- v2/artists.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artists — Festival of Darkness 2 — Kutná Hora 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/lang.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="Festival of Darkness 2 Home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">Festival of Darkness 2</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html" class="nav-link" data-i18n="nav.home">Overview</a>
+        <a href="program.html" class="nav-link" data-i18n="nav.program">Program</a>
+        <a href="artists.html" class="nav-link active">Artists</a>
+        <button type="button" class="lang-toggle" id="lang-toggle" aria-label="Switch language">
+          <span class="lang-pill" data-lang-option="en">EN</span>
+          <span class="lang-sep">/</span>
+          <span class="lang-pill" data-lang-option="cs">CZ</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="hero-meta">
+          <span class="meta-badge" data-i18n="hero.dates">10-12 Jul 2026</span>
+          <span class="meta-dot" aria-hidden="true"></span>
+          <span class="meta-location" data-i18n="hero.location">Kutná Hora, Czech Republic</span>
+        </div>
+        <h1 class="page-title">Artist Directory</h1>
+        <p class="page-subtitle">All 60 live acts and DJ sets performing across Solar Horizon Stage and Lunar Forest Dome. Select any artist for full profile and set details.</p>
+
+        <div class="filter-bar" aria-label="Filter artists">
+          <div class="filter-group" role="group" aria-label="Filter by stage">
+            <button type="button" class="filter-btn active" data-artist-stage="all" data-i18n="filters.allStages">All stages</button>
+            <button type="button" class="filter-btn" data-artist-stage="stage-solar">Solar Horizon Stage</button>
+            <button type="button" class="filter-btn" data-artist-stage="stage-lunar">Lunar Forest Dome</button>
+          </div>
+          <div class="filter-group" role="group" aria-label="Filter by day">
+            <button type="button" class="filter-btn active" data-artist-day="all" data-i18n="filters.allDays">All days</button>
+            <button type="button" class="filter-btn" data-artist-day="fri" data-i18n="days.friShort">Fri 10</button>
+            <button type="button" class="filter-btn" data-artist-day="sat" data-i18n="days.satShort">Sat 11</button>
+            <button type="button" class="filter-btn" data-artist-day="sun" data-i18n="days.sunShort">Sun 12</button>
+          </div>
+          <span class="filter-count" id="artist-visible-count">60 acts</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="schedule-table" role="table" aria-label="Festival artist directory" id="artist-directory-table">
+          <div class="schedule-row schedule-row-head" role="row">
+            <span role="columnheader" data-i18n="table.dayTime">Day / Time</span>
+            <span role="columnheader" data-i18n="table.artist">Artist</span>
+            <span role="columnheader" data-i18n="table.genre">Genre</span>
+            <span role="columnheader" data-i18n="table.stage">Stage</span>
+          </div>
+
+          <a href="artist-detail.html?id=perf-01" class="schedule-row" role="row" data-stage="stage-solar" data-day="fri">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.friShort">Fri 10</span><span class="mono-time">14:00 - 14:45</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Echoes of Light</span><span class="origin-tag">CZ</span></div>
+            <div class="cell-genre" role="cell">Post-Rock / Ambient</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-02" class="schedule-row" role="row" data-stage="stage-solar" data-day="fri">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.friShort">Fri 10</span><span class="mono-time">15:00 - 15:45</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Velvet Morning</span><span class="origin-tag">SK</span></div>
+            <div class="cell-genre" role="cell">Dream Pop</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-03" class="schedule-row" role="row" data-stage="stage-solar" data-day="fri">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.friShort">Fri 10</span><span class="mono-time">16:00 - 16:50</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Nordic Wave</span><span class="origin-tag">SE</span></div>
+            <div class="cell-genre" role="cell">Indie Rock</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-04" class="schedule-row" role="row" data-stage="stage-solar" data-day="fri">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.friShort">Fri 10</span><span class="mono-time">17:05 - 17:55</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">The Daylight Project</span><span class="origin-tag">CZ</span></div>
+            <div class="cell-genre" role="cell">Indie Pop</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-05" class="schedule-row" role="row" data-stage="stage-solar" data-day="fri">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.friShort">Fri 10</span><span class="mono-time">18:15 - 19:05</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Prague Synth Collective</span><span class="origin-tag">CZ</span></div>
+            <div class="cell-genre" role="cell">Synthpop</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-06" class="schedule-row" role="row" data-stage="stage-solar" data-day="fri">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.friShort">Fri 10</span><span class="mono-time">19:25 - 20:20</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Electric Meadow</span><span class="origin-tag">AT</span></div>
+            <div class="cell-genre" role="cell">Electro-Folk</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-07" class="schedule-row" role="row" data-stage="stage-solar" data-day="fri">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.friShort">Fri 10</span><span class="mono-time">20:40 - 21:40</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Mirage Horizon</span><span class="origin-tag">UK</span></div>
+            <div class="cell-genre" role="cell">Alternative Rock</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-08" class="schedule-row" role="row" data-stage="stage-solar" data-day="fri">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.friShort">Fri 10</span><span class="mono-time">22:00 - 23:10</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Solar Flare</span><span class="origin-tag">DE</span></div>
+            <div class="cell-genre" role="cell">Nu-Disco / Funk</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-09" class="schedule-row" role="row" data-stage="stage-solar" data-day="fri">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.friShort">Fri 10</span><span class="mono-time">23:30 - 00:45</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Starlight Odyssey</span><span class="origin-tag">FR</span></div>
+            <div class="cell-genre" role="cell">Electronic Indie</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-10" class="schedule-row" role="row" data-stage="stage-solar" data-day="fri">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.friShort">Fri 10</span><span class="mono-time">01:00 - 02:00</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Midnight Pulse</span><span class="origin-tag">CZ</span></div>
+            <div class="cell-genre" role="cell">Electro Rock</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-11" class="schedule-row" role="row" data-stage="stage-lunar" data-day="fri">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.friShort">Fri 10</span><span class="mono-time">15:00 - 15:50</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Subtle Resonances</span><span class="origin-tag">CZ</span></div>
+            <div class="cell-genre" role="cell">Modular Ambient</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-12" class="schedule-row" role="row" data-stage="stage-lunar" data-day="fri">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.friShort">Fri 10</span><span class="mono-time">16:05 - 17:00</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Binary Fields</span><span class="origin-tag">PL</span></div>
+            <div class="cell-genre" role="cell">IDM / Glitch</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-13" class="schedule-row" role="row" data-stage="stage-lunar" data-day="fri">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.friShort">Fri 10</span><span class="mono-time">17:15 - 18:15</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Deep Texture</span><span class="origin-tag">DE</span></div>
+            <div class="cell-genre" role="cell">Dub Techno</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-14" class="schedule-row" role="row" data-stage="stage-lunar" data-day="fri">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.friShort">Fri 10</span><span class="mono-time">18:30 - 19:30</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Oscillator Shift</span><span class="origin-tag">CZ</span></div>
+            <div class="cell-genre" role="cell">Minimal Techno</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-15" class="schedule-row" role="row" data-stage="stage-lunar" data-day="fri">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.friShort">Fri 10</span><span class="mono-time">19:45 - 20:45</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Echo Chamber</span><span class="origin-tag">SK</span></div>
+            <div class="cell-genre" role="cell">Dark Ambient</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-16" class="schedule-row" role="row" data-stage="stage-lunar" data-day="fri">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.friShort">Fri 10</span><span class="mono-time">21:00 - 22:15</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Krypton DJ</span><span class="origin-tag">HU</span></div>
+            <div class="cell-genre" role="cell">Hypnotic Techno</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-17" class="schedule-row" role="row" data-stage="stage-lunar" data-day="fri">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.friShort">Fri 10</span><span class="mono-time">22:30 - 23:50</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Modular Horizon</span><span class="origin-tag">DE</span></div>
+            <div class="cell-genre" role="cell">Live Hardware Techno</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-18" class="schedule-row" role="row" data-stage="stage-lunar" data-day="fri">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.friShort">Fri 10</span><span class="mono-time">00:05 - 01:25</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Analog Void</span><span class="origin-tag">NL</span></div>
+            <div class="cell-genre" role="cell">Industrial Techno</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-19" class="schedule-row" role="row" data-stage="stage-lunar" data-day="fri">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.friShort">Fri 10</span><span class="mono-time">01:40 - 03:00</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Frequency 404</span><span class="origin-tag">UK</span></div>
+            <div class="cell-genre" role="cell">Raw Acid Techno</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-20" class="schedule-row" role="row" data-stage="stage-lunar" data-day="fri">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.friShort">Fri 10</span><span class="mono-time">03:10 - 04:00</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Dawn Ritual</span><span class="origin-tag">CZ</span></div>
+            <div class="cell-genre" role="cell">Atmospheric Ambient</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-21" class="schedule-row" role="row" data-stage="stage-solar" data-day="sat">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.satShort">Sat 11</span><span class="mono-time">13:30 - 14:15</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Sunburst Trio</span><span class="origin-tag">CZ</span></div>
+            <div class="cell-genre" role="cell">Acoustic Indie</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-22" class="schedule-row" role="row" data-stage="stage-solar" data-day="sat">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.satShort">Sat 11</span><span class="mono-time">14:30 - 15:15</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Coastline Drift</span><span class="origin-tag">ES</span></div>
+            <div class="cell-genre" role="cell">Surf Rock</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-23" class="schedule-row" role="row" data-stage="stage-solar" data-day="sat">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.satShort">Sat 11</span><span class="mono-time">15:30 - 16:20</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">The Urban Poets</span><span class="origin-tag">UK</span></div>
+            <div class="cell-genre" role="cell">Indie Soul</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-24" class="schedule-row" role="row" data-stage="stage-solar" data-day="sat">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.satShort">Sat 11</span><span class="mono-time">16:35 - 17:25</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Neon Youth</span><span class="origin-tag">SK</span></div>
+            <div class="cell-genre" role="cell">Indie Pop</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-25" class="schedule-row" role="row" data-stage="stage-solar" data-day="sat">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.satShort">Sat 11</span><span class="mono-time">17:45 - 18:40</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Silver Tides</span><span class="origin-tag">CZ</span></div>
+            <div class="cell-genre" role="cell">Shoegaze</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-26" class="schedule-row" role="row" data-stage="stage-solar" data-day="sat">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.satShort">Sat 11</span><span class="mono-time">19:00 - 20:00</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Horizon Glow</span><span class="origin-tag">SE</span></div>
+            <div class="cell-genre" role="cell">Electronic Pop</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-27" class="schedule-row" role="row" data-stage="stage-solar" data-day="sat">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.satShort">Sat 11</span><span class="mono-time">20:20 - 21:20</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Wild Horizon</span><span class="origin-tag">DE</span></div>
+            <div class="cell-genre" role="cell">Post-Punk Revival</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-28" class="schedule-row" role="row" data-stage="stage-solar" data-day="sat">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.satShort">Sat 11</span><span class="mono-time">21:40 - 22:50</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Magnetic River</span><span class="origin-tag">FR</span></div>
+            <div class="cell-genre" role="cell">Indie Dance</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-29" class="schedule-row" role="row" data-stage="stage-solar" data-day="sat">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.satShort">Sat 11</span><span class="mono-time">23:10 - 00:25</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Vortex Motion</span><span class="origin-tag">UK</span></div>
+            <div class="cell-genre" role="cell">Nu-Electro</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-30" class="schedule-row" role="row" data-stage="stage-solar" data-day="sat">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.satShort">Sat 11</span><span class="mono-time">00:45 - 02:00</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Aura Soundsystem</span><span class="origin-tag">CZ</span></div>
+            <div class="cell-genre" role="cell">Progressive Dance</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-31" class="schedule-row" role="row" data-stage="stage-lunar" data-day="sat">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.satShort">Sat 11</span><span class="mono-time">14:30 - 15:20</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Dronescape</span><span class="origin-tag">CZ</span></div>
+            <div class="cell-genre" role="cell">Drone Music</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-32" class="schedule-row" role="row" data-stage="stage-lunar" data-day="sat">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.satShort">Sat 11</span><span class="mono-time">15:35 - 16:30</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Glitch Garden</span><span class="origin-tag">AT</span></div>
+            <div class="cell-genre" role="cell">Microhouse</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-33" class="schedule-row" role="row" data-stage="stage-lunar" data-day="sat">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.satShort">Sat 11</span><span class="mono-time">16:45 - 17:45</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Forest Whispers</span><span class="origin-tag">SK</span></div>
+            <div class="cell-genre" role="cell">Organic House</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-34" class="schedule-row" role="row" data-stage="stage-lunar" data-day="sat">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.satShort">Sat 11</span><span class="mono-time">18:00 - 19:00</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Low Frequency Unit</span><span class="origin-tag">UK</span></div>
+            <div class="cell-genre" role="cell">Deep Dubstep</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-35" class="schedule-row" role="row" data-stage="stage-lunar" data-day="sat">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.satShort">Sat 11</span><span class="mono-time">19:15 - 20:15</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Monolith Audio</span><span class="origin-tag">DE</span></div>
+            <div class="cell-genre" role="cell">Peak Time Techno</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-36" class="schedule-row" role="row" data-stage="stage-lunar" data-day="sat">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.satShort">Sat 11</span><span class="mono-time">20:30 - 21:45</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Sine Wave Syndicate</span><span class="origin-tag">FR</span></div>
+            <div class="cell-genre" role="cell">Electro Techno</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-37" class="schedule-row" role="row" data-stage="stage-lunar" data-day="sat">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.satShort">Sat 11</span><span class="mono-time">22:00 - 23:20</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Shadowplay DJ</span><span class="origin-tag">CZ</span></div>
+            <div class="cell-genre" role="cell">Dark Wave Techno</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-38" class="schedule-row" role="row" data-stage="stage-lunar" data-day="sat">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.satShort">Sat 11</span><span class="mono-time">23:35 - 00:55</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Circuit Overload</span><span class="origin-tag">PL</span></div>
+            <div class="cell-genre" role="cell">Hard Techno</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-39" class="schedule-row" role="row" data-stage="stage-lunar" data-day="sat">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.satShort">Sat 11</span><span class="mono-time">01:10 - 02:30</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Neural Network Live</span><span class="origin-tag">BE</span></div>
+            <div class="cell-genre" role="cell">Acid Techno</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-40" class="schedule-row" role="row" data-stage="stage-lunar" data-day="sat">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.satShort">Sat 11</span><span class="mono-time">02:40 - 04:00</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Solar Wind</span><span class="origin-tag">CZ</span></div>
+            <div class="cell-genre" role="cell">Chillout Ambient</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-41" class="schedule-row" role="row" data-stage="stage-solar" data-day="sun">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.sunShort">Sun 12</span><span class="mono-time">13:00 - 13:45</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Morning Breeze</span><span class="origin-tag">CZ</span></div>
+            <div class="cell-genre" role="cell">Folk Indie</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-42" class="schedule-row" role="row" data-stage="stage-solar" data-day="sun">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.sunShort">Sun 12</span><span class="mono-time">14:00 - 14:45</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Silent Pines</span><span class="origin-tag">SK</span></div>
+            <div class="cell-genre" role="cell">Chamber Pop</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-43" class="schedule-row" role="row" data-stage="stage-solar" data-day="sun">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.sunShort">Sun 12</span><span class="mono-time">15:00 - 15:50</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Sunken Ship</span><span class="origin-tag">UK</span></div>
+            <div class="cell-genre" role="cell">Psych Rock</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-44" class="schedule-row" role="row" data-stage="stage-solar" data-day="sun">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.sunShort">Sun 12</span><span class="mono-time">16:05 - 16:55</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Amber Boulevard</span><span class="origin-tag">DE</span></div>
+            <div class="cell-genre" role="cell">Dream Indie</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-45" class="schedule-row" role="row" data-stage="stage-solar" data-day="sun">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.sunShort">Sun 12</span><span class="mono-time">17:15 - 18:10</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Urban Echo</span><span class="origin-tag">CZ</span></div>
+            <div class="cell-genre" role="cell">Art Pop</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-46" class="schedule-row" role="row" data-stage="stage-solar" data-day="sun">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.sunShort">Sun 12</span><span class="mono-time">18:30 - 19:30</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Luminous Band</span><span class="origin-tag">IT</span></div>
+            <div class="cell-genre" role="cell">Indie Funk</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-47" class="schedule-row" role="row" data-stage="stage-solar" data-day="sun">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.sunShort">Sun 12</span><span class="mono-time">19:50 - 20:50</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">The Velvet Trails</span><span class="origin-tag">SE</span></div>
+            <div class="cell-genre" role="cell">Space Rock</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-48" class="schedule-row" role="row" data-stage="stage-solar" data-day="sun">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.sunShort">Sun 12</span><span class="mono-time">21:10 - 22:15</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Prismatics</span><span class="origin-tag">UK</span></div>
+            <div class="cell-genre" role="cell">Dance Punk</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-49" class="schedule-row" role="row" data-stage="stage-solar" data-day="sun">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.sunShort">Sun 12</span><span class="mono-time">22:35 - 23:55</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Starlight Runners</span><span class="origin-tag">DK</span></div>
+            <div class="cell-genre" role="cell">Electropop Headliner</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-50" class="schedule-row" role="row" data-stage="stage-solar" data-day="sun">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.sunShort">Sun 12</span><span class="mono-time">00:10 - 01:15</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Final Cascade</span><span class="origin-tag">CZ</span></div>
+            <div class="cell-genre" role="cell">Orchestral Electronic</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot solar"></span>Solar Horizon</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-51" class="schedule-row" role="row" data-stage="stage-lunar" data-day="sun">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.sunShort">Sun 12</span><span class="mono-time">14:00 - 14:50</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Static Drift</span><span class="origin-tag">CZ</span></div>
+            <div class="cell-genre" role="cell">Field Recording / Ambient</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-52" class="schedule-row" role="row" data-stage="stage-lunar" data-day="sun">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.sunShort">Sun 12</span><span class="mono-time">15:05 - 16:00</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Resonance Space</span><span class="origin-tag">AT</span></div>
+            <div class="cell-genre" role="cell">Deep Ambient</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-53" class="schedule-row" role="row" data-stage="stage-lunar" data-day="sun">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.sunShort">Sun 12</span><span class="mono-time">16:15 - 17:15</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Tape Loop Experiment</span><span class="origin-tag">PL</span></div>
+            <div class="cell-genre" role="cell">Tape Ambient</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-54" class="schedule-row" role="row" data-stage="stage-lunar" data-day="sun">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.sunShort">Sun 12</span><span class="mono-time">17:30 - 18:30</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Minimal Horizon</span><span class="origin-tag">DE</span></div>
+            <div class="cell-genre" role="cell">Micro Techno</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-55" class="schedule-row" role="row" data-stage="stage-lunar" data-day="sun">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.sunShort">Sun 12</span><span class="mono-time">18:45 - 19:45</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Dark Matter</span><span class="origin-tag">CZ</span></div>
+            <div class="cell-genre" role="cell">Deep Progressive</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-56" class="schedule-row" role="row" data-stage="stage-lunar" data-day="sun">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.sunShort">Sun 12</span><span class="mono-time">20:00 - 21:15</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Hyperspace DJ</span><span class="origin-tag">IL</span></div>
+            <div class="cell-genre" role="cell">Psy Techno</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-57" class="schedule-row" role="row" data-stage="stage-lunar" data-day="sun">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.sunShort">Sun 12</span><span class="mono-time">21:30 - 22:45</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Galactic Orbit</span><span class="origin-tag">IT</span></div>
+            <div class="cell-genre" role="cell">Melodic Techno</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-58" class="schedule-row" role="row" data-stage="stage-lunar" data-day="sun">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.sunShort">Sun 12</span><span class="mono-time">23:00 - 00:15</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Bass Distortion</span><span class="origin-tag">UK</span></div>
+            <div class="cell-genre" role="cell">Leftfield Bass</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-59" class="schedule-row" role="row" data-stage="stage-lunar" data-day="sun">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.sunShort">Sun 12</span><span class="mono-time">00:30 - 01:45</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Cosmic Pulse</span><span class="origin-tag">NL</span></div>
+            <div class="cell-genre" role="cell">Uplifting Trance Techno</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+
+          <a href="artist-detail.html?id=perf-60" class="schedule-row" role="row" data-stage="stage-lunar" data-day="sun">
+            <div class="cell-time" role="cell"><span class="day-pill" data-i18n="days.sunShort">Sun 12</span><span class="mono-time">02:00 - 03:00</span></div>
+            <div class="cell-artist" role="cell"><span class="artist-name">Equinox Farewell</span><span class="origin-tag">CZ</span></div>
+            <div class="cell-genre" role="cell">Down-tempo Ambient</div>
+            <div class="cell-stage" role="cell"><span class="stage-dot lunar"></span>Lunar Forest</div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <span class="footer-brand">Festival of Darkness 2</span>
+        <span class="footer-meta" data-i18n="footer.location">Kutná Hora, Czech Republic · 10-12 Jul 2026</span>
+      </div>
+      <div class="footer-links">
+        <a href="index.html" data-i18n="nav.home">Overview</a>
+        <a href="program.html" data-i18n="nav.program">Program</a>
+        <a href="artists.html">Artists</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var selectedStage = "all";
+      var selectedDay = "all";
+      var rows = document.querySelectorAll("#artist-directory-table a.schedule-row");
+      var stageBtns = document.querySelectorAll("[data-artist-stage]");
+      var dayBtns = document.querySelectorAll("[data-artist-day]");
+      var countEl = document.getElementById("artist-visible-count");
+
+      function updateDirectory() {
+        var visible = 0;
+        for (var i = 0; i < rows.length; i++) {
+          var matchStage = selectedStage === "all" || rows[i].getAttribute("data-stage") === selectedStage;
+          var matchDay = selectedDay === "all" || rows[i].getAttribute("data-day") === selectedDay;
+          var show = matchStage && matchDay;
+          rows[i].classList.toggle("is-hidden", !show);
+          if (show) visible++;
+        }
+        if (countEl) {
+          countEl.textContent = visible + (visible === 1 ? " act" : " acts");
+        }
+      }
+
+      for (var i = 0; i < stageBtns.length; i++) {
+        stageBtns[i].addEventListener("click", function (e) {
+          selectedStage = e.currentTarget.getAttribute("data-artist-stage");
+          for (var j = 0; j < stageBtns.length; j++) {
+            stageBtns[j].classList.toggle("active", stageBtns[j] === e.currentTarget);
+          }
+          updateDirectory();
+        });
+      }
+
+      for (var k = 0; k < dayBtns.length; k++) {
+        dayBtns[k].addEventListener("click", function (e) {
+          selectedDay = e.currentTarget.getAttribute("data-artist-day");
+          for (var m = 0; m < dayBtns.length; m++) {
+            dayBtns[m].classList.toggle("active", dayBtns[m] === e.currentTarget);
+          }
+          updateDirectory();
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

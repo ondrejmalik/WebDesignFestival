@@ -1,0 +1,3167 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informace o cookies – SG nábytek</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ==========================================================================
+       1. DESIGN TOKENS & SYSTEM VARIABLES
+       ========================================================================== */
+    :root {
+      /* Brand & Surface Colors */
+      --color-navy-950: #162544;
+      --color-navy-900: #1e315c;
+      --color-navy-800: #243866;
+      --color-indigo-700: #2e3768;
+      --color-indigo-800: #222952;
+      --color-magenta-600: #c84079;
+      --color-magenta-700: #b03167;
+      --color-magenta-soft: #fdf2f7;
+      --color-cyan-badge: #009ee3;
+      --color-green-600: #2e9e44;
+      --color-green-soft: #eaf7ed;
+
+      /* Neutrals */
+      --color-white: #ffffff;
+      --color-bg-page: #ffffff;
+      --color-bg-subtle: #f4f6f9;
+      --color-bg-muted: #eef0f4;
+      --color-border: #e2e6ef;
+      --color-border-strong: #cbd2e0;
+
+      /* Text Hierarchy */
+      --color-text-primary: #1e293b;
+      --color-text-navy: #243866;
+      --color-text-secondary: #4b5563;
+      --color-text-muted: #78849a;
+      --color-text-light: #cfd5e2;
+
+      /* Typography */
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-display: 'Plus Jakarta Sans', 'Inter', sans-serif;
+
+      /* Radii & Shadows */
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --radius-pill: 9999px;
+      --shadow-sm: 0 2px 8px rgba(24, 39, 75, 0.06);
+      --shadow-md: 0 8px 24px rgba(24, 39, 75, 0.12);
+      --shadow-modal: 0 20px 50px rgba(15, 23, 42, 0.28);
+
+      /* Layout */
+      --container-max: 1280px;
+      --transition: 180ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* ==========================================================================
+       2. RESET & BASE STYLES
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      color: var(--color-text-primary);
+      background-color: var(--color-bg-page);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    button, input, select {
+      font-family: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    ul, ol {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    h1, h2, h3, h4, p {
+      margin: 0;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .svg-icon {
+      display: inline-block;
+      vertical-align: middle;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* ==========================================================================
+       3. FLOATING HEUREKA BADGE (LEFT EDGE)
+       ========================================================================== */
+    .heureka-tab {
+      position: fixed;
+      left: 0;
+      top: 64px;
+      z-index: 90;
+      background: var(--color-cyan-badge);
+      color: var(--color-white);
+      border: none;
+      border-radius: 0 6px 6px 0;
+      padding: 12px 7px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 2px 4px 12px rgba(0, 158, 227, 0.28);
+      transition: transform var(--transition), background var(--transition);
+    }
+
+    .heureka-tab:hover {
+      background: #008cc9;
+      transform: translateX(2px);
+    }
+
+    .heureka-tab__text {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ==========================================================================
+       4. HEADER: TOP USP BAR, MAIN HEADER, NAVIGATION & MEGAMENU
+       ========================================================================== */
+    .top-bar {
+      background-color: var(--color-navy-900);
+      color: var(--color-text-light);
+      font-size: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .top-bar__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 36px;
+      gap: 16px;
+    }
+
+    .top-bar__usps {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .top-bar__usp {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: #dce2ee;
+      white-space: nowrap;
+    }
+
+    .top-bar__usp svg {
+      width: 15px;
+      height: 13px;
+      color: #9fb0ce;
+    }
+
+    .top-bar__contact {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .top-bar__contact-label {
+      color: #b4c0d6;
+    }
+
+    .top-bar__phone {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--color-white);
+      font-weight: 700;
+    }
+
+    .top-bar__phone svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    .top-bar__hours {
+      color: #b4c0d6;
+    }
+
+    /* Main Header */
+    .main-header {
+      background: var(--color-white);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(24, 39, 75, 0.05);
+    }
+
+    .main-header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 82px;
+      gap: 24px;
+    }
+
+    /* Brand Logo */
+    .brand-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    .brand-logo__mark {
+      display: flex;
+      align-items: center;
+    }
+
+    .brand-logo__wordmark {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      color: var(--color-navy-800);
+      text-transform: uppercase;
+    }
+
+    /* Search Bar */
+    .header-search {
+      position: relative;
+      flex: 1;
+      max-width: 520px;
+    }
+
+    .header-search__box {
+      display: flex;
+      align-items: center;
+      background: var(--color-bg-muted);
+      border: 1.5px solid transparent;
+      border-radius: var(--radius-pill);
+      height: 44px;
+      padding: 0 16px;
+      transition: all var(--transition);
+    }
+
+    .header-search__box:focus-within {
+      background: var(--color-white);
+      border-color: var(--color-navy-800);
+      box-shadow: 0 4px 16px rgba(36, 56, 102, 0.1);
+    }
+
+    .header-search__icon {
+      width: 18px;
+      height: 18px;
+      color: var(--color-navy-800);
+      margin-right: 10px;
+    }
+
+    .header-search__input {
+      border: none;
+      background: transparent;
+      width: 100%;
+      font-size: 13.5px;
+      color: var(--color-text-primary);
+      outline: none;
+    }
+
+    .header-search__input::placeholder {
+      color: #6e7b91;
+    }
+
+    .header-search__clear {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--color-text-muted);
+      padding: 4px;
+      line-height: 0;
+    }
+
+    .header-search__clear.is-visible {
+      display: inline-flex;
+    }
+
+    .search-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      right: 0;
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      z-index: 150;
+      display: none;
+      overflow: hidden;
+    }
+
+    .search-dropdown.is-open {
+      display: block;
+    }
+
+    .search-dropdown__header {
+      padding: 10px 14px;
+      background: var(--color-bg-subtle);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
+    }
+
+    .search-dropdown__item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--color-border);
+      gap: 12px;
+      transition: background var(--transition);
+    }
+
+    .search-dropdown__item:hover {
+      background: var(--color-bg-subtle);
+    }
+
+    .search-dropdown__item-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-navy-800);
+    }
+
+    .search-dropdown__item-cat {
+      font-size: 11px;
+      color: var(--color-text-muted);
+    }
+
+    .search-dropdown__item-price {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--color-magenta-600);
+      white-space: nowrap;
+    }
+
+    /* Header Utility Actions */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .header-action {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: none;
+      padding: 6px;
+      color: var(--color-navy-800);
+      font-size: 13.5px;
+      font-weight: 600;
+      transition: color var(--transition), transform var(--transition);
+    }
+
+    .header-action:hover {
+      color: var(--color-magenta-600);
+    }
+
+    .header-action svg {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.65;
+    }
+
+    .header-action__badge {
+      position: absolute;
+      top: 0;
+      right: 0;
+      min-width: 17px;
+      height: 17px;
+      padding: 0 4px;
+      border-radius: var(--radius-pill);
+      background: var(--color-magenta-600);
+      color: var(--color-white);
+      font-size: 10px;
+      font-weight: 700;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .header-action__badge.has-count {
+      display: inline-flex;
+    }
+
+    .header-action--cart .header-action__badge {
+      right: auto;
+      left: 18px;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 8px 10px;
+      color: var(--color-navy-800);
+      font-weight: 600;
+      font-size: 13px;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Primary Navy Navigation Bar */
+    .main-nav {
+      background-color: var(--color-navy-800);
+      color: var(--color-white);
+      position: relative;
+    }
+
+    .main-nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 46px;
+    }
+
+    .main-nav__left,
+    .main-nav__right {
+      display: flex;
+      align-items: center;
+    }
+
+    .main-nav__item {
+      position: relative;
+    }
+
+    .main-nav__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 14px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--color-white);
+      white-space: nowrap;
+      border: none;
+      background: none;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    .main-nav__link:hover,
+    .main-nav__link.is-active {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .main-nav__link--sale {
+      color: #ff9ec7;
+    }
+
+    .main-nav__link--sale:hover {
+      background: var(--color-magenta-600);
+      color: var(--color-white);
+    }
+
+    .main-nav__right .main-nav__link {
+      font-weight: 500;
+      font-size: 13px;
+      color: #e2e8f5;
+      padding: 12px 12px;
+    }
+
+    .main-nav__right .main-nav__link:hover {
+      color: var(--color-white);
+    }
+
+    .main-nav__chevron {
+      width: 9px;
+      height: 9px;
+      transition: transform var(--transition);
+    }
+
+    .main-nav__item:hover .main-nav__chevron {
+      transform: rotate(180deg);
+    }
+
+    /* Megamenu Panel */
+    .megamenu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--color-white);
+      color: var(--color-text-primary);
+      border-top: 1px solid var(--color-border);
+      box-shadow: 0 20px 40px rgba(24, 39, 75, 0.16);
+      z-index: 140;
+      padding: 24px 0;
+    }
+
+    .megamenu.is-open {
+      display: block;
+    }
+
+    .megamenu__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .megamenu__card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: var(--color-white);
+      transition: all var(--transition);
+      text-align: left;
+    }
+
+    .megamenu__card:hover {
+      border-color: var(--color-magenta-600);
+      background: var(--color-magenta-soft);
+      transform: translateY(-1px);
+    }
+
+    .megamenu__card-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--color-navy-800);
+      margin-bottom: 2px;
+    }
+
+    .megamenu__card-sub {
+      font-size: 11.5px;
+      color: var(--color-text-muted);
+    }
+
+    /* ==========================================================================
+       5. BREADCRUMB & CONTENT VIEWS
+       ========================================================================== */
+    .breadcrumb-bar {
+      padding: 14px 0 6px;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 12.5px;
+      color: var(--color-text-muted);
+    }
+
+    .breadcrumb__link {
+      text-decoration: underline;
+      color: var(--color-text-secondary);
+    }
+
+    .breadcrumb__link:hover {
+      color: var(--color-magenta-600);
+    }
+
+    .main-view {
+      min-height: 480px;
+      padding-bottom: 48px;
+    }
+
+    .view-panel {
+      display: none;
+    }
+
+    .view-panel.is-active {
+      display: block;
+    }
+
+    /* Cookies Info View (Matches Screenshot Layout) */
+    .cookies-info-page {
+      padding-top: 18px;
+      padding-bottom: 40px;
+    }
+
+    .page-title {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--color-navy-800);
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .wysiwyg-copy {
+      max-width: 1120px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: #2f3a4d;
+    }
+
+    .wysiwyg-copy p {
+      margin-bottom: 18px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 11px 24px;
+      font-size: 13.5px;
+      font-weight: 600;
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn--indigo {
+      background: var(--color-indigo-700);
+      color: var(--color-white);
+    }
+
+    .btn--indigo:hover {
+      background: var(--color-indigo-800);
+      transform: translateY(-1px);
+    }
+
+    .btn--magenta {
+      background: var(--color-magenta-600);
+      color: var(--color-white);
+    }
+
+    .btn--magenta:hover {
+      background: var(--color-magenta-700);
+      transform: translateY(-1px);
+    }
+
+    .btn--outline {
+      background: var(--color-white);
+      color: var(--color-navy-800);
+      border: 1.5px solid var(--color-border-strong);
+    }
+
+    .btn--outline:hover {
+      border-color: var(--color-navy-800);
+      background: var(--color-bg-subtle);
+    }
+
+    .btn--sm {
+      padding: 8px 16px;
+      font-size: 12.5px;
+    }
+
+    /* ==========================================================================
+       6. BOTTOM COOKIE POLICY BANNER (EXACT SCREENSHOT VISUAL)
+       ========================================================================== */
+    .cookie-banner {
+      max-width: 980px;
+      margin: 24px auto 12px;
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      box-shadow: 0 10px 35px rgba(24, 39, 75, 0.14);
+      padding: 24px 28px;
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    .cookie-banner.is-hidden {
+      display: none;
+    }
+
+    .cookie-banner__art {
+      flex-shrink: 0;
+      width: 96px;
+      height: 102px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cookie-banner__body {
+      flex: 1;
+    }
+
+    .cookie-banner__title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--color-navy-800);
+      margin-bottom: 8px;
+    }
+
+    .cookie-banner__text {
+      font-size: 12.5px;
+      line-height: 1.6;
+      color: var(--color-text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .cookie-banner__text a {
+      text-decoration: underline;
+      color: var(--color-navy-800);
+    }
+
+    .cookie-banner__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* ==========================================================================
+       7. COOKIE SETTINGS MODAL OVERLAY (ACTIVE BY DEFAULT LIKE SCREENSHOT)
+       ========================================================================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.48);
+      z-index: 500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .modal-backdrop.is-open {
+      display: flex;
+    }
+
+    .cookie-modal {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      background: var(--color-white);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-modal);
+      padding: 32px 36px 34px;
+      animation: modalFadeIn 0.2s ease-out;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(8px) scale(0.99); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .cookie-modal__close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 34px;
+      height: 34px;
+      border: none;
+      background: transparent;
+      color: var(--color-navy-800);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition);
+    }
+
+    .cookie-modal__close:hover {
+      background: var(--color-bg-muted);
+    }
+
+    .cookie-modal__title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--color-navy-800);
+      margin-bottom: 10px;
+    }
+
+    .cookie-modal__perex {
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--color-text-secondary);
+      margin-bottom: 18px;
+    }
+
+    .cookie-modal__perex a {
+      text-decoration: underline;
+      color: var(--color-navy-800);
+    }
+
+    .cookie-modal__top-cta {
+      margin-bottom: 22px;
+    }
+
+    .cookie-modal__section {
+      border-top: 1px solid var(--color-border);
+      padding: 18px 0;
+    }
+
+    .cookie-modal__section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .cookie-modal__section-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--color-navy-800);
+    }
+
+    .cookie-modal__always-on {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-green-600);
+    }
+
+    .cookie-modal__desc {
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: var(--color-text-secondary);
+    }
+
+    .cookie-modal__subblock {
+      margin-top: 14px;
+    }
+
+    .cookie-modal__subtitle {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      margin-bottom: 4px;
+    }
+
+    /* Toggle Switch */
+    .cookie-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .cookie-toggle input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .cookie-toggle__track {
+      position: relative;
+      width: 38px;
+      height: 20px;
+      background: #9aa3b2;
+      border-radius: var(--radius-pill);
+      transition: background var(--transition);
+    }
+
+    .cookie-toggle__thumb {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 16px;
+      background: var(--color-white);
+      border-radius: 50%;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+      transition: transform var(--transition);
+    }
+
+    .cookie-toggle input:checked + .cookie-toggle__track {
+      background: var(--color-green-600);
+    }
+
+    .cookie-toggle input:checked + .cookie-toggle__track .cookie-toggle__thumb {
+      transform: translateX(18px);
+    }
+
+    .cookie-toggle__label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      min-width: 50px;
+    }
+
+    .cookie-modal__footer {
+      border-top: 1px solid var(--color-border);
+      padding-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* ==========================================================================
+       8. STOREFRONT CATALOG, COMPARISON, WISHLIST & CART VIEWS
+       ========================================================================== */
+    .hero-banner {
+      background: linear-gradient(125deg, #243866 0%, #344e86 58%, #523b6e 100%);
+      border-radius: var(--radius-lg);
+      padding: 36px 40px;
+      color: var(--color-white);
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 28px;
+      align-items: center;
+      margin: 14px 0 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-banner__tag {
+      display: inline-block;
+      background: var(--color-magenta-600);
+      color: var(--color-white);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 14px;
+    }
+
+    .hero-banner__title {
+      font-family: var(--font-display);
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .hero-banner__desc {
+      font-size: 14px;
+      color: #dbe4f7;
+      margin-bottom: 22px;
+      max-width: 520px;
+    }
+
+    .hero-banner__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .category-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .category-pill {
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--color-border);
+      background: var(--color-white);
+      color: var(--color-navy-800);
+      font-size: 13px;
+      font-weight: 600;
+      transition: all var(--transition);
+    }
+
+    .category-pill:hover,
+    .category-pill.is-active {
+      background: var(--color-navy-800);
+      color: var(--color-white);
+      border-color: var(--color-navy-800);
+    }
+
+    .catalog-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .product-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: all var(--transition);
+    }
+
+    .product-card:hover {
+      border-color: #c5cee0;
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .product-card__badges {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      z-index: 2;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .badge--sale {
+      background: var(--color-magenta-600);
+      color: var(--color-white);
+    }
+
+    .badge--stock {
+      background: var(--color-green-soft);
+      color: var(--color-green-600);
+    }
+
+    .product-card__utils {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      z-index: 2;
+    }
+
+    .icon-circle-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--color-border);
+      background: var(--color-white);
+      color: var(--color-navy-800);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition);
+    }
+
+    .icon-circle-btn:hover,
+    .icon-circle-btn.is-active {
+      background: var(--color-magenta-600);
+      color: var(--color-white);
+      border-color: var(--color-magenta-600);
+    }
+
+    .product-card__visual {
+      height: 160px;
+      background: var(--color-bg-subtle);
+      border-radius: var(--radius-sm);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+    }
+
+    .product-card__cat {
+      font-size: 11.5px;
+      color: var(--color-text-muted);
+      margin-bottom: 4px;
+    }
+
+    .product-card__title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--color-navy-800);
+      margin-bottom: 6px;
+      line-height: 1.35;
+    }
+
+    .product-card__dims {
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      margin-bottom: 14px;
+    }
+
+    .product-card__footer {
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .product-card__old-price {
+      font-size: 11.5px;
+      color: var(--color-text-muted);
+      text-decoration: line-through;
+    }
+
+    .product-card__price {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--color-magenta-600);
+    }
+
+    /* Comparison Table */
+    .compare-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-white);
+    }
+
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 640px;
+    }
+
+    .compare-table th,
+    .compare-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--color-border);
+      border-right: 1px solid var(--color-border);
+      text-align: left;
+      font-size: 13.5px;
+      vertical-align: top;
+    }
+
+    .compare-table th {
+      background: var(--color-bg-subtle);
+      color: var(--color-navy-800);
+      font-weight: 700;
+      width: 200px;
+    }
+
+    /* Cart Layout */
+    .cart-layout {
+      display: grid;
+      grid-template-columns: 1.4fr 0.85fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .cart-box {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 22px;
+    }
+
+    .shipping-meter {
+      background: var(--color-bg-subtle);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+
+    .shipping-meter__bar {
+      height: 8px;
+      background: #dce2ee;
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .shipping-meter__fill {
+      height: 100%;
+      background: var(--color-green-600);
+      transition: width 0.3s ease;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .qty-control {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--color-border-strong);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+    }
+
+    .qty-control button {
+      width: 30px;
+      height: 30px;
+      border: none;
+      background: var(--color-bg-subtle);
+      font-weight: 700;
+      color: var(--color-navy-800);
+    }
+
+    .qty-control span {
+      padding: 0 12px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .option-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .option-card.is-selected {
+      border-color: var(--color-navy-800);
+      background: var(--color-bg-subtle);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 54px 20px;
+      background: var(--color-bg-subtle);
+      border-radius: var(--radius-md);
+      border: 1px dashed var(--color-border-strong);
+    }
+
+    /* ==========================================================================
+       9. USP STRIP & FOOTER (EXACT SCREENSHOT LAYOUT)
+       ========================================================================== */
+    .usp-strip {
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+      background: var(--color-white);
+      padding: 34px 0;
+    }
+
+    .usp-strip__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .usp-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+    }
+
+    .usp-item__icon {
+      width: 56px;
+      height: 40px;
+      color: var(--color-navy-800);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .usp-item__title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--color-magenta-600);
+      margin-bottom: 4px;
+    }
+
+    .usp-item__text {
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: var(--color-text-secondary);
+    }
+
+    /* Site Footer */
+    .site-footer {
+      background: var(--color-bg-subtle);
+      padding: 46px 0 28px;
+      color: var(--color-text-primary);
+    }
+
+    .site-footer__grid {
+      display: grid;
+      grid-template-columns: 1.45fr 1fr 0.95fr;
+      gap: 44px;
+      padding-bottom: 34px;
+    }
+
+    /* Newsletter Block */
+    .newsletter-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .newsletter-head__icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--color-navy-800);
+      color: var(--color-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .newsletter-head__title {
+      font-family: var(--font-display);
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--color-navy-800);
+      line-height: 1.25;
+    }
+
+    .newsletter-head__sub {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      margin-top: 2px;
+    }
+
+    .newsletter-form {
+      display: flex;
+      align-items: center;
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-pill);
+      padding: 4px 4px 4px 18px;
+      max-width: 440px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .newsletter-form__input {
+      border: none;
+      background: transparent;
+      flex: 1;
+      font-size: 13.5px;
+      color: var(--color-text-primary);
+      outline: none;
+      min-width: 0;
+    }
+
+    .newsletter-form__btn {
+      background: var(--color-indigo-700);
+      color: var(--color-white);
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 10px 22px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: background var(--transition);
+    }
+
+    .newsletter-form__btn:hover {
+      background: var(--color-indigo-800);
+    }
+
+    .newsletter-note {
+      font-size: 11px;
+      color: var(--color-text-muted);
+      margin-bottom: 24px;
+    }
+
+    .trust-badges {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    /* Footer Navigation Columns */
+    .footer-col__title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--color-navy-800);
+      margin-bottom: 14px;
+    }
+
+    .footer-col__list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .footer-col__link {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+    }
+
+    .footer-col__link:hover {
+      color: var(--color-magenta-600);
+      text-decoration: underline;
+    }
+
+    .footer-contact__hours {
+      font-size: 12px;
+      color: var(--color-text-muted);
+      margin-top: -8px;
+      margin-bottom: 12px;
+    }
+
+    .footer-contact__phone {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--color-magenta-600);
+      margin-bottom: 8px;
+    }
+
+    .footer-contact__email {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--color-navy-800);
+      text-decoration: underline;
+      margin-bottom: 24px;
+    }
+
+    /* Bottom Legal Bar */
+    .footer-legal {
+      border-top: 1px solid var(--color-border);
+      padding-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 12px;
+      color: var(--color-text-secondary);
+    }
+
+    .footer-legal__left {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-legal__copy {
+      font-weight: 700;
+      color: var(--color-navy-800);
+    }
+
+    .footer-legal__link:hover {
+      color: var(--color-magenta-600);
+      text-decoration: underline;
+    }
+
+    .footer-legal__authors {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--color-navy-800);
+    }
+
+    /* Toast Notification */
+    .toast-container {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      z-index: 600;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: none;
+    }
+
+    .toast {
+      background: var(--color-navy-900);
+      color: var(--color-white);
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: var(--shadow-md);
+      border-left: 4px solid var(--color-magenta-600);
+      animation: toastSlide 0.22s ease-out;
+    }
+
+    @keyframes toastSlide {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==========================================================================
+       10. RESPONSIVE ADAPTATION (TABLET & MOBILE)
+       ========================================================================== */
+    @media (max-width: 1024px) {
+      .top-bar__usps {
+        gap: 14px;
+      }
+      .top-bar__usp:nth-child(3) {
+        display: none;
+      }
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .megamenu__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .site-footer__grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .site-footer__newsletter-col {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 820px) {
+      .top-bar__usps {
+        display: none;
+      }
+      .top-bar__inner {
+        justify-content: center;
+      }
+      .main-header__inner {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 12px 20px;
+        gap: 12px;
+      }
+      .header-search {
+        order: 3;
+        max-width: 100%;
+        flex-basis: 100%;
+      }
+      .mobile-menu-btn {
+        display: inline-flex;
+      }
+      .main-nav {
+        display: none;
+      }
+      .main-nav.is-mobile-open {
+        display: block;
+      }
+      .main-nav__inner,
+      .main-nav__left,
+      .main-nav__right {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+      }
+      .main-nav__link {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .cookie-banner {
+        flex-direction: column;
+        padding: 20px;
+      }
+      .cookie-modal {
+        padding: 24px 20px;
+      }
+      .usp-strip__grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .hero-banner,
+      .cart-layout {
+        grid-template-columns: 1fr;
+      }
+      .heureka-tab {
+        display: none;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+      .site-footer__grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+      .header-action__label {
+        display: none;
+      }
+      .brand-logo__wordmark {
+        font-size: 13px;
+        letter-spacing: 0.2em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hidden SVG Symbol Sprite -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
+    <symbol id="ico-truck" viewBox="0 0 14.765 11.997">
+      <path d="M14.765 6.46l-1.846-3.691h-2.768V.923A.926.926 0 009.228 0H.923A.926.926 0 000 .923v7.383l.923.923h1.17a1.846 1.846 0 103.2 0h5.109a1.846 1.846 0 103.2 0h1.17V6.46zm-4.614 0V3.691h1.913l1.384 2.768z"/>
+    </symbol>
+    <symbol id="ico-carry" viewBox="0 0 17.773 14.204">
+      <path d="M0 13.112l1.111-2.716.182-.441a14.835 14.835 0 011.075 1.244.894.894 0 01.03.69c-.187.568-.44 1.114-.658 1.672a.883.883 0 01-.825.633.841.841 0 01-.853-.585.369.369 0 00-.063-.081zM13.776 6.415c-.092 1.116-.971 1.5-1.723 2.01a2.465 2.465 0 01-1.523.448c-1.226-.032-2.453 0-3.679-.02a2.715 2.715 0 01-.814-.23 2.031 2.031 0 01-.352-.22c-.766-.475-1.6-.889-1.716-1.961l-.1.033c-.147.588-.3 1.175-.433 1.766-.015.067.059.168.115.234a7.968 7.968 0 00.667.753 2.884 2.884 0 01.911 2.1c.03.6.117 1.2.187 1.793a.914.914 0 01-.783 1.078.9.9 0 01-.965-.84c-.083-.7-.155-1.4-.22-2.1a1.171 1.171 0 00-.315-.741c-.53-.565-1.032-1.156-1.547-1.736a1.8 1.8 0 01-.443-1.7c.171-.719.317-1.444.5-2.16a1.758 1.758 0 012.792-1.02 3.427 3.427 0 011.294 2.032c.081.3.2.566.588.642.007-.127.021-.248.021-.369V4.159c0-.467.14-.606.6-.606h4.1c.437 0 .587.146.59.577v2.494a.7.7 0 00.587-.534 3.693 3.693 0 011.231-2.078 1.767 1.767 0 011.719-.361 1.707 1.707 0 011.165 1.232q.305 1.173.546 2.362a1.7 1.7 0 01-.429 1.512c-.452.512-.878 1.052-1.375 1.516a2.014 2.014 0 00-.6 1.446c-.043.587-.1 1.176-.2 1.755a.842.842 0 01-1.178.661.765.765 0 01-.53-.779c.082-.967.169-1.935.316-2.893a2.038 2.038 0 01.452-.841c.3-.394.658-.746.973-1.13a.5.5 0 00.11-.365c-.12-.551-.27-1.1-.41-1.644zM16.518 9.951c.423 1.093.836 2.116 1.212 3.154a.837.837 0 01-.575 1.039.787.787 0 01-1.031-.442c-.259-.6-.51-1.211-.731-1.829a.785.785 0 01.174-.863c.311-.321.6-.666.951-1.059zM15.485 1.323a1.274 1.274 0 01-1.292 1.292 1.359 1.359 0 01-1.326-1.327A1.329 1.329 0 0114.186 0a1.281 1.281 0 011.299 1.323zM3.539 2.614a1.33 1.33 0 01-1.3-1.335 1.308 1.308 0 112.615.056 1.284 1.284 0 01-1.315 1.279z"/>
+    </symbol>
+    <symbol id="ico-coins" viewBox="0 0 18.075 15.075">
+      <path d="M0 11.933v1.257c0 1.039 3.036 1.884 6.778 1.884s6.778-.845 6.778-1.884v-1.257c-1.456.857-4.123 1.257-6.778 1.257s-5.32-.4-6.778-1.257zm11.3-8.164c3.742 0 6.778-.845 6.778-1.884S15.039 0 11.3 0 4.519.845 4.519 1.884 7.555 3.769 11.3 3.769zM0 8.845v1.519c0 1.039 3.036 1.884 6.778 1.884s6.778-.845 6.778-1.884V8.845c-1.458 1-4.127 1.519-6.778 1.519S1.458 9.846 0 8.845zm14.686.324c2.023-.327 3.389-.933 3.389-1.631V6.28a9.811 9.811 0 01-3.389 1.02zM6.778 4.711C3.036 4.711 0 5.765 0 7.066s3.036 2.356 6.778 2.356 6.778-1.054 6.778-2.355-3.036-2.356-6.778-2.356zm7.742 1.657c2.118-.318 3.555-.942 3.555-1.658V3.454a13.3 13.3 0 01-5.675 1.23 3.72 3.72 0 012.12 1.684z"/>
+    </symbol>
+    <symbol id="ico-phone-full" viewBox="0 0 13.977 14.004">
+      <path d="M13.976 10.485v2.108A1.405 1.405 0 0112.444 14a13.907 13.907 0 01-6.065-2.157 13.7 13.7 0 01-4.216-4.216A13.907 13.907 0 01.006 1.532 1.405 1.405 0 011.404 0h2.108a1.405 1.405 0 011.406 1.209 9.023 9.023 0 00.492 1.975 1.405 1.405 0 01-.316 1.483l-.892.892a11.244 11.244 0 004.216 4.216l.892-.892a1.405 1.405 0 011.483-.316 9.023 9.023 0 001.975.492 1.405 1.405 0 011.209 1.427z"/>
+    </symbol>
+    <symbol id="ico-search" viewBox="0 0 25.14 26.073">
+      <path d="M24.081 26.073a1.064 1.064 0 01-.769-.33l-6.615-6.88-.239.17a10.328 10.328 0 01-5.988 1.89 10.461 10.461 0 118-3.73l-.2.23 6.573 6.84a1.07 1.07 0 01-.762 1.81zM10.47 2.153a8.315 8.315 0 108.318 8.32 8.315 8.315 0 00-8.318-8.32z"/>
+    </symbol>
+    <symbol id="ico-transport-sg" viewBox="0 0 59.253 37.486">
+      <path d="M10.887 31.608v-.068H5.878a1.919 1.919 0 01-1.918-1.911V27.59H.93a.93.93 0 010-1.86h8.9a.93.93 0 110 1.86H5.809v2.039a.07.07 0 00.065.061h5.332a5.873 5.873 0 0111.105 0h19.25V22.7a.928.928 0 111.855 0v6.991h.445a5.87 5.87 0 0111.1 0h2.432v-4.083h-1.049a2.913 2.913 0 01-2.912-2.908v-1.982a.927.927 0 01.273-.657.94.94 0 01.656-.27h2.88a3.012 3.012 0 00-2.88-2.1H43.417v1.049a.927.927 0 11-1.853 0V1.921a.087.087 0 00-.018-.05.073.073 0 00-.047-.021H5.873a.065.065 0 00-.044.021.071.071 0 00-.018.05V18.74a.928.928 0 11-1.856 0V1.921A1.92 1.92 0 015.873 0h35.626a1.922 1.922 0 011.917 1.921v2.04h6.991a3.9 3.9 0 013.9 3.889v.991a.936.936 0 01-.739.908l1.54 6.14a4.907 4.907 0 014.141 4.83v9.9a.92.92 0 01-.92.919h-3.037v.068a5.873 5.873 0 11-11.745 0v-.068H22.635v.068a5.876 5.876 0 11-11.752 0zm34.521 0a4.02 4.02 0 104.018-4.018 4.019 4.019 0 00-4.019 4.018zm-32.657 0a4.02 4.02 0 104.017-4.018 4.019 4.019 0 00-4.018 4.018zM55.297 22.7a1.059 1.059 0 001.063 1.048h1.049v-2.1h-2.111zm-11.871-6.869h9.763L51.667 9.77h-8.24zm0-7.91h9.03v-.072a2.045 2.045 0 00-2.039-2.04h-6.991zm6 25.6h.008zm-32.653 0a1.914 1.914 0 111.918-1.91 1.911 1.911 0 01-1.918 1.91zm0 0zm30.754-1.917a1.914 1.914 0 111.91 1.917 1.911 1.911 0 01-1.918-1.921zm10.814-.061zm-33.651-3.95a.93.93 0 010-1.86h13.853a.931.931 0 01.931.93.932.932 0 01-.926.93zM2.92 23.632a.93.93 0 110-1.86h11.874a.93.93 0 010 1.86zm22.8-6.086a4.343 4.343 0 01-1.645-1.77 5.369 5.369 0 01-.574-2.492 5.176 5.176 0 01.636-2.567 4.574 4.574 0 011.773-1.784 5.041 5.041 0 012.546-.646 6.473 6.473 0 011.274.154 4.883 4.883 0 011.328.463l-.574 1.3a2.586 2.586 0 00-.377-.111c-.352-.1-.636-.176-.848-.215a3.88 3.88 0 00-.775-.065 3.151 3.151 0 00-1.569.392 2.828 2.828 0 00-1.112 1.17 4.014 4.014 0 00-.413 1.9 4.334 4.334 0 00.352 1.8 2.694 2.694 0 00.987 1.192 2.645 2.645 0 001.462.413 6.986 6.986 0 001.386-.154v-2.327h-2l.15-1.4h3.477v4.7a6.281 6.281 0 01-1.361.5 6.555 6.555 0 01-1.608.2 4.739 4.739 0 01-2.519-.655zm-8.079.38a5.8 5.8 0 01-1.35-.553l.405-1.472a7.536 7.536 0 001.178.47 4.2 4.2 0 001.2.2 2.449 2.449 0 001.274-.266.854.854 0 00.435-.769.833.833 0 00-.345-.639 7.19 7.19 0 00-1.056-.678l-.42-.251q-.937-.56-1.494-.966a4.386 4.386 0 01-.951-.959 2.073 2.073 0 01-.4-1.239 2.313 2.313 0 01.392-1.311 2.6 2.6 0 011.127-.908 4.3 4.3 0 011.76-.331 6.318 6.318 0 012.686.714l-.6 1.458a7.93 7.93 0 00-1.041-.435 3.191 3.191 0 00-1.016-.154 1.949 1.949 0 00-1.027.244.8.8 0 00-.4.722.869.869 0 00.313.679 7.61 7.61 0 001.03.693l.449.251.405.237c.55.32.987.6 1.314.833a3.333 3.333 0 01.822.869 2.2 2.2 0 01.326 1.2 2.3 2.3 0 01-.412 1.357 2.731 2.731 0 01-1.218.923 5.012 5.012 0 01-1.925.337 5.391 5.391 0 01-1.465-.258z"/>
+    </symbol>
+    <symbol id="ico-delivery" viewBox="0 0 59.139 38.341">
+      <path d="M52.469 0a6.672 6.672 0 106.67 6.676A6.654 6.654 0 0052.469 0zm0 1.785a4.886 4.886 0 11-4.889 4.891 4.881 4.881 0 014.889-4.891zm-4.936 18.92v.893l-2.971 2.232h-3.784a2.77 2.77 0 00-2.879 2.814 2.82 2.82 0 002.834 2.812h6.3a.89.89 0 00.5-.149v8.146a.893.893 0 00.9.889h9.819a.893.893 0 00.889-.889V20.706a5.803 5.803 0 10-11.606 0zm5.807-4.019a3.994 3.994 0 014.021 4.019v15.857h-8.044v-8.455l4.44-2.98a3.263 3.263 0 001.219-4.507 3.331 3.331 0 00-4.533-1.207c-.357.259-.721.538-1.079.807a3.975 3.975 0 013.972-3.534zm.092 4.837a1.482 1.482 0 01-.56 2.056c-2.033 1.358-4.074 2.728-6.11 4.093h-6.029a1.034 1.034 0 01-1.048-1.028 1 1 0 011.048-1.029h4.126a.893.893 0 00.533-.177l5.951-4.469a1.531 1.531 0 012.089.554zm0 0"/>
+      <path d="M6.677 0a6.675 6.675 0 106.535 5.31h1.967a.893.893 0 100-1.785h-2.622A6.613 6.613 0 006.677 0zm0 1.785a4.921 4.921 0 013.744 1.74H2.933a4.923 4.923 0 013.744-1.74zm4.7 3.525a4.889 4.889 0 11-9.585 1.366 5.939 5.939 0 01.2-1.36zM.004 20.71v16.743a.9.9 0 00.9.889h9.82a.89.89 0 00.889-.889v-8.151a.844.844 0 00.5.156h6.304a2.814 2.814 0 10-.046-5.627h-3.782l-2.98-2.235v-.889a5.803 5.803 0 10-11.606 0zm5.808-4.019a3.977 3.977 0 013.972 3.538l-.993-.744a3.313 3.313 0 00-4.621 1.14 3.274 3.274 0 001.219 4.507l4.443 2.982v8.453h-8.04V20.705a3.992 3.992 0 014.02-4.019zm2 4.282c.458.358 5.222 3.926 5.945 4.469a.892.892 0 00.533.178h4.18a.991.991 0 01.994 1.029 1.026 1.026 0 01-1.048 1.027h-6.03c-.729-.51-4-2.682-6.056-4.059a1.493 1.493 0 01-.619-2.089 1.546 1.546 0 012.1-.555z"/>
+      <path d="M16.979 25.615V12.84a1.622 1.622 0 011.62-1.621h22.005a1.622 1.622 0 011.62 1.621v12.775h1.8V12.84a3.424 3.424 0 00-3.42-3.42H18.599a3.424 3.424 0 00-3.421 3.42v12.775z"/>
+      <path d="M42.224 27.671v6.15a1.622 1.622 0 01-1.62 1.62H18.599a1.622 1.622 0 01-1.62-1.62v-6.15h-1.8v6.15a3.424 3.424 0 003.421 3.42h22.005a3.424 3.424 0 003.42-3.42v-6.15z"/>
+      <path d="M29.207 22.262l.421.23.381.229a14.379 14.379 0 011.237.775 3.046 3.046 0 01.769.823 2.006 2.006 0 01.309 1.125 2.167 2.167 0 01-.388 1.271 2.66 2.66 0 01-1.144.871 4.79 4.79 0 01-1.815.315 5.223 5.223 0 01-1.375-.242 5.853 5.853 0 01-1.27-.521l.382-1.379a7.147 7.147 0 001.1.436 3.684 3.684 0 001.131.193 2.28 2.28 0 001.2-.254.793.793 0 00.408-.726.767.767 0 00-.322-.593 7.015 7.015 0 00-.994-.641l-.394-.23q-.882-.526-1.4-.908a3.975 3.975 0 01-.9-.908 1.9 1.9 0 01-.375-1.161 2.153 2.153 0 01.363-1.235 2.435 2.435 0 011.059-.847 4.015 4.015 0 011.651-.314 5.924 5.924 0 012.525.677l-.565 1.368a7.078 7.078 0 00-.98-.412 3.025 3.025 0 00-.954-.145 1.791 1.791 0 00-.968.23.747.747 0 00-.375.677.814.814 0 00.3.642 7.48 7.48 0 00.968.655z" fill-rule="evenodd"/>
+    </symbol>
+    <symbol id="ico-low-price" viewBox="0 0 32 32">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M32 21.19c0 5.86-4.77 10.63-10.63 10.63-3.06 0-5.82-1.3-7.76-3.38H6.25c-1.58 0-2.87-1.29-2.87-2.88 0-.91.43-1.72 1.09-2.25-.66-.53-1.09-1.34-1.09-2.25s.43-1.72 1.09-2.25c-.66-.53-1.09-1.34-1.09-2.25s.43-1.72 1.09-2.25a2.885 2.885 0 01-1.09-2.25c0-1.59 1.29-2.88 2.87-2.88h1.63a2.78 2.78 0 01-.5-1.62c0-.6.19-1.16.51-1.63H2.87A2.864 2.864 0 010 3.06C0 1.48 1.29.18 2.87.18h15.31a2.88 2.88 0 012.88 2.88c0 .6-.19 1.16-.51 1.63h5a2.88 2.88 0 010 5.76h-1.63c.11.16.2.33.28.51 4.5 1.23 7.8 5.35 7.8 10.23zm-25.75 6h6.36a10.71 10.71 0 01-1.5-3.25H6.25c-.9 0-1.62.73-1.62 1.63s.72 1.62 1.62 1.62zm0-4.5h4.61c-.07-.49-.11-.99-.11-1.5 0-.6.05-1.18.15-1.75H6.25c-.9 0-1.62.73-1.62 1.63s.72 1.62 1.62 1.62zm0-4.5h4.93c.35-1.18.9-2.28 1.61-3.25H6.25c-.9 0-1.62.73-1.62 1.63 0 .89.72 1.62 1.62 1.62zm0-7.75c-.9 0-1.62.73-1.62 1.63s.73 1.63 1.62 1.63h7.61a10.614 10.614 0 018.42-3.09c-.22-.11-.46-.16-.71-.16H6.25zm11.94-9H2.87a1.63 1.63 0 000 3.26h15.31a1.63 1.63 0 00.01-3.26zm7.37 7.75a1.63 1.63 0 000-3.26H10.25a1.63 1.63 0 000 3.26h15.31zm-4.19 2.62c-5.17 0-9.37 4.21-9.37 9.38s4.21 9.38 9.37 9.38c5.17 0 9.38-4.21 9.38-9.38s-4.21-9.38-9.38-9.38zm8.13 9.38c0 1.33-.33 2.65-.95 3.81a.624.624 0 11-1.1-.59c.52-.99.8-2.1.8-3.22 0-2.63-1.53-5.06-3.9-6.2a.629.629 0 01-.29-.84.62.62 0 01.83-.29c1.36.65 2.51 1.67 3.33 2.94a8.118 8.118 0 011.28 4.39zm-7.15-6.88h-.04c-.35 0-.63-.28-.63-.63s.28-.63.63-.63h.04c.35 0 .62.28.62.63.01.36-.27.63-.62.63zm-.28 10.66h-1.18v-7l-1.7.8-.52-.94 2.62-1.21h.78v8.35zm-3.38 3.25c-.11.22-.33.36-.56.36a.66.66 0 01-.27-.06 8.154 8.154 0 01-3.33-2.94 8.084 8.084 0 01-1.28-4.38c0-1.33.33-2.65.95-3.81.16-.31.54-.42.85-.26.31.16.42.54.26.84-.53.99-.8 2.1-.8 3.23 0 2.63 1.53 5.06 3.9 6.2.3.14.43.51.28.82zm1.71-.16h.04c.35 0 .63.28.63.63s-.28.63-.63.63h-.04c-.35 0-.62-.28-.62-.63-.01-.35.27-.63.62-.63z"/>
+    </symbol>
+    <symbol id="ico-phone" viewBox="0 0 20.463 20.5">
+      <path d="M17.606 20.5c-.085 0-.172 0-.257-.012h-.018a19.468 19.468 0 01-8.444-3 19.229 19.229 0 01-5.871-5.871 19.464 19.464 0 01-3-8.484v-.016A2.857 2.857 0 012.854 0h2.8a2.87 2.87 0 012.828 2.457v.009a10.936 10.936 0 00.6 2.39 2.864 2.864 0 01-.644 3.012l-.625.625a13.862 13.862 0 004.156 4.156l.625-.625a2.856 2.856 0 013.014-.643 10.932 10.932 0 002.388.594h.009a2.856 2.856 0 012.457 2.886v2.774a2.857 2.857 0 01-2.856 2.865zm-.07-2a.857.857 0 00.926-.857v-2.792-.025a.857.857 0 00-.734-.869 12.939 12.939 0 01-2.821-.7.856.856 0 00-.9.191l-1.18 1.172a1 1 0 01-1.2.162 15.861 15.861 0 01-5.945-5.945 1 1 0 01.162-1.2L7.018 6.46a.859.859 0 00.192-.9 12.944 12.944 0 01-.7-2.824A.861.861 0 005.658 2h-2.8a.857.857 0 00-.852.927 17.454 17.454 0 002.694 7.6v.007A17.214 17.214 0 009.964 15.8h.008a17.456 17.456 0 007.56 2.7z"/>
+    </symbol>
+    <symbol id="ico-email" viewBox="0 0 19.988 16.391">
+      <path d="M2.8 0h14.39a2.8 2.8 0 012.8 2.8v10.792a2.8 2.8 0 01-2.8 2.8H2.8a2.8 2.8 0 01-2.8-2.8V2.8A2.8 2.8 0 012.8 0zm14.39 14.39a.8.8 0 00.8-.8V2.8a.8.8 0 00-.8-.8H2.8a.8.8 0 00-.8.8v10.792a.8.8 0 00.8.8z"/>
+      <path d="M9.994 10.099a1 1 0 01-.573-.181l-8.994-6.3A1 1 0 011.573 1.98l8.421 5.894 8.421-5.894a1 1 0 011.147 1.638l-8.994 6.3a1 1 0 01-.574.181z"/>
+    </symbol>
+    <symbol id="ico-edee" viewBox="0 0 59.1 19">
+      <g transform="translate(-1113 -1370.766)">
+        <path fill="#243866" d="M1119.6 1384.3c-.8.4-1.6.6-2.5.6-.7.1-1.4-.3-1.9-.9-.2-.4-.3-.8-.3-1.2 3.5.1 5.9-.6 5.9-2.7 0-1.5-1.2-2.4-2.9-2.4-2.8.1-5 2.4-4.9 5.2-.2 1.8 1.2 3.4 3 3.6h.7c1.1 0 2.2-.2 3.2-.7l-.3-1.5zm-.7-4.2c0 1-1.4 1.2-3.7 1.2.3-1.2 1.3-2 2.5-2.1.7.1 1.2.4 1.2.9zM1128.4 1374l-.7 4c-.5-.2-.9-.2-1.4-.2-3 0-5.5 2.4-5.5 5.4v.1c0 2 1.2 3.3 2.8 3.3 1.3 0 2.4-.7 3.1-1.8l-.2 1.6h1.9c.1-1 .2-2 .4-3l1.7-9.3-2.1-.1zm-1.5 7.9c-.3 1.9-1.6 3-2.6 3s-1.5-.9-1.5-1.9c-.1-1.8 1.3-3.4 3.1-3.6h.1c.5 0 .9.1 1.3.3l-.4 2.2zM1136.2 1384.3c-.8.4-1.6.6-2.5.6-.7.1-1.4-.3-1.9-.9-.2-.4-.3-.8-.3-1.2 3.5.1 5.9-.6 5.9-2.7 0-1.5-1.2-2.4-2.9-2.4-2.8.1-5 2.4-4.9 5.2-.2 1.8 1.2 3.4 3 3.6h.7c1.1 0 2.2-.2 3.2-.7l-.3-1.5zm-.7-4.2c0 1-1.4 1.2-3.7 1.2.3-1.2 1.3-2 2.5-2.1.7.1 1.2.4 1.2.9z"/>
+        <path fill="#243866" d="M1143.9 1384.3c-.8.4-1.6.6-2.5.6-.7.1-1.4-.3-1.9-.9-.2-.4-.3-.8-.3-1.2 3.5.1 5.9-.6 5.9-2.7 0-1.5-1.2-2.4-2.9-2.4-2.8.1-5 2.4-4.9 5.2-.2 1.8 1.2 3.4 3 3.6h.7c1.1 0 2.2-.2 3.2-.7l-.3-1.5zm-.7-4.2c0 1-1.4 1.2-3.7 1.2.3-1.2 1.3-2 2.5-2.1.7.1 1.2.4 1.2.9z"/>
+        <path fill="#c84079" d="M1145.9 1386.5c.6 0 1.1-.5 1.1-1.1v-.1c0-.5-.4-1-.9-1.1h-.1c-.6 0-1.1.5-1.1 1.1v.1c0 .6.4 1.1 1 1.1z"/>
+        <path fill="#243866" d="M1151.2 1386.5c2.7 0 4.9-2.2 4.9-4.9v-.1c.1-1.9-1.3-3.6-3.3-3.7h-.4c-2.7 0-4.9 2.2-4.9 4.9v.2c-.1 1.9 1.4 3.5 3.3 3.6h.4zm.1-1.1c-1.3 0-2.3-1-2.3-2.3v-.2c0-2 1.3-3.9 3.2-3.9 1.3 0 2.3 1.1 2.3 2.4v.1c0 2.1-1.4 3.9-3.2 3.9zM1157.5 1386.3l.7-3.8c.4-2.2 2-3.5 3.1-3.5s1.5.7 1.5 1.6c0 .4 0 .7-.1 1l-.9 4.6h1.5l.9-4.7c.1-.4.1-.9.2-1.3.2-1.2-.7-2.3-1.9-2.5h-.4c-1.4 0-2.6.8-3.3 1.9l.2-1.7h-1.3c-.1.7-.2 1.4-.4 2.3l-1.1 6h1.3zM1170.9 1384.7c-.8.4-1.6.6-2.5.6-.8.1-1.6-.4-2-1.1-.2-.5-.3-1-.2-1.5 3.3.1 5.9-.4 5.9-2.6 0-1.3-1-2.2-2.6-2.2-2.7 0-4.8 2.7-4.8 5.3-.2 1.7 1.1 3.3 2.9 3.5h.5c1 0 2-.2 3-.7l-.2-1.3zm-.2-4.7c0 1.3-1.8 1.5-4.4 1.5.3-1.4 1.5-2.4 2.9-2.6.9 0 1.5.4 1.5 1.1z"/>
+      </g>
+    </symbol>
+    <symbol id="ico-fg" viewBox="0 0 19 19">
+      <path fill="#243866" d="M19 17.5v-16c0-.8-.7-1.5-1.5-1.5h-16C.7 0 0 .7 0 1.5v15.9c0 .9.7 1.6 1.5 1.6h15.9c.9 0 1.6-.7 1.6-1.5zm-11.6-9c0 .3-.1.6-.1 1V9.8c0 .3 0 .5.1.8H5.5V14H3V4.8h5.6v.7c-.3.4-.5.8-.7 1.3H5.5v1.7h1.9zm9 5.1c-1 .3-2.1.5-3.2.5-1.3.1-2.5-.3-3.4-1.3-.9-.8-1.4-2-1.4-3.3 0-3.2 1.9-4.9 4.9-4.9.9 0 1.8.1 2.7.5l-.5 2c-.7-.3-1.5-.4-2.2-.4-1.4 0-2.4 1.2-2.4 2.5v.1c0 1.7 1 2.7 2.2 2.7.3 0 .5 0 .8-.1v-1.6h-1.2V8.5h3.6l.1 5.1z"/>
+    </symbol>
+  </svg>
+
+  <!-- Floating Heureka Verified Tab -->
+  <button type="button" class="heureka-tab" id="heurekaTabBtn" title="Ověřeno zákazníky – 98 % doporučuje">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+      <path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"/>
+      <path d="M9 12l2 2 4-4"/>
+    </svg>
+    <span class="heureka-tab__text">Ověřeno zákazníky</span>
+  </button>
+
+  <!-- Top Utility Strip -->
+  <div class="top-bar">
+    <div class="container top-bar__inner">
+      <ul class="top-bar__usps">
+        <li class="top-bar__usp">
+          <svg class="svg-icon"><use href="#ico-truck"></use></svg>
+          <span>Výhodná doprava na vše</span>
+        </li>
+        <li class="top-bar__usp">
+          <svg class="svg-icon"><use href="#ico-carry"></use></svg>
+          <span>Pomůžeme vám s odnosem</span>
+        </li>
+        <li class="top-bar__usp">
+          <svg class="svg-icon"><use href="#ico-coins"></use></svg>
+          <span>Garantujeme nejnižší ceny</span>
+        </li>
+      </ul>
+      <div class="top-bar__contact">
+        <span class="top-bar__contact-label">Zákaznická linka:</span>
+        <a href="tel:+420222745674" class="top-bar__phone">
+          <svg class="svg-icon"><use href="#ico-phone-full"></use></svg>
+          <span>222 745 674</span>
+        </a>
+        <span class="top-bar__hours">(Po - Pá: 8:00 - 16:00)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main E-Shop Header -->
+  <header class="main-header">
+    <div class="container main-header__inner">
+      <!-- SG Nábytek Brand Logo -->
+      <a href="#uvodni-stranka" class="brand-logo" data-route="catalog" data-category="all" aria-label="SG nábytek – úvodní stránka">
+        <span class="brand-logo__mark">
+          <svg width="70" height="38" viewBox="0 0 70 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="19" cy="19" r="18" fill="#c84079"/>
+            <text x="19" y="24" text-anchor="middle" fill="#ffffff" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="16">S</text>
+            <circle cx="51" cy="19" r="18" fill="#243866"/>
+            <text x="51" y="24" text-anchor="middle" fill="#ffffff" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="16">G</text>
+          </svg>
+        </span>
+        <span class="brand-logo__wordmark">NÁBYTEK</span>
+      </a>
+
+      <!-- Autocomplete Search -->
+      <div class="header-search" id="headerSearchWrap">
+        <div class="header-search__box">
+          <svg class="svg-icon header-search__icon"><use href="#ico-search"></use></svg>
+          <input
+            type="search"
+            id="searchInput"
+            class="header-search__input"
+            placeholder="Co hledáte? Např. Sedací soupravy"
+            autocomplete="off"
+          >
+          <button type="button" id="searchClearBtn" class="header-search__clear" aria-label="Vymazat hledání">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+              <path d="M18 6L6 18M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+        <div class="search-dropdown" id="searchDropdown"></div>
+      </div>
+
+      <!-- User Utility Icons -->
+      <div class="header-actions">
+        <button type="button" class="header-action" id="loginOpenBtn" title="Přihlášení">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        </button>
+
+        <button type="button" class="header-action" data-route="compare" title="Porovnávač produktů">
+          <svg viewBox="0 0 24 24"><path d="M12 3v18M8 21h8M4 8h16M4 8l-2 5h4l-2-5zm16 0l-2 5h4l-2-5z"/></svg>
+          <span class="header-action__badge" id="compareBadge">0</span>
+        </button>
+
+        <button type="button" class="header-action" data-route="wishlist" title="Oblíbené položky">
+          <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.8-9.5-9.2C.9 8.2 3.2 4.5 6.8 4.5c2.1 0 3.9 1.1 5.2 2.8 1.3-1.7 3.1-2.8 5.2-2.8 3.6 0 5.9 3.7 4.3 7.3C19.5 16.2 12 21 12 21z"/></svg>
+          <span class="header-action__badge" id="wishlistBadge">0</span>
+        </button>
+
+        <button type="button" class="header-action header-action--cart" data-route="cart" title="Nákupní košík">
+          <svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.4 11.2a1.5 1.5 0 001.5 1.2h8.8a1.5 1.5 0 001.4-1.1L21 7H6"/></svg>
+          <span class="header-action__badge" id="cartBadge">0</span>
+          <span id="headerCartTotal">0 Kč</span>
+        </button>
+
+        <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 6h18M3 12h18M3 18h18"/>
+          </svg>
+          <span>Menu</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Primary Navy Navigation Bar -->
+    <nav class="main-nav" id="mainNav" aria-label="Hlavní navigace">
+      <div class="container main-nav__inner">
+        <ul class="main-nav__left">
+          <li class="main-nav__item" data-mega="nabytek">
+            <button type="button" class="main-nav__link" data-route="catalog" data-category="all">
+              <span>Nábytek</span>
+              <svg class="main-nav__chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 1l4 4 4-4"/></svg>
+            </button>
+          </li>
+          <li class="main-nav__item" data-mega="mistnosti">
+            <button type="button" class="main-nav__link" data-route="catalog" data-category="all">
+              <span>Místnosti</span>
+              <svg class="main-nav__chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 1l4 4 4-4"/></svg>
+            </button>
+          </li>
+          <li class="main-nav__item">
+            <button type="button" class="main-nav__link" data-route="catalog" data-category="Sedací soupravy a pohovky">Sedací soupravy a pohovky</button>
+          </li>
+          <li class="main-nav__item">
+            <button type="button" class="main-nav__link" data-route="catalog" data-category="Komody">Komody</button>
+          </li>
+          <li class="main-nav__item">
+            <button type="button" class="main-nav__link" data-route="catalog" data-category="Postele">Postele</button>
+          </li>
+          <li class="main-nav__item">
+            <button type="button" class="main-nav__link" data-route="catalog" data-category="Šatní skříně">Šatní skříně</button>
+          </li>
+          <li class="main-nav__item">
+            <button type="button" class="main-nav__link main-nav__link--sale" data-route="catalog" data-category="Výprodej">Výprodej</button>
+          </li>
+        </ul>
+
+        <ul class="main-nav__right">
+          <li class="main-nav__item">
+            <button type="button" class="main-nav__link" data-route="info" data-info="o-nas">O nás</button>
+          </li>
+          <li class="main-nav__item">
+            <button type="button" class="main-nav__link" data-route="info" data-info="clanky">Články</button>
+          </li>
+          <li class="main-nav__item">
+            <button type="button" class="main-nav__link" data-route="info" data-info="kontakt">Kontakt</button>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Interactive Megamenu Drawer -->
+      <div class="megamenu" id="megamenuDrawer">
+        <div class="container" id="megamenuContent"></div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Breadcrumb Trail -->
+  <div class="breadcrumb-bar">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Drobečková navigace">
+        <a href="#uvodni-stranka" class="breadcrumb__link" data-route="catalog" data-category="all">Úvodní stránka</a>
+        <span id="breadcrumbCurrentWrap" style="display:none;">
+          <span>/</span>
+          <span id="breadcrumbCurrent">Informace o cookies</span>
+        </span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Main Content Area -->
+  <main class="main-view" role="main">
+
+    <!-- VIEW 1: INFORMACE O COOKIES (DEFAULT INITIAL VIEW MATCHING SCREENSHOT) -->
+    <section id="view-cookies" class="view-panel is-active">
+      <div class="container cookies-info-page">
+        <h1 class="page-title">Informace o cookies</h1>
+        <div class="wysiwyg-copy">
+          <p>Cookie je krátký textový soubor, který navštívená webová stránka odešle do prohlížeče. Umožňuje webu zaznamenat informace o&nbsp;vaší návštěvě, například preferovaný jazyk a&nbsp;další nastavení. Příští návštěva stránek tak může být snazší a&nbsp;produktivnější. Soubory cookie jsou důležité. Bez nich by procházení webu bylo mnohem složitější.</p>
+          <p>Soubory cookie slouží k&nbsp;celé řadě účelů. Používáme je například k&nbsp;ukládání vašich nastavení bezpečného vyhledávání, k&nbsp;výběru relevantních reklam, ke sledování počtu návštěvníků na stránce, k&nbsp;usnadnění registrace nových služeb a&nbsp;k&nbsp;ochraně vašich dat.</p>
+          <p>Webové rozhraní obchodu používá službu Google Analytics, poskytovanou společností Google, Inc. (dále jen "Google"). Služba Google Analytics používá souborů "cookies", které jsou textovými soubory ukládanými počítače Kupujícího a&nbsp;Uživatelů webového rozhraní obchodu umožňující analýzu způsobu užívání webového rozhraní obchodu Kupujícím a&nbsp;Uživateli. Informace vygenerované souborem cookie o&nbsp;užívání stránky (včetně IP adresy) budou společností Google přeneseny a&nbsp;uloženy na serverech ve Spojených státech. Google bude užívat těchto informací pro účely vyhodnocování užívání webového rozhraní obchodu a&nbsp;vytváření zpráv o&nbsp;jeho aktivitě, určených pro Prodávajícího a&nbsp;provozovatele webového rozhraní obchodu a&nbsp;pro užívání internetu vůbec. Google může také poskytnout tyto informace třetím osobám, bude-li to požadováno zákonem nebo budou-li takovéto třetí osoby zpracovávat tyto informace pro Google. Google nebude spojovat IP adresu Kupujícího a&nbsp;Uživatelů s&nbsp;jakýmikoli jinými daty, která má k&nbsp;dispozici. Kupující a&nbsp;Uživatelé webového rozhraní obchodu mohou odmítnout používání souborů cookies volbou v&nbsp;přísluém nastavení v&nbsp;internetovém prohlížeči, avšak v&nbsp;tomto případně není vyloučeno, že nebude možné plně využívat veškeré funkce webového rozhraní obchodu. Používáním webového rozhraní obchodu souhlasí Kupující a&nbsp;Uživatelé se zpracováváním údajů o&nbsp;nich společností Google, a&nbsp;to způsobem a&nbsp;k&nbsp;účelu shora uvedeným.</p>
+          <p style="margin-top: 22px;">
+            <button type="button" class="btn btn--indigo" id="openCookieModalInlineBtn">Nastavení cookies</button>
+          </p>
+        </div>
+
+        <!-- Bottom Cookie Consent Banner (Visible below content just like screenshot) -->
+        <aside class="cookie-banner" id="cookieBottomBanner" aria-label="Informace o souborech cookies">
+          <div class="cookie-banner__art" aria-hidden="true">
+            <!-- Stylized Cookie & Crumbs Illustration replacing external GIF -->
+            <svg width="92" height="98" viewBox="0 0 92 98" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="48" cy="48" r="30" fill="#e8dcc8"/>
+              <path d="M68 25c-4 3-5 9-1 13 4 4 10 3 13-1 2 7 1 15-3 21-9 14-28 18-42 9-14-9-18-28-9-42 9-14 28-18 42-9z" fill="#d9c6a5"/>
+              <circle cx="38" cy="36" r="3.5" fill="#7c5b3e"/>
+              <circle cx="52" cy="46" r="4" fill="#6d4c30"/>
+              <circle cx="36" cy="56" r="3" fill="#7c5b3e"/>
+              <circle cx="55" cy="62" r="2.8" fill="#6d4c30"/>
+              <circle cx="46" cy="31" r="2.2" fill="#8b694b"/>
+              <circle cx="22" cy="74" r="2.5" fill="#cbb38e"/>
+              <circle cx="31" cy="82" r="1.8" fill="#7c5b3e"/>
+              <circle cx="67" cy="76" r="2.2" fill="#cbb38e"/>
+              <circle cx="18" cy="42" r="1.6" fill="#9c7a5b"/>
+              <circle cx="74" cy="48" r="2" fill="#9c7a5b"/>
+            </svg>
+          </div>
+          <div class="cookie-banner__body">
+            <h2 class="cookie-banner__title">Nastavení cookies: Aby&nbsp;web fungoval, jak&nbsp;má</h2>
+            <p class="cookie-banner__text">
+              Používáme cookies a&nbsp;mobilní reklamní identifikátory k&nbsp;zajištění funkčnosti webu, měření návštěvnosti, zlepšování služeb a&nbsp;k&nbsp;zobrazování personalizované i&nbsp;nepersonalizované reklamy. Se&nbsp;souhlasem můžeme tyto údaje sdílet s&nbsp;našimi partnery (např. Google) pro analytiku, měření konverzí, remarketing a&nbsp;personalizaci reklam. Volbu můžete kdykoli změnit v&nbsp;Nastavení cookies. Informace o&nbsp;tom, jak Google používá data, najdete zde:
+              <a href="https://business.safety.google/privacy/" target="_blank" rel="noopener noreferrer">business.safety.google/privacy</a>.
+              Více najdete na&nbsp;stránce <a href="#informace-o-cookies" data-route="cookies">Informace o&nbsp;cookies</a>.
+            </p>
+            <div class="cookie-banner__actions">
+              <button type="button" class="btn btn--indigo" id="bannerSettingsBtn">Podrobné nastavení</button>
+              <button type="button" class="btn btn--indigo" id="bannerTechnicalBtn">Pouze technické cookies</button>
+              <button type="button" class="btn btn--magenta" id="bannerAcceptAllBtn">Povolit všechny cookies</button>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- VIEW 2: STOREFRONT & PRODUCT CATALOG -->
+    <section id="view-catalog" class="view-panel">
+      <div class="container">
+        <div class="hero-banner">
+          <div>
+            <span class="hero-banner__tag">SIGNAL nábytek je nově SG nábytek</span>
+            <h1 class="hero-banner__title">Moderní nábytek pro váš domov za nejnižší ceny na trhu</h1>
+            <p class="hero-banner__desc">Vyberte si z tisíců položek skladem. Při objednávce nad 15 000 Kč máte vlastní dopravu SG nábytek včetně pomoci s odnosem zcela zdarma.</p>
+            <div class="hero-banner__actions">
+              <button type="button" class="btn btn--magenta" data-category-filter="Výprodej">Zobrazit výprodej až -40 %</button>
+              <button type="button" class="btn btn--outline" style="background:rgba(255,255,255,0.12); color:#fff; border-color:rgba(255,255,255,0.35);" data-route="cookies">Zpět na Informace o cookies</button>
+            </div>
+          </div>
+          <div style="display:flex; justify-content:center;">
+            <!-- Stylized Living Room Illustration -->
+            <svg width="260" height="150" viewBox="0 0 260 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="24" y="62" width="212" height="54" rx="14" fill="#f8fafc"/>
+              <rect x="34" y="42" width="192" height="32" rx="10" fill="#e2e8f0"/>
+              <rect x="16" y="72" width="22" height="44" rx="8" fill="#cbd5e1"/>
+              <rect x="222" y="72" width="22" height="44" rx="8" fill="#cbd5e1"/>
+              <rect x="52" y="50" width="38" height="24" rx="6" fill="#c84079"/>
+              <rect x="170" y="50" width="38" height="24" rx="6" fill="#c84079"/>
+              <rect x="44" y="116" width="8" height="16" rx="3" fill="#94a3b8"/>
+              <rect x="208" y="116" width="8" height="16" rx="3" fill="#94a3b8"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="category-pills" id="categoryPills"></div>
+
+        <div class="catalog-toolbar">
+          <div>
+            <h2 id="catalogHeading" style="font-family:var(--font-display); font-size:22px; color:var(--color-navy-800);">Všechny kategorie nábytku</h2>
+            <p id="catalogCount" style="font-size:12.5px; color:var(--color-text-muted);">Zobrazeno 8 produktů</p>
+          </div>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <label for="sortSelect" style="font-size:13px; color:var(--color-text-secondary);">Řadit dle:</label>
+            <select id="sortSelect" style="padding:8px 14px; border-radius:var(--radius-pill); border:1px solid var(--color-border-strong); font-size:13px; color:var(--color-navy-800); background:#fff;">
+              <option value="featured">Doporučené</option>
+              <option value="price-asc">Nejlevnější</option>
+              <option value="price-desc">Nejdražší</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="product-grid" id="productGrid"></div>
+      </div>
+    </section>
+
+    <!-- VIEW 3: POROVNÁVAČ PRODUKTŮ (02-porovnat) -->
+    <section id="view-compare" class="view-panel">
+      <div class="container">
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
+          <h1 class="page-title" style="margin-bottom:0;">Porovnávač zboží</h1>
+          <div style="display:flex; gap:10px;">
+            <button type="button" class="btn btn--outline btn--sm" id="clearCompareBtn">Vymazat porovnávač</button>
+            <button type="button" class="btn btn--indigo btn--sm" data-route="catalog" data-category="all">+ Přidat další nábytek</button>
+          </div>
+        </div>
+        <div id="compareContent"></div>
+      </div>
+    </section>
+
+    <!-- VIEW 4: OBLÍBENÉ POLOŽKY (03-oblibene) -->
+    <section id="view-wishlist" class="view-panel">
+      <div class="container">
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
+          <h1 class="page-title" style="margin-bottom:0;">Oblíbené položky</h1>
+          <button type="button" class="btn btn--indigo btn--sm" data-route="catalog" data-category="all">Pokračovat v nákupu</button>
+        </div>
+        <div id="wishlistContent"></div>
+      </div>
+    </section>
+
+    <!-- VIEW 5: NÁKUPNÍ KOŠÍK (04-nakupni-kosik) -->
+    <section id="view-cart" class="view-panel">
+      <div class="container">
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
+          <h1 class="page-title" style="margin-bottom:0;">Nákupní košík</h1>
+          <button type="button" class="btn btn--outline btn--sm" data-route="catalog" data-category="all">← Zpět do obchodu</button>
+        </div>
+        <div id="cartContent"></div>
+      </div>
+    </section>
+
+    <!-- VIEW 6: INFORMAČNÍ STRÁNKY (O nás, Články, Kontakt, Obchodní podmínky...) -->
+    <section id="view-info" class="view-panel">
+      <div class="container cookies-info-page" id="infoPageContent"></div>
+    </section>
+
+  </main>
+
+  <!-- USP Strip Above Footer (Matches Screenshot) -->
+  <section class="usp-strip" aria-label="Výhody nákupu">
+    <div class="container usp-strip__grid">
+      <div class="usp-item">
+        <svg class="svg-icon usp-item__icon"><use href="#ico-transport-sg"></use></svg>
+        <div>
+          <h3 class="usp-item__title">Výhodná doprava na vše</h3>
+          <p class="usp-item__text">Garantujeme nejvýhodnější cenu dopravy na trhu. Při objednávce nad 15000&nbsp;Kč máte dopravu zcela zdarma.</p>
+        </div>
+      </div>
+
+      <div class="usp-item">
+        <svg class="svg-icon usp-item__icon"><use href="#ico-delivery"></use></svg>
+        <div>
+          <h3 class="usp-item__title">Vlastní doprava a&nbsp;pomoc s&nbsp;odnosem</h3>
+          <p class="usp-item__text">Zboží vám dovezou naši zaměstnanci a&nbsp;pomohou vám i&nbsp;s&nbsp;odnosem nábytku.</p>
+        </div>
+      </div>
+
+      <div class="usp-item">
+        <svg class="svg-icon usp-item__icon"><use href="#ico-low-price"></use></svg>
+        <div>
+          <h3 class="usp-item__title">Nejnižší ceny</h3>
+          <p class="usp-item__text">Garantujeme nejvýhodnější ceny na trhu.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Site Footer (Matches Screenshot) -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="site-footer__grid">
+        <!-- Column 1: Newsletter & Trust Badges -->
+        <div class="site-footer__newsletter-col">
+          <div class="newsletter-head">
+            <span class="newsletter-head__icon">
+              <svg width="20" height="16" viewBox="0 0 20 16" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="1" y="1" width="18" height="14" rx="2.5"/>
+                <path d="M2 2l8 6 8-6"/>
+              </svg>
+            </span>
+            <div>
+              <h2 class="newsletter-head__title">Přihlaste se k odběru našeho newsletteru</h2>
+              <p class="newsletter-head__sub">Budeme vám občas zasílat slevy a akční nabídky.</p>
+            </div>
+          </div>
+
+          <form class="newsletter-form" id="newsletterForm">
+            <input type="email" id="newsletterEmail" class="newsletter-form__input" placeholder="Zadejte váš e-mail" required>
+            <button type="submit" class="newsletter-form__btn">Přihlásit odběr</button>
+          </form>
+          <p class="newsletter-note">Stiskem tlačítka „Přihlásit k odběru“ souhlasím se zpracováním osobních údajů.</p>
+
+          <!-- BIANO STAR 4.3 & FAVI EXTRA Badges -->
+          <div class="trust-badges">
+            <!-- BIANO STAR 4.3 -->
+            <svg width="64" height="62" viewBox="0 0 64 62" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Biano Star 4.3">
+              <rect x="2" y="2" width="60" height="58" rx="4" fill="#e26252"/>
+              <text x="32" y="14" text-anchor="middle" fill="#ffffff" font-family="Inter, sans-serif" font-weight="800" font-size="8.5" letter-spacing="0.06em">BIANO</text>
+              <text x="32" y="22" text-anchor="middle" fill="#ffffff" font-family="Inter, sans-serif" font-weight="600" font-size="7" letter-spacing="0.08em">STAR</text>
+              <text x="32" y="44" text-anchor="middle" fill="#ffffff" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="22">4.3</text>
+              <text x="32" y="54" text-anchor="middle" fill="#ffffff" font-size="8" letter-spacing="1">★★★★★</text>
+            </svg>
+
+            <!-- FAVI EXTRA -->
+            <svg width="92" height="64" viewBox="0 0 92 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FAVI Extra">
+              <circle cx="46" cy="32" r="28" fill="#b72638" stroke="#ffffff" stroke-width="2"/>
+              <path d="M35 20h22v7H35z" fill="none" stroke="#ffffff" stroke-width="1.4"/>
+              <rect x="6" y="24" width="80" height="17" rx="3" fill="#a21c2d" stroke="#ffffff" stroke-width="1.4"/>
+              <text x="46" y="36" text-anchor="middle" fill="#ffffff" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="11" letter-spacing="0.08em">EXTRA</text>
+              <path d="M36 47l5 5 15-11" stroke="#facc15" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Column 2: Vše o nakupování -->
+        <div>
+          <h3 class="footer-col__title">Vše o nakupování</h3>
+          <ul class="footer-col__list">
+            <li><a href="#obchodni-podminky" class="footer-col__link" data-route="info" data-info="obchodni-podminky">Obchodní podmínky</a></li>
+            <li><a href="#ochrana-osobnich-udaju" class="footer-col__link" data-route="info" data-info="gdpr">Ochrana osobních údajů</a></li>
+            <li><a href="#odstoupeni" class="footer-col__link" data-route="info" data-info="odstoupeni">Odstoupení od kupní smlouvy</a></li>
+            <li><a href="#reklamace" class="footer-col__link" data-route="info" data-info="reklamace">Jak postupovat při reklamaci</a></li>
+            <li><a href="#zabaleni" class="footer-col__link" data-route="info" data-info="zabaleni">Jak správně zabalit zboží při odstoupení od kupní smlouvy</a></li>
+            <li><a href="#vernostni-program" class="footer-col__link" data-route="info" data-info="vernostni">Věrnostní program</a></li>
+            <li><a href="#doprava-a-platba" class="footer-col__link" data-route="info" data-info="doprava">Doprava a platba</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Zákaznická linka & O nás -->
+        <div>
+          <h3 class="footer-col__title">Zákaznická linka</h3>
+          <p class="footer-contact__hours">(Po - Pá: 8:00 - 16:00)</p>
+          <a href="tel:+420222745674" class="footer-contact__phone">
+            <svg class="svg-icon" width="16" height="16" style="color:#758ba6;"><use href="#ico-phone"></use></svg>
+            <span>+420 222 745 674</span>
+          </a>
+          <a href="mailto:info@sg-nabytek.cz" class="footer-contact__email">
+            <svg class="svg-icon" width="16" height="13" style="color:#758ba6;"><use href="#ico-email"></use></svg>
+            <span>info@sg-nabytek.cz</span>
+          </a>
+
+          <h3 class="footer-col__title">O nás</h3>
+          <ul class="footer-col__list">
+            <li><a href="#kontakt" class="footer-col__link" data-route="info" data-info="kontakt">Kontakt</a></li>
+            <li><a href="#clanky" class="footer-col__link" data-route="info" data-info="clanky">Články</a></li>
+            <li><a href="#affiliate" class="footer-col__link" data-route="info" data-info="affiliate">Affiliate program SG-Nábytek.cz</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom Legal Bar -->
+      <div class="footer-legal">
+        <div class="footer-legal__left">
+          <span class="footer-legal__copy">© 2026 SG nábytek</span>
+          <a href="#informace-o-webu" class="footer-legal__link" data-route="info" data-info="o-webu">Informace o webu</a>
+          <a href="#informace-o-cookies" class="footer-legal__link" data-route="cookies">Informace o cookies</a>
+        </div>
+        <div class="footer-legal__authors">
+          <span title="Edee.one – CMS & E-commerce platform">
+            <svg class="svg-icon" width="59" height="19"><use href="#ico-edee"></use></svg>
+          </span>
+          <span title="FG Forrest, a.s.">
+            <svg class="svg-icon" width="19" height="19"><use href="#ico-fg"></use></svg>
+          </span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       COOKIE SETTINGS MODAL (OPEN ON LOAD TO MATCH ATTACHED SCREENSHOTS)
+       ======================================================================== -->
+  <div class="modal-backdrop is-open" id="cookieSettingsModal" role="dialog" aria-modal="true" aria-labelledby="cookieModalTitle">
+    <div class="cookie-modal">
+      <button type="button" class="cookie-modal__close" id="cookieModalCloseBtn" aria-label="Zavřít">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <h2 class="cookie-modal__title" id="cookieModalTitle">Nastavení cookies</h2>
+      <p class="cookie-modal__perex">
+        Zde si můžete nastavit, jaké soubory cookies budeme zpracovávat. Více informací najdete na stránce
+        <a href="#informace-o-cookies" id="cookieModalPolicyLink">Informace o cookies.</a>
+      </p>
+
+      <div class="cookie-modal__top-cta">
+        <button type="button" class="btn btn--magenta" id="modalAcceptAllBtn">Povolit všechny cookies</button>
+      </div>
+
+      <!-- Technical Cookies Section -->
+      <div class="cookie-modal__section">
+        <div class="cookie-modal__section-head">
+          <h3 class="cookie-modal__section-title">Technické cookies</h3>
+          <span class="cookie-modal__always-on">Vždy zapnuto</span>
+        </div>
+        <p class="cookie-modal__desc">
+          Jsou nutné k&nbsp;tomu, abychom vám&nbsp;zobrazili naše webové stránky a&nbsp;fungovaly vám&nbsp;tak, jak&nbsp;mají. Tyto cookies jsou&nbsp;povinné a&nbsp;nelze je&nbsp;vypnout.
+        </p>
+      </div>
+
+      <!-- Analytics & Marketing Cookies Section -->
+      <div class="cookie-modal__section">
+        <div class="cookie-modal__section-head">
+          <h3 class="cookie-modal__section-title">Analytické a&nbsp;marketingové cookies</h3>
+          <label class="cookie-toggle" for="adAnalyticsCheckbox">
+            <input type="checkbox" id="adAnalyticsCheckbox">
+            <span class="cookie-toggle__track">
+              <span class="cookie-toggle__thumb"></span>
+            </span>
+            <span class="cookie-toggle__label" id="adAnalyticsStateText">Vypnuto</span>
+          </label>
+        </div>
+
+        <div class="cookie-modal__subblock">
+          <h4 class="cookie-modal__subtitle">Analytické cookies</h4>
+          <p class="cookie-modal__desc">
+            Pomáhají analyzovat, jak&nbsp;fungují naše webové stránky z&nbsp;hlediska chování návštěvníků a&nbsp;podle toho web&nbsp;případně přizpůsobovat a&nbsp;měnit.
+          </p>
+        </div>
+
+        <div class="cookie-modal__subblock">
+          <h4 class="cookie-modal__subtitle">Marketingové cookies (personalizace reklam, remarketing)</h4>
+          <p class="cookie-modal__desc">
+            Díky těmto cookies můžeme my&nbsp;nebo třetí strany po&nbsp;vaší návštěvě přizpůsobit nabídku našich služeb. Tato nabídka se&nbsp;vám&nbsp;potom může zobrazovat i&nbsp;mimo naše webové stránky.
+          </p>
+        </div>
+      </div>
+
+      <div class="cookie-modal__footer">
+        <button type="button" class="btn btn--indigo" id="modalTechnicalOnlyBtn">Pouze technické cookies</button>
+        <button type="button" class="btn btn--indigo" id="modalAcceptSelectedBtn">Povolit vybrané cookies</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login / Account Modal -->
+  <div class="modal-backdrop" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
+    <div class="cookie-modal" style="max-width: 440px;">
+      <button type="button" class="cookie-modal__close" id="loginCloseBtn" aria-label="Zavřít">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+      <h2 class="cookie-modal__title" id="loginModalTitle">Přihlášení k účtu</h2>
+      <p class="cookie-modal__perex">Přihlaste se ke svému zákaznickému účtu SG nábytek pro sledování objednávek a věrnostních výhod.</p>
+      <form id="loginForm" style="display:flex; flex-direction:column; gap:14px;">
+        <div>
+          <label for="loginEmail" style="display:block; font-size:12.5px; font-weight:600; color:var(--color-navy-800); margin-bottom:4px;">E-mail</label>
+          <input type="email" id="loginEmail" required placeholder="vas@email.cz" style="width:100%; padding:10px 14px; border:1px solid var(--color-border-strong); border-radius:var(--radius-sm); font-size:14px;">
+        </div>
+        <div>
+          <label for="loginPassword" style="display:block; font-size:12.5px; font-weight:600; color:var(--color-navy-800); margin-bottom:4px;">Heslo</label>
+          <input type="password" id="loginPassword" required placeholder="••••••••" style="width:100%; padding:10px 14px; border:1px solid var(--color-border-strong); border-radius:var(--radius-sm); font-size:14px;">
+        </div>
+        <button type="submit" class="btn btn--magenta" style="width:100%; margin-top:4px;">Přihlásit se</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script>
+    /* ==========================================================================
+       SG NÁBYTEK – STANDALONE INTERACTIVE APPLICATION LOGIC
+       ========================================================================== */
+    (function () {
+      // 1. PRODUCT CATALOG DATA (Authentic Czech Furniture Categories from DOM)
+      const PRODUCTS = [
+        {
+          id: 'sg-101',
+          name: 'Rohová sedací souprava Bergamo L',
+          category: 'Sedací soupravy a pohovky',
+          price: 16490,
+          oldPrice: 21990,
+          discount: '-25 %',
+          dims: '265 × 175 × 88 cm',
+          material: 'Voděodpudivá tkanina Monolith, masivní buk',
+          color: 'Šedá / Antracit',
+          storage: 'Ano, s úložným prostorem a rozkladem',
+          inStock: 'Skladem ihned',
+          sale: true,
+          svgType: 'sofa'
+        },
+        {
+          id: 'sg-102',
+          name: 'Komoda dub artisan Nordik 160',
+          category: 'Komody',
+          price: 5490,
+          oldPrice: 6990,
+          discount: '-21 %',
+          dims: '160 × 85 × 42 cm',
+          material: 'Lamino 18 mm, ABS hrany, kovové úchytky',
+          color: 'Dub Artisan / Černá',
+          storage: '3 zásuvky + 2 skříňky',
+          inStock: 'Skladem ihned',
+          sale: true,
+          svgType: 'dresser'
+        },
+        {
+          id: 'sg-103',
+          name: 'Čalouněná manželská postel Valencia 180×200',
+          category: 'Postele',
+          price: 12990,
+          oldPrice: 15890,
+          discount: '-18 %',
+          dims: '196 × 218 × 112 cm',
+          material: 'Sametová látka Velvet, lamelový rošt v ceně',
+          color: 'Krémová béžová',
+          storage: 'Velký úložný prostor pod roštem',
+          inStock: 'Skladem ihned',
+          sale: false,
+          svgType: 'bed'
+        },
+        {
+          id: 'sg-104',
+          name: 'Šatní skříň s posuvnými dveřmi Milano 200',
+          category: 'Šatní skříně',
+          price: 11290,
+          oldPrice: 14500,
+          discount: '-22 %',
+          dims: '200 × 215 × 62 cm',
+          material: 'LTD deska, hliníkové pojezdy, zrcadlo',
+          color: 'Bílá mat / Zrcadlo',
+          storage: '2 šatní tyče + 6 polic',
+          inStock: 'Skladem ihned',
+          sale: true,
+          svgType: 'wardrobe'
+        },
+        {
+          id: 'sg-105',
+          name: 'Sedačka do U Toscana XL',
+          category: 'Sedací soupravy a pohovky',
+          price: 23990,
+          oldPrice: 29990,
+          discount: '-20 %',
+          dims: '340 × 195 × 165 cm',
+          material: 'Pružiny Faliste + PUR pěna T30',
+          color: 'Tmavě modrá',
+          storage: 'Rozkládací (lůžko 285×130 cm)',
+          inStock: 'Skladem ihned',
+          sale: true,
+          svgType: 'sofa'
+        },
+        {
+          id: 'sg-106',
+          name: 'Křeslo ušák Chesterfield Royal',
+          category: 'Křesla',
+          price: 6890,
+          oldPrice: 8490,
+          discount: '-19 %',
+          dims: '84 × 104 × 90 cm',
+          material: 'Tkanina Kronos, dřevěné nožky',
+          color: 'Starorůžová / Magenta',
+          storage: 'Ergonomická opěrka zad',
+          inStock: 'Skladem ihned',
+          sale: false,
+          svgType: 'armchair'
+        },
+        {
+          id: 'sg-107',
+          name: 'Jídelní stůl rozkládací Loft Dub',
+          category: 'Stoly a stolky',
+          price: 4990,
+          oldPrice: 6490,
+          discount: '-23 %',
+          dims: '140–180 × 76 × 85 cm',
+          material: 'MDF dýha dub, ocelová podnož',
+          color: 'Přírodní dub / Černá',
+          storage: 'Rozklad pro až 8 osob',
+          inStock: 'Skladem ihned',
+          sale: true,
+          svgType: 'table'
+        },
+        {
+          id: 'sg-108',
+          name: 'Komoda se zásuvkami Oslo 120',
+          category: 'Komody',
+          price: 3890,
+          oldPrice: 4790,
+          discount: '-19 %',
+          dims: '120 × 82 × 40 cm',
+          material: 'Lamino, tiché dovírání zásuvek',
+          color: 'Bílá / Dub Sonoma',
+          storage: '4 prostorné zásuvky',
+          inStock: 'Skladem ihned',
+          sale: false,
+          svgType: 'dresser'
+        }
+      ];
+
+      const MEGAMENU_DATA = {
+        nabytek: [
+          { title: 'Sedací soupravy a pohovky', sub: 'Rohové, do U, rozkládací' },
+          { title: 'Skříně a komody', sub: 'Komody, šatní skříně, vitríny' },
+          { title: 'Křesla', sub: 'Ušáky, kancelářská, taburety' },
+          { title: 'Sestavy a stěny', sub: 'Obývací a předsíňové stěny' },
+          { title: 'Stoly a stolky', sub: 'Jídelní, konferenční, psací' },
+          { title: 'Židle', sub: 'Jídelní a kancelářské židle' },
+          { title: 'Postele', sub: 'Manželské, jednolůžkové, dětské' },
+          { title: 'Matrace', sub: 'Pěnové, taštičkové, paměťové' }
+        ],
+        mistnosti: [
+          { title: 'Obývací pokoj', sub: 'Sedačky, stolky, obývací stěny' },
+          { title: 'Ložnice', sub: 'Postele, matrace, šatní skříně' },
+          { title: 'Předsíň a šatna', sub: 'Botníky, věšáky, předsíňové stěny' },
+          { title: 'Jídelna a kuchyně', sub: 'Jídelní stoly, židle, linky' },
+          { title: 'Pracovna a kancelář', sub: 'Psací stoly, židle, knihovny' },
+          { title: 'Dětský pokoj', sub: 'Dětské postele a psací stoly' },
+          { title: 'Koupelna', sub: 'Závěsné a vysoké skříňky' },
+          { title: 'Zahrada', sub: 'Zahradní sestavy a lehátka' }
+        ]
+      };
+
+      const INFO_PAGES = {
+        'o-nas': {
+          title: 'O nás – SG nábytek',
+          paragraphs: [
+            'SIGNAL nábytek je nově SG nábytek. Již více než 15 let přinášíme do českých domácností kvalitní, moderní a cenově dostupný nábytek pro každou místnost.',
+            'Díky vlastní autodopravě SG nábytek doručujeme zboží přímo k vašim dveřím a naši zkušení pracovníci vám rádi pomohou i s výnosem do bytu. Při objednávce nad 15 000 Kč máte dopravu po celé ČR zcela zdarma.'
+          ]
+        },
+        'clanky': {
+          title: 'Články a inspirace pro bydlení',
+          paragraphs: [
+            '1. Jak vybrat rohovou sedací soupravu do menšího obývacího pokoje: Zaměřte se na světlé odstíny potahových látek s úpravou EasyClean a integrovaný úložný prostor.',
+            '2. Trendy roku 2026: Přírodní dekory dubu artisan v kombinaci s matnou černou ocelí a sametovým čalouněním dodají interiéru nadčasovou eleganci.'
+          ]
+        },
+        'kontakt': {
+          title: 'Kontakt',
+          paragraphs: [
+            'Zákaznická linka: +420 222 745 674 (Po – Pá: 8:00 – 16:00)',
+            'E-mailová podpora: info@sg-nabytek.cz',
+            'Provozovatel e-shopu: SG nábytek, Česká republika. Rádi vám poradíme s výběrem zboží, dostupností i termínem závozu.'
+          ]
+        },
+        'obchodni-podminky': {
+          title: 'Obchodní podmínky',
+          paragraphs: [
+            'Tyto obchodní podmínky upravují práva a povinnosti mezi prodávajícím (SG nábytek) a kupujícím při nákupu zboží prostřednictvím internetového obchodu sg-nabytek.cz.',
+            'Veškeré ceny jsou uvedeny včetně DPH. Kupující má právo odstoupit od kupní smlouvy bez udání důvodu ve lhůtě 14 dnů od převzetí zboží.'
+          ]
+        },
+        'gdpr': {
+          title: 'Ochrana osobních údajů',
+          paragraphs: [
+            'Ochrana vašich osobních údajů je pro nás prioritou. Osobní údaje zpracováváme v souladu s nařízením GDPR výhradně za účelem vyřízení vaší objednávky, doručení zboží a zákaznické podpory.'
+          ]
+        },
+        'odstoupeni': {
+          title: 'Odstoupení od kupní smlouvy',
+          paragraphs: [
+            'Zakoupené zboží můžete vrátit do 14 dnů od doručení. Stačí nás kontaktovat na info@sg-nabytek.cz nebo telefonicky na +420 222 745 674.'
+          ]
+        },
+        'reklamace': {
+          title: 'Jak postupovat při reklamaci',
+          paragraphs: [
+            'Na veškerý sortiment poskytujeme zákonnou záruku 24 měsíců. V případě poškození při přepravě nebo výrobní vady nám zašlete číslo objednávky a fotografii na info@sg-nabytek.cz.'
+          ]
+        },
+        'zabaleni': {
+          title: 'Jak správně zabalit zboží při odstoupení od kupní smlouvy',
+          paragraphs: [
+            'Zboží prosím zabalte ideálně do původního obalu s ochrannými rohy a výplní, aby nedošlo k jeho poškození během zpětné přepravy.'
+          ]
+        },
+        'vernostni': {
+          title: 'Věrnostní program SG nábytek',
+          paragraphs: [
+            'Registrovaní zákazníci získávají slevy na další nákupy, přednostní přístup k výprodejovým akcím a přehled všech objednávek na jednom místě.'
+          ]
+        },
+        'doprava': {
+          title: 'Doprava a platba',
+          paragraphs: [
+            'Nabízíme vlastní dopravu SG nábytek s možností pomoci s odnosem, doručení kurýrem PPL / DPD i výdejní místa Balíkovna. Při nákupu nad 15 000 Kč je doprava ZDARMA.',
+            'Platit můžete online kartou přes GoPay, bankovním převodem, na dobírku při převzetí nebo na splátky se společností ESSOX.'
+          ]
+        },
+        'affiliate': {
+          title: 'Affiliate program SG-Nábytek.cz',
+          paragraphs: [
+            'Spolupracujte s jedním z největších českých e-shopů s nábytkem a získejte atraktivní provize z každé uskutečněné objednávky.'
+          ]
+        },
+        'o-webu': {
+          title: 'Informace o webu',
+          paragraphs: [
+            'Webová prezentace a e-commerce řešení SG nábytek běží na platformě Edee.one od společnosti FG Forrest, a.s.'
+          ]
+        }
+      };
+
+      // 2. APPLICATION STATE
+      const state = {
+        route: 'cookies', // Starts on 'Informace o cookies' with modal open to match screenshot
+        selectedCategory: 'all',
+        sortBy: 'featured',
+        cart: [
+          // Pre-seeded optional empty cart so header displays exact "0 Kč" like screenshot!
+        ],
+        wishlist: ['sg-101', 'sg-103'],
+        compare: ['sg-101', 'sg-105'],
+        selectedShipping: 'sg',
+        selectedPayment: 'gopay',
+        cookies: {
+          decided: false,
+          analyticsMarketing: false
+        }
+      };
+
+      // 3. HELPERS
+      const formatCZK = (amount) => amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' Kč';
+
+      function showToast(message) {
+        const container = document.getElementById('toastContainer');
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.textContent = message;
+        container.appendChild(toast);
+        setTimeout(() => {
+          toast.style.opacity = '0';
+          toast.style.transform = 'translateY(8px)';
+          toast.style.transition = 'all 0.2s ease';
+          setTimeout(() => toast.remove(), 220);
+        }, 2800);
+      }
+
+      function getFurnitureSVG(type) {
+        const svgs = {
+          sofa: `<svg width="160" height="96" viewBox="0 0 160 96" fill="none"><rect x="18" y="38" width="124" height="36" rx="8" fill="#475569"/><rect x="26" y="22" width="108" height="24" rx="6" fill="#64748b"/><rect x="10" y="44" width="16" height="30" rx="5" fill="#334155"/><rect x="134" y="44" width="16" height="30" rx="5" fill="#334155"/><rect x="34" y="28" width="24" height="16" rx="4" fill="#c84079"/><rect x="102" y="28" width="24" height="16" rx="4" fill="#c84079"/><rect x="28" y="74" width="6" height="10" rx="2" fill="#1e293b"/><rect x="126" y="74" width="6" height="10" rx="2" fill="#1e293b"/></svg>`,
+          dresser: `<svg width="160" height="96" viewBox="0 0 160 96" fill="none"><rect x="22" y="20" width="116" height="54" rx="4" fill="#c89d6c"/><rect x="28" y="26" width="32" height="13" rx="2" fill="#e2be93"/><rect x="28" y="42" width="32" height="13" rx="2" fill="#e2be93"/><rect x="28" y="58" width="32" height="10" rx="2" fill="#e2be93"/><rect x="65" y="26" width="32" height="42" rx="2" fill="#b38654"/><rect x="101" y="26" width="31" height="42" rx="2" fill="#b38654"/><rect x="32" y="74" width="6" height="12" fill="#243866"/><rect x="122" y="74" width="6" height="12" fill="#243866"/></svg>`,
+          bed: `<svg width="160" height="96" viewBox="0 0 160 96" fill="none"><rect x="26" y="16" width="108" height="36" rx="6" fill="#94a3b8"/><rect x="20" y="44" width="120" height="32" rx="6" fill="#cbd5e1"/><rect x="36" y="34" width="38" height="14" rx="4" fill="#ffffff"/><rect x="86" y="34" width="38" height="14" rx="4" fill="#ffffff"/><rect x="20" y="54" width="120" height="22" rx="4" fill="#243866"/><rect x="28" y="76" width="6" height="8" fill="#1e293b"/><rect x="126" y="76" width="6" height="8" fill="#1e293b"/></svg>`,
+          wardrobe: `<svg width="160" height="96" viewBox="0 0 160 96" fill="none"><rect x="38" y="10" width="84" height="76" rx="3" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/><line x1="80" y1="10" x2="80" y2="86" stroke="#94a3b8" stroke-width="2"/><rect x="86" y="18" width="28" height="60" rx="2" fill="#bae6fd"/><line x1="74" y1="40" x2="74" y2="54" stroke="#243866" stroke-width="2.5" stroke-linecap="round"/></svg>`,
+          armchair: `<svg width="160" height="96" viewBox="0 0 160 96" fill="none"><path d="M48 22c0-6 6-10 32-10s32 4 32 10v32H48V22z" fill="#c84079"/><rect x="38" y="46" width="84" height="26" rx="8" fill="#a83263"/><rect x="52" y="72" width="6" height="14" rx="2" fill="#243866"/><rect x="102" y="72" width="6" height="14" rx="2" fill="#243866"/></svg>`,
+          table: `<svg width="160" height="96" viewBox="0 0 160 96" fill="none"><rect x="20" y="32" width="120" height="9" rx="3" fill="#c89d6c"/><path d="M42 41L32 80M118 41l10 39M48 41l14 39M112 41L98 80" stroke="#243866" stroke-width="4" stroke-linecap="round"/></svg>`
+        };
+        return svgs[type] || svgs.sofa;
+      }
+
+      // 4. COOKIE CONSENT MODAL & BANNER INTERACTIONS
+      const cookieModal = document.getElementById('cookieSettingsModal');
+      const cookieBanner = document.getElementById('cookieBottomBanner');
+      const adAnalyticsCheckbox = document.getElementById('adAnalyticsCheckbox');
+      const adAnalyticsStateText = document.getElementById('adAnalyticsStateText');
+
+      function updateCookieToggleLabel() {
+        adAnalyticsStateText.textContent = adAnalyticsCheckbox.checked ? 'Zapnuto' : 'Vypnuto';
+        adAnalyticsStateText.style.color = adAnalyticsCheckbox.checked ? 'var(--color-green-600)' : 'var(--color-text-secondary)';
+      }
+
+      function openCookieModal() {
+        adAnalyticsCheckbox.checked = state.cookies.analyticsMarketing;
+        updateCookieToggleLabel();
+        cookieModal.classList.add('is-open');
+      }
+
+      function closeCookieModal() {
+        cookieModal.classList.remove('is-open');
+      }
+
+      function saveCookieConsent(allowAnalyticsMarketing, message) {
+        state.cookies.decided = true;
+        state.cookies.analyticsMarketing = allowAnalyticsMarketing;
+        adAnalyticsCheckbox.checked = allowAnalyticsMarketing;
+        updateCookieToggleLabel();
+        closeCookieModal();
+        if (cookieBanner) {
+          cookieBanner.classList.add('is-hidden');
+        }
+        showToast(message);
+      }
+
+      adAnalyticsCheckbox.addEventListener('change', updateCookieToggleLabel);
+
+      document.getElementById('cookieModalCloseBtn').addEventListener('click', closeCookieModal);
+      cookieModal.addEventListener('click', (e) => {
+        if (e.target === cookieModal) closeCookieModal();
+      });
+
+      document.getElementById('openCookieModalInlineBtn').addEventListener('click', openCookieModal);
+      document.getElementById('bannerSettingsBtn').addEventListener('click', openCookieModal);
+
+      document.getElementById('modalAcceptAllBtn').addEventListener('click', () => {
+        saveCookieConsent(true, 'Všechny soubory cookies byly povoleny.');
+      });
+      document.getElementById('bannerAcceptAllBtn').addEventListener('click', () => {
+        saveCookieConsent(true, 'Všechny soubory cookies byly povoleny.');
+      });
+
+      document.getElementById('modalTechnicalOnlyBtn').addEventListener('click', () => {
+        saveCookieConsent(false, 'Uloženo: Povolena pouze technická cookies.');
+      });
+      document.getElementById('bannerTechnicalBtn').addEventListener('click', () => {
+        saveCookieConsent(false, 'Uloženo: Povolena pouze technická cookies.');
+      });
+
+      document.getElementById('modalAcceptSelectedBtn').addEventListener('click', () => {
+        const enabled = adAnalyticsCheckbox.checked;
+        saveCookieConsent(
+          enabled,
+          enabled
+            ? 'Vybrané soubory cookies (včetně analytických a marketingových) byly povoleny.'
+            : 'Vybrané soubory cookies (pouze technické) byly uloženy.'
+        );
+      });
+
+      document.getElementById('cookieModalPolicyLink').addEventListener('click', (e) => {
+        e.preventDefault();
+        closeCookieModal();
+        navigateTo('cookies');
+      });
+
+      // 5. NAVIGATION & VIEW ROUTER
+      function updateHeaderBadges() {
+        const cartCount = state.cart.reduce((sum, item) => sum + item.qty, 0);
+        const cartTotal = state.cart.reduce((sum, item) => {
+          const prod = PRODUCTS.find((p) => p.id === item.id);
+          return sum + (prod ? prod.price * item.qty : 0);
+        }, 0);
+
+        const cartBadge = document.getElementById('cartBadge');
+        cartBadge.textContent = cartCount;
+        cartBadge.classList.toggle('has-count', cartCount > 0);
+        document.getElementById('headerCartTotal').textContent = formatCZK(cartTotal);
+
+        const wishBadge = document.getElementById('wishlistBadge');
+        wishBadge.textContent = state.wishlist.length;
+        wishBadge.classList.toggle('has-count', state.wishlist.length > 0);
+
+        const compBadge = document.getElementById('compareBadge');
+        compBadge.textContent = state.compare.length;
+        compBadge.classList.toggle('has-count', state.compare.length > 0);
+      }
+
+      function navigateTo(route, options = {}) {
+        state.route = route;
+        document.querySelectorAll('.view-panel').forEach((el) => el.classList.remove('is-active'));
+        document.getElementById('megamenuDrawer').classList.remove('is-open');
+        document.getElementById('mainNav').classList.remove('is-mobile-open');
+
+        const breadcrumbWrap = document.getElementById('breadcrumbCurrentWrap');
+        const breadcrumbCurrent = document.getElementById('breadcrumbCurrent');
+
+        if (route === 'cookies') {
+          document.getElementById('view-cookies').classList.add('is-active');
+          breadcrumbWrap.style.display = 'none';
+        } else if (route === 'catalog') {
+          if (options.category) state.selectedCategory = options.category;
+          document.getElementById('view-catalog').classList.add('is-active');
+          breadcrumbWrap.style.display = 'inline';
+          breadcrumbCurrent.textContent = state.selectedCategory === 'all' ? 'Nábytek' : state.selectedCategory;
+          renderCatalog();
+        } else if (route === 'compare') {
+          document.getElementById('view-compare').classList.add('is-active');
+          breadcrumbWrap.style.display = 'inline';
+          breadcrumbCurrent.textContent = 'Porovnávač';
+          renderCompare();
+        } else if (route === 'wishlist') {
+          document.getElementById('view-wishlist').classList.add('is-active');
+          breadcrumbWrap.style.display = 'inline';
+          breadcrumbCurrent.textContent = 'Oblíbené';
+          renderWishlist();
+        } else if (route === 'cart') {
+          document.getElementById('view-cart').classList.add('is-active');
+          breadcrumbWrap.style.display = 'inline';
+          breadcrumbCurrent.textContent = 'Nákupní košík';
+          renderCart();
+        } else if (route === 'info') {
+          const infoKey = options.info || 'o-nas';
+          const page = INFO_PAGES[infoKey] || INFO_PAGES['o-nas'];
+          document.getElementById('view-info').classList.add('is-active');
+          breadcrumbWrap.style.display = 'inline';
+          breadcrumbCurrent.textContent = page.title;
+          document.getElementById('infoPageContent').innerHTML = `
+            <h1 class="page-title">${page.title}</h1>
+            <div class="wysiwyg-copy">
+              ${page.paragraphs.map((p) => `<p>${p}</p>`).join('')}
+              <p style="margin-top:24px;">
+                <button type="button" class="btn btn--indigo" data-route="catalog" data-category="all">Prohlédnout nabídku nábytku</button>
+              </p>
+            </div>
+          `;
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      document.addEventListener('click', (e) => {
+        const routeTarget = e.target.closest('[data-route]');
+        if (routeTarget) {
+          e.preventDefault();
+          const route = routeTarget.getAttribute('data-route');
+          const category = routeTarget.getAttribute('data-category');
+          const info = routeTarget.getAttribute('data-info');
+          navigateTo(route, { category, info });
+        }
+
+        const catFilter = e.target.closest('[data-category-filter]');
+        if (catFilter) {
+          state.selectedCategory = catFilter.getAttribute('data-category-filter');
+          renderCatalog();
+        }
+      });
+
+      // 6. CATALOG RENDER & ACTIONS
+      function renderCatalog() {
+        const categories = ['all', 'Sedací soupravy a pohovky', 'Komody', 'Postele', 'Šatní skříně', 'Křesla', 'Stoly a stolky', 'Výprodej'];
+        const pillsContainer = document.getElementById('categoryPills');
+        pillsContainer.innerHTML = categories
+          .map(
+            (cat) => `
+          <button type="button" class="category-pill ${state.selectedCategory === cat ? 'is-active' : ''}" data-category-filter="${cat}">
+            ${cat === 'all' ? 'Všechny kategorie' : cat}
+          </button>
+        `
+          )
+          .join('');
+
+        let filtered = PRODUCTS.filter((p) => {
+          if (state.selectedCategory === 'all') return true;
+          if (state.selectedCategory === 'Výprodej') return p.sale;
+          return p.category === state.selectedCategory;
+        });
+
+        if (state.sortBy === 'price-asc') {
+          filtered = [...filtered].sort((a, b) => a.price - b.price);
+        } else if (state.sortBy === 'price-desc') {
+          filtered = [...filtered].sort((a, b) => b.price - a.price);
+        }
+
+        document.getElementById('catalogHeading').textContent =
+          state.selectedCategory === 'all' ? 'Všechny kategorie nábytku' : state.selectedCategory;
+        document.getElementById('catalogCount').textContent = `Zobrazeno ${filtered.length} produktů`;
+
+        const grid = document.getElementById('productGrid');
+        grid.innerHTML = filtered
+          .map((p) => {
+            const inWish = state.wishlist.includes(p.id);
+            const inComp = state.compare.includes(p.id);
+            return `
+            <article class="product-card">
+              <div class="product-card__badges">
+                ${p.discount ? `<span class="badge badge--sale">${p.discount}</span>` : ''}
+                <span class="badge badge--stock">${p.inStock}</span>
+              </div>
+              <div class="product-card__utils">
+                <button type="button" class="icon-circle-btn ${inWish ? 'is-active' : ''}" onclick="window.sgActions.toggleWishlist('${p.id}')" title="Přidat do oblíbených">♥</button>
+                <button type="button" class="icon-circle-btn ${inComp ? 'is-active' : ''}" onclick="window.sgActions.toggleCompare('${p.id}')" title="Porovnat produkt">⚖</button>
+              </div>
+              <div class="product-card__visual">${getFurnitureSVG(p.svgType)}</div>
+              <div class="product-card__cat">${p.category}</div>
+              <h3 class="product-card__title">${p.name}</h3>
+              <div class="product-card__dims">Rozměry: ${p.dims}</div>
+              <div class="product-card__footer">
+                <div>
+                  ${p.oldPrice ? `<div class="product-card__old-price">${formatCZK(p.oldPrice)}</div>` : ''}
+                  <div class="product-card__price">${formatCZK(p.price)}</div>
+                </div>
+                <button type="button" class="btn btn--magenta btn--sm" onclick="window.sgActions.addToCart('${p.id}')">Do košíku</button>
+              </div>
+            </article>
+          `;
+          })
+          .join('');
+      }
+
+      document.getElementById('sortSelect').addEventListener('change', (e) => {
+        state.sortBy = e.target.value;
+        renderCatalog();
+      });
+
+      // 7. CART, WISHLIST & COMPARE ACTIONS
+      window.sgActions = {
+        addToCart(id) {
+          const existing = state.cart.find((c) => c.id === id);
+          if (existing) {
+            existing.qty += 1;
+          } else {
+            state.cart.push({ id, qty: 1 });
+          }
+          const prod = PRODUCTS.find((p) => p.id === id);
+          updateHeaderBadges();
+          showToast(`Přidáno do košíku: ${prod.name}`);
+          if (state.route === 'cart') renderCart();
+        },
+        updateQty(id, delta) {
+          const item = state.cart.find((c) => c.id === id);
+          if (!item) return;
+          item.qty += delta;
+          if (item.qty <= 0) {
+            state.cart = state.cart.filter((c) => c.id !== id);
+          }
+          updateHeaderBadges();
+          renderCart();
+        },
+        toggleWishlist(id) {
+          const prod = PRODUCTS.find((p) => p.id === id);
+          if (state.wishlist.includes(id)) {
+            state.wishlist = state.wishlist.filter((x) => x !== id);
+            showToast(`Odebráno z oblíbených: ${prod.name}`);
+          } else {
+            state.wishlist.push(id);
+            showToast(`Přidáno do oblíbených: ${prod.name}`);
+          }
+          updateHeaderBadges();
+          if (state.route === 'catalog') renderCatalog();
+          if (state.route === 'wishlist') renderWishlist();
+        },
+        toggleCompare(id) {
+          const prod = PRODUCTS.find((p) => p.id === id);
+          if (state.compare.includes(id)) {
+            state.compare = state.compare.filter((x) => x !== id);
+            showToast(`Odebráno z porovnávače: ${prod.name}`);
+          } else {
+            if (state.compare.length >= 4) {
+              showToast('V porovnávači lze porovnávat maximálně 4 produkty najednou.');
+              return;
+            }
+            state.compare.push(id);
+            showToast(`Přidáno do porovnávače: ${prod.name}`);
+          }
+          updateHeaderBadges();
+          if (state.route === 'catalog') renderCatalog();
+          if (state.route === 'compare') renderCompare();
+        }
+      };
+
+      function renderCompare() {
+        const container = document.getElementById('compareContent');
+        const items = state.compare.map((id) => PRODUCTS.find((p) => p.id === id)).filter(Boolean);
+        if (!items.length) {
+          container.innerHTML = `
+            <div class="empty-state">
+              <h3 style="color:var(--color-navy-800); margin-bottom:8px;">Porovnávač produktů je prázdný</h3>
+              <p style="font-size:13.5px; color:var(--color-text-secondary); margin-bottom:18px;">Přidejte si produkty kliknutím na ikonu vah u libovolného nábytku.</p>
+              <button type="button" class="btn btn--magenta" data-route="catalog" data-category="all">Vybrat nábytek k porovnání</button>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = `
+          <div class="compare-table-wrap">
+            <table class="compare-table">
+              <tr>
+                <th>Produkt</th>
+                ${items
+                  .map(
+                    (p) => `
+                  <td>
+                    <div style="margin-bottom:8px;">${getFurnitureSVG(p.svgType)}</div>
+                    <div style="font-weight:700; color:var(--color-navy-800); margin-bottom:6px;">${p.name}</div>
+                    <button type="button" class="btn btn--outline btn--sm" onclick="window.sgActions.toggleCompare('${p.id}')">Odebrat</button>
+                  </td>
+                `
+                  )
+                  .join('')}
+              </tr>
+              <tr>
+                <th>Cena</th>
+                ${items.map((p) => `<td style="font-weight:800; color:var(--color-magenta-600); font-size:16px;">${formatCZK(p.price)}</td>`).join('')}
+              </tr>
+              <tr>
+                <th>Kategorie</th>
+                ${items.map((p) => `<td>${p.category}</td>`).join('')}
+              </tr>
+              <tr>
+                <th>Rozměry (Š × V × H)</th>
+                ${items.map((p) => `<td>${p.dims}</td>`).join('')}
+              </tr>
+              <tr>
+                <th>Materiál a provedení</th>
+                ${items.map((p) => `<td>${p.material}</td>`).join('')}
+              </tr>
+              <tr>
+                <th>Barevné provedení</th>
+                ${items.map((p) => `<td>${p.color}</td>`).join('')}
+              </tr>
+              <tr>
+                <th>Úložný prostor / funkce</th>
+                ${items.map((p) => `<td>${p.storage}</td>`).join('')}
+              </tr>
+              <tr>
+                <th>Akce</th>
+                ${items.map((p) => `<td><button type="button" class="btn btn--magenta btn--sm" onclick="window.sgActions.addToCart('${p.id}')">Koupit</button></td>`).join('')}
+              </tr>
+            </table>
+          </div>
+        `;
+      }
+
+      document.getElementById('clearCompareBtn').addEventListener('click', () => {
+        state.compare = [];
+        updateHeaderBadges();
+        renderCompare();
+        showToast('Porovnávač byl vyprázdněn.');
+      });
+
+      function renderWishlist() {
+        const container = document.getElementById('wishlistContent');
+        const items = state.wishlist.map((id) => PRODUCTS.find((p) => p.id === id)).filter(Boolean);
+        if (!items.length) {
+          container.innerHTML = `
+            <div class="empty-state">
+              <h3 style="color:var(--color-navy-800); margin-bottom:8px;">Zatím nemáte žádné oblíbené položky</h3>
+              <p style="font-size:13.5px; color:var(--color-text-secondary); margin-bottom:18px;">Uložte si nábytek, který se vám líbí, kliknutím na ikonu srdíčka.</p>
+              <button type="button" class="btn btn--magenta" data-route="catalog" data-category="all">Prohlédnout katalog</button>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = `
+          <div class="product-grid">
+            ${items
+              .map(
+                (p) => `
+              <article class="product-card">
+                <div class="product-card__utils">
+                  <button type="button" class="icon-circle-btn is-active" onclick="window.sgActions.toggleWishlist('${p.id}')" title="Odebrat z oblíbených">✕</button>
+                </div>
+                <div class="product-card__visual">${getFurnitureSVG(p.svgType)}</div>
+                <div class="product-card__cat">${p.category}</div>
+                <h3 class="product-card__title">${p.name}</h3>
+                <div class="product-card__dims">${p.dims}</div>
+                <div class="product-card__footer">
+                  <div class="product-card__price">${formatCZK(p.price)}</div>
+                  <button type="button" class="btn btn--magenta btn--sm" onclick="window.sgActions.addToCart('${p.id}')">Do košíku</button>
+                </div>
+              </article>
+            `
+              )
+              .join('')}
+          </div>
+        `;
+      }
+
+      function renderCart() {
+        const container = document.getElementById('cartContent');
+        const items = state.cart
+          .map((c) => {
+            const p = PRODUCTS.find((prod) => prod.id === c.id);
+            return p ? { ...p, qty: c.qty } : null;
+          })
+          .filter(Boolean);
+
+        if (!items.length) {
+          container.innerHTML = `
+            <div class="empty-state">
+              <h3 style="color:var(--color-navy-800); margin-bottom:8px;">Váš nákupní košík je prázdný</h3>
+              <p style="font-size:13.5px; color:var(--color-text-secondary); margin-bottom:18px;">Vyberte si z naší nabídky sedacích souprav, komod, postelí a šatních skříní.</p>
+              <button type="button" class="btn btn--magenta" data-route="catalog" data-category="all">Přejít do katalogu nábytku</button>
+            </div>
+          `;
+          return;
+        }
+
+        const subtotal = items.reduce((sum, item) => sum + item.price * item.qty, 0);
+        const freeThreshold = 15000;
+        const isFreeShipping = subtotal >= freeThreshold;
+        const progressPct = Math.min(100, Math.round((subtotal / freeThreshold) * 100));
+        const shippingCost = isFreeShipping ? 0 : state.selectedShipping === 'sg' ? 490 : 290;
+        const total = subtotal + shippingCost;
+
+        container.innerHTML = `
+          <div class="cart-layout">
+            <div class="cart-box">
+              <div class="shipping-meter">
+                <div style="font-size:13px; font-weight:600; color:var(--color-navy-800);">
+                  ${
+                    isFreeShipping
+                      ? '🎉 Gratulujeme! Získali jste dopravu SG nábytek ZDARMA.'
+                      : `Nakupte ještě za <strong style="color:var(--color-magenta-600);">${formatCZK(freeThreshold - subtotal)}</strong> a máte dopravu zcela zdarma!`
+                  }
+                </div>
+                <div class="shipping-meter__bar">
+                  <div class="shipping-meter__fill" style="width:${progressPct}%;"></div>
+                </div>
+              </div>
+
+              ${items
+                .map(
+                  (item) => `
+                <div class="cart-item">
+                  <div style="display:flex; align-items:center; gap:14px;">
+                    <div style="width:76px; height:52px; background:var(--color-bg-subtle); border-radius:6px; display:flex; align-items:center; justify-content:center; padding:4px;">
+                      ${getFurnitureSVG(item.svgType)}
+                    </div>
+                    <div>
+                      <div style="font-weight:700; color:var(--color-navy-800); font-size:14px;">${item.name}</div>
+                      <div style="font-size:12px; color:var(--color-green-600);">${item.inStock}</div>
+                    </div>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:16px;">
+                    <div class="qty-control">
+                      <button type="button" onclick="window.sgActions.updateQty('${item.id}', -1)">−</button>
+                      <span>${item.qty} ks</span>
+                      <button type="button" onclick="window.sgActions.updateQty('${item.id}', 1)">+</button>
+                    </div>
+                    <div style="font-weight:800; color:var(--color-navy-800); min-width:92px; text-align:right;">
+                      ${formatCZK(item.price * item.qty)}
+                    </div>
+                  </div>
+                </div>
+              `
+                )
+                .join('')}
+            </div>
+
+            <div class="cart-box">
+              <h3 style="font-size:16px; color:var(--color-navy-800); margin-bottom:12px;">Doprava a platba</h3>
+              <div class="option-card ${state.selectedShipping === 'sg' ? 'is-selected' : ''}" onclick="window.sgSelectShipping('sg')">
+                <div>
+                  <div style="font-size:13px; font-weight:700; color:var(--color-navy-800);">Vlastní doprava SG nábytek + pomoc s odnosem</div>
+                  <div style="font-size:11.5px; color:var(--color-text-muted);">Nad 15 000 Kč zdarma</div>
+                </div>
+                <strong style="font-size:13px;">${isFreeShipping ? 'Zdarma' : '490 Kč'}</strong>
+              </div>
+              <div class="option-card ${state.selectedShipping === 'courier' ? 'is-selected' : ''}" onclick="window.sgSelectShipping('courier')">
+                <div>
+                  <div style="font-size:13px; font-weight:700; color:var(--color-navy-800);">Kurýrní služba PPL / DPD</div>
+                  <div style="font-size:11.5px; color:var(--color-text-muted);">Doručení za první uzamykatelné dveře</div>
+                </div>
+                <strong style="font-size:13px;">${isFreeShipping ? 'Zdarma' : '290 Kč'}</strong>
+              </div>
+
+              <div style="border-top:1px solid var(--color-border); margin-top:16px; padding-top:16px;">
+                <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:6px;">
+                  <span>Mezisoučet zboží:</span>
+                  <strong>${formatCZK(subtotal)}</strong>
+                </div>
+                <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:12px;">
+                  <span>Doprava:</span>
+                  <strong>${shippingCost === 0 ? 'Zdarma' : formatCZK(shippingCost)}</strong>
+                </div>
+                <div style="display:flex; justify-content:space-between; font-size:18px; font-weight:800; color:var(--color-navy-800); margin-bottom:16px;">
+                  <span>Celkem s DPH:</span>
+                  <span style="color:var(--color-magenta-600);">${formatCZK(total)}</span>
+                </div>
+                <button type="button" class="btn btn--magenta" style="width:100%;" id="checkoutOrderBtn">Odeslat objednávku</button>
+              </div>
+            </div>
+          </div>
+        `;
+
+        const checkoutBtn = document.getElementById('checkoutOrderBtn');
+        if (checkoutBtn) {
+          checkoutBtn.addEventListener('click', () => {
+            state.cart = [];
+            updateHeaderBadges();
+            renderCart();
+            showToast('Děkujeme! Vaše objednávka byla úspěšně přijata ke zpracování.');
+          });
+        }
+      }
+
+      window.sgSelectShipping = function (type) {
+        state.selectedShipping = type;
+        renderCart();
+      };
+
+      // 8. MEGAMENU & SEARCH AUTOCOMPLETE
+      const megamenuDrawer = document.getElementById('megamenuDrawer');
+      const megamenuContent = document.getElementById('megamenuContent');
+
+      document.querySelectorAll('[data-mega]').forEach((item) => {
+        item.addEventListener('mouseenter', () => {
+          const key = item.getAttribute('data-mega');
+          const list = MEGAMENU_DATA[key] || [];
+          megamenuContent.innerHTML = `
+            <div class="megamenu__grid">
+              ${list
+                .map(
+                  (c) => `
+                <button type="button" class="megamenu__card" data-route="catalog" data-category="${key === 'nabytek' ? c.title : 'all'}">
+                  <div>
+                    <div class="megamenu__card-title">${c.title}</div>
+                    <div class="megamenu__card-sub">${c.sub}</div>
+                  </div>
+                  <span style="color:var(--color-magenta-600); font-weight:700;">›</span>
+                </button>
+              `
+                )
+                .join('')}
+            </div>
+          `;
+          megamenuDrawer.classList.add('is-open');
+        });
+      });
+
+      document.getElementById('mainNav').addEventListener('mouseleave', () => {
+        megamenuDrawer.classList.remove('is-open');
+      });
+
+      // Search Input
+      const searchInput = document.getElementById('searchInput');
+      const searchClearBtn = document.getElementById('searchClearBtn');
+      const searchDropdown = document.getElementById('searchDropdown');
+
+      searchInput.addEventListener('input', () => {
+        const q = searchInput.value.trim().toLowerCase();
+        searchClearBtn.classList.toggle('is-visible', q.length > 0);
+        if (q.length < 2) {
+          searchDropdown.classList.remove('is-open');
+          return;
+        }
+        const matches = PRODUCTS.filter(
+          (p) => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q)
+        );
+        if (!matches.length) {
+          searchDropdown.innerHTML = `<div class="search-dropdown__header">Nic jsme nenašli pro „${searchInput.value}“</div>`;
+        } else {
+          searchDropdown.innerHTML = `
+            <div class="search-dropdown__header">Nalezené produkty (${matches.length})</div>
+            ${matches
+              .slice(0, 4)
+              .map(
+                (m) => `
+              <a href="#produkt" class="search-dropdown__item" data-route="catalog" data-category="${m.category}">
+                <div>
+                  <div class="search-dropdown__item-title">${m.name}</div>
+                  <div class="search-dropdown__item-cat">${m.category} • ${m.dims}</div>
+                </div>
+                <div class="search-dropdown__item-price">${formatCZK(m.price)}</div>
+              </a>
+            `
+              )
+              .join('')}
+          `;
+        }
+        searchDropdown.classList.add('is-open');
+      });
+
+      searchClearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        searchClearBtn.classList.remove('is-visible');
+        searchDropdown.classList.remove('is-open');
+        searchInput.focus();
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('#headerSearchWrap')) {
+          searchDropdown.classList.remove('is-open');
+        }
+      });
+
+      // Mobile Navigation Toggle
+      document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+        document.getElementById('mainNav').classList.toggle('is-mobile-open');
+      });
+
+      // Login Modal
+      const loginModal = document.getElementById('loginModal');
+      document.getElementById('loginOpenBtn').addEventListener('click', () => {
+        loginModal.classList.add('is-open');
+      });
+      document.getElementById('loginCloseBtn').addEventListener('click', () => {
+        loginModal.classList.remove('is-open');
+      });
+      loginModal.addEventListener('click', (e) => {
+        if (e.target === loginModal) loginModal.classList.remove('is-open');
+      });
+      document.getElementById('loginForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        loginModal.classList.remove('is-open');
+        showToast('Úspěšně jste se přihlásili ke svému účtu SG nábytek.');
+      });
+
+      // Newsletter Subscription
+      document.getElementById('newsletterForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const emailVal = document.getElementById('newsletterEmail').value.trim();
+        if (emailVal) {
+          document.getElementById('newsletterEmail').value = '';
+          showToast(`Děkujeme! E-mail ${emailVal} byl přihlášen k odběru novinek.`);
+        }
+      });
+
+      // Heureka Floating Tab
+      document.getElementById('heurekaTabBtn').addEventListener('click', () => {
+        showToast('Ověřeno zákazníky Heureka: 98 % zákazníků doporučuje obchod SG nábytek.');
+      });
+
+      // Initialize Badges
+      updateHeaderBadges();
+    })();
+  </script>
+</body>
+</html>

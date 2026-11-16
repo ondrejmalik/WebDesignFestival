@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Schedule - Festival of Darkness 2</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/lang.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">Festival of Darkness 2</span>
+      </a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html" class="nav-link" data-i18n="nav_home">Overview</a>
+        <a href="program.html" class="nav-link" data-i18n="nav_program">Program</a>
+        <a href="artists.html" class="nav-link">Artists</a>
+        <a href="my-schedule.html" class="nav-link active">My Schedule</a>
+        <button type="button" class="lang-btn" id="lang-toggle" onclick="toggleFestivalLang()" aria-label="Switch language">CZ</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="page-head">
+      <p class="hero-meta" data-i18n="hero_meta">Kutná Hora, Czech Republic · 10-12 Jul 2026</p>
+      <h1 class="page-title">My Schedule</h1>
+      <p class="page-lead">Your personal festival checklist and collision-free timetable across Solar Horizon Stage and Lunar Forest Dome.</p>
+      <div class="hero-actions">
+        <a href="program.html" class="btn-primary" data-i18n="cta_program">Explore 3-Day Program</a>
+        <button type="button" class="btn-secondary" id="load-sample-btn">Load Curated Sample</button>
+        <button type="button" class="btn-secondary" id="clear-schedule-btn">Clear Saved Sets</button>
+      </div>
+    </section>
+
+    <section class="stats-strip" aria-label="Personal schedule summary">
+      <div class="stat-item">
+        <span class="stat-value" id="saved-total-count">0</span>
+        <span class="stat-label">Saved Sets</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value" id="saved-conflicts-count">0</span>
+        <span class="stat-label">Time Overlaps</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value" id="saved-solar-count">0</span>
+        <span class="stat-label">Solar Horizon</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value" id="saved-lunar-count">0</span>
+        <span class="stat-label">Lunar Forest Dome</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Quick-Add Featured Sets</h2>
+        <p class="section-sub">Toggle sets below or save favorites from Program and Artists. Changes persist in localStorage (<code>festival_favorites</code>).</p>
+      </div>
+
+      <div class="day-jump" id="quick-add-list" aria-label="Toggle sets into personal schedule"></div>
+    </section>
+
+    <section id="saved-timetable" class="section">
+      <div class="section-header">
+        <h2 class="section-title">Personal Timetable</h2>
+        <p class="section-sub" id="schedule-status-text">Showing your saved sets ordered chronologically with automatic overlap detection.</p>
+      </div>
+
+      <div id="empty-state-card" class="card">
+        <div class="card-top">
+          <span class="badge badge-solar">Empty Checklist</span>
+          <span class="capacity-tag">localStorage: festival_favorites</span>
+        </div>
+        <h3 class="card-title">No sets saved in your personal schedule yet</h3>
+        <p class="card-body">Use the quick-add toggles above, load a conflict-free sample route, or star sets while browsing the full 3-day lineup.</p>
+        <ul class="checklist">
+          <li class="check-item">Browse the 60 scheduled sets across Friday, Saturday, and Sunday</li>
+          <li class="check-item">Save sets to automatically check for cross-stage time collisions</li>
+          <li class="check-item">Your selection stays saved locally in this browser</li>
+        </ul>
+        <div class="section-footer">
+          <a href="program.html" class="btn-primary" data-i18n="cta_full_schedule">View Full Timetable</a>
+        </div>
+      </div>
+
+      <div id="days-container"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="brand-name">Festival of Darkness 2</span>
+        <span class="footer-meta" data-i18n="footer_loc">Kutná Hora, Czech Republic · 10-12 Jul 2026</span>
+      </div>
+      <div class="footer-links">
+        <a href="index.html" data-i18n="nav_home">Overview</a>
+        <a href="program.html" data-i18n="nav_program">Program</a>
+        <a href="artists.html">Artists</a>
+        <a href="stages.html">Stages</a>
+        <a href="practical-info.html">Practical Info</a>
+        <a href="search.html">Search</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const FAVORITES_KEY = "festival_favorites";
+
+      const ALL_SETS = [
+        { id: "perf-01", schId: "sch-01", day: "day1", dayTitle: "Day 1 - Friday, 10 July 2026", start: "14:00", end: "14:45", stage: "Solar Horizon Stage", stageType: "solar", artist: "Echoes of Light", origin: "CZ", genre: "Post-Rock / Ambient" },
+        { id: "perf-03", schId: "sch-03", day: "day1", dayTitle: "Day 1 - Friday, 10 July 2026", start: "16:00", end: "16:50", stage: "Solar Horizon Stage", stageType: "solar", artist: "Nordic Wave", origin: "SE", genre: "Indie Rock" },
+        { id: "perf-13", schId: "sch-13", day: "day1", dayTitle: "Day 1 - Friday, 10 July 2026", start: "17:15", end: "18:15", stage: "Lunar Forest Dome", stageType: "lunar", artist: "Deep Texture", origin: "DE", genre: "Dub Techno" },
+        { id: "perf-07", schId: "sch-07", day: "day1", dayTitle: "Day 1 - Friday, 10 July 2026", start: "20:40", end: "21:40", stage: "Solar Horizon Stage", stageType: "solar", artist: "Mirage Horizon", origin: "UK", genre: "Alternative Rock" },
+        { id: "perf-08", schId: "sch-08", day: "day1", dayTitle: "Day 1 - Friday, 10 July 2026", start: "22:00", end: "23:10", stage: "Solar Horizon Stage", stageType: "solar", artist: "Solar Flare", origin: "DE", genre: "Nu-Disco / Funk" },
+        { id: "perf-17", schId: "sch-17", day: "day1", dayTitle: "Day 1 - Friday, 10 July 2026", start: "22:30", end: "23:50", stage: "Lunar Forest Dome", stageType: "lunar", artist: "Modular Horizon", origin: "DE", genre: "Live Hardware Techno" },
+        { id: "perf-09", schId: "sch-09", day: "day1", dayTitle: "Day 1 - Friday, 10 July 2026", start: "23:30", end: "00:45", stage: "Solar Horizon Stage", stageType: "solar", artist: "Starlight Odyssey", origin: "FR", genre: "Electronic Indie" },
+        { id: "perf-19", schId: "sch-19", day: "day1", dayTitle: "Day 1 - Friday, 10 July 2026", start: "01:40", end: "03:00", stage: "Lunar Forest Dome", stageType: "lunar", artist: "Frequency 404", origin: "UK", genre: "Raw Acid Techno" },
+
+        { id: "perf-25", schId: "sch-25", day: "day2", dayTitle: "Day 2 - Saturday, 11 July 2026", start: "17:45", end: "18:40", stage: "Solar Horizon Stage", stageType: "solar", artist: "Silver Tides", origin: "CZ", genre: "Shoegaze" },
+        { id: "perf-35", schId: "sch-35", day: "day2", dayTitle: "Day 2 - Saturday, 11 July 2026", start: "19:15", end: "20:15", stage: "Lunar Forest Dome", stageType: "lunar", artist: "Monolith Audio", origin: "DE", genre: "Peak Time Techno" },
+        { id: "perf-27", schId: "sch-27", day: "day2", dayTitle: "Day 2 - Saturday, 11 July 2026", start: "20:20", end: "21:20", stage: "Solar Horizon Stage", stageType: "solar", artist: "Wild Horizon", origin: "DE", genre: "Post-Punk Revival" },
+        { id: "perf-28", schId: "sch-28", day: "day2", dayTitle: "Day 2 - Saturday, 11 July 2026", start: "21:40", end: "22:50", stage: "Solar Horizon Stage", stageType: "solar", artist: "Magnetic River", origin: "FR", genre: "Indie Dance" },
+        { id: "perf-38", schId: "sch-38", day: "day2", dayTitle: "Day 2 - Saturday, 11 July 2026", start: "23:35", end: "00:55", stage: "Lunar Forest Dome", stageType: "lunar", artist: "Circuit Overload", origin: "PL", genre: "Hard Techno" },
+        { id: "perf-39", schId: "sch-39", day: "day2", dayTitle: "Day 2 - Saturday, 11 July 2026", start: "01:10", end: "02:30", stage: "Lunar Forest Dome", stageType: "lunar", artist: "Neural Network Live", origin: "BE", genre: "Acid Techno" },
+
+        { id: "perf-42", schId: "sch-42", day: "day3", dayTitle: "Day 3 - Sunday, 12 July 2026", start: "14:00", end: "14:45", stage: "Solar Horizon Stage", stageType: "solar", artist: "Silent Pines", origin: "SK", genre: "Chamber Pop" },
+        { id: "perf-43", schId: "sch-43", day: "day3", dayTitle: "Day 3 - Sunday, 12 July 2026", start: "15:00", end: "15:50", stage: "Solar Horizon Stage", stageType: "solar", artist: "Sunken Ship", origin: "UK", genre: "Psych Rock" },
+        { id: "perf-55", schId: "sch-55", day: "day3", dayTitle: "Day 3 - Sunday, 12 July 2026", start: "18:45", end: "19:45", stage: "Lunar Forest Dome", stageType: "lunar", artist: "Dark Matter", origin: "CZ", genre: "Deep Progressive" },
+        { id: "perf-57", schId: "sch-57", day: "day3", dayTitle: "Day 3 - Sunday, 12 July 2026", start: "21:30", end: "22:45", stage: "Lunar Forest Dome", stageType: "lunar", artist: "Galactic Orbit", origin: "IT", genre: "Melodic Techno" },
+        { id: "perf-49", schId: "sch-49", day: "day3", dayTitle: "Day 3 - Sunday, 12 July 2026", start: "22:35", end: "23:55", stage: "Solar Horizon Stage", stageType: "solar", artist: "Starlight Runners", origin: "DK", genre: "Electropop Headliner" },
+        { id: "perf-50", schId: "sch-50", day: "day3", dayTitle: "Day 3 - Sunday, 12 July 2026", start: "00:10", end: "01:15", stage: "Solar Horizon Stage", stageType: "solar", artist: "Final Cascade", origin: "CZ", genre: "Orchestral Electronic" }
+      ];
+
+      const COLLISION_FREE_SAMPLE = [
+        "perf-03",
+        "perf-13",
+        "perf-07",
+        "perf-09",
+        "perf-19",
+        "perf-25",
+        "perf-35",
+        "perf-28",
+        "perf-38",
+        "perf-39",
+        "perf-43",
+        "perf-55",
+        "perf-49",
+        "perf-50"
+      ];
+
+      function toFestivalMinutes(hhmm) {
+        const parts = hhmm.split(":");
+        let hours = parseInt(parts[0], 10);
+        const mins = parseInt(parts[1], 10);
+        if (hours < 6) {
+          hours += 24;
+        }
+        return hours * 60 + mins;
+      }
+
+      function readFavorites() {
+        try {
+          const raw = localStorage.getItem(FAVORITES_KEY);
+          if (!raw) return [];
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) {
+            return parsed.map(String);
+          }
+        } catch (e) {
+          // Ignore malformed storage
+        }
+        return [];
+      }
+
+      function writeFavorites(ids) {
+        const unique = Array.from(new Set(ids));
+        try {
+          localStorage.setItem(FAVORITES_KEY, JSON.stringify(unique));
+        } catch (e) {
+          // Ignore storage quota errors
+        }
+        render();
+      }
+
+      function toggleFavorite(id) {
+        const current = readFavorites();
+        const exists = current.includes(id);
+        const next = exists ? current.filter((item) => item !== id) : current.concat(id);
+        writeFavorites(next);
+      }
+
+      function findOverlaps(daySets) {
+        const overlappingIds = new Set();
+        for (let i = 0; i < daySets.length; i++) {
+          const aStart = toFestivalMinutes(daySets[i].start);
+          const aEnd = toFestivalMinutes(daySets[i].end);
+          for (let j = i + 1; j < daySets.length; j++) {
+            const bStart = toFestivalMinutes(daySets[j].start);
+            const bEnd = toFestivalMinutes(daySets[j].end);
+            if (aStart < bEnd && bStart < aEnd) {
+              overlappingIds.add(daySets[i].id);
+              overlappingIds.add(daySets[j].id);
+            }
+          }
+        }
+        return overlappingIds;
+      }
+
+      function renderQuickAdd(savedIds) {
+        const container = document.getElementById("quick-add-list");
+        if (!container) return;
+        container.innerHTML = "";
+
+        ALL_SETS.forEach((item) => {
+          const isSaved = savedIds.includes(item.id);
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "jump-pill";
+          btn.setAttribute("aria-pressed", isSaved ? "true" : "false");
+          btn.textContent = (isSaved ? "✓ " : "+ ") + item.artist + " (" + item.start + ")";
+          btn.addEventListener("click", function () {
+            toggleFavorite(item.id);
+          });
+          container.appendChild(btn);
+        });
+      }
+
+      function render() {
+        const savedIds = readFavorites();
+        renderQuickAdd(savedIds);
+
+        const matchedSets = ALL_SETS.filter(
+          (s) => savedIds.includes(s.id) || savedIds.includes(s.schId) || savedIds.includes(s.artist)
+        );
+
+        const daysMeta = [
+          { key: "day1", title: "Day 1 - Friday, 10 July 2026" },
+          { key: "day2", title: "Day 2 - Saturday, 11 July 2026" },
+          { key: "day3", title: "Day 3 - Sunday, 12 July 2026" }
+        ];
+
+        let totalConflicts = 0;
+        let solarCount = 0;
+        let lunarCount = 0;
+
+        matchedSets.forEach((s) => {
+          if (s.stageType === "solar") solarCount++;
+          if (s.stageType === "lunar") lunarCount++;
+        });
+
+        const daysContainer = document.getElementById("days-container");
+        const emptyCard = document.getElementById("empty-state-card");
+        const statusText = document.getElementById("schedule-status-text");
+
+        daysContainer.innerHTML = "";
+
+        if (matchedSets.length === 0) {
+          emptyCard.hidden = false;
+        } else {
+          emptyCard.hidden = true;
+
+          daysMeta.forEach((dayInfo) => {
+            const daySets = matchedSets
+              .filter((s) => s.day === dayInfo.key)
+              .sort((a, b) => toFestivalMinutes(a.start) - toFestivalMinutes(b.start));
+
+            if (daySets.length === 0) return;
+
+            const overlaps = findOverlaps(daySets);
+            totalConflicts += overlaps.size;
+
+            const dayBlock = document.createElement("div");
+            dayBlock.className = "day-section";
+
+            const header = document.createElement("div");
+            header.className = "day-header";
+
+            const titleWrap = document.createElement("div");
+            const h3 = document.createElement("h3");
+            h3.className = "day-title";
+            h3.textContent = dayInfo.title;
+
+            const sub = document.createElement("p");
+            sub.className = "day-sub";
+            sub.textContent =
+              overlaps.size === 0
+                ? "Collision-free route — plenty of transition time between stages."
+                : "Schedule overlap detected between highlighted sets.";
+
+            titleWrap.appendChild(h3);
+            titleWrap.appendChild(sub);
+
+            const countBadge = document.createElement("span");
+            countBadge.className = "set-count-badge";
+            countBadge.textContent = daySets.length === 1 ? "1 saved set" : daySets.length + " saved sets";
+
+            header.appendChild(titleWrap);
+            header.appendChild(countBadge);
+            dayBlock.appendChild(header);
+
+            const list = document.createElement("div");
+            list.className = "schedule-list";
+
+            daySets.forEach((item) => {
+              const row = document.createElement("div");
+              row.className = "schedule-row";
+
+              const timeEl = document.createElement("div");
+              timeEl.className = "slot-time";
+              timeEl.textContent = item.start + "–" + item.end;
+
+              const stageWrap = document.createElement("div");
+              stageWrap.className = "slot-stage";
+              const stageTag = document.createElement("span");
+              stageTag.className = "stage-tag " + (item.stageType === "solar" ? "solar-tag" : "lunar-tag");
+              stageTag.textContent = item.stageType === "solar" ? "Solar Horizon" : "Lunar Forest Dome";
+              stageWrap.appendChild(stageTag);
+
+              const artistWrap = document.createElement("div");
+              artistWrap.className = "slot-artist";
+
+              const artistLink = document.createElement("a");
+              artistLink.href = "artist-detail.html?id=" + encodeURIComponent(item.id);
+              artistLink.textContent = item.artist;
+              artistWrap.appendChild(artistLink);
+
+              const originTag = document.createElement("span");
+              originTag.className = "origin-tag";
+              originTag.textContent = item.origin;
+              artistWrap.appendChild(originTag);
+
+              if (overlaps.has(item.id)) {
+                const conflictBadge = document.createElement("span");
+                conflictBadge.className = "badge badge-solar";
+                conflictBadge.textContent = "Time Overlap";
+                artistWrap.appendChild(conflictBadge);
+              }
+
+              const rightWrap = document.createElement("div");
+              rightWrap.className = "slot-genre";
+
+              const genreSpan = document.createElement("span");
+              genreSpan.textContent = item.genre + " · ";
+
+              const removeBtn = document.createElement("button");
+              removeBtn.type = "button";
+              removeBtn.className = "lang-btn";
+              removeBtn.textContent = "Remove";
+              removeBtn.setAttribute("aria-label", "Remove " + item.artist + " from My Schedule");
+              removeBtn.addEventListener("click", function () {
+                toggleFavorite(item.id);
+              });
+
+              rightWrap.appendChild(genreSpan);
+              rightWrap.appendChild(removeBtn);
+
+              row.appendChild(timeEl);
+              row.appendChild(stageWrap);
+              row.appendChild(artistWrap);
+              row.appendChild(rightWrap);
+              list.appendChild(row);
+            });
+
+            dayBlock.appendChild(list);
+            daysContainer.appendChild(dayBlock);
+          });
+        }
+
+        document.getElementById("saved-total-count").textContent = String(matchedSets.length);
+        document.getElementById("saved-conflicts-count").textContent = String(totalConflicts);
+        document.getElementById("saved-solar-count").textContent = String(solarCount);
+        document.getElementById("saved-lunar-count").textContent = String(lunarCount);
+
+        if (statusText) {
+          if (matchedSets.length === 0) {
+            statusText.textContent = "No sets saved yet. Add sets above or load the collision-free sample route.";
+          } else if (totalConflicts === 0) {
+            statusText.textContent = "All " + matchedSets.length + " saved sets are collision-free across both stages.";
+          } else {
+            statusText.textContent = "Warning: " + totalConflicts + " saved sets overlap in time. Remove one to resolve.";
+          }
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const sampleBtn = document.getElementById("load-sample-btn");
+        const clearBtn = document.getElementById("clear-schedule-btn");
+
+        if (sampleBtn) {
+          sampleBtn.addEventListener("click", function () {
+            writeFavorites(COLLISION_FREE_SAMPLE);
+          });
+        }
+
+        if (clearBtn) {
+          clearBtn.addEventListener("click", function () {
+            writeFavorites([]);
+          });
+        }
+
+        render();
+      });
+    })();
+  </script>
+</body>
+</html>

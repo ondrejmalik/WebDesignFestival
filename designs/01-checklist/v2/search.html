@@ -1,0 +1,254 @@
+<!-- v2/search.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search - Festival of Darkness 2 - Kutna Hora 2026</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/lang.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">Festival of Darkness 2</span>
+      </a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html" class="nav-link" data-i18n="nav_home">Overview</a>
+        <a href="program.html" class="nav-link" data-i18n="nav_program">Program</a>
+        <a href="artists.html" class="nav-link">Artists</a>
+        <a href="stages.html" class="nav-link">Stages</a>
+        <a href="search.html" class="nav-link active">Search</a>
+        <button type="button" class="lang-btn" id="lang-toggle" onclick="toggleFestivalLang()" aria-label="Switch language">CZ</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="page-head">
+      <p class="hero-meta" data-i18n="hero_meta">Kutná Hora, Czech Republic · 10-12 Jul 2026</p>
+      <h1 class="page-title">Search Festival</h1>
+      <p class="page-lead">Find artists, genres, stage specifications, set times, and visitor guidance across the 2026 edition.</p>
+
+      <form class="hero-actions" action="search.html" method="get" role="search">
+        <input type="search" id="festival-search-input" name="q" class="btn-secondary" placeholder="Search artists, stages, genres, or info..." aria-label="Search festival">
+        <button type="submit" class="btn-primary">Search</button>
+      </form>
+    </section>
+
+    <section class="section" aria-label="Filter categories">
+      <div class="day-jump" id="search-filters">
+        <button type="button" class="jump-pill" data-filter="all" aria-pressed="true">All (10)</button>
+        <button type="button" class="jump-pill" data-filter="artists" aria-pressed="false">Artists (5)</button>
+        <button type="button" class="jump-pill" data-filter="stages" aria-pressed="false">Stages (2)</button>
+        <button type="button" class="jump-pill" data-filter="info" aria-pressed="false">Info (3)</button>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Search Results</h2>
+        <p class="section-sub" id="results-summary">Showing 10 matching entries across artists, stages, and schedule.</p>
+      </div>
+
+      <div class="card-grid" id="search-results-grid">
+        <article class="card" data-category="artists" data-keywords="starlight odyssey electronic indie fr friday solar horizon 23:30">
+          <div class="card-top">
+            <span class="badge badge-solar">Artist</span>
+            <span class="day-pill">Fri 10 Jul · 23:30-00:45</span>
+          </div>
+          <h3 class="card-title"><a href="artist-detail.html">Starlight Odyssey (FR)</a></h3>
+          <p class="card-meta">Electronic Indie · Solar Horizon Stage</p>
+          <p class="card-body">Friday night open-air amphitheater headliner following Mirage Horizon and Solar Flare.</p>
+          <div class="section-footer">
+            <a href="artist-detail.html" class="btn-secondary">Artist Profile</a>
+          </div>
+        </article>
+
+        <article class="card" data-category="artists" data-keywords="neural network live acid techno be saturday lunar forest dome 01:10">
+          <div class="card-top">
+            <span class="badge badge-lunar">Artist</span>
+            <span class="day-pill">Sat 11 Jul · 01:10-02:30</span>
+          </div>
+          <h3 class="card-title"><a href="artist-detail.html">Neural Network Live (BE)</a></h3>
+          <p class="card-meta">Acid Techno · Lunar Forest Dome</p>
+          <p class="card-body">Hardware acid session under full 360-degree dome projections on Saturday night.</p>
+          <div class="section-footer">
+            <a href="artist-detail.html" class="btn-secondary">Artist Profile</a>
+          </div>
+        </article>
+
+        <article class="card" data-category="artists" data-keywords="starlight runners electropop headliner dk sunday solar horizon 22:35">
+          <div class="card-top">
+            <span class="badge badge-solar">Artist</span>
+            <span class="day-pill">Sun 12 Jul · 22:35-23:55</span>
+          </div>
+          <h3 class="card-title"><a href="artist-detail.html">Starlight Runners (DK)</a></h3>
+          <p class="card-meta">Electropop Headliner · Solar Horizon Stage</p>
+          <p class="card-body">Sunday main stage climax before Final Cascade closes the open-air amphitheater.</p>
+          <div class="section-footer">
+            <a href="artist-detail.html" class="btn-secondary">Artist Profile</a>
+          </div>
+        </article>
+
+        <article class="card" data-category="artists" data-keywords="prague synth collective synthpop cz friday solar horizon 18:15">
+          <div class="card-top">
+            <span class="badge badge-solar">Artist</span>
+            <span class="day-pill">Fri 10 Jul · 18:15-19:05</span>
+          </div>
+          <h3 class="card-title"><a href="artist-detail.html">Prague Synth Collective (CZ)</a></h3>
+          <p class="card-meta">Synthpop · Solar Horizon Stage</p>
+          <p class="card-body">Analog synthesizer ensemble performing early Friday evening on the main stage.</p>
+          <div class="section-footer">
+            <a href="artist-detail.html" class="btn-secondary">Artist Profile</a>
+          </div>
+        </article>
+
+        <article class="card" data-category="artists" data-keywords="analog void industrial techno nl friday lunar forest dome 00:05">
+          <div class="card-top">
+            <span class="badge badge-lunar">Artist</span>
+            <span class="day-pill">Fri 10 Jul · 00:05-01:25</span>
+          </div>
+          <h3 class="card-title"><a href="artist-detail.html">Analog Void (NL)</a></h3>
+          <p class="card-meta">Industrial Techno · Lunar Forest Dome</p>
+          <p class="card-body">Midnight industrial hardware set inside the covered audiovisual dome.</p>
+          <div class="section-footer">
+            <a href="artist-detail.html" class="btn-secondary">Artist Profile</a>
+          </div>
+        </article>
+
+        <article class="card" data-category="stages" data-keywords="solar horizon stage open-air main stage 4500 capacity amphitheater indie rock">
+          <div class="card-top">
+            <span class="badge badge-solar">Stage</span>
+            <span class="capacity-tag">4,500 capacity</span>
+          </div>
+          <h3 class="card-title"><a href="stages.html">Solar Horizon Stage</a></h3>
+          <p class="card-meta">Open-air main stage · Daily 13:00-02:00</p>
+          <p class="card-body">Central open-air amphitheater for major live bands, indie rock, synthpop, and dance headliners.</p>
+          <div class="section-footer">
+            <a href="stages.html" class="btn-secondary">Stage Details</a>
+          </div>
+        </article>
+
+        <article class="card" data-category="stages" data-keywords="lunar forest dome covered audiovisual dome 1800 capacity 360 projection techno ambient">
+          <div class="card-top">
+            <span class="badge badge-lunar">Stage</span>
+            <span class="capacity-tag">1,800 capacity</span>
+          </div>
+          <h3 class="card-title"><a href="stages.html">Lunar Forest Dome</a></h3>
+          <p class="card-meta">Covered audiovisual dome · Daily until 04:00</p>
+          <p class="card-body">Atmospheric covered stage featuring 360-degree projection mapping, spatial sound, and late-night electronics.</p>
+          <div class="section-footer">
+            <a href="stages.html" class="btn-secondary">Stage Details</a>
+          </div>
+        </article>
+
+        <article class="card" data-category="info" data-keywords="full 3-day timetable schedule program friday saturday sunday 60 sets">
+          <div class="card-top">
+            <span class="badge badge-solar">Info</span>
+            <span class="day-pill">10-12 Jul 2026</span>
+          </div>
+          <h3 class="card-title"><a href="program.html">Full 3-Day Festival Timetable</a></h3>
+          <p class="card-meta">60 Scheduled Sets · Both Stages</p>
+          <p class="card-body">Chronological set times across Friday, Saturday, and Sunday for Solar Horizon and Lunar Forest.</p>
+          <div class="section-footer">
+            <a href="program.html" class="btn-secondary">Open Program</a>
+          </div>
+        </article>
+
+        <article class="card" data-category="info" data-keywords="gates opening hours entry kutna hora practical info transport camping">
+          <div class="card-top">
+            <span class="badge badge-lunar">Info</span>
+            <span class="day-pill">Kutná Hora, CZ</span>
+          </div>
+          <h3 class="card-title"><a href="practical-info.html">Gates, Entry & Transport Guide</a></h3>
+          <p class="card-meta">Daily Gates 12:00 · Kutná Hora hl.n. Shuttle</p>
+          <p class="card-body">Wristband exchange hours, rail connections from Prague, on-site camping check-in, and cashless payment rules.</p>
+          <div class="section-footer">
+            <a href="practical-info.html" class="btn-secondary">Practical Info</a>
+          </div>
+        </article>
+
+        <article class="card" data-category="info" data-keywords="personal schedule checklist my schedule saved sets clash planner">
+          <div class="card-top">
+            <span class="badge badge-solar">Info</span>
+            <span class="day-pill">Personal Planner</span>
+          </div>
+          <h3 class="card-title"><a href="my-schedule.html">My Saved Set Checklist</a></h3>
+          <p class="card-meta">Custom Timetable · Overlap Check</p>
+          <p class="card-body">Review saved performances across Solar Horizon Stage and Lunar Forest Dome and check set overlaps.</p>
+          <div class="section-footer">
+            <a href="my-schedule.html" class="btn-secondary">View My Schedule</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="brand-name">Festival of Darkness 2</span>
+        <span class="footer-meta" data-i18n="footer_loc">Kutná Hora, Czech Republic · 10-12 Jul 2026</span>
+      </div>
+      <div class="footer-links">
+        <a href="index.html" data-i18n="nav_home">Overview</a>
+        <a href="program.html" data-i18n="nav_program">Program</a>
+        <a href="artists.html">Artists</a>
+        <a href="stages.html">Stages</a>
+        <a href="practical-info.html">Practical Info</a>
+        <a href="my-schedule.html">My Schedule</a>
+        <a href="search.html">Search</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const input = document.getElementById("festival-search-input");
+      const filterButtons = document.querySelectorAll("#search-filters [data-filter]");
+      const cards = document.querySelectorAll("#search-results-grid [data-category]");
+      const summary = document.getElementById("results-summary");
+      let activeFilter = "all";
+
+      function updateResults() {
+        const query = (input.value || "").trim().toLowerCase();
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const category = card.getAttribute("data-category");
+          const haystack = (card.textContent + " " + (card.getAttribute("data-keywords") || "")).toLowerCase();
+          const matchesCategory = activeFilter === "all" || category === activeFilter;
+          const matchesQuery = !query || haystack.includes(query);
+          const show = matchesCategory && matchesQuery;
+          card.hidden = !show;
+          if (show) visibleCount += 1;
+        });
+
+        if (summary) {
+          summary.textContent = "Showing " + visibleCount + (visibleCount === 1 ? " matching entry." : " matching entries.");
+        }
+      }
+
+      filterButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          activeFilter = btn.getAttribute("data-filter") || "all";
+          filterButtons.forEach((b) => b.setAttribute("aria-pressed", b === btn ? "true" : "false"));
+          updateResults();
+        });
+      });
+
+      input.addEventListener("input", updateResults);
+
+      const params = new URLSearchParams(window.location.search);
+      const initialQuery = params.get("q");
+      if (initialQuery) {
+        input.value = initialQuery;
+        updateResults();
+      }
+    })();
+  </script>
+</body>
+</html>
