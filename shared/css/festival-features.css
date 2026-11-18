@@ -2670,6 +2670,17 @@ a.rail-link-tickets:focus-visible,
   }
 }
 
+@keyframes sunderSlideInSubtle {
+  0% {
+    transform: translateY(0.75rem);
+    opacity: 0.01;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 @keyframes sunderMenuOpen {
   0% {
     opacity: 0;
@@ -2696,6 +2707,11 @@ a.rail-link-tickets:focus-visible,
   animation-delay: calc(var(--animation-order, 0) * 75ms);
 }
 
+.scroll-trigger.animate--slide-in.animate--subtle:not(.scroll-trigger--offscreen):not(.scroll-trigger--cancel) {
+  animation: sunderSlideInSubtle 0.42s var(--sunder-ease-out-slow) both;
+  animation-delay: calc(var(--animation-order, 0) * 40ms);
+}
+
 .scroll-trigger.animate--fade-in.scroll-trigger--offscreen {
   opacity: 0.01;
 }
@@ -2703,6 +2719,11 @@ a.rail-link-tickets:focus-visible,
 .scroll-trigger.animate--slide-in.scroll-trigger--offscreen {
   opacity: 0.01;
   transform: translateY(2rem);
+}
+
+.scroll-trigger.animate--slide-in.animate--subtle.scroll-trigger--offscreen {
+  opacity: 0.01;
+  transform: translateY(0.75rem);
 }
 
 .scroll-trigger--cancel {

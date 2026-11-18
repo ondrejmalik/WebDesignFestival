@@ -823,6 +823,22 @@
         el.setAttribute('data-cascade', '');
       }
     });
+
+    // Subtle scroll-trigger animations for program timetable sections and cards
+    scope.querySelectorAll('.fod-day-section, .fod-empty-card').forEach(el => {
+      if (!el.classList.contains('scroll-trigger')) {
+        el.classList.add('scroll-trigger', 'animate--slide-in', 'animate--subtle');
+      }
+    });
+
+    scope.querySelectorAll('.fod-timetable-card, .fod-slot-row').forEach(el => {
+      if (!el.classList.contains('scroll-trigger')) {
+        el.classList.add('scroll-trigger', 'animate--slide-in', 'animate--subtle');
+      }
+      if (!el.hasAttribute('data-cascade')) {
+        el.setAttribute('data-cascade', '');
+      }
+    });
   }
 
   function refreshScrollTriggers(root, isDynamicMutation) {
