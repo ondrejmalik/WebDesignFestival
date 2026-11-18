@@ -2688,11 +2688,11 @@ a.rail-link-tickets:focus-visible,
 }
 
 .scroll-trigger.animate--fade-in:not(.scroll-trigger--offscreen):not(.scroll-trigger--cancel) {
-  animation: sunderFadeIn var(--sunder-duration-extra-long) var(--sunder-ease-out-slow) forwards;
+  animation: sunderFadeIn var(--sunder-duration-extra-long) var(--sunder-ease-out-slow) both;
 }
 
 .scroll-trigger.animate--slide-in:not(.scroll-trigger--offscreen):not(.scroll-trigger--cancel) {
-  animation: sunderSlideIn var(--sunder-duration-extra-long) var(--sunder-ease-out-slow) forwards;
+  animation: sunderSlideIn var(--sunder-duration-extra-long) var(--sunder-ease-out-slow) both;
   animation-delay: calc(var(--animation-order, 0) * 75ms);
 }
 

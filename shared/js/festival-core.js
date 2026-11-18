@@ -825,7 +825,7 @@
     });
   }
 
-  function refreshScrollTriggers(root) {
+  function refreshScrollTriggers(root, isDynamicMutation) {
     applyScrollTriggerTargets(root);
     const scope = root && root.querySelectorAll ? root : document;
     const elements = scope.querySelectorAll('.scroll-trigger');
@@ -858,9 +858,22 @@
       );
     }
 
+    const viewportCutoff = (window.innerHeight || 900) * 0.95;
+
     elements.forEach(el => {
       if (el.dataset.sunderObserved === '1') return;
       el.dataset.sunderObserved = '1';
+
+      // On initial page load, do not hide elements already in/above the viewport
+      // so deferred JS never causes a visible -> hidden -> animate flash.
+      if (!isDynamicMutation) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < viewportCutoff) {
+          el.classList.remove('scroll-trigger--offscreen');
+          return;
+        }
+      }
+
       el.classList.add('scroll-trigger--offscreen');
       sunderObserver.observe(el);
     });
@@ -917,13 +930,8 @@
 
     const mainEl = document.querySelector('main');
     if (mainEl && typeof MutationObserver !== 'undefined') {
-      let mutRaf = 0;
       const mo = new MutationObserver(() => {
-        if (mutRaf) return;
-        mutRaf = window.requestAnimationFrame(() => {
-          mutRaf = 0;
-          refreshScrollTriggers(mainEl);
-        });
+        refreshScrollTriggers(mainEl, true);
       });
       mo.observe(mainEl, { childList: true, subtree: true });
     }
