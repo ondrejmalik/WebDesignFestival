@@ -778,6 +778,158 @@
   }
 
   // =========================================================================
+  // SUNDER C60 HE ANIMATION ENGINE (Scroll reveals + Smart Sticky Header)
+  // =========================================================================
+  let sunderObserver = null;
+
+  function prefersReducedMotion() {
+    return Boolean(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }
+
+  function applyScrollTriggerTargets(root) {
+    const scope = root && root.querySelectorAll ? root : document;
+
+    // Fade-in hero media
+    scope.querySelectorAll('.hero-stage-media, .hero img, .hero-banner img').forEach(el => {
+      if (!el.classList.contains('scroll-trigger')) {
+        el.classList.add('scroll-trigger', 'animate--fade-in');
+      }
+    });
+
+    // Slide-in sections, panels, cards, and footer blocks
+    const slideSelectors = [
+      'main > section',
+      'main > article',
+      '.fod-panel',
+      '.fod-card',
+      '.fod-stage-card',
+      '.fod-footer-top',
+      '.fod-footer-col',
+      '.fod-footer-bottom'
+    ].join(', ');
+
+    scope.querySelectorAll(slideSelectors).forEach(el => {
+      if (!el.classList.contains('scroll-trigger')) {
+        el.classList.add('scroll-trigger', 'animate--slide-in');
+      }
+    });
+
+    // Cascade stagger (75ms per batch item) for grid/footer children
+    scope.querySelectorAll('.fod-cards-grid > *, .fod-footer-top > *, .cards-grid > *, .grid > *').forEach(el => {
+      if (!el.classList.contains('scroll-trigger')) {
+        el.classList.add('scroll-trigger', 'animate--slide-in');
+      }
+      if (!el.hasAttribute('data-cascade')) {
+        el.setAttribute('data-cascade', '');
+      }
+    });
+  }
+
+  function refreshScrollTriggers(root) {
+    applyScrollTriggerTargets(root);
+    const scope = root && root.querySelectorAll ? root : document;
+    const elements = scope.querySelectorAll('.scroll-trigger');
+    if (!elements.length) return;
+
+    if (prefersReducedMotion() || typeof IntersectionObserver === 'undefined') {
+      elements.forEach(el => {
+        el.classList.remove('scroll-trigger--offscreen');
+      });
+      return;
+    }
+
+    if (!sunderObserver) {
+      sunderObserver = new IntersectionObserver(
+        (entries, observer) => {
+          let cascadeIndex = 0;
+          entries.forEach(entry => {
+            const target = entry.target;
+            if (entry.isIntersecting) {
+              target.classList.remove('scroll-trigger--offscreen');
+              if (target.hasAttribute('data-cascade')) {
+                target.style.setProperty('--animation-order', String(cascadeIndex));
+                cascadeIndex += 1;
+              }
+              observer.unobserve(target);
+            }
+          });
+        },
+        { rootMargin: '0px 0px -50px 0px' }
+      );
+    }
+
+    elements.forEach(el => {
+      if (el.dataset.sunderObserved === '1') return;
+      el.dataset.sunderObserved = '1';
+      el.classList.add('scroll-trigger--offscreen');
+      sunderObserver.observe(el);
+    });
+  }
+
+  function setupStickyRevealHeader() {
+    const header = document.querySelector('header.site-header, header.eb-header, header.topbar');
+    if (!header || prefersReducedMotion()) return;
+
+    header.classList.add('sunder-header-sticky', 'sunder-header-animate');
+    let lastScrollY = window.scrollY || 0;
+    let ticking = false;
+
+    const updateHeader = () => {
+      ticking = false;
+      const rect = header.getBoundingClientRect();
+      if (rect.height === 0 || rect.width === 0) return;
+
+      const menuOpen = Boolean(
+        header.classList.contains('menu-open') ||
+        header.classList.contains('is-open') ||
+        header.querySelector('[aria-expanded="true"], details[open]')
+      );
+
+      const currentScrollY = window.scrollY || 0;
+      const threshold = Math.max(rect.height, 106);
+
+      if (menuOpen || currentScrollY <= threshold) {
+        header.classList.remove('sunder-header-hidden');
+      } else if (currentScrollY > lastScrollY + 4) {
+        header.classList.add('sunder-header-hidden');
+      } else if (currentScrollY < lastScrollY - 4) {
+        header.classList.remove('sunder-header-hidden');
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (!ticking) {
+          ticking = true;
+          window.requestAnimationFrame(updateHeader);
+        }
+      },
+      { passive: true }
+    );
+  }
+
+  function initSunderAnimations() {
+    refreshScrollTriggers(document);
+    setupStickyRevealHeader();
+
+    const mainEl = document.querySelector('main');
+    if (mainEl && typeof MutationObserver !== 'undefined') {
+      let mutRaf = 0;
+      const mo = new MutationObserver(() => {
+        if (mutRaf) return;
+        mutRaf = window.requestAnimationFrame(() => {
+          mutRaf = 0;
+          refreshScrollTriggers(mainEl);
+        });
+      });
+      mo.observe(mainEl, { childList: true, subtree: true });
+    }
+  }
+
+  // =========================================================================
   // EXPORTS & INIT
   // =========================================================================
   window.FESTIVAL_CORE = {
@@ -806,7 +958,8 @@
     normalizeStr,
     matchesGenreFilter,
     escapeHtml,
-    showToast
+    showToast,
+    refreshScrollTriggers
   };
 
   function setupFooterActions() {
@@ -835,6 +988,7 @@
     enhanceHomepage();
     setupGlobalKeyboard();
     setupFooterActions();
+    initSunderAnimations();
     setTimeout(() => {
       bindLangButtonsClean();
       applyExtraTranslations(getLang());

@@ -2636,3 +2636,201 @@ a.rail-link-tickets:focus-visible,
   color: var(--fod-text);
   font-weight: 600;
 }
+
+/* =========================================================================
+   SUNDER C60 HE ANIMATION SYSTEM (Shopify Dawn-inspired motion tokens)
+   ========================================================================= */
+:root {
+  --sunder-duration-short: 0.1s;
+  --sunder-duration-default: 0.2s;
+  --sunder-duration-medium: 0.3s;
+  --sunder-duration-long: 0.5s;
+  --sunder-duration-extra-long: 0.6s;
+  --sunder-ease-out-slow: cubic-bezier(0, 0, 0.3, 1);
+  --sunder-ease-media: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes sunderFadeIn {
+  0% {
+    opacity: 0.01;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes sunderSlideIn {
+  0% {
+    transform: translateY(2rem);
+    opacity: 0.01;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes sunderMenuOpen {
+  0% {
+    opacity: 0;
+    transform: translateY(-1.5rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scroll-triggered reveals */
+.scroll-trigger.animate--fade-in,
+.scroll-trigger.animate--slide-in {
+  opacity: 1;
+}
+
+.scroll-trigger.animate--fade-in:not(.scroll-trigger--offscreen):not(.scroll-trigger--cancel) {
+  animation: sunderFadeIn var(--sunder-duration-extra-long) var(--sunder-ease-out-slow) forwards;
+}
+
+.scroll-trigger.animate--slide-in:not(.scroll-trigger--offscreen):not(.scroll-trigger--cancel) {
+  animation: sunderSlideIn var(--sunder-duration-extra-long) var(--sunder-ease-out-slow) forwards;
+  animation-delay: calc(var(--animation-order, 0) * 75ms);
+}
+
+.scroll-trigger.animate--fade-in.scroll-trigger--offscreen {
+  opacity: 0.01;
+}
+
+.scroll-trigger.animate--slide-in.scroll-trigger--offscreen {
+  opacity: 0.01;
+  transform: translateY(2rem);
+}
+
+.scroll-trigger--cancel {
+  opacity: 1 !important;
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+}
+
+@media screen and (max-width: 749px) {
+  .fod-footer-bottom.scroll-trigger.animate--slide-in {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Sticky hide-on-scroll-down / reveal-on-scroll-up header */
+header.site-header.sunder-header-sticky,
+header.eb-header.sunder-header-sticky,
+header.topbar.sunder-header-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header.site-header.sunder-header-animate,
+header.eb-header.sunder-header-animate,
+header.topbar.sunder-header-animate {
+  transition: transform 0.15s ease-out;
+}
+
+header.site-header.sunder-header-hidden,
+header.eb-header.sunder-header-hidden,
+header.topbar.sunder-header-hidden {
+  transform: translateY(-100%);
+}
+
+/* Hover & micro-interactions */
+header nav a,
+.site-footer a,
+.eb-footer a,
+.fod-breadcrumbs a {
+  text-underline-offset: 0.3rem;
+  text-decoration-thickness: 0.1rem;
+  transition: text-decoration-thickness var(--sunder-duration-short) ease,
+    color var(--sunder-duration-short) ease;
+}
+
+header nav a:hover,
+.site-footer a:hover,
+.eb-footer a:hover,
+.fod-breadcrumbs a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 0.2rem;
+}
+
+.fod-theme-btn svg,
+.lang-btn,
+.fod-social-btn svg {
+  transition: transform var(--sunder-duration-short) ease;
+}
+
+.fod-theme-btn:hover svg,
+.lang-btn:hover,
+.fod-social-btn:hover svg {
+  transform: scale(1.07);
+}
+
+.fod-btn,
+.btn {
+  transition: box-shadow var(--sunder-duration-short) ease,
+    border-color var(--sunder-duration-short) ease,
+    background-color 0.15s ease,
+    transform var(--sunder-duration-short) ease;
+}
+
+.fod-btn:not([disabled]):hover,
+.btn:not([disabled]):hover {
+  box-shadow: 0 0 0 1.3px currentColor;
+}
+
+.fod-chip,
+.fod-input,
+.fod-select {
+  transition: border-color var(--sunder-duration-short) ease,
+    box-shadow var(--sunder-duration-short) ease,
+    background-color 0.15s ease;
+}
+
+main img,
+.hero-stage-media,
+.fod-card img {
+  transition: opacity 0.4s var(--sunder-ease-media),
+    transform var(--sunder-duration-medium) var(--sunder-ease-out-slow);
+}
+
+.fod-card:hover img {
+  opacity: 0.88;
+}
+
+details[open] > *:not(summary) {
+  animation: sunderMenuOpen var(--sunder-duration-default) ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-trigger,
+  .scroll-trigger--offscreen,
+  .scroll-trigger.animate--fade-in,
+  .scroll-trigger.animate--slide-in,
+  header.site-header.sunder-header-animate,
+  header.eb-header.sunder-header-animate,
+  header.topbar.sunder-header-animate,
+  details[open] > *:not(summary),
+  .fod-btn,
+  .btn,
+  .fod-chip,
+  .fod-input,
+  .fod-select,
+  .fod-theme-btn svg,
+  .lang-btn,
+  .fod-social-btn svg,
+  main img,
+  .hero-stage-media,
+  .fod-card img {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
