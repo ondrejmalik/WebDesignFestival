@@ -1,13 +1,12 @@
 #!/bin/sh
 
 JENKINS_URL="${JENKINS_URL:-http://localhost:8080}"
-REPOSITORY_URL="${REPOSITORY_URL:-C:\Users\Administrator\Desktop\order\webapp\WebDesignFestival\\}"
+JENKINS_AUTH_TOKEN="${JENKINS_AUTH_TOKEN:-local-commit}"
 
-curl.exe --fail --silent --show-error --max-time 10 --get \
-  --data-urlencode "url=${REPOSITORY_URL}" \
-  "${JENKINS_URL}/git/notifyCommit" \
+curl.exe --fail --silent --show-error --max-time 10 -X POST \
+  "${JENKINS_URL}/job/school-website-ci/build?token=${JENKINS_AUTH_TOKEN}" \
   >/dev/null 2>&1
 
 if [ $? -ne 0 ]; then
-  echo "Jenkins notifyCommit failed; SCM polling will retry the commit." >&2
+  echo "Jenkins trigger failed; SCM polling will retry the commit." >&2
 fi
