@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Schedule - Festival of Darkness 2</title>
+  <title>Practical Info - Festival of Darkness 2</title>
   <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="../../../shared/css/festival-features.css">
+    <link rel="stylesheet" href="shared/css/festival-features.css">
+  <link rel="stylesheet" href="css/overrides.css">
   <script src="js/lang.js" defer></script>
-  <script src="../../../shared/js/festival-data.js" defer></script>
-  <script src="../../../shared/js/festival-core.js" defer></script>
-  <script src="../../../shared/js/festival-pages.js" defer></script>
+  <script src="shared/js/festival-data.js" defer></script>
+  <script src="shared/js/festival-core.js" defer></script>
+  <script src="js/festival-pages.js" defer></script>
+  <script src="js/design4-overrides.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -17,7 +19,7 @@
   <header class="eb-header">
     <div class="eb-container eb-header-inner">
       <a href="index.html" class="eb-logo">
-        <span class="eb-logo-mark" aria-hidden="true">eb</span>
+        <span class="eb-logo-mark" aria-hidden="true">FD</span>
         <span class="eb-logo-text" data-i18n="brand.short">Festival of Darkness 2</span>
       </a>
       <nav class="eb-nav" aria-label="Primary Navigation">
@@ -40,12 +42,12 @@
     <section class="eb-program-hero">
       <div class="eb-container">
         <p class="hero-meta">Kutná Hora, Czech Republic · 10-12 Jul 2026</p>
-      <h1 class="eb-page-title"><span class="lang-en">My Personal Schedule</span><span class="lang-cs is-hidden">Můj osobní plán</span></h1>
-      <p class="eb-page-subtitle"><span class="lang-en">Chronological 3-day itinerary with automatic cross-stage overlap detection, sharing, and .ics export.</span><span class="lang-cs is-hidden">Chronologický třídenní plán s automatickou detekcí kolizí mezi pódii, sdílením a exportem do .ics.</span></p>
+      <h1 class="eb-page-title"><span class="lang-en">Practical Info & Transit</span><span class="lang-cs is-hidden">Praktické informace a doprava</span></h1>
+      <p class="eb-page-subtitle"><span class="lang-en">Free shuttle bus from Kutná Hora station, interactive route map, camping, cashless RFID, and FAQ.</span><span class="lang-cs is-hidden">Bezplatný shuttle bus z nádraží Kutná Hora, interaktivní mapa trasy, kemp, cashless a FAQ.</span></p>
       </div>
     </section>
     <div class="eb-container fod-mount">
-      <div id="fod-my-schedule-root"></div>
+      <div id="fod-practical-root"></div>
     </div>
 </main>
 
@@ -74,7 +76,7 @@
               <li><a href="artist-detail.html" data-i18n="fod_footer_nav_artist_detail">Artist Spotlight</a></li>
               <li><a href="stages.html" data-i18n="fod_footer_nav_stages">Stages &amp; Grounds</a></li>
               <li><a href="tickets.html" data-i18n="fod_footer_nav_tickets">Tickets &amp; Passes</a></li>
-              <li><a href="my-schedule.html" data-i18n="fod_footer_nav_schedule" aria-current="page">My Schedule</a></li>
+              <li><a href="my-schedule.html" data-i18n="fod_footer_nav_schedule">My Schedule</a></li>
               <li><a href="search.html" data-i18n="fod_footer_nav_search">Search</a></li>
             </ul>
           </nav>
@@ -84,7 +86,7 @@
           <p class="fod-footer-heading" id="fod-footer-nav-info" data-i18n="fod_footer_col_info">PRACTICAL INFO</p>
           <nav aria-labelledby="fod-footer-nav-info">
             <ul class="fod-footer-list">
-              <li><a href="practical-info.html" data-i18n="fod_footer_info_all">Practical Info</a></li>
+              <li><a href="practical-info.html" data-i18n="fod_footer_info_all" aria-current="page">Practical Info</a></li>
               <li><a href="tickets.html" data-i18n="fod_footer_info_tickets">Tickets &amp; Entry</a></li>
               <li><a href="practical-info.html#doprava" data-i18n="fod_footer_info_travel">Getting There</a></li>
               <li><a href="practical-info.html#kemp" data-i18n="fod_footer_info_camp">Camping &amp; Stay</a></li>

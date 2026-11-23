@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Artist Detail - Festival of Darkness 2</title>
+  <title>Artists &amp; Stages - Festival of Darkness 2</title>
   <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="../../../shared/css/festival-features.css">
+    <link rel="stylesheet" href="shared/css/festival-features.css">
+  <link rel="stylesheet" href="css/overrides.css">
   <script src="js/lang.js" defer></script>
-  <script src="../../../shared/js/festival-data.js" defer></script>
-  <script src="../../../shared/js/festival-core.js" defer></script>
-  <script src="../../../shared/js/festival-pages.js" defer></script>
+  <script src="shared/js/festival-data.js" defer></script>
+  <script src="shared/js/festival-core.js" defer></script>
+  <script src="js/festival-pages.js" defer></script>
+  <script src="js/design4-overrides.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -17,7 +19,7 @@
   <header class="eb-header">
     <div class="eb-container eb-header-inner">
       <a href="index.html" class="eb-logo">
-        <span class="eb-logo-mark" aria-hidden="true">eb</span>
+        <span class="eb-logo-mark" aria-hidden="true">FD</span>
         <span class="eb-logo-text" data-i18n="brand.short">Festival of Darkness 2</span>
       </a>
       <nav class="eb-nav" aria-label="Primary Navigation">
@@ -37,8 +39,16 @@
 
   
 <main>
+    <section class="eb-program-hero">
+      <div class="eb-container">
+        <p class="hero-meta">Kutná Hora, Czech Republic · 10-12 Jul 2026</p>
+      <h1 class="eb-page-title"><span class="lang-en">Artists &amp; Stages</span><span class="lang-cs is-hidden">Účinkující &amp; Pódia</span></h1>
+      <p class="eb-page-subtitle"><span class="lang-en">Browse all 60 performers by day, genre, country, or keyword and save your favorites.</span><span class="lang-cs is-hidden">Procházejte všech 60 účinkujících podle dne, žánru, země nebo dotazu a ukládejte si oblíbené.</span></p>
+      </div>
+    </section>
     <div class="eb-container fod-mount">
-      <div id="fod-artist-detail-root"><h1>Echoes of Light</h1><p>Post-Rock / Ambient · Solar Horizon Stage · Friday, July 10, 2026 · 14:00 - 14:45</p></div>
+      <div id="fod-stages-root"></div>
+      <div id="fod-artists-root"></div>
     </div>
 </main>
 
@@ -63,8 +73,8 @@
             <ul class="fod-footer-list">
               <li><a href="index.html" data-i18n="fod_footer_nav_home">Overview</a></li>
               <li><a href="program.html" data-i18n="fod_footer_nav_program">Program</a></li>
-              <li><a href="artists.html" data-i18n="fod_footer_nav_artists">Artists</a></li>
-              <li><a href="artist-detail.html" data-i18n="fod_footer_nav_artist_detail" aria-current="page">Artist Spotlight</a></li>
+              <li><a href="artists.html" data-i18n="fod_footer_nav_artists" aria-current="page">Artists</a></li>
+              <li><a href="artist-detail.html" data-i18n="fod_footer_nav_artist_detail">Artist Spotlight</a></li>
               <li><a href="stages.html" data-i18n="fod_footer_nav_stages">Stages &amp; Grounds</a></li>
               <li><a href="tickets.html" data-i18n="fod_footer_nav_tickets">Tickets &amp; Passes</a></li>
               <li><a href="my-schedule.html" data-i18n="fod_footer_nav_schedule">My Schedule</a></li>
