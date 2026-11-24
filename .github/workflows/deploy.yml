@@ -35,6 +35,7 @@ jobs:
         run: |
           mkdir -p _site
           cp *.html _site/
+          cp -f robots.txt llms.txt _site/ 2>/dev/null || true
           cp -r css js img designs data shared _site/
 
       - name: Setup Pages
