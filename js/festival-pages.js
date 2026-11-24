@@ -1445,93 +1445,53 @@
   }
 
   // =========================================================================
-  // 5. PRACTICAL INFO PAGE (Bilingual content + Interactive SVG Route Map)
+  // 5. PRACTICAL INFO & SEARCH PAGE (Simple, arrival-first editorial layout)
   // =========================================================================
   function initPracticalInfoPage() {
     const root = document.getElementById('fod-practical-root');
     if (!root || !C()) return;
 
     const core = C();
-    const PIN_KEY = 'fod_pinned_transit';
     let activeRoute = 'all';
     let estimatorDay = 'fri';
     let estimatorTime = '14:10';
 
     const SHUTTLE_WINDOWS = {
-      fri: { startMin: 11 * 60 + 30, endMin: 28 * 60, minHeadway: 10, maxHeadway: 15, labelEn: 'Fri 10 Jul (11:30-04:00)', labelCs: 'Pá 10. 7. (11:30-04:00)', freqEn: '10-15 min', freqCs: '10-15 min', dirEn: 'Kutná Hora hl.n. to Entrance A', dirCs: 'Kutná Hora hl.n. -> Vstup A' },
-      sat: { startMin: 12 * 60, endMin: 28 * 60, minHeadway: 15, maxHeadway: 15, labelEn: 'Sat 11 Jul (12:00-04:00)', labelCs: 'So 11. 7. (12:00-04:00)', freqEn: '15 min', freqCs: '15 min', dirEn: 'Kutná Hora hl.n. to Entrance A', dirCs: 'Kutná Hora hl.n. -> Vstup A' },
-      sun: { startMin: 12 * 60, endMin: 27 * 60 + 30, minHeadway: 15, maxHeadway: 15, labelEn: 'Sun 12 Jul (12:00-03:30)', labelCs: 'Ne 12. 7. (12:00-03:30)', freqEn: '15 min', freqCs: '15 min', dirEn: 'Kutná Hora hl.n. to Entrance A', dirCs: 'Kutná Hora hl.n. -> Vstup A' },
-      mon: { startMin: 7 * 60, endMin: 13 * 60, minHeadway: 15, maxHeadway: 20, labelEn: 'Mon 13 Jul Departures (07:00-13:00)', labelCs: 'Po 13. 7. Odjezdy (07:00-13:00)', freqEn: '15-20 min', freqCs: '15-20 min', dirEn: 'Entrance A to Kutná Hora hl.n.', dirCs: 'Vstup A -> Kutná Hora hl.n.' }
+      fri: { startMin: 11 * 60 + 30, endMin: 28 * 60, maxHeadway: 15, freqEn: '10-15 min', freqCs: '10-15 min', dirEn: 'to Entrance A', dirCs: 'ke Vstupu A' },
+      sat: { startMin: 12 * 60, endMin: 28 * 60, maxHeadway: 15, freqEn: '15 min', freqCs: '15 min', dirEn: 'to Entrance A', dirCs: 'ke Vstupu A' },
+      sun: { startMin: 12 * 60, endMin: 27 * 60 + 30, maxHeadway: 15, freqEn: '15 min', freqCs: '15 min', dirEn: 'to Entrance A', dirCs: 'ke Vstupu A' },
+      mon: { startMin: 7 * 60, endMin: 13 * 60, maxHeadway: 20, freqEn: '15-20 min', freqCs: '15-20 min', dirEn: 'to Kutná Hora hl.n.', dirCs: 'na Kutná Hora hl.n.' }
     };
-
-    function isTransitPinned() {
-      try { return localStorage.getItem(PIN_KEY) === '1'; } catch (e) { return false; }
-    }
-
-    function setTransitPinned(val) {
-      try {
-        if (val) localStorage.setItem(PIN_KEY, '1');
-        else localStorage.removeItem(PIN_KEY);
-      } catch (e) {}
-    }
 
     function formatMinutesHHMM(totalMin) {
       const m = ((totalMin % (24 * 60)) + (24 * 60)) % (24 * 60);
-      const hh = Math.floor(m / 60);
-      const mm = m % 60;
-      return `${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}`;
-    }
-
-    function evaluateShuttle(dayKey, timeStr, isCs) {
-      const win = SHUTTLE_WINDOWS[dayKey] || SHUTTLE_WINDOWS.fri;
-      const parts = String(timeStr || '14:10').split(':');
-      const rawH = Math.max(0, Math.min(23, parseInt(parts[0], 10) || 0));
-      const rawM = Math.max(0, Math.min(59, parseInt(parts[1], 10) || 0));
-      const isNightOverflow = dayKey !== 'mon' && rawH < 5;
-      const normMin = (isNightOverflow ? rawH + 24 : rawH) * 60 + rawM;
-      const isRunning = normMin >= win.startMin && normMin <= win.endMin;
-
-      if (isRunning) {
-        const arriveMin = normMin + 7;
-        const arriveMax = normMin + win.maxHeadway + 7;
-        return {
-          running: true,
-          badge: isCs ? 'Shuttle v provozu' : 'Shuttle Running',
-          title: isCs
-            ? `Interval ${win.freqCs} (${win.dirCs})`
-            : `Departs every ${win.freqEn} (${win.dirEn})`,
-          detail: isCs
-            ? `Odhadovaný příjezd po 7 min jízdy: ${formatMinutesHHMM(arriveMin)} až ${formatMinutesHHMM(arriveMax)} (podle čekání na zastávce). Nástupiště: Stanoviště 1 vpravo před budovou Kutná Hora hl.n.`
-            : `Estimated arrival after 7 min ride: ${formatMinutesHHMM(arriveMin)} to ${formatMinutesHHMM(arriveMax)} (including wait). Pickup: Bus Bay 1 to the right outside Kutná Hora hl.n. main hall.`
-        };
-      }
-
-      const nextStart = formatMinutesHHMM(win.startMin);
-      return {
-        running: false,
-        badge: isCs ? 'Mimo provoz shuttle busu' : 'Outside Shuttle Hours',
-        title: isCs
-          ? `V ${formatMinutesHHMM(normMin)} kyvadlová linka nejede (${win.labelCs}).`
-          : `No shuttle runs at ${formatMinutesHHMM(normMin)} (${win.labelEn}).`,
-        detail: isCs
-          ? `Provoz v tento den začíná v ${nextStart}. Mezitím využijte osvětlenou pěší trasu (1,8 km, 22-25 min) nebo místní taxi.`
-          : `Service on this day starts at ${nextStart}. Meanwhile, take the lit walking route (1.8 km, 22-25 min) or a local taxi.`
-      };
+      return `${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
     }
 
     function updateShuttleEstimator() {
       const box = document.getElementById('fod-shuttle-result');
       if (!box) return;
       const isCs = core.getLang() === 'cs';
-      const res = evaluateShuttle(estimatorDay, estimatorTime, isCs);
-      box.className = `fod-shuttle-result ${res.running ? 'is-running' : 'is-closed'}`;
-      box.innerHTML = `
-        <div class="fod-shuttle-result-head">
-          <span class="fod-status-pill ${res.running ? 'is-running' : 'is-closed'}">${core.escapeHtml(res.badge)}</span>
-          <strong>${core.escapeHtml(res.title)}</strong>
-        </div>
-        <p>${core.escapeHtml(res.detail)}</p>
-      `;
+      const win = SHUTTLE_WINDOWS[estimatorDay] || SHUTTLE_WINDOWS.fri;
+      const parts = String(estimatorTime || '14:10').split(':');
+      const rawH = Math.max(0, Math.min(23, parseInt(parts[0], 10) || 0));
+      const rawM = Math.max(0, Math.min(59, parseInt(parts[1], 10) || 0));
+      const normMin = ((estimatorDay !== 'mon' && rawH < 5) ? rawH + 24 : rawH) * 60 + rawM;
+      const isRunning = normMin >= win.startMin && normMin <= win.endMin;
+
+      box.className = `fod-simple-status ${isRunning ? 'is-running' : 'is-closed'}`;
+      if (isRunning) {
+        const minArr = formatMinutesHHMM(normMin + 7);
+        const maxArr = formatMinutesHHMM(normMin + win.maxHeadway + 7);
+        box.textContent = isCs
+          ? `V provozu: každých ${win.freqCs}, příjezd ${win.dirCs} kolem ${minArr}-${maxArr}.`
+          : `Running: every ${win.freqEn}, arrive ${win.dirEn} around ${minArr}-${maxArr}.`;
+      } else {
+        const nextStart = formatMinutesHHMM(win.startMin);
+        box.textContent = isCs
+          ? `Mimo provoz v ${formatMinutesHHMM(normMin)}. Další spoje od ${nextStart}, nebo jděte pěšky (22-25 min).`
+          : `No shuttle at ${formatMinutesHHMM(normMin)}. Next buses start at ${nextStart}, or walk (22-25 min).`;
+      }
     }
 
     function setMapRoute(type) {
@@ -1550,16 +1510,10 @@
       });
 
       const statusText = activeRoute === 'bus'
-        ? (isCs
-          ? 'Zobrazena trasa Shuttle Bus: 7 min přímá jízda zdarma každých 10-15 min ze Stanoviště 1 před Kutná Hora hl.n. ke Vstupu A.'
-          : 'Showing Shuttle Bus route: 7 min free non-stop ride every 10-15 min from Bus Bay 1 outside Kutná Hora hl.n. to Entrance A.')
+        ? (isCs ? 'Shuttle Bus: 7 min zdarma, každých 10-15 min ze Stanoviště 1 (Kutná Hora hl.n.) ke Vstupu A.' : 'Shuttle Bus: 7 min free, every 10-15 min from Bus Bay 1 (Kutná Hora hl.n.) to Entrance A.')
         : (activeRoute === 'walk'
-          ? (isCs
-            ? 'Zobrazena pěší trasa: 1,8 km (22-25 min) po osvětleném koridoru přes Sedlec a lávku přes Vrchlici až ke Vstupu A.'
-            : 'Showing Walking route: 1.8 km (22-25 min) along the lit signposted path via Sedlec and Vrchlice Footbridge to Entrance A.')
-          : (isCs
-            ? 'Zobrazeny obě trasy z Kutná Hora hl.n. ke Vstupu A: Shuttle Bus (7 min zdarma) i pěší trasa (1,8 km, 22-25 min).'
-            : 'Showing both routes from Kutná Hora hl.n. to Entrance A: Free Shuttle Bus (7 min) and Walking Route (1.8 km, 22-25 min).'));
+          ? (isCs ? 'Pěší trasa: 1,8 km (22-25 min) po osvětleném chodníku přes Sedlec a lávku přes Vrchlici.' : 'Walking route: 1.8 km (22-25 min) along the lit path via Sedlec and Vrchlice Footbridge.')
+          : (isCs ? 'Obě trasy z Kutná Hora hl.n. ke Vstupu A: Shuttle Bus (7 min) a pěší trasa (1,8 km).' : 'Both routes from Kutná Hora hl.n. to Entrance A: Shuttle Bus (7 min) and Walking Route (1.8 km).'));
 
       const statusEl = document.getElementById('fod-map-status');
       if (statusEl) statusEl.textContent = statusText;
@@ -1570,338 +1524,248 @@
 
     function render() {
       const isCs = core.getLang() === 'cs';
-      const pinned = isTransitPinned();
       const mapyWalkUrl = 'https://mapy.cz/turisticka?q=49.9615N%2C%2015.2882E';
       const gmapsWalkUrl = 'https://www.google.com/maps/dir/?api=1&origin=Kutna+Hora+hl.n.&destination=Sedlec,+Kutna+Hora&travelmode=walking';
       const venueAddressCopy = 'Sedlec Festival Grounds, 284 03 Kutná Hora (49.9615 N, 15.2882 E)';
 
       root.innerHTML = `
-        <nav class="fod-filter-row fod-info-nav" aria-label="${isCs ? 'Sekce praktických informací' : 'Practical Info Sections'}">
-          <a href="#doprava" class="fod-chip is-active">${isCs ? 'Doprava z nádraží' : 'From Train Station'}</a>
-          <a href="#shuttle-bus" class="fod-chip">${isCs ? 'Shuttle Bus' : 'Shuttle Bus'}</a>
-          <a href="#pesi-trasa" class="fod-chip">${isCs ? 'Pěší trasa' : 'Walking Route'}</a>
-          <a href="#mapa-trasy" class="fod-chip">${isCs ? 'Mapa trasy' : 'Route Map'}</a>
-          <a href="#kemp" class="fod-chip">${isCs ? 'Kempování' : 'Camping'}</a>
-          <a href="#cashless" class="fod-chip">${isCs ? 'Cashless & Bezpečí' : 'Cashless & Safety'}</a>
-          <a href="#faq" class="fod-chip">FAQ</a>
-          <a href="#parametry" class="fod-chip">${isCs ? 'Parametry 2026' : '2026 Facts'}</a>
-        </nav>
-
-        ${pinned ? `
-          <aside class="fod-pinned-transit" aria-label="${isCs ? 'Uložený souhrn dopravy offline' : 'Pinned offline transit summary'}">
-            <div class="fod-pinned-transit-head">
-              <strong>${isCs ? 'Uložená karta příjezdu (Offline)' : 'Pinned Arrival Card (Offline)'}</strong>
-              <button type="button" class="fod-btn fod-btn-ghost fod-btn-sm" id="fod-unpin-transit-btn">${isCs ? 'Odepnout' : 'Unpin'}</button>
-            </div>
-            <p>${isCs
-              ? 'Stanice: Kutná Hora hl.n. (NE Kutná Hora město) · Shuttle ZDARMA každých 10-15 min (7 min jízdy, Stanoviště 1 vpravo před halou) · Pěšky: 1,8 km (22-25 min) po žlutých směrovkách přes Sedlec a lávku přes Vrchlici ke Vstupu A.'
-              : 'Station: Kutná Hora hl.n. (NOT Kutná Hora město) · FREE Shuttle every 10-15 min (7 min ride, Bus Bay 1 right outside main hall) · Walk: 1.8 km (22-25 min) via yellow signs past Sedlec Ossuary & Vrchlice Footbridge to Entrance A.'}</p>
-          </aside>
-        ` : ''}
-
-        <section class="fod-panel" id="doprava">
-          <div class="fod-section-head-split">
-            <div>
-              <h2>${isCs ? 'Doprava z nádraží Kutná Hora hl.n. a mapa trasy' : 'Arriving at Kutná Hora hl.n. (Main Station) & Route Map'}</h2>
-              <p class="fod-section-lead">${isCs
-                ? 'Rychlý přehled, jak se z hlavního nádraží dostat k Hlavní bráně (Vstup A) bezplatným shuttle busem nebo pěšky.'
-                : 'Fast guide from Kutná Hora hl.n. railway station directly to Main Gate (Entrance A) by free shuttle bus or on foot.'}</p>
-            </div>
-            <button type="button" id="fod-pin-transit-btn" class="fod-btn fod-btn-secondary fod-btn-sm" aria-pressed="${pinned}">
-              ${pinned ? (isCs ? '✓ Uloženo pro offline' : '✓ Pinned for Offline') : (isCs ? 'Uložit souhrn offline' : 'Pin Offline Summary')}
-            </button>
+        <div class="fod-info-sheet">
+          <div class="fod-info-top">
+            <form action="search.html" method="get" class="fod-simple-search" role="search">
+              <label for="info-search-input" class="fod-sr-only">${isCs ? 'Hledat na festivalu' : 'Search festival'}</label>
+              <input type="search" id="info-search-input" name="q" class="fod-input"
+                placeholder="${isCs ? 'Hledat interprety, pódia, shuttle bus, kemp nebo FAQ...' : 'Search artists, stages, shuttle bus, camping, or FAQ...'}">
+              <button type="submit" class="fod-btn fod-btn-primary">${isCs ? 'Hledat' : 'Search'}</button>
+            </form>
+            <nav class="fod-simple-jump" aria-label="${isCs ? 'Sekce informací' : 'Information sections'}">
+              <a href="#doprava">${isCs ? 'Doprava z nádraží' : 'Getting there'}</a>
+              <a href="#kemp">${isCs ? 'Kemp' : 'Camping'}</a>
+              <a href="#cashless">${isCs ? 'Cashless a zázemí' : 'Cashless & on site'}</a>
+              <a href="#faq">FAQ</a>
+            </nav>
           </div>
 
-          <div class="fod-station-alert" role="note">
-            <strong>${isCs ? 'Důležité pro vlak:' : 'Train station tip:'}</strong>
-            ${isCs
-              ? 'Vystupte ve stanici <strong>Kutná Hora hl.n.</strong> (hlavní nádraží na trati R9 Praha-Brno), nikoli v zastávce Kutná Hora město. Nástupiště festivalového shuttle busu je na <strong>Stanovišti 1 vpravo před hlavní halou</strong>.'
-              : 'Get off at <strong>Kutná Hora hl.n.</strong> (Main Railway Station on the Prague-Brno R9 line), not Kutná Hora město. Festival shuttle pickup is at <strong>Bus Bay 1, immediately to the right outside the main hall</strong>.'}
-          </div>
-
-          <div class="fod-arrival-compare">
-            <div class="fod-arrival-option is-recommended">
-              <div class="fod-card-top">
-                <span class="fod-stage-pill is-lunar">${isCs ? 'Doporučeno se zavazadly / při dešti' : 'Best with luggage or rain'}</span>
-                <span class="fod-badge">${isCs ? 'ZDARMA' : 'FREE'}</span>
-              </div>
-              <h3>${isCs ? 'Shuttle Bus: 7 min (každých 10-15 min)' : 'Shuttle Bus: 7 min (every 10-15 min)'}</h3>
-              <p>${isCs
-                ? 'Přímá bezbariérová linka ze Stanoviště 1 (Kutná Hora hl.n.) přímo k Hlavní bráně (Vstup A). Místo na batohy a kufry.'
-                : 'Direct non-stop, step-free bus from Bus Bay 1 (Kutná Hora hl.n.) to Main Gate (Entrance A). Space for luggage and backpacks.'}</p>
-            </div>
-            <div class="fod-arrival-option">
-              <div class="fod-card-top">
-                <span class="fod-stage-pill is-solar">${isCs ? 'Kdykoli 24/7' : 'Available 24/7'}</span>
-                <span class="fod-badge">1.8 km</span>
-              </div>
-              <h3>${isCs ? 'Značená pěší trasa: 22-25 min' : 'Marked Walking Route: 22-25 min'}</h3>
-              <p>${isCs
-                ? 'Osvětlená trasa se žlutými reflexními směrovkami kolem Sedlecké kostnice a přes lávku Vrchlice. Vhodná i mimo provoz shuttle busu.'
-                : 'Lit path marked with yellow reflective signs past Sedlec Ossuary and Vrchlice Footbridge. Ideal whenever shuttles are between operating hours.'}</p>
-            </div>
-          </div>
-
-          <div class="fod-nav-actions-bar">
-            <a href="${mapyWalkUrl}" target="_blank" rel="noopener noreferrer" class="fod-btn fod-btn-primary fod-btn-sm">
-              ${isCs ? 'Otevřít v Mapy.cz ↗' : 'Open in Mapy.cz ↗'}<span class="fod-sr-only"> (${isCs ? 'otevře se v nové záložce' : 'opens in new tab'})</span>
-            </a>
-            <a href="${gmapsWalkUrl}" target="_blank" rel="noopener noreferrer" class="fod-btn fod-btn-secondary fod-btn-sm">
-              ${isCs ? 'Navigace Google Maps ↗' : 'Walking Directions (Google Maps) ↗'}<span class="fod-sr-only"> (${isCs ? 'otevře se v nové záložce' : 'opens in new tab'})</span>
-            </a>
-            <button type="button" id="fod-copy-venue-btn" class="fod-btn fod-btn-ghost fod-btn-sm" data-copy-text="${core.escapeHtml(venueAddressCopy)}">
-              ${isCs ? 'Kopírovat adresu a GPS' : 'Copy Address & GPS'}
-            </button>
-          </div>
-
-          <div class="fod-info-grid">
-            <article class="fod-sub-card" id="shuttle-bus">
-              <h3>${isCs ? 'Kyvadlový Shuttle Bus (ZDARMA)' : 'Festival Shuttle Bus (FREE)'}</h3>
-              <p>${isCs
-                ? 'Bezplatná přímá kyvadlová linka z Kutná Hora hl.n. (Stanoviště 1 vpravo před halou) k Hlavní bráně (Vstup A). Jezdí během otevírací doby areálu i po nočních headlinerech každých 10 až 15 minut (doba jízdy 7 minut) s návazností na rychlíky R9 z Prahy a Brna.'
-                : 'Free non-stop shuttle from Kutná Hora hl.n. (Bus Bay 1, right outside the main hall) directly to Entrance A. Runs throughout festival hours and late-night headliners every 10-15 minutes (7 min ride), synced with R9 express trains from Prague & Brno.'}</p>
-
-              <div class="fod-shuttle-estimator">
-                <p class="fod-estimator-label"><strong>${isCs ? 'Ověřit odjezd shuttle busu podle příjezdu vlaku:' : 'Check shuttle availability for your train arrival:'}</strong></p>
-                <div class="fod-estimator-controls">
-                  <label class="fod-sr-only" for="fod-shuttle-day">${isCs ? 'Den příjezdu' : 'Arrival day'}</label>
-                  <select id="fod-shuttle-day" class="fod-select">
-                    <option value="fri" ${estimatorDay === 'fri' ? 'selected' : ''}>${isCs ? 'Pá 10. 7. (11:30-04:00)' : 'Fri 10 Jul (11:30-04:00)'}</option>
-                    <option value="sat" ${estimatorDay === 'sat' ? 'selected' : ''}>${isCs ? 'So 11. 7. (12:00-04:00)' : 'Sat 11 Jul (12:00-04:00)'}</option>
-                    <option value="sun" ${estimatorDay === 'sun' ? 'selected' : ''}>${isCs ? 'Ne 12. 7. (12:00-03:30)' : 'Sun 12 Jul (12:00-03:30)'}</option>
-                    <option value="mon" ${estimatorDay === 'mon' ? 'selected' : ''}>${isCs ? 'Po 13. 7. Odjezdy (07:00-13:00)' : 'Mon 13 Jul Departures (07:00-13:00)'}</option>
-                  </select>
-                  <label class="fod-sr-only" for="fod-shuttle-time">${isCs ? 'Čas příjezdu' : 'Arrival time'}</label>
-                  <input type="time" id="fod-shuttle-time" class="fod-input fod-time-input" value="${core.escapeHtml(estimatorTime)}">
-                </div>
-                <div class="fod-estimator-presets" role="group" aria-label="${isCs ? 'Rychlé časy příjezdu' : 'Quick arrival times'}">
-                  <button type="button" class="fod-chip fod-chip-sm" data-shuttle-preset="fri:14:10">${isCs ? 'Pá 14:10 (R9)' : 'Fri 14:10 (R9)'}</button>
-                  <button type="button" class="fod-chip fod-chip-sm" data-shuttle-preset="sat:19:10">${isCs ? 'So 19:10 (R9)' : 'Sat 19:10 (R9)'}</button>
-                  <button type="button" class="fod-chip fod-chip-sm" data-shuttle-preset="sat:01:30">${isCs ? 'So 01:30 (Noc)' : 'Sat 01:30 (Night)'}</button>
-                  <button type="button" class="fod-chip fod-chip-sm" data-shuttle-preset="sat:06:00">${isCs ? 'So 06:00 (Pauza)' : 'Sat 06:00 (Gap)'}</button>
-                </div>
-                <div id="fod-shuttle-result" class="fod-shuttle-result" role="status" aria-live="polite"></div>
-              </div>
-
-              <div class="fod-table-scroll">
-                <table class="fod-mini-table">
-                  <thead>
-                    <tr>
-                      <th>${isCs ? 'Den' : 'Day'}</th>
-                      <th>${isCs ? 'Provoz' : 'Hours'}</th>
-                      <th>${isCs ? 'Interval' : 'Frequency'}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr><td>${isCs ? 'Pá 10. 7.' : 'Fri Jul 10'}</td><td>11:30-04:00</td><td>10-15 min</td></tr>
-                    <tr><td>${isCs ? 'So 11. 7.' : 'Sat Jul 11'}</td><td>12:00-04:00</td><td>15 min</td></tr>
-                    <tr><td>${isCs ? 'Ne 12. 7.' : 'Sun Jul 12'}</td><td>12:00-03:30</td><td>15 min</td></tr>
-                    <tr><td>${isCs ? 'Po 13. 7. (Odjezdy)' : 'Mon Jul 13 (Departures)'}</td><td>07:00-13:00</td><td>15-20 min</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </article>
-
-            <article class="fod-sub-card" id="pesi-trasa">
-              <h3>${isCs ? 'Značená pěší trasa (1,8 km, 22-25 min)' : 'Marked Walking Route (1.8 km, 22-25 min)'}</h3>
-              <p>${isCs
-                ? 'Osvětlená pěší trasa po chodnících a zpevněné cestě, osazená žlutými reflexními směrovkami z nádraží Kutná Hora hl.n. až ke Vstupu A:'
-                : 'Illuminated route on paved sidewalks and paths, marked with yellow reflective signs from Kutná Hora hl.n. straight to Entrance A:'}</p>
-              <ol class="fod-walk-steps">
-                <li>
-                  <span class="fod-step-dist">0.0 km</span>
-                  <div><strong>${isCs ? 'Kutná Hora hl.n.' : 'Kutná Hora hl.n. (Main Station)'}</strong>: ${isCs ? 'vyjděte z hlavní haly před nádraží a držte se vlevo do ulice Nádražní.' : 'exit the main hall onto the plaza and bear left onto Nádražní St.'}</div>
-                </li>
-                <li>
-                  <span class="fod-step-dist">0.1-0.7 km</span>
-                  <div><strong>${isCs ? 'Nádražní -> Křižovatka Sedlec' : 'Nádražní -> Sedlec Junction'}</strong>: ${isCs ? 'rovně po chodníku kolem viaduktu ke Katedrále Nanebevzetí Panny Marie.' : 'continue straight on the sidewalk past the viaduct to the Cathedral.'}</div>
-                </li>
-                <li>
-                  <span class="fod-step-dist">0.7-1.2 km</span>
-                  <div><strong>${isCs ? 'Kolem Sedlecké kostnice do Zámecké' : 'Past Sedlec Ossuary into Zámecká St'}</strong>: ${isCs ? 'odbočte vpravo do ulice Vítězná, poté vlevo do Zámecké.' : 'turn right onto Vítězná St, then left into Zámecká St.'}</div>
-                </li>
-                <li>
-                  <span class="fod-step-dist">1.2-1.6 km</span>
-                  <div><strong>${isCs ? 'Lávka přes Vrchlici' : 'Vrchlice Footbridge'}</strong>: ${isCs ? 'přejděte osvětlenou festivalovou lávku do klidové zóny areálu.' : 'cross the lit festival footbridge into the venue sector.'}</div>
-                </li>
-                <li>
-                  <span class="fod-step-dist">1.8 km</span>
-                  <div><strong>${isCs ? 'Hlavní brána (Vstup A)' : 'Main Gate (Entrance A)'}</strong>: ${isCs ? 'pokladna, výměna RFID pásek, úschovna 230V a vstup do areálu.' : 'box office, RFID wristbands, 230V lockers, and main entry.'}</div>
-                </li>
-              </ol>
-              <div class="fod-card-actions">
-                <button type="button" class="fod-btn fod-btn-secondary fod-btn-sm" id="fod-show-walk-map-btn">
-                  ${isCs ? 'Zvýraznit pěší trasu na mapě' : 'Highlight Walking Route on Map'}
-                </button>
-              </div>
-            </article>
-          </div>
-
-          <div class="fod-map-box" id="mapa-trasy">
-            <div class="fod-map-toolbar">
-              <strong>${isCs ? 'Interaktivní mapa trasy: Kutná Hora hl.n. -> Vstup A' : 'Interactive Route Map: Kutná Hora hl.n. -> Entrance A'}</strong>
-              <div class="fod-filter-row" role="group" aria-label="${isCs ? 'Zvýraznit trasu' : 'Highlight route'}">
-                <button type="button" class="fod-chip ${activeRoute === 'all' ? 'is-active' : ''}" data-route-filter="all" aria-pressed="${activeRoute === 'all'}">${isCs ? 'Všechny trasy' : 'All Routes'}</button>
-                <button type="button" class="fod-chip ${activeRoute === 'bus' ? 'is-active' : ''}" data-route-filter="bus" aria-pressed="${activeRoute === 'bus'}">${isCs ? 'Shuttle Bus (7 min)' : 'Shuttle Bus (7 min)'}</button>
-                <button type="button" class="fod-chip ${activeRoute === 'walk' ? 'is-active' : ''}" data-route-filter="walk" aria-pressed="${activeRoute === 'walk'}">${isCs ? 'Pěší trasa (1,8 km)' : 'Walking Route (1.8 km)'}</button>
-              </div>
+          <section class="fod-info-block" id="doprava">
+            <div class="fod-info-block-head">
+              <h2>${isCs ? 'Doprava z nádraží Kutná Hora hl.n.' : 'Getting there from Kutná Hora hl.n.'}</h2>
+              <p class="fod-station-note">${isCs
+                ? 'Vystupte ve stanici <strong>Kutná Hora hl.n.</strong> (ne Kutná Hora město). Zastávka shuttle busu je na <strong>Stanovišti 1 vpravo před hlavní halou</strong>.'
+                : 'Get off at <strong>Kutná Hora hl.n.</strong> (not Kutná Hora město). Shuttle pickup is at <strong>Bus Bay 1, right outside the main hall</strong>.'}</p>
             </div>
 
-            <p id="fod-map-status" class="fod-map-status" role="status" aria-live="polite"></p>
+            <div class="fod-transit-cols">
+              <div class="fod-transit-col" id="shuttle-bus">
+                <h3>${isCs ? 'Shuttle Bus (zdarma, 7 min)' : 'Free Shuttle Bus (7 min)'}</h3>
+                <p class="fod-prose">${isCs
+                  ? 'Přímá bezbariérová linka ze Stanoviště 1 přímo ke Vstupu A. Návaznost na rychlíky R9 z Prahy a Brna, místo na zavazadla.'
+                  : 'Non-stop step-free bus from Bus Bay 1 directly to Entrance A. Synced with R9 trains from Prague and Brno, with luggage space.'}</p>
 
-            <div class="fod-mobile-route-schematic" aria-label="${isCs ? 'Mobilní schéma trasy z nádraží do areálu' : 'Mobile route schematic from station to venue'}">
-              <div class="fod-route-stop is-start">
-                <span class="fod-route-dot" aria-hidden="true"></span>
-                <div>
-                  <strong>Kutná Hora hl.n.</strong>
-                  <span>${isCs ? 'Příjezd vlaků R9 (Praha 55 min) · Stanoviště 1 Shuttle Busu' : 'R9 Train Arrival (Prague 55 min) · Shuttle Bus Bay 1'}</span>
+                <div class="fod-table-scroll">
+                  <table class="fod-mini-table">
+                    <thead>
+                      <tr>
+                        <th>${isCs ? 'Den' : 'Day'}</th>
+                        <th>${isCs ? 'Provoz' : 'Hours'}</th>
+                        <th>${isCs ? 'Interval' : 'Frequency'}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>${isCs ? 'Pá 10. 7.' : 'Fri 10 Jul'}</td><td>11:30-04:00</td><td>10-15 min</td></tr>
+                      <tr><td>${isCs ? 'So 11. 7.' : 'Sat 11 Jul'}</td><td>12:00-04:00</td><td>15 min</td></tr>
+                      <tr><td>${isCs ? 'Ne 12. 7.' : 'Sun 12 Jul'}</td><td>12:00-03:30</td><td>15 min</td></tr>
+                      <tr><td>${isCs ? 'Po 13. 7. (Odjezdy)' : 'Mon 13 Jul (Departures)'}</td><td>07:00-13:00</td><td>15-20 min</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="fod-simple-check">
+                  <label for="fod-shuttle-day" class="fod-check-label">${isCs ? 'Ověřit příjezd vlaku' : 'Check train arrival'}</label>
+                  <div class="fod-simple-check-row">
+                    <select id="fod-shuttle-day" class="fod-select" aria-label="${isCs ? 'Den příjezdu' : 'Arrival day'}">
+                      <option value="fri" ${estimatorDay === 'fri' ? 'selected' : ''}>${isCs ? 'Pá 10. 7.' : 'Fri 10 Jul'}</option>
+                      <option value="sat" ${estimatorDay === 'sat' ? 'selected' : ''}>${isCs ? 'So 11. 7.' : 'Sat 11 Jul'}</option>
+                      <option value="sun" ${estimatorDay === 'sun' ? 'selected' : ''}>${isCs ? 'Ne 12. 7.' : 'Sun 12 Jul'}</option>
+                      <option value="mon" ${estimatorDay === 'mon' ? 'selected' : ''}>${isCs ? 'Po 13. 7. (Odjezdy)' : 'Mon 13 Jul (Departures)'}</option>
+                    </select>
+                    <input type="time" id="fod-shuttle-time" class="fod-input fod-time-input" aria-label="${isCs ? 'Čas příjezdu' : 'Arrival time'}" value="${core.escapeHtml(estimatorTime)}">
+                  </div>
+                  <p id="fod-shuttle-result" class="fod-simple-status" role="status" aria-live="polite"></p>
                 </div>
               </div>
-              <div class="fod-route-branch route-bus-group">
-                <span class="fod-route-line is-bus" aria-hidden="true"></span>
-                <div class="fod-route-branch-card is-bus">
-                  <strong>${isCs ? 'Shuttle Bus: 7 min (Zdarma, přímý)' : 'Shuttle Bus: 7 min (Free, non-stop)'}</strong>
-                  <span>${isCs ? 'Každých 10-15 min přímo ke Vstupu A' : 'Every 10-15 min directly to Entrance A'}</span>
-                </div>
-              </div>
-              <div class="fod-route-branch route-walk-group">
-                <span class="fod-route-line is-walk" aria-hidden="true"></span>
-                <div class="fod-route-branch-card is-walk">
-                  <strong>${isCs ? 'Pěší trasa: 1,8 km (22-25 min)' : 'Walking Route: 1.8 km (22-25 min)'}</strong>
-                  <span>${isCs ? '0.7 km Sedlec a Kostnice -> 1.4 km Lávka Vrchlice (osvětleno)' : '0.7 km Sedlec & Ossuary -> 1.4 km Vrchlice Footbridge (lit)'}</span>
-                </div>
-              </div>
-              <div class="fod-route-stop is-end">
-                <span class="fod-route-dot is-end" aria-hidden="true"></span>
-                <div>
-                  <strong>${isCs ? 'Vstup A · Festivalový areál Sedlec' : 'Entrance A · Sedlec Festival Grounds'}</strong>
-                  <span>${isCs ? 'RFID náramky · Úschovna · Solar Horizon · Lunar Dome (Kryté)' : 'RFID Wristbands · Lockers · Solar Horizon · Lunar Dome (Covered)'}</span>
+
+              <div class="fod-transit-col" id="pesi-trasa">
+                <h3>${isCs ? 'Pěší trasa (1,8 km, 22-25 min)' : 'Walking Route (1.8 km, 22-25 min)'}</h3>
+                <p class="fod-prose">${isCs
+                  ? 'Osvětlený chodník a zpevněná cesta se žlutými reflexními směrovkami z nádraží až ke Vstupu A.'
+                  : 'Lit sidewalk and paved path marked with yellow reflective signs from the station to Entrance A.'}</p>
+
+                <ol class="fod-clean-steps">
+                  <li>
+                    <span class="fod-step-km">0.0 km</span>
+                    <span><strong>Kutná Hora hl.n.</strong> ${isCs ? 'Vyjděte z haly a dejte se vlevo do ulice Nádražní.' : 'Exit the main hall and bear left onto Nádražní St.'}</span>
+                  </li>
+                  <li>
+                    <span class="fod-step-km">0.7 km</span>
+                    <span><strong>${isCs ? 'Křižovatka Sedlec.' : 'Sedlec Junction.'}</strong> ${isCs ? 'Rovně po chodníku kolem viaduktu ke Katedrále.' : 'Straight past the viaduct toward the Cathedral.'}</span>
+                  </li>
+                  <li>
+                    <span class="fod-step-km">1.2 km</span>
+                    <span><strong>${isCs ? 'Sedlecká kostnice.' : 'Sedlec Ossuary.'}</strong> ${isCs ? 'Vpravo do Vítězné, pak vlevo do Zámecké.' : 'Turn right on Vítězná St, then left into Zámecká St.'}</span>
+                  </li>
+                  <li>
+                    <span class="fod-step-km">1.6 km</span>
+                    <span><strong>${isCs ? 'Lávka přes Vrchlici.' : 'Vrchlice Footbridge.'}</strong> ${isCs ? 'Přejděte osvětlenou lávku do areálu.' : 'Cross the lit footbridge into the venue sector.'}</span>
+                  </li>
+                  <li>
+                    <span class="fod-step-km">1.8 km</span>
+                    <span><strong>${isCs ? 'Vstup A.' : 'Entrance A.'}</strong> ${isCs ? 'Pokladna, RFID pásky a úschovna.' : 'Box office, RFID wristbands, and lockers.'}</span>
+                  </li>
+                </ol>
+
+                <div class="fod-inline-links">
+                  <a href="${mapyWalkUrl}" target="_blank" rel="noopener noreferrer" class="eb-text-link">${isCs ? 'Otevřít v Mapy.cz' : 'Open in Mapy.cz'}<span class="fod-sr-only"> (${isCs ? 'nová záložka' : 'opens in new tab'})</span></a>
+                  <a href="${gmapsWalkUrl}" target="_blank" rel="noopener noreferrer" class="eb-text-link">${isCs ? 'Google Maps' : 'Google Maps'}<span class="fod-sr-only"> (${isCs ? 'nová záložka' : 'opens in new tab'})</span></a>
+                  <button type="button" id="fod-copy-venue-btn" class="fod-link-btn" data-copy-text="${core.escapeHtml(venueAddressCopy)}">${isCs ? 'Kopírovat adresu a GPS' : 'Copy address & GPS'}</button>
                 </div>
               </div>
             </div>
 
-            <svg viewBox="0 0 880 340" class="fod-route-svg" role="img" aria-label="${isCs ? 'Mapa trasy z hlavního nádraží Kutná Hora hl.n. do festivalového areálu' : 'Route map from Kutná Hora hl.n. main station to the festival grounds'}">
-              <rect x="0" y="0" width="880" height="340" rx="12" class="fod-svg-bg"/>
-              <g>
-                <rect x="24" y="105" width="180" height="120" rx="8" class="fod-svg-node"/>
-                <text x="114" y="138" text-anchor="middle" class="fod-svg-title">Kutná Hora hl.n.</text>
-                <text x="114" y="160" text-anchor="middle" class="fod-svg-sub">${isCs ? 'Vlaky R9 (Praha 55m)' : 'R9 Trains (Prague 55m)'}</text>
-                <text x="114" y="182" text-anchor="middle" class="fod-svg-sub">${isCs ? 'Shuttle: Stanoviště 1' : 'Shuttle: Bus Bay 1'}</text>
-              </g>
-              <g class="route-bus-group">
-                <path d="M 204 135 Q 440 25 685 135" fill="none" class="fod-svg-bus-path"/>
-                <rect x="315" y="26" width="260" height="28" rx="6" class="fod-svg-bus-badge"/>
-                <text x="445" y="45" text-anchor="middle" class="fod-svg-bus-text">${isCs ? 'Shuttle Bus: 7 min (Zdarma, přímý)' : 'Shuttle Bus: 7 min (Free, direct)'}</text>
-              </g>
-              <g class="route-walk-group">
-                <rect x="285" y="185" width="165" height="82" rx="8" class="fod-svg-node"/>
-                <text x="367" y="214" text-anchor="middle" class="fod-svg-title">${isCs ? 'Sedlec a Kostnice' : 'Sedlec & Ossuary'}</text>
-                <text x="367" y="234" text-anchor="middle" class="fod-svg-sub">0.7 km · ${isCs ? 'Značená trasa' : 'Signposted'}</text>
-                <rect x="495" y="190" width="150" height="74" rx="8" class="fod-svg-node"/>
-                <text x="570" y="218" text-anchor="middle" class="fod-svg-title">${isCs ? 'Lávka Vrchlice' : 'Vrchlice Footbridge'}</text>
-                <text x="570" y="238" text-anchor="middle" class="fod-svg-sub">1.4 km · ${isCs ? 'Osvětlený koridor' : 'Lit Corridor'}</text>
-                <path d="M 204 185 L 285 220 M 450 225 L 495 225 M 645 220 L 685 175" fill="none" class="fod-svg-walk-path"/>
-                <rect x="305" y="288" width="280" height="28" rx="6" class="fod-svg-walk-badge"/>
-                <text x="445" y="307" text-anchor="middle" class="fod-svg-walk-text">${isCs ? 'Pěší trasa: 1,8 km (22-25 min)' : 'Walking Route: 1.8 km (22-25 min)'}</text>
-              </g>
-              <g>
-                <rect x="685" y="96" width="172" height="145" rx="8" class="fod-svg-venue"/>
-                <text x="771" y="128" text-anchor="middle" class="fod-svg-title">${isCs ? 'Vstup A · Areál' : 'Entrance A · Venue'}</text>
-                <text x="771" y="150" text-anchor="middle" class="fod-svg-sub">${isCs ? 'Akreditace & Úschovna' : 'Wristbands & Lockers'}</text>
-                <text x="771" y="182" text-anchor="middle" class="fod-svg-sub">Solar Horizon (4,500)</text>
-                <text x="771" y="204" text-anchor="middle" class="fod-svg-sub">Lunar Dome (1,800 · ${isCs ? 'Kryté' : 'Covered'})</text>
-              </g>
-            </svg>
-          </div>
+            <div class="fod-simple-map" id="mapa-trasy">
+              <div class="fod-map-toolbar">
+                <strong>${isCs ? 'Mapa trasy: Kutná Hora hl.n. -> Vstup A' : 'Route map: Kutná Hora hl.n. -> Entrance A'}</strong>
+                <div class="fod-filter-row" role="group" aria-label="${isCs ? 'Zvýraznit trasu' : 'Highlight route'}">
+                  <button type="button" class="fod-chip fod-chip-sm ${activeRoute === 'all' ? 'is-active' : ''}" data-route-filter="all" aria-pressed="${activeRoute === 'all'}">${isCs ? 'Vše' : 'All'}</button>
+                  <button type="button" class="fod-chip fod-chip-sm ${activeRoute === 'bus' ? 'is-active' : ''}" data-route-filter="bus" aria-pressed="${activeRoute === 'bus'}">${isCs ? 'Shuttle (7 min)' : 'Shuttle (7 min)'}</button>
+                  <button type="button" class="fod-chip fod-chip-sm ${activeRoute === 'walk' ? 'is-active' : ''}" data-route-filter="walk" aria-pressed="${activeRoute === 'walk'}">${isCs ? 'Pěšky (1,8 km)' : 'Walk (1.8 km)'}</button>
+                </div>
+              </div>
 
-          <article class="fod-sub-card fod-parking-card">
-            <h3>${isCs ? 'Auto a Parkoviště P1' : 'Arrival by Car & Parking P1'}</h3>
-            <p>${isCs
-              ? 'Centrální parkoviště P1 na okraji Kutné Hory má kapacitu 800 vozidel (100 Kč / den). Z parkoviště vede značená cesta přímo ke Vstupu A (400 m, cca 5 minut chůze).'
-              : 'Central Parking Lot P1 offers 800 spaces (100 CZK / day) with a marked pedestrian path leading directly to Entrance A (400 m, approx. 5 min walk).'}</p>
-          </article>
-        </section>
+              <p id="fod-map-status" class="fod-map-status" role="status" aria-live="polite"></p>
 
-        <form action="search.html" method="get" class="fod-toolbar-panel fod-search-row" role="search">
-          <label for="info-search-input" class="fod-sr-only">${isCs ? 'Vyhledat na festivalu' : 'Search festival'}</label>
-          <input type="search" id="info-search-input" name="q" class="fod-input"
-            placeholder="${isCs ? 'Hledat interprety, pódia, shuttle bus, kemp nebo FAQ...' : 'Search artists, stages, shuttle bus, camping, or FAQ...'}">
-          <button type="submit" class="fod-btn fod-btn-primary">${isCs ? 'Hledat' : 'Search'}</button>
-          <a href="my-schedule.html" class="fod-btn fod-btn-secondary">${isCs ? 'Můj plán' : 'My Schedule'}</a>
-        </form>
+              <div class="fod-mobile-route-schematic" aria-label="${isCs ? 'Schéma trasy z nádraží do areálu' : 'Route schematic from station to venue'}">
+                <div class="fod-route-stop is-start">
+                  <span class="fod-route-dot" aria-hidden="true"></span>
+                  <div>
+                    <strong>Kutná Hora hl.n.</strong>
+                    <span>${isCs ? 'Vlaky R9 · Stanoviště 1 Shuttle Busu' : 'R9 trains · Shuttle Bus Bay 1'}</span>
+                  </div>
+                </div>
+                <div class="fod-route-branch route-bus-group">
+                  <span class="fod-route-line is-bus" aria-hidden="true"></span>
+                  <div class="fod-route-branch-card is-bus">
+                    <strong>${isCs ? 'Shuttle Bus: 7 min (zdarma)' : 'Shuttle Bus: 7 min (free)'}</strong>
+                    <span>${isCs ? 'Přímý spoj každých 10-15 min ke Vstupu A' : 'Non-stop every 10-15 min to Entrance A'}</span>
+                  </div>
+                </div>
+                <div class="fod-route-branch route-walk-group">
+                  <span class="fod-route-line is-walk" aria-hidden="true"></span>
+                  <div class="fod-route-branch-card is-walk">
+                    <strong>${isCs ? 'Pěšky: 1,8 km (22-25 min)' : 'Walk: 1.8 km (22-25 min)'}</strong>
+                    <span>${isCs ? '0.7 km Sedlec -> 1.6 km Lávka Vrchlice' : '0.7 km Sedlec -> 1.6 km Vrchlice Footbridge'}</span>
+                  </div>
+                </div>
+                <div class="fod-route-stop is-end">
+                  <span class="fod-route-dot is-end" aria-hidden="true"></span>
+                  <div>
+                    <strong>${isCs ? 'Vstup A · Areál Sedlec' : 'Entrance A · Sedlec Grounds'}</strong>
+                    <span>${isCs ? 'Solar Horizon · Lunar Dome (kryté)' : 'Solar Horizon · Lunar Dome (covered)'}</span>
+                  </div>
+                </div>
+              </div>
 
-        <section class="fod-panel" id="kemp">
-          <h2>${isCs ? 'Stanové městečko a ubytování' : 'Camping & Accommodation'}</h2>
-          <p>${isCs
-            ? 'Stanové městečko leží přímo u areálu (300 m od Vstupu A) a je vybaveno teplými sprchami, pitnou vodou, sociálním zázemím a nonstop recepcí. Otevřeno od pátku 10:00 do pondělí 12:00.'
-            : 'The official festival campsite sits 300 m from Entrance A with hot showers, drinking water, sanitation, and 24/7 reception. Open Friday 10:00 through Monday 12:00.'}</p>
-        </section>
+              <svg viewBox="0 0 880 340" class="fod-route-svg" role="img" aria-label="${isCs ? 'Mapa trasy z Kutná Hora hl.n. ke Vstupu A' : 'Route map from Kutná Hora hl.n. to Entrance A'}">
+                <rect x="0" y="0" width="880" height="340" rx="12" class="fod-svg-bg"/>
+                <g>
+                  <rect x="24" y="105" width="180" height="120" rx="8" class="fod-svg-node"/>
+                  <text x="114" y="138" text-anchor="middle" class="fod-svg-title">Kutná Hora hl.n.</text>
+                  <text x="114" y="160" text-anchor="middle" class="fod-svg-sub">${isCs ? 'Vlaky R9 (Praha 55m)' : 'R9 Trains (Prague 55m)'}</text>
+                  <text x="114" y="182" text-anchor="middle" class="fod-svg-sub">${isCs ? 'Shuttle: Stanoviště 1' : 'Shuttle: Bus Bay 1'}</text>
+                </g>
+                <g class="route-bus-group">
+                  <path d="M 204 135 Q 440 25 685 135" fill="none" class="fod-svg-bus-path"/>
+                  <rect x="315" y="26" width="260" height="28" rx="6" class="fod-svg-bus-badge"/>
+                  <text x="445" y="45" text-anchor="middle" class="fod-svg-bus-text">${isCs ? 'Shuttle Bus: 7 min (zdarma)' : 'Shuttle Bus: 7 min (free)'}</text>
+                </g>
+                <g class="route-walk-group">
+                  <rect x="285" y="185" width="165" height="82" rx="8" class="fod-svg-node"/>
+                  <text x="367" y="214" text-anchor="middle" class="fod-svg-title">${isCs ? 'Sedlec a Kostnice' : 'Sedlec & Ossuary'}</text>
+                  <text x="367" y="234" text-anchor="middle" class="fod-svg-sub">0.7 km</text>
+                  <rect x="495" y="190" width="150" height="74" rx="8" class="fod-svg-node"/>
+                  <text x="570" y="218" text-anchor="middle" class="fod-svg-title">${isCs ? 'Lávka Vrchlice' : 'Vrchlice Footbridge'}</text>
+                  <text x="570" y="238" text-anchor="middle" class="fod-svg-sub">1.6 km</text>
+                  <path d="M 204 185 L 285 220 M 450 225 L 495 225 M 645 220 L 685 175" fill="none" class="fod-svg-walk-path"/>
+                  <rect x="305" y="288" width="280" height="28" rx="6" class="fod-svg-walk-badge"/>
+                  <text x="445" y="307" text-anchor="middle" class="fod-svg-walk-text">${isCs ? 'Pěší trasa: 1,8 km (22-25 min)' : 'Walking route: 1.8 km (22-25 min)'}</text>
+                </g>
+                <g>
+                  <rect x="685" y="96" width="172" height="145" rx="8" class="fod-svg-venue"/>
+                  <text x="771" y="128" text-anchor="middle" class="fod-svg-title">${isCs ? 'Vstup A · Areál' : 'Entrance A · Venue'}</text>
+                  <text x="771" y="150" text-anchor="middle" class="fod-svg-sub">${isCs ? 'Akreditace & Úschovna' : 'Wristbands & Lockers'}</text>
+                  <text x="771" y="182" text-anchor="middle" class="fod-svg-sub">Solar Horizon (4,500)</text>
+                  <text x="771" y="204" text-anchor="middle" class="fod-svg-sub">Lunar Dome (1,800 · ${isCs ? 'kryté' : 'covered'})</text>
+                </g>
+              </svg>
+            </div>
 
-        <section class="fod-panel" id="cashless">
-          <h2>${isCs ? 'Cashless systém, úschovna a zdravotní péče' : 'Cashless RFID, Lockers & First Aid'}</h2>
-          <div class="fod-info-grid">
-            <article class="fod-sub-card">
-              <h3>${isCs ? '100% Cashless RFID náramek' : '100% Cashless RFID Wristband'}</h3>
-              <p>${isCs
-                ? 'Všude v areálu platíte čipem na náramku. Dobití zdarma online předem nebo na místě hotově i kartou.'
-                : 'All bars and food stalls operate strictly via RFID wristband. Free top-ups online or on-site by card or cash.'}</p>
-            </article>
-            <article class="fod-sub-card">
-              <h3>${isCs ? 'Úschovna zavazadel a skříňky 230V' : 'Lockers & 230V Charging'}</h3>
-              <p>${isCs
-                ? 'Bezpečnostní skříňky se zásuvkami 230V pro nabíjení telefonů jsou umístěny ihned vedle Vstupu A.'
-                : 'Secure storage lockers with built-in 230V power sockets are located right beside Entrance A accreditation.'}</p>
-            </article>
-            <article class="fod-sub-card">
-              <h3>${isCs ? 'Zdravotnická služba 24/7' : '24/7 Medical & Welfare'}</h3>
-              <p>${isCs
-                ? 'Stanoviště Červeného kříže s nepřetržitou péčí se nachází mezi Lunar Forest Dome a Vstupem A.'
-                : 'Red Cross medical station providing round-the-clock care sits between Lunar Forest Dome and Entrance A.'}</p>
-            </article>
-          </div>
-        </section>
+            <p class="fod-car-footnote">${isCs
+              ? '<strong>Autem:</strong> Parkoviště P1 na okraji Kutné Hory (800 míst, 100 Kč/den), značená cesta ke Vstupu A (400 m, cca 5 min pěšky).'
+              : '<strong>By car:</strong> Parking P1 on the edge of Kutná Hora (800 spaces, 100 CZK/day), marked 400 m path to Entrance A (approx. 5 min walk).'}</p>
+          </section>
 
-        <section class="fod-panel" id="faq">
-          <h2>${isCs ? 'Často kladené otázky (FAQ)' : 'Frequently Asked Questions (FAQ)'}</h2>
-          <div class="fod-faq-list">
-            <details class="fod-faq-item" open>
-              <summary>${isCs ? 'Co se stane v případě prudkého deště?' : 'What happens if it rains heavily?'}</summary>
-              <p>${isCs
-                ? 'Festival probíhá za každého počasí. Kryté pódium Lunar Forest Dome poskytuje zastřešený prostor pro 1 800 návštěvníků s nepřerušeným hudebním programem.'
-                : 'The festival runs in all weather. Lunar Forest Dome provides a solid covered shelter for 1,800 visitors with uninterrupted live performances.'}</p>
-            </details>
-            <details class="fod-faq-item" open>
-              <summary>${isCs ? 'Je shuttle bus z hlavního nádraží zpoplatněn?' : 'Is the shuttle bus from the train station free?'}</summary>
-              <p>${isCs
-                ? 'Ne, kyvadlový autobus z Kutná Hora hl.n. (Stanoviště 1 vpravo před halou) je pro všechny držitele vstupenek zcela ZDARMA a jezdí každých 10 až 15 minut.'
-                : 'No, the shuttle bus from Kutná Hora hl.n. (Bus Bay 1, right outside the main hall) is 100% FREE for all ticket holders and departs every 10-15 minutes.'}</p>
-            </details>
-            <details class="fod-faq-item">
-              <summary>${isCs ? 'Mohu po festivalu vrátit zbývající kredit na náramku?' : 'Can I refund unused cashless balance?'}</summary>
-              <p>${isCs
-                ? 'Ano, nevyčerpaný kredit je možné po skončení festivalu do 14 dnů zdarma převést zpět na bankovní účet.'
-                : 'Yes, remaining cashless credit can be refunded fee-free to your bank account within 14 days after the festival.'}</p>
-            </details>
-          </div>
-        </section>
+          <section class="fod-info-block" id="kemp">
+            <h2>${isCs ? 'V areálu' : 'On site'}</h2>
+            <dl class="fod-info-dl">
+              <div>
+                <dt>${isCs ? 'Stanové městečko' : 'Camping'}</dt>
+                <dd>${isCs
+                  ? '300 m od Vstupu A. Teplé sprchy, pitná voda a nonstop recepce. Otevřeno od pátku 10:00 do pondělí 12:00.'
+                  : '300 m from Entrance A. Hot showers, drinking water, and 24/7 reception. Open Fri 10:00 to Mon 12:00.'}</dd>
+              </div>
+              <div id="cashless">
+                <dt>${isCs ? 'Cashless náramek' : 'Cashless RFID'}</dt>
+                <dd>${isCs
+                  ? 'Na barech i ve stáncích se platí pouze čipem na náramku. Dobití zdarma online nebo na místě kartou i hotově; vrácení zůstatku zdarma do 14 dnů.'
+                  : 'All bars and food stalls take RFID wristbands only. Free top-up online or on site by card or cash; fee-free refunds within 14 days.'}</dd>
+              </div>
+              <div>
+                <dt>${isCs ? 'Úschovna a zdravotníci' : 'Lockers & Medical'}</dt>
+                <dd>${isCs
+                  ? 'Skříňky se zásuvkami 230V jsou hned vedle Vstupu A. Nepřetržité stanoviště Červeného kříže leží mezi Lunar Forest Dome a Vstupem A.'
+                  : '230V charging lockers sit beside Entrance A. A 24/7 Red Cross medical station sits between Lunar Forest Dome and Entrance A.'}</dd>
+              </div>
+              <div id="parametry">
+                <dt>${isCs ? 'Ročník 2026' : '2026 Facts'}</dt>
+                <dd>${isCs
+                  ? '10.-12. 7. 2026 (areál 13:00-04:00). Dvě pódia: venkovní Solar Horizon (4 500 míst) a krytý Lunar Forest Dome (1 800 míst). 60 živých vystoupení.'
+                  : '10-12 Jul 2026 (grounds 13:00-04:00). Two stages: open-air Solar Horizon (4,500 cap) and covered Lunar Forest Dome (1,800 cap). 60 live acts.'}</dd>
+              </div>
+            </dl>
+          </section>
 
-        <section class="fod-panel" id="parametry">
-          <h2>${isCs ? 'Klíčové parametry ročníku 2026' : 'Key Parameters of the 2026 Edition'}</h2>
-          <div class="fod-info-grid">
-            <article class="fod-sub-card">
-              <h3>${isCs ? '3 festivalové dny' : '3 Festival Days'}</h3>
-              <p>${isCs ? 'Pátek 10. 7., sobota 11. 7., neděle 12. 7. 2026 (areál otevřen od 13:00 do 04:00).' : 'Friday July 10, Saturday July 11, Sunday July 12, 2026 (grounds open 13:00 to 04:00).'}</p>
-            </article>
-            <article class="fod-sub-card">
-              <h3>${isCs ? '2 odlišná pódia' : '2 Distinct Stages'}</h3>
-              <p>${isCs ? 'Solar Horizon Stage (venkovní amfiteátr, 4 500 míst) a krytý Lunar Forest Dome (1 800 míst).' : 'Solar Horizon Stage (open-air amphitheater, 4,500 cap) and covered Lunar Forest Dome (1,800 cap).'}</p>
-            </article>
-            <article class="fod-sub-card">
-              <h3>${isCs ? '60 živých vystoupení' : '60 Live Performances'}</h3>
-              <p>${isCs ? 'Kurátorovaný mezinárodní program elektroniky, post-rocku, indie, techna a audiovizuálních setů.' : 'Curated international lineup of electronic, post-rock, indie, techno, and audiovisual sets.'}</p>
-            </article>
-          </div>
-        </section>
+          <section class="fod-info-block" id="faq">
+            <h2>${isCs ? 'Časté dotazy' : 'FAQ'}</h2>
+            <div class="fod-clean-faq">
+              <details>
+                <summary>${isCs ? 'Co se stane v případě silného deště?' : 'What happens if it rains heavily?'}</summary>
+                <p>${isCs
+                  ? 'Festival probíhá za každého počasí. Krytý Lunar Forest Dome pojme 1 800 návštěvníků a hraje bez přerušení.'
+                  : 'The festival runs in all weather. Covered Lunar Forest Dome shelters 1,800 visitors with uninterrupted live sets.'}</p>
+              </details>
+              <details>
+                <summary>${isCs ? 'Je shuttle bus z nádraží zdarma?' : 'Is the shuttle bus from the station free?'}</summary>
+                <p>${isCs
+                  ? 'Ano, pro všechny držitele vstupenek je kyvadlová linka z Kutná Hora hl.n. zcela zdarma.'
+                  : 'Yes, the shuttle bus from Kutná Hora hl.n. is free for all ticket holders.'}</p>
+              </details>
+              <details>
+                <summary>${isCs ? 'Jak získám zpět nevyčerpaný kredit z náramku?' : 'How do I refund unused wristband balance?'}</summary>
+                <p>${isCs
+                  ? 'Po skončení festivalu si zůstatek do 14 dnů zdarma převedete zpět na bankovní účet.'
+                  : 'Request a fee-free bank refund within 14 days after the festival ends.'}</p>
+              </details>
+            </div>
+          </section>
+        </div>
       `;
 
       root.querySelectorAll('[data-route-filter]').forEach(btn => {
@@ -1922,28 +1786,6 @@
           updateShuttleEstimator();
         });
       }
-      root.querySelectorAll('[data-shuttle-preset]').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const val = btn.getAttribute('data-shuttle-preset') || '';
-          const firstColon = val.indexOf(':');
-          if (firstColon > 0) {
-            estimatorDay = val.slice(0, firstColon);
-            estimatorTime = val.slice(firstColon + 1);
-            if (daySelect) daySelect.value = estimatorDay;
-            if (timeInput) timeInput.value = estimatorTime;
-            updateShuttleEstimator();
-          }
-        });
-      });
-
-      const showWalkBtn = document.getElementById('fod-show-walk-map-btn');
-      if (showWalkBtn) {
-        showWalkBtn.addEventListener('click', () => {
-          setMapRoute('walk');
-          const mapBox = document.getElementById('mapa-trasy');
-          if (mapBox) mapBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-      }
 
       const copyBtn = document.getElementById('fod-copy-venue-btn');
       if (copyBtn) {
@@ -1951,33 +1793,13 @@
           const txt = copyBtn.getAttribute('data-copy-text') || venueAddressCopy;
           if (navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard.writeText(txt).then(() => {
-              core.showToast(isCs ? 'Adresa a GPS souřadnice zkopírovány!' : 'Venue address & GPS copied!');
+              core.showToast(isCs ? 'Adresa a GPS zkopírovány.' : 'Address and GPS copied.');
             }).catch(() => {
               window.prompt(isCs ? 'Zkopírujte adresu areálu:' : 'Copy venue address:', txt);
             });
           } else {
             window.prompt(isCs ? 'Zkopírujte adresu areálu:' : 'Copy venue address:', txt);
           }
-        });
-      }
-
-      const pinBtn = document.getElementById('fod-pin-transit-btn');
-      if (pinBtn) {
-        pinBtn.addEventListener('click', () => {
-          const next = !isTransitPinned();
-          setTransitPinned(next);
-          core.showToast(next
-            ? (isCs ? 'Souhrn příjezdu uložen pro rychlý přístup.' : 'Arrival summary pinned for quick offline lookup.')
-            : (isCs ? 'Uložený souhrn odepnut.' : 'Arrival summary unpinned.'));
-          render();
-        });
-      }
-
-      const unpinBtn = document.getElementById('fod-unpin-transit-btn');
-      if (unpinBtn) {
-        unpinBtn.addEventListener('click', () => {
-          setTransitPinned(false);
-          render();
         });
       }
 
