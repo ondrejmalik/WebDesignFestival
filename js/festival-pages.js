@@ -41,16 +41,55 @@
   // =========================================================================
   // 1. PROGRAM PAGE (60-set timetable, Day/Stage/Genre/Fav/Search filters)
   // =========================================================================
+  function getActiveFestivalContext(nowInput) {
+    const now = nowInput instanceof Date ? nowInput : new Date();
+    const y = now.getFullYear();
+    const m = now.getMonth() + 1;
+    const d = now.getDate();
+    const h = now.getHours();
+    const min = now.getMinutes();
+    const normMinutes = (h < 8 ? h + 24 : h) * 60 + min;
+
+    let effDay = d;
+    if (h < 8) {
+      const prev = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+      if (prev.getFullYear() === 2026 && prev.getMonth() + 1 === 7) {
+        effDay = prev.getDate();
+      } else {
+        effDay = -1;
+      }
+    }
+
+    let activeDayKey = 'day1';
+    let isLiveFestival = false;
+    if (y === 2026 && m === 7 && effDay >= 10 && effDay <= 12) {
+      activeDayKey = effDay === 10 ? 'day1' : (effDay === 11 ? 'day2' : 'day3');
+      isLiveFestival = true;
+    }
+
+    return { activeDayKey, isLiveFestival, nowMinutes: normMinutes };
+  }
+
+  function parseSlotBounds(timeStr, core) {
+    const parts = String(timeStr || '').split(/[–-]/).map(s => s.trim()).filter(Boolean);
+    const startMin = core.timeToMinutes(parts[0] || '14:00');
+    let endMin = parts[1] ? core.timeToMinutes(parts[1]) : startMin + 60;
+    if (endMin < startMin) endMin += 24 * 60;
+    return { startMin, endMin };
+  }
+
   function initProgramPage() {
     const root = document.getElementById('fod-program-root');
     if (!root || !C() || !D()) return;
 
     const core = C();
     const data = D();
+    const festCtx = getActiveFestivalContext();
 
     const state = {
       day: 'all',
       stage: 'all',
+      timeWindow: 'all',
       genre: 'all',
       onlyFavs: false,
       query: '',
@@ -65,9 +104,37 @@
       if (dp === '1' || dp === 'day1') state.day = 'day1';
       else if (dp === '2' || dp === 'day2') state.day = 'day2';
       else if (dp === '3' || dp === 'day3') state.day = 'day3';
+      else if (dp === 'today' || dp === 'tonight') state.day = festCtx.activeDayKey;
+      const wp = (params.get('window') || '').toLowerCase();
+      if (wp === 'tonight' || wp === 'evening') {
+        state.timeWindow = 'tonight';
+        if (state.day === 'all') state.day = festCtx.activeDayKey;
+      }
+      const gp = (params.get('genre') || '').toLowerCase();
+      if (gp) state.genre = gp;
+      const fp = (params.get('favs') || '').toLowerCase();
+      if (fp === '1' || fp === 'true') state.onlyFavs = true;
+      const qp = params.get('q');
+      if (qp) state.query = qp;
       const hl = params.get('highlight') || window.location.hash.replace('#', '');
       if (hl && /^perf-\d+$/i.test(hl)) state.highlightId = hl.toLowerCase();
     } catch (e) {}
+
+    function syncProgramUrl() {
+      try {
+        const url = new URL(window.location.href);
+        const params = new URLSearchParams();
+        if (state.stage !== 'all') params.set('stage', state.stage);
+        if (state.day !== 'all') params.set('day', state.day);
+        if (state.timeWindow !== 'all') params.set('window', state.timeWindow);
+        if (state.genre !== 'all') params.set('genre', state.genre);
+        if (state.onlyFavs) params.set('favs', '1');
+        if (state.query.trim()) params.set('q', state.query.trim());
+        const qs = params.toString();
+        url.search = qs ? `?${qs}` : '';
+        window.history.replaceState({}, '', url.pathname + url.search + url.hash);
+      } catch (e) {}
+    }
 
     function getFilteredPerformers() {
       const favIds = new Set(core.getFavorites().map(f => f.id));
@@ -75,6 +142,7 @@
       return data.PERFORMERS.filter(p => {
         if (state.day !== "all" && p.dayKey !== state.day) return false;
         if (state.stage !== "all" && p.stageKey !== state.stage) return false;
+        if (state.timeWindow === "tonight" && core.timeToMinutes(p.start) < 18 * 60) return false;
         if (state.genre !== "all" && !core.matchesGenreFilter(p.genre, state.genre)) return false;
         if (state.onlyFavs && !favIds.has(p.id)) return false;
         if (tokens.length) {
@@ -88,6 +156,12 @@
     function renderShell() {
       const isCs = core.getLang() === 'cs';
       const favCount = core.getFavorites().length;
+      const isQuickLunarActive = state.stage === 'lunar' && state.timeWindow === 'tonight' && state.day === festCtx.activeDayKey;
+      const activeDayObj = data.DAYS.find(d => d.key === festCtx.activeDayKey) || data.DAYS[0];
+      const activeDayShort = isCs ? activeDayObj.shortCs : activeDayObj.shortEn;
+      const hasSecondaryActive = state.genre !== 'all' || state.query.trim() !== '';
+      const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 769;
+      const secondaryCount = (state.genre !== 'all' ? 1 : 0) + (state.query.trim() ? 1 : 0);
       const genres = [
         { key: 'all', en: 'All Genres', cs: 'Všechny žánry' },
         { key: 'ambient', en: 'Ambient', cs: 'Ambient' },
@@ -104,10 +178,25 @@
 
       root.innerHTML = `
         <nav class="fod-breadcrumbs" aria-label="${isCs ? 'Drobečková navigace' : 'Breadcrumb'}">
-          <a href="program.html">${isCs ? 'Program' : 'Program'}</a>
+          <a href="index.html">${isCs ? 'Přehled' : 'Overview'}</a>
           <span class="fod-breadcrumb-sep" aria-hidden="true">&gt;</span>
-          <span aria-current="page">${isCs ? 'Můj plán' : 'My Schedule'}</span>
+          <span aria-current="page">${isCs ? 'Program' : 'Program'}</span>
         </nav>
+
+        <div class="fod-rain-quickbar" role="region" aria-label="${isCs ? 'Rychlý přístup ke krytému pódiu' : 'Covered stage quick filter'}">
+          <div class="fod-rain-quickbar-copy">
+            <strong>${isCs ? 'Prší nebo hledáte střechu?' : 'Rain or need a roof?'}</strong>
+            <span>${isCs
+              ? `Krytý Lunar Forest Dome (1 800 míst) hraje za každého počasí (${activeDayShort}).`
+              : `Covered Lunar Forest Dome (1,800 cap) runs uninterrupted in all weather (${activeDayShort}).`}</span>
+          </div>
+          <button type="button" id="quick-lunar-btn" class="fod-btn fod-btn-lunar ${isQuickLunarActive ? 'is-active' : ''}" aria-pressed="${isQuickLunarActive}">
+            ${isQuickLunarActive
+              ? (isCs ? '✓ Kryté pódium dnes večer (Zobrazit vše)' : '✓ Covered Stage Tonight (Show All)')
+              : (isCs ? 'Lunar Dome dnes večer (Kryté)' : 'Lunar Dome Tonight (Covered)')}
+          </button>
+        </div>
+
         <div class="fod-toolbar-panel">
           <div class="fod-plan-summary-row">
             <div class="fod-plan-summary-left">
@@ -131,48 +220,58 @@
             <div class="fod-filter-group">
               <span class="fod-filter-group-label">${isCs ? 'Dny' : 'Days'}</span>
               <div class="fod-filter-row" role="group" aria-label="${isCs ? 'Filtrovat podle dne' : 'Filter by day'}">
-              <button type="button" class="fod-chip ${state.day === 'all' ? 'is-active' : ''}" data-filter-day="all">${isCs ? 'Všechny dny (60)' : 'All Days (60)'}</button>
-              <button type="button" class="fod-chip ${state.day === 'day1' ? 'is-active' : ''}" data-filter-day="day1">${isCs ? 'Den 1 · Pá 10. 7.' : 'Day 1 · Fri 10 Jul'}</button>
-              <button type="button" class="fod-chip ${state.day === 'day2' ? 'is-active' : ''}" data-filter-day="day2">${isCs ? 'Den 2 · So 11. 7.' : 'Day 2 · Sat 11 Jul'}</button>
-              <button type="button" class="fod-chip ${state.day === 'day3' ? 'is-active' : ''}" data-filter-day="day3">${isCs ? 'Den 3 · Ne 12. 7.' : 'Day 3 · Sun 12 Jul'}</button>
+                <button type="button" class="fod-chip ${state.day === 'all' ? 'is-active' : ''}" data-filter-day="all" aria-pressed="${state.day === 'all'}">${isCs ? 'Všechny dny (60)' : 'All Days (60)'}</button>
+                <button type="button" class="fod-chip ${state.day === 'day1' ? 'is-active' : ''}" data-filter-day="day1" aria-pressed="${state.day === 'day1'}">${isCs ? 'Den 1 · Pá 10. 7.' : 'Day 1 · Fri 10 Jul'}${festCtx.isLiveFestival && festCtx.activeDayKey === 'day1' ? (isCs ? ' (Dnes)' : ' (Today)') : ''}</button>
+                <button type="button" class="fod-chip ${state.day === 'day2' ? 'is-active' : ''}" data-filter-day="day2" aria-pressed="${state.day === 'day2'}">${isCs ? 'Den 2 · So 11. 7.' : 'Day 2 · Sat 11 Jul'}${festCtx.isLiveFestival && festCtx.activeDayKey === 'day2' ? (isCs ? ' (Dnes)' : ' (Today)') : ''}</button>
+                <button type="button" class="fod-chip ${state.day === 'day3' ? 'is-active' : ''}" data-filter-day="day3" aria-pressed="${state.day === 'day3'}">${isCs ? 'Den 3 · Ne 12. 7.' : 'Day 3 · Sun 12 Jul'}${festCtx.isLiveFestival && festCtx.activeDayKey === 'day3' ? (isCs ? ' (Dnes)' : ' (Today)') : ''}</button>
+              </div>
             </div>
 
-            </div>
             <div class="fod-filter-group">
-              <span class="fod-filter-group-label">${isCs ? 'Pódia' : 'Stages'}</span>
+              <span class="fod-filter-group-label">${isCs ? 'Pódia a čas' : 'Stages & Time'}</span>
               <div class="fod-filter-row" role="group" aria-label="${isCs ? 'Filtrovat podle pódia' : 'Filter by stage'}">
-              <button type="button" class="fod-chip ${state.stage === 'all' ? 'is-active' : ''}" data-filter-stage="all">${isCs ? 'Všechna pódia' : 'All Stages'}</button>
-              <button type="button" class="fod-chip ${state.stage === 'solar' ? 'is-active' : ''}" data-filter-stage="solar">Solar Horizon Stage</button>
-              <button type="button" class="fod-chip ${state.stage === 'lunar' ? 'is-active' : ''}" data-filter-stage="lunar">Lunar Forest Dome</button>
-              <button type="button" id="filter-fav-only" class="fod-chip fod-chip-fav ${state.onlyFavs ? 'is-active' : ''}" aria-pressed="${state.onlyFavs}">
-                ${isCs ? '★ Jen moje oblíbené' : '★ My Favourites Only'}
-              </button>
-            </div>
-
-            </div>
-            <div class="fod-filter-group">
-              <span class="fod-filter-group-label">${isCs ? 'Žánry' : 'Genres'}</span>
-              <div class="fod-filter-row" role="group" aria-label="${isCs ? 'Filtrovat podle žánru' : 'Filter by genre'}">
-              ${genres.map(g => `
-                <button type="button" class="fod-chip ${state.genre === g.key ? 'is-active' : ''}" data-filter-genre="${g.key}">
-                  ${isCs ? g.cs : g.en}
+                <button type="button" class="fod-chip ${state.stage === 'all' ? 'is-active' : ''}" data-filter-stage="all" aria-pressed="${state.stage === 'all'}">${isCs ? 'Všechna pódia' : 'All Stages'}</button>
+                <button type="button" class="fod-chip ${state.stage === 'solar' ? 'is-active' : ''}" data-filter-stage="solar" aria-pressed="${state.stage === 'solar'}">${isCs ? 'Solar Horizon (Venkovní)' : 'Solar Horizon (Open-air)'}</button>
+                <button type="button" class="fod-chip fod-chip-lunar ${state.stage === 'lunar' ? 'is-active' : ''}" data-filter-stage="lunar" aria-pressed="${state.stage === 'lunar'}">${isCs ? 'Lunar Forest Dome (Kryté)' : 'Lunar Forest Dome (Covered)'}</button>
+                <button type="button" class="fod-chip ${state.timeWindow === 'tonight' ? 'is-active' : ''}" data-filter-window="tonight" aria-pressed="${state.timeWindow === 'tonight'}">${isCs ? 'Večer a noc (18:00-04:00)' : 'Tonight (18:00-04:00)'}</button>
+                <button type="button" id="filter-fav-only" class="fod-chip fod-chip-fav ${state.onlyFavs ? 'is-active' : ''}" aria-pressed="${state.onlyFavs}">
+                  ${isCs ? '★ Jen moje oblíbené' : '★ My Favourites Only'}
                 </button>
-              `).join('')}
-            </div>
+              </div>
             </div>
 
-            <div class="fod-search-row">
-              <label for="artist-search-input" class="fod-sr-only">${isCs ? 'Hledat v programu' : 'Search timetable'}</label>
-              <input type="search" id="artist-search-input" class="fod-input"
-                value="${core.escapeHtml(state.query)}"
-                placeholder="${isCs ? 'Filtrovat podle interpreta, žánru nebo pódia...' : 'Filter by artist, genre, or stage...'}">
-              <button type="button" id="clear-search-btn" class="fod-btn fod-btn-secondary">
-                ${isCs ? 'Vymazat' : 'Clear'}
-              </button>
-            </div>
+            <details class="fod-more-filters" id="fod-more-filters" ${(isDesktop || hasSecondaryActive) ? 'open' : ''}>
+              <summary class="fod-more-filters-summary">
+                <span>${isCs ? 'Žánry a vyhledávání' : 'Genres & Search'}</span>
+                ${secondaryCount > 0 ? `<span class="fod-badge is-active">${secondaryCount}</span>` : ''}
+              </summary>
+              <div class="fod-more-filters-body">
+                <div class="fod-filter-group">
+                  <span class="fod-filter-group-label">${isCs ? 'Žánry' : 'Genres'}</span>
+                  <div class="fod-filter-row" role="group" aria-label="${isCs ? 'Filtrovat podle žánru' : 'Filter by genre'}">
+                    ${genres.map(g => `
+                      <button type="button" class="fod-chip ${state.genre === g.key ? 'is-active' : ''}" data-filter-genre="${g.key}" aria-pressed="${state.genre === g.key}">
+                        ${isCs ? g.cs : g.en}
+                      </button>
+                    `).join('')}
+                  </div>
+                </div>
+
+                <div class="fod-search-row">
+                  <label for="artist-search-input" class="fod-sr-only">${isCs ? 'Hledat v programu' : 'Search timetable'}</label>
+                  <input type="search" id="artist-search-input" class="fod-input"
+                    value="${core.escapeHtml(state.query)}"
+                    placeholder="${isCs ? 'Filtrovat podle interpreta, žánru nebo pódia...' : 'Filter by artist, genre, or stage...'}">
+                  <button type="button" id="clear-search-btn" class="fod-btn fod-btn-secondary">
+                    ${isCs ? 'Vymazat' : 'Clear'}
+                  </button>
+                </div>
+              </div>
+            </details>
           </div>
         </div>
 
+        <div id="fod-stage-context-slot"></div>
         <div id="fod-program-days"></div>
       `;
 
@@ -180,8 +279,21 @@
       renderDays();
     }
 
+    function updateQuickLunarButton() {
+      const quickLunarBtn = document.getElementById('quick-lunar-btn');
+      if (!quickLunarBtn) return;
+      const isCs = core.getLang() === 'cs';
+      const isActive = state.stage === 'lunar' && state.timeWindow === 'tonight' && state.day === festCtx.activeDayKey;
+      quickLunarBtn.classList.toggle('is-active', isActive);
+      quickLunarBtn.setAttribute('aria-pressed', String(isActive));
+      quickLunarBtn.textContent = isActive
+        ? (isCs ? '✓ Kryté pódium dnes večer (Zobrazit vše)' : '✓ Covered Stage Tonight (Show All)')
+        : (isCs ? 'Lunar Dome dnes večer (Kryté)' : 'Lunar Dome Tonight (Covered)');
+    }
+
     function renderDays() {
       const daysContainer = document.getElementById('fod-program-days');
+      const contextSlot = document.getElementById('fod-stage-context-slot');
       const statusEl = document.getElementById('filter-status-text');
       if (!daysContainer) return;
 
@@ -189,14 +301,55 @@
       const favIds = new Set(core.getFavorites().map(f => f.id));
       const matched = getFilteredPerformers();
 
+      if (contextSlot) {
+        if (state.stage === 'lunar') {
+          const lunar = data.STAGES.lunar;
+          contextSlot.innerHTML = `
+            <div class="fod-stage-context-banner is-lunar" role="status">
+              <div>
+                <strong>${core.escapeHtml(lunar.name)} (${isCs ? 'Kryté pódium · Úkryt před deštěm' : 'Covered Indoor Stage · Rain Shelter'})</strong>
+                <p>${core.escapeHtml(isCs ? lunar.locationCs : lunar.locationEn)} (${lunar.capacity.toLocaleString()} ${isCs ? 'míst' : 'cap'}, ${lunar.hours})${state.timeWindow === 'tonight' ? (isCs ? ' - zobrazen večerní a noční program (18:00-04:00).' : ' - showing evening and late-night sets (18:00-04:00).') : ''}</p>
+              </div>
+              ${state.day === 'all' ? `
+                <button type="button" class="fod-btn fod-btn-secondary fod-btn-sm" id="fod-ctx-today-btn">
+                  ${isCs ? 'Zobrazit jen 1 den' : 'Focus Single Day'}
+                </button>
+              ` : ''}
+            </div>
+          `;
+          const ctxBtn = document.getElementById('fod-ctx-today-btn');
+          if (ctxBtn) {
+            ctxBtn.addEventListener('click', () => {
+              state.day = festCtx.activeDayKey;
+              syncProgramUrl();
+              renderShell();
+            });
+          }
+        } else if (state.stage === 'solar') {
+          const solar = data.STAGES.solar;
+          contextSlot.innerHTML = `
+            <div class="fod-stage-context-banner is-solar" role="status">
+              <div>
+                <strong>${core.escapeHtml(solar.name)} (${isCs ? 'Venkovní amfiteátr' : 'Open-air Amphitheater'})</strong>
+                <p>${core.escapeHtml(isCs ? solar.locationCs : solar.locationEn)} (${solar.capacity.toLocaleString()} ${isCs ? 'míst' : 'cap'}, ${solar.hours})</p>
+              </div>
+            </div>
+          `;
+        } else {
+          contextSlot.innerHTML = '';
+        }
+      }
+
       if (statusEl) {
         const total = data.PERFORMERS.length;
-        const stageLabel = state.stage === 'lunar'
-          ? ' (Lunar Forest Dome)'
-          : (state.stage === 'solar' ? ' (Solar Horizon Stage)' : '');
+        const parts = [];
+        if (state.stage === 'lunar') parts.push(isCs ? 'Lunar Forest Dome (Kryté)' : 'Lunar Forest Dome (Covered)');
+        else if (state.stage === 'solar') parts.push(isCs ? 'Solar Horizon (Venkovní)' : 'Solar Horizon (Open-air)');
+        if (state.timeWindow === 'tonight') parts.push(isCs ? '18:00-04:00' : 'Tonight 18:00-04:00');
+        const suffix = parts.length ? ` (${parts.join(', ')})` : '';
         statusEl.textContent = isCs
-          ? `Zobrazeno ${matched.length} z ${total} vystoupení${stageLabel}`
-          : `Showing ${matched.length} of ${total} shows${stageLabel}`;
+          ? `Zobrazeno ${matched.length} z ${total} vystoupení${suffix}`
+          : `Showing ${matched.length} of ${total} shows${suffix}`;
       }
 
       if (matched.length === 0) {
@@ -221,9 +374,11 @@
           resetBtn.addEventListener('click', () => {
             state.day = 'all';
             state.stage = 'all';
+            state.timeWindow = 'all';
             state.genre = 'all';
             state.onlyFavs = false;
             state.query = '';
+            syncProgramUrl();
             renderShell();
           });
         }
@@ -241,15 +396,36 @@
         return `${String(startH).padStart(2, '0')}:00 - ${String(endH).padStart(2, '0')}:00`;
       }
 
+      const upNextByStage = new Set();
+      if (festCtx.isLiveFestival) {
+        ['solar', 'lunar'].forEach(sk => {
+          const next = matched
+            .filter(p => p.dayKey === festCtx.activeDayKey && p.stageKey === sk && parseSlotBounds(p.time, core).startMin > festCtx.nowMinutes)
+            .sort((a, b) => core.timeToMinutes(a.start) - core.timeToMinutes(b.start))[0];
+          if (next) upNextByStage.add(next.id);
+        });
+      }
+
       function renderPerformerCard(p) {
         const isFav = favIds.has(p.id);
         const stageCls = p.stageKey === 'lunar' ? 'is-lunar' : 'is-solar';
         const hlCls = state.highlightId === p.id ? 'spot-highlight' : '';
+        const bounds = parseSlotBounds(p.time, core);
+        const isLiveNow = festCtx.isLiveFestival && p.dayKey === festCtx.activeDayKey && festCtx.nowMinutes >= bounds.startMin && festCtx.nowMinutes < bounds.endMin;
+        const isUpNext = !isLiveNow && upNextByStage.has(p.id);
+        const statusPill = isLiveNow
+          ? `<span class="fod-live-pill">${isCs ? 'Právě hraje' : 'Live Now'}</span>`
+          : (isUpNext ? `<span class="fod-next-pill">${isCs ? 'Následuje' : 'Up Next'}</span>` : '');
+        const stageLabel = p.stageKey === 'lunar'
+          ? (isCs ? 'Lunar Dome (Kryté)' : 'Lunar Dome (Covered)')
+          : (isCs ? 'Solar Horizon (Venkovní)' : 'Solar Horizon (Open-air)');
+
         return `
-          <article class="fod-timetable-card ${stageCls} ${isFav ? 'is-saved' : ''} ${hlCls}" id="${p.id}" data-id="${p.id}">
+          <article class="fod-timetable-card ${stageCls} ${isFav ? 'is-saved' : ''} ${isLiveNow ? 'is-live-now' : ''} ${hlCls}" id="${p.id}" data-id="${p.id}">
             <div class="fod-timetable-card-top">
               <span class="fod-slot-time">${core.escapeHtml(p.time)}</span>
-              <span class="fod-stage-pill ${stageCls}">${core.escapeHtml(p.stage)}</span>
+              ${statusPill}
+              <span class="fod-stage-pill ${stageCls}">${core.escapeHtml(stageLabel)}</span>
             </div>
             <div class="fod-timetable-card-body">
               <a href="artist-detail.html?id=${p.id}&from=program#${p.id}" class="fod-slot-artist">
@@ -262,7 +438,7 @@
             </div>
             <div class="fod-slot-actions">
               <a href="artist-detail.html?id=${p.id}&from=program#${p.id}" class="fod-btn fod-btn-ghost fod-btn-sm">
-                Detail<span class="fod-sr-only"> (${core.escapeHtml(p.name)})</span>
+                ${isCs ? 'Detail' : 'Details'}<span class="fod-sr-only"> (${core.escapeHtml(p.name)})</span>
               </a>
               <button type="button" class="fod-btn fod-btn-sm fav-toggle-btn ${isFav ? 'is-saved' : ''}" data-perf-id="${p.id}" aria-pressed="${isFav}">
                 ${isFav ? (isCs ? '✓ V plánu' : '✓ In Plan') : (isCs ? '+ Přidat' : '+ Add')}<span class="fod-sr-only"> (${core.escapeHtml(p.name)})</span>
@@ -273,7 +449,7 @@
       }
 
       function renderEmptySlotCell() {
-        const hasSecondaryFilter = state.genre !== 'all' || state.onlyFavs || state.query.trim() !== '';
+        const hasSecondaryFilter = state.genre !== 'all' || state.onlyFavs || state.query.trim() !== '' || state.timeWindow !== 'all';
         const label = hasSecondaryFilter
           ? (isCs ? 'Bez odpovídajícího setu' : 'No matching set')
           : (isCs ? 'Přestavba pódia' : 'Stage changeover');
@@ -399,7 +575,13 @@
       root.querySelectorAll('[data-filter-day]').forEach(btn => {
         btn.addEventListener('click', () => {
           state.day = btn.getAttribute('data-filter-day');
-          root.querySelectorAll('[data-filter-day]').forEach(b => b.classList.toggle('is-active', b === btn));
+          root.querySelectorAll('[data-filter-day]').forEach(b => {
+            const active = b === btn;
+            b.classList.toggle('is-active', active);
+            b.setAttribute('aria-pressed', String(active));
+          });
+          syncProgramUrl();
+          updateQuickLunarButton();
           renderDays();
         });
       });
@@ -407,7 +589,33 @@
       root.querySelectorAll('[data-filter-stage]').forEach(btn => {
         btn.addEventListener('click', () => {
           state.stage = btn.getAttribute('data-filter-stage');
-          root.querySelectorAll('[data-filter-stage]').forEach(b => b.classList.toggle('is-active', b === btn));
+          root.querySelectorAll('[data-filter-stage]').forEach(b => {
+            const active = b === btn;
+            b.classList.toggle('is-active', active);
+            b.setAttribute('aria-pressed', String(active));
+          });
+          syncProgramUrl();
+          updateQuickLunarButton();
+          renderDays();
+        });
+      });
+
+      root.querySelectorAll('[data-filter-window]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          state.timeWindow = state.timeWindow === 'tonight' ? 'all' : 'tonight';
+          if (state.timeWindow === 'tonight' && state.day === 'all') {
+            state.day = festCtx.activeDayKey;
+            root.querySelectorAll('[data-filter-day]').forEach(b => {
+              const active = b.getAttribute('data-filter-day') === state.day;
+              b.classList.toggle('is-active', active);
+              b.setAttribute('aria-pressed', String(active));
+            });
+          }
+          const isTonight = state.timeWindow === 'tonight';
+          btn.classList.toggle('is-active', isTonight);
+          btn.setAttribute('aria-pressed', String(isTonight));
+          syncProgramUrl();
+          updateQuickLunarButton();
           renderDays();
         });
       });
@@ -415,7 +623,12 @@
       root.querySelectorAll('[data-filter-genre]').forEach(btn => {
         btn.addEventListener('click', () => {
           state.genre = btn.getAttribute('data-filter-genre');
-          root.querySelectorAll('[data-filter-genre]').forEach(b => b.classList.toggle('is-active', b === btn));
+          root.querySelectorAll('[data-filter-genre]').forEach(b => {
+            const active = b === btn;
+            b.classList.toggle('is-active', active);
+            b.setAttribute('aria-pressed', String(active));
+          });
+          syncProgramUrl();
           renderDays();
         });
       });
@@ -426,6 +639,7 @@
           state.onlyFavs = !state.onlyFavs;
           favOnlyBtn.classList.toggle('is-active', state.onlyFavs);
           favOnlyBtn.setAttribute('aria-pressed', String(state.onlyFavs));
+          syncProgramUrl();
           renderDays();
         });
       }
@@ -434,6 +648,7 @@
       if (searchInput) {
         searchInput.addEventListener('input', e => {
           state.query = e.target.value;
+          syncProgramUrl();
           renderDays();
         });
       }
@@ -443,6 +658,7 @@
         clearSearchBtn.addEventListener('click', () => {
           state.query = '';
           searchInput.value = '';
+          syncProgramUrl();
           renderDays();
           searchInput.focus();
         });
@@ -451,14 +667,23 @@
       const quickLunarBtn = document.getElementById('quick-lunar-btn');
       if (quickLunarBtn) {
         quickLunarBtn.addEventListener('click', () => {
-          state.stage = 'lunar';
-          state.day = 'day1';
-          state.genre = 'all';
-          state.onlyFavs = false;
-          state.query = '';
+          const isAlready = state.stage === 'lunar' && state.timeWindow === 'tonight' && state.day === festCtx.activeDayKey;
+          if (isAlready) {
+            state.stage = 'all';
+            state.day = 'all';
+            state.timeWindow = 'all';
+          } else {
+            state.stage = 'lunar';
+            state.day = festCtx.activeDayKey;
+            state.timeWindow = 'tonight';
+            state.genre = 'all';
+            state.onlyFavs = false;
+            state.query = '';
+          }
+          syncProgramUrl();
           renderShell();
-          const sec = document.getElementById('program-day1');
-          if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          const sec = document.getElementById('fod-stage-context-slot') || document.getElementById('fod-program-days');
+          if (!isAlready && sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
       }
 
@@ -1028,6 +1253,11 @@
 
     const core = C();
     const data = D();
+    const festCtx = getActiveFestivalContext();
+    const previewState = {
+      solar: { day: festCtx.activeDayKey, tonight: false },
+      lunar: { day: festCtx.activeDayKey, tonight: false }
+    };
 
     function highlightStageFromHash() {
       const hash = window.location.hash;
@@ -1043,6 +1273,56 @@
       }
     }
 
+    function renderStageTimetablePreview(stageKey, isCs) {
+      const st = previewState[stageKey];
+      const favIds = new Set(core.getFavorites().map(f => f.id));
+      const sets = data.PERFORMERS
+        .filter(p => p.stageKey === stageKey && p.dayKey === st.day && (!st.tonight || core.timeToMinutes(p.start) >= 18 * 60))
+        .sort((a, b) => core.timeToMinutes(a.start) - core.timeToMinutes(b.start));
+
+      const dayBtns = data.DAYS.map(d => `
+        <button type="button" class="fod-chip fod-chip-sm ${st.day === d.key ? 'is-active' : ''}" data-stage-preview-day="${stageKey}:${d.key}" aria-pressed="${st.day === d.key}">
+          ${isCs ? d.shortCs : d.shortEn}
+        </button>
+      `).join('');
+
+      const rowsHtml = sets.length
+        ? sets.map(p => {
+            const isFav = favIds.has(p.id);
+            return `
+              <li class="fod-stage-mini-row">
+                <span class="fod-stage-mini-time">${core.escapeHtml(p.time)}</span>
+                <div class="fod-stage-mini-info">
+                  <a href="artist-detail.html?id=${p.id}&from=stages#${p.id}" class="fod-stage-mini-artist">${core.escapeHtml(p.name)}</a>
+                  <span class="fod-stage-mini-genre">${core.escapeHtml(p.genre)}</span>
+                </div>
+                <button type="button" class="fod-btn fod-btn-sm fav-toggle-btn ${isFav ? 'is-saved' : ''}" data-perf-id="${p.id}" aria-pressed="${isFav}">
+                  ${isFav ? (isCs ? '✓ V plánu' : '✓ Saved') : (isCs ? '+ Přidat' : '+ Add')}<span class="fod-sr-only"> (${core.escapeHtml(p.name)})</span>
+                </button>
+              </li>
+            `;
+          }).join('')
+        : `<li class="fod-stage-mini-empty">${isCs ? 'Pro vybraný filtr nejsou žádná vystoupení.' : 'No sets match this filter.'}</li>`;
+
+      return `
+        <div class="fod-stage-preview" data-stage-preview="${stageKey}">
+          <div class="fod-stage-preview-head">
+            <h3>${isCs ? 'Chronologický harmonogram pódia' : 'Chronological Stage Timetable'}</h3>
+            <span class="fod-badge">${isCs ? core.formatCzPlural(sets.length, 'set', 'sety', 'setů') : (sets.length === 1 ? '1 set' : `${sets.length} sets`)}</span>
+          </div>
+          <div class="fod-stage-preview-controls" role="group" aria-label="${isCs ? 'Výběr dne pro pódium' : 'Select day for stage timetable'}">
+            ${dayBtns}
+            <button type="button" class="fod-chip fod-chip-sm ${st.tonight ? 'is-active' : ''}" data-stage-preview-tonight="${stageKey}" aria-pressed="${st.tonight}">
+              ${isCs ? 'Večer (18:00+)' : 'Tonight (18:00+)'}
+            </button>
+          </div>
+          <ol class="fod-stage-mini-list">
+            ${rowsHtml}
+          </ol>
+        </div>
+      `;
+    }
+
     function render() {
       const isCs = core.getLang() === 'cs';
       const solar = data.STAGES.solar;
@@ -1052,36 +1332,22 @@
       root.innerHTML = `
         <div class="fod-merged-section-head">
           <h2>${isCs ? 'Pódia a areál' : 'Stages & Grounds'}</h2>
-          ${hasArtistsOnPage ? `
-            <a href="#fod-artists-root" class="fod-btn fod-btn-secondary fod-btn-sm">
-              ${isCs ? 'Přejít na účinkující' : 'Jump to Artists'}
+          <div class="fod-card-actions">
+            <a href="#stage-lunar" class="fod-btn fod-btn-lunar fod-btn-sm">
+              ${isCs ? 'Kryté pódium (Lunar Dome)' : 'Covered Stage (Lunar Dome)'}
             </a>
-          ` : ''}
+            ${hasArtistsOnPage ? `
+              <a href="#fod-artists-root" class="fod-btn fod-btn-secondary fod-btn-sm">
+                ${isCs ? 'Přejít na účinkující' : 'Jump to Artists'}
+              </a>
+            ` : ''}
+          </div>
         </div>
 
         <div class="fod-stages-grid">
-          <section class="fod-panel fod-stage-card" id="stage-solar">
-            <figure class="fod-stage-photo">
-              <img src="shared/img/stage-solar.jpg" alt="${isCs ? 'Ilustrační fotografie venkovního amfiteátru Solar Horizon Stage při západu slunce' : 'Placeholder photo of the open-air Solar Horizon Stage amphitheater at sunset'}" width="1280" height="720">
-            </figure>
-            <div class="fod-card-top">
-              <span class="fod-stage-pill is-solar">${core.escapeHtml(isCs ? solar.typeCs : solar.typeEn)}</span>
-              <span class="fod-badge">${solar.capacity.toLocaleString()} ${isCs ? 'kapacita' : 'capacity'}</span>
-            </div>
-            <h2>${core.escapeHtml(solar.name)}</h2>
-            <p>${core.escapeHtml(isCs ? solar.focusCs : solar.focusEn)}</p>
-            <p class="fod-meta-line"><strong>${isCs ? 'Lokalita:' : 'Location:'}</strong> ${core.escapeHtml(isCs ? solar.locationCs : solar.locationEn)} · <strong>${isCs ? 'Provoz:' : 'Hours:'}</strong> ${solar.hours}</p>
-            <ul class="fod-feature-list">
-              ${(isCs ? solar.featuresCs : solar.featuresEn).map(f => `<li>${core.escapeHtml(f)}</li>`).join('')}
-            </ul>
-            <div class="fod-card-actions">
-              <a href="program.html?stage=solar" class="fod-btn fod-btn-primary">${isCs ? 'Otevřít v Programu' : 'Open Solar Schedule'}</a>
-            </div>
-          </section>
-
           <section class="fod-panel fod-stage-card" id="stage-lunar">
             <figure class="fod-stage-photo">
-              <img src="shared/img/stage-lunar.jpg" alt="${isCs ? 'Ilustrační fotografie kryté kupole Lunar Forest Dome v lese za soumraku' : 'Placeholder photo of the covered Lunar Forest Dome marquee in the forest at twilight'}" width="1280" height="720">
+              <img src="shared/img/stage-lunar.jpg" alt="${isCs ? 'Ilustrační fotografie kryté kupole Lunar Forest Dome v lese za soumraku' : 'Photo of the covered Lunar Forest Dome marquee in the forest at twilight'}" width="1280" height="720">
             </figure>
             <div class="fod-card-top">
               <span class="fod-stage-pill is-lunar">${core.escapeHtml(isCs ? lunar.typeCs : lunar.typeEn)}</span>
@@ -1094,8 +1360,30 @@
             <ul class="fod-feature-list">
               ${(isCs ? lunar.featuresCs : lunar.featuresEn).map(f => `<li>${core.escapeHtml(f)}</li>`).join('')}
             </ul>
+            ${renderStageTimetablePreview('lunar', isCs)}
             <div class="fod-card-actions">
-              <a href="program.html?stage=lunar" class="fod-btn fod-btn-primary">${isCs ? 'Otevřít v Programu' : 'Open Lunar Schedule'}</a>
+              <a href="program.html?stage=lunar&day=${previewState.lunar.day}${previewState.lunar.tonight ? '&window=tonight' : ''}" class="fod-btn fod-btn-primary">${isCs ? 'Otevřít Lunar v Programu' : 'Open Full Lunar Schedule'}</a>
+              <a href="program.html?stage=lunar&day=${previewState.lunar.day}&window=tonight" class="fod-btn fod-btn-secondary">${isCs ? 'Lunar dnes večer (18:00+)' : 'Lunar Tonight (18:00+)'}</a>
+            </div>
+          </section>
+
+          <section class="fod-panel fod-stage-card" id="stage-solar">
+            <figure class="fod-stage-photo">
+              <img src="shared/img/stage-solar.jpg" alt="${isCs ? 'Ilustrační fotografie venkovního amfiteátru Solar Horizon Stage při západu slunce' : 'Photo of the open-air Solar Horizon Stage amphitheater at sunset'}" width="1280" height="720">
+            </figure>
+            <div class="fod-card-top">
+              <span class="fod-stage-pill is-solar">${core.escapeHtml(isCs ? solar.typeCs : solar.typeEn)}</span>
+              <span class="fod-badge">${solar.capacity.toLocaleString()} ${isCs ? 'kapacita' : 'capacity'}</span>
+            </div>
+            <h2>${core.escapeHtml(solar.name)}</h2>
+            <p>${core.escapeHtml(isCs ? solar.focusCs : solar.focusEn)}</p>
+            <p class="fod-meta-line"><strong>${isCs ? 'Lokalita:' : 'Location:'}</strong> ${core.escapeHtml(isCs ? solar.locationCs : solar.locationEn)} · <strong>${isCs ? 'Provoz:' : 'Hours:'}</strong> ${solar.hours}</p>
+            <ul class="fod-feature-list">
+              ${(isCs ? solar.featuresCs : solar.featuresEn).map(f => `<li>${core.escapeHtml(f)}</li>`).join('')}
+            </ul>
+            ${renderStageTimetablePreview('solar', isCs)}
+            <div class="fod-card-actions">
+              <a href="program.html?stage=solar&day=${previewState.solar.day}${previewState.solar.tonight ? '&window=tonight' : ''}" class="fod-btn fod-btn-primary">${isCs ? 'Otevřít Solar v Programu' : 'Open Full Solar Schedule'}</a>
             </div>
           </section>
         </div>
@@ -1121,8 +1409,38 @@
       highlightStageFromHash();
     }
 
+    root.addEventListener('click', e => {
+      const dayBtn = e.target && e.target.closest && e.target.closest('[data-stage-preview-day]');
+      if (dayBtn) {
+        const [stageKey, dayKey] = (dayBtn.getAttribute('data-stage-preview-day') || '').split(':');
+        if (previewState[stageKey] && dayKey) {
+          previewState[stageKey].day = dayKey;
+          render();
+        }
+        return;
+      }
+      const tonightBtn = e.target && e.target.closest && e.target.closest('[data-stage-preview-tonight]');
+      if (tonightBtn) {
+        const stageKey = tonightBtn.getAttribute('data-stage-preview-tonight');
+        if (previewState[stageKey]) {
+          previewState[stageKey].tonight = !previewState[stageKey].tonight;
+          render();
+        }
+        return;
+      }
+      const favBtn = e.target && e.target.closest && e.target.closest('.fav-toggle-btn[data-perf-id]');
+      if (favBtn) {
+        const id = favBtn.getAttribute('data-perf-id');
+        if (id) {
+          core.toggleFavoriteById(id);
+          render();
+        }
+      }
+    });
+
     window.addEventListener('hashchange', highlightStageFromHash);
     window.addEventListener('languageChanged', render);
+    window.addEventListener('favoritesUpdated', render);
     render();
   }
 
@@ -1134,10 +1452,91 @@
     if (!root || !C()) return;
 
     const core = C();
+    const PIN_KEY = 'fod_pinned_transit';
     let activeRoute = 'all';
+    let estimatorDay = 'fri';
+    let estimatorTime = '14:10';
+
+    const SHUTTLE_WINDOWS = {
+      fri: { startMin: 11 * 60 + 30, endMin: 28 * 60, minHeadway: 10, maxHeadway: 15, labelEn: 'Fri 10 Jul (11:30-04:00)', labelCs: 'Pá 10. 7. (11:30-04:00)', freqEn: '10-15 min', freqCs: '10-15 min', dirEn: 'Kutná Hora hl.n. to Entrance A', dirCs: 'Kutná Hora hl.n. -> Vstup A' },
+      sat: { startMin: 12 * 60, endMin: 28 * 60, minHeadway: 15, maxHeadway: 15, labelEn: 'Sat 11 Jul (12:00-04:00)', labelCs: 'So 11. 7. (12:00-04:00)', freqEn: '15 min', freqCs: '15 min', dirEn: 'Kutná Hora hl.n. to Entrance A', dirCs: 'Kutná Hora hl.n. -> Vstup A' },
+      sun: { startMin: 12 * 60, endMin: 27 * 60 + 30, minHeadway: 15, maxHeadway: 15, labelEn: 'Sun 12 Jul (12:00-03:30)', labelCs: 'Ne 12. 7. (12:00-03:30)', freqEn: '15 min', freqCs: '15 min', dirEn: 'Kutná Hora hl.n. to Entrance A', dirCs: 'Kutná Hora hl.n. -> Vstup A' },
+      mon: { startMin: 7 * 60, endMin: 13 * 60, minHeadway: 15, maxHeadway: 20, labelEn: 'Mon 13 Jul Departures (07:00-13:00)', labelCs: 'Po 13. 7. Odjezdy (07:00-13:00)', freqEn: '15-20 min', freqCs: '15-20 min', dirEn: 'Entrance A to Kutná Hora hl.n.', dirCs: 'Vstup A -> Kutná Hora hl.n.' }
+    };
+
+    function isTransitPinned() {
+      try { return localStorage.getItem(PIN_KEY) === '1'; } catch (e) { return false; }
+    }
+
+    function setTransitPinned(val) {
+      try {
+        if (val) localStorage.setItem(PIN_KEY, '1');
+        else localStorage.removeItem(PIN_KEY);
+      } catch (e) {}
+    }
+
+    function formatMinutesHHMM(totalMin) {
+      const m = ((totalMin % (24 * 60)) + (24 * 60)) % (24 * 60);
+      const hh = Math.floor(m / 60);
+      const mm = m % 60;
+      return `${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}`;
+    }
+
+    function evaluateShuttle(dayKey, timeStr, isCs) {
+      const win = SHUTTLE_WINDOWS[dayKey] || SHUTTLE_WINDOWS.fri;
+      const parts = String(timeStr || '14:10').split(':');
+      const rawH = Math.max(0, Math.min(23, parseInt(parts[0], 10) || 0));
+      const rawM = Math.max(0, Math.min(59, parseInt(parts[1], 10) || 0));
+      const isNightOverflow = dayKey !== 'mon' && rawH < 5;
+      const normMin = (isNightOverflow ? rawH + 24 : rawH) * 60 + rawM;
+      const isRunning = normMin >= win.startMin && normMin <= win.endMin;
+
+      if (isRunning) {
+        const arriveMin = normMin + 7;
+        const arriveMax = normMin + win.maxHeadway + 7;
+        return {
+          running: true,
+          badge: isCs ? 'Shuttle v provozu' : 'Shuttle Running',
+          title: isCs
+            ? `Interval ${win.freqCs} (${win.dirCs})`
+            : `Departs every ${win.freqEn} (${win.dirEn})`,
+          detail: isCs
+            ? `Odhadovaný příjezd po 7 min jízdy: ${formatMinutesHHMM(arriveMin)} až ${formatMinutesHHMM(arriveMax)} (podle čekání na zastávce). Nástupiště: Stanoviště 1 vpravo před budovou Kutná Hora hl.n.`
+            : `Estimated arrival after 7 min ride: ${formatMinutesHHMM(arriveMin)} to ${formatMinutesHHMM(arriveMax)} (including wait). Pickup: Bus Bay 1 to the right outside Kutná Hora hl.n. main hall.`
+        };
+      }
+
+      const nextStart = formatMinutesHHMM(win.startMin);
+      return {
+        running: false,
+        badge: isCs ? 'Mimo provoz shuttle busu' : 'Outside Shuttle Hours',
+        title: isCs
+          ? `V ${formatMinutesHHMM(normMin)} kyvadlová linka nejede (${win.labelCs}).`
+          : `No shuttle runs at ${formatMinutesHHMM(normMin)} (${win.labelEn}).`,
+        detail: isCs
+          ? `Provoz v tento den začíná v ${nextStart}. Mezitím využijte osvětlenou pěší trasu (1,8 km, 22-25 min) nebo místní taxi.`
+          : `Service on this day starts at ${nextStart}. Meanwhile, take the lit walking route (1.8 km, 22-25 min) or a local taxi.`
+      };
+    }
+
+    function updateShuttleEstimator() {
+      const box = document.getElementById('fod-shuttle-result');
+      if (!box) return;
+      const isCs = core.getLang() === 'cs';
+      const res = evaluateShuttle(estimatorDay, estimatorTime, isCs);
+      box.className = `fod-shuttle-result ${res.running ? 'is-running' : 'is-closed'}`;
+      box.innerHTML = `
+        <div class="fod-shuttle-result-head">
+          <span class="fod-status-pill ${res.running ? 'is-running' : 'is-closed'}">${core.escapeHtml(res.badge)}</span>
+          <strong>${core.escapeHtml(res.title)}</strong>
+        </div>
+        <p>${core.escapeHtml(res.detail)}</p>
+      `;
+    }
 
     function setMapRoute(type) {
       activeRoute = type || 'all';
+      const isCs = core.getLang() === 'cs';
       root.querySelectorAll('.route-bus-group').forEach(el => {
         el.classList.toggle('is-dimmed', activeRoute !== 'all' && activeRoute !== 'bus');
       });
@@ -1145,58 +1544,145 @@
         el.classList.toggle('is-dimmed', activeRoute !== 'all' && activeRoute !== 'walk');
       });
       root.querySelectorAll('[data-route-filter]').forEach(btn => {
-        btn.classList.toggle('is-active', btn.getAttribute('data-route-filter') === activeRoute);
+        const isActive = btn.getAttribute('data-route-filter') === activeRoute;
+        btn.classList.toggle('is-active', isActive);
+        btn.setAttribute('aria-pressed', String(isActive));
       });
+
+      const statusText = activeRoute === 'bus'
+        ? (isCs
+          ? 'Zobrazena trasa Shuttle Bus: 7 min přímá jízda zdarma každých 10-15 min ze Stanoviště 1 před Kutná Hora hl.n. ke Vstupu A.'
+          : 'Showing Shuttle Bus route: 7 min free non-stop ride every 10-15 min from Bus Bay 1 outside Kutná Hora hl.n. to Entrance A.')
+        : (activeRoute === 'walk'
+          ? (isCs
+            ? 'Zobrazena pěší trasa: 1,8 km (22-25 min) po osvětleném koridoru přes Sedlec a lávku přes Vrchlici až ke Vstupu A.'
+            : 'Showing Walking route: 1.8 km (22-25 min) along the lit signposted path via Sedlec and Vrchlice Footbridge to Entrance A.')
+          : (isCs
+            ? 'Zobrazeny obě trasy z Kutná Hora hl.n. ke Vstupu A: Shuttle Bus (7 min zdarma) i pěší trasa (1,8 km, 22-25 min).'
+            : 'Showing both routes from Kutná Hora hl.n. to Entrance A: Free Shuttle Bus (7 min) and Walking Route (1.8 km, 22-25 min).'));
+
+      const statusEl = document.getElementById('fod-map-status');
+      if (statusEl) statusEl.textContent = statusText;
+      const svgEl = root.querySelector('.fod-route-svg');
+      if (svgEl) svgEl.setAttribute('aria-label', statusText);
     }
     window.setMapRoute = setMapRoute;
 
     function render() {
       const isCs = core.getLang() === 'cs';
-      root.innerHTML = `
-        <form action="search.html" method="get" class="fod-toolbar-panel fod-search-row" role="search">
-          <label for="info-search-input" class="fod-sr-only">${isCs ? 'Vyhledat na festivalu' : 'Search festival'}</label>
-          <input type="search" id="info-search-input" name="q" class="fod-input"
-            placeholder="${isCs ? 'Hledat interprety, pódia, shuttle bus, kemp nebo FAQ...' : 'Search artists, stages, shuttle bus, camping, or FAQ...'}">
-          <button type="submit" class="fod-btn fod-btn-primary">${isCs ? 'Hledat' : 'Search'}</button>
-          <a href="my-schedule.html" class="fod-btn fod-btn-secondary">${isCs ? 'Můj plán' : 'My Schedule'}</a>
-        </form>
+      const pinned = isTransitPinned();
+      const mapyWalkUrl = 'https://mapy.cz/turisticka?q=49.9615N%2C%2015.2882E';
+      const gmapsWalkUrl = 'https://www.google.com/maps/dir/?api=1&origin=Kutna+Hora+hl.n.&destination=Sedlec,+Kutna+Hora&travelmode=walking';
+      const venueAddressCopy = 'Sedlec Festival Grounds, 284 03 Kutná Hora (49.9615 N, 15.2882 E)';
 
+      root.innerHTML = `
         <nav class="fod-filter-row fod-info-nav" aria-label="${isCs ? 'Sekce praktických informací' : 'Practical Info Sections'}">
-          <a href="#parametry" class="fod-chip">${isCs ? 'Parametry 2026' : '2026 Key Facts'}</a>
-          <a href="#doprava" class="fod-chip">${isCs ? 'Doprava a mapa' : 'Transit & Map'}</a>
-          <a href="#shuttle-bus" class="fod-chip">${isCs ? 'Jízdní řád Shuttle' : 'Shuttle Timetable'}</a>
+          <a href="#doprava" class="fod-chip is-active">${isCs ? 'Doprava z nádraží' : 'From Train Station'}</a>
+          <a href="#shuttle-bus" class="fod-chip">${isCs ? 'Shuttle Bus' : 'Shuttle Bus'}</a>
           <a href="#pesi-trasa" class="fod-chip">${isCs ? 'Pěší trasa' : 'Walking Route'}</a>
+          <a href="#mapa-trasy" class="fod-chip">${isCs ? 'Mapa trasy' : 'Route Map'}</a>
           <a href="#kemp" class="fod-chip">${isCs ? 'Kempování' : 'Camping'}</a>
           <a href="#cashless" class="fod-chip">${isCs ? 'Cashless & Bezpečí' : 'Cashless & Safety'}</a>
           <a href="#faq" class="fod-chip">FAQ</a>
+          <a href="#parametry" class="fod-chip">${isCs ? 'Parametry 2026' : '2026 Facts'}</a>
         </nav>
 
-        <section class="fod-panel" id="parametry">
-          <h2>${isCs ? 'Klíčové parametry ročníku 2026' : 'Key Parameters of the 2026 Edition'}</h2>
-          <div class="fod-info-grid">
-            <article class="fod-sub-card">
-              <h3>${isCs ? '3 festivalové dny' : '3 Festival Days'}</h3>
-              <p>${isCs ? 'Pátek 10. 7., sobota 11. 7., neděle 12. 7. 2026 (areál otevřen od 13:00 do 04:00).' : 'Friday July 10, Saturday July 11, Sunday July 12, 2026 (grounds open 13:00 to 04:00).'}</p>
-            </article>
-            <article class="fod-sub-card">
-              <h3>${isCs ? '2 odlišná pódia' : '2 Distinct Stages'}</h3>
-              <p>${isCs ? 'Solar Horizon Stage (venkovní amfiteátr, 4 500 míst) a krytý Lunar Forest Dome (1 800 míst).' : 'Solar Horizon Stage (open-air amphitheater, 4,500 cap) and covered Lunar Forest Dome (1,800 cap).'}</p>
-            </article>
-            <article class="fod-sub-card">
-              <h3>${isCs ? '60 živých vystoupení' : '60 Live Performances'}</h3>
-              <p>${isCs ? 'Kurátorovaný mezinárodní program elektroniky, post-rocku, indie, techna a audiovizuálních setů.' : 'Curated international lineup of electronic, post-rock, indie, techno, and audiovisual sets.'}</p>
-            </article>
-          </div>
-        </section>
+        ${pinned ? `
+          <aside class="fod-pinned-transit" aria-label="${isCs ? 'Uložený souhrn dopravy offline' : 'Pinned offline transit summary'}">
+            <div class="fod-pinned-transit-head">
+              <strong>${isCs ? 'Uložená karta příjezdu (Offline)' : 'Pinned Arrival Card (Offline)'}</strong>
+              <button type="button" class="fod-btn fod-btn-ghost fod-btn-sm" id="fod-unpin-transit-btn">${isCs ? 'Odepnout' : 'Unpin'}</button>
+            </div>
+            <p>${isCs
+              ? 'Stanice: Kutná Hora hl.n. (NE Kutná Hora město) · Shuttle ZDARMA každých 10-15 min (7 min jízdy, Stanoviště 1 vpravo před halou) · Pěšky: 1,8 km (22-25 min) po žlutých směrovkách přes Sedlec a lávku přes Vrchlici ke Vstupu A.'
+              : 'Station: Kutná Hora hl.n. (NOT Kutná Hora město) · FREE Shuttle every 10-15 min (7 min ride, Bus Bay 1 right outside main hall) · Walk: 1.8 km (22-25 min) via yellow signs past Sedlec Ossuary & Vrchlice Footbridge to Entrance A.'}</p>
+          </aside>
+        ` : ''}
 
         <section class="fod-panel" id="doprava">
-          <h2>${isCs ? 'Doprava z nádraží Kutná Hora a mapa trasy' : 'Transit from Kutná Hora Station & Route Map'}</h2>
+          <div class="fod-section-head-split">
+            <div>
+              <h2>${isCs ? 'Doprava z nádraží Kutná Hora hl.n. a mapa trasy' : 'Arriving at Kutná Hora hl.n. (Main Station) & Route Map'}</h2>
+              <p class="fod-section-lead">${isCs
+                ? 'Rychlý přehled, jak se z hlavního nádraží dostat k Hlavní bráně (Vstup A) bezplatným shuttle busem nebo pěšky.'
+                : 'Fast guide from Kutná Hora hl.n. railway station directly to Main Gate (Entrance A) by free shuttle bus or on foot.'}</p>
+            </div>
+            <button type="button" id="fod-pin-transit-btn" class="fod-btn fod-btn-secondary fod-btn-sm" aria-pressed="${pinned}">
+              ${pinned ? (isCs ? '✓ Uloženo pro offline' : '✓ Pinned for Offline') : (isCs ? 'Uložit souhrn offline' : 'Pin Offline Summary')}
+            </button>
+          </div>
+
+          <div class="fod-station-alert" role="note">
+            <strong>${isCs ? 'Důležité pro vlak:' : 'Train station tip:'}</strong>
+            ${isCs
+              ? 'Vystupte ve stanici <strong>Kutná Hora hl.n.</strong> (hlavní nádraží na trati R9 Praha-Brno), nikoli v zastávce Kutná Hora město. Nástupiště festivalového shuttle busu je na <strong>Stanovišti 1 vpravo před hlavní halou</strong>.'
+              : 'Get off at <strong>Kutná Hora hl.n.</strong> (Main Railway Station on the Prague-Brno R9 line), not Kutná Hora město. Festival shuttle pickup is at <strong>Bus Bay 1, immediately to the right outside the main hall</strong>.'}
+          </div>
+
+          <div class="fod-arrival-compare">
+            <div class="fod-arrival-option is-recommended">
+              <div class="fod-card-top">
+                <span class="fod-stage-pill is-lunar">${isCs ? 'Doporučeno se zavazadly / při dešti' : 'Best with luggage or rain'}</span>
+                <span class="fod-badge">${isCs ? 'ZDARMA' : 'FREE'}</span>
+              </div>
+              <h3>${isCs ? 'Shuttle Bus: 7 min (každých 10-15 min)' : 'Shuttle Bus: 7 min (every 10-15 min)'}</h3>
+              <p>${isCs
+                ? 'Přímá bezbariérová linka ze Stanoviště 1 (Kutná Hora hl.n.) přímo k Hlavní bráně (Vstup A). Místo na batohy a kufry.'
+                : 'Direct non-stop, step-free bus from Bus Bay 1 (Kutná Hora hl.n.) to Main Gate (Entrance A). Space for luggage and backpacks.'}</p>
+            </div>
+            <div class="fod-arrival-option">
+              <div class="fod-card-top">
+                <span class="fod-stage-pill is-solar">${isCs ? 'Kdykoli 24/7' : 'Available 24/7'}</span>
+                <span class="fod-badge">1.8 km</span>
+              </div>
+              <h3>${isCs ? 'Značená pěší trasa: 22-25 min' : 'Marked Walking Route: 22-25 min'}</h3>
+              <p>${isCs
+                ? 'Osvětlená trasa se žlutými reflexními směrovkami kolem Sedlecké kostnice a přes lávku Vrchlice. Vhodná i mimo provoz shuttle busu.'
+                : 'Lit path marked with yellow reflective signs past Sedlec Ossuary and Vrchlice Footbridge. Ideal whenever shuttles are between operating hours.'}</p>
+            </div>
+          </div>
+
+          <div class="fod-nav-actions-bar">
+            <a href="${mapyWalkUrl}" target="_blank" rel="noopener noreferrer" class="fod-btn fod-btn-primary fod-btn-sm">
+              ${isCs ? 'Otevřít v Mapy.cz ↗' : 'Open in Mapy.cz ↗'}<span class="fod-sr-only"> (${isCs ? 'otevře se v nové záložce' : 'opens in new tab'})</span>
+            </a>
+            <a href="${gmapsWalkUrl}" target="_blank" rel="noopener noreferrer" class="fod-btn fod-btn-secondary fod-btn-sm">
+              ${isCs ? 'Navigace Google Maps ↗' : 'Walking Directions (Google Maps) ↗'}<span class="fod-sr-only"> (${isCs ? 'otevře se v nové záložce' : 'opens in new tab'})</span>
+            </a>
+            <button type="button" id="fod-copy-venue-btn" class="fod-btn fod-btn-ghost fod-btn-sm" data-copy-text="${core.escapeHtml(venueAddressCopy)}">
+              ${isCs ? 'Kopírovat adresu a GPS' : 'Copy Address & GPS'}
+            </button>
+          </div>
+
           <div class="fod-info-grid">
             <article class="fod-sub-card" id="shuttle-bus">
               <h3>${isCs ? 'Kyvadlový Shuttle Bus (ZDARMA)' : 'Festival Shuttle Bus (FREE)'}</h3>
               <p>${isCs
-                ? 'Bezplatná kyvadlová linka z hlavního nádraží Kutná Hora hl.n. přímo k Hlavní bráně (Vstup A). Jezdí každých 10 až 15 minut po celý den i v noci (doba jízdy 7 minut). Garance návaznosti na rychlíky R9 z Prahy a Brna.'
-                : 'Free festival shuttle bus connecting Kutná Hora main railway station directly to Venue Entrance A. Departs every 10 to 15 minutes day and night (7 min travel time). Guaranteed sync with R9 express trains from Prague & Brno.'}</p>
+                ? 'Bezplatná přímá kyvadlová linka z Kutná Hora hl.n. (Stanoviště 1 vpravo před halou) k Hlavní bráně (Vstup A). Jezdí během otevírací doby areálu i po nočních headlinerech každých 10 až 15 minut (doba jízdy 7 minut) s návazností na rychlíky R9 z Prahy a Brna.'
+                : 'Free non-stop shuttle from Kutná Hora hl.n. (Bus Bay 1, right outside the main hall) directly to Entrance A. Runs throughout festival hours and late-night headliners every 10-15 minutes (7 min ride), synced with R9 express trains from Prague & Brno.'}</p>
+
+              <div class="fod-shuttle-estimator">
+                <p class="fod-estimator-label"><strong>${isCs ? 'Ověřit odjezd shuttle busu podle příjezdu vlaku:' : 'Check shuttle availability for your train arrival:'}</strong></p>
+                <div class="fod-estimator-controls">
+                  <label class="fod-sr-only" for="fod-shuttle-day">${isCs ? 'Den příjezdu' : 'Arrival day'}</label>
+                  <select id="fod-shuttle-day" class="fod-select">
+                    <option value="fri" ${estimatorDay === 'fri' ? 'selected' : ''}>${isCs ? 'Pá 10. 7. (11:30-04:00)' : 'Fri 10 Jul (11:30-04:00)'}</option>
+                    <option value="sat" ${estimatorDay === 'sat' ? 'selected' : ''}>${isCs ? 'So 11. 7. (12:00-04:00)' : 'Sat 11 Jul (12:00-04:00)'}</option>
+                    <option value="sun" ${estimatorDay === 'sun' ? 'selected' : ''}>${isCs ? 'Ne 12. 7. (12:00-03:30)' : 'Sun 12 Jul (12:00-03:30)'}</option>
+                    <option value="mon" ${estimatorDay === 'mon' ? 'selected' : ''}>${isCs ? 'Po 13. 7. Odjezdy (07:00-13:00)' : 'Mon 13 Jul Departures (07:00-13:00)'}</option>
+                  </select>
+                  <label class="fod-sr-only" for="fod-shuttle-time">${isCs ? 'Čas příjezdu' : 'Arrival time'}</label>
+                  <input type="time" id="fod-shuttle-time" class="fod-input fod-time-input" value="${core.escapeHtml(estimatorTime)}">
+                </div>
+                <div class="fod-estimator-presets" role="group" aria-label="${isCs ? 'Rychlé časy příjezdu' : 'Quick arrival times'}">
+                  <button type="button" class="fod-chip fod-chip-sm" data-shuttle-preset="fri:14:10">${isCs ? 'Pá 14:10 (R9)' : 'Fri 14:10 (R9)'}</button>
+                  <button type="button" class="fod-chip fod-chip-sm" data-shuttle-preset="sat:19:10">${isCs ? 'So 19:10 (R9)' : 'Sat 19:10 (R9)'}</button>
+                  <button type="button" class="fod-chip fod-chip-sm" data-shuttle-preset="sat:01:30">${isCs ? 'So 01:30 (Noc)' : 'Sat 01:30 (Night)'}</button>
+                  <button type="button" class="fod-chip fod-chip-sm" data-shuttle-preset="sat:06:00">${isCs ? 'So 06:00 (Pauza)' : 'Sat 06:00 (Gap)'}</button>
+                </div>
+                <div id="fod-shuttle-result" class="fod-shuttle-result" role="status" aria-live="polite"></div>
+              </div>
+
               <div class="fod-table-scroll">
                 <table class="fod-mini-table">
                   <thead>
@@ -1207,67 +1693,113 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr><td>${isCs ? 'Pá 10. 7.' : 'Fri Jul 10'}</td><td>11:30–04:00</td><td>${isCs ? '10–15 min' : '10–15 min'}</td></tr>
-                    <tr><td>${isCs ? 'So 11. 7.' : 'Sat Jul 11'}</td><td>12:00–04:00</td><td>15 min</td></tr>
-                    <tr><td>${isCs ? 'Ne 12. 7.' : 'Sun Jul 12'}</td><td>12:00–03:30</td><td>15 min</td></tr>
-                    <tr><td>${isCs ? 'Po 13. 7. (Odjezdy)' : 'Mon Jul 13 (Departures)'}</td><td>07:00–13:00</td><td>15–20 min</td></tr>
+                    <tr><td>${isCs ? 'Pá 10. 7.' : 'Fri Jul 10'}</td><td>11:30-04:00</td><td>10-15 min</td></tr>
+                    <tr><td>${isCs ? 'So 11. 7.' : 'Sat Jul 11'}</td><td>12:00-04:00</td><td>15 min</td></tr>
+                    <tr><td>${isCs ? 'Ne 12. 7.' : 'Sun Jul 12'}</td><td>12:00-03:30</td><td>15 min</td></tr>
+                    <tr><td>${isCs ? 'Po 13. 7. (Odjezdy)' : 'Mon Jul 13 (Departures)'}</td><td>07:00-13:00</td><td>15-20 min</td></tr>
                   </tbody>
                 </table>
               </div>
             </article>
+
             <article class="fod-sub-card" id="pesi-trasa">
-              <h3>${isCs ? 'Značená pěší trasa (1,8 km, 22–25 min)' : 'Marked Walking Route (1.8 km, 22–25 min)'}</h3>
+              <h3>${isCs ? 'Značená pěší trasa (1,8 km, 22-25 min)' : 'Marked Walking Route (1.8 km, 22-25 min)'}</h3>
               <p>${isCs
-                ? 'Osvětlená pěší trasa osazená žlutými reflexními směrovkami z nádraží až ke Vstupu A:'
-                : 'Illuminated walking corridor marked with yellow reflective signs from the station straight to Entrance A:'}</p>
-              <ol class="fod-feature-list">
-                <li>${isCs ? 'Kutná Hora hl. n. (0,0 km): vyjděte před nádraží a držte se vlevo do ulice Nádražní.' : 'Kutná Hora Main Station (0.0 km): exit straight onto the plaza and follow Nádražní St.'}</li>
-                <li>${isCs ? 'Nádražní → Křižovatka Sedlec (0,1–0,7 km): rovně kolem viaduktu ke Katedrále.' : 'Nádražní → Sedlec Junction (0.1–0.7 km): continue past the viaduct to the Cathedral.'}</li>
-                <li>${isCs ? 'Kolem Sedlecké kostnice do Zámecké (0,7–1,2 km): odbočte vpravo do Vítězné, poté vlevo do Zámecké.' : 'Past Sedlec Ossuary into Zámecká St (0.7–1.2 km): turn right on Vítězná, then left into Zámecká.'}</li>
-                <li>${isCs ? 'Lávka přes Vrchlici (1,2–1,6 km): osvětlená festivalová lávka do klidové zóny.' : 'Vrchlice Footbridge (1.2–1.6 km): cross the lit festival footbridge into the venue sector.'}</li>
-                <li>${isCs ? 'Hlavní brána – Vstup A (1,8 km): pokladna, RFID pásky a turniketový vstup.' : 'Main Gate – Entrance A (1.8 km): box office, RFID wristbands, and main entry.'}</li>
+                ? 'Osvětlená pěší trasa po chodnících a zpevněné cestě, osazená žlutými reflexními směrovkami z nádraží Kutná Hora hl.n. až ke Vstupu A:'
+                : 'Illuminated route on paved sidewalks and paths, marked with yellow reflective signs from Kutná Hora hl.n. straight to Entrance A:'}</p>
+              <ol class="fod-walk-steps">
+                <li>
+                  <span class="fod-step-dist">0.0 km</span>
+                  <div><strong>${isCs ? 'Kutná Hora hl.n.' : 'Kutná Hora hl.n. (Main Station)'}</strong>: ${isCs ? 'vyjděte z hlavní haly před nádraží a držte se vlevo do ulice Nádražní.' : 'exit the main hall onto the plaza and bear left onto Nádražní St.'}</div>
+                </li>
+                <li>
+                  <span class="fod-step-dist">0.1-0.7 km</span>
+                  <div><strong>${isCs ? 'Nádražní -> Křižovatka Sedlec' : 'Nádražní -> Sedlec Junction'}</strong>: ${isCs ? 'rovně po chodníku kolem viaduktu ke Katedrále Nanebevzetí Panny Marie.' : 'continue straight on the sidewalk past the viaduct to the Cathedral.'}</div>
+                </li>
+                <li>
+                  <span class="fod-step-dist">0.7-1.2 km</span>
+                  <div><strong>${isCs ? 'Kolem Sedlecké kostnice do Zámecké' : 'Past Sedlec Ossuary into Zámecká St'}</strong>: ${isCs ? 'odbočte vpravo do ulice Vítězná, poté vlevo do Zámecké.' : 'turn right onto Vítězná St, then left into Zámecká St.'}</div>
+                </li>
+                <li>
+                  <span class="fod-step-dist">1.2-1.6 km</span>
+                  <div><strong>${isCs ? 'Lávka přes Vrchlici' : 'Vrchlice Footbridge'}</strong>: ${isCs ? 'přejděte osvětlenou festivalovou lávku do klidové zóny areálu.' : 'cross the lit festival footbridge into the venue sector.'}</div>
+                </li>
+                <li>
+                  <span class="fod-step-dist">1.8 km</span>
+                  <div><strong>${isCs ? 'Hlavní brána (Vstup A)' : 'Main Gate (Entrance A)'}</strong>: ${isCs ? 'pokladna, výměna RFID pásek, úschovna 230V a vstup do areálu.' : 'box office, RFID wristbands, 230V lockers, and main entry.'}</div>
+                </li>
               </ol>
-            </article>
-            <article class="fod-sub-card">
-              <h3>${isCs ? 'Auto a Parkoviště P1' : 'Arrival by Car & Parking P1'}</h3>
-              <p>${isCs
-                ? 'Centrální parkoviště P1 na okraji Kutné Hory má kapacitu 800 vozidel (100 Kč / den). Z parkoviště vede značená cesta přímo ke Vstupu A (400 m, cca 5 minut chůze).'
-                : 'Central Parking Lot P1 offers 800 spaces (100 CZK / day) with a marked pedestrian path leading directly to Entrance A (400 m, approx. 5 min walk).'}</p>
+              <div class="fod-card-actions">
+                <button type="button" class="fod-btn fod-btn-secondary fod-btn-sm" id="fod-show-walk-map-btn">
+                  ${isCs ? 'Zvýraznit pěší trasu na mapě' : 'Highlight Walking Route on Map'}
+                </button>
+              </div>
             </article>
           </div>
 
           <div class="fod-map-box" id="mapa-trasy">
             <div class="fod-map-toolbar">
-              <strong>${isCs ? 'Interaktivní mapa trasy: Nádraží -> Areál' : 'Interactive Route Map: Station -> Venue'}</strong>
+              <strong>${isCs ? 'Interaktivní mapa trasy: Kutná Hora hl.n. -> Vstup A' : 'Interactive Route Map: Kutná Hora hl.n. -> Entrance A'}</strong>
               <div class="fod-filter-row" role="group" aria-label="${isCs ? 'Zvýraznit trasu' : 'Highlight route'}">
-                <button type="button" class="fod-chip ${activeRoute === 'all' ? 'is-active' : ''}" data-route-filter="all">${isCs ? 'Všechny trasy' : 'All Routes'}</button>
-                <button type="button" class="fod-chip ${activeRoute === 'bus' ? 'is-active' : ''}" data-route-filter="bus">${isCs ? 'Shuttle Bus (7 min)' : 'Shuttle Bus (7 min)'}</button>
-                <button type="button" class="fod-chip ${activeRoute === 'walk' ? 'is-active' : ''}" data-route-filter="walk">${isCs ? 'Pěší trasa (1,8 km)' : 'Walking Route (1.8 km)'}</button>
+                <button type="button" class="fod-chip ${activeRoute === 'all' ? 'is-active' : ''}" data-route-filter="all" aria-pressed="${activeRoute === 'all'}">${isCs ? 'Všechny trasy' : 'All Routes'}</button>
+                <button type="button" class="fod-chip ${activeRoute === 'bus' ? 'is-active' : ''}" data-route-filter="bus" aria-pressed="${activeRoute === 'bus'}">${isCs ? 'Shuttle Bus (7 min)' : 'Shuttle Bus (7 min)'}</button>
+                <button type="button" class="fod-chip ${activeRoute === 'walk' ? 'is-active' : ''}" data-route-filter="walk" aria-pressed="${activeRoute === 'walk'}">${isCs ? 'Pěší trasa (1,8 km)' : 'Walking Route (1.8 km)'}</button>
               </div>
             </div>
 
-            <svg viewBox="0 0 880 340" class="fod-route-svg" role="img" aria-label="${isCs ? 'Mapa trasy z hlavního nádraží Kutná Hora do festivalového areálu' : 'Route map from Kutná Hora main station to the festival grounds'}">
+            <p id="fod-map-status" class="fod-map-status" role="status" aria-live="polite"></p>
+
+            <div class="fod-mobile-route-schematic" aria-label="${isCs ? 'Mobilní schéma trasy z nádraží do areálu' : 'Mobile route schematic from station to venue'}">
+              <div class="fod-route-stop is-start">
+                <span class="fod-route-dot" aria-hidden="true"></span>
+                <div>
+                  <strong>Kutná Hora hl.n.</strong>
+                  <span>${isCs ? 'Příjezd vlaků R9 (Praha 55 min) · Stanoviště 1 Shuttle Busu' : 'R9 Train Arrival (Prague 55 min) · Shuttle Bus Bay 1'}</span>
+                </div>
+              </div>
+              <div class="fod-route-branch route-bus-group">
+                <span class="fod-route-line is-bus" aria-hidden="true"></span>
+                <div class="fod-route-branch-card is-bus">
+                  <strong>${isCs ? 'Shuttle Bus: 7 min (Zdarma, přímý)' : 'Shuttle Bus: 7 min (Free, non-stop)'}</strong>
+                  <span>${isCs ? 'Každých 10-15 min přímo ke Vstupu A' : 'Every 10-15 min directly to Entrance A'}</span>
+                </div>
+              </div>
+              <div class="fod-route-branch route-walk-group">
+                <span class="fod-route-line is-walk" aria-hidden="true"></span>
+                <div class="fod-route-branch-card is-walk">
+                  <strong>${isCs ? 'Pěší trasa: 1,8 km (22-25 min)' : 'Walking Route: 1.8 km (22-25 min)'}</strong>
+                  <span>${isCs ? '0.7 km Sedlec a Kostnice -> 1.4 km Lávka Vrchlice (osvětleno)' : '0.7 km Sedlec & Ossuary -> 1.4 km Vrchlice Footbridge (lit)'}</span>
+                </div>
+              </div>
+              <div class="fod-route-stop is-end">
+                <span class="fod-route-dot is-end" aria-hidden="true"></span>
+                <div>
+                  <strong>${isCs ? 'Vstup A · Festivalový areál Sedlec' : 'Entrance A · Sedlec Festival Grounds'}</strong>
+                  <span>${isCs ? 'RFID náramky · Úschovna · Solar Horizon · Lunar Dome (Kryté)' : 'RFID Wristbands · Lockers · Solar Horizon · Lunar Dome (Covered)'}</span>
+                </div>
+              </div>
+            </div>
+
+            <svg viewBox="0 0 880 340" class="fod-route-svg" role="img" aria-label="${isCs ? 'Mapa trasy z hlavního nádraží Kutná Hora hl.n. do festivalového areálu' : 'Route map from Kutná Hora hl.n. main station to the festival grounds'}">
               <rect x="0" y="0" width="880" height="340" rx="12" class="fod-svg-bg"/>
               <g>
                 <rect x="24" y="105" width="180" height="120" rx="8" class="fod-svg-node"/>
-                <text x="114" y="138" text-anchor="middle" class="fod-svg-title">${isCs ? 'Kutná Hora hl.n.' : 'Kutná Hora Station'}</text>
-                <text x="114" y="160" text-anchor="middle" class="fod-svg-sub">${isCs ? 'Příjezd vlaků (Praha 55m)' : 'Train Arrival (Prague 55m)'}</text>
-                <text x="114" y="182" text-anchor="middle" class="fod-svg-sub">${isCs ? 'Nástupiště Shuttle Busu' : 'Shuttle Bus Stop'}</text>
+                <text x="114" y="138" text-anchor="middle" class="fod-svg-title">Kutná Hora hl.n.</text>
+                <text x="114" y="160" text-anchor="middle" class="fod-svg-sub">${isCs ? 'Vlaky R9 (Praha 55m)' : 'R9 Trains (Prague 55m)'}</text>
+                <text x="114" y="182" text-anchor="middle" class="fod-svg-sub">${isCs ? 'Shuttle: Stanoviště 1' : 'Shuttle: Bus Bay 1'}</text>
               </g>
               <g class="route-bus-group">
                 <path d="M 204 135 Q 440 25 685 135" fill="none" class="fod-svg-bus-path"/>
-                <rect x="330" y="26" width="230" height="28" rx="6" class="fod-svg-bus-badge"/>
-                <text x="445" y="45" text-anchor="middle" class="fod-svg-bus-text">${isCs ? 'Shuttle Bus: 7 min (Zdarma)' : 'Shuttle Bus: 7 min (Free)'}</text>
+                <rect x="315" y="26" width="260" height="28" rx="6" class="fod-svg-bus-badge"/>
+                <text x="445" y="45" text-anchor="middle" class="fod-svg-bus-text">${isCs ? 'Shuttle Bus: 7 min (Zdarma, přímý)' : 'Shuttle Bus: 7 min (Free, direct)'}</text>
               </g>
-              <g>
+              <g class="route-walk-group">
                 <rect x="285" y="185" width="165" height="82" rx="8" class="fod-svg-node"/>
                 <text x="367" y="214" text-anchor="middle" class="fod-svg-title">${isCs ? 'Sedlec a Kostnice' : 'Sedlec & Ossuary'}</text>
                 <text x="367" y="234" text-anchor="middle" class="fod-svg-sub">0.7 km · ${isCs ? 'Značená trasa' : 'Signposted'}</text>
                 <rect x="495" y="190" width="150" height="74" rx="8" class="fod-svg-node"/>
                 <text x="570" y="218" text-anchor="middle" class="fod-svg-title">${isCs ? 'Lávka Vrchlice' : 'Vrchlice Footbridge'}</text>
                 <text x="570" y="238" text-anchor="middle" class="fod-svg-sub">1.4 km · ${isCs ? 'Osvětlený koridor' : 'Lit Corridor'}</text>
-              </g>
-              <g class="route-walk-group">
                 <path d="M 204 185 L 285 220 M 450 225 L 495 225 M 645 220 L 685 175" fill="none" class="fod-svg-walk-path"/>
                 <rect x="305" y="288" width="280" height="28" rx="6" class="fod-svg-walk-badge"/>
                 <text x="445" y="307" text-anchor="middle" class="fod-svg-walk-text">${isCs ? 'Pěší trasa: 1,8 km (22-25 min)' : 'Walking Route: 1.8 km (22-25 min)'}</text>
@@ -1281,7 +1813,22 @@
               </g>
             </svg>
           </div>
+
+          <article class="fod-sub-card fod-parking-card">
+            <h3>${isCs ? 'Auto a Parkoviště P1' : 'Arrival by Car & Parking P1'}</h3>
+            <p>${isCs
+              ? 'Centrální parkoviště P1 na okraji Kutné Hory má kapacitu 800 vozidel (100 Kč / den). Z parkoviště vede značená cesta přímo ke Vstupu A (400 m, cca 5 minut chůze).'
+              : 'Central Parking Lot P1 offers 800 spaces (100 CZK / day) with a marked pedestrian path leading directly to Entrance A (400 m, approx. 5 min walk).'}</p>
+          </article>
         </section>
+
+        <form action="search.html" method="get" class="fod-toolbar-panel fod-search-row" role="search">
+          <label for="info-search-input" class="fod-sr-only">${isCs ? 'Vyhledat na festivalu' : 'Search festival'}</label>
+          <input type="search" id="info-search-input" name="q" class="fod-input"
+            placeholder="${isCs ? 'Hledat interprety, pódia, shuttle bus, kemp nebo FAQ...' : 'Search artists, stages, shuttle bus, camping, or FAQ...'}">
+          <button type="submit" class="fod-btn fod-btn-primary">${isCs ? 'Hledat' : 'Search'}</button>
+          <a href="my-schedule.html" class="fod-btn fod-btn-secondary">${isCs ? 'Můj plán' : 'My Schedule'}</a>
+        </form>
 
         <section class="fod-panel" id="kemp">
           <h2>${isCs ? 'Stanové městečko a ubytování' : 'Camping & Accommodation'}</h2>
@@ -1323,11 +1870,11 @@
                 ? 'Festival probíhá za každého počasí. Kryté pódium Lunar Forest Dome poskytuje zastřešený prostor pro 1 800 návštěvníků s nepřerušeným hudebním programem.'
                 : 'The festival runs in all weather. Lunar Forest Dome provides a solid covered shelter for 1,800 visitors with uninterrupted live performances.'}</p>
             </details>
-            <details class="fod-faq-item">
+            <details class="fod-faq-item" open>
               <summary>${isCs ? 'Je shuttle bus z hlavního nádraží zpoplatněn?' : 'Is the shuttle bus from the train station free?'}</summary>
               <p>${isCs
-                ? 'Ne, kyvadlový autobus z Kutné Hory hl.n. je pro všechny držitele vstupenek zcela ZDARMA a jezdí každých 10 až 15 minut.'
-                : 'No, the shuttle bus from Kutná Hora main station is 100% FREE for all ticket holders and departs every 10-15 minutes.'}</p>
+                ? 'Ne, kyvadlový autobus z Kutná Hora hl.n. (Stanoviště 1 vpravo před halou) je pro všechny držitele vstupenek zcela ZDARMA a jezdí každých 10 až 15 minut.'
+                : 'No, the shuttle bus from Kutná Hora hl.n. (Bus Bay 1, right outside the main hall) is 100% FREE for all ticket holders and departs every 10-15 minutes.'}</p>
             </details>
             <details class="fod-faq-item">
               <summary>${isCs ? 'Mohu po festivalu vrátit zbývající kredit na náramku?' : 'Can I refund unused cashless balance?'}</summary>
@@ -1337,12 +1884,105 @@
             </details>
           </div>
         </section>
+
+        <section class="fod-panel" id="parametry">
+          <h2>${isCs ? 'Klíčové parametry ročníku 2026' : 'Key Parameters of the 2026 Edition'}</h2>
+          <div class="fod-info-grid">
+            <article class="fod-sub-card">
+              <h3>${isCs ? '3 festivalové dny' : '3 Festival Days'}</h3>
+              <p>${isCs ? 'Pátek 10. 7., sobota 11. 7., neděle 12. 7. 2026 (areál otevřen od 13:00 do 04:00).' : 'Friday July 10, Saturday July 11, Sunday July 12, 2026 (grounds open 13:00 to 04:00).'}</p>
+            </article>
+            <article class="fod-sub-card">
+              <h3>${isCs ? '2 odlišná pódia' : '2 Distinct Stages'}</h3>
+              <p>${isCs ? 'Solar Horizon Stage (venkovní amfiteátr, 4 500 míst) a krytý Lunar Forest Dome (1 800 míst).' : 'Solar Horizon Stage (open-air amphitheater, 4,500 cap) and covered Lunar Forest Dome (1,800 cap).'}</p>
+            </article>
+            <article class="fod-sub-card">
+              <h3>${isCs ? '60 živých vystoupení' : '60 Live Performances'}</h3>
+              <p>${isCs ? 'Kurátorovaný mezinárodní program elektroniky, post-rocku, indie, techna a audiovizuálních setů.' : 'Curated international lineup of electronic, post-rock, indie, techno, and audiovisual sets.'}</p>
+            </article>
+          </div>
+        </section>
       `;
 
       root.querySelectorAll('[data-route-filter]').forEach(btn => {
         btn.addEventListener('click', () => setMapRoute(btn.getAttribute('data-route-filter')));
       });
+
+      const daySelect = document.getElementById('fod-shuttle-day');
+      const timeInput = document.getElementById('fod-shuttle-time');
+      if (daySelect) {
+        daySelect.addEventListener('change', () => {
+          estimatorDay = daySelect.value;
+          updateShuttleEstimator();
+        });
+      }
+      if (timeInput) {
+        timeInput.addEventListener('input', () => {
+          estimatorTime = timeInput.value || '14:10';
+          updateShuttleEstimator();
+        });
+      }
+      root.querySelectorAll('[data-shuttle-preset]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const val = btn.getAttribute('data-shuttle-preset') || '';
+          const firstColon = val.indexOf(':');
+          if (firstColon > 0) {
+            estimatorDay = val.slice(0, firstColon);
+            estimatorTime = val.slice(firstColon + 1);
+            if (daySelect) daySelect.value = estimatorDay;
+            if (timeInput) timeInput.value = estimatorTime;
+            updateShuttleEstimator();
+          }
+        });
+      });
+
+      const showWalkBtn = document.getElementById('fod-show-walk-map-btn');
+      if (showWalkBtn) {
+        showWalkBtn.addEventListener('click', () => {
+          setMapRoute('walk');
+          const mapBox = document.getElementById('mapa-trasy');
+          if (mapBox) mapBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      }
+
+      const copyBtn = document.getElementById('fod-copy-venue-btn');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+          const txt = copyBtn.getAttribute('data-copy-text') || venueAddressCopy;
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(txt).then(() => {
+              core.showToast(isCs ? 'Adresa a GPS souřadnice zkopírovány!' : 'Venue address & GPS copied!');
+            }).catch(() => {
+              window.prompt(isCs ? 'Zkopírujte adresu areálu:' : 'Copy venue address:', txt);
+            });
+          } else {
+            window.prompt(isCs ? 'Zkopírujte adresu areálu:' : 'Copy venue address:', txt);
+          }
+        });
+      }
+
+      const pinBtn = document.getElementById('fod-pin-transit-btn');
+      if (pinBtn) {
+        pinBtn.addEventListener('click', () => {
+          const next = !isTransitPinned();
+          setTransitPinned(next);
+          core.showToast(next
+            ? (isCs ? 'Souhrn příjezdu uložen pro rychlý přístup.' : 'Arrival summary pinned for quick offline lookup.')
+            : (isCs ? 'Uložený souhrn odepnut.' : 'Arrival summary unpinned.'));
+          render();
+        });
+      }
+
+      const unpinBtn = document.getElementById('fod-unpin-transit-btn');
+      if (unpinBtn) {
+        unpinBtn.addEventListener('click', () => {
+          setTransitPinned(false);
+          render();
+        });
+      }
+
       setMapRoute(activeRoute);
+      updateShuttleEstimator();
     }
 
     window.addEventListener('languageChanged', render);
