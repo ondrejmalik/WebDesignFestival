@@ -815,6 +815,13 @@
       ];
 
       root.innerHTML = `
+        ${!hasStagesOnPage ? `
+        <nav class="fod-breadcrumbs" aria-label="${isCs ? 'Drobečková navigace' : 'Breadcrumb'}">
+          <a href="index.html">${isCs ? 'Přehled' : 'Overview'}</a>
+          <span class="fod-breadcrumb-sep" aria-hidden="true">&gt;</span>
+          <span aria-current="page">${isCs ? 'Účinkující' : 'Artists'}</span>
+        </nav>
+        ` : ''}
         ${hasStagesOnPage ? `
           <div class="fod-merged-section-head">
             <h2>${isCs ? 'Účinkující a program (60)' : 'Artists & Lineup (60)'}</h2>
@@ -1362,6 +1369,12 @@
       const hasArtistsOnPage = Boolean(document.getElementById('fod-artists-root'));
 
       root.innerHTML = `
+        <nav class="fod-breadcrumbs" aria-label="${isCs ? 'Drobečková navigace' : 'Breadcrumb'}">
+          <a href="index.html">${isCs ? 'Přehled' : 'Overview'}</a>
+          <span class="fod-breadcrumb-sep" aria-hidden="true">&gt;</span>
+          <span aria-current="page">${isCs ? 'Pódia a areál' : 'Stages & Grounds'}</span>
+        </nav>
+
         <div class="fod-merged-section-head">
           <h2>${isCs ? 'Pódia a areál' : 'Stages & Grounds'}</h2>
           <div class="fod-card-actions">
@@ -1372,7 +1385,11 @@
               <a href="#fod-artists-root" class="fod-btn fod-btn-secondary fod-btn-sm">
                 ${isCs ? 'Přejít na účinkující' : 'Jump to Artists'}
               </a>
-            ` : ''}
+            ` : `
+              <a href="artists.html" class="fod-btn fod-btn-secondary fod-btn-sm">
+                ${isCs ? 'Všech 60 účinkujících' : 'All 60 Artists'}
+              </a>
+            `}
           </div>
         </div>
 
@@ -1561,6 +1578,11 @@
       const venueAddressCopy = 'Sedlec Festival Grounds, 284 03 Kutná Hora (49.9615 N, 15.2882 E)';
 
       root.innerHTML = `
+        <nav class="fod-breadcrumbs" aria-label="${isCs ? 'Drobečková navigace' : 'Breadcrumb'}">
+          <a href="index.html">${isCs ? 'Přehled' : 'Overview'}</a>
+          <span class="fod-breadcrumb-sep" aria-hidden="true">&gt;</span>
+          <span aria-current="page">${isCs ? 'Praktické informace' : 'Practical Info'}</span>
+        </nav>
         <div class="fod-info-sheet">
           <div class="fod-info-top">
             <form action="search.html" method="get" class="fod-simple-search" role="search">

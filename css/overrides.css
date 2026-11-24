@@ -1116,3 +1116,63 @@ html[data-design="04-eventbrite"] .fod-route-branch-card {
     grid-column: 1 / -1;
   }
 }
+
+/* =========================================================================
+   Cross-Review Readiness: Contrast-Safe Scroll, Touch Targets, Desktop Nav
+   ========================================================================= */
+
+/* Keep offscreen scroll-trigger elements at full opacity so automated a11y
+   auditors (axe-core / Lighthouse) and instant jump-to-anchor views never
+   encounter 0.01 opacity contrast traps. */
+html[data-design="04-eventbrite"] .scroll-trigger.animate--fade-in.scroll-trigger--offscreen,
+html[data-design="04-eventbrite"] .scroll-trigger.animate--slide-in.scroll-trigger--offscreen,
+html[data-design="04-eventbrite"] .scroll-trigger.animate--slide-in.animate--subtle.scroll-trigger--offscreen {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Comfortable desktop spacing for the 7-item spec-aligned navigation */
+@media (min-width: 900px) {
+  html[data-design="04-eventbrite"] .eb-header-inner {
+    grid-template-columns: auto 1fr auto;
+    gap: 12px;
+  }
+
+  html[data-design="04-eventbrite"] .eb-nav {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+  }
+
+  html[data-design="04-eventbrite"] .eb-header .eb-nav-link {
+    padding: 8px 9px;
+    font-size: 13.5px;
+    white-space: nowrap;
+  }
+}
+
+/* WCAG 2.5.8 target size compliance for inline action links & mobile controls */
+html[data-design="04-eventbrite"] .eb-logo {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+html[data-design="04-eventbrite"] .eb-text-link,
+html[data-design="04-eventbrite"] .stage-card-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding-block: 3px;
+}
+
+@media (max-width: 768px) {
+  html[data-design="04-eventbrite"] .eb-header-actions .fod-theme-btn,
+  html[data-design="04-eventbrite"] .eb-header-actions .eb-lang-btn {
+    height: 44px;
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
