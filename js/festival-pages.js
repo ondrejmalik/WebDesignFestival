@@ -38,6 +38,44 @@
     return tokens.every(tok => haystack.includes(tok));
   }
 
+  const DAY_ISO_MAP = { day1: '2026-07-10', day2: '2026-07-11', day3: '2026-07-12' };
+  const NEXT_DAY_ISO_MAP = { day1: '2026-07-11', day2: '2026-07-12', day3: '2026-07-13' };
+
+  function toIsoDateTime(dayKey, hmStr) {
+    const m = String(hmStr || '').trim().match(/^(\d{1,2}):(\d{2})$/);
+    if (!m) return '';
+    const h = parseInt(m[1], 10);
+    const min = m[2];
+    const baseDate = h < 8 ? NEXT_DAY_ISO_MAP[dayKey] : DAY_ISO_MAP[dayKey];
+    if (!baseDate) return '';
+    return `${baseDate}T${String(h).padStart(2, '0')}:${min}`;
+  }
+
+  function renderTimeTag(dayKey, hmStr, core) {
+    const clean = String(hmStr || '').trim();
+    const iso = toIsoDateTime(dayKey, clean);
+    const safeText = core ? core.escapeHtml(clean) : clean;
+    return iso ? `<time datetime="${iso}">${safeText}</time>` : safeText;
+  }
+
+  function renderTimeRangeHtml(dayKey, timeStr, core) {
+    const raw = String(timeStr || '').trim();
+    if (!raw) return '';
+    const sep = raw.includes('–') ? ' – ' : ' - ';
+    const parts = raw.split(/[–-]/).map(s => s.trim()).filter(Boolean);
+    if (parts.length === 0) return core ? core.escapeHtml(raw) : raw;
+    if (parts.length === 1) return renderTimeTag(dayKey, parts[0], core);
+    return `${renderTimeTag(dayKey, parts[0], core)}${sep}${renderTimeTag(dayKey, parts[1], core)}`;
+  }
+
+  function renderHourSlotHtml(dayKey, normHour) {
+    const startH = normHour >= 24 ? normHour - 24 : normHour;
+    const endH = (startH + 1) % 24;
+    const startStr = `${String(startH).padStart(2, '0')}:00`;
+    const endStr = `${String(endH).padStart(2, '0')}:00`;
+    return `${renderTimeTag(dayKey, startStr)} - ${renderTimeTag(dayKey, endStr)}`;
+  }
+
   // =========================================================================
   // 1. PROGRAM PAGE (60-set timetable, Day/Stage/Genre/Fav/Search filters)
   // =========================================================================
@@ -390,12 +428,6 @@
         return h < 8 ? h + 24 : h;
       }
 
-      function formatHourSlotLabel(normHour) {
-        const startH = normHour >= 24 ? normHour - 24 : normHour;
-        const endH = (startH + 1) % 24;
-        return `${String(startH).padStart(2, '0')}:00 - ${String(endH).padStart(2, '0')}:00`;
-      }
-
       const upNextByStage = new Set();
       if (festCtx.isLiveFestival) {
         ['solar', 'lunar'].forEach(sk => {
@@ -423,7 +455,7 @@
         return `
           <article class="fod-timetable-card ${stageCls} ${isFav ? 'is-saved' : ''} ${isLiveNow ? 'is-live-now' : ''} ${hlCls}" id="${p.id}" data-id="${p.id}">
             <div class="fod-timetable-card-top">
-              <span class="fod-slot-time">${core.escapeHtml(p.time)}</span>
+              <span class="fod-slot-time">${renderTimeRangeHtml(p.dayKey, p.time, core)}</span>
               ${statusPill}
               <span class="fod-stage-pill ${stageCls}">${core.escapeHtml(stageLabel)}</span>
             </div>
@@ -508,7 +540,7 @@
           `;
 
         const rowsHtml = buckets.map(bucket => {
-          const hourLabel = formatHourSlotLabel(bucket.normHour);
+          const hourLabel = renderHourSlotHtml(day.key, bucket.normHour);
 
           if (isSingleStage) {
             const stageItems = state.stage === 'lunar' ? bucket.lunar : bucket.solar;
@@ -919,7 +951,7 @@
             <h2 class="fod-card-title">
               <a href="artist-detail.html?id=${p.id}&from=artists#${p.id}">${core.escapeHtml(p.name)}</a>
             </h2>
-            <p class="fod-card-meta">${core.escapeHtml(p.genre)} · ${core.escapeHtml(dayShort)} · ${core.escapeHtml(p.time)}</p>
+            <p class="fod-card-meta">${core.escapeHtml(p.genre)} · ${core.escapeHtml(dayShort)} · ${renderTimeRangeHtml(p.dayKey, p.time, core)}</p>
             <p class="fod-card-bio">${core.escapeHtml(bio)}</p>
             <div class="fod-card-actions">
               <a href="artist-detail.html?id=${p.id}&from=artists#${p.id}" class="fod-btn fod-btn-secondary fod-btn-sm">
@@ -1122,7 +1154,7 @@
             <span class="fod-badge">${core.escapeHtml(artist.id.toUpperCase())}</span>
           </div>
           <h1 class="fod-detail-title">${core.escapeHtml(artist.name)}</h1>
-          <p class="fod-detail-sub">${core.escapeHtml(artist.genre)} · ${core.escapeHtml(dayLabel)} · ${core.escapeHtml(artist.time)}</p>
+          <p class="fod-detail-sub">${core.escapeHtml(artist.genre)} · ${core.escapeHtml(dayLabel)} · ${renderTimeRangeHtml(artist.dayKey, artist.time, core)}</p>
           <div class="fod-detail-cta-row">
             <button type="button" id="profile-star-btn" class="fod-btn ${isFav ? 'fod-btn-primary is-saved' : 'fod-btn-primary'}" aria-pressed="${isFav}">
               ${isFav ? (isCs ? '✓ Uloženo v Mém plánu' : '✓ Saved in My Schedule') : (isCs ? '★ Přidat do Mého plánu' : '★ Add to My Schedule')}
@@ -1156,7 +1188,7 @@
               </div>
               <div>
                 <dt>${isCs ? 'Čas' : 'Set Time'}</dt>
-                <dd>${core.escapeHtml(artist.time)}</dd>
+                <dd>${renderTimeRangeHtml(artist.dayKey, artist.time, core)}</dd>
               </div>
               <div>
                 <dt>${isCs ? 'Pódium' : 'Stage'}</dt>
@@ -1291,7 +1323,7 @@
             const isFav = favIds.has(p.id);
             return `
               <li class="fod-stage-mini-row">
-                <span class="fod-stage-mini-time">${core.escapeHtml(p.time)}</span>
+                <span class="fod-stage-mini-time">${renderTimeRangeHtml(p.dayKey, p.time, core)}</span>
                 <div class="fod-stage-mini-info">
                   <a href="artist-detail.html?id=${p.id}&from=stages#${p.id}" class="fod-stage-mini-artist">${core.escapeHtml(p.name)}</a>
                   <span class="fod-stage-mini-genre">${core.escapeHtml(p.genre)}</span>
@@ -2026,7 +2058,7 @@
                     return `
                       <article class="fod-plan-card ${hasCol ? 'has-collision' : ''}" id="${item.id}">
                         <div class="fod-card-top">
-                          <span class="fod-slot-time">${core.escapeHtml(item.time)}</span>
+                          <span class="fod-slot-time">${renderTimeRangeHtml(d.key, item.time, core)}</span>
                           <span class="fod-stage-pill ${stageKey === 'lunar' ? 'is-lunar' : 'is-solar'}">
                             <a href="stages.html#${stageHash}">${core.escapeHtml(item.stage)}</a>
                           </span>
@@ -2038,7 +2070,7 @@
                         ${bio ? `<p class="fod-card-bio">${core.escapeHtml(bio)}</p>` : ''}
                         <div class="fod-status-badge ${hasCol ? 'is-conflict' : 'is-clean'}">
                           ${hasCol
-                            ? `<strong>${isCs ? '⚠ ČASOVÁ KOLIZE' : '⚠ TIME CONFLICT'}</strong> — ${isCs ? 'Překrývá se s' : 'Overlaps with'} <strong>${core.escapeHtml(colliding.artist)}</strong> (${core.escapeHtml(colliding.stage)}, ${core.escapeHtml(colliding.time)})`
+                            ? `<strong>${isCs ? '⚠ ČASOVÁ KOLIZE' : '⚠ TIME CONFLICT'}</strong> — ${isCs ? 'Překrývá se s' : 'Overlaps with'} <strong>${core.escapeHtml(colliding.artist)}</strong> (${core.escapeHtml(colliding.stage)}, ${renderTimeRangeHtml(d.key, colliding.time, core)})`
                             : `<strong>${isCs ? '✓ Bez časové kolize' : '✓ No time conflict'}</strong>`
                           }
                         </div>
@@ -2321,7 +2353,7 @@
             <article class="fod-search-item">
               <div class="fod-search-item-main">
                 <h3><a href="artist-detail.html?id=${p.id}&from=search#${p.id}">${core.escapeHtml(p.name)}</a> <span class="fod-origin-pill">${core.escapeHtml(p.origin)}</span></h3>
-                <p class="fod-card-meta">${core.escapeHtml(p.genre)} · ${core.escapeHtml(p.stage)} · ${core.escapeHtml(p.time)}</p>
+                <p class="fod-card-meta">${core.escapeHtml(p.genre)} · ${core.escapeHtml(p.stage)} · ${renderTimeRangeHtml(p.dayKey, p.time, core)}</p>
                 <p>${core.escapeHtml(isCs ? p.bioCs : p.bioEn)}</p>
               </div>
               <div class="fod-search-item-actions">
@@ -2340,7 +2372,7 @@
         timeBox.innerHTML = matchedTimetable.slice(0, 10).map(p => `
           <div class="fod-search-item">
             <div class="fod-search-item-main">
-              <h3>${core.escapeHtml(p.stage)} - ${core.escapeHtml(isCs ? p.dayShortCs : p.dayShortEn)}, ${core.escapeHtml(p.time)}</h3>
+              <h3>${core.escapeHtml(p.stage)} - ${core.escapeHtml(isCs ? p.dayShortCs : p.dayShortEn)}, ${renderTimeRangeHtml(p.dayKey, p.time, core)}</h3>
               <p><strong>${core.escapeHtml(p.name)}</strong> - ${core.escapeHtml(p.genre)} (${core.escapeHtml(p.origin)})</p>
             </div>
             <div class="fod-search-item-actions">
