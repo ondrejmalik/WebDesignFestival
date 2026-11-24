@@ -176,8 +176,10 @@ async function runRootHubAudit({ browser, baseUrl, baseOrigin, errors, warnings,
       const title = (document.title || '').trim();
       const bodyText = document.body ? document.body.innerText.trim() : '';
       const h1Count = document.querySelectorAll('h1').length;
+      const isPromotedSite = Boolean(document.documentElement.getAttribute('data-design'));
 
-      const cardAnchors = Array.from(document.querySelectorAll('a.card, .card a'));
+      const linkSelector = isPromotedSite ? 'header a[href], nav a[href], footer a[href]' : 'a.card, .card a';
+      const cardAnchors = Array.from(document.querySelectorAll(linkSelector));
       const seen = new Set();
       const cards = [];
 
@@ -204,7 +206,16 @@ async function runRootHubAudit({ browser, baseUrl, baseOrigin, errors, warnings,
         });
       }
 
-      return { title, bodyLength: bodyText.length, h1Count, cards };
+      const brokenImages = Array.from(document.querySelectorAll('img'))
+        .filter((img) => {
+          const rect = img.getBoundingClientRect();
+          const style = window.getComputedStyle(img);
+          const visible = style.display !== 'none' && style.visibility !== 'hidden' && (rect.width > 0 || rect.height > 0);
+          return visible && (!img.complete || img.naturalWidth === 0);
+        })
+        .map((img) => img.getAttribute('src') || '');
+
+      return { title, bodyLength: bodyText.length, h1Count, isPromotedSite, cards, brokenImages };
     });
 
     if (!docMetrics.title) {
@@ -217,23 +228,29 @@ async function runRootHubAudit({ browser, baseUrl, baseOrigin, errors, warnings,
       warnings.push(`[${contextLabel}] Missing <h1> on root hub`);
     }
 
-    if (docMetrics.cards.length < 11) {
-      errors.push(
-        `[${contextLabel}] Expected at least 11 .card design links, found ${docMetrics.cards.length}`
-      );
-    }
+    if (docMetrics.isPromotedSite) {
+      for (const src of docMetrics.brokenImages) {
+        errors.push(`[${contextLabel}] Broken local visible <img>: ${src}`);
+      }
+    } else {
+      if (docMetrics.cards.length < 11) {
+        errors.push(
+          `[${contextLabel}] Expected at least 11 .card design links, found ${docMetrics.cards.length}`
+        );
+      }
 
-    for (let i = 1; i <= 11; i++) {
-      const prefix = String(i).padStart(2, '0');
-      const expectedPattern = new RegExp(`designs/${prefix}-[^/]+/(v2|web)/index\\.html`, 'i');
-      const match = docMetrics.cards.find(
-        (c) => expectedPattern.test(c.href) || expectedPattern.test(c.resolvedHref)
-      );
+      for (let i = 1; i <= 11; i++) {
+        const prefix = String(i).padStart(2, '0');
+        const expectedPattern = new RegExp(`designs/${prefix}-[^/]+/(v2|web)/index\\.html`, 'i');
+        const match = docMetrics.cards.find(
+          (c) => expectedPattern.test(c.href) || expectedPattern.test(c.resolvedHref)
+        );
 
-      if (!match) {
-        errors.push(`[${contextLabel}] Missing .card link for design #${prefix} (designs/${prefix}-*/v2/index.html)`);
-      } else if (!match.visible) {
-        errors.push(`[${contextLabel}] Design #${prefix} .card link is not visible (${match.href})`);
+        if (!match) {
+          errors.push(`[${contextLabel}] Missing .card link for design #${prefix} (designs/${prefix}-*/v2/index.html)`);
+        } else if (!match.visible) {
+          errors.push(`[${contextLabel}] Design #${prefix} .card link is not visible (${match.href})`);
+        }
       }
     }
 

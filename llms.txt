@@ -1,0 +1,14 @@
+# Festival of Darkness 2 (2026)
+
+> Three-day electronic, alternative, and audiovisual music festival in Kutná Hora, Czech Republic (July 10–12, 2026). 60 performers across 2 stages: Solar Horizon Stage (open-air, 4,500 capacity) and Lunar Forest Dome (covered 360-degree audiovisual dome, 1,800 capacity).
+
+## Key Pages
+- [Overview](index.html): Festival identity, dates, stages summary, headliners, and ticket tiers.
+- [Program](program.html): Complete 3-day chronological timetable (60 sets) with day, stage, genre, and covered-stage-tonight filters.
+- [Artists](artists.html): Filterable catalog of all 60 performers with search and direct links to artist detail pages.
+- [Artist Detail](artist-detail.html): Individual performer bio, genre, origin, stage, time slot, and personal schedule toggle.
+- [Stages & Grounds](stages.html): Detailed profiles and live previews of Solar Horizon Stage (open-air) and Lunar Forest Dome (covered rain shelter).
+- [Practical Info](practical-info.html): Transit from Kutná Hora hl.n. train station (free 7-min shuttle bus every 10–15 min from Bus Bay 1 and 1.8 km lit walking route), camping, cashless RFID system, and FAQ.
+- [My Schedule](my-schedule.html): Personal schedule saved in browser localStorage with automatic cross-stage time collision detection and .ics calendar export.
+- [Search](search.html): Instant client-side search across artists, timetable slots, stages, and practical information.
+- [Tickets & Passes](tickets.html): Festival passes (1-Day 1,090 CZK, 3-Day Full Pass 2,490 CZK, 3-Day Comfy+ 3,690 CZK), camping (490 CZK), parking, reduced ZTP/junior/senior rates, and client-side order planner.

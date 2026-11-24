@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225" width="400" height="225" role="img" aria-label="Lunar Forest Dome stage geometric backdrop">
+  <defs>
+    <radialGradient id="lunar-bg" cx="50%" cy="46%" r="65%">
+      <stop offset="0%" stop-color="#132e35"/>
+      <stop offset="55%" stop-color="#101b2e"/>
+      <stop offset="100%" stop-color="#0b0e19"/>
+    </radialGradient>
+    <radialGradient id="sub-core" cx="50%" cy="54%" r="36%">
+      <stop offset="0%" stop-color="#2ee6a6" stop-opacity="0.35"/>
+      <stop offset="55%" stop-color="#1ca7b8" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#101b2e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="225" fill="url(#lunar-bg)"/>
+  <circle cx="200" cy="122" r="128" fill="url(#sub-core)"/>
+  <g fill="none" stroke-linecap="round">
+    <circle cx="200" cy="122" r="22" stroke="#4ff5bd" stroke-opacity="0.7" stroke-width="1.4"/>
+    <circle cx="200" cy="122" r="40" stroke="#2dd4bf" stroke-opacity="0.5" stroke-width="1.1"/>
+    <circle cx="200" cy="122" r="60" stroke="#22b8cf" stroke-opacity="0.34" stroke-width="1"/>
+    <circle cx="200" cy="122" r="82" stroke="#3b82f6" stroke-opacity="0.24" stroke-width="0.9"/>
+  </g>
+  <g fill="none" stroke="#38d9a9" stroke-opacity="0.36" stroke-width="1">
+    <path d="M 62 192 A 138 138 0 0 1 338 192"/>
+    <polyline points="62,192 84,126 136,74 200,54 264,74 316,126 338,192"/>
+    <polyline points="84,126 146,112 200,96 254,112 316,126"/>
+    <polyline points="136,74 146,112 200,54 254,112 264,74"/>
+    <polyline points="62,192 146,112 128,176 200,148 272,176 254,112 338,192"/>
+    <line x1="200" y1="54" x2="200" y2="96"/>
+    <line x1="128" y1="176" x2="272" y2="176"/>
+  </g>
+  <g fill="#5ef2c2" fill-opacity="0.75">
+    <circle cx="200" cy="54" r="2"/>
+    <circle cx="136" cy="74" r="1.8"/>
+    <circle cx="264" cy="74" r="1.8"/>
+    <circle cx="84" cy="126" r="1.8"/>
+    <circle cx="316" cy="126" r="1.8"/>
+    <circle cx="146" cy="112" r="1.6"/>
+    <circle cx="254" cy="112" r="1.6"/>
+    <circle cx="200" cy="96" r="1.6"/>
+  </g>
+  <polygon points="0,225 0,164 24,182 42,150 66,188 92,168 118,192 282,192 308,168 334,188 358,150 376,182 400,164 400,225" fill="#090d16"/>
+  <line x1="48" y1="192" x2="352" y2="192" stroke="#2dd4bf" stroke-opacity="0.45" stroke-width="1.2"/>
+</svg>
