@@ -242,6 +242,7 @@
                 <strong id="fav-count">${favCount}</strong>
                 <span id="fod-prog-fav-label">${isCs ? 'uloženo v Mém plánu' : 'saved in My Schedule'}</span>
               </span>
+              <button type="button" id="fod-program-conflict-pill" class="fod-conflict-pill is-hidden" aria-controls="fod-program-conflict-slot"></button>
               <span class="fod-status-text" id="filter-status-text" aria-live="polite"></span>
             </div>
             <div class="fod-plan-summary-actions">
@@ -309,6 +310,7 @@
           </div>
         </div>
 
+        <div id="fod-program-conflict-slot" class="fod-program-conflict-slot is-hidden" aria-live="polite"></div>
         <div id="fod-stage-context-slot"></div>
         <div id="fod-program-days"></div>
       `;
@@ -329,6 +331,130 @@
         : (isCs ? 'Lunar Dome dnes večer (Kryté)' : 'Lunar Dome Tonight (Covered)');
     }
 
+    const CONFLICT_ICON_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>';
+
+    function formatCardConflictText(conflicts, isCs) {
+      if (!conflicts || !conflicts.length) return '';
+      const first = conflicts[0];
+      const firstArtist = first.artist || first.name || first.id;
+      const extra = conflicts.length - 1;
+      if (extra > 0) {
+        return isCs
+          ? `Kolize s ${firstArtist} (${first.time}) +${extra} další`
+          : `Overlaps with ${firstArtist} (${first.time}) +${extra} more`;
+      }
+      return isCs
+        ? `Kolize s ${firstArtist} (${first.time})`
+        : `Overlaps with ${firstArtist} (${first.time})`;
+    }
+
+    function renderCardConflictNoteHtml(conflicts, isCs) {
+      if (!conflicts || !conflicts.length) return '';
+      const heading = isCs ? 'Časová kolize:' : 'Time conflict:';
+      return `<div class="fod-card-conflict-note">${CONFLICT_ICON_SVG}<span><strong>${heading}</strong> ${core.escapeHtml(formatCardConflictText(conflicts, isCs))}</span></div>`;
+    }
+
+    function syncProgramConflictUi(collisionsArg) {
+      const isCs = core.getLang() === 'cs';
+      const collisions = collisionsArg || (typeof core.computeScheduleCollisions === 'function'
+        ? core.computeScheduleCollisions(core.getFavorites())
+        : { total: 0, pairs: [], byId: new Map() });
+      const pill = document.getElementById('fod-program-conflict-pill');
+      const slot = document.getElementById('fod-program-conflict-slot');
+
+      if (pill) {
+        if (collisions.total > 0) {
+          const pillLabel = isCs
+            ? core.formatCzPlural(collisions.total, 'kolize', 'kolize', 'kolizí')
+            : (collisions.total === 1 ? '1 conflict' : `${collisions.total} conflicts`);
+          pill.innerHTML = `${CONFLICT_ICON_SVG}<span>${core.escapeHtml(pillLabel)}</span>`;
+          pill.classList.remove('is-hidden');
+        } else {
+          pill.classList.add('is-hidden');
+          pill.innerHTML = '';
+        }
+      }
+
+      if (slot) {
+        if (collisions.total === 0) {
+          slot.classList.add('is-hidden');
+          if (slot.innerHTML !== '') slot.innerHTML = '';
+          return;
+        }
+        const dayLookup = new Map(data.DAYS.map(d => [d.key, d]));
+        const headingText = isCs
+          ? `${core.formatCzPlural(collisions.total, 'časová kolize', 'časové kolize', 'časových kolizí')} ve vašem plánu`
+          : `${collisions.total === 1 ? '1 time conflict' : `${collisions.total} time conflicts`} in your schedule`;
+        const maxShown = 3;
+        const shownPairs = collisions.pairs.slice(0, maxShown);
+        const remaining = collisions.pairs.length - shownPairs.length;
+
+        const pairsHtml = shownPairs.map(pair => {
+          const dayObj = dayLookup.get(pair.dayKey);
+          const dayShort = dayObj ? (isCs ? dayObj.shortCs : dayObj.shortEn) : pair.dayKey;
+          const aName = pair.a.artist || pair.a.name || pair.a.id;
+          const bName = pair.b.artist || pair.b.name || pair.b.id;
+          return `
+            <li class="fod-conflict-pair-item">
+              <div class="fod-conflict-pair-text">
+                <span class="fod-conflict-pair-day">${core.escapeHtml(dayShort)}</span>
+                <span><strong>${core.escapeHtml(aName)}</strong> (${core.escapeHtml(pair.a.time)}) vs <strong>${core.escapeHtml(bName)}</strong> (${core.escapeHtml(pair.b.time)})</span>
+              </div>
+              <button type="button" class="fod-conflict-jump-btn" data-jump-perf="${core.escapeHtml(pair.b.id)}">
+                ${isCs ? 'Zobrazit v programu' : 'Show in Program'}
+              </button>
+            </li>
+          `;
+        }).join('');
+
+        const moreHtml = remaining > 0
+          ? `<p class="fod-conflict-more-note">${isCs
+              ? `+ ${core.formatCzPlural(remaining, 'další kolize', 'další kolize', 'dalších kolizí')} v Mém plánu`
+              : `+ ${remaining} more ${remaining === 1 ? 'conflict' : 'conflicts'} in My Schedule`}</p>`
+          : '';
+
+        slot.classList.remove('is-hidden');
+        slot.innerHTML = `
+          <div class="fod-program-conflict-banner" role="alert">
+            <div class="fod-conflict-banner-head">
+              <p class="fod-conflict-banner-title">${CONFLICT_ICON_SVG}<span>${core.escapeHtml(headingText)}</span></p>
+              <a href="my-schedule.html" class="fod-conflict-banner-link">${isCs ? 'Vyřešit v Mém plánu' : 'Resolve in My Schedule'}</a>
+            </div>
+            <ul class="fod-conflict-pair-list">${pairsHtml}</ul>
+            ${moreHtml}
+          </div>
+        `;
+      }
+    }
+
+    function focusPerformerCard(perfId) {
+      if (!perfId) return;
+      let el = document.getElementById(perfId);
+      if (!el || state.stage !== 'all') {
+        const perf = data.PERFORMERS.find(p => p.id === perfId);
+        if (perf) {
+          state.stage = 'all';
+          state.genre = 'all';
+          state.timeWindow = 'all';
+          state.query = '';
+          state.onlyFavs = false;
+          if (state.day !== 'all' && state.day !== perf.dayKey) {
+            state.day = perf.dayKey;
+          }
+          syncProgramUrl();
+          renderShell();
+          el = document.getElementById(perfId);
+        }
+      }
+      if (!el) return;
+      const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      el.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
+      el.classList.remove('is-conflict-focus');
+      void el.offsetWidth;
+      el.classList.add('is-conflict-focus');
+      setTimeout(() => el.classList.remove('is-conflict-focus'), 1800);
+    }
+
     function renderDays() {
       const daysContainer = document.getElementById('fod-program-days');
       const contextSlot = document.getElementById('fod-stage-context-slot');
@@ -336,8 +462,13 @@
       if (!daysContainer) return;
 
       const isCs = core.getLang() === 'cs';
-      const favIds = new Set(core.getFavorites().map(f => f.id));
+      const favs = core.getFavorites();
+      const favIds = new Set(favs.map(f => f.id));
+      const collisions = typeof core.computeScheduleCollisions === 'function'
+        ? core.computeScheduleCollisions(favs)
+        : { total: 0, pairs: [], byId: new Map() };
       const matched = getFilteredPerformers();
+      syncProgramConflictUi(collisions);
 
       if (contextSlot) {
         if (state.stage === 'lunar') {
@@ -440,6 +571,8 @@
 
       function renderPerformerCard(p) {
         const isFav = favIds.has(p.id);
+        const cardConflicts = isFav ? (collisions.byId.get(p.id) || []) : [];
+        const hasCol = cardConflicts.length > 0;
         const stageCls = p.stageKey === 'lunar' ? 'is-lunar' : 'is-solar';
         const hlCls = state.highlightId === p.id ? 'spot-highlight' : '';
         const bounds = parseSlotBounds(p.time, core);
@@ -453,7 +586,7 @@
           : (isCs ? 'Solar Horizon (Venkovní)' : 'Solar Horizon (Open-air)');
 
         return `
-          <article class="fod-timetable-card ${stageCls} ${isFav ? 'is-saved' : ''} ${isLiveNow ? 'is-live-now' : ''} ${hlCls}" id="${p.id}" data-id="${p.id}">
+          <article class="fod-timetable-card ${stageCls} ${isFav ? 'is-saved' : ''} ${hasCol ? 'has-collision' : ''} ${isLiveNow ? 'is-live-now' : ''} ${hlCls}" id="${p.id}" data-id="${p.id}"${hasCol ? ' data-conflict="true"' : ''}>
             <div class="fod-timetable-card-top">
               <span class="fod-slot-time">${renderTimeRangeHtml(p.dayKey, p.time, core)}</span>
               ${statusPill}
@@ -468,6 +601,7 @@
                 <span class="fod-slot-genre">${core.escapeHtml(p.genre)}</span>
               </div>
             </div>
+            <div class="fod-card-conflict-slot">${renderCardConflictNoteHtml(cardConflicts, isCs)}</div>
             <div class="fod-slot-actions">
               <a href="artist-detail.html?id=${p.id}&from=program#${p.id}" class="fod-btn fod-btn-ghost fod-btn-sm">
                 ${isCs ? 'Detail' : 'Details'}<span class="fod-sr-only"> (${core.escapeHtml(p.name)})</span>
@@ -734,14 +868,35 @@
 
     function syncFavoriteCardStates() {
       const isCs = core.getLang() === 'cs';
-      const favIds = new Set(core.getFavorites().map(f => f.id));
+      const favs = core.getFavorites();
+      const favIds = new Set(favs.map(f => f.id));
+      const collisions = typeof core.computeScheduleCollisions === 'function'
+        ? core.computeScheduleCollisions(favs)
+        : { total: 0, pairs: [], byId: new Map() };
       const fc = document.getElementById('fav-count');
       if (fc) fc.textContent = String(favIds.size);
+
+      syncProgramConflictUi(collisions);
 
       root.querySelectorAll('.fod-timetable-card[data-id]').forEach(card => {
         const id = card.getAttribute('data-id');
         const isFav = favIds.has(id);
+        const cardConflicts = isFav ? (collisions.byId.get(id) || []) : [];
+        const hasCol = cardConflicts.length > 0;
+
         card.classList.toggle('is-saved', isFav);
+        card.classList.toggle('has-collision', hasCol);
+        if (hasCol) card.setAttribute('data-conflict', 'true');
+        else card.removeAttribute('data-conflict');
+
+        const noteSlot = card.querySelector('.fod-card-conflict-slot');
+        if (noteSlot) {
+          const nextHtml = renderCardConflictNoteHtml(cardConflicts, isCs);
+          if (noteSlot.innerHTML !== nextHtml) {
+            noteSlot.innerHTML = nextHtml;
+          }
+        }
+
         const btn = card.querySelector('.fav-toggle-btn[data-perf-id]');
         if (btn) {
           btn.classList.toggle('is-saved', isFav);
@@ -754,6 +909,23 @@
     }
 
     root.addEventListener('click', e => {
+      const jumpBtn = e.target && e.target.closest && e.target.closest('[data-jump-perf]');
+      if (jumpBtn) {
+        const targetId = jumpBtn.getAttribute('data-jump-perf');
+        if (targetId) focusPerformerCard(targetId);
+        return;
+      }
+
+      const conflictPill = e.target && e.target.closest && e.target.closest('#fod-program-conflict-pill');
+      if (conflictPill) {
+        const target = document.getElementById('fod-program-conflict-slot') || root.querySelector('.fod-timetable-card.has-collision');
+        if (target && !target.classList.contains('is-hidden')) {
+          const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
+        }
+        return;
+      }
+
       const btn = e.target && e.target.closest && e.target.closest('.fav-toggle-btn[data-perf-id]');
       if (!btn) return;
       const id = btn.getAttribute('data-perf-id');
@@ -2036,6 +2208,9 @@
     }
 
     function computeCollisions(favs) {
+      if (typeof core.computeScheduleCollisions === 'function') {
+        return core.computeScheduleCollisions(favs);
+      }
       let total = 0;
       const byId = new Map();
       data.DAYS.forEach(d => {
@@ -2046,8 +2221,10 @@
             const b = dayFavs[j];
             if (core.normalizeStageKey(a.stage) !== core.normalizeStageKey(b.stage) && core.isOverlapping(a.time, b.time)) {
               total++;
-              byId.set(a.id, b);
-              byId.set(b.id, a);
+              if (!byId.has(a.id)) byId.set(a.id, []);
+              if (!byId.has(b.id)) byId.set(b.id, []);
+              byId.get(a.id).push(b);
+              byId.get(b.id).push(a);
             }
           }
         }
@@ -2172,14 +2349,18 @@
                 <div class="fod-cards-grid">
                   ${dayFavs.map(item => {
                     const p = data.PERFORMERS.find(x => x.id === item.id) || {};
-                    const colliding = collisionMap.get(item.id);
-                    const hasCol = !!colliding;
+                    const collidingRaw = collisionMap.get(item.id);
+                    const collidingList = Array.isArray(collidingRaw) ? collidingRaw : (collidingRaw ? [collidingRaw] : []);
+                    const hasCol = collidingList.length > 0;
+                    const collidingSummaryHtml = collidingList.map(c =>
+                      `<strong>${core.escapeHtml(c.artist)}</strong> (${core.escapeHtml(c.stage)}, ${renderTimeRangeHtml(d.key, c.time, core)})`
+                    ).join(', ');
                     const stageKey = core.normalizeStageKey(item.stage);
                     const stageHash = stageKey === 'lunar' ? 'stage-lunar' : 'stage-solar';
                     const bio = isCs ? (p.bioCs || '') : (p.bioEn || '');
 
                     return `
-                      <article class="fod-plan-card ${hasCol ? 'has-collision' : ''}" id="${item.id}">
+                      <article class="fod-plan-card ${hasCol ? 'has-collision' : ''}" id="${item.id}"${hasCol ? ' data-conflict="true"' : ''}>
                         <div class="fod-card-top">
                           <span class="fod-slot-time">${renderTimeRangeHtml(d.key, item.time, core)}</span>
                           <span class="fod-stage-pill ${stageKey === 'lunar' ? 'is-lunar' : 'is-solar'}">
@@ -2193,7 +2374,7 @@
                         ${bio ? `<p class="fod-card-bio">${core.escapeHtml(bio)}</p>` : ''}
                         <div class="fod-status-badge ${hasCol ? 'is-conflict' : 'is-clean'}">
                           ${hasCol
-                            ? `<strong>${isCs ? '⚠ ČASOVÁ KOLIZE' : '⚠ TIME CONFLICT'}</strong> — ${isCs ? 'Překrývá se s' : 'Overlaps with'} <strong>${core.escapeHtml(colliding.artist)}</strong> (${core.escapeHtml(colliding.stage)}, ${renderTimeRangeHtml(d.key, colliding.time, core)})`
+                            ? `<strong>${isCs ? '⚠ ČASOVÁ KOLIZE' : '⚠ TIME CONFLICT'}</strong>: ${isCs ? 'Překrývá se s' : 'Overlaps with'} ${collidingSummaryHtml}`
                             : `<strong>${isCs ? '✓ Bez časové kolize' : '✓ No time conflict'}</strong>`
                           }
                         </div>

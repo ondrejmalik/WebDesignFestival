@@ -397,7 +397,7 @@
     }
   }
 
-  function saveFavorites(items) {
+  function saveFavorites(items, meta) {
     const seen = new Set();
     const clean = [];
     (items || []).forEach(it => {
@@ -412,7 +412,9 @@
     } catch (e) {}
     updateAllFavBadges(clean.length);
     try {
-      window.dispatchEvent(new CustomEvent('favoritesUpdated', { detail: { count: clean.length } }));
+      window.dispatchEvent(new CustomEvent('favoritesUpdated', {
+        detail: Object.assign({ count: clean.length }, meta || {})
+      }));
     } catch (e) {}
     return clean;
   }
@@ -434,12 +436,36 @@
         added = true;
       }
     }
-    saveFavorites(favs);
+    const conflicts = added ? getCollisionsForItem(id, favs) : [];
+    saveFavorites(favs, { lastToggledId: id, added, conflicts });
     const cat = getCatalogMap()[id];
     const name = cat ? cat.name : id;
-    showToast(added
-      ? t(`Added ${name} to My Schedule`, `${name} přidáno do Mého plánu`)
-      : t(`Removed ${name} from My Schedule`, `${name} odebráno z Mého plánu`));
+
+    if (added && conflicts.length > 0) {
+      const first = conflicts[0];
+      const firstArtist = first.artist || first.name || first.id;
+      const extra = conflicts.length - 1;
+      const msg = extra === 0
+        ? t(
+            `Time conflict: ${name} overlaps with ${firstArtist} (${first.time})`,
+            `Časová kolize: ${name} se překrývá s ${firstArtist} (${first.time})`
+          )
+        : t(
+            `Time conflict: ${name} overlaps with ${firstArtist} (${first.time}) and ${extra} more`,
+            `Časová kolize: ${name} se překrývá s ${firstArtist} (${first.time}) a ${formatCzPlural(extra, 'dalším setem', 'dalšími sety', 'dalšími sety')}`
+          );
+      showToast(msg, {
+        variant: 'conflict',
+        duration: 6000,
+        action: getCurrentPage() === 'my-schedule.html'
+          ? null
+          : { label: t('My Schedule', 'Můj plán'), href: 'my-schedule.html' }
+      });
+    } else {
+      showToast(added
+        ? t(`Added ${name} to My Schedule`, `${name} přidáno do Mého plánu`)
+        : t(`Removed ${name} from My Schedule`, `${name} odebráno z Mého plánu`));
+    }
     return added;
   }
 
@@ -568,6 +594,96 @@
     return 'day1';
   }
 
+  function getStartMinutes(item) {
+    if (!item || !item.time) return 0;
+    const startStr = String(item.time).split(/[–-]/)[0];
+    return timeToMinutes(startStr);
+  }
+
+  function getCollisionsForItem(itemOrId, favoritesList) {
+    const list = Array.isArray(favoritesList) ? favoritesList : getFavorites();
+    const target = typeof itemOrId === 'string'
+      ? (list.find(f => f && f.id === itemOrId) || enrichFavorite(itemOrId))
+      : enrichFavorite(itemOrId);
+    if (!target || !target.id || !target.time) return [];
+
+    const targetDay = normalizeDayKey(target);
+    const targetStage = normalizeStageKey(target.stage);
+    const seen = new Set();
+    const conflicts = [];
+
+    list.forEach(raw => {
+      const other = enrichFavorite(raw);
+      if (!other || !other.id || other.id === target.id || seen.has(other.id)) return;
+      if (normalizeDayKey(other) !== targetDay) return;
+      if (normalizeStageKey(other.stage) === targetStage) return;
+      if (!isOverlapping(target.time, other.time)) return;
+      seen.add(other.id);
+      conflicts.push(other);
+    });
+
+    conflicts.sort((a, b) => getStartMinutes(a) - getStartMinutes(b));
+    return conflicts;
+  }
+
+  function computeScheduleCollisions(favoritesList) {
+    const rawList = Array.isArray(favoritesList) ? favoritesList : getFavorites();
+    const seenIds = new Set();
+    const items = [];
+    rawList.forEach(raw => {
+      const enr = enrichFavorite(raw);
+      if (enr && enr.id && !seenIds.has(enr.id)) {
+        seenIds.add(enr.id);
+        items.push(enr);
+      }
+    });
+
+    const pairs = [];
+    const byIdSets = new Map();
+
+    for (let i = 0; i < items.length; i++) {
+      const a = items[i];
+      if (!a.time) continue;
+      const dayA = normalizeDayKey(a);
+      const stageA = normalizeStageKey(a.stage);
+
+      for (let j = i + 1; j < items.length; j++) {
+        const b = items[j];
+        if (!b.time || a.id === b.id) continue;
+        if (normalizeDayKey(b) !== dayA) continue;
+        if (normalizeStageKey(b.stage) === stageA) continue;
+        if (!isOverlapping(a.time, b.time)) continue;
+
+        const ordered = getStartMinutes(a) <= getStartMinutes(b) ? [a, b] : [b, a];
+        pairs.push({ dayKey: dayA, a: ordered[0], b: ordered[1] });
+
+        if (!byIdSets.has(a.id)) byIdSets.set(a.id, new Map());
+        if (!byIdSets.has(b.id)) byIdSets.set(b.id, new Map());
+        byIdSets.get(a.id).set(b.id, b);
+        byIdSets.get(b.id).set(a.id, a);
+      }
+    }
+
+    pairs.sort((p1, p2) => {
+      if (p1.dayKey !== p2.dayKey) return p1.dayKey.localeCompare(p2.dayKey);
+      const diffA = getStartMinutes(p1.a) - getStartMinutes(p2.a);
+      if (diffA !== 0) return diffA;
+      return getStartMinutes(p1.b) - getStartMinutes(p2.b);
+    });
+
+    const byId = new Map();
+    byIdSets.forEach((map, id) => {
+      const sorted = Array.from(map.values()).sort((x, y) => getStartMinutes(x) - getStartMinutes(y));
+      byId.set(id, sorted);
+    });
+
+    return {
+      total: pairs.length,
+      pairs,
+      byId
+    };
+  }
+
   function normalizeStr(str) {
     return String(str || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
   }
@@ -594,21 +710,87 @@
   // TOAST FEEDBACK
   // =========================================================================
   let toastTimer = null;
-  function showToast(msg) {
+  let toastDuration = 2600;
+  let toastPaused = false;
+
+  function hideToast() {
+    clearTimeout(toastTimer);
+    toastTimer = null;
+    toastPaused = false;
+    const el = document.getElementById('fod-toast');
+    if (el) el.classList.remove('is-visible');
+  }
+
+  function scheduleToastHide(duration) {
+    clearTimeout(toastTimer);
+    if (toastPaused) return;
+    toastTimer = setTimeout(hideToast, duration);
+  }
+
+  function showToast(msg, opts) {
     if (!document.body) return;
+    const options = opts && typeof opts === 'object' ? opts : {};
+    const isConflict = options.variant === 'conflict';
+    const duration = typeof options.duration === 'number' && options.duration > 0
+      ? options.duration
+      : (isConflict ? 6000 : 2600);
+    const action = options.action && options.action.label && options.action.href ? options.action : null;
+
     let el = document.getElementById('fod-toast');
     if (!el) {
       el = document.createElement('div');
       el.id = 'fod-toast';
       el.className = 'fod-toast';
-      el.setAttribute('role', 'status');
-      el.setAttribute('aria-live', 'polite');
+      el.addEventListener('mouseenter', () => {
+        toastPaused = true;
+        clearTimeout(toastTimer);
+      });
+      el.addEventListener('focusin', () => {
+        toastPaused = true;
+        clearTimeout(toastTimer);
+      });
+      el.addEventListener('mouseleave', () => {
+        toastPaused = false;
+        if (el.classList.contains('is-visible')) {
+          scheduleToastHide(toastDuration);
+        }
+      });
+      el.addEventListener('focusout', e => {
+        if (!el.contains(e.relatedTarget)) {
+          toastPaused = false;
+          if (el.classList.contains('is-visible')) {
+            scheduleToastHide(toastDuration);
+          }
+        }
+      });
+      el.addEventListener('click', e => {
+        if (e.target && e.target.closest && e.target.closest('.fod-toast-close')) {
+          hideToast();
+        }
+      });
       document.body.appendChild(el);
     }
-    el.textContent = msg;
+
+    el.classList.toggle('is-conflict', isConflict);
+    el.setAttribute('role', isConflict ? 'alert' : 'status');
+    el.setAttribute('aria-live', isConflict ? 'assertive' : 'polite');
+
+    if (isConflict) {
+      const iconHtml = '<svg class="fod-toast-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>';
+      const msgHtml = `<span class="fod-toast-msg">${escapeHtml(msg)}</span>`;
+      const actionHtml = action
+        ? `<a class="fod-toast-action" href="${escapeHtml(action.href)}">${escapeHtml(action.label)}</a>`
+        : '';
+      const closeHtml = `<button type="button" class="fod-toast-close" aria-label="${escapeHtml(t('Dismiss notification', 'Zavřít upozornění'))}">&times;</button>`;
+      el.innerHTML = `<span class="fod-toast-body">${iconHtml}${msgHtml}</span><span class="fod-toast-actions">${actionHtml}${closeHtml}</span>`;
+    } else {
+      el.textContent = msg;
+    }
+
+    toastDuration = duration;
+    toastPaused = false;
     el.classList.add('is-visible');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => el.classList.remove('is-visible'), 2600);
+    scheduleToastHide(duration);
   }
 
   // =========================================================================
@@ -1031,6 +1213,8 @@
     isOverlapping,
     normalizeStageKey,
     normalizeDayKey,
+    getCollisionsForItem,
+    computeScheduleCollisions,
     normalizeStr,
     matchesGenreFilter,
     escapeHtml,

@@ -1672,3 +1672,241 @@ html[data-design="04-eventbrite"] .stage-card-link {
     min-width: 44px;
   }
 }
+
+/* =========================================================================
+   DESIGN 04-EVENTBRITE: PROGRAM CONFLICT NOTIFICATIONS (LIGHT & DARK)
+   ========================================================================= */
+html[data-design="04-eventbrite"][data-theme="light"] .fod-toast.is-conflict {
+  background-color: #fff5f5;
+  color: #991b1b;
+  border-color: #dc2626;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-toast-icon {
+  color: #dc2626;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-toast-action,
+html[data-design="04-eventbrite"][data-theme="light"] .fod-conflict-banner-link {
+  background-color: #b91c1c;
+  border-color: #b91c1c;
+  color: #ffffff;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-toast-action:hover,
+html[data-design="04-eventbrite"][data-theme="light"] .fod-conflict-banner-link:hover {
+  background-color: #991b1b;
+  border-color: #991b1b;
+  color: #ffffff;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-toast-close {
+  color: #991b1b;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-conflict-pill {
+  background-color: #fff5f5;
+  border-color: #dc2626;
+  color: #991b1b;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-conflict-pill:hover {
+  background-color: #fee2e2;
+  border-color: #b91c1c;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-program-conflict-banner {
+  background-color: #fff5f5;
+  border-color: #fca5a5;
+  border-left-color: #dc2626;
+  color: #991b1b;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-conflict-banner-title,
+html[data-design="04-eventbrite"][data-theme="light"] .fod-conflict-more-note {
+  color: #991b1b;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-conflict-pair-item {
+  background-color: #ffffff;
+  border-color: #fecaca;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-conflict-pair-text {
+  color: #7f1d1d;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-conflict-pair-day {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-conflict-jump-btn {
+  background-color: #ffffff;
+  border-color: #dc2626;
+  color: #991b1b;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-conflict-jump-btn:hover {
+  background-color: #b91c1c;
+  border-color: #b91c1c;
+  color: #ffffff;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-timetable-card.has-collision,
+html[data-design="04-eventbrite"][data-theme="light"] .fod-timetable-card.is-saved.has-collision {
+  background-color: #fff5f5;
+  border-color: #dc2626;
+  border-left-color: #dc2626;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-card-conflict-note {
+  background-color: #fef2f2;
+  border-color: #fecaca;
+  color: #991b1b;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-card-conflict-note svg {
+  color: #dc2626;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-toast.is-conflict {
+  background-color: #2b1417;
+  color: #fee2e2;
+  border-color: #f87171;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55);
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-toast-icon {
+  color: #f87171;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-toast-action,
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-conflict-banner-link {
+  background-color: #b91c1c;
+  border-color: #f87171;
+  color: #ffffff;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-toast-action:hover,
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-conflict-banner-link:hover {
+  background-color: #dc2626;
+  border-color: #fca5a5;
+  color: #ffffff;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-toast-close {
+  color: #fee2e2;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-toast-close:hover {
+  background-color: rgba(248, 113, 113, 0.18);
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-toast-action:focus-visible,
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-toast-close:focus-visible,
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-conflict-pill:focus-visible,
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-conflict-banner-link:focus-visible,
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-conflict-jump-btn:focus-visible {
+  outline-color: #fca5a5;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-conflict-pill {
+  background-color: #2b1417;
+  border-color: #f87171;
+  color: #fee2e2;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-conflict-pill:hover {
+  background-color: #3f1a1f;
+  border-color: #fca5a5;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-program-conflict-banner {
+  background-color: #2b1417;
+  border-color: #7f1d1d;
+  border-left-color: #f87171;
+  color: #fee2e2;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-conflict-banner-title,
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-conflict-more-note {
+  color: #fee2e2;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-conflict-pair-item {
+  background-color: #1f1114;
+  border-color: #7f1d1d;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-conflict-pair-text {
+  color: #fecaca;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-conflict-pair-day {
+  background-color: #451a1f;
+  color: #fecaca;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-conflict-jump-btn {
+  background-color: #2b1417;
+  border-color: #f87171;
+  color: #fee2e2;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-conflict-jump-btn:hover {
+  background-color: #b91c1c;
+  border-color: #fca5a5;
+  color: #ffffff;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-timetable-card.has-collision,
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-timetable-card.is-saved.has-collision {
+  background-color: #261418;
+  border-color: #f87171;
+  border-left-color: #f87171;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-card-conflict-note {
+  background-color: #33181c;
+  border-color: #7f1d1d;
+  color: #fecaca;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-card-conflict-note svg {
+  color: #f87171;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-timetable-card.is-conflict-focus {
+  outline-color: #f87171;
+}
+
+@media (max-width: 480px) {
+  html[data-design="04-eventbrite"] .fod-program-conflict-banner {
+    padding: 10px 12px;
+  }
+
+  html[data-design="04-eventbrite"] .fod-conflict-pair-item {
+    padding: 8px;
+  }
+
+  html[data-design="04-eventbrite"] .fod-toast.is-conflict {
+    padding: 10px 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-design="04-eventbrite"] .fod-toast,
+  html[data-design="04-eventbrite"] .fod-conflict-pill,
+  html[data-design="04-eventbrite"] .fod-conflict-banner-link,
+  html[data-design="04-eventbrite"] .fod-conflict-jump-btn,
+  html[data-design="04-eventbrite"] .fod-toast-action,
+  html[data-design="04-eventbrite"] .fod-toast-close {
+    transition: none;
+  }
+
+  html[data-design="04-eventbrite"][data-theme="dark"] .fod-timetable-card.is-conflict-focus {
+    animation: none;
+    box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.45);
+  }
+}
