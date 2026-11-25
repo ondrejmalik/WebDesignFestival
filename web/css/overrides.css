@@ -1499,9 +1499,85 @@ html[data-design="04-eventbrite"] .fod-map-scroll {
    Cross-Review Readiness: Contrast-Safe Scroll, Touch Targets, Desktop Nav
    ========================================================================= */
 
-/* Tasteful, contrast-safe Sunder C60 HE scroll reveals:
-   Uses GPU transform transitions (never opacity: 0.01) so below-the-fold
-   sections glide smoothly into place without flashing or axe-core contrast traps. */
+/* =========================================================================
+   Hero Text Entrance (t3.codes-style staggered rise) + Contrast-Safe Sunder Scroll Reveals
+   ========================================================================= */
+
+@keyframes fodHeroRise {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fodHeroMediaSettle {
+  0% {
+    transform: scale(1.045);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Landing page hero staggered text entrance (no inline style="" needed) */
+html[data-design="04-eventbrite"] .eb-main .eb-hero-img {
+  animation: fodHeroMediaSettle 1.15s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+html[data-design="04-eventbrite"] .eb-main .eb-hero-kicker,
+html[data-design="04-eventbrite"] .eb-main .eb-hero-title,
+html[data-design="04-eventbrite"] .eb-main .eb-hero-date,
+html[data-design="04-eventbrite"] .eb-main .eb-hero-subtitle,
+html[data-design="04-eventbrite"] .eb-main .eb-hero-actions {
+  animation: fodHeroRise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+html[data-design="04-eventbrite"] .eb-main .eb-hero-kicker {
+  animation-delay: 0ms;
+}
+
+html[data-design="04-eventbrite"] .eb-main .eb-hero-title {
+  animation-delay: 90ms;
+}
+
+html[data-design="04-eventbrite"] .eb-main .eb-hero-date {
+  animation-delay: 180ms;
+}
+
+html[data-design="04-eventbrite"] .eb-main .eb-hero-subtitle {
+  animation-delay: 280ms;
+}
+
+html[data-design="04-eventbrite"] .eb-main .eb-hero-actions {
+  animation-delay: 380ms;
+}
+
+/* Subpage hero staggered text entrance */
+html[data-design="04-eventbrite"] .eb-program-hero .hero-meta,
+html[data-design="04-eventbrite"] .eb-program-hero .eb-page-title,
+html[data-design="04-eventbrite"] .eb-program-hero .eb-page-subtitle {
+  animation: fodHeroRise 0.58s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+html[data-design="04-eventbrite"] .eb-program-hero .hero-meta {
+  animation-delay: 0ms;
+}
+
+html[data-design="04-eventbrite"] .eb-program-hero .eb-page-title {
+  animation-delay: 75ms;
+}
+
+html[data-design="04-eventbrite"] .eb-program-hero .eb-page-subtitle {
+  animation-delay: 150ms;
+}
+
+/* Tasteful, contrast-safe Sunder scroll reveals below the fold:
+   Uses GPU transform transitions (never opacity: 0.01) with the same easing curve
+   so below-the-fold sections glide smoothly without flashing or axe-core contrast traps. */
 html[data-design="04-eventbrite"] .scroll-trigger,
 html[data-design="04-eventbrite"] .scroll-trigger.animate--fade-in,
 html[data-design="04-eventbrite"] .scroll-trigger.animate--slide-in,
@@ -1511,17 +1587,17 @@ html[data-design="04-eventbrite"] .scroll-trigger.animate--slide-in.animate--sub
 }
 
 html[data-design="04-eventbrite"] .scroll-trigger.animate--slide-in:not(.scroll-trigger--cancel):not(.sunder-settled) {
-  transition: transform 0.52s cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: calc(var(--animation-order, 0) * 45ms);
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--animation-order, 0) * 55ms);
 }
 
 html[data-design="04-eventbrite"] .scroll-trigger.animate--slide-in.animate--subtle:not(.scroll-trigger--cancel):not(.sunder-settled) {
-  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: calc(var(--animation-order, 0) * 30ms);
+  transition: transform 0.42s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--animation-order, 0) * 35ms);
 }
 
 html[data-design="04-eventbrite"] .scroll-trigger.animate--slide-in.scroll-trigger--offscreen {
-  transform: translateY(22px) scale(0.986);
+  transform: translateY(20px) scale(0.988);
 }
 
 html[data-design="04-eventbrite"] .scroll-trigger.animate--slide-in.animate--subtle.scroll-trigger--offscreen {
@@ -1533,7 +1609,7 @@ html[data-design="04-eventbrite"] .scroll-trigger.animate--fade-in.scroll-trigge
 }
 
 html[data-design="04-eventbrite"] .scroll-trigger.animate--fade-in:not(.scroll-trigger--cancel):not(.sunder-settled) {
-  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 @media (max-width: 768px) {
@@ -1544,7 +1620,7 @@ html[data-design="04-eventbrite"] .scroll-trigger.animate--fade-in:not(.scroll-t
   /* Keep dense 60-item mobile lists snappy with minimal lift and zero stagger lag */
   html[data-design="04-eventbrite"] .fod-artist-card.scroll-trigger:not(.scroll-trigger--cancel):not(.sunder-settled),
   html[data-design="04-eventbrite"] .fod-timetable-card.scroll-trigger:not(.scroll-trigger--cancel):not(.sunder-settled) {
-    transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.26s cubic-bezier(0.2, 0.7, 0.2, 1);
     transition-delay: 0ms;
   }
 
@@ -1555,10 +1631,21 @@ html[data-design="04-eventbrite"] .scroll-trigger.animate--fade-in:not(.scroll-t
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html[data-design="04-eventbrite"] .eb-main .eb-hero-img,
+  html[data-design="04-eventbrite"] .eb-main .eb-hero-kicker,
+  html[data-design="04-eventbrite"] .eb-main .eb-hero-title,
+  html[data-design="04-eventbrite"] .eb-main .eb-hero-date,
+  html[data-design="04-eventbrite"] .eb-main .eb-hero-subtitle,
+  html[data-design="04-eventbrite"] .eb-main .eb-hero-actions,
+  html[data-design="04-eventbrite"] .eb-program-hero .hero-meta,
+  html[data-design="04-eventbrite"] .eb-program-hero .eb-page-title,
+  html[data-design="04-eventbrite"] .eb-program-hero .eb-page-subtitle,
   html[data-design="04-eventbrite"] .scroll-trigger,
   html[data-design="04-eventbrite"] .scroll-trigger.scroll-trigger--offscreen {
+    animation: none !important;
     transition: none !important;
     transform: none !important;
+    opacity: 1 !important;
   }
 }
 
