@@ -60,6 +60,7 @@ Po vyhodnocení čitelnosti, kontrastu ve světlém i tmavém režimu, použitel
    - Oprava blikání karet programu na mobilu, doladění kontrastu ve světlém motivu, responzivní hlavičky, minimapy a vyhledávání zkratek interpretů; přidání plynulých, neblikajících *scroll-reveal* animací (respektujících `prefers-reduced-motion`) a odstupňované animace úvodního nadpisu.
    - Živá detekce a zobrazování časových kolizí přímo na stránce `web/program.html` (badge kolizí, souhrnný panel s proklikem na kolidující karty, varovný štítek na kartě a notifikační toast s odkazem na *Můj plán*).
    - Optimalizace Core Web Vitals (**CLS**): doplnění `min-height: 100vh` pro `.fod-mount` v `web/css/festival-features.css`, čímž se odstranil posun patičky při klientském vykreslení obsahu (pokles CLS z `0,49–0,58` na `<= 0,051` na všech 9 stránkách).
+   - Redesign společné patičky na všech 9 stránkách do čistého 4sloupcového edičního stylu sladěného s hlavičkou (světlý i tmavý režim, plně bilingvní CZ/EN, přímé odkazy na obě pódia a živý odznak počtu uložených setů v *Mém plánu*, synchronizované přepínače jazyka/motivu a návrat nahoru, kaskádové Sunder scroll-reveal animace a odstranění duplicitních odkazů i zástupných sociálních ikon).
 
 ### 1.3 Přehled implementovaných 9 stránek v `web/`
 
@@ -147,8 +148,8 @@ Protože jsme paralelně vyvíjeli **11 různých vizuálních návrhů** a nás
    - Kontroluje všechny lokální odkazy a assety (`<link>`, `<script>`, `<img>`, `<a>`), syntaktickou validitu všech JS souborů přes `node --check` a spustí vestavěný lokální HTTP server pro ověření odpovědi `200 OK` a neprázdného těla u všech HTML stránek.
    - *Aktuální výsledek pro `web/`:* **7/7 kontrol `PASS`, 0 chyb, 0 varování** (9 HTML, 5 JS, 19 textových souborů).
 2. **Jazykový test (`lang_test.js`):**
-   - Kontroluje, že každá stránka načítá `js/lang.js`, spustí jej v izolovaném Node.js VM sandboxu a ověří existenci a 1:1 shodu klíčů v `window.FESTIVAL_I18N.en` a `window.FESTIVAL_I18N.cs` (120 klíčů, přítomnost české diakritiky).
-   - Projde veškeré HTML a JS soubory a ověří, že každý použitý atribut `data-i18n*` existuje v obou jazycích (93 klíčů, 0 neznámých).
+   - Kontroluje, že každá stránka načítá `js/lang.js`, spustí jej v izolovaném Node.js VM sandboxu a ověří existenci a 1:1 shodu klíčů v `window.FESTIVAL_I18N.en` a `window.FESTIVAL_I18N.cs` (138 klíčů, přítomnost české diakritiky).
+   - Projde veškeré HTML a JS soubory a ověří, že každý použitý atribut `data-i18n*` existuje v obou jazycích (83 klíčů, 0 neznámých).
    - Otestuje veřejné API (`getFestivalLang`, `setFestivalLang`, `toggleFestivalLang`), persistenci v `localStorage` a českou třípádovou pluralizaci `formatCzPlural(1 / 3 / 5)`.
    - *Aktuální výsledek pro `web/` i všechny návrhy v repozitáři:* **22/22 kontrol `PASS`** (100 % průchodnost po opravě `formatCzPlural` v návrzích 02 a 09).
 3. **Playwright E2E testovací sada (`run-e2e.js` – 6 specializovaných speců):**
@@ -187,8 +188,8 @@ Web ve složce `web/` nemá žádné známé blokující chyby a umožňuje plyn
 
 1. **Lokální úložiště prohlížeče (`localStorage`):** Osobní plán (`festival_favorites`), košík vstupenek, zvolený jazyk i barevný motiv se ukládají výhradně lokálně v jednom prohlížeči – po vymazání dat prohlížeče se ztratí (osobní plán lze však přenést nebo sdílet odkazem `?plan=...` či exportovat do `.ics`).
 2. **Simulovaný košík vstupenek (`web/tickets.html`) a audio ukázky (`web/artist-detail.html`):** Protože jde o čistě klientský školní projekt bez backendu, nákupní košík simuluje výběr a souhrn objednávky lokálně bez platební brány; audio přehrávač u detailu interpreta používá klientskou simulaci bez licencovaných MP3 souborů.
-3. **Offline provoz vs. externí odkazy a placeholdery:** Celý web včetně vestavěné SVG mapy trasy funguje plně offline (`file:///`); externí mapové odkazy (*Mapy.cz*, *Google Maps*) vyžadují připojení k internetu. Tlačítka sociálních sítí v patičce jsou označena jako `(placeholder)` a zobrazují informační toast místo slepých odkazů.
-4. **Velikost textových odkazů uvnitř seznamů na mobilu (`375px`):** Zatímco hlavní navigační prvky, spodní dok (`48px`), filtrační čipy a primární tlačítka splňují mobilní doporučení `44×44px`, Playwright audit hlásí varování u drobnějších inline textových odkazů (např. názvy interpretů v hustých výsledcích vyhledávání na `web/search.html`, drobečková navigace a odkazy v patičce). Plánujeme jejich vertikální padding dále zpřehlednit na základě zpětné vazby z cross-review.
+3. **Offline provoz vs. externí odkazy:** Celý web včetně vestavěné SVG mapy trasy funguje plně offline (`file:///`); externí mapové odkazy (*Mapy.cz*, *Google Maps*) vyžadují připojení k internetu.
+4. **Velikost textových odkazů uvnitř hustých seznamů na mobilu (`375px`):** Zatímco hlavní navigační prvky, spodní dok (`48px`), odkazy v patičce (`>= 45px`), filtrační čipy a primární tlačítka splňují mobilní doporučení `44×44px`, Playwright audit hlásí varování u drobnějších inline textových odkazů (např. názvy interpretů v hustých výsledcích vyhledávání na `web/search.html` a drobečková navigace). Plánujeme jejich vertikální padding dále zpřehlednit na základě zpětné vazby z cross-review.
 5. **Prostředí testů a přechodový kontrast motivu:** Automatizované testy probíhaly v bezhlavém Chromiu na emulovaných šířkách displeje (`320–1440 px`); testování na fyzickém iPhonu/Safari a s reálnou čtečkou obrazovky (NVDA / VoiceOver) zatím neproběhlo. Při okamžitém auditu bez prodlevy během CSS `transition` po přepnutí tmavého režimu zachytil axe-core přechodový stav barvy odkazu, ačkoliv v ustáleném stavu po 200 ms má všech 9 stránek `0` porušení WCAG 2.2 AA ve světlém i tmavém režimu.
 
 ---

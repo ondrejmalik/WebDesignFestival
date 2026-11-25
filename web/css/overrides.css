@@ -2259,7 +2259,8 @@ html[data-design="04-eventbrite"] .eb-footer .eb-footer-util-btn:focus-visible {
 
   html[data-design="04-eventbrite"] .eb-footer .eb-footer-link,
   html[data-design="04-eventbrite"] .eb-footer .eb-footer-mail {
-    min-height: 44px;
+    min-height: 45px;
+    min-width: 45px;
     padding: 6px 0;
   }
 
