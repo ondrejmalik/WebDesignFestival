@@ -133,7 +133,12 @@ const FESTIVAL_I18N = {
     "fod_footer_dir_stages": "Stages",
     "fod_footer_dir_practical": "Practical & Contact",
     "fod_footer_dir_camping": "Camping",
-    "fod_footer_dir_cashless": "Cashless"
+    "fod_footer_dir_cashless": "Cashless",
+    "fod_footer_tagline": "10-12 Jul 2026 · Kutná Hora",
+    "fod_footer_stats": "3 days, 60 acts, 2 stages",
+    "fod_footer_addr_full": "Sedlec Festival Grounds, 284 03 Kutná Hora",
+    "fod_footer_col_stages_tickets": "Stages & Tickets",
+    "fod_footer_info_guide": "Visitor Guide"
   },
   cs: {
     "brand.short": "Festival Temnoty 2",
@@ -268,7 +273,12 @@ const FESTIVAL_I18N = {
     "fod_footer_dir_stages": "Scény",
     "fod_footer_dir_practical": "Praktické a kontakt",
     "fod_footer_dir_camping": "Kemp",
-    "fod_footer_dir_cashless": "Cashless"
+    "fod_footer_dir_cashless": "Cashless",
+    "fod_footer_tagline": "10.-12. 7. 2026 · Kutná Hora",
+    "fod_footer_stats": "3 dny, 60 interpretů, 2 scény",
+    "fod_footer_addr_full": "Areál Sedlec, 284 03 Kutná Hora",
+    "fod_footer_col_stages_tickets": "Scény a vstupenky",
+    "fod_footer_info_guide": "Průvodce areálem"
   }
 };
 

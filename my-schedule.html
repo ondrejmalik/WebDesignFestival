@@ -69,79 +69,56 @@
 
   <footer class="eb-footer">
     <div class="eb-container eb-footer-shell">
-      <div class="eb-footer-bento">
-        <div class="eb-footer-card eb-footer-brand-card">
-          <div class="eb-footer-brand-head">
-            <span class="eb-footer-emblem" aria-hidden="true">FD</span>
-            <div class="eb-footer-brand-copy">
-              <p class="eb-footer-brand-title" data-i18n="brand.short">Festival of Darkness 2</p>
-              <ul class="eb-footer-meta-list">
-                <li data-i18n="fod_footer_meta_dates">10-12 Jul 2026</li>
-                <li data-i18n="fod_footer_meta_loc">Sedlec, Kutná Hora</li>
-                <li data-i18n="fod_footer_meta_acts">60 Acts</li>
-              </ul>
-            </div>
-          </div>
-          <div class="eb-footer-actions">
-            <a href="tickets.html" class="eb-footer-cta eb-footer-cta-primary" data-i18n="fod_footer_nav_tickets">Tickets &amp; Passes</a>
-            <a href="my-schedule.html" class="eb-footer-cta eb-footer-cta-secondary" aria-current="page"><span data-i18n="fod_footer_nav_schedule">My Schedule</span><span class="nav-badge-count is-hidden">0</span></a>
-          </div>
-        </div>
-
-        <div class="eb-footer-card eb-footer-stages-card">
-          <p class="eb-footer-card-heading" data-i18n="fod_footer_stages_heading">Stages &amp; Arrival</p>
-          <div class="eb-footer-stage-list">
-            <a href="stages.html#stage-solar" class="eb-footer-stage-link">
-              <span class="eb-footer-stage-dot eb-footer-dot-solar" aria-hidden="true"></span>
-              <span class="eb-footer-stage-text">
-                <span class="eb-footer-stage-name" data-i18n="stages.solar_name">Solar Horizon Stage</span>
-                <span class="eb-footer-stage-tag" data-i18n="fod_footer_solar_tag">Open-Air</span>
-              </span>
-            </a>
-            <a href="program.html?stage=lunar&amp;window=tonight" class="eb-footer-stage-link">
-              <span class="eb-footer-stage-dot eb-footer-dot-lunar" aria-hidden="true"></span>
-              <span class="eb-footer-stage-text">
-                <span class="eb-footer-stage-name" data-i18n="stages.lunar_name">Lunar Forest Dome</span>
-                <span class="eb-footer-stage-tag" data-i18n="fod_footer_lunar_tag">Covered</span>
-              </span>
-            </a>
-          </div>
-          <a href="practical-info.html#doprava" class="eb-footer-arrival-link">
-            <span data-i18n="fod_footer_arrival_link">Shuttle &amp; Directions from Kutná Hora hl.n.</span>
-            <span class="eb-footer-arrow" aria-hidden="true">→</span>
+      <div class="eb-footer-grid">
+        <div class="eb-footer-brand-col">
+          <a href="index.html" class="eb-footer-brand-link">
+            <span class="eb-logo-mark" aria-hidden="true">FD</span>
+            <span class="eb-footer-brand-name" data-i18n="brand.short">Festival of Darkness 2</span>
           </a>
+          <p class="eb-footer-meta" data-i18n="fod_footer_tagline">10-12 Jul 2026 · Kutná Hora</p>
+          <p class="eb-footer-meta" data-i18n="fod_footer_stats">3 days, 60 acts, 2 stages</p>
+          <address class="eb-footer-address">
+            <span data-i18n="fod_footer_addr_full">Sedlec Festival Grounds, 284 03 Kutná Hora</span>
+            <a href="mailto:info@festivaltemnoty.cz" class="eb-footer-mail">info@festivaltemnoty.cz</a>
+          </address>
         </div>
-      </div>
 
-      <div class="eb-footer-directory">
-        <div class="eb-footer-dir-group">
-          <p class="eb-footer-dir-label" id="eb-footer-nav-explore" data-i18n="fod_footer_dir_explore">Explore</p>
-          <nav aria-labelledby="eb-footer-nav-explore">
-            <ul class="eb-footer-dir-list">
-              <li><a href="index.html" class="eb-footer-dir-link" data-i18n="fod_footer_nav_home">Overview</a></li>
-              <li><a href="program.html" class="eb-footer-dir-link" data-i18n="fod_footer_nav_program">Program</a></li>
-              <li><a href="artists.html" class="eb-footer-dir-link" data-i18n="fod_footer_nav_artists">Artists</a></li>
-              <li><a href="stages.html" class="eb-footer-dir-link" data-i18n="fod_footer_dir_stages">Stages</a></li>
-              <li><a href="search.html" class="eb-footer-dir-link" data-i18n="fod_footer_nav_search">Search</a></li>
+        <div class="eb-footer-col">
+          <p class="eb-footer-col-heading" id="eb-footer-nav-festival" data-i18n="fod_footer_col_festival">FESTIVAL</p>
+          <nav aria-labelledby="eb-footer-nav-festival">
+            <ul class="eb-footer-links-list">
+              <li><a href="index.html" class="eb-footer-link" data-i18n="fod_footer_nav_home">Overview</a></li>
+              <li><a href="program.html" class="eb-footer-link" data-i18n="fod_footer_nav_program">Program</a></li>
+              <li><a href="artists.html" class="eb-footer-link" data-i18n="fod_footer_nav_artists">Artists</a></li>
+              <li><a href="my-schedule.html" class="eb-footer-link" aria-current="page"><span data-i18n="fod_footer_nav_schedule">My Schedule</span><span class="nav-badge-count is-hidden">0</span></a></li>
+              <li><a href="search.html" class="eb-footer-link" data-i18n="fod_footer_nav_search">Search</a></li>
             </ul>
           </nav>
         </div>
 
-        <div class="eb-footer-dir-group">
-          <p class="eb-footer-dir-label" id="eb-footer-nav-practical" data-i18n="fod_footer_dir_practical">Practical &amp; Contact</p>
-          <div class="eb-footer-dir-cluster">
-            <nav aria-labelledby="eb-footer-nav-practical">
-              <ul class="eb-footer-dir-list">
-                <li><a href="practical-info.html" class="eb-footer-dir-link" data-i18n="fod_footer_info_all">Practical Info</a></li>
-                <li><a href="practical-info.html#kemp" class="eb-footer-dir-link" data-i18n="fod_footer_dir_camping">Camping</a></li>
-                <li><a href="practical-info.html#cashless" class="eb-footer-dir-link" data-i18n="fod_footer_dir_cashless">Cashless</a></li>
-                <li><a href="practical-info.html#faq" class="eb-footer-dir-link" data-i18n="fod_footer_info_faq">FAQ</a></li>
-              </ul>
-            </nav>
-            <address class="eb-footer-contact">
-              <a href="mailto:info@festivaltemnoty.cz" class="eb-footer-dir-link eb-footer-mail-link">info@festivaltemnoty.cz</a>
-            </address>
-          </div>
+        <div class="eb-footer-col">
+          <p class="eb-footer-col-heading" id="eb-footer-nav-stages" data-i18n="fod_footer_col_stages_tickets">Stages &amp; Tickets</p>
+          <nav aria-labelledby="eb-footer-nav-stages">
+            <ul class="eb-footer-links-list">
+              <li><a href="tickets.html" class="eb-footer-link" data-i18n="fod_footer_nav_tickets">Tickets &amp; Passes</a></li>
+              <li><a href="stages.html#stage-solar" class="eb-footer-link"><span class="eb-footer-stage-dot eb-footer-dot-solar" aria-hidden="true"></span><span data-i18n="stages.solar_name">Solar Horizon Stage</span></a></li>
+              <li><a href="program.html?stage=lunar&amp;window=tonight" class="eb-footer-link"><span class="eb-footer-stage-dot eb-footer-dot-lunar" aria-hidden="true"></span><span data-i18n="stages.lunar_name">Lunar Forest Dome</span></a></li>
+              <li><a href="stages.html" class="eb-footer-link" data-i18n="fod_footer_nav_stages">Stages &amp; Grounds</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="eb-footer-col">
+          <p class="eb-footer-col-heading" id="eb-footer-nav-info" data-i18n="fod_footer_col_info">PRACTICAL INFO</p>
+          <nav aria-labelledby="eb-footer-nav-info">
+            <ul class="eb-footer-links-list">
+              <li><a href="practical-info.html" class="eb-footer-link" data-i18n="fod_footer_info_guide">Visitor Guide</a></li>
+              <li><a href="practical-info.html#doprava" class="eb-footer-link" data-i18n="fod_footer_info_travel">Getting There</a></li>
+              <li><a href="practical-info.html#kemp" class="eb-footer-link" data-i18n="fod_footer_info_camp">Camping &amp; Stay</a></li>
+              <li><a href="practical-info.html#cashless" class="eb-footer-link" data-i18n="fod_footer_info_cashless">Cashless &amp; Grounds</a></li>
+              <li><a href="practical-info.html#faq" class="eb-footer-link" data-i18n="fod_footer_info_faq">FAQ</a></li>
+            </ul>
+          </nav>
         </div>
       </div>
 
