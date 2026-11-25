@@ -1868,10 +1868,10 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr><td>${isCs ? 'Pá 10. 7.' : 'Fri 10 Jul'}</td><td>11:30-04:00</td><td>10-15 min</td></tr>
-                      <tr><td>${isCs ? 'So 11. 7.' : 'Sat 11 Jul'}</td><td>12:00-04:00</td><td>15 min</td></tr>
-                      <tr><td>${isCs ? 'Ne 12. 7.' : 'Sun 12 Jul'}</td><td>12:00-03:30</td><td>15 min</td></tr>
-                      <tr><td>${isCs ? 'Po 13. 7. (Odjezdy)' : 'Mon 13 Jul (Departures)'}</td><td>07:00-13:00</td><td>15-20 min</td></tr>
+                      <tr><td><time datetime="2026-07-10">${isCs ? 'Pá 10. 7.' : 'Fri 10 Jul'}</time></td><td><time datetime="2026-07-10T11:30">11:30</time>–<time datetime="2026-07-11T04:00">04:00</time></td><td>10-15 min</td></tr>
+                      <tr><td><time datetime="2026-07-11">${isCs ? 'So 11. 7.' : 'Sat 11 Jul'}</time></td><td><time datetime="2026-07-11T12:00">12:00</time>–<time datetime="2026-07-12T04:00">04:00</time></td><td>15 min</td></tr>
+                      <tr><td><time datetime="2026-07-12">${isCs ? 'Ne 12. 7.' : 'Sun 12 Jul'}</time></td><td><time datetime="2026-07-12T12:00">12:00</time>–<time datetime="2026-07-13T03:30">03:30</time></td><td>15 min</td></tr>
+                      <tr><td><time datetime="2026-07-13">${isCs ? 'Po 13. 7. (Odjezdy)' : 'Mon 13 Jul (Departures)'}</time></td><td><time datetime="2026-07-13T07:00">07:00</time>–<time datetime="2026-07-13T13:00">13:00</time></td><td>15-20 min</td></tr>
                     </tbody>
                   </table>
                 </div>
@@ -1885,6 +1885,7 @@
                       <option value="sun" ${estimatorDay === 'sun' ? 'selected' : ''}>${isCs ? 'Ne 12. 7.' : 'Sun 12 Jul'}</option>
                       <option value="mon" ${estimatorDay === 'mon' ? 'selected' : ''}>${isCs ? 'Po 13. 7. (Odjezdy)' : 'Mon 13 Jul (Departures)'}</option>
                     </select>
+                    <label for="fod-shuttle-time" class="fod-sr-only">${isCs ? 'Čas příjezdu' : 'Arrival time'}</label>
                     <input type="time" id="fod-shuttle-time" class="fod-input fod-time-input" aria-label="${isCs ? 'Čas příjezdu' : 'Arrival time'}" value="${core.escapeHtml(estimatorTime)}">
                   </div>
                   <p id="fod-shuttle-result" class="fod-simple-status" role="status" aria-live="polite"></p>

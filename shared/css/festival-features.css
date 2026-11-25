@@ -905,6 +905,7 @@ html[data-design="11-zzz"] .rail-footer .fod-theme-btn .theme-label {
    5. BUTTONS, CHIPS, INPUTS, TOOLBARS
    ========================================================================= */
 .fod-mount {
+  min-height: 100vh;
   padding-top: 20px;
   padding-bottom: 56px;
 }
