@@ -14,7 +14,9 @@
 
 ## 1. Aktuální stav projektu a přehled změn od posledního odevzdání (`progress-03.md`)
 
-Od odevzdání Cvičení 4 (*první funkční implementace* ve wireframe podobě) prošel projekt zásadní vizuální i architektonickou proměnou. Z prototypu vznikla plnohodnotná, graficky vypilovaná a samostatně spustitelná klientská webová aplikace ve složce `web/` (bez nutnosti build kroku, Node.js či backendu – funguje lokálně přes `file:///` i na GitHub Pages).
+**Jak spustit a prezentovat:** Po rozbalení otevřete `web/index.html` v libovolném moderním prohlížeči s povoleným JavaScriptem – web funguje čistě klientsky i přímo z disku (`file:///`) bez lokálního serveru, build kroku či instalace. K prezentaci slouží přímo web (případně živá verze na GitHub Pages). Projektová specifikace je v `project-specification.md`.
+
+Od odevzdání Cvičení 4 (*první funkční implementace* ve wireframe podobě) prošel projekt zásadní vizuální i architektonickou proměnou. Z prototypu vznikla plnohodnotná, graficky vypilovaná a samostatně spustitelná 9stránková webová aplikace ve složce `web/` (3 dny, 2 pódia, 60 interpretů, 60 vystoupení, plně bilingvní CZ/EN a ve světlém i tmavém režimu).
 
 ### 1.1 Paralelní průzkum 11 designových směrů a výběr hlavního designu (Design 4)
 
@@ -71,9 +73,17 @@ Po vyhodnocení čitelnosti, kontrastu ve světlém i tmavém režimu, použitel
 - `web/search.html` – Celowebové vyhledávání napříč interprety, sloty, pódii a praktickými informacemi (včetně klávesové zkratky `/` a vyhledávání bez diakritiky).
 - `web/tickets.html` – Katalog vstupenek, kempových pasů a doplňků s filtrací podle kategorií a klientským košíkem.
 
+### 1.4 Doporučené průchody pro hodnotitele (Cross-review scénáře)
+
+Pro nezávislé ověření klíčových uživatelských scénářů při cross-review doporučujeme projít tyto tři návazné scénáře (v CZ i EN, na desktopu i mobilu `375px`):
+
+1. **Scénář 1 – Náhlý déšť v areálu (přesun na kryté pódium):** Na `web/index.html` v sekci *Dvě odlišná pódia* klikněte u *Lunar Forest Dome* na odkaz **Program Lunar Dome (kryté)**. Otevře se `web/program.html?stage=lunar&window=tonight` s předfiltrovanými vystoupeními kryté scény a informačním panelem. Vyzkoušejte rozkliknutí detailu libovolného interpreta a návrat zpět.
+2. **Scénář 2 – Osobní plán a časová kolize přes půlnoc:** Otevřete `web/program.html` a vyfiltrujte **Pátek 10. 7.** Nejprve klikněte na text/čas libovolné karty a ověřte, že uložení se nepřepne. Poté tlačítkem **`+ Přidat`** uložte dvě překrývající se noční vystoupení: **Starlight Odyssey** (`23:30–00:45`, Solar Horizon Stage) a **Analog Void** (`00:05–01:25`, Lunar Forest Dome). Očekávejte okamžitý varovný toast o kolizi, badge kolizí a zvýraznění karet přímo v programu. Přejděte do `web/my-schedule.html`, obnovte stránku (`F5`) a ověřte, že oba koncerty i varování o kolizi zůstaly. Jedno vystoupení odeberte a ověřte, že kolize zmizela; volitelně vyzkoušejte **Sdílet plán** (`?plan=...`) a **Export .ics**.
+3. **Scénář 3 – Příjezd vlakem na Kutná Hora hl.n., doprava a vyhledávání:** Z `web/index.html` (odkaz *Z nádraží: bezplatný shuttle a pěší trasa*) otevřete `web/practical-info.html#doprava`. V sekci *Ověřit příjezd vlaku* zadejte např. Pátek `14:10` a ověřte doporučení na bezplatný shuttle bus ze *Stanoviště 1* (7 min). Na interaktivní SVG mapě přepněte filtry **Shuttle** a **Pěšky (1,8 km)**. Nakonec stiskněte klávesu **`/`** (nebo použijte vyhledávací pole), zadejte dotaz bez diakritiky (např. `kutna`) nebo zkratku/název interpreta a ověřte nalezené výsledky.
+
 ---
 
-## 2. Vypořádání zpětné vazby vyučujícího z Cvičení 4
+## 2. Vypořádání zpětné vazby z Cvičení 4
 
 Všech pět připomínek z hodnocení předchozího odevzdání bylo systematicky vyřešeno a ověřeno automatickými testy nad složkou `web/`:
 
@@ -124,9 +134,6 @@ Měření bylo provedeno v bezhlavém prohlížeči Chromium (`1280×800`, loká
 | **Cíl Google „Good“ / WCAG** | **≤ 800** | **≤ 1 800** | **≤ 2 500** | **≤ 0,100** | **≤ 200** | **≤ 2 500** | **Ano** | **0** | **0 / 0** |
 
 *\*Na `web/my-schedule.html` se `<time datetime="...">` vykresluje dynamicky pro každé uložené vystoupení; výše uvedený řádek měří výchozí prázdný stav bez uložených koncertů.*
-
-*Poznámka k metodice měření:* Lokální HTTP server má zanedbatelnou síťovou latenci (TTFB 0,7–4,3 ms), takže naměřené časy LCP (56–132 ms) odrážejí čistý čas vykreslení a klientské hydratace prohlížečem bez latence CDN. Na mobilním viewportu (`375×812`) bylo na všech 9 stránkách ověřeno **0 px horizontálního přetékání**, skrytí desktopové navigace a správné zobrazení spodního doku.
-
 ---
 
 ## 4. Aktuální stav testování a využití GitHub Actions
@@ -178,23 +185,27 @@ Doplňkově je v repozitáři nastaven lokální git `pre-push` hook a zrcadlov�
 
 Web ve složce `web/` nemá žádné známé blokující chyby a umožňuje plynule projít všechny tři klíčové uživatelské scénáře na mobilu i desktopu. Pro transparentnost při cross-review uvádíme známá vědomá omezení a drobné prostory pro další zlepšení:
 
-1. **Simulovaný košík vstupenek (`web/tickets.html`) a audio ukázky (`web/artist-detail.html`):** Protože jde o čistě klientský školní projekt bez backendu, nákupní košík vstupenek simuluje výběr a souhrn objednávky lokálně bez platební brány; audio přehrávač u detailu interpreta používá klientskou ukázku bez licencovaných MP3 souborů.
-2. **Placeholdery sociálních sítí a obrázků interpretů:** Tlačítka sociálních sítí v patičce jsou označena jako `(placeholder)` a při kliknutí zobrazují přívětivý informační toast místo nefunkčních externích odkazů. Karty interpretů využívají lehké tématické SVG placeholdery rozlišené podle scény (Solar/Lunar), aby zůstala velikost balíčku malá.
-3. **Velikost textových odkazů uvnitř seznamů na mobilu (`375px`):** Zatímco hlavní navigační prvky, spodní dok (`48px`), filtrační čipy a primární tlačítka splňují mobilní doporučení `44×44px`, Playwright audit hlásí varování u drobnějších inline textových odkazů (např. názvy interpretů v hustých výsledcích vyhledávání na `web/search.html`, drobečková navigace a odkazy v patičce). Plánujeme jejich vertikální padding dále zpřehlednit na základě zpětné vazby z cross-review.
-4. **Rychlé přepnutí motivu během CSS přechodu:** V automatizovaném auditu bez prodlevy po kliknutí na přepínač tmavého režimu zachytil axe-core přechodový stav barvy odkazu během animace `transition`, ačkoliv v ustáleném stavu po 200 ms má všech 9 stránek `0` porušení WCAG 2.2 AA ve světlém i tmavém režimu.
+1. **Lokální úložiště prohlížeče (`localStorage`):** Osobní plán (`festival_favorites`), košík vstupenek, zvolený jazyk i barevný motiv se ukládají výhradně lokálně v jednom prohlížeči – po vymazání dat prohlížeče se ztratí (osobní plán lze však přenést nebo sdílet odkazem `?plan=...` či exportovat do `.ics`).
+2. **Simulovaný košík vstupenek (`web/tickets.html`) a audio ukázky (`web/artist-detail.html`):** Protože jde o čistě klientský školní projekt bez backendu, nákupní košík simuluje výběr a souhrn objednávky lokálně bez platební brány; audio přehrávač u detailu interpreta používá klientskou simulaci bez licencovaných MP3 souborů.
+3. **Offline provoz vs. externí odkazy a placeholdery:** Celý web včetně vestavěné SVG mapy trasy funguje plně offline (`file:///`); externí mapové odkazy (*Mapy.cz*, *Google Maps*) vyžadují připojení k internetu. Tlačítka sociálních sítí v patičce jsou označena jako `(placeholder)` a zobrazují informační toast místo slepých odkazů.
+4. **Velikost textových odkazů uvnitř seznamů na mobilu (`375px`):** Zatímco hlavní navigační prvky, spodní dok (`48px`), filtrační čipy a primární tlačítka splňují mobilní doporučení `44×44px`, Playwright audit hlásí varování u drobnějších inline textových odkazů (např. názvy interpretů v hustých výsledcích vyhledávání na `web/search.html`, drobečková navigace a odkazy v patičce). Plánujeme jejich vertikální padding dále zpřehlednit na základě zpětné vazby z cross-review.
+5. **Prostředí testů a přechodový kontrast motivu:** Automatizované testy probíhaly v bezhlavém Chromiu na emulovaných šířkách displeje (`320–1440 px`); testování na fyzickém iPhonu/Safari a s reálnou čtečkou obrazovky (NVDA / VoiceOver) zatím neproběhlo. Při okamžitém auditu bez prodlevy během CSS `transition` po přepnutí tmavého režimu zachytil axe-core přechodový stav barvy odkazu, ačkoliv v ustáleném stavu po 200 ms má všech 9 stránek `0` porušení WCAG 2.2 AA ve světlém i tmavém režimu.
 
 ---
 
 ## 6. Použití AI a ověření AI výstupů
 
 1. **K čemu byla AI použita:**
+   - **Generování obrázků, ilustrací a textů:** V souladu se zadáním byly pomocí generativní AI vytvořeny všechny festivalové texty (biografie 60 interpretů v CZ/EN, praktické informace, FAQ), hlavní fotografie a ilustrace areálu i pódií (`web/img/hero.jpg`, `web/img/stage-solar.jpg`, `web/img/stage-lunar.jpg`) i vektorové SVG ilustrace interpretů (`artist-placeholder-solar.svg`, `artist-placeholder-lunar.svg`) a schémata tras.
    - Paralelní vygenerování a iterativní ladění **11 vizuálních variant** na základě předem definovaných briefů a inspiračních webů.
-   - Extrakce a sjednocení společné aplikační logiky (data 60 interpretů, kolize přes půlnoc, vyhledávání bez diakritiky, export `.ics`, sdílení plánu, nákupní košík) a zabalení vybraného Designu 4 do `web/`.
+   - Extrakce a sjednocení společné aplikační logiky (data 60 interpretů, kolize přes půlnoc, vyhledávání bez diakritiky s escapováním HTML vstupů proti XSS, export `.ics`, sdílení plánu, nákupní košík) a zabalení vybraného Designu 4 do `web/`.
    - Návrh a implementace 6 design-agnostických Playwright E2E speců a GitHub Actions workflows v repozitáři.
+   - Sepsání `progress-04.md` chronologicky podle historie git.
 2. **Jak byly výstupy ověřeny:**
    - Každý návrh i finální balíček `web/` prošel automatickou třívrstvou sadou Smoke + Language + 6 Playwright E2E specy v reálném prohlížeči Chromium (včetně `@axe-core/playwright` pro WCAG 2.2 AA).
    - Změřili jsme reálné Core Web Vitals (`LCP`, `FCP`, `CLS`, `INP`, `TTFB`) na všech 9 stránkách v `web/`.
-   - Ručně jsme prošli všechny 3 uživatelské scénáře na desktopu i v mobilním zobrazení (`375px`) v obou jazycích (CZ/EN) a v obou barevných režimech (světlý/tmavý).
+   - Ověřili jsme sanitizaci uživatelských vstupů (`escapeHtml`) při vykreslování vyhledávacích dotazů a dat, aby vložené znaky HTML nemohly narušit DOM.
+   - Ručně jsme prošli všechny 3 uživatelské scénáře na desktopu i v mobilním zobrazení (`375px`) v obou jazycích (CZ/EN), v obou barevných režimech (světlý/tmavý) i při spuštění přímo z disku (`file:///`) bez lokálního serveru.
 3. **Co bylo upraveno nebo odmítnuto (zjištěné chyby a limity AI):**
    - **Vysoký Cumulative Layout Shift (`CLS 0,49–0,58`) na podstránkách:** AI zpočátku generovala prázdné kontejnery `.fod-mount` bez rezervované výšky, takže při klientské hydrataci `defer` skriptů patička výrazně poskakovala. Měřením Core Web Vitals jsme chybu odhalili a opravili přidáním `min-height: 100vh` (pokles CLS na `0,0018–0,0508`).
    - **Problikávání tmavého režimu (FOUC) a scroll animací:** Původní AI řešení nastavovalo tmavý režim až po načtení deferred JS, což způsobovalo bílé bliknutí při navigaci, a scroll animace na mobilu problikávaly. Přidali jsme synchronní skript do `<head>` každé stránky a přepsali spouštění animací tak, aby prvky ve výchozím viewportu neblikaly.
