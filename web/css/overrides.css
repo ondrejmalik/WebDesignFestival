@@ -2269,6 +2269,15 @@ html[data-design="04-eventbrite"] .eb-footer .eb-footer-util-btn:focus-visible {
   }
 }
 
+@media screen and (max-width: 749px) {
+  html[data-design="04-eventbrite"] .eb-footer .eb-footer-colophon.scroll-trigger.animate--slide-in {
+    animation: none;
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @media (max-width: 540px) {
   html[data-design="04-eventbrite"] .eb-footer .eb-footer-colophon {
     flex-direction: column;

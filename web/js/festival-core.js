@@ -1030,7 +1030,11 @@
       '.fod-plan-card',
       '.fod-footer-top',
       '.fod-footer-col',
-      '.fod-footer-bottom'
+      '.fod-footer-bottom',
+      '.eb-footer-grid',
+      '.eb-footer-brand-col',
+      '.eb-footer-col',
+      '.eb-footer-colophon'
     ].join(', ');
 
     scope.querySelectorAll(slideSelectors).forEach(el => {
@@ -1040,7 +1044,7 @@
     });
 
     // Cascade stagger (capped per batch) for grid/featured/footer children
-    scope.querySelectorAll('.fod-cards-grid > *, .eb-featured-list > *, .eb-stages-grid > *, .fod-footer-top > *, .cards-grid > *, .grid > *').forEach(el => {
+    scope.querySelectorAll('.fod-cards-grid > *, .eb-featured-list > *, .eb-stages-grid > *, .fod-footer-top > *, .eb-footer-grid > *, .cards-grid > *, .grid > *').forEach(el => {
       if (!el.classList.contains('scroll-trigger')) {
         el.classList.add('scroll-trigger', 'animate--slide-in');
       }
