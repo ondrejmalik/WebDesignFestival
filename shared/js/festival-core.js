@@ -830,11 +830,17 @@
 
     // Slide-in sections, panels, cards, and footer blocks
     const slideSelectors = [
-      'main > section',
+      'main > section:not(.eb-hero-banner):not(.eb-program-hero):not(.eb-main-layout)',
       'main > article',
+      '.eb-organizer-bar',
+      '.eb-section-block',
+      '.eb-stage-card',
+      '.eb-ticket-box',
       '.fod-panel',
+      '.fod-info-block',
       '.fod-card',
       '.fod-stage-card',
+      '.fod-plan-card',
       '.fod-footer-top',
       '.fod-footer-col',
       '.fod-footer-bottom'
@@ -846,8 +852,8 @@
       }
     });
 
-    // Cascade stagger (75ms per batch item) for grid/footer children
-    scope.querySelectorAll('.fod-cards-grid > *, .fod-footer-top > *, .cards-grid > *, .grid > *').forEach(el => {
+    // Cascade stagger (capped per batch) for grid/featured/footer children
+    scope.querySelectorAll('.fod-cards-grid > *, .eb-featured-list > *, .eb-stages-grid > *, .fod-footer-top > *, .cards-grid > *, .grid > *').forEach(el => {
       if (!el.classList.contains('scroll-trigger')) {
         el.classList.add('scroll-trigger', 'animate--slide-in');
       }
@@ -882,6 +888,7 @@
     if (prefersReducedMotion() || typeof IntersectionObserver === 'undefined') {
       elements.forEach(el => {
         el.classList.remove('scroll-trigger--offscreen');
+        el.classList.add('scroll-trigger--cancel');
       });
       return;
     }
@@ -893,20 +900,24 @@
           entries.forEach(entry => {
             const target = entry.target;
             if (entry.isIntersecting) {
-              target.classList.remove('scroll-trigger--offscreen');
               if (target.hasAttribute('data-cascade')) {
-                target.style.setProperty('--animation-order', String(cascadeIndex));
+                target.style.setProperty('--animation-order', String(Math.min(cascadeIndex, 5)));
                 cascadeIndex += 1;
               }
+              target.classList.remove('scroll-trigger--offscreen');
               observer.unobserve(target);
+              setTimeout(() => {
+                target.classList.add('sunder-settled');
+                target.style.removeProperty('--animation-order');
+              }, 800);
             }
           });
         },
-        { rootMargin: '0px' }
+        { rootMargin: '0px 0px -24px 0px', threshold: 0.02 }
       );
     }
 
-    const viewportCutoff = (window.innerHeight || 900) * 0.98;
+    const viewportCutoff = (window.innerHeight || 900) * 0.96;
 
     elements.forEach(el => {
       if (el.dataset.sunderObserved === '1') return;
