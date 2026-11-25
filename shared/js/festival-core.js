@@ -208,6 +208,11 @@
       const dockLabel = a.querySelector('.dock-label');
       const dockKey = dockLabel && dockLabel.getAttribute('data-i18n');
       if (dockKey && Object.prototype.hasOwnProperty.call(dict, dockKey)) return;
+      if (a.closest('footer')) {
+        const childI18n = a.querySelector('[data-i18n]');
+        const childKey = childI18n && childI18n.getAttribute('data-i18n');
+        if (childKey && Object.prototype.hasOwnProperty.call(dict, childKey)) return;
+      }
       const href = (a.getAttribute('href') || '').split('#')[0].split('?')[0];
       if (!NAV_LABELS[href]) return;
       const favBadge = a.querySelector('.nav-badge-count:not(.fod-cart-badge)');
@@ -281,6 +286,19 @@
     });
 
     updateThemeButtons(getFestivalTheme());
+    updateMobileScheduleButtons(getFavorites().length, lang);
+  }
+
+  function updateMobileScheduleButtons(count, langOverride) {
+    const isCs = (langOverride || getLang()) === 'cs';
+    const c = typeof count === 'number' ? count : getFavorites().length;
+    const label = isCs
+      ? (c > 0 ? `Můj plán (${c})` : 'Můj plán')
+      : (c > 0 ? `My Schedule (${c})` : 'My Schedule');
+    document.querySelectorAll('.fod-mobile-schedule-btn').forEach(btn => {
+      btn.setAttribute('aria-label', label);
+      btn.setAttribute('title', label);
+    });
   }
 
   function bindLangButtonsClean() {
@@ -384,7 +402,7 @@
     }
   }
 
-  function saveFavorites(items) {
+  function saveFavorites(items, meta) {
     const seen = new Set();
     const clean = [];
     (items || []).forEach(it => {
@@ -399,7 +417,9 @@
     } catch (e) {}
     updateAllFavBadges(clean.length);
     try {
-      window.dispatchEvent(new CustomEvent('favoritesUpdated', { detail: { count: clean.length } }));
+      window.dispatchEvent(new CustomEvent('favoritesUpdated', {
+        detail: Object.assign({ count: clean.length }, meta || {})
+      }));
     } catch (e) {}
     return clean;
   }
@@ -421,12 +441,36 @@
         added = true;
       }
     }
-    saveFavorites(favs);
+    const conflicts = added ? getCollisionsForItem(id, favs) : [];
+    saveFavorites(favs, { lastToggledId: id, added, conflicts });
     const cat = getCatalogMap()[id];
     const name = cat ? cat.name : id;
-    showToast(added
-      ? t(`Added ${name} to My Schedule`, `${name} přidáno do Mého plánu`)
-      : t(`Removed ${name} from My Schedule`, `${name} odebráno z Mého plánu`));
+
+    if (added && conflicts.length > 0) {
+      const first = conflicts[0];
+      const firstArtist = first.artist || first.name || first.id;
+      const extra = conflicts.length - 1;
+      const msg = extra === 0
+        ? t(
+            `Time conflict: ${name} overlaps with ${firstArtist} (${first.time})`,
+            `Časová kolize: ${name} se překrývá s ${firstArtist} (${first.time})`
+          )
+        : t(
+            `Time conflict: ${name} overlaps with ${firstArtist} (${first.time}) and ${extra} more`,
+            `Časová kolize: ${name} se překrývá s ${firstArtist} (${first.time}) a ${formatCzPlural(extra, 'dalším setem', 'dalšími sety', 'dalšími sety')}`
+          );
+      showToast(msg, {
+        variant: 'conflict',
+        duration: 6000,
+        action: getCurrentPage() === 'my-schedule.html'
+          ? null
+          : { label: t('My Schedule', 'Můj plán'), href: 'my-schedule.html' }
+      });
+    } else {
+      showToast(added
+        ? t(`Added ${name} to My Schedule`, `${name} přidáno do Mého plánu`)
+        : t(`Removed ${name} from My Schedule`, `${name} odebráno z Mého plánu`));
+    }
     return added;
   }
 
@@ -436,12 +480,14 @@
 
   function updateAllFavBadges(countOverride) {
     const count = typeof countOverride === 'number' ? countOverride : getFavorites().length;
+    const badgeText = count > 99 ? '99+' : String(count);
     document.querySelectorAll('.nav-badge-count, .fav-count-badge, #fav-count').forEach(el => {
-      el.textContent = String(count);
+      el.textContent = el.classList.contains('nav-badge-count') ? badgeText : String(count);
       if (el.classList.contains('nav-badge-count')) {
         el.classList.toggle('is-hidden', count === 0);
       }
     });
+    updateMobileScheduleButtons(count);
     const planBarCount = document.getElementById('plan-bar-count');
     if (planBarCount) {
       planBarCount.textContent = formatShowsCount(count, getLang());
@@ -494,7 +540,6 @@
       localStorage.setItem(CART_KEY, JSON.stringify(clean));
     } catch (e) {}
     updateAllCartBadges();
-    updateNavScheduleBadges();
     window.dispatchEvent(new CustomEvent('festivalCartChanged', { detail: { items: clean } }));
     return clean;
   }
@@ -505,8 +550,9 @@
 
   function updateAllCartBadges() {
     const count = getCartCount();
+    const display = count > 99 ? '99+' : (count > 0 ? String(count) : '');
     document.querySelectorAll('.fod-cart-badge').forEach(el => {
-      el.textContent = count > 0 ? String(count) : '';
+      el.textContent = display;
       el.setAttribute('data-count', String(count));
       el.classList.toggle('is-hidden', count === 0);
     });
@@ -553,6 +599,96 @@
     return 'day1';
   }
 
+  function getStartMinutes(item) {
+    if (!item || !item.time) return 0;
+    const startStr = String(item.time).split(/[–-]/)[0];
+    return timeToMinutes(startStr);
+  }
+
+  function getCollisionsForItem(itemOrId, favoritesList) {
+    const list = Array.isArray(favoritesList) ? favoritesList : getFavorites();
+    const target = typeof itemOrId === 'string'
+      ? (list.find(f => f && f.id === itemOrId) || enrichFavorite(itemOrId))
+      : enrichFavorite(itemOrId);
+    if (!target || !target.id || !target.time) return [];
+
+    const targetDay = normalizeDayKey(target);
+    const targetStage = normalizeStageKey(target.stage);
+    const seen = new Set();
+    const conflicts = [];
+
+    list.forEach(raw => {
+      const other = enrichFavorite(raw);
+      if (!other || !other.id || other.id === target.id || seen.has(other.id)) return;
+      if (normalizeDayKey(other) !== targetDay) return;
+      if (normalizeStageKey(other.stage) === targetStage) return;
+      if (!isOverlapping(target.time, other.time)) return;
+      seen.add(other.id);
+      conflicts.push(other);
+    });
+
+    conflicts.sort((a, b) => getStartMinutes(a) - getStartMinutes(b));
+    return conflicts;
+  }
+
+  function computeScheduleCollisions(favoritesList) {
+    const rawList = Array.isArray(favoritesList) ? favoritesList : getFavorites();
+    const seenIds = new Set();
+    const items = [];
+    rawList.forEach(raw => {
+      const enr = enrichFavorite(raw);
+      if (enr && enr.id && !seenIds.has(enr.id)) {
+        seenIds.add(enr.id);
+        items.push(enr);
+      }
+    });
+
+    const pairs = [];
+    const byIdSets = new Map();
+
+    for (let i = 0; i < items.length; i++) {
+      const a = items[i];
+      if (!a.time) continue;
+      const dayA = normalizeDayKey(a);
+      const stageA = normalizeStageKey(a.stage);
+
+      for (let j = i + 1; j < items.length; j++) {
+        const b = items[j];
+        if (!b.time || a.id === b.id) continue;
+        if (normalizeDayKey(b) !== dayA) continue;
+        if (normalizeStageKey(b.stage) === stageA) continue;
+        if (!isOverlapping(a.time, b.time)) continue;
+
+        const ordered = getStartMinutes(a) <= getStartMinutes(b) ? [a, b] : [b, a];
+        pairs.push({ dayKey: dayA, a: ordered[0], b: ordered[1] });
+
+        if (!byIdSets.has(a.id)) byIdSets.set(a.id, new Map());
+        if (!byIdSets.has(b.id)) byIdSets.set(b.id, new Map());
+        byIdSets.get(a.id).set(b.id, b);
+        byIdSets.get(b.id).set(a.id, a);
+      }
+    }
+
+    pairs.sort((p1, p2) => {
+      if (p1.dayKey !== p2.dayKey) return p1.dayKey.localeCompare(p2.dayKey);
+      const diffA = getStartMinutes(p1.a) - getStartMinutes(p2.a);
+      if (diffA !== 0) return diffA;
+      return getStartMinutes(p1.b) - getStartMinutes(p2.b);
+    });
+
+    const byId = new Map();
+    byIdSets.forEach((map, id) => {
+      const sorted = Array.from(map.values()).sort((x, y) => getStartMinutes(x) - getStartMinutes(y));
+      byId.set(id, sorted);
+    });
+
+    return {
+      total: pairs.length,
+      pairs,
+      byId
+    };
+  }
+
   function normalizeStr(str) {
     return String(str || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
   }
@@ -579,21 +715,87 @@
   // TOAST FEEDBACK
   // =========================================================================
   let toastTimer = null;
-  function showToast(msg) {
+  let toastDuration = 2600;
+  let toastPaused = false;
+
+  function hideToast() {
+    clearTimeout(toastTimer);
+    toastTimer = null;
+    toastPaused = false;
+    const el = document.getElementById('fod-toast');
+    if (el) el.classList.remove('is-visible');
+  }
+
+  function scheduleToastHide(duration) {
+    clearTimeout(toastTimer);
+    if (toastPaused) return;
+    toastTimer = setTimeout(hideToast, duration);
+  }
+
+  function showToast(msg, opts) {
     if (!document.body) return;
+    const options = opts && typeof opts === 'object' ? opts : {};
+    const isConflict = options.variant === 'conflict';
+    const duration = typeof options.duration === 'number' && options.duration > 0
+      ? options.duration
+      : (isConflict ? 6000 : 2600);
+    const action = options.action && options.action.label && options.action.href ? options.action : null;
+
     let el = document.getElementById('fod-toast');
     if (!el) {
       el = document.createElement('div');
       el.id = 'fod-toast';
       el.className = 'fod-toast';
-      el.setAttribute('role', 'status');
-      el.setAttribute('aria-live', 'polite');
+      el.addEventListener('mouseenter', () => {
+        toastPaused = true;
+        clearTimeout(toastTimer);
+      });
+      el.addEventListener('focusin', () => {
+        toastPaused = true;
+        clearTimeout(toastTimer);
+      });
+      el.addEventListener('mouseleave', () => {
+        toastPaused = false;
+        if (el.classList.contains('is-visible')) {
+          scheduleToastHide(toastDuration);
+        }
+      });
+      el.addEventListener('focusout', e => {
+        if (!el.contains(e.relatedTarget)) {
+          toastPaused = false;
+          if (el.classList.contains('is-visible')) {
+            scheduleToastHide(toastDuration);
+          }
+        }
+      });
+      el.addEventListener('click', e => {
+        if (e.target && e.target.closest && e.target.closest('.fod-toast-close')) {
+          hideToast();
+        }
+      });
       document.body.appendChild(el);
     }
-    el.textContent = msg;
+
+    el.classList.toggle('is-conflict', isConflict);
+    el.setAttribute('role', isConflict ? 'alert' : 'status');
+    el.setAttribute('aria-live', isConflict ? 'assertive' : 'polite');
+
+    if (isConflict) {
+      const iconHtml = '<svg class="fod-toast-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>';
+      const msgHtml = `<span class="fod-toast-msg">${escapeHtml(msg)}</span>`;
+      const actionHtml = action
+        ? `<a class="fod-toast-action" href="${escapeHtml(action.href)}">${escapeHtml(action.label)}</a>`
+        : '';
+      const closeHtml = `<button type="button" class="fod-toast-close" aria-label="${escapeHtml(t('Dismiss notification', 'Zavřít upozornění'))}">&times;</button>`;
+      el.innerHTML = `<span class="fod-toast-body">${iconHtml}${msgHtml}</span><span class="fod-toast-actions">${actionHtml}${closeHtml}</span>`;
+    } else {
+      el.textContent = msg;
+    }
+
+    toastDuration = duration;
+    toastPaused = false;
     el.classList.add('is-visible');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => el.classList.remove('is-visible'), 2600);
+    scheduleToastHide(duration);
   }
 
   // =========================================================================
@@ -625,6 +827,24 @@
       }
     });
     updateThemeButtons(getFestivalTheme());
+
+    // 1b. Mobile/tablet top-right My Schedule shortcut in .eb-header-actions
+    document.querySelectorAll('.eb-header-actions').forEach(actions => {
+      if (!actions.querySelector('.fod-mobile-schedule-btn')) {
+        const schedLink = document.createElement('a');
+        schedLink.href = 'my-schedule.html';
+        schedLink.className = 'fod-mobile-schedule-btn';
+        schedLink.innerHTML =
+          '<svg class="fod-mobile-schedule-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>' +
+          '<span class="nav-badge-count is-hidden">0</span>';
+        const isOnSchedule = getCurrentPage() === 'my-schedule.html';
+        if (isOnSchedule) {
+          schedLink.classList.add('is-active');
+          schedLink.setAttribute('aria-current', 'page');
+        }
+        actions.insertBefore(schedLink, actions.firstChild);
+      }
+    });
 
     // 2. Ensure My Schedule links in nav & bottom dock carry a live count badge
     document.querySelectorAll('header nav a[href="my-schedule.html"], .side-rail nav a[href="my-schedule.html"], .bottom-nav-dock a[href="my-schedule.html"]').forEach(a => {
@@ -675,7 +895,6 @@
 
     updateAllFavBadges();
     updateAllCartBadges();
-    updateNavScheduleBadges();
   }
 
   function enhanceHomepage() {
@@ -798,14 +1017,24 @@
 
     // Slide-in sections, panels, cards, and footer blocks
     const slideSelectors = [
-      'main > section',
+      'main > section:not(.eb-hero-banner):not(.eb-program-hero):not(.eb-main-layout)',
       'main > article',
+      '.eb-organizer-bar',
+      '.eb-section-block',
+      '.eb-stage-card',
+      '.eb-ticket-box',
       '.fod-panel',
+      '.fod-info-block',
       '.fod-card',
       '.fod-stage-card',
+      '.fod-plan-card',
       '.fod-footer-top',
       '.fod-footer-col',
-      '.fod-footer-bottom'
+      '.fod-footer-bottom',
+      '.eb-footer-grid',
+      '.eb-footer-brand-col',
+      '.eb-footer-col',
+      '.eb-footer-colophon'
     ].join(', ');
 
     scope.querySelectorAll(slideSelectors).forEach(el => {
@@ -814,8 +1043,8 @@
       }
     });
 
-    // Cascade stagger (75ms per batch item) for grid/footer children
-    scope.querySelectorAll('.fod-cards-grid > *, .fod-footer-top > *, .cards-grid > *, .grid > *').forEach(el => {
+    // Cascade stagger (capped per batch) for grid/featured/footer children
+    scope.querySelectorAll('.fod-cards-grid > *, .eb-featured-list > *, .eb-stages-grid > *, .fod-footer-top > *, .eb-footer-grid > *, .cards-grid > *, .grid > *').forEach(el => {
       if (!el.classList.contains('scroll-trigger')) {
         el.classList.add('scroll-trigger', 'animate--slide-in');
       }
@@ -850,6 +1079,7 @@
     if (prefersReducedMotion() || typeof IntersectionObserver === 'undefined') {
       elements.forEach(el => {
         el.classList.remove('scroll-trigger--offscreen');
+        el.classList.add('scroll-trigger--cancel');
       });
       return;
     }
@@ -861,33 +1091,36 @@
           entries.forEach(entry => {
             const target = entry.target;
             if (entry.isIntersecting) {
-              target.classList.remove('scroll-trigger--offscreen');
               if (target.hasAttribute('data-cascade')) {
-                target.style.setProperty('--animation-order', String(cascadeIndex));
+                target.style.setProperty('--animation-order', String(Math.min(cascadeIndex, 5)));
                 cascadeIndex += 1;
               }
+              target.classList.remove('scroll-trigger--offscreen');
               observer.unobserve(target);
+              setTimeout(() => {
+                target.classList.add('sunder-settled');
+                target.style.removeProperty('--animation-order');
+              }, 800);
             }
           });
         },
-        { rootMargin: '0px 0px -50px 0px' }
+        { rootMargin: '0px 0px -24px 0px', threshold: 0.02 }
       );
     }
 
-    const viewportCutoff = (window.innerHeight || 900) * 0.95;
+    const viewportCutoff = (window.innerHeight || 900) * 0.96;
 
     elements.forEach(el => {
       if (el.dataset.sunderObserved === '1') return;
       el.dataset.sunderObserved = '1';
 
-      // On initial page load, do not hide elements already in/above the viewport
-      // so deferred JS never causes a visible -> hidden -> animate flash.
-      if (!isDynamicMutation) {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < viewportCutoff) {
-          el.classList.remove('scroll-trigger--offscreen');
-          return;
-        }
+      // Never hide elements already in/above the viewport (including dynamic updates)
+      // so deferred JS and live DOM updates never cause a visible -> hidden -> animate flash.
+      const rect = el.getBoundingClientRect();
+      if (rect.top < viewportCutoff) {
+        el.classList.remove('scroll-trigger--offscreen');
+        el.classList.add('scroll-trigger--cancel');
+        return;
       }
 
       el.classList.add('scroll-trigger--offscreen');
@@ -900,7 +1133,7 @@
     if (!header || prefersReducedMotion()) return;
 
     header.classList.add('sunder-header-sticky', 'sunder-header-animate');
-    let lastScrollY = window.scrollY || 0;
+    let lastScrollY = Math.max(0, window.scrollY || 0);
     let ticking = false;
 
     const updateHeader = () => {
@@ -908,20 +1141,30 @@
       const rect = header.getBoundingClientRect();
       if (rect.height === 0 || rect.width === 0) return;
 
+      // Keep mobile/tablet header permanently visible to avoid overscroll bounce flicker
+      if (window.innerWidth <= 960) {
+        header.classList.remove('sunder-header-hidden');
+        lastScrollY = Math.max(0, window.scrollY || 0);
+        return;
+      }
+
       const menuOpen = Boolean(
         header.classList.contains('menu-open') ||
         header.classList.contains('is-open') ||
         header.querySelector('[aria-expanded="true"], details[open]')
       );
 
-      const currentScrollY = window.scrollY || 0;
+      const currentScrollY = Math.max(0, window.scrollY || 0);
+      const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
       const threshold = Math.max(rect.height, 106);
 
       if (menuOpen || currentScrollY <= threshold) {
         header.classList.remove('sunder-header-hidden');
-      } else if (currentScrollY > lastScrollY + 4) {
+      } else if (currentScrollY >= maxScroll - 4) {
+        // Ignore bottom overscroll bounce
+      } else if (currentScrollY > lastScrollY + 16) {
         header.classList.add('sunder-header-hidden');
-      } else if (currentScrollY < lastScrollY - 4) {
+      } else if (currentScrollY < lastScrollY - 16) {
         header.classList.remove('sunder-header-hidden');
       }
 
@@ -979,6 +1222,8 @@
     isOverlapping,
     normalizeStageKey,
     normalizeDayKey,
+    getCollisionsForItem,
+    computeScheduleCollisions,
     normalizeStr,
     matchesGenreFilter,
     escapeHtml,
@@ -1025,28 +1270,7 @@
     boot();
   }
 
-  function updateNavScheduleBadges() {
-    const count = getFavorites().length;
-    document
-      .querySelectorAll('a[href$="program.html"]')
-      .forEach((link) => {
-        if (!link.closest('.site-nav, .rail-nav, .bottom-nav-dock, header, nav')) return;
-        let badge = link.querySelector('.fod-nav-schedule-badge');
-        if (count > 0) {
-          if (!badge) {
-            badge = document.createElement('span');
-            badge.className = 'fod-nav-schedule-badge';
-            link.appendChild(badge);
-          }
-          badge.textContent = String(count);
-        } else if (badge) {
-          badge.remove();
-        }
-      });
-  }
-
   window.addEventListener('festivalCartChanged', () => updateAllCartBadges());
-  window.addEventListener('festivalFavoritesChanged', () => updateNavScheduleBadges());
 
   window.addEventListener('storage', e => {
     if (!e || e.key === THEME_KEY) applyTheme(getFestivalTheme());

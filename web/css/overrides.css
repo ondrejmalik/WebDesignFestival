@@ -17,24 +17,24 @@ html[data-design="04-eventbrite"] {
   --fod-lunar-ink: #ffffff;
 }
 
-/* Darker gray surface hierarchy in Light Mode */
+/* Clean light-mode surface hierarchy (no washed-out monochrome gray) */
 html[data-design="04-eventbrite"][data-theme="light"] {
   color-scheme: light;
-  --eb-bg: #d9dee6;
-  --eb-surface-subtle: #f5f7fa;
-  --eb-surface-warm: #c7cfd9;
+  --eb-bg: #f4f6f9;
+  --eb-surface-subtle: #ffffff;
+  --eb-surface-warm: #eaedf2;
   --eb-ink-primary: #161719;
   --eb-ink-secondary: #2d3138;
-  --eb-ink-muted: #474e59;
-  --eb-border: #aeb7c4;
-  --eb-border-strong: #8792a3;
+  --eb-ink-muted: #4b5563;
+  --eb-border: #d5dce4;
+  --eb-border-strong: #b4c0cf;
   --fod-bg: #ffffff;
-  --fod-surface: #f5f7fa;
-  --fod-subtle: #cfd6e0;
-  --fod-border: #aeb7c4;
-  --fod-border-strong: #8792a3;
+  --fod-surface: #ffffff;
+  --fod-subtle: #eef2f6;
+  --fod-border: #d5dce4;
+  --fod-border-strong: #b4c0cf;
   --fod-text: #161719;
-  --fod-muted: #474e59;
+  --fod-muted: #4b5563;
 }
 
 html[data-design="04-eventbrite"][data-theme="light"],
@@ -44,7 +44,7 @@ html[data-design="04-eventbrite"][data-theme="light"] body {
 }
 
 html[data-design="04-eventbrite"][data-theme="light"] .eb-header {
-  background-color: #f5f7fa;
+  background-color: #ffffff;
   border-bottom-color: var(--eb-border);
 }
 
@@ -63,13 +63,23 @@ html[data-design="04-eventbrite"][data-theme="light"] .eb-ticket-box,
 html[data-design="04-eventbrite"][data-theme="light"] .fod-cart-panel,
 html[data-design="04-eventbrite"][data-theme="light"] .fod-search-item,
 html[data-design="04-eventbrite"][data-theme="light"] .fod-empty-card {
-  background-color: #f5f7fa;
+  background-color: #ffffff;
   border-color: var(--eb-border);
 }
 
 html[data-design="04-eventbrite"][data-theme="light"] .fod-timetable-card {
   background-color: #ffffff;
-  border-color: var(--eb-border);
+  border-top-color: var(--eb-border);
+  border-right-color: var(--eb-border);
+  border-bottom-color: var(--eb-border);
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-timetable-card.is-solar {
+  border-left-color: var(--fod-solar);
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-timetable-card.is-lunar {
+  border-left-color: var(--fod-lunar);
 }
 
 html[data-design="04-eventbrite"][data-theme="light"] .fod-timetable-card.is-saved {
@@ -78,8 +88,6 @@ html[data-design="04-eventbrite"][data-theme="light"] .fod-timetable-card.is-sav
 }
 
 html[data-design="04-eventbrite"][data-theme="light"] .fod-timetable-head,
-html[data-design="04-eventbrite"][data-theme="light"] .fod-slot-empty,
-html[data-design="04-eventbrite"][data-theme="light"] .fod-chip,
 html[data-design="04-eventbrite"][data-theme="light"] .fod-pill-stat,
 html[data-design="04-eventbrite"][data-theme="light"] .eb-organizer-bar,
 html[data-design="04-eventbrite"][data-theme="light"] .eb-tier-item,
@@ -87,6 +95,44 @@ html[data-design="04-eventbrite"][data-theme="light"] .eb-highlight-chip,
 html[data-design="04-eventbrite"][data-theme="light"] .eb-meta-icon {
   background-color: var(--fod-subtle);
   border-color: var(--eb-border);
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-slot-empty {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+  color: #64748b;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-stage-pill.is-solar {
+  background-color: #fff4ed;
+  border-color: #f59e0b;
+  color: #9a3412;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-stage-pill.is-lunar {
+  background-color: #eff6ff;
+  border-color: #60a5fa;
+  color: #1e40af;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-origin-pill {
+  background-color: #eef2f6;
+  border-color: #cbd5e1;
+  color: #334155;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-chip:not(.is-active),
+html[data-design="04-eventbrite"][data-theme="light"] .fav-toggle-btn:not(.is-saved) {
+  background-color: #ffffff;
+  border-color: #cbd5e1;
+  color: #161719;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-chip:not(.is-active):hover,
+html[data-design="04-eventbrite"][data-theme="light"] .fav-toggle-btn:not(.is-saved):hover {
+  background-color: #fff5f2;
+  border-color: var(--fod-accent-text);
+  color: var(--fod-accent-text);
 }
 
 html[data-design="04-eventbrite"][data-theme="light"] .fod-input,
@@ -104,8 +150,13 @@ html[data-design="04-eventbrite"][data-theme="light"] .eb-text-link {
 }
 
 html[data-design="04-eventbrite"][data-theme="light"] .bottom-nav-dock {
-  background-color: rgba(245, 247, 250, 0.96);
+  background-color: #ffffff;
   border-top-color: var(--eb-border);
+}
+
+html[data-design="04-eventbrite"] .eb-org-avatar {
+  background-color: var(--eb-accent-orange);
+  color: #ffffff;
 }
 
 /* Dark Mode: replace all purple & pink accents with orange, keep blue stage accents */
@@ -210,10 +261,34 @@ html[data-design="04-eventbrite"] .fod-open-schedule-cta:focus-visible {
   color: #ffffff;
 }
 
-html[data-design="04-eventbrite"] .fod-nav-schedule-badge {
+html[data-design="04-eventbrite"] .fod-nav-schedule-badge,
+html[data-design="04-eventbrite"] .nav-badge-count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 999px;
   background: #c93b1f;
   color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
   font-variant-numeric: tabular-nums;
+  text-align: center;
+  vertical-align: middle;
+}
+
+html[data-design="04-eventbrite"] .eb-nav .nav-badge-count {
+  margin-left: 4px;
+}
+
+@supports (text-box: trim-both cap alphabetic) {
+  html[data-design="04-eventbrite"] .nav-badge-count,
+  html[data-design="04-eventbrite"] .fod-nav-schedule-badge,
+  html[data-design="04-eventbrite"] .fod-cart-badge {
+    text-box: trim-both cap alphabetic;
+  }
 }
 
 html[data-design="04-eventbrite"] .fod-breadcrumbs a {
@@ -244,10 +319,39 @@ html[data-design="04-eventbrite"] .fod-chip:hover {
 }
 
 html[data-design="04-eventbrite"] .eb-header a.eb-nav-link.nav-link-tickets {
+  position: relative;
+  overflow: visible;
   background: #c93b1f;
   border-color: #c93b1f;
   color: #ffffff;
   border-bottom: 1px solid #c93b1f;
+}
+
+html[data-design="04-eventbrite"] .eb-header a.eb-nav-link.nav-link-tickets .fod-cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #c93b1f;
+  border: 2px solid #c93b1f;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.22);
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+}
+
+html[data-design="04-eventbrite"] .eb-header a.eb-nav-link.nav-link-tickets .fod-cart-badge.is-hidden,
+html[data-design="04-eventbrite"] .eb-header a.eb-nav-link.nav-link-tickets .fod-cart-badge:empty,
+html[data-design="04-eventbrite"] .eb-header a.eb-nav-link.nav-link-tickets .fod-cart-badge[data-count="0"] {
+  display: none;
 }
 
 html[data-design="04-eventbrite"] .eb-header a.eb-nav-link.nav-link-tickets:hover {
@@ -320,18 +424,82 @@ html[data-design="04-eventbrite"] .eb-header-actions .eb-lang-btn:focus-visible 
   box-shadow: 0 0 0 2px rgba(201, 59, 31, 0.28);
 }
 
+html[data-design="04-eventbrite"] .fod-mobile-schedule-btn {
+  display: none;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 36px;
+  min-height: 36px;
+  min-width: 40px;
+  padding: 0 10px;
+  border-radius: var(--eb-radius-sm);
+  border: 1px solid var(--fod-border-strong);
+  background-color: var(--fod-surface);
+  color: var(--fod-text);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-mobile-schedule-btn {
+  background-color: #1f2633;
+  color: #f3f4f6;
+  border-color: #475569;
+}
+
+html[data-design="04-eventbrite"] .fod-mobile-schedule-btn:hover,
+html[data-design="04-eventbrite"] .fod-mobile-schedule-btn:focus-visible,
+html[data-design="04-eventbrite"] .fod-mobile-schedule-btn.is-active,
+html[data-design="04-eventbrite"] .fod-mobile-schedule-btn[aria-current="page"] {
+  border-color: var(--fod-accent-text);
+  color: var(--fod-accent-text);
+  background-color: rgba(201, 59, 31, 0.12);
+  outline: none;
+}
+
+html[data-design="04-eventbrite"] .fod-mobile-schedule-btn .nav-badge-count {
+  margin-left: 0;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  font-size: 10.5px;
+}
+
 /* Centered page structure & locked units against CZ/EN layout shift */
 html[data-design="04-eventbrite"] .eb-container {
   max-width: 1120px;
   margin-inline: auto;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 961px) {
+  html[data-design="04-eventbrite"] .bottom-nav-dock {
+    display: none !important;
+  }
+
+  html[data-design="04-eventbrite"] .eb-nav {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+  }
+
   html[data-design="04-eventbrite"] .eb-header-inner {
     display: grid;
-    grid-template-columns: minmax(200px, 1fr) auto minmax(168px, 1fr);
+    grid-template-columns: auto minmax(0, 1fr) auto;
     align-items: center;
-    gap: 16px;
+    gap: 12px;
+  }
+
+  html[data-design="04-eventbrite"] .eb-header .eb-nav-link {
+    padding: 8px 9px;
+    font-size: 13.5px;
+    white-space: nowrap;
   }
 
   html[data-design="04-eventbrite"] .eb-logo {
@@ -344,6 +512,26 @@ html[data-design="04-eventbrite"] .eb-container {
 
   html[data-design="04-eventbrite"] .eb-header-actions {
     justify-self: end;
+  }
+}
+
+@media (min-width: 961px) and (max-width: 1140px) {
+  html[data-design="04-eventbrite"] .eb-logo-text {
+    display: none;
+  }
+
+  html[data-design="04-eventbrite"] .eb-header-actions .fod-theme-btn {
+    min-width: 40px;
+    padding: 0 10px;
+  }
+
+  html[data-design="04-eventbrite"] .eb-header-actions .fod-theme-btn .theme-label {
+    display: none;
+  }
+
+  html[data-design="04-eventbrite"] .eb-header .eb-nav-link {
+    padding: 8px 7px;
+    font-size: 13px;
   }
 }
 
@@ -404,17 +592,60 @@ html[data-design="04-eventbrite"] .fod-time-cell {
   font-variant-numeric: tabular-nums;
 }
 
-/* Mobile adjustments & dynamic orange bottom-nav-dock */
-@media (max-width: 768px) {
+/* Mobile & tablet adjustments (<= 960px) & dynamic orange bottom-nav-dock */
+@media (max-width: 960px) {
+  html[data-design="04-eventbrite"] body {
+    padding-bottom: calc(74px + env(safe-area-inset-bottom, 0px));
+  }
+
+  html[data-design="04-eventbrite"] .eb-nav {
+    display: none !important;
+  }
+
+  html[data-design="04-eventbrite"] .eb-header-inner {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  html[data-design="04-eventbrite"] .eb-logo {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: none;
+  }
+
+  html[data-design="04-eventbrite"] .eb-logo-text {
+    font-size: 14px;
+  }
+
+  html[data-design="04-eventbrite"] .eb-header-actions {
+    flex-shrink: 0;
+    gap: 6px;
+  }
+
+  html[data-design="04-eventbrite"] .fod-mobile-schedule-btn {
+    display: inline-flex;
+    height: 44px;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0 9px;
+  }
+
   html[data-design="04-eventbrite"] .eb-header-actions .fod-theme-btn {
+    height: 44px;
+    min-height: 44px;
     min-width: 82px;
-    padding: 0 8px;
+    padding: 0 10px;
     font-size: 12px;
   }
 
   html[data-design="04-eventbrite"] .eb-header-actions .eb-lang-btn {
+    height: 44px;
+    min-height: 44px;
     min-width: 44px;
-    padding: 0 8px;
+    padding: 0 10px;
     font-size: 12px;
   }
 
@@ -424,20 +655,63 @@ html[data-design="04-eventbrite"] .fod-time-cell {
   }
 
   html[data-design="04-eventbrite"] .bottom-nav-dock {
+    display: flex !important;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: calc(64px + env(safe-area-inset-bottom, 0px));
     padding: 4px 6px calc(4px + env(safe-area-inset-bottom, 0px));
     gap: 4px;
+    z-index: 100;
+    border-top: 1px solid var(--eb-border);
+    box-shadow: 0 -4px 16px rgba(22, 23, 25, 0.08);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  html[data-design="04-eventbrite"][data-theme="dark"] .bottom-nav-dock {
+    background-color: #151922;
   }
 
   html[data-design="04-eventbrite"] .bottom-nav-dock a.bottom-dock-item,
   html[data-design="04-eventbrite"] .bottom-nav-dock a.bottom-dock-home,
   html[data-design="04-eventbrite"] .bottom-nav-dock a.bottom-dock-tickets {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    position: relative;
+    overflow: visible;
     color: var(--eb-ink-muted);
     font-weight: 500;
     border: 1.5px solid transparent;
     background: transparent;
-    border-radius: 14px;
-    min-height: 46px;
+    border-radius: 12px;
+    min-height: 48px;
     padding: 4px 2px;
+  }
+
+  html[data-design="04-eventbrite"] .bottom-nav-dock .dock-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  html[data-design="04-eventbrite"] .bottom-nav-dock .dock-label {
+    font-size: 11px;
+    line-height: 1.15;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   html[data-design="04-eventbrite"] .bottom-nav-dock a.bottom-dock-home svg {
@@ -453,7 +727,7 @@ html[data-design="04-eventbrite"] .fod-time-cell {
     color: var(--fod-accent-text);
     border: 1.5px solid var(--fod-accent-text);
     background: rgba(201, 59, 31, 0.14);
-    border-radius: 999px;
+    border-radius: 12px;
     font-weight: 700;
   }
 
@@ -464,6 +738,79 @@ html[data-design="04-eventbrite"] .fod-time-cell {
   html[data-design="04-eventbrite"] .bottom-nav-dock a.bottom-dock-tickets.is-active svg,
   html[data-design="04-eventbrite"] .bottom-nav-dock a.bottom-dock-tickets[aria-current="page"] svg {
     color: var(--fod-accent-text);
+  }
+
+  html[data-design="04-eventbrite"] .bottom-nav-dock a.bottom-dock-tickets .fod-cart-badge {
+    position: absolute;
+    top: 2px;
+    left: calc(50% + 5px);
+    right: auto;
+    display: inline-grid;
+    place-items: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    font-size: 10px;
+    font-weight: 800;
+    line-height: 1;
+    background: #ffffff;
+    color: #c93b1f;
+    border: 1.5px solid #c93b1f;
+    border-radius: 999px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  html[data-design="04-eventbrite"] .bottom-nav-dock a.bottom-dock-tickets .fod-cart-badge.is-hidden,
+  html[data-design="04-eventbrite"] .bottom-nav-dock a.bottom-dock-tickets .fod-cart-badge:empty,
+  html[data-design="04-eventbrite"] .bottom-nav-dock a.bottom-dock-tickets .fod-cart-badge[data-count="0"] {
+    display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  html[data-design="04-eventbrite"] .eb-header-actions .fod-theme-btn {
+    min-width: 44px;
+    width: 44px;
+    padding: 0;
+  }
+
+  html[data-design="04-eventbrite"] .eb-header-actions .fod-theme-btn .theme-label {
+    display: none;
+  }
+}
+
+/* Option A: Decouple hero photo from text on mobile so EN/CZ text wrapping never resizes the image */
+@media (max-width: 768px) {
+  html[data-design="04-eventbrite"] .eb-main .eb-hero-banner {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 0;
+    padding: 0;
+  }
+
+  html[data-design="04-eventbrite"] .eb-main .eb-hero-media {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  html[data-design="04-eventbrite"] .eb-main .eb-hero-scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(11, 13, 19, 0.08) 0%,
+      rgba(11, 13, 19, 0.72) 100%
+    );
+  }
+
+  html[data-design="04-eventbrite"] .eb-main .eb-hero-inner {
+    padding-block: 20px 26px;
+    background-color: #0b0d13;
   }
 }
 
@@ -1102,13 +1449,37 @@ html[data-design="04-eventbrite"] .fod-route-branch-card {
   }
 }
 
+html[data-design="04-eventbrite"] .fod-map-pan-hint {
+  display: none;
+  margin: 0 0 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--fod-muted);
+}
+
+html[data-design="04-eventbrite"] .fod-map-scroll {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 12px;
+}
+
 @media (max-width: 640px) {
+  html[data-design="04-eventbrite"] .fod-map-pan-hint {
+    display: block;
+  }
+
   html[data-design="04-eventbrite"] .fod-route-svg {
-    display: none;
+    display: block;
+    width: 560px;
+    min-width: 560px;
+    max-width: none;
+    height: auto;
   }
 
   html[data-design="04-eventbrite"] .fod-mobile-route-schematic {
-    display: flex;
+    display: none;
   }
 
   html[data-design="04-eventbrite"] .fod-simple-check-row {
@@ -1128,35 +1499,153 @@ html[data-design="04-eventbrite"] .fod-route-branch-card {
    Cross-Review Readiness: Contrast-Safe Scroll, Touch Targets, Desktop Nav
    ========================================================================= */
 
-/* Keep offscreen scroll-trigger elements at full opacity so automated a11y
-   auditors (axe-core / Lighthouse) and instant jump-to-anchor views never
-   encounter 0.01 opacity contrast traps. */
-html[data-design="04-eventbrite"] .scroll-trigger.animate--fade-in.scroll-trigger--offscreen,
-html[data-design="04-eventbrite"] .scroll-trigger.animate--slide-in.scroll-trigger--offscreen,
-html[data-design="04-eventbrite"] .scroll-trigger.animate--slide-in.animate--subtle.scroll-trigger--offscreen {
-  opacity: 1 !important;
-  transform: none !important;
+/* =========================================================================
+   Hero Text Entrance (t3.codes-style staggered rise) + Contrast-Safe Sunder Scroll Reveals
+   ========================================================================= */
+
+@keyframes fodHeroRise {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
 }
 
-/* Comfortable desktop spacing for the 7-item spec-aligned navigation */
-@media (min-width: 900px) {
-  html[data-design="04-eventbrite"] .eb-header-inner {
-    grid-template-columns: auto 1fr auto;
-    gap: 12px;
+@keyframes fodHeroMediaSettle {
+  0% {
+    transform: scale(1.045);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Landing page hero staggered text entrance (no inline style="" needed) */
+html[data-design="04-eventbrite"] .eb-main .eb-hero-img {
+  animation: fodHeroMediaSettle 1.15s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+html[data-design="04-eventbrite"] .eb-main .eb-hero-kicker,
+html[data-design="04-eventbrite"] .eb-main .eb-hero-title,
+html[data-design="04-eventbrite"] .eb-main .eb-hero-date,
+html[data-design="04-eventbrite"] .eb-main .eb-hero-subtitle,
+html[data-design="04-eventbrite"] .eb-main .eb-hero-actions {
+  animation: fodHeroRise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+html[data-design="04-eventbrite"] .eb-main .eb-hero-kicker {
+  animation-delay: 0ms;
+}
+
+html[data-design="04-eventbrite"] .eb-main .eb-hero-title {
+  animation-delay: 90ms;
+}
+
+html[data-design="04-eventbrite"] .eb-main .eb-hero-date {
+  animation-delay: 180ms;
+}
+
+html[data-design="04-eventbrite"] .eb-main .eb-hero-subtitle {
+  animation-delay: 280ms;
+}
+
+html[data-design="04-eventbrite"] .eb-main .eb-hero-actions {
+  animation-delay: 380ms;
+}
+
+/* Subpage hero staggered text entrance */
+html[data-design="04-eventbrite"] .eb-program-hero .hero-meta,
+html[data-design="04-eventbrite"] .eb-program-hero .eb-page-title,
+html[data-design="04-eventbrite"] .eb-program-hero .eb-page-subtitle {
+  animation: fodHeroRise 0.58s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+html[data-design="04-eventbrite"] .eb-program-hero .hero-meta {
+  animation-delay: 0ms;
+}
+
+html[data-design="04-eventbrite"] .eb-program-hero .eb-page-title {
+  animation-delay: 75ms;
+}
+
+html[data-design="04-eventbrite"] .eb-program-hero .eb-page-subtitle {
+  animation-delay: 150ms;
+}
+
+/* Tasteful, contrast-safe Sunder scroll reveals below the fold:
+   Uses GPU transform transitions (never opacity: 0.01) with the same easing curve
+   so below-the-fold sections glide smoothly without flashing or axe-core contrast traps. */
+html[data-design="04-eventbrite"] .scroll-trigger,
+html[data-design="04-eventbrite"] .scroll-trigger.animate--fade-in,
+html[data-design="04-eventbrite"] .scroll-trigger.animate--slide-in,
+html[data-design="04-eventbrite"] .scroll-trigger.animate--slide-in.animate--subtle {
+  animation: none !important;
+  opacity: 1 !important;
+}
+
+html[data-design="04-eventbrite"] .scroll-trigger.animate--slide-in:not(.scroll-trigger--cancel):not(.sunder-settled) {
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--animation-order, 0) * 55ms);
+}
+
+html[data-design="04-eventbrite"] .scroll-trigger.animate--slide-in.animate--subtle:not(.scroll-trigger--cancel):not(.sunder-settled) {
+  transition: transform 0.42s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--animation-order, 0) * 35ms);
+}
+
+html[data-design="04-eventbrite"] .scroll-trigger.animate--slide-in.scroll-trigger--offscreen {
+  transform: translateY(20px) scale(0.988);
+}
+
+html[data-design="04-eventbrite"] .scroll-trigger.animate--slide-in.animate--subtle.scroll-trigger--offscreen {
+  transform: translateY(12px) scale(0.992);
+}
+
+html[data-design="04-eventbrite"] .scroll-trigger.animate--fade-in.scroll-trigger--offscreen {
+  transform: scale(0.99);
+}
+
+html[data-design="04-eventbrite"] .scroll-trigger.animate--fade-in:not(.scroll-trigger--cancel):not(.sunder-settled) {
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@media (max-width: 768px) {
+  html[data-design="04-eventbrite"] .scroll-trigger.animate--slide-in.scroll-trigger--offscreen {
+    transform: translateY(14px) scale(0.992);
   }
 
-  html[data-design="04-eventbrite"] .eb-nav {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
+  /* Keep dense 60-item mobile lists snappy with minimal lift and zero stagger lag */
+  html[data-design="04-eventbrite"] .fod-artist-card.scroll-trigger:not(.scroll-trigger--cancel):not(.sunder-settled),
+  html[data-design="04-eventbrite"] .fod-timetable-card.scroll-trigger:not(.scroll-trigger--cancel):not(.sunder-settled) {
+    transition: transform 0.26s cubic-bezier(0.2, 0.7, 0.2, 1);
+    transition-delay: 0ms;
   }
 
-  html[data-design="04-eventbrite"] .eb-header .eb-nav-link {
-    padding: 8px 9px;
-    font-size: 13.5px;
-    white-space: nowrap;
+  html[data-design="04-eventbrite"] .fod-artist-card.scroll-trigger.scroll-trigger--offscreen,
+  html[data-design="04-eventbrite"] .fod-timetable-card.scroll-trigger.scroll-trigger--offscreen {
+    transform: translateY(8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-design="04-eventbrite"] .eb-main .eb-hero-img,
+  html[data-design="04-eventbrite"] .eb-main .eb-hero-kicker,
+  html[data-design="04-eventbrite"] .eb-main .eb-hero-title,
+  html[data-design="04-eventbrite"] .eb-main .eb-hero-date,
+  html[data-design="04-eventbrite"] .eb-main .eb-hero-subtitle,
+  html[data-design="04-eventbrite"] .eb-main .eb-hero-actions,
+  html[data-design="04-eventbrite"] .eb-program-hero .hero-meta,
+  html[data-design="04-eventbrite"] .eb-program-hero .eb-page-title,
+  html[data-design="04-eventbrite"] .eb-program-hero .eb-page-subtitle,
+  html[data-design="04-eventbrite"] .scroll-trigger,
+  html[data-design="04-eventbrite"] .scroll-trigger.scroll-trigger--offscreen {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
   }
 }
 
@@ -1181,5 +1670,626 @@ html[data-design="04-eventbrite"] .stage-card-link {
     height: 44px;
     min-height: 44px;
     min-width: 44px;
+  }
+}
+
+/* =========================================================================
+   DESIGN 04-EVENTBRITE: PROGRAM CONFLICT NOTIFICATIONS (LIGHT & DARK)
+   ========================================================================= */
+html[data-design="04-eventbrite"][data-theme="light"] .fod-toast.is-conflict {
+  background-color: #fff5f5;
+  color: #991b1b;
+  border-color: #dc2626;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-toast-icon {
+  color: #dc2626;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-toast-action,
+html[data-design="04-eventbrite"][data-theme="light"] .fod-conflict-banner-link {
+  background-color: #b91c1c;
+  border-color: #b91c1c;
+  color: #ffffff;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-toast-action:hover,
+html[data-design="04-eventbrite"][data-theme="light"] .fod-conflict-banner-link:hover {
+  background-color: #991b1b;
+  border-color: #991b1b;
+  color: #ffffff;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-toast-close {
+  color: #991b1b;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-conflict-pill {
+  background-color: #fff5f5;
+  border-color: #dc2626;
+  color: #991b1b;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-conflict-pill:hover {
+  background-color: #fee2e2;
+  border-color: #b91c1c;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-program-conflict-banner {
+  background-color: #fff5f5;
+  border-color: #fca5a5;
+  border-left-color: #dc2626;
+  color: #991b1b;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-conflict-banner-title,
+html[data-design="04-eventbrite"][data-theme="light"] .fod-conflict-more-note {
+  color: #991b1b;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-conflict-pair-item {
+  background-color: #ffffff;
+  border-color: #fecaca;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-conflict-pair-text {
+  color: #7f1d1d;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-conflict-pair-day {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-conflict-jump-btn {
+  background-color: #ffffff;
+  border-color: #dc2626;
+  color: #991b1b;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-conflict-jump-btn:hover {
+  background-color: #b91c1c;
+  border-color: #b91c1c;
+  color: #ffffff;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-timetable-card.has-collision,
+html[data-design="04-eventbrite"][data-theme="light"] .fod-timetable-card.is-saved.has-collision {
+  background-color: #fff5f5;
+  border-color: #dc2626;
+  border-left-color: #dc2626;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-card-conflict-note {
+  background-color: #fef2f2;
+  border-color: #fecaca;
+  color: #991b1b;
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .fod-card-conflict-note svg {
+  color: #dc2626;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-toast.is-conflict {
+  background-color: #2b1417;
+  color: #fee2e2;
+  border-color: #f87171;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55);
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-toast-icon {
+  color: #f87171;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-toast-action,
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-conflict-banner-link {
+  background-color: #b91c1c;
+  border-color: #f87171;
+  color: #ffffff;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-toast-action:hover,
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-conflict-banner-link:hover {
+  background-color: #dc2626;
+  border-color: #fca5a5;
+  color: #ffffff;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-toast-close {
+  color: #fee2e2;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-toast-close:hover {
+  background-color: rgba(248, 113, 113, 0.18);
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-toast-action:focus-visible,
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-toast-close:focus-visible,
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-conflict-pill:focus-visible,
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-conflict-banner-link:focus-visible,
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-conflict-jump-btn:focus-visible {
+  outline-color: #fca5a5;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-conflict-pill {
+  background-color: #2b1417;
+  border-color: #f87171;
+  color: #fee2e2;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-conflict-pill:hover {
+  background-color: #3f1a1f;
+  border-color: #fca5a5;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-program-conflict-banner {
+  background-color: #2b1417;
+  border-color: #7f1d1d;
+  border-left-color: #f87171;
+  color: #fee2e2;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-conflict-banner-title,
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-conflict-more-note {
+  color: #fee2e2;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-conflict-pair-item {
+  background-color: #1f1114;
+  border-color: #7f1d1d;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-conflict-pair-text {
+  color: #fecaca;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-conflict-pair-day {
+  background-color: #451a1f;
+  color: #fecaca;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-conflict-jump-btn {
+  background-color: #2b1417;
+  border-color: #f87171;
+  color: #fee2e2;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-conflict-jump-btn:hover {
+  background-color: #b91c1c;
+  border-color: #fca5a5;
+  color: #ffffff;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-timetable-card.has-collision,
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-timetable-card.is-saved.has-collision {
+  background-color: #261418;
+  border-color: #f87171;
+  border-left-color: #f87171;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-card-conflict-note {
+  background-color: #33181c;
+  border-color: #7f1d1d;
+  color: #fecaca;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-card-conflict-note svg {
+  color: #f87171;
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .fod-timetable-card.is-conflict-focus {
+  outline-color: #f87171;
+}
+
+@media (max-width: 480px) {
+  html[data-design="04-eventbrite"] .fod-program-conflict-banner {
+    padding: 10px 12px;
+  }
+
+  html[data-design="04-eventbrite"] .fod-conflict-pair-item {
+    padding: 8px;
+  }
+
+  html[data-design="04-eventbrite"] .fod-toast.is-conflict {
+    padding: 10px 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-design="04-eventbrite"] .fod-toast,
+  html[data-design="04-eventbrite"] .fod-conflict-pill,
+  html[data-design="04-eventbrite"] .fod-conflict-banner-link,
+  html[data-design="04-eventbrite"] .fod-conflict-jump-btn,
+  html[data-design="04-eventbrite"] .fod-toast-action,
+  html[data-design="04-eventbrite"] .fod-toast-close {
+    transition: none;
+  }
+
+  html[data-design="04-eventbrite"][data-theme="dark"] .fod-timetable-card.is-conflict-focus {
+    animation: none;
+    box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.45);
+  }
+}
+
+/* =========================================================================
+   Clean Light/Dark Eventbrite Editorial Footer (04-eventbrite)
+   ========================================================================= */
+html[data-design="04-eventbrite"] .eb-footer {
+  position: relative;
+  margin-top: 56px;
+  padding: 44px 0 28px;
+  border-top: 1px solid var(--eb-border);
+  background-color: #ffffff;
+  color: var(--eb-ink-primary);
+  --eb-foot-bg: #ffffff;
+  --eb-foot-border: #d5dce4;
+  --eb-foot-border-strong: #b4c0cf;
+  --eb-foot-ink: #161719;
+  --eb-foot-secondary: #2d3138;
+  --eb-foot-muted: #4b5563;
+  --eb-foot-accent: #9f2912;
+  --eb-foot-ctrl-bg: #ffffff;
+  --eb-foot-ctrl-hover-bg: rgba(201, 59, 31, 0.08);
+}
+
+html[data-design="04-eventbrite"][data-theme="light"] .eb-footer {
+  background-color: var(--eb-foot-bg);
+  color: var(--eb-foot-ink);
+  border-top-color: var(--eb-foot-border);
+}
+
+html[data-design="04-eventbrite"][data-theme="dark"] .eb-footer {
+  --eb-foot-bg: #151922;
+  --eb-foot-border: #2b3547;
+  --eb-foot-border-strong: #475569;
+  --eb-foot-ink: #f3f4f6;
+  --eb-foot-secondary: #e2e8f0;
+  --eb-foot-muted: #cbd5e1;
+  --eb-foot-accent: #ff9c85;
+  --eb-foot-ctrl-bg: #1f2633;
+  --eb-foot-ctrl-hover-bg: rgba(201, 59, 31, 0.16);
+  background-color: var(--eb-foot-bg);
+  color: var(--eb-foot-ink);
+  border-top-color: var(--eb-foot-border);
+}
+
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+  min-width: 0;
+}
+
+/* Top 4-column editorial layout */
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) repeat(3, minmax(0, 1fr));
+  gap: 32px 28px;
+  align-items: start;
+}
+
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-brand-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0;
+}
+
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-brand-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--eb-foot-ink);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-brand-link:hover,
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-brand-link:focus-visible {
+  color: var(--eb-foot-accent);
+  text-decoration: none;
+}
+
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-brand-link:focus-visible {
+  outline: 2px solid var(--eb-foot-accent);
+  outline-offset: 3px;
+  border-radius: var(--eb-radius-sm);
+}
+
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-brand-name {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-meta {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--eb-foot-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-address {
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  margin-top: 2px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--eb-foot-muted);
+}
+
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-mail {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  color: var(--eb-foot-ink);
+  font-weight: 600;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: color 0.15s ease;
+}
+
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-mail:hover,
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-mail:focus-visible {
+  color: var(--eb-foot-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+}
+
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-mail:focus-visible {
+  outline: 2px solid var(--eb-foot-accent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* Editorial link columns */
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-col-heading {
+  margin: 0 0 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--eb-foot-muted);
+}
+
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-links-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 30px;
+  padding: 3px 0;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--eb-foot-secondary);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: color 0.15s ease;
+}
+
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-link:hover,
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-link:focus-visible {
+  color: var(--eb-foot-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+}
+
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-link:focus-visible {
+  outline: 2px solid var(--eb-foot-accent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-link[aria-current="page"] {
+  color: var(--eb-foot-accent);
+  font-weight: 700;
+}
+
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-stage-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-dot-solar {
+  background-color: var(--fod-solar);
+}
+
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-dot-lunar {
+  background-color: var(--fod-lunar);
+}
+
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-link .nav-badge-count.is-hidden {
+  display: none;
+}
+
+/* Bottom colophon & flat 4px utility controls matching header */
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-colophon {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--eb-foot-border);
+}
+
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-copy {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--eb-foot-muted);
+}
+
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-utils {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-util-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 36px;
+  min-height: 36px;
+  min-width: 44px;
+  padding: 0 12px;
+  border-radius: var(--eb-radius-sm);
+  border: 1px solid var(--eb-foot-border-strong);
+  background-color: var(--eb-foot-ctrl-bg);
+  color: var(--eb-foot-ink);
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+}
+
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-util-btn.lang-switch {
+  min-width: 52px;
+}
+
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-util-btn.theme-switch-btn {
+  min-width: 96px;
+}
+
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-util-btn:hover,
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-util-btn:focus-visible {
+  border-color: var(--eb-foot-accent);
+  color: var(--eb-foot-accent);
+  background-color: var(--eb-foot-ctrl-hover-bg);
+  outline: none;
+}
+
+html[data-design="04-eventbrite"] .eb-footer .eb-footer-util-btn:focus-visible {
+  box-shadow: 0 0 0 2px rgba(201, 59, 31, 0.28);
+}
+
+@media (max-width: 960px) {
+  html[data-design="04-eventbrite"] .eb-footer {
+    padding-bottom: 92px;
+  }
+
+  html[data-design="04-eventbrite"] body:has(.fod-mobile-cart-bar:not([hidden]):not(.is-empty)) .eb-footer {
+    padding-bottom: 164px;
+  }
+
+  html[data-design="04-eventbrite"] .eb-footer .eb-footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  html[data-design="04-eventbrite"] .eb-footer {
+    padding-top: 32px;
+  }
+
+  html[data-design="04-eventbrite"] .eb-footer .eb-footer-shell {
+    gap: 24px;
+  }
+
+  html[data-design="04-eventbrite"] .eb-footer .eb-footer-grid {
+    gap: 20px 16px;
+  }
+
+  html[data-design="04-eventbrite"] .eb-footer .eb-footer-brand-col {
+    grid-column: 1 / -1;
+    gap: 8px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--eb-foot-border);
+  }
+
+  html[data-design="04-eventbrite"] .eb-footer .eb-footer-col-heading {
+    margin-bottom: 6px;
+  }
+
+  html[data-design="04-eventbrite"] .eb-footer .eb-footer-links-list {
+    gap: 0;
+  }
+
+  html[data-design="04-eventbrite"] .eb-footer .eb-footer-col:last-child {
+    grid-column: 1 / -1;
+    padding-top: 16px;
+    border-top: 1px solid var(--eb-foot-border);
+  }
+
+  html[data-design="04-eventbrite"] .eb-footer .eb-footer-col:last-child nav {
+    width: 100%;
+  }
+
+  html[data-design="04-eventbrite"] .eb-footer .eb-footer-col:last-child .eb-footer-links-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 16px;
+  }
+
+  html[data-design="04-eventbrite"] .eb-footer .eb-footer-link,
+  html[data-design="04-eventbrite"] .eb-footer .eb-footer-mail {
+    min-height: 45px;
+    min-width: 45px;
+    padding: 6px 0;
+  }
+
+  html[data-design="04-eventbrite"] .eb-footer .eb-footer-util-btn {
+    height: 44px;
+    min-height: 44px;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  html[data-design="04-eventbrite"] .eb-footer .eb-footer-colophon.scroll-trigger.animate--slide-in {
+    animation: none;
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 540px) {
+  html[data-design="04-eventbrite"] .eb-footer .eb-footer-colophon {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-design="04-eventbrite"] .eb-footer .eb-footer-link,
+  html[data-design="04-eventbrite"] .eb-footer .eb-footer-mail,
+  html[data-design="04-eventbrite"] .eb-footer .eb-footer-util-btn {
+    transition: none;
   }
 }
