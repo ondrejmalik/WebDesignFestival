@@ -281,6 +281,19 @@
     });
 
     updateThemeButtons(getFestivalTheme());
+    updateMobileScheduleButtons(getFavorites().length, lang);
+  }
+
+  function updateMobileScheduleButtons(count, langOverride) {
+    const isCs = (langOverride || getLang()) === 'cs';
+    const c = typeof count === 'number' ? count : getFavorites().length;
+    const label = isCs
+      ? (c > 0 ? `Můj plán (${c})` : 'Můj plán')
+      : (c > 0 ? `My Schedule (${c})` : 'My Schedule');
+    document.querySelectorAll('.fod-mobile-schedule-btn').forEach(btn => {
+      btn.setAttribute('aria-label', label);
+      btn.setAttribute('title', label);
+    });
   }
 
   function bindLangButtonsClean() {
@@ -436,12 +449,14 @@
 
   function updateAllFavBadges(countOverride) {
     const count = typeof countOverride === 'number' ? countOverride : getFavorites().length;
+    const badgeText = count > 99 ? '99+' : String(count);
     document.querySelectorAll('.nav-badge-count, .fav-count-badge, #fav-count').forEach(el => {
-      el.textContent = String(count);
+      el.textContent = el.classList.contains('nav-badge-count') ? badgeText : String(count);
       if (el.classList.contains('nav-badge-count')) {
         el.classList.toggle('is-hidden', count === 0);
       }
     });
+    updateMobileScheduleButtons(count);
     const planBarCount = document.getElementById('plan-bar-count');
     if (planBarCount) {
       planBarCount.textContent = formatShowsCount(count, getLang());
@@ -494,7 +509,6 @@
       localStorage.setItem(CART_KEY, JSON.stringify(clean));
     } catch (e) {}
     updateAllCartBadges();
-    updateNavScheduleBadges();
     window.dispatchEvent(new CustomEvent('festivalCartChanged', { detail: { items: clean } }));
     return clean;
   }
@@ -505,8 +519,9 @@
 
   function updateAllCartBadges() {
     const count = getCartCount();
+    const display = count > 99 ? '99+' : (count > 0 ? String(count) : '');
     document.querySelectorAll('.fod-cart-badge').forEach(el => {
-      el.textContent = count > 0 ? String(count) : '';
+      el.textContent = display;
       el.setAttribute('data-count', String(count));
       el.classList.toggle('is-hidden', count === 0);
     });
@@ -626,6 +641,24 @@
     });
     updateThemeButtons(getFestivalTheme());
 
+    // 1b. Mobile/tablet top-right My Schedule shortcut in .eb-header-actions
+    document.querySelectorAll('.eb-header-actions').forEach(actions => {
+      if (!actions.querySelector('.fod-mobile-schedule-btn')) {
+        const schedLink = document.createElement('a');
+        schedLink.href = 'my-schedule.html';
+        schedLink.className = 'fod-mobile-schedule-btn';
+        schedLink.innerHTML =
+          '<svg class="fod-mobile-schedule-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>' +
+          '<span class="nav-badge-count is-hidden">0</span>';
+        const isOnSchedule = getCurrentPage() === 'my-schedule.html';
+        if (isOnSchedule) {
+          schedLink.classList.add('is-active');
+          schedLink.setAttribute('aria-current', 'page');
+        }
+        actions.insertBefore(schedLink, actions.firstChild);
+      }
+    });
+
     // 2. Ensure My Schedule links in nav & bottom dock carry a live count badge
     document.querySelectorAll('header nav a[href="my-schedule.html"], .side-rail nav a[href="my-schedule.html"], .bottom-nav-dock a[href="my-schedule.html"]').forEach(a => {
       if (!a.querySelector('.nav-badge-count')) {
@@ -675,7 +708,6 @@
 
     updateAllFavBadges();
     updateAllCartBadges();
-    updateNavScheduleBadges();
   }
 
   function enhanceHomepage() {
@@ -870,24 +902,23 @@
             }
           });
         },
-        { rootMargin: '0px 0px -50px 0px' }
+        { rootMargin: '0px' }
       );
     }
 
-    const viewportCutoff = (window.innerHeight || 900) * 0.95;
+    const viewportCutoff = (window.innerHeight || 900) * 0.98;
 
     elements.forEach(el => {
       if (el.dataset.sunderObserved === '1') return;
       el.dataset.sunderObserved = '1';
 
-      // On initial page load, do not hide elements already in/above the viewport
-      // so deferred JS never causes a visible -> hidden -> animate flash.
-      if (!isDynamicMutation) {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < viewportCutoff) {
-          el.classList.remove('scroll-trigger--offscreen');
-          return;
-        }
+      // Never hide elements already in/above the viewport (including dynamic updates)
+      // so deferred JS and live DOM updates never cause a visible -> hidden -> animate flash.
+      const rect = el.getBoundingClientRect();
+      if (rect.top < viewportCutoff) {
+        el.classList.remove('scroll-trigger--offscreen');
+        el.classList.add('scroll-trigger--cancel');
+        return;
       }
 
       el.classList.add('scroll-trigger--offscreen');
@@ -900,7 +931,7 @@
     if (!header || prefersReducedMotion()) return;
 
     header.classList.add('sunder-header-sticky', 'sunder-header-animate');
-    let lastScrollY = window.scrollY || 0;
+    let lastScrollY = Math.max(0, window.scrollY || 0);
     let ticking = false;
 
     const updateHeader = () => {
@@ -908,20 +939,30 @@
       const rect = header.getBoundingClientRect();
       if (rect.height === 0 || rect.width === 0) return;
 
+      // Keep mobile/tablet header permanently visible to avoid overscroll bounce flicker
+      if (window.innerWidth <= 960) {
+        header.classList.remove('sunder-header-hidden');
+        lastScrollY = Math.max(0, window.scrollY || 0);
+        return;
+      }
+
       const menuOpen = Boolean(
         header.classList.contains('menu-open') ||
         header.classList.contains('is-open') ||
         header.querySelector('[aria-expanded="true"], details[open]')
       );
 
-      const currentScrollY = window.scrollY || 0;
+      const currentScrollY = Math.max(0, window.scrollY || 0);
+      const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
       const threshold = Math.max(rect.height, 106);
 
       if (menuOpen || currentScrollY <= threshold) {
         header.classList.remove('sunder-header-hidden');
-      } else if (currentScrollY > lastScrollY + 4) {
+      } else if (currentScrollY >= maxScroll - 4) {
+        // Ignore bottom overscroll bounce
+      } else if (currentScrollY > lastScrollY + 16) {
         header.classList.add('sunder-header-hidden');
-      } else if (currentScrollY < lastScrollY - 4) {
+      } else if (currentScrollY < lastScrollY - 16) {
         header.classList.remove('sunder-header-hidden');
       }
 
@@ -1025,28 +1066,7 @@
     boot();
   }
 
-  function updateNavScheduleBadges() {
-    const count = getFavorites().length;
-    document
-      .querySelectorAll('a[href$="program.html"]')
-      .forEach((link) => {
-        if (!link.closest('.site-nav, .rail-nav, .bottom-nav-dock, header, nav')) return;
-        let badge = link.querySelector('.fod-nav-schedule-badge');
-        if (count > 0) {
-          if (!badge) {
-            badge = document.createElement('span');
-            badge.className = 'fod-nav-schedule-badge';
-            link.appendChild(badge);
-          }
-          badge.textContent = String(count);
-        } else if (badge) {
-          badge.remove();
-        }
-      });
-  }
-
   window.addEventListener('festivalCartChanged', () => updateAllCartBadges());
-  window.addEventListener('festivalFavoritesChanged', () => updateNavScheduleBadges());
 
   window.addEventListener('storage', e => {
     if (!e || e.key === THEME_KEY) applyTheme(getFestivalTheme());

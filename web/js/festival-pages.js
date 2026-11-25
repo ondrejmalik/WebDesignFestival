@@ -732,22 +732,44 @@
       }
     }
 
+    function syncFavoriteCardStates() {
+      const isCs = core.getLang() === 'cs';
+      const favIds = new Set(core.getFavorites().map(f => f.id));
+      const fc = document.getElementById('fav-count');
+      if (fc) fc.textContent = String(favIds.size);
+
+      root.querySelectorAll('.fod-timetable-card[data-id]').forEach(card => {
+        const id = card.getAttribute('data-id');
+        const isFav = favIds.has(id);
+        card.classList.toggle('is-saved', isFav);
+        const btn = card.querySelector('.fav-toggle-btn[data-perf-id]');
+        if (btn) {
+          btn.classList.toggle('is-saved', isFav);
+          btn.setAttribute('aria-pressed', String(isFav));
+          const sr = btn.querySelector('.fod-sr-only');
+          const srHtml = sr ? sr.outerHTML : '';
+          btn.innerHTML = `${isFav ? (isCs ? '✓ V plánu' : '✓ In Plan') : (isCs ? '+ Přidat' : '+ Add')}${srHtml}`;
+        }
+      });
+    }
+
     root.addEventListener('click', e => {
       const btn = e.target && e.target.closest && e.target.closest('.fav-toggle-btn[data-perf-id]');
       if (!btn) return;
       const id = btn.getAttribute('data-perf-id');
       if (!id) return;
       core.toggleFavoriteById(id);
-      renderDays();
-      const fc = document.getElementById('fav-count');
-      if (fc) fc.textContent = String(core.getFavorites().length);
     });
 
     window.addEventListener('languageChanged', renderShell);
     window.addEventListener('favoritesUpdated', () => {
-      const fc = document.getElementById('fav-count');
-      if (fc) fc.textContent = String(core.getFavorites().length);
-      renderDays();
+      if (state.onlyFavs) {
+        const fc = document.getElementById('fav-count');
+        if (fc) fc.textContent = String(core.getFavorites().length);
+        renderDays();
+      } else {
+        syncFavoriteCardStates();
+      }
     });
 
     renderShell();
@@ -771,17 +793,46 @@
       hashId: (window.location.hash || '').replace('#', '').toLowerCase()
     };
 
+    const COUNTRY_ABBR_ALIASES = { gb: 'uk', cr: 'cz' };
+    const STAGE_ABBR_MAP = { sh: 'solar', lfd: 'lunar' };
+    const KNOWN_COUNTRY_CODES = new Set(
+      Object.keys(data.COUNTRIES || {}).map(code => core.normalizeStr(code))
+    );
+
     function getFilteredArtists() {
       const favIds = new Set(core.getFavorites().map(f => f.id));
-      const q = core.normalizeStr(state.query.trim());
+      const qRaw = core.normalizeStr(state.query.trim());
+      const tokens = qRaw ? qRaw.split(/\s+/).filter(Boolean) : [];
       return data.PERFORMERS.filter(p => {
         if (state.day !== 'all' && p.dayKey !== state.day) return false;
         if (state.genre !== 'all' && !core.matchesGenreFilter(p.genre, state.genre)) return false;
         if (state.onlyFavs && !favIds.has(p.id)) return false;
-        if (q) {
-          const country = data.COUNTRIES[p.origin] || { en: '', cs: '' };
-          const hay = core.normalizeStr(`${p.name} ${p.genre} ${p.origin} ${country.en} ${country.cs} ${p.stage} ${p.bioEn} ${p.bioCs}`);
-          if (!hay.includes(q)) return false;
+        if (tokens.length > 0) {
+          const originCode = core.normalizeStr(p.origin);
+          const initials = core.normalizeStr(getArtistInitials(p.name));
+          const stageAbbr = p.stageKey === 'lunar' ? 'lfd' : 'sh';
+          const dayShortEn = core.normalizeStr(p.dayShortEn || '').split(/\s+/)[0] || '';
+          const dayShortCs = core.normalizeStr(p.dayShortCs || '').split(/\s+/)[0] || '';
+          const hay = buildPerformerSearchHaystack(p, core, data);
+          const nameGenreTokens = core.normalizeStr(`${p.name} ${p.genre}`).split(/[^a-z0-9]+/).filter(Boolean);
+
+          const allMatch = tokens.every(tok => {
+            const countryAlias = COUNTRY_ABBR_ALIASES[tok] || tok;
+            if (KNOWN_COUNTRY_CODES.has(countryAlias)) {
+              return originCode === countryAlias || initials === tok || nameGenreTokens.includes(tok);
+            }
+            if (STAGE_ABBR_MAP[tok]) {
+              return p.stageKey === STAGE_ABBR_MAP[tok] || initials === tok || nameGenreTokens.includes(tok);
+            }
+            if (tok === initials || tok === stageAbbr || tok === dayShortEn || tok === dayShortCs) {
+              return true;
+            }
+            if (tok.length <= 2) {
+              return originCode === tok || initials === tok || nameGenreTokens.some(w => w.startsWith(tok));
+            }
+            return hay.includes(tok);
+          });
+          if (!allMatch) return false;
         }
         return true;
       });
@@ -1027,20 +1078,42 @@
       }
     }
 
+    function syncArtistFavStates() {
+      const isCs = core.getLang() === 'cs';
+      const favIds = new Set(core.getFavorites().map(f => f.id));
+      const fc = document.getElementById('artists-fav-count');
+      if (fc) fc.textContent = String(favIds.size);
+
+      root.querySelectorAll('.fod-artist-card[data-id]').forEach(card => {
+        const id = card.getAttribute('data-id');
+        const isFav = favIds.has(id);
+        card.classList.toggle('is-saved', isFav);
+        const btn = card.querySelector('.artist-fav-btn[data-perf-id]');
+        if (btn) {
+          btn.classList.toggle('is-saved', isFav);
+          btn.setAttribute('aria-pressed', String(isFav));
+          btn.textContent = isFav
+            ? (isCs ? '★ V plánu' : '★ Saved')
+            : (isCs ? '☆ Přidat' : '☆ Add');
+        }
+      });
+    }
+
     root.addEventListener('click', e => {
       const btn = e.target && e.target.closest && e.target.closest('.artist-fav-btn[data-perf-id]');
       if (!btn) return;
       core.toggleFavoriteById(btn.getAttribute('data-perf-id'));
-      const fc = document.getElementById('artists-fav-count');
-      if (fc) fc.textContent = String(core.getFavorites().length);
-      renderGrid();
     });
 
     window.addEventListener('languageChanged', renderShell);
     window.addEventListener('favoritesUpdated', () => {
-      const fc = document.getElementById('artists-fav-count');
-      if (fc) fc.textContent = String(core.getFavorites().length);
-      renderGrid();
+      if (state.onlyFavs) {
+        const fc = document.getElementById('artists-fav-count');
+        if (fc) fc.textContent = String(core.getFavorites().length);
+        renderGrid();
+      } else {
+        syncArtistFavStates();
+      }
     });
 
     renderShell();
@@ -1482,7 +1555,6 @@
         const id = favBtn.getAttribute('data-perf-id');
         if (id) {
           core.toggleFavoriteById(id);
-          render();
         }
       }
     });
@@ -1727,38 +1799,41 @@
                 </div>
               </div>
 
-              <svg viewBox="0 0 880 340" class="fod-route-svg" role="img" aria-label="${isCs ? 'Mapa trasy z Kutná Hora hl.n. ke Vstupu A' : 'Route map from Kutná Hora hl.n. to Entrance A'}">
-                <rect x="0" y="0" width="880" height="340" rx="12" class="fod-svg-bg"/>
-                <g>
-                  <rect x="24" y="105" width="180" height="120" rx="8" class="fod-svg-node"/>
-                  <text x="114" y="138" text-anchor="middle" class="fod-svg-title">Kutná Hora hl.n.</text>
-                  <text x="114" y="160" text-anchor="middle" class="fod-svg-sub">${isCs ? 'Vlaky R9 (Praha 55m)' : 'R9 Trains (Prague 55m)'}</text>
-                  <text x="114" y="182" text-anchor="middle" class="fod-svg-sub">${isCs ? 'Shuttle: Stanoviště 1' : 'Shuttle: Bus Bay 1'}</text>
-                </g>
-                <g class="route-bus-group">
-                  <path d="M 204 135 Q 440 25 685 135" fill="none" class="fod-svg-bus-path"/>
-                  <rect x="315" y="26" width="260" height="28" rx="6" class="fod-svg-bus-badge"/>
-                  <text x="445" y="45" text-anchor="middle" class="fod-svg-bus-text">${isCs ? 'Shuttle Bus: 7 min (zdarma)' : 'Shuttle Bus: 7 min (free)'}</text>
-                </g>
-                <g class="route-walk-group">
-                  <rect x="285" y="185" width="165" height="82" rx="8" class="fod-svg-node"/>
-                  <text x="367" y="214" text-anchor="middle" class="fod-svg-title">${isCs ? 'Sedlec a Kostnice' : 'Sedlec & Ossuary'}</text>
-                  <text x="367" y="234" text-anchor="middle" class="fod-svg-sub">0.7 km</text>
-                  <rect x="495" y="190" width="150" height="74" rx="8" class="fod-svg-node"/>
-                  <text x="570" y="218" text-anchor="middle" class="fod-svg-title">${isCs ? 'Lávka Vrchlice' : 'Vrchlice Footbridge'}</text>
-                  <text x="570" y="238" text-anchor="middle" class="fod-svg-sub">1.6 km</text>
-                  <path d="M 204 185 L 285 220 M 450 225 L 495 225 M 645 220 L 685 175" fill="none" class="fod-svg-walk-path"/>
-                  <rect x="305" y="288" width="280" height="28" rx="6" class="fod-svg-walk-badge"/>
-                  <text x="445" y="307" text-anchor="middle" class="fod-svg-walk-text">${isCs ? 'Pěší trasa: 1,8 km (22-25 min)' : 'Walking route: 1.8 km (22-25 min)'}</text>
-                </g>
-                <g>
-                  <rect x="685" y="96" width="172" height="145" rx="8" class="fod-svg-venue"/>
-                  <text x="771" y="128" text-anchor="middle" class="fod-svg-title">${isCs ? 'Vstup A · Areál' : 'Entrance A · Venue'}</text>
-                  <text x="771" y="150" text-anchor="middle" class="fod-svg-sub">${isCs ? 'Akreditace & Úschovna' : 'Wristbands & Lockers'}</text>
-                  <text x="771" y="182" text-anchor="middle" class="fod-svg-sub">Solar Horizon (4,500)</text>
-                  <text x="771" y="204" text-anchor="middle" class="fod-svg-sub">Lunar Dome (1,800 · ${isCs ? 'kryté' : 'covered'})</text>
-                </g>
-              </svg>
+              <p class="fod-map-pan-hint" aria-hidden="true">${isCs ? '← Posuňte mapu do stran →' : '← Swipe map sideways →'}</p>
+              <div class="fod-map-scroll">
+                <svg viewBox="0 0 880 340" class="fod-route-svg" role="img" aria-label="${isCs ? 'Mapa trasy z Kutná Hora hl.n. ke Vstupu A' : 'Route map from Kutná Hora hl.n. to Entrance A'}">
+                  <rect x="0" y="0" width="880" height="340" rx="12" class="fod-svg-bg"/>
+                  <g>
+                    <rect x="24" y="105" width="180" height="120" rx="8" class="fod-svg-node"/>
+                    <text x="114" y="138" text-anchor="middle" class="fod-svg-title">Kutná Hora hl.n.</text>
+                    <text x="114" y="160" text-anchor="middle" class="fod-svg-sub">${isCs ? 'Vlaky R9 (Praha 55m)' : 'R9 Trains (Prague 55m)'}</text>
+                    <text x="114" y="182" text-anchor="middle" class="fod-svg-sub">${isCs ? 'Shuttle: Stanoviště 1' : 'Shuttle: Bus Bay 1'}</text>
+                  </g>
+                  <g class="route-bus-group">
+                    <path d="M 204 135 Q 440 25 685 135" fill="none" class="fod-svg-bus-path"/>
+                    <rect x="315" y="26" width="260" height="28" rx="6" class="fod-svg-bus-badge"/>
+                    <text x="445" y="45" text-anchor="middle" class="fod-svg-bus-text">${isCs ? 'Shuttle Bus: 7 min (zdarma)' : 'Shuttle Bus: 7 min (free)'}</text>
+                  </g>
+                  <g class="route-walk-group">
+                    <rect x="285" y="185" width="165" height="82" rx="8" class="fod-svg-node"/>
+                    <text x="367" y="214" text-anchor="middle" class="fod-svg-title">${isCs ? 'Sedlec a Kostnice' : 'Sedlec & Ossuary'}</text>
+                    <text x="367" y="234" text-anchor="middle" class="fod-svg-sub">0.7 km</text>
+                    <rect x="495" y="190" width="150" height="74" rx="8" class="fod-svg-node"/>
+                    <text x="570" y="218" text-anchor="middle" class="fod-svg-title">${isCs ? 'Lávka Vrchlice' : 'Vrchlice Footbridge'}</text>
+                    <text x="570" y="238" text-anchor="middle" class="fod-svg-sub">1.6 km</text>
+                    <path d="M 204 185 L 285 220 M 450 225 L 495 225 M 645 220 L 685 175" fill="none" class="fod-svg-walk-path"/>
+                    <rect x="305" y="288" width="280" height="28" rx="6" class="fod-svg-walk-badge"/>
+                    <text x="445" y="307" text-anchor="middle" class="fod-svg-walk-text">${isCs ? 'Pěší trasa: 1,8 km (22-25 min)' : 'Walking route: 1.8 km (22-25 min)'}</text>
+                  </g>
+                  <g>
+                    <rect x="685" y="96" width="172" height="145" rx="8" class="fod-svg-venue"/>
+                    <text x="771" y="128" text-anchor="middle" class="fod-svg-title">${isCs ? 'Vstup A · Areál' : 'Entrance A · Venue'}</text>
+                    <text x="771" y="150" text-anchor="middle" class="fod-svg-sub">${isCs ? 'Akreditace & Úschovna' : 'Wristbands & Lockers'}</text>
+                    <text x="771" y="182" text-anchor="middle" class="fod-svg-sub">Solar Horizon (4,500)</text>
+                    <text x="771" y="204" text-anchor="middle" class="fod-svg-sub">Lunar Dome (1,800 · ${isCs ? 'kryté' : 'covered'})</text>
+                  </g>
+                </svg>
+              </div>
             </div>
 
             <p class="fod-car-footnote">${isCs
@@ -1980,11 +2055,10 @@
       return { total, byId };
     }
 
-    function render() {
-      const isCs = core.getLang() === 'cs';
-      const favs = core.getFavorites();
-      const { total: totalCollisions, byId: collisionMap } = computeCollisions(favs);
+    let pendingHashId = (window.location.hash || '').replace('#', '');
 
+    function renderShell() {
+      const isCs = core.getLang() === 'cs';
       root.innerHTML = `
         <nav class="fod-breadcrumbs" aria-label="${isCs ? 'Drobečková navigace' : 'Breadcrumb'}">
           <a href="program.html">${isCs ? 'Program' : 'Program'}</a>
@@ -2003,7 +2077,34 @@
         <div id="my-schedule-container"></div>
       `;
 
+      const shareBtn = document.getElementById('share-schedule-btn');
+      if (shareBtn) shareBtn.addEventListener('click', shareSchedule);
+
+      const exportBtn = document.getElementById('export-schedule-btn');
+      if (exportBtn) exportBtn.addEventListener('click', exportIcs);
+
+      const clearBtn = document.getElementById('clear-favorites-btn');
+      if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+          const msg = core.getLang() === 'cs'
+            ? 'Opravdu chcete odebrat všechna uložená vystoupení?'
+            : 'Are you sure you want to remove all saved performances?';
+          if (window.confirm(msg)) {
+            core.clearFavorites();
+          }
+        });
+      }
+
+      renderBody();
+    }
+
+    function renderBody() {
       const container = document.getElementById('my-schedule-container');
+      if (!container) return;
+      const isCs = core.getLang() === 'cs';
+      const favs = core.getFavorites();
+      const { total: totalCollisions, byId: collisionMap } = computeCollisions(favs);
+
       if (favs.length === 0) {
         container.innerHTML = `
           <div class="fod-empty-card">
@@ -2116,39 +2217,21 @@
         container.innerHTML = bannerHtml + daysHtml;
       }
 
-      // Bind action buttons
-      const sampleFn = () => {
-        core.saveFavorites(data.SAMPLE_IDS);
-        core.showToast(isCs ? 'Načten ukázkový bezkolizní plán.' : 'Loaded curated conflict-free sample.');
-        render();
-      };
       const emptySampleBtn = document.getElementById('empty-sample-btn');
-      if (emptySampleBtn) emptySampleBtn.addEventListener('click', sampleFn);
-
-      const shareBtn = document.getElementById('share-schedule-btn');
-      if (shareBtn) shareBtn.addEventListener('click', shareSchedule);
-
-      const exportBtn = document.getElementById('export-schedule-btn');
-      if (exportBtn) exportBtn.addEventListener('click', exportIcs);
-
-      const clearBtn = document.getElementById('clear-favorites-btn');
-      if (clearBtn) {
-        clearBtn.addEventListener('click', () => {
-          const msg = isCs ? 'Opravdu chcete odebrat všechna uložená vystoupení?' : 'Are you sure you want to remove all saved performances?';
-          if (window.confirm(msg)) {
-            core.clearFavorites();
-            render();
-          }
+      if (emptySampleBtn) {
+        emptySampleBtn.addEventListener('click', () => {
+          core.saveFavorites(data.SAMPLE_IDS);
+          core.showToast(isCs ? 'Načten ukázkový bezkolizní plán.' : 'Loaded curated conflict-free sample.');
         });
       }
 
-      const hashId = (window.location.hash || '').replace('#', '');
-      if (hashId) {
-        const el = document.getElementById(hashId);
+      if (pendingHashId) {
+        const el = document.getElementById(pendingHashId);
         if (el) {
           el.classList.add('spot-highlight');
           setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'center' }), 80);
         }
+        pendingHashId = '';
       }
     }
 
@@ -2156,13 +2239,12 @@
       const rem = e.target && e.target.closest && e.target.closest('.remove-btn[data-id]');
       if (rem) {
         core.toggleFavoriteById(rem.getAttribute('data-id'));
-        render();
       }
     });
 
-    window.addEventListener('languageChanged', render);
-    window.addEventListener('favoritesUpdated', render);
-    render();
+    window.addEventListener('languageChanged', renderShell);
+    window.addEventListener('favoritesUpdated', renderBody);
+    renderShell();
   }
 
   // =========================================================================
