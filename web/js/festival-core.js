@@ -208,6 +208,11 @@
       const dockLabel = a.querySelector('.dock-label');
       const dockKey = dockLabel && dockLabel.getAttribute('data-i18n');
       if (dockKey && Object.prototype.hasOwnProperty.call(dict, dockKey)) return;
+      if (a.closest('footer')) {
+        const childI18n = a.querySelector('[data-i18n]');
+        const childKey = childI18n && childI18n.getAttribute('data-i18n');
+        if (childKey && Object.prototype.hasOwnProperty.call(dict, childKey)) return;
+      }
       const href = (a.getAttribute('href') || '').split('#')[0].split('?')[0];
       if (!NAV_LABELS[href]) return;
       const favBadge = a.querySelector('.nav-badge-count:not(.fod-cart-badge)');
